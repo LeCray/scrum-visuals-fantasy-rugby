@@ -1,3 +1,4 @@
+
 import { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -16,14 +17,14 @@ const ThreeScene = ({ className }: ThreeSceneProps) => {
     // Create scene
     const scene = new THREE.Scene();
     
-    // Create camera
+    // Create camera with adjusted position
     const camera = new THREE.PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
       0.1,
       1000
     );
-    camera.position.z = 5;
+    camera.position.set(-2, -1, 5); // Moved camera left and down
     
     // Create renderer
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -46,40 +47,40 @@ const ThreeScene = ({ className }: ThreeSceneProps) => {
       specular: 0x333333,
     });
     
-    // Create rugby ball geometry as an elongated sphere
-    const ballGeometry = new THREE.SphereGeometry(1, 32, 32);
+    // Create rugby ball geometry as an elongated sphere (smaller size)
+    const ballGeometry = new THREE.SphereGeometry(0.7, 32, 32); // Reduced from 1 to 0.7
     ballGeometry.scale(1, 0.6, 0.6);
     
     const rugbyBall = new THREE.Mesh(ballGeometry, ballMaterial);
     scene.add(rugbyBall);
 
     // Add rugby ball seam
-    const torusGeometry = new THREE.TorusGeometry(0.65, 0.02, 16, 100);
+    const torusGeometry = new THREE.TorusGeometry(0.45, 0.02, 16, 100); // Proportionally reduced
     const seamMaterial = new THREE.MeshPhongMaterial({ color: 0xFFFFFF });
     const seam = new THREE.Mesh(torusGeometry, seamMaterial);
     seam.rotation.x = Math.PI / 2;
     rugbyBall.add(seam);
     
     // Add rugby ball markings
-    const markingGeometry = new THREE.PlaneGeometry(0.8, 0.1);
+    const markingGeometry = new THREE.PlaneGeometry(0.6, 0.1); // Reduced size
     const markingMaterial = new THREE.MeshPhongMaterial({
       color: 0xFFD700,
       side: THREE.DoubleSide
     });
     
     const marking1 = new THREE.Mesh(markingGeometry, markingMaterial);
-    marking1.position.set(0, 0, 0.61);
+    marking1.position.set(0, 0, 0.41); // Adjusted position
     marking1.rotation.x = Math.PI / 2;
     rugbyBall.add(marking1);
     
     const marking2 = new THREE.Mesh(markingGeometry, markingMaterial);
-    marking2.position.set(0, 0, -0.61);
+    marking2.position.set(0, 0, -0.41); // Adjusted position
     marking2.rotation.x = Math.PI / 2;
     rugbyBall.add(marking2);
     
     // Create flying particles that look like small rugby balls or stars
     const particles: THREE.Mesh[] = [];
-    const particleGeometry = new THREE.SphereGeometry(0.05, 8, 8);
+    const particleGeometry = new THREE.SphereGeometry(0.04, 8, 8); // Slightly smaller
     particleGeometry.scale(1, 0.6, 0.6);
     
     const particleMaterials = [
@@ -87,17 +88,17 @@ const ThreeScene = ({ className }: ThreeSceneProps) => {
       new THREE.MeshPhongMaterial({ color: 0x0D1E31 }), // Navy
     ];
     
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 15; i++) { // Reduced number of particles
       const particle = new THREE.Mesh(
         particleGeometry, 
         particleMaterials[Math.floor(Math.random() * particleMaterials.length)]
       );
       
-      // Randomize position
+      // Randomize position with slightly reduced range
       particle.position.set(
-        (Math.random() - 0.5) * 10,
-        (Math.random() - 0.5) * 10,
-        (Math.random() - 0.5) * 10
+        (Math.random() - 0.5) * 8,
+        (Math.random() - 0.5) * 8,
+        (Math.random() - 0.5) * 8
       );
       
       // Randomize rotation
@@ -160,8 +161,8 @@ const ThreeScene = ({ className }: ThreeSceneProps) => {
       rugbyBall.rotation.z = THREE.MathUtils.lerp(rugbyBall.rotation.z, targetRotationY, 0.05);
       
       // Move the rugby ball slightly with the mouse
-      rugbyBall.position.x = THREE.MathUtils.lerp(rugbyBall.position.x, mouseX * 2, 0.02);
-      rugbyBall.position.y = THREE.MathUtils.lerp(rugbyBall.position.y, mouseY * 1.5, 0.02);
+      rugbyBall.position.x = THREE.MathUtils.lerp(rugbyBall.position.x, mouseX * 1.5, 0.02);
+      rugbyBall.position.y = THREE.MathUtils.lerp(rugbyBall.position.y, mouseY * 1, 0.02);
       
       // Animate particles
       particles.forEach((particle, index) => {
@@ -173,13 +174,13 @@ const ThreeScene = ({ className }: ThreeSceneProps) => {
         particle.position.x += Math.cos(Date.now() * 0.001 + index) * 0.005;
         
         // Reset particles that go out of bounds
-        if (Math.abs(particle.position.x) > 10 || 
-            Math.abs(particle.position.y) > 10 || 
-            Math.abs(particle.position.z) > 10) {
+        if (Math.abs(particle.position.x) > 8 || 
+            Math.abs(particle.position.y) > 8 || 
+            Math.abs(particle.position.z) > 8) {
           particle.position.set(
-            (Math.random() - 0.5) * 10,
-            (Math.random() - 0.5) * 10,
-            (Math.random() - 0.5) * 10
+            (Math.random() - 0.5) * 8,
+            (Math.random() - 0.5) * 8,
+            (Math.random() - 0.5) * 8
           );
         }
       });
