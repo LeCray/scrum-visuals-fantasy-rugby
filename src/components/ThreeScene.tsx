@@ -104,9 +104,12 @@ const ThreeScene = ({ className }: ThreeSceneProps) => {
       new THREE.MeshPhongMaterial({ color: 0x00a6ff }), // Light Blue
     ];
 
-    // Create 30 particles (increased from 20) with varied shapes
-    for (let i = 0; i < 50; i++) {
-      // Increased loop limit from 20 to 30
+    // Determine particle count based on device type
+    const particleCount = isMobile ? 90 : 60; // Increase to 70 for mobile, keep 50 for desktop
+
+    // Create particles with varied shapes based on particleCount
+    for (let i = 0; i < particleCount; i++) {
+      // Use dynamic particleCount
       const geometryIndex = Math.floor(
         Math.random() * particleGeometries.length
       );
@@ -220,18 +223,32 @@ const ThreeScene = ({ className }: ThreeSceneProps) => {
         particle.rotation.x += particle.rotationSpeed;
         particle.rotation.y += particle.rotationSpeed * 0.8;
 
-        // Move particles upward with respawn at bottom
+        // Move particles upward
         particle.position.y += particle.speed * 0.01;
 
-        // More pronounced mouse interaction
+        // Apply mouse interaction
         const mouseInfluenceFactor = 0.05;
         particle.position.x += mouseX * mouseInfluenceFactor * particle.speed;
         particle.position.z += mouseY * mouseInfluenceFactor * particle.speed;
 
-        if (particle.position.y > 5) {
-          particle.position.y = -5;
-          particle.position.x = (Math.random() - 0.5) * 10;
-          particle.position.z = (Math.random() - 0.5) * 10;
+        // --- Boundary Check and Respawn Logic ---
+        const boundaryX = 6; // Define horizontal boundary
+        const boundaryY = 5; // Define vertical boundary
+        const boundaryZ = 6; // Define depth boundary
+
+        // Check if particle is out of bounds (top, left, right, front, back)
+        if (
+          particle.position.y > boundaryY ||
+          Math.abs(particle.position.x) > boundaryX ||
+          Math.abs(particle.position.z) > boundaryZ
+        ) {
+          // Reset position to the bottom, with random X and Z
+          particle.position.y = -boundaryY; // Start from below the screen
+          particle.position.x = (Math.random() - 0.5) * boundaryX * 1.5; // Random horizontal position within a slightly wider range
+          particle.position.z = (Math.random() - 0.5) * boundaryZ * 1.5; // Random depth position
+          // Optionally reset opacity for a fresh fade-in
+          particle.material.opacity = 0.1;
+          particle.fadeDirection = 1;
         }
 
         // Fade in/out effect
