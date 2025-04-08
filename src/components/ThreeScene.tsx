@@ -105,7 +105,7 @@ const ThreeScene = ({ className }: ThreeSceneProps) => {
     ];
 
     // Create 30 particles (increased from 20) with varied shapes
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 50; i++) {
       // Increased loop limit from 20 to 30
       const geometryIndex = Math.floor(
         Math.random() * particleGeometries.length
