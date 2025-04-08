@@ -124,9 +124,9 @@ const ThreeScene = ({ className }: ThreeSceneProps) => {
 
       // Randomize position with wider distribution
       particle.position.set(
-        (Math.random() - 0.5) * 10,
-        (Math.random() - 0.5) * 10,
-        (Math.random() - 0.5) * 10
+        (Math.random() - 0.5) * 10, // Random X between -5 and 5
+        (Math.random() - 0.5) * 10, // Random Y between -5 and 5
+        (Math.random() - 0.5) * 10 // Random Z between -5 and 5
       );
 
       // Randomize rotation
@@ -232,20 +232,24 @@ const ThreeScene = ({ className }: ThreeSceneProps) => {
         particle.position.z += mouseY * mouseInfluenceFactor * particle.speed;
 
         // --- Boundary Check and Respawn Logic ---
-        const boundaryX = 6; // Define horizontal boundary
-        const boundaryY = 5; // Define vertical boundary
-        const boundaryZ = 6; // Define depth boundary
+        const boundaryX = 6;
+        const boundaryY = 5;
+        const boundaryZ = 6;
 
-        // Check if particle is out of bounds (top, left, right, front, back)
+        // Check if particle is out of bounds
         if (
-          particle.position.y > boundaryY ||
+          Math.abs(particle.position.y) > boundaryY || // Check top AND bottom
           Math.abs(particle.position.x) > boundaryX ||
           Math.abs(particle.position.z) > boundaryZ
         ) {
-          // Reset position to the bottom, with random X and Z
-          particle.position.y = -boundaryY; // Start from below the screen
-          particle.position.x = (Math.random() - 0.5) * boundaryX * 1.5; // Random horizontal position within a slightly wider range
-          particle.position.z = (Math.random() - 0.5) * boundaryZ * 1.5; // Random depth position
+          // --- Respawn Randomly Across Screen ---
+          // Determine which boundary was crossed to place it on the opposite side,
+          // or just randomize completely if preferred.
+          // Simple approach: Randomize all coordinates within bounds.
+          particle.position.y = (Math.random() - 0.5) * boundaryY * 1.8; // Random Y within slightly wider bounds
+          particle.position.x = (Math.random() - 0.5) * boundaryX * 1.8; // Random X within slightly wider bounds
+          particle.position.z = (Math.random() - 0.5) * boundaryZ * 1.8; // Random Z within slightly wider bounds
+
           // Optionally reset opacity for a fresh fade-in
           particle.material.opacity = 0.1;
           particle.fadeDirection = 1;
