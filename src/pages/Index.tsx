@@ -1,8 +1,33 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import ThreeScene from "../components/ThreeScene";
 import CountdownTimer from "../components/CountdownTimer";
 import WaitlistForm from "../components/WaitlistForm";
 import Logo from "../components/Logo";
+
+// Define animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 10,
+    },
+  },
+};
 
 const Index: React.FC = () => {
   const [launchDate, setLaunchDate] = useState(new Date());
@@ -22,31 +47,56 @@ const Index: React.FC = () => {
         className="content-container min-h-screen flex flex-col items-center justify-center px-4 py-12"
         style={{ paddingBottom: 200 }}
       >
-        <div className="max-w-6xl w-full mx-auto flex flex-col items-center">
-          <Logo className="mb-10" />
+        <motion.div
+          className="max-w-6xl w-full mx-auto flex flex-col items-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div
+            variants={itemVariants}
+            className="w-full flex justify-center"
+          >
+            <Logo className="mb-10" />
+          </motion.div>
 
-          <h1 className="font-orbitron text-4xl md:text-7xl font-bold text-center mb-6 tracking-wider leading-tight">
+          <motion.h1
+            variants={itemVariants}
+            className="font-orbitron text-4xl md:text-7xl font-bold text-center mb-6 tracking-wider leading-tight"
+          >
             <span className="text-[#003366]">FANTASY RUGBY</span>
             <br />
             <span className="text-[#FFC700]">REIMAGINED</span>
-          </h1>
+          </motion.h1>
 
-          <p className="text-scrummy-blue text-lg md:text-xl lg:text-2xl text-center max-w-3xl mb-8 md:mb-16 leading-relaxed font-light">
+          <motion.p
+            variants={itemVariants}
+            className="text-scrummy-blue text-lg md:text-xl lg:text-2xl text-center max-w-3xl mb-8 md:mb-16 leading-relaxed font-light"
+          >
             Build your ultimate rugby team. Weekly thrills. Compete against
             friends and rugby pros. Launching soon!
-          </p>
+          </motion.p>
 
-          <div className="mb-8 md:mb-16 w-full flex justify-center">
+          <motion.div
+            variants={itemVariants}
+            className="mb-8 md:mb-16 w-full flex justify-center"
+          >
             <CountdownTimer targetDate={launchDate} />
-          </div>
+          </motion.div>
 
-          <div className="mb-8 w-full max-w-lg mx-auto">
+          <motion.div
+            variants={itemVariants}
+            className="mb-8 w-full max-w-lg mx-auto"
+          >
             <WaitlistForm />
-          </div>
+          </motion.div>
 
-          <p className="text-[#003366] text-sm md:text-base italic text-center max-w-md">
+          <motion.p
+            variants={itemVariants}
+            className="text-[#003366] text-sm md:text-base italic text-center max-w-md"
+          >
             <em>Spots are limited—reserve your early access now!</em>
-          </p>
+          </motion.p>
 
           {/* <div className="mt-20 flex flex-col items-center">
             <h2 className="font-orbitron text-2xl font-bold text-scrummy-navy mb-4">
@@ -127,7 +177,7 @@ const Index: React.FC = () => {
               </div>
             </div>
           </div> */}
-        </div>
+        </motion.div>
       </div>
     </>
   );
