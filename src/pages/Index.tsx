@@ -18,22 +18,25 @@ const Index: React.FC = () => {
     <>
       <ThreeScene />
 
-      <div className="content-container min-h-screen flex flex-col items-center justify-center px-4 py-12">
+      <div
+        className="content-container min-h-screen flex flex-col items-center justify-center px-4 py-12"
+        style={{ paddingBottom: 200 }}
+      >
         <div className="max-w-6xl w-full mx-auto flex flex-col items-center">
           <Logo className="mb-10" />
 
-          <h1 className="font-orbitron text-5xl md:text-7xl lg:text-8xl font-bold text-center mb-6 tracking-wider leading-tight">
+          <h1 className="font-orbitron text-4xl md:text-7xl font-bold text-center mb-6 tracking-wider leading-tight">
             <span className="text-[#003366]">FANTASY RUGBY</span>
             <br />
             <span className="text-[#FFC700]">REIMAGINED</span>
           </h1>
 
-          <p className="text-scrummy-blue text-lg md:text-xl lg:text-2xl text-center max-w-3xl mb-16 leading-relaxed font-light">
+          <p className="text-scrummy-blue text-lg md:text-xl lg:text-2xl text-center max-w-3xl mb-8 md:mb-16 leading-relaxed font-light">
             Build your ultimate rugby team. Weekly thrills. Compete against
             friends and rugby pros. Launching soon!
           </p>
 
-          <div className="mb-16 w-full flex justify-center">
+          <div className="mb-8 md:mb-16 w-full flex justify-center">
             <CountdownTimer targetDate={launchDate} />
           </div>
 
@@ -41,7 +44,7 @@ const Index: React.FC = () => {
             <WaitlistForm />
           </div>
 
-          <p className="text-white text-sm md:text-base italic text-center max-w-md">
+          <p className="text-[#003366] text-sm md:text-base italic text-center max-w-md">
             <em>Spots are limited—reserve your early access now!</em>
           </p>
 

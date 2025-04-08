@@ -51,7 +51,7 @@ const ThreeScene = ({ className }: ThreeSceneProps) => {
     ballGeometry.scale(1, 0.6, 0.6);
 
     const rugbyBall = new THREE.Mesh(ballGeometry, ballMaterial);
-    scene.add(rugbyBall);
+    //scene.add(rugbyBall);
 
     // More visible rugby ball seam
     const torusGeometry = new THREE.TorusGeometry(0.45, 0.03, 16, 100);
@@ -104,8 +104,9 @@ const ThreeScene = ({ className }: ThreeSceneProps) => {
       new THREE.MeshPhongMaterial({ color: 0x00a6ff }), // Light Blue
     ];
 
-    // Create 20 particles with varied shapes
-    for (let i = 0; i < 20; i++) {
+    // Create 30 particles (increased from 20) with varied shapes
+    for (let i = 0; i < 30; i++) {
+      // Increased loop limit from 20 to 30
       const geometryIndex = Math.floor(
         Math.random() * particleGeometries.length
       );
@@ -151,20 +152,24 @@ const ThreeScene = ({ className }: ThreeSceneProps) => {
 
     // Event listeners for mouse/touch interaction
     const handleMouseMove = (event: MouseEvent) => {
+      // Update simple variables directly
       mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-      mouseY = -((event.clientY / window.innerHeight) * 2 - 1);
+      mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
 
-      targetRotationX = mouseY * 0.5;
-      targetRotationY = mouseX * 0.5;
+      // Update target rotation for the rugby ball
+      targetRotationX = mouseY * 0.2;
+      targetRotationY = mouseX * 0.2;
     };
 
     const handleTouchMove = (event: TouchEvent) => {
       if (event.touches.length > 0) {
+        // Update simple variables directly
         mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
         mouseY = -((event.touches[0].clientY / window.innerHeight) * 2 - 1);
 
-        targetRotationX = mouseY * 0.5;
-        targetRotationY = mouseX * 0.5;
+        // Update target rotation for the rugby ball
+        targetRotationX = mouseY * 0.2;
+        targetRotationY = mouseX * 0.2;
       }
     };
 
@@ -215,35 +220,31 @@ const ThreeScene = ({ className }: ThreeSceneProps) => {
         particle.rotation.x += particle.rotationSpeed;
         particle.rotation.y += particle.rotationSpeed * 0.8;
 
-        // Slowly float upward
+        // Move particles upward with respawn at bottom
         particle.position.y += particle.speed * 0.01;
 
-        // Subtle sideways drift
-        particle.position.x +=
-          Math.sin(Date.now() * 0.001 + particles.indexOf(particle)) * 0.002;
+        // More pronounced mouse interaction
+        const mouseInfluenceFactor = 0.05;
+        particle.position.x += mouseX * mouseInfluenceFactor * particle.speed;
+        particle.position.z += mouseY * mouseInfluenceFactor * particle.speed;
 
-        // Fade in/out effect
-        particle.opacity += particle.fadeDirection * particle.fadeSpeed;
-        if (particle.opacity > 1) {
-          particle.opacity = 1;
-          particle.fadeDirection = -1;
-        } else if (particle.opacity < 0.2) {
-          particle.opacity = 0.2;
-          particle.fadeDirection = 1;
-        }
-
-        // Apply opacity if material supports it
-        if (particle.material.opacity !== undefined) {
-          particle.material.opacity = particle.opacity;
-          particle.material.transparent = true;
-        }
-
-        // Reset particles that float too high
         if (particle.position.y > 5) {
           particle.position.y = -5;
           particle.position.x = (Math.random() - 0.5) * 10;
           particle.position.z = (Math.random() - 0.5) * 10;
         }
+
+        // Fade in/out effect
+        if (particle.material.opacity <= 0.1) {
+          particle.fadeDirection = 1;
+        } else if (particle.material.opacity >= 0.9) {
+          particle.fadeDirection = -1;
+        }
+        if (!particle.material.transparent) {
+          particle.material.transparent = true;
+        }
+        particle.material.opacity +=
+          particle.fadeDirection * particle.fadeSpeed;
       });
 
       renderer.render(scene, camera);

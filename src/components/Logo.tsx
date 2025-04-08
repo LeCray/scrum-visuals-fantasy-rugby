@@ -14,7 +14,11 @@ const Logo: React.FC<LogoProps> = ({ className }) => {
         src="/assets/logo.png"
         alt="SCRUMMY Fantasy Rugby"
         className={`w-auto ${isMobile ? "h-16" : "h-32"}`}
-        style={{ height: 300, marginBottom: -50, marginTop: -80 }}
+        style={{
+          height: isMobile ? 200 : 300,
+          marginBottom: -50,
+          marginTop: -10,
+        }}
       />
     </div>
   );

@@ -44,7 +44,7 @@ const WaitlistForm: React.FC = () => {
   return (
     <div className="w-full max-w-md mx-auto">
       {isSuccess ? (
-        <div className="bg-[#003366]/30 backdrop-blur-sm p-6 rounded-xl shadow-lg text-center">
+        <div className="bg-[#003366]/30  p-6 rounded-xl shadow-lg text-center">
           <div className="text-[#FFC700] text-2xl mb-2">🏉 Thank You!</div>
           <p className="text-white">
             You've been added to our waitlist. We'll notify you when we launch!
@@ -62,7 +62,7 @@ const WaitlistForm: React.FC = () => {
               onChange={(e) => setEmail(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Enter your email"
-              className="h-14 px-5 bg-white/80 backdrop-blur-sm rounded-xl text-base border-2 border-white/30 focus:border-[#00A6FF] shadow-lg placeholder:text-gray-500 focus:ring-4 focus:ring-[#00A6FF]/30 transition-all duration-300 w-full"
+              className="h-14 px-5 bg-white/80 rounded-xl text-base border-2 border-white/30 focus:border-[#00A6FF] shadow-lg placeholder:text-gray-500 focus:ring-4 focus:ring-[#00A6FF]/30 transition-all duration-300 w-full"
               aria-label="Email address"
               tabIndex={0}
               disabled={isLoading}
