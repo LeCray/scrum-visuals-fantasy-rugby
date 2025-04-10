@@ -10,26 +10,38 @@ const WaitlistForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
-    if (!email) {
-      setError("Please enter your email");
-      return;
-    }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError("Please enter a valid email address");
-      return;
-    }
-
     setIsLoading(true);
-
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      setIsSuccess(true);
-      setEmail("");
-    } catch (err) {
-      setError("Something went wrong. Please try again.");
+      const url = "https://api.sender.net/v2/subscribers";
+      const apiKey = import.meta.env.VITE_SENDER_API_KEY; // Replace with your API key
+
+      const data = {
+        email: email,
+        groups: ["en7KXD"], // Replace with your group ID(s)
+        trigger_automation: false,
+      };
+
+      const headers = {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(data),
+      });
+
+      console.log("Response", response);
+
+      if (response.status === 200) {
+        setIsSuccess(true);
+      } else {
+        setError("Failed to subscribe. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
     } finally {
       setIsLoading(false);
     }
