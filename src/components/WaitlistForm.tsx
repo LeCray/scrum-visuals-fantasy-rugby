@@ -113,7 +113,7 @@ const WaitlistForm: React.FC = () => {
                 Processing
               </span>
             ) : (
-              "Join Waitlist"
+              "Sign Up For Launch"
             )}
           </button>
         </form>
