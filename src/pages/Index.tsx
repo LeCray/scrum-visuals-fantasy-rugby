@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import ThreeScene from "../components/ThreeScene";
 import CountdownTimer from "../components/CountdownTimer";
 import WaitlistForm from "../components/WaitlistForm";
 import Logo from "../components/Logo";
+import { Instagram, Facebook, Youtube } from "lucide-react";
+import { FaTiktok } from 'react-icons/fa';
 
 // Define animation variants
 const containerVariants = {
@@ -29,16 +31,27 @@ const itemVariants = {
   },
 };
 
+const floatingAnimation = {
+  y: [0, -8, 0],
+  transition: {
+    duration: 2,
+    ease: "easeInOut",
+    repeat: Infinity,
+    repeatType: "reverse" as const
+  }
+};
+
+// Set a fixed launch date - 30 days from now
+const LAUNCH_DATE = (() => {
+  const date = new Date();
+  date.setDate(date.getDate() + 29);
+  // Set the time to midnight UTC
+  date.setUTCHours(0, 0, 0, 0);
+  console.log('Launch date initialized as:', date);
+  return date;
+})();
+
 const Index: React.FC = () => {
-  const [launchDate, setLaunchDate] = useState(new Date());
-
-  useEffect(() => {
-    // Set launch date to 30 days from now
-    const futureDate = new Date();
-    futureDate.setDate(futureDate.getDate() + 30);
-    setLaunchDate(futureDate);
-  }, []);
-
   return (
     <>
       <ThreeScene />
@@ -66,22 +79,21 @@ const Index: React.FC = () => {
           >
             <span className="text-[#003366]">FANTASY RUGBY</span>
             <br />
-            <span className="text-[#FFC700]">REIMAGINED</span>
+            <span className="text-[#FFC700] text-3xl md:text-5xl">IS ABOUT TO GET <br />SCRUMMY</span>
           </motion.h1>
 
           <motion.p
             variants={itemVariants}
             className="text-scrummy-blue text-lg md:text-xl lg:text-2xl text-center max-w-3xl mb-8 md:mb-16 leading-relaxed font-light"
           >
-            Build your ultimate rugby team. Weekly thrills. Compete against
-            friends and rugby pros. Launching soon!
+            Be the First to Join the Scrum!
           </motion.p>
 
           <motion.div
             variants={itemVariants}
             className="mb-8 md:mb-16 w-full flex justify-center"
           >
-            <CountdownTimer targetDate={launchDate} />
+            <CountdownTimer targetDate={LAUNCH_DATE} />
           </motion.div>
 
           <motion.div
@@ -91,92 +103,76 @@ const Index: React.FC = () => {
             <WaitlistForm />
           </motion.div>
 
+          {/* Social Media Icons */}
+          <motion.div
+            variants={itemVariants}
+            className="flex gap-8 mb-8 justify-center"
+          >
+            <motion.a
+              href="https://www.instagram.com/scrum_myy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#003366] hover:text-[#FFC700] transition-colors p-2"
+              whileHover={{ scale: 1.1, y: 0 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              animate={floatingAnimation}
+            >
+              <Instagram size={32} strokeWidth={2} />
+            </motion.a>
+            <motion.a
+              href="https://www.facebook.com/profile.php?id=61574057183440"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#003366] hover:text-[#FFC700] transition-colors p-2"
+              whileHover={{ scale: 1.1, y: 0 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              animate={{
+                ...floatingAnimation,
+                transition: { ...floatingAnimation.transition, delay: 0.3 }
+              }}
+            >
+              <Facebook size={32} strokeWidth={2} />
+            </motion.a>
+            <motion.a
+              href="https://www.tiktok.com/@scrummy_fantasy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#003366] hover:text-[#FFC700] transition-colors p-2"
+              whileHover={{ scale: 1.1, y: 0 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              animate={{
+                ...floatingAnimation,
+                transition: { ...floatingAnimation.transition, delay: 0.6 }
+              }}
+            >
+              <FaTiktok size={30} />
+            </motion.a>
+            <motion.a
+              href="https://www.youtube.com/channel/UCnKVk_L_fda9OuA5vDZBmmA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#003366] hover:text-[#FFC700] transition-colors p-2"
+              whileHover={{ scale: 1.1, y: 0 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              animate={{
+                ...floatingAnimation,
+                transition: { ...floatingAnimation.transition, delay: 0.9 }
+              }}
+            >
+              <Youtube size={32} strokeWidth={2} />
+            </motion.a>
+          </motion.div>
+
           <motion.p
             variants={itemVariants}
             className="text-[#003366] text-sm md:text-base italic text-center max-w-md"
           >
             <em>Spots are limited—reserve your early access now!</em>
           </motion.p>
-
-          {/* <div className="mt-20 flex flex-col items-center">
-            <h2 className="font-orbitron text-2xl font-bold text-scrummy-navy mb-4">
-              Features Coming Soon
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-4">
-              <div className="bg-white/30 backdrop-blur-sm p-6 rounded-lg shadow-lg flex flex-col items-center">
-                <div className="bg-scrummy-navy w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M17 6H22V18H17V6Z" fill="#FFD700" />
-                    <path d="M2 6H7V18H2V6Z" fill="#FFD700" />
-                    <path d="M9 8H15V16H9V8Z" fill="#FFD700" />
-                  </svg>
-                </div>
-                <h3 className="font-orbitron font-bold text-xl text-scrummy-navy mb-2">
-                  Real-Time Scoring
-                </h3>
-                <p className="text-center text-scrummy-navy">
-                  Watch your team score points live during matches with our
-                  advanced tracking system
-                </p>
-              </div>
-
-              <div className="bg-white/30 backdrop-blur-sm p-6 rounded-lg shadow-lg flex flex-col items-center">
-                <div className="bg-scrummy-navy w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle cx="12" cy="8" r="5" fill="#FFD700" />
-                    <path
-                      d="M20 21C20 16.5817 16.4183 13 12 13C7.58172 13 4 16.5817 4 21"
-                      fill="#FFD700"
-                    />
-                  </svg>
-                </div>
-                <h3 className="font-orbitron font-bold text-xl text-scrummy-navy mb-2">
-                  Private Leagues
-                </h3>
-                <p className="text-center text-scrummy-navy">
-                  Create exclusive leagues to compete against friends, family,
-                  or colleagues
-                </p>
-              </div>
-
-              <div className="bg-white/30 backdrop-blur-sm p-6 rounded-lg shadow-lg flex flex-col items-center">
-                <div className="bg-scrummy-navy w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z"
-                      fill="#FFD700"
-                    />
-                  </svg>
-                </div>
-                <h3 className="font-orbitron font-bold text-xl text-scrummy-navy mb-2">
-                  Pro Analysis
-                </h3>
-                <p className="text-center text-scrummy-navy">
-                  Get insights from rugby experts to help you build the ultimate
-                  winning team
-                </p>
-              </div>
-            </div>
-          </div> */}
         </motion.div>
       </div>
     </>
