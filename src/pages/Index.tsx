@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import ThreeScene from "../components/ThreeScene";
 import CountdownTimer from "../components/CountdownTimer";
@@ -7,51 +7,60 @@ import Logo from "../components/Logo";
 import { Instagram, Facebook, Youtube } from "lucide-react";
 import { FaTiktok } from 'react-icons/fa';
 
-// Define animation variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
+// Calculate a date exactly 26 days from now
+const calculateLaunchDate = () => {
+  const now = new Date();
+  const futureDate = new Date(now);
+  
+  // Add 26 days
+  futureDate.setDate(now.getDate() + 26);
+  
+  // Ensure it's set to the end of the day to avoid timezone issues
+  futureDate.setHours(23, 59, 59, 999);
+  
+  return futureDate;
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 10,
-    },
-  },
-};
+const LAUNCH_DATE = calculateLaunchDate();
 
-const floatingAnimation = {
-  y: [0, -8, 0],
-  transition: {
-    duration: 2,
-    ease: "easeInOut",
-    repeat: Infinity,
-    repeatType: "reverse" as const
-  }
-};
-
-// Set a fixed launch date - 30 days from now
-const LAUNCH_DATE = (() => {
-  const date = new Date();
-  date.setDate(date.getDate() + 29);
-  // Set the time to midnight UTC
-  date.setUTCHours(0, 0, 0, 0);
-  console.log('Launch date initialized as:', date);
-  return date;
-})();
+// Log launch date details for debugging
+console.log("==== LAUNCH DATE DETAILS ====");
+console.log("Launch date (local):", LAUNCH_DATE.toString());
+console.log("Launch date (ISO):", LAUNCH_DATE.toISOString());
+console.log("Days until launch:", Math.ceil((LAUNCH_DATE.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)));
 
 const Index: React.FC = () => {
+  // Animation variants for staggered animations
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 100 },
+    },
+  };
+
+  const floatingAnimation = {
+    y: [0, -8, 0],
+    transition: {
+      duration: 2,
+      ease: "easeInOut",
+      repeat: Infinity,
+      repeatType: "reverse" as const
+    }
+  };
+
   return (
     <>
       <ThreeScene />
