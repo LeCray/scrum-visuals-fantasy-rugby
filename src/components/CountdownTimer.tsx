@@ -20,14 +20,26 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
   });
 
   useEffect(() => {
+    // Immediately log target date info for debugging
+    console.log('CountdownTimer initialized with target date:', targetDate);
+    console.log('Current date:', new Date());
+    console.log('Target date timestamp:', targetDate.getTime());
+    console.log('Current timestamp:', new Date().getTime());
+    console.log('Time difference (ms):', targetDate.getTime() - new Date().getTime());
+    
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
       const target = targetDate.getTime();
       const difference = target - now;
 
-      console.log('Target date:', targetDate);
-      console.log('Current date:', new Date());
-      console.log('Time difference (ms):', difference);
+      // More detailed logging (only on first calculation)
+      if (!timeLeft.days && !timeLeft.hours && !timeLeft.minutes && !timeLeft.seconds) {
+        console.log('Time calculation details:');
+        console.log('Target date (local):', targetDate.toString());
+        console.log('Target date (UTC):', targetDate.toUTCString());
+        console.log('Target date (ISO):', targetDate.toISOString());
+        console.log('Time difference in days:', difference / (1000 * 60 * 60 * 24));
+      }
 
       if (difference > 0) {
         return {
