@@ -111,7 +111,7 @@ const Index: React.FC = () => {
             className="flex gap-8 mb-8 justify-center"
           >
             <motion.a
-              href="https://www.instagram.com/scrum_myy/"
+              href="https://www.instagram.com/scrummyapp_/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#003366] hover:text-[#FFC700] transition-colors p-2"
