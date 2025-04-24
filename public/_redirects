@@ -1,2 +1,3 @@
 # public/_redirects
-/*    /index.html   200
+/* /index.html 200
+/fixtures /index.html 200
