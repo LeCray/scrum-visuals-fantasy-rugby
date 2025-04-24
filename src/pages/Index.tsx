@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Link } from 'react-router-dom';
 import ThreeScene from "../components/ThreeScene";
 import CountdownTimer from "../components/CountdownTimer";
 import WaitlistForm from "../components/WaitlistForm";
 import Logo from "../components/Logo";
 import { Instagram, Facebook, Youtube } from "lucide-react";
 import { FaTiktok } from 'react-icons/fa';
+
+// Motion-enabled Link
+const MotionLink = motion(Link);
 
 // Set target date to May 12, 2025 at 00:00 (midnight) Eastern Time
 const LAUNCH_DATE = new Date('2025-05-12T00:00:00-04:00');
