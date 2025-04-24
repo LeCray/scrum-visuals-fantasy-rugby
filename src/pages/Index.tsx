@@ -203,7 +203,7 @@ const Index: React.FC = () => {
              </motion.div>
 
              <motion.a
-               href="#/fixtures"
+               href="/fixtures"
                variants={itemVariants}
                className="inline-block bg-[#003366] hover:bg-[#004488] text-[#FFC700] font-bold py-3 px-8 rounded-xl shadow-lg transition-all duration-300"
                whileHover={{ 
