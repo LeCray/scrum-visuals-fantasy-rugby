@@ -198,19 +198,19 @@ const Index: React.FC = () => {
                </p>
              </motion.div>
 
-             <motion.a
-               href="/fixtures"
+             {/* Updated Link to fixtures using React Router */}
+             <MotionLink
+               to="/fixtures"
                variants={itemVariants}
                className="inline-block bg-[#003366] hover:bg-[#004488] text-[#FFC700] font-bold py-3 px-8 rounded-xl shadow-lg transition-all duration-300"
-               whileHover={{ 
-                 y: -5, 
+               whileHover={{
+                 y: -5,
                  boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1)"
                }}
                whileTap={{ scale: 0.98 }}
-
-            >
-              See Derby Day Fixtures
-             </motion.a>
+             >
+               See Derby Day Fixtures
+             </MotionLink>
            </motion.div>
         </motion.div>
       </div>
