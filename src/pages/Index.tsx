@@ -212,7 +212,6 @@ const Index: React.FC = () => {
               See Derby Day Fixtures
              </motion.a>
            </motion.div>
-         </motion.div>
         </motion.div>
       </div>
     </>
