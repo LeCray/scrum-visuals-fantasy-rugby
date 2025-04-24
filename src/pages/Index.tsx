@@ -175,6 +175,44 @@ const Index: React.FC = () => {
           >
             <em>Spots are limited—reserve your early access now!</em>
           </motion.p>
+
+          {/* Derby Day Section */}
+          <motion.div
+             variants={containerVariants}
+             className="text-center mt-16 space-y-6 px-4 max-w-4xl mx-auto"
+             initial="hidden"
+             animate="visible"
+           >
+             <motion.div 
+               variants={itemVariants} 
+               className="bg-[#003366]/10 rounded-xl p-6 shadow-sm"
+             >
+               <h3 className="text-[#003366] font-orbitron text-2xl md:text-3xl font-bold mb-4 tracking-wider">
+                 THE MUKURU DERBY DAY RUGBY FESTIVAL IN ZIMBABWE
+               </h3>
+               <p className="text-[#003366] text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
+                 SCRUMMY is proud to sponsor the <span className="font-semibold">U20 Sharks Rugby Team</span> and the match between the <span className="font-semibold">Sharks and the Zim Steelers</span> on May 1st.
+               </p>
+               <p className="text-[#003366]/80 text-base mt-2">
+                 April 28 - May 3, 2025
+               </p>
+             </motion.div>
+
+             <motion.a
+               href="/fixtures"
+               variants={itemVariants}
+               className="inline-block bg-[#003366] hover:bg-[#004488] text-[#FFC700] font-bold py-3 px-8 rounded-xl shadow-lg transition-all duration-300"
+               whileHover={{ 
+                 y: -5, 
+                 boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1)"
+               }}
+               whileTap={{ scale: 0.98 }}
+
+            >
+              See Derby Day Fixtures
+             </motion.a>
+           </motion.div>
+         </motion.div>
         </motion.div>
       </div>
     </>
