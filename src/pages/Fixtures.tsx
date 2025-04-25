@@ -188,23 +188,23 @@ const Fixtures: React.FC = () => {
       <div className="relative z-20">
         {/* Logo background overlay */}
         <div
-          className="absolute inset-x-0 top-[180px] h-[500px] pointer-events-none"
+          className="absolute inset-x-0 top-[80px] md:top-[180px] h-[500px] pointer-events-none"
           style={{
             backgroundImage: "url('/assets/logo.png')",
             backgroundSize: "contain",
             backgroundPosition: "center top",
-            backgroundRepeat: "no-repeat",
+            backgroundRepeat: "no-repeat"
           }}
         />
 
         {/* HEADER */}
-        <header className="relative py-24 px-4 md:px-8">
+        <header className="relative py-16 md:py-24 px-4 md:px-8">
           <div className="max-w-6xl mx-auto relative z-10">
             <Link to="/" className="text-scrummy-navyBlue hover:text-scrummy-goldYellow flex items-center gap-1">
               <ChevronLeft size={20} /> <span>Back to Home</span>
             </Link>
             <motion.h1
-              className="mt-8 text-5xl md:text-7xl font-bold text-center mb-24 font-orbitron relative z-10"
+              className="mt-8 text-4xl md:text-7xl font-bold text-center mb-16 md:mb-24 font-orbitron relative z-10"
               initial={{ y: -20 }} animate={{ y: 0 }} transition={{ duration: 0.6 }}
             >
               <span className="text-scrummy-navyBlue">Derby Day 2025</span>
@@ -214,7 +214,7 @@ const Fixtures: React.FC = () => {
         </header>
 
         {/* MAIN content */}
-        <main className="relative z-10 px-4 md:px-8 mt-24">
+        <main className="relative z-10 px-4 md:px-8 mt-32 md:mt-24">
           <div className="max-w-6xl mx-auto space-y-12">
             {/* Legend for highlighted games */}
             <div className="flex flex-col items-center gap-2 text-scrummy-navyBlue">
