@@ -220,7 +220,7 @@ const Fixtures: React.FC = () => {
             <div className="flex flex-col items-center gap-2 text-scrummy-navyBlue">
               <div className="flex items-center gap-3">
                 <img src="/assets/logo.png" alt="SCRUMMY" className="w-12 h-12" />
-                <p className="text-base md:text-lg font-orbitron">Below is a schedule of all Derby Day fixtures. Games marked with a<span className="text-scrummy-goldYellow"> yellow border</span> and SCRUMMY logo are ones that will have detailed player and game stats.</p>
+                <p className="text-base md:text-lg font-orbitron">Below is a schedule of all the Derby Day fixtures. Games marked with a<span className="text-scrummy-goldYellow"> yellow border</span> and SCRUMMY logo are ones that will have detailed player and game stats.</p>
               </div>
               <p className="text-sm text-scrummy-navyBlue/70 -mb-2">All times are in CAT (Central Africa Time)</p>
             </div>
