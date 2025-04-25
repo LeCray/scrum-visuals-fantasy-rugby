@@ -1,9 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { generateMatchId } from "@/lib/boxScoreData";
 
 // Define types for our fixtures data
 type Fixture = {
@@ -182,6 +183,14 @@ const isHighlightedFixture = (date: string, time: string, teamA: string, teamB: 
 
 const Fixtures: React.FC = () => {
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
+
+  const handleFixtureClick = (date: string, time: string, teamA: string, teamB: string) => {
+    if (isHighlightedFixture(date, time, teamA, teamB)) {
+      const matchId = generateMatchId(date, time, teamA, teamB);
+      navigate(`/box-score/${matchId}`);
+    }
+  };
 
   return (
     <div className="relative text-scrummy-navyBlue">
@@ -239,7 +248,13 @@ const Fixtures: React.FC = () => {
                   {day.fixtures.map((f, i) => {
                     const isHighlighted = isHighlightedFixture(day.date, f.time, f.teamA, f.teamB);
                     return (
-                      <motion.div key={i} variants={itemVariants} whileHover={{ y: isHighlighted ? -8 : -5, transition: { duration: 0.2 } }}>
+                      <motion.div 
+                        key={i} 
+                        variants={itemVariants} 
+                        whileHover={{ y: isHighlighted ? -8 : -5, transition: { duration: 0.2 } }}
+                        onClick={() => handleFixtureClick(day.date, f.time, f.teamA, f.teamB)}
+                        className={isHighlighted ? 'cursor-pointer' : ''}
+                      >
                         <Card className={`h-full bg-white/60 transition-all duration-300 hover:bg-white/90 relative ${
                           isHighlighted
                             ? 'border-2 border-scrummy-goldYellow shadow-[0_0_15px_rgba(255,199,0,0.3)] hover:shadow-[0_0_20px_rgba(255,199,0,0.4)]'
@@ -252,6 +267,7 @@ const Fixtures: React.FC = () => {
                             <div className={`text-lg font-bold ${isHighlighted ? 'text-scrummy-navyBlue bg-scrummy-goldYellow' : 'text-scrummy-goldYellow bg-scrummy-navyBlue'} inline-flex rounded px-3 py-1 self-start mb-3`}>
                               {f.time}
                             </div>
+
                             <div className="flex items-center justify-between gap-2">
                               {/* Team A */}
                               <div className="flex-1 text-center">
@@ -273,6 +289,7 @@ const Fixtures: React.FC = () => {
                                 )}
                                 <p className={`font-medium text-scrummy-navyBlue ${isHighlighted ? 'font-bold' : ''}`}>{f.teamB}</p>
                               </div>
+
                             </div>
                           </CardContent>
                         </Card>

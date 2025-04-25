@@ -1,0 +1,672 @@
+// Types from BoxScore component
+export type Player = {
+  name: string;
+  position: string;
+  tries: number;
+  kicks: string;
+  lineouts: string;
+  penaltiesWon: number;
+  penaltiesConceded: number;
+};
+
+export type TeamStats = {
+  totalTries: number;
+  totalConversions: string;
+  lineoutAccuracy: string;
+  penaltiesWon: number;
+  penaltiesConceded: number;
+};
+
+export type BoxScoreData = {
+  matchInfo: {
+    teamA: string;
+    teamB: string;
+    venue: string;
+    date: string;
+    kickoff: string;
+    weather: string;
+  };
+  teamAPlayers: Player[];
+  teamBPlayers: Player[];
+  teamASummary: TeamStats;
+  teamBSummary: TeamStats;
+};
+
+// Example box score data for one match
+const exampleBoxScore: BoxScoreData = {
+  matchInfo: {
+    teamA: "MILTON 1XV",
+    teamB: "WISE OWL 1XV",
+    venue: "Milton Sports Complex",
+    date: "April 28th, 2025",
+    kickoff: "13:00",
+    weather: "Sunny, 22°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "FL", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "SO", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "PR", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamBPlayers: [
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamASummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+  teamBSummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+};
+
+// Function to generate a unique ID for each match
+const generateMatchId = (date: string, time: string, teamA: string, teamB: string) => {
+  return `${date}-${time}-${teamA}-${teamB}`.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+};
+
+// Map to store box scores by match ID
+export const boxScores = new Map<string, BoxScoreData>();
+
+// Add example box score
+boxScores.set(
+  generateMatchId("April 28th", "13:00", "MILTON 1XV", "WISE OWL 1XV"),
+  exampleBoxScore
+);
+
+// Sample box scores for all highlighted matches
+const rydingsVsHeritage: BoxScoreData = {
+  matchInfo: {
+    teamA: "RYDINGS 1XV",
+    teamB: "HERITAGE 1XV",
+    venue: "Rydings Sports Complex",
+    date: "April 28th, 2025",
+    kickoff: "15:40",
+    weather: "Partly Cloudy, 24°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "FL", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "SO", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "PR", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamBPlayers: [
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamASummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+  teamBSummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+};
+
+const lomagundiVsStAlbans: BoxScoreData = {
+  matchInfo: {
+    teamA: "LOMAGUNDI 1XV",
+    teamB: "ST ALBANS 1XV",
+    venue: "Lomagundi College",
+    date: "April 29th, 2025",
+    kickoff: "14:20",
+    weather: "Sunny, 26°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "FL", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "SO", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "PR", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamBPlayers: [
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamASummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+  teamBSummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+};
+
+const stGeorgesVsStAndrews: BoxScoreData = {
+  matchInfo: {
+    teamA: "ST GEORGE'S 1XV",
+    teamB: "ST ANDREW'S 1XV",
+    venue: "St George's College",
+    date: "April 29th, 2025",
+    kickoff: "15:40",
+    weather: "Clear, 25°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "FL", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "SO", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "PR", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamBPlayers: [
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamASummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+  teamBSummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+};
+
+// Add all box scores to the map
+boxScores.set(
+  generateMatchId("April 28th", "15:40", "RYDINGS 1XV", "HERITAGE 1XV"),
+  rydingsVsHeritage
+);
+
+boxScores.set(
+  generateMatchId("April 29th", "14:20", "LOMAGUNDI 1XV", "ST ALBANS 1XV"),
+  lomagundiVsStAlbans
+);
+
+boxScores.set(
+  generateMatchId("April 29th", "15:40", "ST GEORGE'S 1XV", "ST ANDREW'S 1XV"),
+  stGeorgesVsStAndrews
+);
+
+const goldridgeVsHillcrest: BoxScoreData = {
+  matchInfo: {
+    teamA: "GOLDRIDGE 1XV",
+    teamB: "HILLCREST 1XV",
+    venue: "Goldridge College",
+    date: "April 30th, 2025",
+    kickoff: "13:00",
+    weather: "Sunny, 27°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "FL", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "SO", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "PR", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamBPlayers: [
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamASummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+  teamBSummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+};
+
+const watershedVsGateway: BoxScoreData = {
+  matchInfo: {
+    teamA: "WATERSHED 1XV",
+    teamB: "GATEWAY 1XV",
+    venue: "Watershed College",
+    date: "April 30th, 2025",
+    kickoff: "15:40",
+    weather: "Partly Cloudy, 25°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "FL", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "SO", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "PR", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamBPlayers: [
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamASummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+  teamBSummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+};
+
+const peterhouseVsStAndrews: BoxScoreData = {
+  matchInfo: {
+    teamA: "PETERHOUSE 1XV",
+    teamB: "ST ANDREW'S 1XV",
+    venue: "Peterhouse Boys",
+    date: "May 1st, 2025",
+    kickoff: "13:20",
+    weather: "Sunny, 24°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "FL", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "SO", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "PR", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamBPlayers: [
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamASummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+  teamBSummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+};
+
+// Add these box scores to the map
+boxScores.set(
+  generateMatchId("April 30th", "13:00", "GOLDRIDGE 1XV", "HILLCREST 1XV"),
+  goldridgeVsHillcrest
+);
+
+boxScores.set(
+  generateMatchId("April 30th", "15:40", "WATERSHED 1XV", "GATEWAY 1XV"),
+  watershedVsGateway
+);
+
+boxScores.set(
+  generateMatchId("May 1st", "13:20", "PETERHOUSE 1XV", "ST ANDREW'S 1XV"),
+  peterhouseVsStAndrews
+);
+
+const falconsVsEagles: BoxScoreData = {
+  matchInfo: {
+    teamA: "FALCON 1XV",
+    teamB: "EAGLES 1XV",
+    venue: "Falcon College",
+    date: "May 1st, 2025",
+    kickoff: "15:00",
+    weather: "Clear, 26°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "FL", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "SO", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "PR", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamBPlayers: [
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamASummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+  teamBSummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+};
+
+const churchillVsPlumtree: BoxScoreData = {
+  matchInfo: {
+    teamA: "CHURCHILL 1XV",
+    teamB: "PLUMTREE 1XV",
+    venue: "Churchill Boys High",
+    date: "May 2nd, 2025",
+    kickoff: "13:00",
+    weather: "Sunny, 28°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "FL", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "SO", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "PR", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamBPlayers: [
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamASummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+  teamBSummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+};
+
+const princeEdwardVsStJohns: BoxScoreData = {
+  matchInfo: {
+    teamA: "PRINCE EDWARD 1XV",
+    teamB: "ST JOHN'S 1XV",
+    venue: "Prince Edward School",
+    date: "May 2nd, 2025",
+    kickoff: "15:00",
+    weather: "Partly Cloudy, 25°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "FL", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "SO", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "PR", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamBPlayers: [
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamASummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+  teamBSummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+};
+
+// Add these box scores to the map
+boxScores.set(
+  generateMatchId("May 1st", "15:00", "FALCON 1XV", "EAGLES 1XV"),
+  falconsVsEagles
+);
+
+boxScores.set(
+  generateMatchId("May 2nd", "13:00", "CHURCHILL 1XV", "PLUMTREE 1XV"),
+  churchillVsPlumtree
+);
+
+boxScores.set(
+  generateMatchId("May 2nd", "15:00", "PRINCE EDWARD 1XV", "ST JOHN'S 1XV"),
+  princeEdwardVsStJohns
+);
+
+const zamSteelersVsSharks: BoxScoreData = {
+  matchInfo: {
+    teamA: "ZAM STEELERS",
+    teamB: "SHARKS U20",
+    venue: "Zambia National Stadium",
+    date: "May 3rd, 2025",
+    kickoff: "13:00",
+    weather: "Sunny, 29°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "FL", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "SO", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "PR", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamBPlayers: [
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamASummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+  teamBSummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+};
+
+const cbcVsPeterhouse: BoxScoreData = {
+  matchInfo: {
+    teamA: "CBC 1XV",
+    teamB: "PETERHOUSE 1XV",
+    venue: "CBC Sports Ground",
+    date: "May 3rd, 2025",
+    kickoff: "14:30",
+    weather: "Clear, 27°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "FL", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "SO", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "PR", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamBPlayers: [
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamASummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+  teamBSummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+};
+
+const princeEdwardVsChurchill: BoxScoreData = {
+  matchInfo: {
+    teamA: "PRINCE EDWARD 1XV",
+    teamB: "CHURCHILL 1XV",
+    venue: "Prince Edward School",
+    date: "May 3rd, 2025",
+    kickoff: "15:45",
+    weather: "Partly Cloudy, 26°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "FL", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "SO", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "PR", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamBPlayers: [
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamASummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+  teamBSummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+};
+
+const falconVsStAlbans: BoxScoreData = {
+  matchInfo: {
+    teamA: "FALCON 1XV",
+    teamB: "ST ALBANS 1XV",
+    venue: "Falcon College",
+    date: "May 4th, 2025",
+    kickoff: "13:00",
+    weather: "Sunny, 25°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "FL", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "SO", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "PR", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamBPlayers: [
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamASummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+  teamBSummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+};
+
+const stJohnsVsStAndrews: BoxScoreData = {
+  matchInfo: {
+    teamA: "ST JOHN'S 1XV",
+    teamB: "ST ANDREW'S 1XV",
+    venue: "St John's College",
+    date: "May 4th, 2025",
+    kickoff: "15:00",
+    weather: "Clear, 24°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "FL", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "SO", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "PR", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamBPlayers: [
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "HK", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamASummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+  teamBSummary: {
+    totalTries: 0,
+    totalConversions: "-",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+  },
+};
+
+// Add these box scores to the map
+boxScores.set(
+  generateMatchId("May 1st", "16:00", "ZAM STEELERS", "SHARKS U20"),
+  zamSteelersVsSharks
+);
+
+boxScores.set(
+  generateMatchId("May 3rd", "10:20", "CBC 1XV", "PETERHOUSE 1XV"),
+  cbcVsPeterhouse
+);
+
+boxScores.set(
+  generateMatchId("May 3rd", "11:40", "PRINCE EDWARD 1XV", "CHURCHILL 1XV"),
+  princeEdwardVsChurchill
+);
+
+boxScores.set(
+  generateMatchId("May 3rd", "14:20", "FALCON 1XV", "ST ALBANS 1XV"),
+  falconVsStAlbans
+);
+
+boxScores.set(
+  generateMatchId("May 3rd", "15:40", "ST JOHN'S 1XV", "ST ANDREW'S 1XV"),
+  stJohnsVsStAndrews
+);
+
+// Function to get box score by match details
+export const getBoxScore = (date: string, time: string, teamA: string, teamB: string) => {
+  const matchId = generateMatchId(date, time, teamA, teamB);
+  return boxScores.get(matchId) || null;
+};
+
+// Export everything as before
+export { generateMatchId }; 
