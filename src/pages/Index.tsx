@@ -192,13 +192,13 @@ const Index: React.FC = () => {
                className="bg-[#003366]/10 rounded-xl p-6 shadow-sm"
              >
                <h3 className="text-[#003366] font-orbitron text-2xl md:text-3xl font-bold mb-4 tracking-wider">
-                 THE MUKURU DERBY DAY RUGBY FESTIVAL IN ZIMBABWE
+                 THE MUKURU <span className="text-scrummy-goldYellow">DERBY DAY</span> RUGBY FESTIVAL IN ZIMBABWE
                </h3>
                <p className="text-[#003366] text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
-                 SCRUMMY is proud to sponsor the <span className="font-semibold">U20 Sharks Rugby Team</span> and the match between the <span className="font-semibold">Sharks and the Zim Steelers</span> on May 1st.
+                 SCRUMMY is proud to sponsor <span className="font-semibold">The Sharks Academy Tour to Zim. </span> The Sharks Academy will play the Zimbabwe U20 team on the 29th of May, the Zambezi Steelers on the 1st of May and again the Zimbabwe U20 on the 4th of May.
                </p>
                <p className="text-[#003366]/80 text-base mt-2">
-                 April 28 - May 3, 2025
+                 April 28 - May 4, 2025
                </p>
              </motion.div>
 
