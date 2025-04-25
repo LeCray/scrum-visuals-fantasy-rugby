@@ -188,7 +188,7 @@ const Fixtures: React.FC = () => {
       <div className="relative z-20">
         {/* Logo background overlay */}
         <div
-          className="absolute inset-x-0 top-[80px] md:top-[180px] h-[500px] pointer-events-none"
+          className="absolute inset-x-0 top-[120px] md:top-[180px] h-[500px] pointer-events-none"
           style={{
             backgroundImage: "url('/assets/logo.png')",
             backgroundSize: "contain",
