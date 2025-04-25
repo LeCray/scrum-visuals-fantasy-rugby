@@ -242,51 +242,6 @@ const BoxScore: React.FC<BoxScoreProps> = ({
               </div>
             </div>
 
-            {/* Team Summary */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md my-8">
-              <h2 className="text-2xl font-bold text-scrummy-navyBlue mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
-                Match Summary
-              </h2>
-              <div className="overflow-x-auto">
-                <table className="w-full border-collapse">
-                  <thead>
-                    <tr className="bg-scrummy-navyBlue text-white">
-                      <th className="p-3 text-left rounded-l-lg">Metric</th>
-                      <th className="p-3">{cleanTeamA}</th>
-                      <th className="p-3 rounded-r-lg">{cleanTeamB}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
-                      <td className="p-3 font-medium">Total Tries</td>
-                      <td className="p-3 text-center">{teamASummary.totalTries}</td>
-                      <td className="p-3 text-center">{teamBSummary.totalTries}</td>
-                    </tr>
-                    <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
-                      <td className="p-3 font-medium">Total Conversions</td>
-                      <td className="p-3 text-center">{teamASummary.totalConversions}</td>
-                      <td className="p-3 text-center">{teamBSummary.totalConversions}</td>
-                    </tr>
-                    <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
-                      <td className="p-3 font-medium">Lineout Accuracy</td>
-                      <td className="p-3 text-center">{teamASummary.lineoutAccuracy}</td>
-                      <td className="p-3 text-center">{teamBSummary.lineoutAccuracy}</td>
-                    </tr>
-                    <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
-                      <td className="p-3 font-medium">Penalties Won</td>
-                      <td className="p-3 text-center">{teamASummary.penaltiesWon}</td>
-                      <td className="p-3 text-center">{teamBSummary.penaltiesWon}</td>
-                    </tr>
-                    <tr className="hover:bg-white/50 transition-colors">
-                      <td className="p-3 font-medium">Penalties Conceded</td>
-                      <td className="p-3 text-center">{teamASummary.penaltiesConceded}</td>
-                      <td className="p-3 text-center">{teamBSummary.penaltiesConceded}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
             {/* Team B Stats */}
             <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md">
               <h2 className="text-2xl font-bold text-scrummy-navyBlue mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
@@ -348,6 +303,51 @@ const BoxScore: React.FC<BoxScoreProps> = ({
                         <td className="p-3 text-center">{player.penaltiesConceded}</td>
                       </tr>
                     ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Match Summary */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md">
+              <h2 className="text-2xl font-bold text-scrummy-navyBlue mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
+                Match Summary
+              </h2>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-scrummy-navyBlue text-white">
+                      <th className="p-3 text-left rounded-l-lg">Metric</th>
+                      <th className="p-3">{cleanTeamA}</th>
+                      <th className="p-3 rounded-r-lg">{cleanTeamB}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
+                      <td className="p-3 font-medium">Total Tries</td>
+                      <td className="p-3 text-center">{teamASummary.totalTries}</td>
+                      <td className="p-3 text-center">{teamBSummary.totalTries}</td>
+                    </tr>
+                    <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
+                      <td className="p-3 font-medium">Total Conversions</td>
+                      <td className="p-3 text-center">{teamASummary.totalConversions}</td>
+                      <td className="p-3 text-center">{teamBSummary.totalConversions}</td>
+                    </tr>
+                    <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
+                      <td className="p-3 font-medium">Lineout Accuracy</td>
+                      <td className="p-3 text-center">{teamASummary.lineoutAccuracy}</td>
+                      <td className="p-3 text-center">{teamBSummary.lineoutAccuracy}</td>
+                    </tr>
+                    <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
+                      <td className="p-3 font-medium">Penalties Won</td>
+                      <td className="p-3 text-center">{teamASummary.penaltiesWon}</td>
+                      <td className="p-3 text-center">{teamBSummary.penaltiesWon}</td>
+                    </tr>
+                    <tr className="hover:bg-white/50 transition-colors">
+                      <td className="p-3 font-medium">Penalties Conceded</td>
+                      <td className="p-3 text-center">{teamASummary.penaltiesConceded}</td>
+                      <td className="p-3 text-center">{teamBSummary.penaltiesConceded}</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
