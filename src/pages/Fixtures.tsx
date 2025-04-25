@@ -285,7 +285,7 @@ const Fixtures: React.FC = () => {
                               {/* Team B */}
                               <div className="flex-1 text-center">
                                 {teamLogoMap[f.teamB] && (
-                                  <img src={teamLogoMap[f.teamB]} alt={`${f.teamB} logo`} className={`w-28 h-28 mx-auto mb-1 object-contain ${f.teamB === "SHARKS ACADEMY" ? 'scale-50' : ''}`}
+                                  <img src={teamLogoMap[f.teamB]} alt={`${f.teamB} logo`} className="w-28 h-28 mx-auto mb-1 object-contain" />
                                 )}
                                 <p className={`font-medium text-scrummy-navyBlue ${isHighlighted ? 'font-bold' : ''}`}>{f.teamB}</p>
                               </div>
