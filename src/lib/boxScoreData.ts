@@ -459,11 +459,11 @@ boxScores.set(
 const zamSteelersVsSharks: BoxScoreData = {
   matchInfo: {
     teamA: "ZAM STEELERS",
-    teamB: "SHARKS U20",
+    teamB: "SHARKS ACADEMY",
     venue: "St John's College",
-    date: "May 3rd, 2025",
-    kickoff: "13:00",
-    weather: "Sunny, 29°C",
+    date: "May 1st, 2025",
+    kickoff: "16:00",
+    weather: "Clear, 24°C",
   },
   teamAPlayers: [
     { name: "-", position: "FL", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
@@ -638,7 +638,7 @@ const stJohnsVsStAndrews: BoxScoreData = {
 
 // Add these box scores to the map
 boxScores.set(
-  generateMatchId("May 1st", "16:00", "ZAM STEELERS", "SHARKS U20"),
+  generateMatchId("May 1st", "16:00", "ZAM STEELERS", "SHARKS ACADEMY"),
   zamSteelersVsSharks
 );
 

@@ -75,7 +75,7 @@ const teamLogoMap: Record<string, string> = {
   "CHURCHILL 1XV": "/assets/Churchill.png",
   "ST JOHN'S 1XV": "/assets/StJohns.png",
   "ZAM STEELERS": "/assets/ZamSteelers.png",
-  "SHARKS U20": "/assets/Sharks.png",
+  "SHARKS ACADEMY": "/assets/Sharks.png",
   "PETERHOUSE 1XV": "/assets/Peterhouse.png",
   "MILTON 2XV": "/assets/Milton.png",
   "WISE OWL 2XV": "/assets/WiseOwl.png",

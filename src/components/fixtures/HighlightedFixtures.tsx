@@ -66,7 +66,7 @@ export const highlightedFixtures: HighlightedFixture[] = [
     date: "May 1st",
     time: "16:00",
     teamA: "ZAM STEELERS",
-    teamB: "SHARKS U20",
+    teamB: "SHARKS ACADEMY",
     venue: "St John's College",
   },
   {
