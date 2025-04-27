@@ -37,7 +37,7 @@ const exampleBoxScore: BoxScoreData = {
   matchInfo: {
     teamA: "MILTON 1XV",
     teamB: "WISE OWL 1XV",
-    venue: "Milton Sports Complex",
+    venue: "St John's College",
     date: "April 28th, 2025",
     kickoff: "13:00",
     weather: "Sunny, 22°C",
@@ -88,7 +88,7 @@ const rydingsVsHeritage: BoxScoreData = {
   matchInfo: {
     teamA: "RYDINGS 1XV",
     teamB: "HERITAGE 1XV",
-    venue: "Rydings Sports Complex",
+    venue: "St John's College",
     date: "April 28th, 2025",
     kickoff: "15:40",
     weather: "Partly Cloudy, 24°C",
@@ -124,7 +124,7 @@ const lomagundiVsStAlbans: BoxScoreData = {
   matchInfo: {
     teamA: "LOMAGUNDI 1XV",
     teamB: "ST ALBANS 1XV",
-    venue: "Lomagundi College",
+    venue: "St John's College",
     date: "April 29th, 2025",
     kickoff: "14:20",
     weather: "Sunny, 26°C",
@@ -160,7 +160,7 @@ const stGeorgesVsStAndrews: BoxScoreData = {
   matchInfo: {
     teamA: "ST GEORGE'S 1XV",
     teamB: "ST ANDREW'S 1XV",
-    venue: "St George's College",
+    venue: "St John's College",
     date: "April 29th, 2025",
     kickoff: "15:40",
     weather: "Clear, 25°C",
@@ -212,7 +212,7 @@ const goldridgeVsHillcrest: BoxScoreData = {
   matchInfo: {
     teamA: "GOLDRIDGE 1XV",
     teamB: "HILLCREST 1XV",
-    venue: "Goldridge College",
+    venue: "St John's College",
     date: "April 30th, 2025",
     kickoff: "13:00",
     weather: "Sunny, 27°C",
@@ -248,7 +248,7 @@ const watershedVsGateway: BoxScoreData = {
   matchInfo: {
     teamA: "WATERSHED 1XV",
     teamB: "GATEWAY 1XV",
-    venue: "Watershed College",
+    venue: "St John's College",
     date: "April 30th, 2025",
     kickoff: "15:40",
     weather: "Partly Cloudy, 25°C",
@@ -284,7 +284,7 @@ const peterhouseVsStAndrews: BoxScoreData = {
   matchInfo: {
     teamA: "PETERHOUSE 1XV",
     teamB: "ST ANDREW'S 1XV",
-    venue: "Peterhouse Boys",
+    venue: "St John's College",
     date: "May 1st, 2025",
     kickoff: "13:20",
     weather: "Sunny, 24°C",
@@ -336,7 +336,7 @@ const falconsVsEagles: BoxScoreData = {
   matchInfo: {
     teamA: "FALCON 1XV",
     teamB: "EAGLES 1XV",
-    venue: "Falcon College",
+    venue: "St John's College",
     date: "May 1st, 2025",
     kickoff: "15:00",
     weather: "Clear, 26°C",
@@ -372,7 +372,7 @@ const churchillVsPlumtree: BoxScoreData = {
   matchInfo: {
     teamA: "CHURCHILL 1XV",
     teamB: "PLUMTREE 1XV",
-    venue: "Churchill Boys High",
+    venue: "St John's College",
     date: "May 2nd, 2025",
     kickoff: "13:00",
     weather: "Sunny, 28°C",
@@ -408,7 +408,7 @@ const princeEdwardVsStJohns: BoxScoreData = {
   matchInfo: {
     teamA: "PRINCE EDWARD 1XV",
     teamB: "ST JOHN'S 1XV",
-    venue: "Prince Edward School",
+    venue: "St John's College",
     date: "May 2nd, 2025",
     kickoff: "15:00",
     weather: "Partly Cloudy, 25°C",
@@ -460,7 +460,7 @@ const zamSteelersVsSharks: BoxScoreData = {
   matchInfo: {
     teamA: "ZAM STEELERS",
     teamB: "SHARKS U20",
-    venue: "Zambia National Stadium",
+    venue: "St John's College",
     date: "May 3rd, 2025",
     kickoff: "13:00",
     weather: "Sunny, 29°C",
@@ -496,7 +496,7 @@ const cbcVsPeterhouse: BoxScoreData = {
   matchInfo: {
     teamA: "CBC 1XV",
     teamB: "PETERHOUSE 1XV",
-    venue: "CBC Sports Ground",
+    venue: "St John's College",
     date: "May 3rd, 2025",
     kickoff: "14:30",
     weather: "Clear, 27°C",
@@ -532,7 +532,7 @@ const princeEdwardVsChurchill: BoxScoreData = {
   matchInfo: {
     teamA: "PRINCE EDWARD 1XV",
     teamB: "CHURCHILL 1XV",
-    venue: "Prince Edward School",
+    venue: "St John's College",
     date: "May 3rd, 2025",
     kickoff: "15:45",
     weather: "Partly Cloudy, 26°C",
@@ -568,7 +568,7 @@ const falconVsStAlbans: BoxScoreData = {
   matchInfo: {
     teamA: "FALCON 1XV",
     teamB: "ST ALBANS 1XV",
-    venue: "Falcon College",
+    venue: "St John's College",
     date: "May 4th, 2025",
     kickoff: "13:00",
     weather: "Sunny, 25°C",
