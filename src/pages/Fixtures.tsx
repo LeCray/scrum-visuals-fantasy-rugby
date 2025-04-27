@@ -166,7 +166,7 @@ const isHighlightedFixture = (date: string, time: string, teamA: string, teamB: 
     { date: "April 30th", time: "13:00", teamA: "GOLDRIDGE 1XV", teamB: "HILLCREST 1XV" },
     { date: "April 30th", time: "15:40", teamA: "WATERSHED 1XV", teamB: "GATEWAY 1XV" },
     { date: "May 1st", time: "13:20", teamA: "PETERHOUSE 1XV", teamB: "ST ANDREW'S 1XV" },
-    { date: "May 1st", time: "16:00", teamA: "ZAM STEELERS", teamB: "SHARKS U20" },
+    { date: "May 1st", time: "16:00", teamA: "ZAM STEELERS", teamB: "SHARKS ACADEMY" },
     { date: "May 3rd", time: "10:20", teamA: "CBC 1XV", teamB: "PETERHOUSE 1XV" },
     { date: "May 3rd", time: "11:40", teamA: "PRINCE EDWARD 1XV", teamB: "CHURCHILL 1XV" },
     { date: "May 3rd", time: "14:20", teamA: "FALCON 1XV", teamB: "ST ALBANS 1XV" },
