@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Types for our box score data
 type Player = {
@@ -90,6 +91,7 @@ const BoxScore: React.FC<BoxScoreProps> = ({
 }) => {
   const cleanTeamA = cleanTeamName(matchInfo.teamA);
   const cleanTeamB = cleanTeamName(matchInfo.teamB);
+  const isMobile = useIsMobile();
 
   // Calculate total points (for now using dummy data, will be updated with real data)
   const teamAPoints = teamASummary.totalTries * 5; // Assuming no conversions for now
@@ -102,7 +104,7 @@ const BoxScore: React.FC<BoxScoreProps> = ({
         className="fixed inset-0 pointer-events-none opacity-5"
         style={{
           backgroundImage: "url('/assets/logo.png')",
-          backgroundSize: "80% auto",
+          backgroundSize: isMobile ? "120% auto" : "80% auto",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
@@ -110,62 +112,62 @@ const BoxScore: React.FC<BoxScoreProps> = ({
 
       <div className="relative z-10">
         {/* Header Section */}
-        <header className="relative py-12 px-4 md:px-8">
+        <header className="relative py-6 md:py-12 px-4 md:px-8">
           <div className="max-w-7xl mx-auto">
             <Link
               to="/fixtures"
-              className="inline-flex items-center text-scrummy-navyBlue hover:text-scrummy-goldYellow transition-colors"
+              className="inline-flex items-center text-scrummy-navyBlue hover:text-scrummy-goldYellow transition-colors text-sm md:text-base"
             >
-              <ChevronLeft size={20} />
+              <ChevronLeft size={isMobile ? 16 : 20} />
               <span>Back to Fixtures</span>
             </Link>
 
-            <div className="text-center mt-8">
+            <div className="text-center mt-4 md:mt-8">
               {/* Centered Large Logo */}
               <Link to="/" className="inline-block">
                 <img
                   src="/assets/logo.png"
                   alt="SCRUMMY"
-                  className="w-full max-w-[480px] h-auto mx-auto"
+                  className="w-full max-w-[280px] md:max-w-[480px] h-auto mx-auto"
                 />
               </Link>
 
-              <h1 className="text-4xl md:text-6xl font-bold font-orbitron mb-6">
+              <h1 className="text-3xl md:text-6xl font-bold font-orbitron mb-4 md:mb-6">
                 <span className="text-scrummy-navyBlue">Rugby Match</span>{" "}
-                <span className="text-scrummy-goldYellow">Box Score</span>
+                <span className="text-scrummy-goldYellow block md:inline">Box Score</span>
               </h1>
 
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md max-w-4xl mx-auto">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-md max-w-4xl mx-auto">
                 {/* Team Logos and Score */}
-                <div className="flex items-center justify-center gap-6 mb-6">
+                <div className="flex items-center justify-center gap-3 md:gap-6 mb-4 md:mb-6">
                   <div className="text-center">
                     <img
                       src={teamLogoMap[matchInfo.teamA]}
                       alt={`${cleanTeamA} logo`}
-                      className="w-24 h-24 mx-auto mb-2 object-contain"
+                      className="w-16 h-16 md:w-24 md:h-24 mx-auto mb-1 md:mb-2 object-contain"
                     />
-                    <h2 className="text-xl font-semibold">{cleanTeamA}</h2>
+                    <h2 className="text-base md:text-xl font-semibold">{cleanTeamA}</h2>
                   </div>
 
-                  <div className="text-center px-8">
-                    <div className="text-4xl font-bold font-orbitron text-scrummy-goldYellow mb-2">
+                  <div className="text-center px-4 md:px-8">
+                    <div className="text-2xl md:text-4xl font-bold font-orbitron text-scrummy-goldYellow mb-1 md:mb-2">
                       {teamAPoints} - {teamBPoints}
                     </div>
-                    <div className="text-sm text-scrummy-navyBlue/60">Final Score</div>
+                    <div className="text-xs md:text-sm text-scrummy-navyBlue/60">Final Score</div>
                   </div>
 
                   <div className="text-center">
                     <img
                       src={teamLogoMap[matchInfo.teamB]}
                       alt={`${cleanTeamB} logo`}
-                      className="w-24 h-24 mx-auto mb-2 object-contain"
+                      className="w-16 h-16 md:w-24 md:h-24 mx-auto mb-1 md:mb-2 object-contain"
                     />
-                    <h2 className="text-xl font-semibold">{cleanTeamB}</h2>
+                    <h2 className="text-base md:text-xl font-semibold">{cleanTeamB}</h2>
                   </div>
                 </div>
 
                 {/* Match Details */}
-                <div className="text-scrummy-navyBlue/80 border-t border-scrummy-lightblue pt-4">
+                <div className="text-scrummy-navyBlue/80 border-t border-scrummy-lightblue pt-3 md:pt-4 text-xs md:text-base text-center md:text-left">
                   {matchInfo.venue} • {matchInfo.date} • {matchInfo.kickoff} • {matchInfo.weather}
                 </div>
               </div>
@@ -174,191 +176,131 @@ const BoxScore: React.FC<BoxScoreProps> = ({
         </header>
 
         {/* Main Content */}
-        <main className="px-4 md:px-8">
-          <div className="max-w-7xl mx-auto space-y-8">
-            {/* Team A Stats */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md">
-              <h2 className="text-2xl font-bold text-scrummy-navyBlue mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
-                {cleanTeamA}
-              </h2>
-              <div className="overflow-x-auto">
-                <table className="w-full border-collapse">
-                  <thead>
-                    <tr className="bg-scrummy-navyBlue text-white">
-                      <th className="p-3 text-left rounded-l-lg">
-                        <div className="flex items-center gap-1">
-                          <img src="/assets/Icons/Player.png" alt="Player" className="w-12 h-12" />
-                          Player
-                        </div>
-                      </th>
-                      <th className="p-3">
-                        <div className="flex items-center justify-center gap-1">
-                          <img src="/assets/Icons/Tries.png" alt="Tries" className="w-12 h-12" />
-                          Tries
-                        </div>
-                      </th>
-                      <th className="p-3">
-                        <div className="flex items-center justify-center gap-1">
-                          <img src="/assets/Icons/Kicks.png" alt="Kicks" className="w-12 h-12" />
-                          Kicks (C/P)
-                        </div>
-                      </th>
-                      <th className="p-3">
-                        <div className="flex items-center justify-center gap-1">
-                          <img src="/assets/Icons/Lineouts.png" alt="Lineouts" className="w-12 h-12" />
-                          Lineouts
-                        </div>
-                      </th>
-                      <th className="p-3">
-                        <div className="flex items-center justify-center gap-1">
-                          <img src="/assets/Icons/Pen.Won.png" alt="Penalties Won" className="w-12 h-12" />
-                          Pen. Won
-                        </div>
-                      </th>
-                      <th className="p-3 rounded-r-lg">
-                        <div className="flex items-center justify-center gap-1">
-                          <img src="/assets/Icons/Pen.Conceded.png" alt="Penalties Conceded" className="w-12 h-12" />
-                          Pen. Conceded
-                        </div>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {teamAPlayers.map((player, index) => (
-                      <tr
-                        key={index}
-                        className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors"
-                      >
-                        <td className="p-3 text-left font-medium">{player.name} ({player.position})</td>
-                        <td className="p-3 text-center">{player.tries}</td>
-                        <td className="p-3 text-center">{player.kicks || "–"}</td>
-                        <td className="p-3 text-center">{player.lineouts || "–"}</td>
-                        <td className="p-3 text-center">{player.penaltiesWon}</td>
-                        <td className="p-3 text-center">{player.penaltiesConceded}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+        <main className="px-2 md:px-8">
+          <div className="max-w-7xl mx-auto space-y-6 md:space-y-8">
+            {/* Team Stats Table Container */}
+            {[
+              { team: cleanTeamA, players: teamAPlayers },
+              { team: cleanTeamB, players: teamBPlayers }
+            ].map(({ team, players }, index) => (
+              <div key={index} className="bg-white/80 backdrop-blur-sm rounded-xl p-3 md:p-6 shadow-md">
+                <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-3 md:mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
+                  {team}
+                </h2>
+                <div className="overflow-x-auto -mx-3 md:mx-0">
+                  <div className="inline-block min-w-full align-middle">
+                    <table className="min-w-full border-collapse">
+                      <thead>
+                        <tr className="bg-scrummy-navyBlue text-white">
+                          <th className="p-2 md:p-3 text-left rounded-l-lg whitespace-nowrap">
+                            <div className="flex items-center gap-1">
+                              <img src="/assets/Icons/Player.png" alt="Player" className="w-8 h-8 md:w-12 md:h-12" />
+                              <span className="text-xs md:text-base">Player</span>
+                            </div>
+                          </th>
+                          {[
+                            { icon: "Tries.png", label: "Tries" },
+                            { icon: "Kicks.png", label: "Kicks" },
+                            { icon: "Lineouts.png", label: "Lineouts" },
+                            { icon: "Pen.Won.png", label: "Won" },
+                            { icon: "Pen.Conceded.png", label: "Conc." }
+                          ].map((col, i) => (
+                            <th key={i} className={`p-2 md:p-3 ${i === 4 ? 'rounded-r-lg' : ''}`}>
+                              <div className="flex flex-col md:flex-row items-center justify-center gap-1">
+                                <img 
+                                  src={`/assets/Icons/${col.icon}`} 
+                                  alt={col.label} 
+                                  className="w-8 h-8 md:w-12 md:h-12"
+                                />
+                                <span className="text-[10px] md:text-base whitespace-nowrap">
+                                  {col.label}
+                                </span>
+                              </div>
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {players.map((player, idx) => (
+                          <tr
+                            key={idx}
+                            className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors"
+                          >
+                            <td className="p-2 md:p-3 text-left">
+                              <div className="font-medium text-xs md:text-base">
+                                <span className="block md:inline">{player.name}</span>
+                                <span className="text-scrummy-navyBlue/70 text-[10px] md:text-sm md:ml-1">
+                                  ({player.position})
+                                </span>
+                              </div>
+                            </td>
+                            <td className="p-2 md:p-3 text-center text-xs md:text-base">{player.tries}</td>
+                            <td className="p-2 md:p-3 text-center text-xs md:text-base">{player.kicks || "–"}</td>
+                            <td className="p-2 md:p-3 text-center text-xs md:text-base">{player.lineouts || "–"}</td>
+                            <td className="p-2 md:p-3 text-center text-xs md:text-base">{player.penaltiesWon}</td>
+                            <td className="p-2 md:p-3 text-center text-xs md:text-base">{player.penaltiesConceded}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
-            </div>
-
-            {/* Team B Stats */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md">
-              <h2 className="text-2xl font-bold text-scrummy-navyBlue mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
-                {cleanTeamB}
-              </h2>
-              <div className="overflow-x-auto">
-                <table className="w-full border-collapse">
-                  <thead>
-                    <tr className="bg-scrummy-navyBlue text-white">
-                      <th className="p-3 text-left rounded-l-lg">
-                        <div className="flex items-center gap-1">
-                          <img src="/assets/Icons/Player.png" alt="Player" className="w-12 h-12" />
-                          Player
-                        </div>
-                      </th>
-                      <th className="p-3">
-                        <div className="flex items-center justify-center gap-1">
-                          <img src="/assets/Icons/Tries.png" alt="Tries" className="w-12 h-12" />
-                          Tries
-                        </div>
-                      </th>
-                      <th className="p-3">
-                        <div className="flex items-center justify-center gap-1">
-                          <img src="/assets/Icons/Kicks.png" alt="Kicks" className="w-12 h-12" />
-                          Kicks (C/P)
-                        </div>
-                      </th>
-                      <th className="p-3">
-                        <div className="flex items-center justify-center gap-1">
-                          <img src="/assets/Icons/Lineouts.png" alt="Lineouts" className="w-12 h-12" />
-                          Lineouts
-                        </div>
-                      </th>
-                      <th className="p-3">
-                        <div className="flex items-center justify-center gap-1">
-                          <img src="/assets/Icons/Pen.Won.png" alt="Penalties Won" className="w-12 h-12" />
-                          Pen. Won
-                        </div>
-                      </th>
-                      <th className="p-3 rounded-r-lg">
-                        <div className="flex items-center justify-center gap-1">
-                          <img src="/assets/Icons/Pen.Conceded.png" alt="Penalties Conceded" className="w-12 h-12" />
-                          Pen. Conceded
-                        </div>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {teamBPlayers.map((player, index) => (
-                      <tr
-                        key={index}
-                        className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors"
-                      >
-                        <td className="p-3 text-left font-medium">{player.name} ({player.position})</td>
-                        <td className="p-3 text-center">{player.tries}</td>
-                        <td className="p-3 text-center">{player.kicks || "–"}</td>
-                        <td className="p-3 text-center">{player.lineouts || "–"}</td>
-                        <td className="p-3 text-center">{player.penaltiesWon}</td>
-                        <td className="p-3 text-center">{player.penaltiesConceded}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            ))}
 
             {/* Match Summary */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md">
-              <h2 className="text-2xl font-bold text-scrummy-navyBlue mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 md:p-6 shadow-md">
+              <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-3 md:mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
                 Match Summary
               </h2>
-              <div className="overflow-x-auto">
-                <table className="w-full border-collapse">
-                  <thead>
-                    <tr className="bg-scrummy-navyBlue text-white">
-                      <th className="p-3 text-left rounded-l-lg">Metric</th>
-                      <th className="p-3">{cleanTeamA}</th>
-                      <th className="p-3 rounded-r-lg">{cleanTeamB}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
-                      <td className="p-3 font-medium">Total Tries</td>
-                      <td className="p-3 text-center">{teamASummary.totalTries}</td>
-                      <td className="p-3 text-center">{teamBSummary.totalTries}</td>
-                    </tr>
-                    <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
-                      <td className="p-3 font-medium">Total Conversions</td>
-                      <td className="p-3 text-center">{teamASummary.totalConversions}</td>
-                      <td className="p-3 text-center">{teamBSummary.totalConversions}</td>
-                    </tr>
-                    <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
-                      <td className="p-3 font-medium">Lineout Accuracy</td>
-                      <td className="p-3 text-center">{teamASummary.lineoutAccuracy}</td>
-                      <td className="p-3 text-center">{teamBSummary.lineoutAccuracy}</td>
-                    </tr>
-                    <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
-                      <td className="p-3 font-medium">Penalties Won</td>
-                      <td className="p-3 text-center">{teamASummary.penaltiesWon}</td>
-                      <td className="p-3 text-center">{teamBSummary.penaltiesWon}</td>
-                    </tr>
-                    <tr className="hover:bg-white/50 transition-colors">
-                      <td className="p-3 font-medium">Penalties Conceded</td>
-                      <td className="p-3 text-center">{teamASummary.penaltiesConceded}</td>
-                      <td className="p-3 text-center">{teamBSummary.penaltiesConceded}</td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div className="overflow-x-auto -mx-3 md:mx-0">
+                <div className="inline-block min-w-full align-middle">
+                  <table className="min-w-full border-collapse">
+                    <thead>
+                      <tr className="bg-scrummy-navyBlue text-white">
+                        <th className="p-2 md:p-3 text-left rounded-l-lg text-xs md:text-base">Metric</th>
+                        <th className="p-2 md:p-3 text-center text-xs md:text-base">{cleanTeamA}</th>
+                        <th className="p-2 md:p-3 text-center rounded-r-lg text-xs md:text-base">{cleanTeamB}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
+                        <td className="p-2 md:p-3 font-medium text-xs md:text-base">Total Tries</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamASummary.totalTries}</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamBSummary.totalTries}</td>
+                      </tr>
+                      <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
+                        <td className="p-2 md:p-3 font-medium text-xs md:text-base">Total Conversions</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamASummary.totalConversions}</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamBSummary.totalConversions}</td>
+                      </tr>
+                      <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
+                        <td className="p-2 md:p-3 font-medium text-xs md:text-base">Lineout Accuracy</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamASummary.lineoutAccuracy}</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamBSummary.lineoutAccuracy}</td>
+                      </tr>
+                      <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
+                        <td className="p-2 md:p-3 font-medium text-xs md:text-base">Penalties Won</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamASummary.penaltiesWon}</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamBSummary.penaltiesWon}</td>
+                      </tr>
+                      <tr className="hover:bg-white/50 transition-colors">
+                        <td className="p-2 md:p-3 font-medium text-xs md:text-base">Penalties Conceded</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamASummary.penaltiesConceded}</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamBSummary.penaltiesConceded}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
 
             {/* Key Section */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md mt-8">
-              <h2 className="text-2xl font-bold text-scrummy-navyBlue mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 md:p-6 shadow-md">
+              <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-3 md:mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
                 Key
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-scrummy-navyBlue/80">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 text-scrummy-navyBlue/80 text-xs md:text-base">
                 <div className="space-y-2">
                   <p><span className="font-semibold">C/P:</span> Conversions / Penalty Kicks made</p>
                   <p><span className="font-semibold">Lineout Throws:</span> Successful / Total (with %)</p>
@@ -370,8 +312,7 @@ const BoxScore: React.FC<BoxScoreProps> = ({
               </div>
             </div>
 
-            {/* Footer */}
-            <div className="text-center text-sm text-scrummy-navyBlue/70 mt-8">
+            <div className="text-center text-xs md:text-sm text-scrummy-navyBlue/70 mt-6 md:mt-8">
               <p>St John's College • MUKURU Derby Day 2025</p>
             </div>
           </div>

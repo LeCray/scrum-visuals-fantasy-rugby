@@ -1,5 +1,6 @@
 import React from 'react';
 import { boxScores, getBoxScore } from '../../lib/boxScoreData';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 // Type for highlighted fixture data
 export type HighlightedFixture = {
@@ -112,17 +113,24 @@ export const HighlightedFixtureCard: React.FC<HighlightedFixtureCardProps> = ({
   venue,
   onClick,
 }) => {
+  const isMobile = useIsMobile();
+  
   return (
     <div 
-      className="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors cursor-pointer"
+      className="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors cursor-pointer shadow-lg transform hover:scale-102 transition-transform duration-200"
       onClick={() => onClick({ date, time, teamA, teamB, venue })}
     >
-      <div className="text-sm text-gray-400">{date} - {time}</div>
-      <div className="mt-2 text-lg font-semibold text-white">
-        {teamA} vs {teamB}
+      <div className="text-sm text-gray-400 flex items-center justify-between">
+        <span>{date}</span>
+        <span>{time}</span>
       </div>
-      <div className="mt-1 text-sm text-gray-300">{venue}</div>
-      <div className="mt-2 text-xl font-orbitron text-gold-500">
+      <div className={`mt-2 ${isMobile ? 'text-base' : 'text-lg'} font-semibold text-white text-center`}>
+        <div className="mb-1">{teamA}</div>
+        <div className="text-gold-500 text-sm mb-1">vs</div>
+        <div>{teamB}</div>
+      </div>
+      <div className="mt-2 text-sm text-gray-300 text-center">{venue}</div>
+      <div className="mt-3 text-xl font-orbitron text-gold-500 text-center">
         0 - 0
       </div>
     </div>
@@ -136,8 +144,14 @@ type HighlightedFixturesProps = {
 
 // Update the main component
 const HighlightedFixtures: React.FC<HighlightedFixturesProps> = ({ onFixtureClick }) => {
+  const isMobile = useIsMobile();
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+    <div className={`grid gap-4 p-4 ${
+      isMobile 
+        ? 'grid-cols-1' 
+        : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+    }`}>
       {highlightedFixtures.map((fixture, index) => (
         <HighlightedFixtureCard 
           key={index} 
