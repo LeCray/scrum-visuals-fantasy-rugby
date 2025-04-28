@@ -314,7 +314,7 @@ const Fixtures: React.FC = () => {
                               />
                             )}
                             <CardContent className="p-2 pt-1 flex flex-col h-full">
-                              <div className={`text-base font-bold ${isHighlighted ? 'text-scrummy-navyBlue bg-scrummy-goldYellow' : 'text-scrummy-goldYellow bg-scrummy-navyBlue'} inline-flex rounded px-2 py-1 self-start mb-0.5`}>
+                              <div className={`text-lg font-bold ${isHighlighted ? 'text-scrummy-navyBlue bg-scrummy-goldYellow' : 'text-scrummy-goldYellow bg-scrummy-navyBlue'} inline-flex rounded px-2 py-1 self-start mb-0.5 mt-2 ml-2`}>
                                 {f.time}
                               </div>
 
