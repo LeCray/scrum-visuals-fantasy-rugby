@@ -104,6 +104,36 @@ type HighlightedFixtureCardProps = HighlightedFixture & {
   onClick: (fixture: HighlightedFixture) => void;
 };
 
+// Helper to parse conversions and penalty kicks from summary string
+function parseConversions(conversionStr: string) {
+  // e.g. "1/1 PK" or "1/1" or "1/1 C, 2/2 PK" or "-"
+  if (!conversionStr || conversionStr === "-") return { conversions: 0, penalties: 0 };
+  let conversions = 0;
+  let penalties = 0;
+  // Split by comma if both are present
+  const parts = conversionStr.split(',').map(s => s.trim());
+  for (const part of parts) {
+    if (part.includes('PK')) {
+      const match = part.match(/(\d+)\/(\d+) PK/);
+      if (match) {
+        penalties += parseInt(match[1], 10);
+      }
+    } else if (part.includes('C')) {
+      const match = part.match(/(\d+)\/(\d+) C/);
+      if (match) {
+        conversions += parseInt(match[1], 10);
+      }
+    } else {
+      // fallback: if just "1/1" assume conversions
+      const match = part.match(/(\d+)\/(\d+)/);
+      if (match) {
+        conversions += parseInt(match[1], 10);
+      }
+    }
+  }
+  return { conversions, penalties };
+}
+
 // Update the HighlightedFixtureCard component
 export const HighlightedFixtureCard: React.FC<HighlightedFixtureCardProps> = ({
   date,
@@ -121,14 +151,10 @@ export const HighlightedFixtureCard: React.FC<HighlightedFixtureCardProps> = ({
   // Calculate the score if boxScore exists
   let scoreDisplay = "0 - 0";
   if (boxScore) {
-    // Calculate points: 5 per try, 2 per conversion, 3 per penalty (if tracked)
-    const parseConversions = (conv: string) => {
-      // Example: "1/1" or "1/1 PK"
-      const [made] = conv.split(/[ /]/);
-      return parseInt(made) || 0;
-    };
-    const teamApoints = (boxScore.teamASummary.totalTries * 5) + parseConversions(boxScore.teamASummary.totalConversions) * 2;
-    const teamBpoints = (boxScore.teamBSummary.totalTries * 5) + parseConversions(boxScore.teamBSummary.totalConversions) * 2;
+    const teamAConv = parseConversions(boxScore.teamASummary.totalConversions);
+    const teamBConv = parseConversions(boxScore.teamBSummary.totalConversions);
+    const teamApoints = boxScore.teamASummary.totalTries * 5 + teamAConv.conversions * 2 + teamAConv.penalties * 3;
+    const teamBpoints = boxScore.teamBSummary.totalTries * 5 + teamBConv.conversions * 2 + teamBConv.penalties * 3;
     scoreDisplay = `${teamApoints} - ${teamBpoints}`;
   }
 

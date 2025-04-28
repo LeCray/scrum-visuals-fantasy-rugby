@@ -181,24 +181,34 @@ const isHighlightedFixture = (date: string, time: string, teamA: string, teamB: 
   );
 };
 
-// Add this function (copy from BoxScore.tsx)
+// Helper to parse conversions and penalty kicks from summary string
 function parseConversions(conversionStr: string) {
-  // e.g. "1/1 PK" or "1/1" or "-"
+  // e.g. "1/1 PK" or "1/1" or "1/1 C, 2/2 PK" or "-"
   if (!conversionStr || conversionStr === "-") return { conversions: 0, penalties: 0 };
-  if (conversionStr.includes("PK")) {
-    // Penalty kicks only
-    const match = conversionStr.match(/(\d+)\/(\d+) PK/);
-    if (match) {
-      return { conversions: 0, penalties: parseInt(match[1], 10) };
-    }
-  } else {
-    // Conversions only
-    const match = conversionStr.match(/(\d+)\/(\d+)/);
-    if (match) {
-      return { conversions: parseInt(match[1], 10), penalties: 0 };
+  let conversions = 0;
+  let penalties = 0;
+  // Split by comma if both are present
+  const parts = conversionStr.split(',').map(s => s.trim());
+  for (const part of parts) {
+    if (part.includes('PK')) {
+      const match = part.match(/(\d+)\/(\d+) PK/);
+      if (match) {
+        penalties += parseInt(match[1], 10);
+      }
+    } else if (part.includes('C')) {
+      const match = part.match(/(\d+)\/(\d+) C/);
+      if (match) {
+        conversions += parseInt(match[1], 10);
+      }
+    } else {
+      // fallback: if just "1/1" assume conversions
+      const match = part.match(/(\d+)\/(\d+)/);
+      if (match) {
+        conversions += parseInt(match[1], 10);
+      }
     }
   }
-  return { conversions: 0, penalties: 0 };
+  return { conversions, penalties };
 }
 
 const Fixtures: React.FC = () => {
