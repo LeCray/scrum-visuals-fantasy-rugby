@@ -668,5 +668,51 @@ export const getBoxScore = (date: string, time: string, teamA: string, teamB: st
   return boxScores.get(matchId) || null;
 };
 
+// Type for final scores
+export type FinalScore = {
+  teamAScore: number;
+  teamBScore: number;
+};
+
+// Map to store final scores independently from box scores
+export const finalScores = new Map<string, FinalScore>();
+
+// Add some example final scores
+finalScores.set(
+  generateMatchId("April 28th", "9:00", "EAGLESVALE 2XV", "WATERSHED 2XV"),
+  { teamAScore: 24, teamBScore: 28 }
+);
+
+finalScores.set(
+  generateMatchId("April 28th", "10:20", "GOLDRIDGE 1XV", "GATEWAY 1XV"),
+  { teamAScore: 22, teamBScore: 22 }
+);
+
+finalScores.set(
+  generateMatchId("April 28th", "11:40", "WATERSHED 1XV", "MIDLANDS CC 1XV"),
+  { teamAScore: 19, teamBScore: 28 }
+);
+
+finalScores.set(
+  generateMatchId("April 28th", "13:00", "MILTON 1XV", "WISE OWL 1XV"),
+  { teamAScore: 8, teamBScore: 7 }
+);
+
+finalScores.set(
+  generateMatchId("April 28th", "14:20", "HILLCREST 1XV", "EAGLESVALE 1XV"),
+  { teamAScore: 21, teamBScore: 49 }
+);
+
+finalScores.set(
+  generateMatchId("April 28th", "15:40", "RYDINGS 1XV", "HERITAGE 1XV"),
+  { teamAScore: 19, teamBScore: 18 }
+);
+
+// Function to get final score for a match
+export const getFinalScore = (date: string, time: string, teamA: string, teamB: string) => {
+  const matchId = generateMatchId(date, time, teamA, teamB);
+  return finalScores.get(matchId);
+};
+
 // Export everything as before
 export { generateMatchId }; 
