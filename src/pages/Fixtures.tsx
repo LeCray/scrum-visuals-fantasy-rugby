@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { generateMatchId } from "@/lib/boxScoreData";
+import { generateMatchId, getBoxScore } from "@/lib/boxScoreData";
 
 // Define types for our fixtures data
 type Fixture = {
@@ -181,6 +181,26 @@ const isHighlightedFixture = (date: string, time: string, teamA: string, teamB: 
   );
 };
 
+// Add this function (copy from BoxScore.tsx)
+function parseConversions(conversionStr: string) {
+  // e.g. "1/1 PK" or "1/1" or "-"
+  if (!conversionStr || conversionStr === "-") return { conversions: 0, penalties: 0 };
+  if (conversionStr.includes("PK")) {
+    // Penalty kicks only
+    const match = conversionStr.match(/(\d+)\/(\d+) PK/);
+    if (match) {
+      return { conversions: 0, penalties: parseInt(match[1], 10) };
+    }
+  } else {
+    // Conversions only
+    const match = conversionStr.match(/(\d+)\/(\d+)/);
+    if (match) {
+      return { conversions: parseInt(match[1], 10), penalties: 0 };
+    }
+  }
+  return { conversions: 0, penalties: 0 };
+}
+
 const Fixtures: React.FC = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
@@ -247,6 +267,33 @@ const Fixtures: React.FC = () => {
                 >
                   {day.fixtures.map((f, i) => {
                     const isHighlighted = isHighlightedFixture(day.date, f.time, f.teamA, f.teamB);
+
+                    // Get the box score for this fixture if it's highlighted
+                    let scoreDisplay = null;
+                    let showFinal = false;
+                    if (isHighlighted) {
+                      const boxScore = getBoxScore(day.date, f.time, f.teamA, f.teamB);
+                      if (boxScore) {
+                        const teamAConv = parseConversions(boxScore.teamASummary.totalConversions);
+                        const teamBConv = parseConversions(boxScore.teamBSummary.totalConversions);
+                        const teamApoints = boxScore.teamASummary.totalTries * 5 + teamAConv.conversions * 2 + teamAConv.penalties * 3;
+                        const teamBpoints = boxScore.teamBSummary.totalTries * 5 + teamBConv.conversions * 2 + teamBConv.penalties * 3;
+                        if (teamApoints !== 0 || teamBpoints !== 0) {
+                          showFinal = true;
+                          // Pad scores to two digits for uniformity
+                          const teamAStr = String(teamApoints).padStart(2, '0');
+                          const teamBStr = String(teamBpoints).padStart(2, '0');
+                          scoreDisplay = (
+                            <div className="text-2xl font-orbitron text-scrummy-goldYellow text-center">
+                              {teamAStr} - {teamBStr}
+                            </div>
+                          );
+                        } else {
+                          scoreDisplay = null;
+                        }
+                      }
+                    }
+
                     return (
                       <motion.div 
                         key={i} 
@@ -268,28 +315,40 @@ const Fixtures: React.FC = () => {
                               {f.time}
                             </div>
 
-                            <div className="flex items-center justify-between gap-2">
-                              {/* Team A */}
-                              <div className="flex-1 text-center">
-                                {teamLogoMap[f.teamA] && (
-                                  <img src={teamLogoMap[f.teamA]} alt={`${f.teamA} logo`} className="w-28 h-28 mx-auto mb-1 object-contain" />
-                                )}
-                                <p className={`font-medium text-scrummy-navyBlue ${isHighlighted ? 'font-bold' : ''}`}>{f.teamA}</p>
-                              </div>
+                            <div className="flex flex-col items-center justify-between gap-2">
+                              {/* FINAL label if score is present */}
+                              {showFinal && (
+                                <div className="text-lg md:text-xl font-bold font-orbitron text-scrummy-navyBlue mb-1 tracking-widest">
+                                  FINAL
+                                </div>
+                              )}
 
-                              {/* VS */}
-                              <div className="flex-none px-2">
-                                <p className="text-scrummy-navyBlue/60 font-semibold">vs</p>
-                              </div>
+                              <div className="flex items-center justify-between w-full gap-2">
+                                {/* Team A */}
+                                <div className="flex-1 text-center">
+                                  {teamLogoMap[f.teamA] && (
+                                    <img src={teamLogoMap[f.teamA]} alt={`${f.teamA} logo`} className="w-28 h-28 mx-auto mb-1 object-contain" />
+                                  )}
+                                  <p className={`font-medium text-scrummy-navyBlue ${isHighlighted ? 'font-bold' : ''}`}>{f.teamA}</p>
+                                </div>
 
-                              {/* Team B */}
-                              <div className="flex-1 text-center">
-                                {teamLogoMap[f.teamB] && (
-                                  <img src={teamLogoMap[f.teamB]} alt={`${f.teamB} logo`} className="w-28 h-28 mx-auto mb-1 object-contain" />
-                                )}
-                                <p className={`font-medium text-scrummy-navyBlue ${isHighlighted ? 'font-bold' : ''}`}>{f.teamB}</p>
-                              </div>
+                                {/* Score or VS */}
+                                <div className="flex-none px-2 flex flex-col items-center justify-center">
+                                  {showFinal ? (
+                                    scoreDisplay
+                                  ) : (
+                                    <p className="text-scrummy-navyBlue/60 font-semibold">vs</p>
+                                  )}
+                                </div>
 
+                                {/* Team B */}
+                                <div className="flex-1 text-center">
+                                  {teamLogoMap[f.teamB] && (
+                                    <img src={teamLogoMap[f.teamB]} alt={`${f.teamB} logo`} className="w-28 h-28 mx-auto mb-1 object-contain" />
+                                  )}
+                                  <p className={`font-medium text-scrummy-navyBlue ${isHighlighted ? 'font-bold' : ''}`}>{f.teamB}</p>
+                                </div>
+                              </div>
                             </div>
                           </CardContent>
                         </Card>

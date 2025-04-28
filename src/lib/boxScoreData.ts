@@ -54,7 +54,7 @@ const exampleBoxScore: BoxScoreData = {
     { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
   ],
   teamASummary: {
-    totalTries: 0,
+    totalTries: 1,
     totalConversions: "1/1 PK",
     lineoutAccuracy: "-",
     penaltiesWon: 0,

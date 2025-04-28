@@ -116,8 +116,12 @@ const BoxScore: React.FC<BoxScoreProps> = ({
   // Calculate total points (for now using dummy data, will be updated with real data)
   const teamAConv = parseConversions(teamASummary.totalConversions);
   const teamBConv = parseConversions(teamBSummary.totalConversions);
-  const teamAPoints = teamASummary.totalTries * 5 + teamAConv.conversions * 2 + teamAConv.penalties * 3;
-  const teamBPoints = teamBSummary.totalTries * 5 + teamBConv.conversions * 2 + teamBConv.penalties * 3;
+  const teamApoints = teamASummary.totalTries * 5 + teamAConv.conversions * 2 + teamAConv.penalties * 3;
+  const teamBpoints = teamBSummary.totalTries * 5 + teamBConv.conversions * 2 + teamBConv.penalties * 3;
+
+  // Pad scores to two digits for uniformity
+  const teamAStr = String(teamApoints).padStart(2, '0');
+  const teamBStr = String(teamBpoints).padStart(2, '0');
 
   return (
     <div className="relative text-scrummy-navyBlue min-h-screen pb-12">
@@ -173,7 +177,7 @@ const BoxScore: React.FC<BoxScoreProps> = ({
 
                   <div className="text-center px-4 md:px-8">
                     <div className="text-2xl md:text-4xl font-bold font-orbitron text-scrummy-goldYellow mb-1 md:mb-2">
-                      {teamAPoints} - {teamBPoints}
+                      {teamAStr} - {teamBStr}
                     </div>
                     <div className="text-xs md:text-sm text-scrummy-navyBlue/60">Final Score</div>
                   </div>

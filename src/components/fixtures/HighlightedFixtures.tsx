@@ -115,6 +115,23 @@ export const HighlightedFixtureCard: React.FC<HighlightedFixtureCardProps> = ({
 }) => {
   const isMobile = useIsMobile();
   
+  // Get the box score for this fixture
+  const boxScore = getBoxScore(date, time, teamA, teamB);
+
+  // Calculate the score if boxScore exists
+  let scoreDisplay = "0 - 0";
+  if (boxScore) {
+    // Calculate points: 5 per try, 2 per conversion, 3 per penalty (if tracked)
+    const parseConversions = (conv: string) => {
+      // Example: "1/1" or "1/1 PK"
+      const [made] = conv.split(/[ /]/);
+      return parseInt(made) || 0;
+    };
+    const teamApoints = (boxScore.teamASummary.totalTries * 5) + parseConversions(boxScore.teamASummary.totalConversions) * 2;
+    const teamBpoints = (boxScore.teamBSummary.totalTries * 5) + parseConversions(boxScore.teamBSummary.totalConversions) * 2;
+    scoreDisplay = `${teamApoints} - ${teamBpoints}`;
+  }
+
   return (
     <div 
       className="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors cursor-pointer shadow-lg transform hover:scale-102 transition-transform duration-200"
@@ -131,7 +148,7 @@ export const HighlightedFixtureCard: React.FC<HighlightedFixtureCardProps> = ({
       </div>
       <div className="mt-2 text-sm text-gray-300 text-center">{venue}</div>
       <div className="mt-3 text-xl font-orbitron text-gold-500 text-center">
-        0 - 0
+        {scoreDisplay}
       </div>
     </div>
   );
