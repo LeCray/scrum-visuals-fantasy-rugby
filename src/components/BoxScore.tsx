@@ -84,22 +84,32 @@ const teamLogoMap: Record<string, string> = {
 
 // Helper to parse conversions and penalty kicks from summary string
 function parseConversions(conversionStr: string) {
-  // e.g. "1/1 PK" or "1/1" or "-"
+  // e.g. "1/1 PK" or "1/1" or "1/1 C, 2/2 PK" or "-"
   if (!conversionStr || conversionStr === "-") return { conversions: 0, penalties: 0 };
-  if (conversionStr.includes("PK")) {
-    // Penalty kicks only
-    const match = conversionStr.match(/(\d+)\/(\d+) PK/);
-    if (match) {
-      return { conversions: 0, penalties: parseInt(match[1], 10) };
-    }
-  } else {
-    // Conversions only
-    const match = conversionStr.match(/(\d+)\/(\d+)/);
-    if (match) {
-      return { conversions: parseInt(match[1], 10), penalties: 0 };
+  let conversions = 0;
+  let penalties = 0;
+  // Split by comma if both are present
+  const parts = conversionStr.split(',').map(s => s.trim());
+  for (const part of parts) {
+    if (part.includes('PK')) {
+      const match = part.match(/(\d+)\/(\d+) PK/);
+      if (match) {
+        penalties += parseInt(match[1], 10);
+      }
+    } else if (part.includes('C')) {
+      const match = part.match(/(\d+)\/(\d+) C/);
+      if (match) {
+        conversions += parseInt(match[1], 10);
+      }
+    } else {
+      // fallback: if just "1/1" assume conversions
+      const match = part.match(/(\d+)\/(\d+)/);
+      if (match) {
+        conversions += parseInt(match[1], 10);
+      }
     }
   }
-  return { conversions: 0, penalties: 0 };
+  return { conversions, penalties };
 }
 
 const BoxScore: React.FC<BoxScoreProps> = ({
@@ -116,12 +126,8 @@ const BoxScore: React.FC<BoxScoreProps> = ({
   // Calculate total points (for now using dummy data, will be updated with real data)
   const teamAConv = parseConversions(teamASummary.totalConversions);
   const teamBConv = parseConversions(teamBSummary.totalConversions);
-  const teamApoints = teamASummary.totalTries * 5 + teamAConv.conversions * 2 + teamAConv.penalties * 3;
-  const teamBpoints = teamBSummary.totalTries * 5 + teamBConv.conversions * 2 + teamBConv.penalties * 3;
-
-  // Pad scores to two digits for uniformity
-  const teamAStr = String(teamApoints).padStart(2, '0');
-  const teamBStr = String(teamBpoints).padStart(2, '0');
+  const teamAPoints = teamASummary.totalTries * 5 + teamAConv.conversions * 2 + teamAConv.penalties * 3;
+  const teamBPoints = teamBSummary.totalTries * 5 + teamBConv.conversions * 2 + teamBConv.penalties * 3;
 
   return (
     <div className="relative text-scrummy-navyBlue min-h-screen pb-12">
@@ -177,7 +183,7 @@ const BoxScore: React.FC<BoxScoreProps> = ({
 
                   <div className="text-center px-4 md:px-8">
                     <div className="text-2xl md:text-4xl font-bold font-orbitron text-scrummy-goldYellow mb-1 md:mb-2">
-                      {teamAStr} - {teamBStr}
+                      {teamAPoints} - {teamBPoints}
                     </div>
                     <div className="text-xs md:text-sm text-scrummy-navyBlue/60">Final Score</div>
                   </div>

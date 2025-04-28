@@ -105,18 +105,18 @@ const rydingsVsHeritage: BoxScoreData = {
     { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
   ],
   teamASummary: {
-    totalTries: 0,
-    totalConversions: "-",
-    lineoutAccuracy: "-",
-    penaltiesWon: 0,
-    penaltiesConceded: 0,
+    totalTries: 2,
+    totalConversions: "0/0 C, 3/3 PK",
+    lineoutAccuracy: "4/7 (57%)",
+    penaltiesWon: 3,
+    penaltiesConceded: 9,
   },
   teamBSummary: {
-    totalTries: 0,
-    totalConversions: "-",
-    lineoutAccuracy: "-",
-    penaltiesWon: 0,
-    penaltiesConceded: 0,
+    totalTries: 2,
+    totalConversions: "1/1 C, 2/2 PK",
+    lineoutAccuracy: "4/5 (80%)",
+    penaltiesWon: 2,
+    penaltiesConceded: 10,
   },
 };
 
