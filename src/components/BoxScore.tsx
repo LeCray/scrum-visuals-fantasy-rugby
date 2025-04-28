@@ -82,6 +82,26 @@ const teamLogoMap: Record<string, string> = {
   "PRINCE EDWARD 2XV": "/assets/PrinceEdward.png",
 };
 
+// Helper to parse conversions and penalty kicks from summary string
+function parseConversions(conversionStr: string) {
+  // e.g. "1/1 PK" or "1/1" or "-"
+  if (!conversionStr || conversionStr === "-") return { conversions: 0, penalties: 0 };
+  if (conversionStr.includes("PK")) {
+    // Penalty kicks only
+    const match = conversionStr.match(/(\d+)\/(\d+) PK/);
+    if (match) {
+      return { conversions: 0, penalties: parseInt(match[1], 10) };
+    }
+  } else {
+    // Conversions only
+    const match = conversionStr.match(/(\d+)\/(\d+)/);
+    if (match) {
+      return { conversions: parseInt(match[1], 10), penalties: 0 };
+    }
+  }
+  return { conversions: 0, penalties: 0 };
+}
+
 const BoxScore: React.FC<BoxScoreProps> = ({
   matchInfo,
   teamAPlayers,
@@ -94,8 +114,10 @@ const BoxScore: React.FC<BoxScoreProps> = ({
   const isMobile = useIsMobile();
 
   // Calculate total points (for now using dummy data, will be updated with real data)
-  const teamAPoints = teamASummary.totalTries * 5; // Assuming no conversions for now
-  const teamBPoints = teamBSummary.totalTries * 5; // Assuming no conversions for now
+  const teamAConv = parseConversions(teamASummary.totalConversions);
+  const teamBConv = parseConversions(teamBSummary.totalConversions);
+  const teamAPoints = teamASummary.totalTries * 5 + teamAConv.conversions * 2 + teamAConv.penalties * 3;
+  const teamBPoints = teamBSummary.totalTries * 5 + teamBConv.conversions * 2 + teamBConv.penalties * 3;
 
   return (
     <div className="relative text-scrummy-navyBlue min-h-screen pb-12">

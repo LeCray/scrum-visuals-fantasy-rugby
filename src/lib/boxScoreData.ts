@@ -55,14 +55,14 @@ const exampleBoxScore: BoxScoreData = {
   ],
   teamASummary: {
     totalTries: 0,
-    totalConversions: "-",
+    totalConversions: "1/1 PK",
     lineoutAccuracy: "-",
     penaltiesWon: 0,
     penaltiesConceded: 0,
   },
   teamBSummary: {
-    totalTries: 0,
-    totalConversions: "-",
+    totalTries: 1,
+    totalConversions: "1/1",
     lineoutAccuracy: "-",
     penaltiesWon: 0,
     penaltiesConceded: 0,
