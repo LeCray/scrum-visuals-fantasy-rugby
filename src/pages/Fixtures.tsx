@@ -299,13 +299,20 @@ const Fixtures: React.FC = () => {
                       return (
                         <motion.div key={i} variants={itemVariants}>
                           <Card
-                            className={`cursor-pointer transition-all duration-300 hover:shadow-lg h-[240px] w-full ${
+                            className={`cursor-pointer transition-all duration-300 hover:shadow-lg h-[240px] w-full relative ${
                               isHighlighted
                                 ? "border-2 border-scrummy-goldYellow hover:shadow-[0_0_20px_rgba(255,199,0,0.4)]"
                                 : "bg-white/80 hover:bg-white/90"
                             }`}
                             onClick={() => handleFixtureClick(day.date, f.time, f.teamA, f.teamB)}
                           >
+                            {isHighlighted && (
+                              <img 
+                                src="/assets/logo.png" 
+                                alt="SCRUMMY" 
+                                className="absolute top-2 right-2 w-12 h-12 opacity-80" 
+                              />
+                            )}
                             <CardContent className="p-2 pt-1 flex flex-col h-full">
                               <div className={`text-base font-bold ${isHighlighted ? 'text-scrummy-navyBlue bg-scrummy-goldYellow' : 'text-scrummy-goldYellow bg-scrummy-navyBlue'} inline-flex rounded px-2 py-1 self-start mb-0.5`}>
                                 {f.time}
