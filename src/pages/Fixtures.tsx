@@ -11,12 +11,27 @@ type Fixture = {
   time: string;
   teamA: string;
   teamB: string;
+  status?: 'cancelled';
 };
 
 type FixtureDay = {
   date: string;
   day: string;
   fixtures: Fixture[];
+};
+
+// Map to track cancelled games
+const cancelledGames = [
+  { date: "April 29th", time: "9:00", teamA: "CHURCHILL 2XV", teamB: "LOMAGUNDI 2XV" }
+];
+
+const isCancelledGame = (date: string, time: string, teamA: string, teamB: string) => {
+  return cancelledGames.some(game => 
+    game.date === date && 
+    game.time === time && 
+    game.teamA === teamA && 
+    game.teamB === teamB
+  );
 };
 
 // Fixture data
@@ -279,12 +294,13 @@ const Fixtures: React.FC = () => {
                   >
                     {day.fixtures.map((f, i) => {
                       const isHighlighted = isHighlightedFixture(day.date, f.time, f.teamA, f.teamB);
+                      const isCancelled = isCancelledGame(day.date, f.time, f.teamA, f.teamB);
 
                       // Get the final score for this fixture
                       let scoreDisplay = null;
                       let showFinal = false;
                       const finalScore = getFinalScore(day.date, f.time, f.teamA, f.teamB);
-                      if (finalScore) {
+                      if (finalScore && !isCancelled) {
                         showFinal = true;
                         // Pad scores to two digits for uniformity
                         const teamAStr = String(finalScore.teamAScore).padStart(2, '0');
@@ -299,14 +315,16 @@ const Fixtures: React.FC = () => {
                       return (
                         <motion.div key={i} variants={itemVariants}>
                           <Card
-                            className={`cursor-pointer transition-all duration-300 hover:shadow-lg h-[240px] w-full relative ${
-                              isHighlighted
-                                ? "border-2 border-scrummy-goldYellow hover:shadow-[0_0_20px_rgba(255,199,0,0.4)]"
-                                : "bg-white/80 hover:bg-white/90"
+                            className={`transition-all duration-300 hover:shadow-lg h-[240px] w-full relative ${
+                              isHighlighted && !isCancelled
+                                ? "border-2 border-scrummy-goldYellow hover:shadow-[0_0_20px_rgba(255,199,0,0.4)] cursor-pointer"
+                                : isCancelled
+                                ? "bg-white/60 opacity-75"
+                                : "bg-white/80 hover:bg-white/90 cursor-pointer"
                             }`}
-                            onClick={() => handleFixtureClick(day.date, f.time, f.teamA, f.teamB)}
+                            onClick={() => !isCancelled && handleFixtureClick(day.date, f.time, f.teamA, f.teamB)}
                           >
-                            {isHighlighted && (
+                            {isHighlighted && !isCancelled && (
                               <img 
                                 src="/assets/logo.png" 
                                 alt="SCRUMMY" 
@@ -314,13 +332,23 @@ const Fixtures: React.FC = () => {
                               />
                             )}
                             <CardContent className="p-2 pt-1 flex flex-col h-full">
-                              <div className={`text-lg font-bold ${isHighlighted ? 'text-scrummy-navyBlue bg-scrummy-goldYellow' : 'text-scrummy-goldYellow bg-scrummy-navyBlue'} inline-flex rounded px-2 py-1 self-start mb-0.5 mt-2 ml-2`}>
+                              <div className={`text-lg font-bold ${
+                                isCancelled 
+                                  ? 'text-red-500 bg-red-50'
+                                  : isHighlighted 
+                                    ? 'text-scrummy-navyBlue bg-scrummy-goldYellow' 
+                                    : 'text-scrummy-goldYellow bg-scrummy-navyBlue'
+                              } inline-flex rounded px-2 py-1 self-start mb-0.5 mt-2 ml-2`}>
                                 {f.time}
                               </div>
 
                               <div className="flex flex-col items-center justify-start flex-grow -mt-1">
-                                {/* FINAL label if score is present */}
-                                {showFinal && (
+                                {/* Status label */}
+                                {isCancelled ? (
+                                  <div className="text-base font-bold font-orbitron text-red-500 mb-0.5 tracking-widest">
+                                    CANCELLED
+                                  </div>
+                                ) : showFinal && (
                                   <div className="text-base font-bold font-orbitron text-scrummy-navyBlue mb-0.5 tracking-widest">
                                     FINAL
                                   </div>
@@ -330,14 +358,24 @@ const Fixtures: React.FC = () => {
                                   {/* Team A */}
                                   <div className="flex-1 text-center">
                                     {teamLogoMap[f.teamA] && (
-                                      <img src={teamLogoMap[f.teamA]} alt={`${f.teamA} logo`} className="w-28 h-28 mx-auto mb-0.5 object-contain" />
+                                      <img 
+                                        src={teamLogoMap[f.teamA]} 
+                                        alt={`${f.teamA} logo`} 
+                                        className={`w-28 h-28 mx-auto mb-0.5 object-contain ${isCancelled ? 'opacity-50' : ''}`} 
+                                      />
                                     )}
-                                    <p className={`text-base font-medium text-scrummy-navyBlue ${isHighlighted ? 'font-bold' : ''}`}>{f.teamA}</p>
+                                    <p className={`text-base font-medium ${
+                                      isCancelled 
+                                        ? 'text-scrummy-navyBlue/50'
+                                        : `text-scrummy-navyBlue ${isHighlighted ? 'font-bold' : ''}`
+                                    }`}>{f.teamA}</p>
                                   </div>
 
                                   {/* Score or VS */}
                                   <div className="flex-none flex flex-col items-center justify-center">
-                                    {showFinal ? (
+                                    {isCancelled ? (
+                                      <p className="text-red-500/70 font-semibold text-base">cancelled</p>
+                                    ) : showFinal ? (
                                       scoreDisplay
                                     ) : (
                                       <p className="text-scrummy-navyBlue/60 font-semibold text-base">vs</p>
@@ -347,9 +385,17 @@ const Fixtures: React.FC = () => {
                                   {/* Team B */}
                                   <div className="flex-1 text-center">
                                     {teamLogoMap[f.teamB] && (
-                                      <img src={teamLogoMap[f.teamB]} alt={`${f.teamB} logo`} className="w-28 h-28 mx-auto mb-0.5 object-contain" />
+                                      <img 
+                                        src={teamLogoMap[f.teamB]} 
+                                        alt={`${f.teamB} logo`} 
+                                        className={`w-28 h-28 mx-auto mb-0.5 object-contain ${isCancelled ? 'opacity-50' : ''}`} 
+                                      />
                                     )}
-                                    <p className={`text-base font-medium text-scrummy-navyBlue ${isHighlighted ? 'font-bold' : ''}`}>{f.teamB}</p>
+                                    <p className={`text-base font-medium ${
+                                      isCancelled 
+                                        ? 'text-scrummy-navyBlue/50'
+                                        : `text-scrummy-navyBlue ${isHighlighted ? 'font-bold' : ''}`
+                                    }`}>{f.teamB}</p>
                                   </div>
                                 </div>
                               </div>
