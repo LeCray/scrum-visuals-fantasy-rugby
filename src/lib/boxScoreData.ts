@@ -730,7 +730,7 @@ finalScores.set(
 
 finalScores.set(
   generateMatchId("April 29th", "15:40", "ST GEORGE'S 1XV", "ST ANDREW'S 1XV"),
-  { teamAScore: 43, teamBScore: 6 }
+  { teamAScore: 6, teamBScore: 43 }
 );
 
 
