@@ -264,7 +264,7 @@ const Fixtures: React.FC = () => {
               <p className="text-sm text-scrummy-navyBlue/70">All times are in CAT (Central Africa Time)</p>
             </div>
 
-            <div className="mt-16">
+            <div className="mt-16 space-y-8">
               {fixturesData.map((day, idx) => (
                 <div key={idx} className="bg-white/60 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-md">
                   <h2 className="text-xl md:text-2xl font-semibold mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 flex flex-col md:flex-row md:items-end">
@@ -326,7 +326,7 @@ const Fixtures: React.FC = () => {
                                   </div>
                                 )}
 
-                                <div className="flex items-center justify-center w-full gap-4">
+                                <div className="flex items-center justify-center w-full gap-4 -mt-6">
                                   {/* Team A */}
                                   <div className="flex-1 text-center">
                                     {teamLogoMap[f.teamA] && (
