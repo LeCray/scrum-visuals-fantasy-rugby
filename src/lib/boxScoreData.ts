@@ -735,7 +735,7 @@ finalScores.set(
 
 finalScores.set(
   generateMatchId("April 30th", "10:20", "WATERSHED 2XV", "CBC 2XV"),
-  { teamAScore: 27, teamBScore: 24 }
+  { teamAScore: 27, teamBScore: 29 }
 );
 
 finalScores.set(
