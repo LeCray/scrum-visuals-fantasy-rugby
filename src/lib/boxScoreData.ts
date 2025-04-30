@@ -733,7 +733,30 @@ finalScores.set(
   { teamAScore: 6, teamBScore: 43 }
 );
 
+{/*finalScores.set(
+  generateMatchId("April 30th", "10:20", "WATERSHED 2XV", "CBC 2XV"),
+  { teamAScore: 6, teamBScore: 43 }
+);
 
+finalScores.set(
+  generateMatchId("April 30th", "11:40", "RYDINGS 1XV", "MIDLANDS CC 1XV"),
+  { teamAScore: 6, teamBScore: 43 }
+);*/}
+
+finalScores.set(
+  generateMatchId("April 30th", "13:00", "GOLDRIDGE 1XV", "HILLCREST 1XV"),
+  { teamAScore: 12, teamBScore: 50 }
+);
+
+{/*finalScores.set(
+  generateMatchId("April 30th", "14:20", "EAGLSVALE 1XV", "HERITAGE 1XV"),
+  { teamAScore: 6, teamBScore: 43 }
+);
+
+finalScores.set(
+  generateMatchId("April 30th", "15:40", "WATERSHED 1XV", "GATEWAY 1XV"),
+  { teamAScore: 6, teamBScore: 43 }
+);*/}
 
 // Function to get final score for a match
 export const getFinalScore = (date: string, time: string, teamA: string, teamB: string) => {
