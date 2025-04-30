@@ -749,7 +749,7 @@ finalScores.set(
 );
 
 finalScores.set(
-  generateMatchId("April 30th", "14:20", "EAGLSVALE 1XV", "HERITAGE 1XV"),
+  generateMatchId("April 30th", "14:20", "EAGLESVALE 1XV", "HERITAGE 1XV"),
   { teamAScore: 8, teamBScore: 7 }
 );
 
