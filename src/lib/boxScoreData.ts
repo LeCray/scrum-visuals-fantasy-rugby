@@ -748,12 +748,12 @@ finalScores.set(
   { teamAScore: 12, teamBScore: 50 }
 );
 
-{/*finalScores.set(
+finalScores.set(
   generateMatchId("April 30th", "14:20", "EAGLSVALE 1XV", "HERITAGE 1XV"),
-  { teamAScore: 6, teamBScore: 43 }
+  { teamAScore: 8, teamBScore: 7 }
 );
 
-finalScores.set(
+{/*finalScores.set(
   generateMatchId("April 30th", "15:40", "WATERSHED 1XV", "GATEWAY 1XV"),
   { teamAScore: 6, teamBScore: 43 }
 );*/}
