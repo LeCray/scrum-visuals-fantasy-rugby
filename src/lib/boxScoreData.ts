@@ -733,15 +733,15 @@ finalScores.set(
   { teamAScore: 6, teamBScore: 43 }
 );
 
-{/*finalScores.set(
+finalScores.set(
   generateMatchId("April 30th", "10:20", "WATERSHED 2XV", "CBC 2XV"),
-  { teamAScore: 6, teamBScore: 43 }
+  { teamAScore: 27, teamBScore: 24 }
 );
 
 finalScores.set(
   generateMatchId("April 30th", "11:40", "RYDINGS 1XV", "MIDLANDS CC 1XV"),
-  { teamAScore: 6, teamBScore: 43 }
-);*/}
+  { teamAScore: 18, teamBScore: 32 }
+);
 
 finalScores.set(
   generateMatchId("April 30th", "13:00", "GOLDRIDGE 1XV", "HILLCREST 1XV"),
