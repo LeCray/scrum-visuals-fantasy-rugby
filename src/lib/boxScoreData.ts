@@ -759,7 +759,7 @@ finalScores.set(
 );
 
 finalScores.set(
-  generateMatchId("May 1", "8:00", "ST GEORGE'S 2XV", "ST ALBANs 2XV"),
+  generateMatchId("May 1st", "8:00", "ST GEORGE'S 2XV", "ST ALBANs 2XV"),
   { teamAScore: 21, teamBScore: 8 }
 );
 
