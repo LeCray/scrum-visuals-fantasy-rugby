@@ -758,6 +758,11 @@ finalScores.set(
   { teamAScore: 14, teamBScore: 24 }
 );
 
+finalScores.set(
+  generateMatchId("May 1", "8:00", "ST GEORGE'S 2XV", "ST ALBANs 2XV"),
+  { teamAScore: 21, teamBScore: 8 }
+);
+
 // Function to get final score for a match
 export const getFinalScore = (date: string, time: string, teamA: string, teamB: string) => {
   const matchId = generateMatchId(date, time, teamA, teamB);
