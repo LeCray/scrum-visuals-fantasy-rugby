@@ -477,15 +477,15 @@ const zamSteelersVsSharks: BoxScoreData = {
     { name: "-", position: "FH", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
   ],
   teamASummary: {
-    totalTries: 0,
+    totalTries: 2,
     totalConversions: "-",
     lineoutAccuracy: "-",
     penaltiesWon: 0,
     penaltiesConceded: 0,
   },
   teamBSummary: {
-    totalTries: 0,
-    totalConversions: "-",
+    totalTries: 13,
+    totalConversions: "1/13 C",
     lineoutAccuracy: "-",
     penaltiesWon: 0,
     penaltiesConceded: 0,
