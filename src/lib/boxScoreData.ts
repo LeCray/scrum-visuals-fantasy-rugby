@@ -783,6 +783,11 @@ finalScores.set(
   { teamAScore: 24, teamBScore: 46 }
 );
 
+finalScores.set(
+  generateMatchId("May 1st", "14:40", "ST JOHN'S 1XV", "ST ALBANS 1XV"),
+  { teamAScore: 14, teamBScore: 26 }
+);
+
 
 
 // Function to get final score for a match
