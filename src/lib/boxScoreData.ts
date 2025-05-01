@@ -768,6 +768,12 @@ finalScores.set(
   { teamAScore: 35, teamBScore: 15 }
 );
 
+finalScores.set(
+  generateMatchId("May 1st", "10:40", "CBC 1XV", "FALCON 1XV"),
+  { teamAScore: 7, teamBScore: 29 }
+);
+
+
 // Function to get final score for a match
 export const getFinalScore = (date: string, time: string, teamA: string, teamB: string) => {
   const matchId = generateMatchId(date, time, teamA, teamB);
