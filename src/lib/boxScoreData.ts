@@ -794,7 +794,7 @@ finalScores.set(
 );
 
 finalScores.set(
-  generateMatchId("May 2nd", "09:00", "MILTON 2XV", "WISE OWL 2XV"),
+  generateMatchId("May 2nd", "9:00", "MILTON 2XV", "WISE OWL 2XV"),
   { teamAScore: 5, teamBScore: 43 }
 );
 
