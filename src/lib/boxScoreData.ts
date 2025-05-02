@@ -819,7 +819,7 @@ finalScores.set(
 );
 
 finalScores.set(
-  generateMatchId("May 2nd", "13:00", "PETERHOUSE 2XV", "FALCON 2XV"),
+  generateMatchId("May 2nd", "15:40", "PETERHOUSE 2XV", "FALCON 2XV"),
   { teamAScore: 43, teamBScore: 13 }
 );
 
