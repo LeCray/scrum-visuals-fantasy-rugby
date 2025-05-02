@@ -808,6 +808,10 @@ finalScores.set(
   { teamAScore: 34, teamBScore: 22 }
 );
 
+finalScores.set(
+  generateMatchId("May 2nd", "13:00", "RYDINGS 1XV", "WISE OWL 1XV"),
+  { teamAScore: 6, teamBScore: 60 }
+);
 
 
 // Function to get final score for a match
