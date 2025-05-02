@@ -805,7 +805,7 @@ finalScores.set(
 
 finalScores.set(
   generateMatchId("May 2nd", "11:40", "MILTON 1XV", "LOMAGUNDI 2XV"),
-  { teamAScore: 10, teamBScore: 20 }
+  { teamAScore: 34, teamBScore: 22 }
 );
 
 
