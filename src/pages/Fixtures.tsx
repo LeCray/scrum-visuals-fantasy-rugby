@@ -91,7 +91,7 @@ const fixturesData: FixtureDay[] = [
       { time: "9:00",  teamA: "MILTON 2XV",      teamB: "WISE OWL 2XV" },
       { time: "10:20", teamA: "EAGLESVALE 2XV", teamB: "CBC 2XV" },
       { time: "11:40", teamA: "MILTON 1XV",     teamB: "LOMAGUNDI 2XV" },
-      { time: "13:00", teamA: "PRINCE EDWARD 2XV", teamB: "CHURCHILL 2XV" },
+      { time: "13:00", teamA: "PRINCE EDWARD 2XV", teamB: "LORD BRIGHTON 2XV" },
       { time: "14:20", teamA: "RYDINGS 1XV",    teamB: "WISE OWL 1XV" },
       { time: "15:40", teamA: "PETERHOUSE 2XV",teamB: "FALCON 2XV" }
     ]
@@ -148,6 +148,7 @@ const teamLogoMap: Record<string, string> = {
   "MILTON 2XV": "/assets/Milton.png",
   "WISE OWL 2XV": "/assets/WiseOwl.png",
   "PRINCE EDWARD 2XV": "/assets/PrinceEdward.png",
+  "LORD BRIGHTON 2XV": "/assets/LordBrighton.png",
 };
 
 // Animation variants for staggered animations
