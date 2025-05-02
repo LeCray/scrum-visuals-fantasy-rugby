@@ -809,7 +809,7 @@ finalScores.set(
 );
 
 finalScores.set(
-  generateMatchId("May 2nd", "13:00", "RYDINGS 1XV", "WISE OWL 1XV"),
+  generateMatchId("May 2nd", "14:20", "RYDINGS 1XV", "WISE OWL 1XV"),
   { teamAScore: 6, teamBScore: 60 }
 );
 
