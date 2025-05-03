@@ -832,7 +832,7 @@ finalScores.set(
 
 finalScores.set(
   generateMatchId("May 3rd", "10:20", "CBC 1XV", "PETERHOUSE 1XV"),
-  { teamAScore: 32, teamBScore: 10 }
+  { teamAScore: 10, teamBScore:32  }
 );
 
 
