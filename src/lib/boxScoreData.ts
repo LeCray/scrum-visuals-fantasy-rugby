@@ -836,10 +836,10 @@ finalScores.set(
 );
 
 
-{/*finalScores.set(
+finalScores.set(
   generateMatchId("May 3rd", "11:40", "PRINCE EDWARD 1XV", "CHURCHILL 1XV"),
-  { teamAScore: 43, teamBScore: 13 }
-);*/}
+  { teamAScore: 3, teamBScore: 23 }
+);
 
 
 finalScores.set(
