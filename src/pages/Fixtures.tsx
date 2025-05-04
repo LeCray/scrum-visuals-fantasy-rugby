@@ -40,7 +40,7 @@ const fixturesData: FixtureDay[] = [
     date: "TODAY",
     day: "FEATURED MATCHES",
     fixtures: [
-      { time: "12:00", teamA: "ZIMBABWE U20", teamB: "SHARKS ACADEMY" },
+      { time: "11:30", teamA: "ZIMBABWE U20", teamB: "SHARKS ACADEMY" },
       { time: "14:30", teamA: "ZIMBABWE SABLES", teamB: "ZAMBIA" }
     ]
   },
@@ -186,7 +186,7 @@ const itemVariants = {
 // Add function to check if a fixture is highlighted
 const isHighlightedFixture = (date: string, time: string, teamA: string, teamB: string) => {
   const highlightedGames = [
-    { date: "TODAY", time: "12:00", teamA: "ZIMBABWE U20", teamB: "SHARKS ACADEMY" },
+    { date: "TODAY", time: "11:30", teamA: "ZIMBABWE U20", teamB: "SHARKS ACADEMY" },
     { date: "TODAY", time: "14:30", teamA: "ZIMBABWE SABLES", teamB: "ZAMBIA" },
     { date: "April 28th", time: "13:00", teamA: "MILTON 1XV", teamB: "WISE OWL 1XV" },
     { date: "April 28th", time: "15:40", teamA: "RYDINGS 1XV", teamB: "HERITAGE 1XV" },
@@ -352,7 +352,7 @@ const Fixtures: React.FC = () => {
                                   </div>
                                 </div>
                                 {/* Add streaming link for first match */}
-                                {day.day === "FEATURED MATCHES" && f.time === "12:00" && (
+                                {day.day === "FEATURED MATCHES" && f.time === "11:30" && (
                                   <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
                                     <a 
                                       href="https://www.facebook.com/stories/103595778471519/UzpfSVNDOjkzMTQzOTcyNTY2OTIxNg==/?view_single=1&source=shared_permalink&mibextid=wwXIfr"
