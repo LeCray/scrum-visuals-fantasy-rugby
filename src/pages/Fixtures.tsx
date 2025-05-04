@@ -337,7 +337,17 @@ const Fixtures: React.FC = () => {
                                   </div>
                                   {/* VS */}
                                   <div className="flex-none">
-                                    <p className="text-3xl font-bold text-scrummy-goldYellow">VS</p>
+                                    {(() => {
+                                      const finalScore = getFinalScore(day.date, f.time, f.teamA, f.teamB);
+                                      if (finalScore) {
+                                        return (
+                                          <p className="text-3xl font-bold text-scrummy-goldYellow">
+                                            {String(finalScore.teamAScore).padStart(2, '0')} - {String(finalScore.teamBScore).padStart(2, '0')}
+                                          </p>
+                                        );
+                                      }
+                                      return <p className="text-3xl font-bold text-scrummy-goldYellow">VS</p>;
+                                    })()}
                                   </div>
                                   {/* Team B */}
                                   <div className="flex-1 text-center">
