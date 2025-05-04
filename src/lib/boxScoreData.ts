@@ -830,7 +830,7 @@ finalScores.set(
 
 finalScores.set(
   generateMatchId("TODAY", "14:30", "ZIMBABWE SABLES", "ZAMBIA"),
-  { teamAScore: 0, teamBScore: 0 }
+  { teamAScore: 70, teamBScore: 15 }
 );
 
 finalScores.set(

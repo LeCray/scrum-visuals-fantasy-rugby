@@ -341,7 +341,7 @@ const Fixtures: React.FC = () => {
                                       const finalScore = getFinalScore(day.date, f.time, f.teamA, f.teamB);
                                       if (finalScore) {
                                         return (
-                                          <p className="text-3xl font-bold text-scrummy-goldYellow">
+                                          <p className="text-5xl font-bold text-scrummy-goldYellow font-orbitron">
                                             {String(finalScore.teamAScore).padStart(2, '0')} - {String(finalScore.teamBScore).padStart(2, '0')}
                                           </p>
                                         );
