@@ -320,7 +320,7 @@ const Fixtures: React.FC = () => {
 
             {/* Tabs */}
             <div className="flex justify-center mt-8">
-              {["derby","zim","week1"].map(tab => (
+              {["derby", "zim", "week1"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
@@ -332,7 +332,7 @@ const Fixtures: React.FC = () => {
                 >
                   {tab === "derby" && "Derby Day Fixtures"}
                   {tab === "zim" && "Zim Sables Games"}
-                  {tab === "week1" && "Week 1 Fixtures"}
+                  {tab === "week1" && "Week 1"} {/* Updated label */}
                 </button>
               ))}
             </div>
