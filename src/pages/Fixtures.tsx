@@ -330,7 +330,7 @@ const Fixtures: React.FC = () => {
                       : "bg-scrummy-navyBlue text-white hover:bg-scrummy-goldYellow hover:text-scrummy-navyBlue"
                   }`}
                 >
-                  {tab === "derby" && "Derby Day Fixtures"}
+                  {tab === "derby" && "Derby Day"}
                   {tab === "zim" && "Zim Sables Games"}
                   {tab === "week1" && "Week 1"} {/* Updated label */}
                 </button>
