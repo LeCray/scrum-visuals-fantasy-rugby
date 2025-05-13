@@ -264,10 +264,15 @@ const Fixtures: React.FC = () => {
     }
   };
 
-  const filteredFixtures = (activeTab: string): FixtureDay[] => {
+  const filteredFixtures = (activeTab: string): FixtureDay[] | string => {
     if (activeTab === "derby") return derbyDay;
     if (activeTab === "zim") return zimSablesGames;
-    if (activeTab === "week1") return week1Games;
+    if (activeTab === "week1") {
+      if (week1Games.length === 0) {
+        return "Stay Tuned";
+      }
+      return week1Games;
+    }
     return [];
   };
 
@@ -333,242 +338,253 @@ const Fixtures: React.FC = () => {
             </div>
 
             <div className="mt-16 space-y-8">
-            {filteredFixtures(activeTab).map((day, idx) => (
-                <div key={idx} className={`bg-white/60 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-md ${day.day === "FEATURED MATCHES" ? "col-span-full" : ""}`}>
-                  {day.day === "FEATURED MATCHES" ? (
-                    <>
-                      <h2 className="text-3xl md:text-4xl font-bold mb-6 font-orbitron border-b border-scrummy-goldYellow pb-4 flex flex-col md:flex-row md:items-end">
-                        <span className="text-scrummy-navyBlue">{day.date}</span>
-                        <span className="text-scrummy-goldYellow text-2xl md:ml-3">{day.day}</span>
-                      </h2>
-                      <motion.div
-                        className="grid grid-cols-1 gap-4"
-                        variants={containerVariants}
-                        initial="hidden"
-                        animate="visible"
-                      >
-                        {day.fixtures.map((f, i) => (
-                          <motion.div key={i} variants={itemVariants} className="w-full">
-                            <Card
-                              className="transition-all duration-300 hover:shadow-lg h-[280px] w-full relative border-2 border-scrummy-goldYellow hover:shadow-[0_0_20px_rgba(255,199,0,0.4)] cursor-pointer bg-gradient-to-br from-white/90 to-white/70"
-                              onClick={() => handleFixtureClick(day.date, f.time, f.teamA, f.teamB)}
-                            >
-                              <img 
-                                src="/assets/logo.png" 
-                                alt="SCRUMMY" 
-                                className="absolute top-4 right-4 w-12 h-12 opacity-80" 
-                              />
-                              <CardContent className="p-6 flex flex-col h-full">
-                                <div className="text-xl font-bold text-scrummy-navyBlue bg-scrummy-goldYellow inline-flex rounded-lg px-4 py-2 self-start mb-4">
-                                  {f.time}
-                                </div>
-                                <div className="flex items-center justify-center flex-grow gap-8 md:gap-16">
-                                  {/* Team A */}
-                                  <div className="flex-1 text-center">
-                                    {teamLogoMap[f.teamA] && (
-                                      <img 
-                                        src={teamLogoMap[f.teamA]} 
-                                        alt={`${f.teamA} logo`} 
-                                        className="w-32 h-32 mx-auto mb-2 object-contain" 
-                                      />
-                                    )}
-                                    <p className="text-xl font-bold text-scrummy-navyBlue">{f.teamA}</p>
-                                  </div>
-                                  {/* VS */}
-                                  <div className="flex-none">
-                                    {(() => {
-                                      const finalScore = getFinalScore(day.date, f.time, f.teamA, f.teamB);
-                                      if (finalScore) {
-                                        return (
-                                          <p className="text-5xl font-bold text-scrummy-goldYellow font-orbitron">
-                                            {String(finalScore.teamAScore).padStart(2, '0')} - {String(finalScore.teamBScore).padStart(2, '0')}
-                                          </p>
-                                        );
-                                      }
-                                      return <p className="text-3xl font-bold text-scrummy-goldYellow">VS</p>;
-                                    })()}
-                                  </div>
-                                  {/* Team B */}
-                                  <div className="flex-1 text-center">
-                                    {teamLogoMap[f.teamB] && (
-                                      <img 
-                                        src={teamLogoMap[f.teamB]} 
-                                        alt={`${f.teamB} logo`} 
-                                        className="w-32 h-32 mx-auto mb-2 object-contain" 
-                                      />
-                                    )}
-                                    <p className="text-xl font-bold text-scrummy-navyBlue">{f.teamB}</p>
-                                  </div>
-                                </div>
-                                {/* Add streaming link for first match */}
-                                {day.day === "FEATURED MATCHES" && f.time === "11:30" && (
-                                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
-                                    <a 
-                                      href="https://www.facebook.com/stories/103595778471519/UzpfSVNDOjkzMTQzOTcyNTY2OTIxNg==/?view_single=1&source=shared_permalink&mibextid=wwXIfr"
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="inline-flex items-center gap-2 bg-[#1877F2] text-white px-4 py-2 rounded-lg hover:bg-[#0c5bce] transition-colors"
-                                      onClick={(e) => e.stopPropagation()}
-                                    >
-                                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                      </svg>
-                                      Watch Live on Facebook
-                                    </a>
-                                  </div>
-                                )}
-                                {/* Add streaming link for Sables match */}
-                                {day.day === "FEATURED MATCHES" && f.time === "14:30" && (
-                                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
-                                    <a 
-                                      href="https://www.facebook.com/share/v/19Ntb1K6s9/?mibextid=wwXIfr"
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="inline-flex items-center gap-2 bg-[#1877F2] text-white px-4 py-2 rounded-lg hover:bg-[#0c5bce] transition-colors"
-                                      onClick={(e) => e.stopPropagation()}
-                                    >
-                                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                      </svg>
-                                      Watch Live on Facebook
-                                    </a>
-                                  </div>
-                                )}
-                              </CardContent>
-                            </Card>
-                          </motion.div>
-                        ))}
-                      </motion.div>
-                    </>
-                  ) : (
-                    <>
-                      <h2 className="text-xl md:text-2xl font-semibold mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 flex flex-col md:flex-row md:items-end">
-                        <span className="text-scrummy-navyBlue">{day.date}</span>
-                        <span className="text-scrummy-goldYellow text-lg md:ml-3">{day.day}</span>
-                      </h2>
-                      <motion.div
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-                        variants={containerVariants}
-                        initial="hidden"
-                        animate="visible"
-                      >
-                        {day.fixtures.map((f, i) => {
-                          const isHighlighted = isHighlightedFixture(day.date, f.time, f.teamA, f.teamB);
-                          const isCancelled = isCancelledGame(day.date, f.time, f.teamA, f.teamB);
-
-                          // Get the final score for this fixture
-                          let scoreDisplay = null;
-                          let showFinal = false;
-                          const finalScore = getFinalScore(day.date, f.time, f.teamA, f.teamB);
-                          if (finalScore && !isCancelled) {
-                            showFinal = true;
-                            // Pad scores to two digits for uniformity
-                            const teamAStr = String(finalScore.teamAScore).padStart(2, '0');
-                            const teamBStr = String(finalScore.teamBScore).padStart(2, '0');
-                            scoreDisplay = (
-                              <div className="text-2xl font-orbitron text-scrummy-goldYellow text-center">
-                                {teamAStr} - {teamBStr}
-                              </div>
-                            );
-                          }
-
-                          return (
-                            <motion.div key={i} variants={itemVariants}>
+              {typeof filteredFixtures(activeTab) === "string" ? (
+                <div className="text-center bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-md">
+                  <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navyBlue mb-4">
+                    {filteredFixtures(activeTab)}
+                  </h2>
+                  <p className="text-base text-scrummy-navyBlue/70">
+                    Check back soon for updates!
+                  </p>
+                </div>
+              ) : (
+                filteredFixtures(activeTab).map((day, idx) => (
+                  <div key={idx} className={`bg-white/60 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-md ${day.day === "FEATURED MATCHES" ? "col-span-full" : ""}`}>
+                    {day.day === "FEATURED MATCHES" ? (
+                      <>
+                        <h2 className="text-3xl md:text-4xl font-bold mb-6 font-orbitron border-b border-scrummy-goldYellow pb-4 flex flex-col md:flex-row md:items-end">
+                          <span className="text-scrummy-navyBlue">{day.date}</span>
+                          <span className="text-scrummy-goldYellow text-2xl md:ml-3">{day.day}</span>
+                        </h2>
+                        <motion.div
+                          className="grid grid-cols-1 gap-4"
+                          variants={containerVariants}
+                          initial="hidden"
+                          animate="visible"
+                        >
+                          {day.fixtures.map((f, i) => (
+                            <motion.div key={i} variants={itemVariants} className="w-full">
                               <Card
-                                className={`transition-all duration-300 hover:shadow-lg h-[240px] w-full relative ${
-                                  isHighlighted && !isCancelled
-                                    ? "border-2 border-scrummy-goldYellow hover:shadow-[0_0_20px_rgba(255,199,0,0.4)] cursor-pointer"
-                                    : isCancelled
-                                    ? "bg-white/60 opacity-75"
-                                    : "bg-white/80 hover:bg-white/90 cursor-pointer"
-                                }`}
-                                onClick={() => !isCancelled && handleFixtureClick(day.date, f.time, f.teamA, f.teamB)}
+                                className="transition-all duration-300 hover:shadow-lg h-[280px] w-full relative border-2 border-scrummy-goldYellow hover:shadow-[0_0_20px_rgba(255,199,0,0.4)] cursor-pointer bg-gradient-to-br from-white/90 to-white/70"
+                                onClick={() => handleFixtureClick(day.date, f.time, f.teamA, f.teamB)}
                               >
-                                {isHighlighted && !isCancelled && (
-                                  <img 
-                                    src="/assets/logo.png" 
-                                    alt="SCRUMMY" 
-                                    className="absolute top-2 right-2 w-12 h-12 opacity-80" 
-                                  />
-                                )}
-                                <CardContent className="p-2 pt-1 flex flex-col h-full">
-                                  <div className={`text-lg font-bold ${
-                                    isCancelled 
-                                      ? 'text-red-500 bg-red-50'
-                                      : isHighlighted 
-                                        ? 'text-scrummy-navyBlue bg-scrummy-goldYellow' 
-                                        : 'text-scrummy-goldYellow bg-scrummy-navyBlue'
-                                  } inline-flex rounded px-2 py-1 self-start mb-0.5 mt-2 ml-2`}>
+                                <img 
+                                  src="/assets/logo.png" 
+                                  alt="SCRUMMY" 
+                                  className="absolute top-4 right-4 w-12 h-12 opacity-80" 
+                                />
+                                <CardContent className="p-6 flex flex-col h-full">
+                                  <div className="text-xl font-bold text-scrummy-navyBlue bg-scrummy-goldYellow inline-flex rounded-lg px-4 py-2 self-start mb-4">
                                     {f.time}
                                   </div>
-
-                                  <div className="flex flex-col items-center justify-start flex-grow -mt-1">
-                                    {/* Status label */}
-                                    {isCancelled ? (
-                                      <div className="text-base font-bold font-orbitron text-red-500 mb-0.5 tracking-widest">
-                                        CANCELLED
-                                      </div>
-                                    ) : showFinal && (
-                                      <div className="text-base font-bold font-orbitron text-scrummy-navyBlue mb-0.5 tracking-widest">
-                                        FINAL
-                                      </div>
-                                    )}
-
-                                    <div className="flex items-center justify-center w-full gap-4 -mt-6">
-                                      {/* Team A */}
-                                      <div className="flex-1 text-center">
-                                        {teamLogoMap[f.teamA] && (
-                                          <img 
-                                            src={teamLogoMap[f.teamA]} 
-                                            alt={`${f.teamA} logo`} 
-                                            className={`w-28 h-28 mx-auto mb-0.5 object-contain ${isCancelled ? 'opacity-50' : ''}`} 
-                                          />
-                                        )}
-                                        <p className={`text-base font-medium ${
-                                          isCancelled 
-                                            ? 'text-scrummy-navyBlue/50'
-                                            : `text-scrummy-navyBlue ${isHighlighted ? 'font-bold' : ''}`
-                                        }`}>{f.teamA}</p>
-                                      </div>
-
-                                      {/* Score or VS */}
-                                      <div className="flex-none flex flex-col items-center justify-center">
-                                        {isCancelled ? (
-                                          <p className="text-red-500/70 font-semibold text-base">cancelled</p>
-                                        ) : showFinal ? (
-                                          scoreDisplay
-                                        ) : (
-                                          <p className="text-scrummy-navyBlue/60 font-semibold text-base">vs</p>
-                                        )}
-                                      </div>
-
-                                      {/* Team B */}
-                                      <div className="flex-1 text-center">
-                                        {teamLogoMap[f.teamB] && (
-                                          <img 
-                                            src={teamLogoMap[f.teamB]} 
-                                            alt={`${f.teamB} logo`} 
-                                            className={`w-28 h-28 mx-auto mb-0.5 object-contain ${isCancelled ? 'opacity-50' : ''}`} 
-                                          />
-                                        )}
-                                        <p className={`text-base font-medium ${
-                                          isCancelled 
-                                            ? 'text-scrummy-navyBlue/50'
-                                            : `text-scrummy-navyBlue ${isHighlighted ? 'font-bold' : ''}`
-                                        }`}>{f.teamB}</p>
-                                      </div>
+                                  <div className="flex items-center justify-center flex-grow gap-8 md:gap-16">
+                                    {/* Team A */}
+                                    <div className="flex-1 text-center">
+                                      {teamLogoMap[f.teamA] && (
+                                        <img 
+                                          src={teamLogoMap[f.teamA]} 
+                                          alt={`${f.teamA} logo`} 
+                                          className="w-32 h-32 mx-auto mb-2 object-contain" 
+                                        />
+                                      )}
+                                      <p className="text-xl font-bold text-scrummy-navyBlue">{f.teamA}</p>
+                                    </div>
+                                    {/* VS */}
+                                    <div className="flex-none">
+                                      {(() => {
+                                        const finalScore = getFinalScore(day.date, f.time, f.teamA, f.teamB);
+                                        if (finalScore) {
+                                          return (
+                                            <p className="text-5xl font-bold text-scrummy-goldYellow font-orbitron">
+                                              {String(finalScore.teamAScore).padStart(2, '0')} - {String(finalScore.teamBScore).padStart(2, '0')}
+                                            </p>
+                                          );
+                                        }
+                                        return <p className="text-3xl font-bold text-scrummy-goldYellow">VS</p>;
+                                      })()}
+                                    </div>
+                                    {/* Team B */}
+                                    <div className="flex-1 text-center">
+                                      {teamLogoMap[f.teamB] && (
+                                        <img 
+                                          src={teamLogoMap[f.teamB]} 
+                                          alt={`${f.teamB} logo`} 
+                                          className="w-32 h-32 mx-auto mb-2 object-contain" 
+                                        />
+                                      )}
+                                      <p className="text-xl font-bold text-scrummy-navyBlue">{f.teamB}</p>
                                     </div>
                                   </div>
+                                  {/* Add streaming link for first match */}
+                                  {day.day === "FEATURED MATCHES" && f.time === "11:30" && (
+                                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
+                                      <a 
+                                        href="https://www.facebook.com/stories/103595778471519/UzpfSVNDOjkzMTQzOTcyNTY2OTIxNg==/?view_single=1&source=shared_permalink&mibextid=wwXIfr"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 bg-[#1877F2] text-white px-4 py-2 rounded-lg hover:bg-[#0c5bce] transition-colors"
+                                        onClick={(e) => e.stopPropagation()}
+                                      >
+                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                        </svg>
+                                        Watch Live on Facebook
+                                      </a>
+                                    </div>
+                                  )}
+                                  {/* Add streaming link for Sables match */}
+                                  {day.day === "FEATURED MATCHES" && f.time === "14:30" && (
+                                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
+                                      <a 
+                                        href="https://www.facebook.com/share/v/19Ntb1K6s9/?mibextid=wwXIfr"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 bg-[#1877F2] text-white px-4 py-2 rounded-lg hover:bg-[#0c5bce] transition-colors"
+                                        onClick={(e) => e.stopPropagation()}
+                                      >
+                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                        </svg>
+                                        Watch Live on Facebook
+                                      </a>
+                                    </div>
+                                  )}
                                 </CardContent>
                               </Card>
                             </motion.div>
-                          );
-                        })}
-                      </motion.div>
-                    </>
-                  )}
-                </div>
-              ))}
+                          ))}
+                        </motion.div>
+                      </>
+                    ) : (
+                      <>
+                        <h2 className="text-xl md:text-2xl font-semibold mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 flex flex-col md:flex-row md:items-end">
+                          <span className="text-scrummy-navyBlue">{day.date}</span>
+                          <span className="text-scrummy-goldYellow text-lg md:ml-3">{day.day}</span>
+                        </h2>
+                        <motion.div
+                          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                          variants={containerVariants}
+                          initial="hidden"
+                          animate="visible"
+                        >
+                          {day.fixtures.map((f, i) => {
+                            const isHighlighted = isHighlightedFixture(day.date, f.time, f.teamA, f.teamB);
+                            const isCancelled = isCancelledGame(day.date, f.time, f.teamA, f.teamB);
+
+                            // Get the final score for this fixture
+                            let scoreDisplay = null;
+                            let showFinal = false;
+                            const finalScore = getFinalScore(day.date, f.time, f.teamA, f.teamB);
+                            if (finalScore && !isCancelled) {
+                              showFinal = true;
+                              // Pad scores to two digits for uniformity
+                              const teamAStr = String(finalScore.teamAScore).padStart(2, '0');
+                              const teamBStr = String(finalScore.teamBScore).padStart(2, '0');
+                              scoreDisplay = (
+                                <div className="text-2xl font-orbitron text-scrummy-goldYellow text-center">
+                                  {teamAStr} - {teamBStr}
+                                </div>
+                              );
+                            }
+
+                            return (
+                              <motion.div key={i} variants={itemVariants}>
+                                <Card
+                                  className={`transition-all duration-300 hover:shadow-lg h-[240px] w-full relative ${
+                                    isHighlighted && !isCancelled
+                                      ? "border-2 border-scrummy-goldYellow hover:shadow-[0_0_20px_rgba(255,199,0,0.4)] cursor-pointer"
+                                      : isCancelled
+                                      ? "bg-white/60 opacity-75"
+                                      : "bg-white/80 hover:bg-white/90 cursor-pointer"
+                                  }`}
+                                  onClick={() => !isCancelled && handleFixtureClick(day.date, f.time, f.teamA, f.teamB)}
+                                >
+                                  {isHighlighted && !isCancelled && (
+                                    <img 
+                                      src="/assets/logo.png" 
+                                      alt="SCRUMMY" 
+                                      className="absolute top-2 right-2 w-12 h-12 opacity-80" 
+                                    />
+                                  )}
+                                  <CardContent className="p-2 pt-1 flex flex-col h-full">
+                                    <div className={`text-lg font-bold ${
+                                      isCancelled 
+                                        ? 'text-red-500 bg-red-50'
+                                        : isHighlighted 
+                                          ? 'text-scrummy-navyBlue bg-scrummy-goldYellow' 
+                                          : 'text-scrummy-goldYellow bg-scrummy-navyBlue'
+                                    } inline-flex rounded px-2 py-1 self-start mb-0.5 mt-2 ml-2`}>
+                                      {f.time}
+                                    </div>
+
+                                    <div className="flex flex-col items-center justify-start flex-grow -mt-1">
+                                      {/* Status label */}
+                                      {isCancelled ? (
+                                        <div className="text-base font-bold font-orbitron text-red-500 mb-0.5 tracking-widest">
+                                          CANCELLED
+                                        </div>
+                                      ) : showFinal && (
+                                        <div className="text-base font-bold font-orbitron text-scrummy-navyBlue mb-0.5 tracking-widest">
+                                          FINAL
+                                        </div>
+                                      )}
+
+                                      <div className="flex items-center justify-center w-full gap-4 -mt-6">
+                                        {/* Team A */}
+                                        <div className="flex-1 text-center">
+                                          {teamLogoMap[f.teamA] && (
+                                            <img 
+                                              src={teamLogoMap[f.teamA]} 
+                                              alt={`${f.teamA} logo`} 
+                                              className={`w-28 h-28 mx-auto mb-0.5 object-contain ${isCancelled ? 'opacity-50' : ''}`} 
+                                            />
+                                          )}
+                                          <p className={`text-base font-medium ${
+                                            isCancelled 
+                                              ? 'text-scrummy-navyBlue/50'
+                                              : `text-scrummy-navyBlue ${isHighlighted ? 'font-bold' : ''}`
+                                          }`}>{f.teamA}</p>
+                                        </div>
+
+                                        {/* Score or VS */}
+                                        <div className="flex-none flex flex-col items-center justify-center">
+                                          {isCancelled ? (
+                                            <p className="text-red-500/70 font-semibold text-base">cancelled</p>
+                                          ) : showFinal ? (
+                                            scoreDisplay
+                                          ) : (
+                                            <p className="text-scrummy-navyBlue/60 font-semibold text-base">vs</p>
+                                          )}
+                                        </div>
+
+                                        {/* Team B */}
+                                        <div className="flex-1 text-center">
+                                          {teamLogoMap[f.teamB] && (
+                                            <img 
+                                              src={teamLogoMap[f.teamB]} 
+                                              alt={`${f.teamB} logo`} 
+                                              className={`w-28 h-28 mx-auto mb-0.5 object-contain ${isCancelled ? 'opacity-50' : ''}`} 
+                                            />
+                                          )}
+                                          <p className={`text-base font-medium ${
+                                            isCancelled 
+                                              ? 'text-scrummy-navyBlue/50'
+                                              : `text-scrummy-navyBlue ${isHighlighted ? 'font-bold' : ''}`
+                                          }`}>{f.teamB}</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </CardContent>
+                                </Card>
+                              </motion.div>
+                            );
+                          })}
+                        </motion.div>
+                      </>
+                    )}
+                  </div>
+                ))
+              )}
             </div>
             <div className="mt-12 text-center text-sm text-scrummy-navyBlue/70">
             </div>
