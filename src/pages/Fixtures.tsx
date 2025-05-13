@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
@@ -20,6 +20,12 @@ type FixtureDay = {
   fixtures: Fixture[];
 };
 
+const tabs = [
+  { name: "Derby Day", key: "derby" },
+  { name: "Zim Sables Games", key: "zim" },
+  { name: "Week 1", key: "week1" }
+];
+
 // Map to track cancelled games
 const cancelledGames = [
   { date: "April 29th", time: "9:00", teamA: "CHURCHILL 2XV", teamB: "LOMAGUNDI 2XV" }
@@ -35,16 +41,7 @@ const isCancelledGame = (date: string, time: string, teamA: string, teamB: strin
 };
 
 // Fixture data
-const fixturesData: FixtureDay[] = [
-  {
-    date: "TODAY",
-    day: "FEATURED MATCHES",
-    fixtures: [
-      { time: "11:30", teamA: "ZIMBABWE U20", teamB: "SHARKS ACADEMY" },
-      { time: "14:30", teamA: "ZIMBABWE SABLES", teamB: "ZAMBIA" }
-    ]
-  },
-  {
+const derbyDay: FixtureDay[] = [  {
     date: "April 28th",
     day: "Monday",
     fixtures: [
@@ -117,6 +114,19 @@ const fixturesData: FixtureDay[] = [
     ]
   }
 ];
+
+const zimSablesGames: FixtureDay[] = [ {
+    date: "May 4th",
+    day: "Sunday",
+    fixtures: [
+      { time: "11:30", teamA: "ZIMBABWE U20", teamB: "SHARKS ACADEMY" },
+      { time: "14:30", teamA: "ZIMBABWE SABLES", teamB: "ZAMBIA" }
+    ]
+  }
+];
+
+const week1Games: FixtureDay[] = [];
+
 
 // Map team names to logo paths
 const teamLogoMap: Record<string, string> = {
@@ -244,11 +254,20 @@ const Fixtures: React.FC = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
 
+  const [activeTab, setActiveTab] = useState("derby");
+
   const handleFixtureClick = (date: string, time: string, teamA: string, teamB: string) => {
     if (isHighlightedFixture(date, time, teamA, teamB)) {
       const matchId = generateMatchId(date, time, teamA, teamB);
       navigate(`/box-score/${matchId}`);
     }
+  };
+
+  const filteredFixtures = (activeTab: string): FixtureDay[] => {
+    if (activeTab === "derby") return derbyDay;
+    if (activeTab === "zim") return zimSablesGames;
+    if (activeTab === "week1") return week1Games;
+    return [];
   };
 
   return (
@@ -275,8 +294,8 @@ const Fixtures: React.FC = () => {
               className="mt-8 text-4xl md:text-7xl font-bold text-center mb-16 md:mb-24 font-orbitron relative z-10"
               initial={{ y: -20 }} animate={{ y: 0 }} transition={{ duration: 0.6 }}
             >
-              <span className="text-scrummy-navyBlue">Derby Day 2025</span>
-              <span className="block text-scrummy-goldYellow">Rugby Fixtures</span>
+              <span className="text-scrummy-navyBlue">School Boy Rugby</span>
+              <span className="block text-scrummy-goldYellow">Fixtures & Results</span>
             </motion.h1>
           </div>
         </header>
@@ -288,13 +307,32 @@ const Fixtures: React.FC = () => {
             <div className="flex flex-col items-center gap-1 text-scrummy-navyBlue">
               <div className="flex items-center gap-3">
                 <img src="/assets/logo.png" alt="SCRUMMY" className="w-12 h-12" />
-                <p className="text-base md:text-lg font-orbitron">Below is a schedule of all the Derby Day fixtures. Games marked with a<span className="text-scrummy-goldYellow"> yellow border</span> and SCRUMMY logo are ones that will have detailed player and game stats.</p>
+                <p className="text-base md:text-lg font-orbitron">Below is a schedule of all the School Boy Rugby fixtures. Games marked with a<span className="text-scrummy-goldYellow"> yellow border</span> and SCRUMMY logo are ones that will have detailed player and game stats.</p>
               </div>
               <p className="text-sm text-scrummy-navyBlue/70">All times are in CAT (Central Africa Time)</p>
             </div>
 
+            {/* Tabs */}
+            <div className="flex justify-center mt-8">
+              {["derby","zim","week1"].map(tab => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-4 py-2 mx-2 rounded-lg font-bold ${
+                    activeTab === tab
+                      ? "bg-scrummy-goldYellow text-scrummy-navyBlue"
+                      : "bg-scrummy-navyBlue text-white hover:bg-scrummy-goldYellow hover:text-scrummy-navyBlue"
+                  }`}
+                >
+                  {tab === "derby" && "Derby Day Fixtures"}
+                  {tab === "zim" && "Zim Sables Games"}
+                  {tab === "week1" && "Week 1 Fixtures"}
+                </button>
+              ))}
+            </div>
+
             <div className="mt-16 space-y-8">
-              {fixturesData.map((day, idx) => (
+            {filteredFixtures(activeTab).map((day, idx) => (
                 <div key={idx} className={`bg-white/60 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-md ${day.day === "FEATURED MATCHES" ? "col-span-full" : ""}`}>
                   {day.day === "FEATURED MATCHES" ? (
                     <>
