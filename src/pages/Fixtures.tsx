@@ -294,7 +294,7 @@ const Fixtures: React.FC = () => {
               className="mt-8 text-4xl md:text-7xl font-bold text-center mb-16 md:mb-24 font-orbitron relative z-10"
               initial={{ y: -20 }} animate={{ y: 0 }} transition={{ duration: 0.6 }}
             >
-              <span className="text-scrummy-navyBlue">School Boy Rugby</span>
+              <span className="text-scrummy-navyBlue">Schools Rugby</span>
               <span className="block text-scrummy-goldYellow">Fixtures & Results</span>
             </motion.h1>
           </div>
@@ -307,7 +307,7 @@ const Fixtures: React.FC = () => {
             <div className="flex flex-col items-center gap-1 text-scrummy-navyBlue">
               <div className="flex items-center gap-3">
                 <img src="/assets/logo.png" alt="SCRUMMY" className="w-12 h-12" />
-                <p className="text-base md:text-lg font-orbitron">Below is a schedule of all the School Boy Rugby fixtures. Games marked with a<span className="text-scrummy-goldYellow"> yellow border</span> and SCRUMMY logo are ones that will have detailed player and game stats.</p>
+                <p className="text-base md:text-lg font-orbitron">Below is a schedule of all the Schools Rugby fixtures. Games marked with a<span className="text-scrummy-goldYellow"> yellow border</span> and SCRUMMY logo are ones that will have detailed player and game stats.</p>
               </div>
               <p className="text-sm text-scrummy-navyBlue/70">All times are in CAT (Central Africa Time)</p>
             </div>
@@ -570,7 +570,6 @@ const Fixtures: React.FC = () => {
               ))}
             </div>
             <div className="mt-12 text-center text-sm text-scrummy-navyBlue/70">
-              <p>St John's College • MUKURU Derby Day 2025</p>
             </div>
           </div>
         </main>
