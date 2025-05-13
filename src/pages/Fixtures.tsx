@@ -69,6 +69,7 @@ const derbyDay: FixtureDay[] = [  {
     date: "April 30th",
     day: "Wednesday",
     fixtures: [
+      { time: "9:00",  teamA: "WISE OWL 2XV", teamB: "LOMAGUNDI 2XV" },
       { time: "10:20", teamA: "WATERSHED 2XV", teamB: "CBC 2XV" },
       { time: "11:40", teamA: "RYDINGS 1XV",   teamB: "MIDLANDS CC 1XV" },
       { time: "13:00", teamA: "GOLDRIDGE 1XV", teamB: "HILLCREST 1XV" },

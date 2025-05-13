@@ -683,6 +683,7 @@ finalScores.set(
   { teamAScore: 24, teamBScore: 28 }
 );
 
+
 finalScores.set(
   generateMatchId("April 28th", "10:20", "GOLDRIDGE 1XV", "GATEWAY 1XV"),
   { teamAScore: 22, teamBScore: 22 }
@@ -733,6 +734,10 @@ finalScores.set(
   { teamAScore: 6, teamBScore: 43 }
 );
 
+finalScores.set(
+  generateMatchId("April 30th", "9:00", "WISE OWL 2XV", "LOMAGUNDI 2XV"),
+  { teamAScore: 19, teamBScore: 22 }
+);
 finalScores.set(
   generateMatchId("April 30th", "10:20", "WATERSHED 2XV", "CBC 2XV"),
   { teamAScore: 27, teamBScore: 29 }
@@ -831,6 +836,11 @@ finalScores.set(
 finalScores.set(
   generateMatchId("TODAY", "14:30", "ZIMBABWE SABLES", "ZAMBIA"),
   { teamAScore: 70, teamBScore: 15 }
+);
+
+finalScores.set(
+  generateMatchId("May 3rd", "9:00", "ST JOHN'S 2XV", "ST ALBANS 2XV"),
+  { teamAScore: 14, teamBScore:14  }
 );
 
 finalScores.set(
