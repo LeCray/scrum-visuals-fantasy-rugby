@@ -18,12 +18,13 @@ type FixtureDay = {
   date: string;
   day: string;
   fixtures: Fixture[];
+  month?: string;
 };
 
 const tabs = [
-  { name: "Derby Day", key: "derby" },
+  { name: "CBZ Schools Rugby", key: "sbr2025" },
   { name: "Zim Sables Games", key: "zim" },
-  { name: "Week 1", key: "week1" }
+  { name: "Derby Day", key: "derby" }
 ];
 
 // Map to track cancelled games
@@ -128,6 +129,141 @@ const zimSablesGames: FixtureDay[] = [ {
 
 const week1Games: FixtureDay[] = [];
 
+// SBR Season 2025 fixtures organized by week with month information
+const sbr2025Games: FixtureDay[] = [
+  {
+    date: "Week 1 - 15 May",
+    day: "Week 1",
+    month: "May",
+    fixtures: [
+      { time: "TBD", teamA: "WISE OWL", teamB: "CHURCHILL" },
+      { time: "TBD", teamA: "ST JOHNS", teamB: "PRINCE EDWARD" },
+      { time: "TBD", teamA: "KYLE", teamB: "ST GEORGES" },
+      { time: "TBD", teamA: "GATEWAY", teamB: "HILLCREST" },
+      { time: "TBD", teamA: "WATERSHED", teamB: "HELLENIC" },
+      { time: "TBD", teamA: "NATTIE COLLEGE", teamB: "RYDINGS" },
+      { time: "TBD", teamA: "PETERHOUSE", teamB: "CBC" },
+      { time: "TBD", teamA: "LOMAGUNDI", teamB: "FALCON" }
+    ]
+  },
+  {
+    date: "Week 2 - 24 May",
+    day: "Week 2",
+    month: "May",
+    fixtures: [
+      { time: "TBD", teamA: "PRINCE EDWARD", teamB: "CHURCHILL" },
+      { time: "TBD", teamA: "ST GEORGES", teamB: "ST JOHNS" },
+      { time: "TBD", teamA: "HELLENIC", teamB: "VALE" },
+      { time: "TBD", teamA: "GATEWAY", teamB: "HERITAGE" },
+      { time: "TBD", teamA: "WATERSHED", teamB: "HILLCREST" },
+      { time: "TBD", teamA: "PETERHOUSE", teamB: "LOMAGUNDI" },
+      { time: "TBD", teamA: "FALCON", teamB: "CBC" }
+    ]
+  },
+  {
+    date: "Week 3 - 07 June",
+    day: "Week 3",
+    month: "June",
+    fixtures: [
+      { time: "TBD", teamA: "PRINCE EDWARD", teamB: "HILLCREST" },
+      { time: "TBD", teamA: "LOMAGUNDI", teamB: "ST GEORGES" },
+      { time: "TBD", teamA: "HELLENIC", teamB: "ST JOHNS" },
+      { time: "TBD", teamA: "FALCON", teamB: "PETERHOUSE" },
+      { time: "TBD", teamA: "MILTON", teamB: "CHURCHILL" }
+    ]
+  },
+  {
+    date: "Week 4 - 14 June",
+    day: "Week 4",
+    month: "June",
+    fixtures: [
+      { time: "TBD", teamA: "CHURCHILL", teamB: "ALLAN WILSON" },
+      { time: "TBD", teamA: "FALCON", teamB: "ST GEORGES" },
+      { time: "TBD", teamA: "PETERHOUSE", teamB: "ST JOHNS" },
+      { time: "TBD", teamA: "GOROMONZI", teamB: "CRENBORNE" },
+      { time: "TBD", teamA: "HELLENIC", teamB: "HERITAGE" },
+      { time: "TBD", teamA: "ST JOHNS HIGH", teamB: "KUTAMA" }
+    ]
+  },
+  {
+    date: "Week 5 - 28 June",
+    day: "Week 5",
+    month: "June",
+    fixtures: [
+      { time: "TBD", teamA: "LOMAGUNDI", teamB: "CHURCHILL" },
+      { time: "TBD", teamA: "PRINCE EDWARD", teamB: "VALE" },
+      { time: "TBD", teamA: "ST GEORGES", teamB: "CBC" },
+      { time: "TBD", teamA: "ST JOHNS", teamB: "FALCON" },
+      { time: "TBD", teamA: "HERITAGE", teamB: "WATERSHED" },
+      { time: "TBD", teamA: "HELLENIC", teamB: "PETERHOUSE" },
+      { time: "TBD", teamA: "MUTARE", teamB: "HILLCREST" },
+      { time: "TBD", teamA: "PETRA", teamB: "MCC" }
+    ]
+  },
+  {
+    date: "Week 6 - 05 July",
+    day: "Week 6",
+    month: "July",
+    fixtures: [
+      { time: "TBD", teamA: "PH 7s", teamB: "" },
+      { time: "TBD", teamA: "ALLAN WILSON", teamB: "CHURCHILL" },
+      { time: "TBD", teamA: "WATERSHED", teamB: "VALE" },
+      { time: "TBD", teamA: "HERITAGE", teamB: "WISE OWL" }
+    ]
+  },
+  {
+    date: "Week 7 - 12 July",
+    day: "Week 7",
+    month: "July",
+    fixtures: [
+      { time: "TBD", teamA: "ST JOHNS", teamB: "LOMAGUNDI" },
+      { time: "TBD", teamA: "WISE OWL", teamB: "PRINCE EDWARD" },
+      { time: "TBD", teamA: "HELLENIC", teamB: "FALCON" },
+      { time: "TBD", teamA: "CBC", teamB: "MILTON" }
+    ]
+  },
+  {
+    date: "Week 8 - 19 July",
+    day: "Week 8",
+    month: "July",
+    fixtures: [
+      { time: "TBD", teamA: "ST GEORGES", teamB: "PRINCE EDWARD" },
+      { time: "TBD", teamA: "ST JOHNS", teamB: "PH" },
+      { time: "TBD", teamA: "ALLAN WILSON", teamB: "MILTON" },
+      { time: "TBD", teamA: "VALE", teamB: "GATEWAY" },
+      { time: "TBD", teamA: "HELLENIC", teamB: "LOMAGUNDI" },
+      { time: "TBD", teamA: "ST IGNATIUS", teamB: "GOROMONZI" }
+    ]
+  },
+  {
+    date: "Week 9 - 26 July",
+    day: "Week 9",
+    month: "July",
+    fixtures: [
+      { time: "TBD", teamA: "CHURCHILL", teamB: "PRINCE EDWARD" },
+      { time: "TBD", teamA: "ST JOHNS", teamB: "ST GEORGES" },
+      { time: "TBD", teamA: "ALLAN WILSON", teamB: "ST IGNATIUS" },
+      { time: "TBD", teamA: "GATEWAY", teamB: "RIPPLES" }
+    ]
+  },
+  {
+    date: "Week 10 - 02 Aug",
+    day: "Week 10",
+    month: "August",
+    fixtures: [
+      { time: "TBD", teamA: "CHURCHILL", teamB: "PLUMTREE" },
+      { time: "TBD", teamA: "LOMAGUNDI", teamB: "PRINCE EDWARD" },
+      { time: "TBD", teamA: "PETERHOUSE", teamB: "ST GEORGES" },
+      { time: "TBD", teamA: "FALCON", teamB: "ST JOHNS" },
+      { time: "TBD", teamA: "GATEWAY", teamB: "WATERSHED" },
+      { time: "TBD", teamA: "HERITAGE", teamB: "KYLE" },
+      { time: "TBD", teamA: "MARONDERA HIGH", teamB: "MUTARE" },
+      { time: "TBD", teamA: "HELLENIC", teamB: "CBC" },
+      { time: "TBD", teamA: "GIFFORD", teamB: "MILTON" },
+      { time: "TBD", teamA: "GOLDRIDGE", teamB: "PETRA" }
+    ]
+  }
+];
 
 // Map team names to logo paths
 const teamLogoMap: Record<string, string> = {
@@ -170,7 +306,44 @@ const teamLogoMap: Record<string, string> = {
   "MILTON 2XV": "/assets/Milton.png",
   "WISE OWL 2XV": "/assets/WiseOwl.png",
   "PRINCE EDWARD 2XV": "/assets/PrinceEdward.png",
-  "LORD BRIGHTON 2XV": "/assets/LordBrighton.png"
+  "LORD BRIGHTON 2XV": "/assets/LordBrighton.png",
+  
+  // SBR Season 2025 teams
+  "WISE OWL": "/assets/WiseOwl.png",
+  "CHURCHILL": "/assets/Churchill.png",
+  "ST JOHNS": "/assets/StJohns.png",
+  "PRINCE EDWARD": "/assets/PrinceEdward.png",
+  "KYLE": "/assets/Kyle.png",
+  "ST GEORGES": "/assets/StGeorges.png",
+  "GATEWAY": "/assets/Gateway.png",
+  "HILLCREST": "/assets/Hillcrest.png",
+  "HELLENIC": "/assets/Hellenic.png",
+  "VALE": "/assets/logo.png",
+  "HERITAGE": "/assets/Heritage.png",
+  "LOMAGUNDI": "/assets/Lomagundi.png",
+  "FALCON": "/assets/Falcon.png",
+  "PETERHOUSE": "/assets/Peterhouse.png",
+  "ALLAN WILSON": "/assets/Allan Wilson.png",
+  "CRENBORNE": "/assets/logo.png",
+  "CBC": "/assets/CBC.png",
+  "WATERSHED": "/assets/Watershed.png",
+  "MILTON": "/assets/Milton.png",
+  "PH": "/assets/Peterhouse.png",
+  "PH 7s": "/assets/Peterhouse.png",
+  "ST IGNATIUS": "/assets/logo.png",
+  "RIPPLES": "/assets/logo.png",
+  "NATTIE COLLEGE": "/assets/Nattie.png",
+  "RYDINGS": "/assets/Rydings.png",
+  "GOROMONZI": "/assets/Goromonzi.png",
+  "ST JOHNS HIGH": "/assets/logo.png",
+  "KUTAMA": "/assets/logo.png",
+  "MUTARE": "/assets/logo.png",
+  "PETRA": "/assets/logo.png",
+  "MCC": "/assets/logo.png",
+  "PLUMTREE": "/assets/logo.png",
+  "MARONDERA HIGH": "/assets/logo.png",
+  "GIFFORD": "/assets/logo.png",
+  "GOLDRIDGE": "/assets/logo.png"
 };
 
 // Animation variants for staggered animations
@@ -255,7 +428,8 @@ const Fixtures: React.FC = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
 
-  const [activeTab, setActiveTab] = useState("derby");
+  const [activeTab, setActiveTab] = useState("sbr2025");
+  const [selectedMonth, setSelectedMonth] = useState("All");
 
   const handleFixtureClick = (date: string, time: string, teamA: string, teamB: string) => {
     if (isHighlightedFixture(date, time, teamA, teamB)) {
@@ -264,17 +438,29 @@ const Fixtures: React.FC = () => {
     }
   };
 
-  const filteredFixtures = (activeTab: string): FixtureDay[] | string => {
+  const filteredFixtures = (activeTab: string): FixtureDay[] => {
     if (activeTab === "derby") return derbyDay;
     if (activeTab === "zim") return zimSablesGames;
-    if (activeTab === "week1") {
-      if (week1Games.length === 0) {
-        return "Stay Tuned";
+    if (activeTab === "sbr2025") {
+      if (selectedMonth === "All") {
+        return sbr2025Games;
+      } else {
+        return sbr2025Games.filter(day => day.month === selectedMonth);
       }
-      return week1Games;
     }
     return [];
   };
+
+  // Check if fixtures are available for the active tab
+  const hasFixtures = (): boolean => {
+    if (activeTab === "derby") return derbyDay.length > 0;
+    if (activeTab === "zim") return zimSablesGames.length > 0;
+    if (activeTab === "sbr2025") return sbr2025Games.length > 0;
+    return false;
+  };
+
+  // Get unique months from SBR 2025 fixtures for the dropdown
+  const months = ["All", ...Array.from(new Set(sbr2025Games.map(day => day.month)))];
 
   return (
     <div className="relative text-scrummy-navyBlue">
@@ -320,28 +506,45 @@ const Fixtures: React.FC = () => {
 
             {/* Tabs */}
             <div className="flex justify-center mt-8">
-              {["derby", "zim", "week1"].map((tab) => (
+              {tabs.map((tab) => (
                 <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
+                  key={tab.key}
+                  onClick={() => setActiveTab(tab.key)}
                   className={`px-4 py-2 mx-2 rounded-lg font-bold ${
-                    activeTab === tab
+                    activeTab === tab.key
                       ? "bg-scrummy-goldYellow text-scrummy-navyBlue"
                       : "bg-scrummy-navyBlue text-white hover:bg-scrummy-goldYellow hover:text-scrummy-navyBlue"
                   }`}
                 >
-                  {tab === "derby" && "Derby Day"}
-                  {tab === "zim" && "Zim Sables Games"}
-                  {tab === "week1" && "Week 1"} {/* Updated label */}
+                  {tab.name}
                 </button>
               ))}
             </div>
 
+            {/* Month filter for SBR 2025 */}
+            {activeTab === "sbr2025" && (
+              <div className="flex justify-end mt-4">
+                <div className="w-60">
+                  <select
+                    value={selectedMonth}
+                    onChange={(e) => setSelectedMonth(e.target.value)}
+                    className="w-full px-4 py-2 rounded-lg bg-white border border-scrummy-navyBlue/20 text-scrummy-navyBlue font-semibold focus:outline-none focus:ring-2 focus:ring-scrummy-goldYellow"
+                  >
+                    {months.map((month) => (
+                      <option key={month} value={month}>
+                        {month === "All" ? "All Months" : month}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            )}
+
             <div className="mt-16 space-y-8">
-              {typeof filteredFixtures(activeTab) === "string" ? (
+              {!hasFixtures() ? (
                 <div className="text-center bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-md">
                   <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navyBlue mb-4">
-                    {filteredFixtures(activeTab)}
+                    Stay Tuned
                   </h2>
                   <p className="text-base text-scrummy-navyBlue/70">
                     Check back soon for updates!
@@ -513,11 +716,11 @@ const Fixtures: React.FC = () => {
                                         : isHighlighted 
                                           ? 'text-scrummy-navyBlue bg-scrummy-goldYellow' 
                                           : 'text-scrummy-goldYellow bg-scrummy-navyBlue'
-                                    } inline-flex rounded px-2 py-1 self-start mb-0.5 mt-2 ml-2`}>
+                                    } inline-flex rounded px-2 py-1 self-start mb-0.5 mt-2 ml-2 z-10`}>
                                       {f.time}
                                     </div>
 
-                                    <div className="flex flex-col items-center justify-start flex-grow -mt-1">
+                                    <div className="flex flex-col items-center justify-start flex-grow -mt-1 pt-4">
                                       {/* Status label */}
                                       {isCancelled ? (
                                         <div className="text-base font-bold font-orbitron text-red-500 mb-0.5 tracking-widest">
@@ -529,14 +732,14 @@ const Fixtures: React.FC = () => {
                                         </div>
                                       )}
 
-                                      <div className="flex items-center justify-center w-full gap-4 -mt-6">
+                                      <div className="flex items-center justify-center w-full gap-4 mt-2">
                                         {/* Team A */}
                                         <div className="flex-1 text-center">
                                           {teamLogoMap[f.teamA] && (
                                             <img 
                                               src={teamLogoMap[f.teamA]} 
                                               alt={`${f.teamA} logo`} 
-                                              className={`w-28 h-28 mx-auto mb-0.5 object-contain ${isCancelled ? 'opacity-50' : ''}`} 
+                                              className={`w-24 h-24 mx-auto mb-0.5 object-contain ${isCancelled ? 'opacity-50' : ''}`} 
                                             />
                                           )}
                                           <p className={`text-base font-medium ${
@@ -563,7 +766,7 @@ const Fixtures: React.FC = () => {
                                             <img 
                                               src={teamLogoMap[f.teamB]} 
                                               alt={`${f.teamB} logo`} 
-                                              className={`w-28 h-28 mx-auto mb-0.5 object-contain ${isCancelled ? 'opacity-50' : ''}`} 
+                                              className={`w-24 h-24 mx-auto mb-0.5 object-contain ${isCancelled ? 'opacity-50' : ''}`} 
                                             />
                                           )}
                                           <p className={`text-base font-medium ${
