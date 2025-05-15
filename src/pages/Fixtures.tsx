@@ -126,7 +126,18 @@ const zimSablesGames: FixtureDay[] = [ {
   }
 ];
 
-const week1Games: FixtureDay[] = [];
+const week1Games: FixtureDay[] = [ {
+  date: "",
+  day: "",
+  fixtures: [
+    { time: "TBA", teamA: "KYLE", teamB: "ST GEORGE'S" },
+    { time: "TBA", teamA: "PETERHOUSE", teamB: "CBC" },
+    { time: "TBA", teamA: "ST. JOHN'S", teamB: "PRINCE EDWARD'S" },
+    { time: "TBA", teamA: "LOMAGUNDI", teamB: "FALCON" },
+    { time: "TBA", teamA: "WATERSHED", teamB: "HELLENIC" },
+    { time: "TBA", teamA: "HATTIE COLLEGE", teamB: "RYDINGS" }
+  ]
+}];
 
 
 // Map team names to logo paths
@@ -140,12 +151,14 @@ const teamLogoMap: Record<string, string> = {
   "GOLDRIDGE 1XV": "/assets/Goldridge.png",
   "GATEWAY 1XV": "/assets/Gateway.png",
   "WATERSHED 1XV": "/assets/Watershed.png",
+  "WATERSHED": "/assets/Watershed.png",
   "MIDLANDS CC 1XV": "/assets/MidlandsCC.png",
   "MILTON 1XV": "/assets/Milton.png",
   "WISE OWL 1XV": "/assets/WiseOwl.png",
   "HILLCREST 1XV": "/assets/Hillcrest.png",
   "EAGLESVALE 1XV": "/assets/Eaglesvale.png",
   "RYDINGS 1XV": "/assets/Rydings.png",
+  "RYDINGS": "/assets/Rydings.png",
   "HERITAGE 1XV": "/assets/Heritage.png",
   "CHURCHILL 2XV": "/assets/Churchill.png",
   "LOMAGUNDI 2XV": "/assets/Lomagundi.png",
@@ -153,24 +166,31 @@ const teamLogoMap: Record<string, string> = {
   "ST ALBANS 2XV": "/assets/StAlbans.png",
   "PETERHOUSE 2XV": "/assets/Peterhouse.png",
   "ST GEORGE'S 2XV": "/assets/StGeorges.png",
+  "ST GEORGE'S": "/assets/StGeorges.png",
   "ST JOHN'S 2XV": "/assets/StJohns.png",
   "PRINCE EDWARD'S 2XV": "/assets/PrinceEdward.png",
   "LOMAGUNDI 1XV": "/assets/Lomagundi.png",
+  "LOMAGUNDI": "/assets/Lomagundi.png",
   "ST ALBANS 1XV": "/assets/StAlbans.png",
   "ST GEORGE'S 1XV": "/assets/StGeorges.png",
   "ST ANDREW'S 1XV": "/assets/StAndrews.png",
   "CBC 2XV": "/assets/CBC.png",
+  "CBC": "/assets/CBC.png",
   "PRINCE EDWARD 1XV": "/assets/PrinceEdward.png",
   "CBC 1XV": "/assets/CBC.png",
   "FALCON 1XV": "/assets/Falcon.png",
+  "FALCON": "/assets/Falcon.png",
   "CHURCHILL 1XV": "/assets/Churchill.png",
   "ST JOHN'S 1XV": "/assets/StJohns.png",
+  "ST JOHN'S": "/assets/StJohns.png",
   "ZAM STEELERS": "/assets/ZamSteelers.png",
   "PETERHOUSE 1XV": "/assets/Peterhouse.png",
+  "PETERHOUSE": "/assets/Peterhouse.png",
   "MILTON 2XV": "/assets/Milton.png",
   "WISE OWL 2XV": "/assets/WiseOwl.png",
   "PRINCE EDWARD 2XV": "/assets/PrinceEdward.png",
-  "LORD BRIGHTON 2XV": "/assets/LordBrighton.png"
+  "LORD BRIGHTON 2XV": "/assets/LordBrighton.png",
+  "KYLE": "/assets/kyle.png",
 };
 
 // Animation variants for staggered animations
@@ -332,7 +352,7 @@ const Fixtures: React.FC = () => {
                 >
                   {tab === "derby" && "Derby Day"}
                   {tab === "zim" && "Zim Sables Games"}
-                  {tab === "week1" && "Week 1"} {/* Updated label */}
+                  {tab === "week1" && "Week 1 Fixtures"} {/* Updated label */}
                 </button>
               ))}
             </div>
@@ -340,12 +360,6 @@ const Fixtures: React.FC = () => {
             <div className="mt-16 space-y-8">
               {typeof filteredFixtures(activeTab) === "string" ? (
                 <div className="text-center bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-md">
-                  <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navyBlue mb-4">
-                    {filteredFixtures(activeTab)}
-                  </h2>
-                  <p className="text-base text-scrummy-navyBlue/70">
-                    Check back soon for updates!
-                  </p>
                 </div>
               ) : (
                 filteredFixtures(activeTab).map((day, idx) => (
