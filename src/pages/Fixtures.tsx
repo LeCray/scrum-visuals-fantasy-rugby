@@ -722,61 +722,38 @@ const Fixtures: React.FC = () => {
                                       {f.time}
                                     </div>
 
-                                    <div className="flex flex-col items-center justify-start flex-grow -mt-1 pt-4">
-                                      {/* Status label */}
-                                      {isCancelled ? (
-                                        <div className="text-base font-bold font-orbitron text-red-500 mb-0.5 tracking-widest">
-                                          CANCELLED
-                                        </div>
-                                      ) : showFinal && (
-                                        <div className="text-base font-bold font-orbitron text-scrummy-navyBlue mb-0.5 tracking-widest">
-                                          FINAL
-                                        </div>
-                                      )}
-
-                                      <div className="flex items-center justify-center w-full gap-4 mt-2">
-                                        {/* Team A */}
-                                        <div className="flex-1 text-center">
-                                          {teamLogoMap[f.teamA] && (
-                                            <img 
-                                              src={teamLogoMap[f.teamA]} 
-                                              alt={`${f.teamA} logo`} 
-                                              className={`w-24 h-24 mx-auto mb-0.5 object-contain ${isCancelled ? 'opacity-50' : ''}`} 
-                                            />
-                                          )}
-                                          <p className={`text-base font-medium ${
-                                            isCancelled 
-                                              ? 'text-scrummy-navyBlue/50'
-                                              : `text-scrummy-navyBlue ${isHighlighted ? 'font-bold' : ''}`
-                                          }`}>{f.teamA}</p>
-                                        </div>
-
-                                        {/* Score or VS */}
-                                        <div className="flex-none flex flex-col items-center justify-center">
-                                          {isCancelled ? (
-                                            <p className="text-red-500/70 font-semibold text-base">cancelled</p>
-                                          ) : showFinal ? (
-                                            scoreDisplay
-                                          ) : (
-                                            <p className="text-scrummy-navyBlue/60 font-semibold text-base">vs</p>
-                                          )}
-                                        </div>
-
-                                        {/* Team B */}
-                                        <div className="flex-1 text-center">
-                                          {teamLogoMap[f.teamB] && (
-                                            <img 
-                                              src={teamLogoMap[f.teamB]} 
-                                              alt={`${f.teamB} logo`} 
-                                              className={`w-24 h-24 mx-auto mb-0.5 object-contain ${isCancelled ? 'opacity-50' : ''}`} 
-                                            />
-                                          )}
-                                          <p className={`text-base font-medium ${
-                                            isCancelled 
-                                              ? 'text-scrummy-navyBlue/50'
-                                              : `text-scrummy-navyBlue ${isHighlighted ? 'font-bold' : ''}`
-                                          }`}>{f.teamB}</p>
-                                        </div>
+                                    <div className="flex items-center justify-center w-full gap-4 mt-2">
+                                      {/* Team A */}
+                                      <div className="flex-1 text-center">
+                                        {teamLogoMap[f.teamA] && (
+                                          <img 
+                                            src={teamLogoMap[f.teamA]} 
+                                            alt={`${f.teamA} logo`} 
+                                            className="w-24 h-24 mx-auto mb-0.5 object-contain" 
+                                          />
+                                        )}
+                                        <p className="text-base font-medium text-scrummy-navyBlue">{f.teamA}</p>
+                                      </div>
+                                      {/* Score or VS */}
+                                      <div className="flex-none flex flex-col items-center justify-center">
+                                        {isCancelled ? (
+                                          <p className="text-red-500/70 font-semibold text-base">cancelled</p>
+                                        ) : showFinal ? (
+                                          scoreDisplay
+                                        ) : (
+                                          <p className="text-scrummy-navyBlue/60 font-semibold text-base">vs</p>
+                                        )}
+                                      </div>
+                                      {/* Team B */}
+                                      <div className="flex-1 text-center">
+                                        {teamLogoMap[f.teamB] && (
+                                          <img 
+                                            src={teamLogoMap[f.teamB]} 
+                                            alt={`${f.teamB} logo`} 
+                                            className="w-24 h-24 mx-auto mb-0.5 object-contain" 
+                                          />
+                                        )}
+                                        <p className="text-base font-medium text-scrummy-navyBlue">{f.teamB}</p>
                                       </div>
                                     </div>
                                   </CardContent>
