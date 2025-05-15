@@ -328,20 +328,14 @@ const teamLogoMap: Record<string, string> = {
   "HELLENIC": "/assets/Hellenic.png",
   "VALE": "/assets/logo.png",
   "HERITAGE": "/assets/Heritage.png",
-  "LOMAGUNDI": "/assets/Lomagundi.png",
-  "FALCON": "/assets/Falcon.png",
-  "PETERHOUSE": "/assets/Peterhouse.png",
   "ALLAN WILSON": "/assets/Allan Wilson.png",
   "CRENBORNE": "/assets/logo.png",
-  "CBC": "/assets/CBC.png",
-  "WATERSHED": "/assets/Watershed.png",
   "MILTON": "/assets/Milton.png",
   "PH": "/assets/Peterhouse.png",
   "PH 7s": "/assets/Peterhouse.png",
   "ST IGNATIUS": "/assets/logo.png",
   "RIPPLES": "/assets/logo.png",
   "NATTIE COLLEGE": "/assets/Nattie.png",
-  "RYDINGS": "/assets/Rydings.png",
   "GOROMONZI": "/assets/Goromonzi.png",
   "ST JOHNS HIGH": "/assets/logo.png",
   "KUTAMA": "/assets/logo.png",
@@ -475,7 +469,7 @@ const Fixtures: React.FC = () => {
       <div className="relative z-20">
         {/* Logo background overlay */}
         <div
-          className="absolute inset-x-0 top-[120px] md:top-[180px] h-[500px] pointer-events-none"
+          className="absolute inset-x-0 top-[200px] md:top-[180px] h-[500px] pointer-events-none"
           style={{
             backgroundImage: "url('/assets/logo.png')",
             backgroundSize: "contain",
