@@ -137,17 +137,17 @@ const sbr2025Games: FixtureDay[] = [
     day: "17 May",
     month: "May",
     fixtures: [
-      { time: "14:30", teamA: "WISE OWL", teamB: "CHURCHILL", location: "Wise Owl, Marondera" },
       { time: "14:00", teamA: "ST JOHNS", teamB: "PRINCE EDWARD", location: "St John's College, Harare" },
       { time: "14:00", teamA: "KYLE", teamB: "ST GEORGES", location: "Kyle College, Masvingo" },
       { time: "14:00", teamA: "GATEWAY", teamB: "HILLCREST", location: "Gateway High School, Harare" },
       { time: "14:00", teamA: "WATERSHED", teamB: "HELLENIC", location: "Hellenic Academy, Harare" },
-      { time: "TBA", teamA: "NATTIE COLLEGE", teamB: "RYDINGS", location: "Nattie College, Harare" },
       { time: "14:00", teamA: "PETERHOUSE", teamB: "CBC", location: "Peterhouse Boys, Marondera" },
-      { time: "15:15", teamA: "LOMAGUNDI", teamB: "FALCON", location: "Lomagundi College, Chinhoyi" },
       { time: "14:00", teamA: "ALLAN WILSON", teamB: "MILTON", location: "Allan Wilson, Harare" },
       { time: "14:00", teamA: "MCC", teamB: "HERITAGE", location: "MCC, Gweru" },
-      { time: "14:00", teamA: "GOLDRIDGE", teamB: "EAGLESVALE", location: "Goldridge, Kwekwe" }
+      { time: "14:00", teamA: "GOLDRIDGE", teamB: "EAGLESVALE", location: "Goldridge, Kwekwe" },
+      { time: "14:30", teamA: "WISE OWL", teamB: "CHURCHILL", location: "Wise Owl, Marondera" },
+      { time: "15:15", teamA: "LOMAGUNDI", teamB: "FALCON", location: "Lomagundi College, Chinhoyi" },
+      { time: "TBA", teamA: "NATTIE COLLEGE", teamB: "RYDINGS", location: "Nattie College, Harare" }
     ]
   },
   {
@@ -349,7 +349,8 @@ const teamLogoMap: Record<string, string> = {
   "PLUMTREE": "/assets/logo.png",
   "MARONDERA HIGH": "/assets/logo.png",
   "GIFFORD": "/assets/logo.png",
-  "GOLDRIDGE": "/assets/logo.png"
+  "GOLDRIDGE": "/assets/logo.png",
+  "EAGLESVALE": "/assets/Eaglesvale.png"
 };
 
 // Animation variants for staggered animations
