@@ -12,6 +12,7 @@ type Fixture = {
   teamA: string;
   teamB: string;
   status?: 'cancelled';
+  location?: string;
 };
 
 type FixtureDay = {
@@ -133,17 +134,20 @@ const week1Games: FixtureDay[] = [];
 const sbr2025Games: FixtureDay[] = [
   {
     date: "Week 1",
-    day: "15 May",
+    day: "17 May",
     month: "May",
     fixtures: [
-      { time: "TBD", teamA: "WISE OWL", teamB: "CHURCHILL" },
-      { time: "TBD", teamA: "ST JOHNS", teamB: "PRINCE EDWARD" },
-      { time: "TBD", teamA: "KYLE", teamB: "ST GEORGES" },
-      { time: "TBD", teamA: "GATEWAY", teamB: "HILLCREST" },
-      { time: "TBD", teamA: "WATERSHED", teamB: "HELLENIC" },
-      { time: "TBD", teamA: "NATTIE COLLEGE", teamB: "RYDINGS" },
-      { time: "TBD", teamA: "PETERHOUSE", teamB: "CBC" },
-      { time: "TBD", teamA: "LOMAGUNDI", teamB: "FALCON" }
+      { time: "14:30", teamA: "WISE OWL", teamB: "CHURCHILL", location: "Wise Owl, Marondera" },
+      { time: "14:00", teamA: "ST JOHNS", teamB: "PRINCE EDWARD", location: "St John's College, Harare" },
+      { time: "14:00", teamA: "KYLE", teamB: "ST GEORGES", location: "Kyle College, Masvingo" },
+      { time: "14:00", teamA: "GATEWAY", teamB: "HILLCREST", location: "Gateway High School, Harare" },
+      { time: "14:00", teamA: "WATERSHED", teamB: "HELLENIC", location: "Hellenic Academy, Harare" },
+      { time: "TBA", teamA: "NATTIE COLLEGE", teamB: "RYDINGS", location: "Nattie College, Harare" },
+      { time: "14:00", teamA: "PETERHOUSE", teamB: "CBC", location: "Peterhouse Boys, Marondera" },
+      { time: "15:15", teamA: "LOMAGUNDI", teamB: "FALCON", location: "Lomagundi College, Chinhoyi" },
+      { time: "14:00", teamA: "ALLAN WILSON", teamB: "MILTON", location: "Allan Wilson, Harare" },
+      { time: "14:00", teamA: "MCC", teamB: "HERITAGE", location: "MCC, Gweru" },
+      { time: "14:00", teamA: "GOLDRIDGE", teamB: "EAGLESVALE", location: "Goldridge, Kwekwe" }
     ]
   },
   {
@@ -756,6 +760,13 @@ const Fixtures: React.FC = () => {
                                         <p className="text-base font-medium text-scrummy-navyBlue">{f.teamB}</p>
                                       </div>
                                     </div>
+
+                                    {/* Location display below team info */}
+                                    {f.location && (
+                                      <div className="text-xs text-center font-medium text-scrummy-navyBlue/70 mt-2">
+                                        {f.location}
+                                      </div>
+                                    )}
                                   </CardContent>
                                 </Card>
                               </motion.div>
