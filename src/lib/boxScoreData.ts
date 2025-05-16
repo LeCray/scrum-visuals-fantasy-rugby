@@ -683,7 +683,6 @@ finalScores.set(
   { teamAScore: 24, teamBScore: 28 }
 );
 
-
 finalScores.set(
   generateMatchId("April 28th", "10:20", "GOLDRIDGE 1XV", "GATEWAY 1XV"),
   { teamAScore: 22, teamBScore: 22 }
@@ -883,6 +882,37 @@ export const getFinalScore = (date: string, time: string, teamA: string, teamB: 
   const matchId = generateMatchId(date, time, teamA, teamB);
   return finalScores.get(matchId);
 };
+
+// Add scores for May 16th SA Schools Rugby games
+finalScores.set(
+  generateMatchId("May 16th", "TBD", "ST CHARLES COLLEGE", "CLIFTON SCHOOL"),
+  { teamAScore: 47, teamBScore: 14 }
+);
+
+finalScores.set(
+  generateMatchId("May 16th", "TBD", "MICHAELHOUSE", "NORTHWOOD SCHOOL"),
+  { teamAScore: 29, teamBScore: 43 }
+);
+
+finalScores.set(
+  generateMatchId("May 16th", "TBD", "KEARSNEY COLLEGE", "DURBAN HIGH SCHOOL"),
+  { teamAScore: 20, teamBScore: 42 }
+);
+
+finalScores.set(
+  generateMatchId("May 16th", "TBD", "MARITZBURG COLLEGE", "WESTVILLE BOYS' HIGH SCHOOL"),
+  { teamAScore: 21, teamBScore: 22 }
+);
+
+finalScores.set(
+  generateMatchId("May 16th", "TBD", "HILTON COLLEGE", "GLENWOOD HIGH SCHOOL"),
+  { teamAScore: 53, teamBScore: 15 }
+);
+
+finalScores.set(
+  generateMatchId("May 16th", "TBD", "TIER 2 URBAN", "TIER 2 CD"),
+  { teamAScore: 8, teamBScore: 40 }
+);
 
 // Export everything as before
 export { generateMatchId }; 
