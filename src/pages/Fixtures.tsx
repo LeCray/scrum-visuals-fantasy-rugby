@@ -143,7 +143,7 @@ const sbr2025Games: FixtureDay[] = [
       { time: "14:00", teamA: "WATERSHED", teamB: "HELLENIC", location: "Hellenic Academy, Harare" },
       { time: "14:00", teamA: "PETERHOUSE", teamB: "CBC", location: "Peterhouse Boys, Marondera" },
       { time: "14:00", teamA: "ALLAN WILSON", teamB: "MILTON", location: "Allan Wilson, Harare" },
-      { time: "14:00", teamA: "MCC", teamB: "HERITAGE", location: "MCC, Gweru" },
+      { time: "14:00", teamA: "MIDLANDS CC", teamB: "HERITAGE", location: "MCC, Gweru" },
       { time: "14:00", teamA: "GOLDRIDGE", teamB: "EAGLESVALE", location: "Goldridge, Kwekwe" },
       { time: "14:30", teamA: "WISE OWL", teamB: "CHURCHILL", location: "Wise Owl, Marondera" },
       { time: "15:15", teamA: "LOMAGUNDI", teamB: "FALCON", location: "Lomagundi College, Chinhoyi" },
@@ -201,7 +201,7 @@ const sbr2025Games: FixtureDay[] = [
       { time: "TBD", teamA: "HERITAGE", teamB: "WATERSHED" },
       { time: "TBD", teamA: "HELLENIC", teamB: "PETERHOUSE" },
       { time: "TBD", teamA: "MUTARE", teamB: "HILLCREST" },
-      { time: "TBD", teamA: "PETRA", teamB: "MCC" }
+      { time: "TBD", teamA: "PETRA", teamB: "MIDLANDS CC" }
     ]
   },
   {
@@ -345,11 +345,11 @@ const teamLogoMap: Record<string, string> = {
   "KUTAMA": "/assets/logo.png",
   "MUTARE": "/assets/logo.png",
   "PETRA": "/assets/logo.png",
-  "MCC": "/assets/logo.png",
+  "MIDLANDS CC": "/assets/MidlandsCC.png",
   "PLUMTREE": "/assets/logo.png",
   "MARONDERA HIGH": "/assets/logo.png",
   "GIFFORD": "/assets/logo.png",
-  "GOLDRIDGE": "/assets/logo.png",
+  "GOLDRIDGE": "/assets/Goldridge.png",
   "EAGLESVALE": "/assets/Eaglesvale.png"
 };
 
