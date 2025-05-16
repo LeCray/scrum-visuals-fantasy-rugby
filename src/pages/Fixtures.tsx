@@ -132,8 +132,8 @@ const week1Games: FixtureDay[] = [];
 // SBR Season 2025 fixtures organized by week with month information
 const sbr2025Games: FixtureDay[] = [
   {
-    date: "Week 1 - 15 May",
-    day: "Week 1",
+    date: "Week 1",
+    day: "15 May",
     month: "May",
     fixtures: [
       { time: "TBD", teamA: "WISE OWL", teamB: "CHURCHILL" },
@@ -147,8 +147,8 @@ const sbr2025Games: FixtureDay[] = [
     ]
   },
   {
-    date: "Week 2 - 24 May",
-    day: "Week 2",
+    date: "Week 2",
+    day: "24 May",
     month: "May",
     fixtures: [
       { time: "TBD", teamA: "PRINCE EDWARD", teamB: "CHURCHILL" },
@@ -161,8 +161,8 @@ const sbr2025Games: FixtureDay[] = [
     ]
   },
   {
-    date: "Week 3 - 07 June",
-    day: "Week 3",
+    date: "Week 3",
+    day: "07 June",
     month: "June",
     fixtures: [
       { time: "TBD", teamA: "PRINCE EDWARD", teamB: "HILLCREST" },
@@ -173,8 +173,8 @@ const sbr2025Games: FixtureDay[] = [
     ]
   },
   {
-    date: "Week 4 - 14 June",
-    day: "Week 4",
+    date: "Week 4",
+    day: "14 June",
     month: "June",
     fixtures: [
       { time: "TBD", teamA: "CHURCHILL", teamB: "ALLAN WILSON" },
@@ -186,8 +186,8 @@ const sbr2025Games: FixtureDay[] = [
     ]
   },
   {
-    date: "Week 5 - 28 June",
-    day: "Week 5",
+    date: "Week 5",
+    day: "28 June",
     month: "June",
     fixtures: [
       { time: "TBD", teamA: "LOMAGUNDI", teamB: "CHURCHILL" },
@@ -201,8 +201,8 @@ const sbr2025Games: FixtureDay[] = [
     ]
   },
   {
-    date: "Week 6 - 05 July",
-    day: "Week 6",
+    date: "Week 6",
+    day: "05 July",
     month: "July",
     fixtures: [
       { time: "TBD", teamA: "PH 7s", teamB: "" },
@@ -212,8 +212,8 @@ const sbr2025Games: FixtureDay[] = [
     ]
   },
   {
-    date: "Week 7 - 12 July",
-    day: "Week 7",
+    date: "Week 7",
+    day: "12 July",
     month: "July",
     fixtures: [
       { time: "TBD", teamA: "ST JOHNS", teamB: "LOMAGUNDI" },
@@ -223,8 +223,8 @@ const sbr2025Games: FixtureDay[] = [
     ]
   },
   {
-    date: "Week 8 - 19 July",
-    day: "Week 8",
+    date: "Week 8",
+    day: "19 July",
     month: "July",
     fixtures: [
       { time: "TBD", teamA: "ST GEORGES", teamB: "PRINCE EDWARD" },
@@ -236,8 +236,8 @@ const sbr2025Games: FixtureDay[] = [
     ]
   },
   {
-    date: "Week 9 - 26 July",
-    day: "Week 9",
+    date: "Week 9",
+    day: "26 July",
     month: "July",
     fixtures: [
       { time: "TBD", teamA: "CHURCHILL", teamB: "PRINCE EDWARD" },
@@ -247,8 +247,8 @@ const sbr2025Games: FixtureDay[] = [
     ]
   },
   {
-    date: "Week 10 - 02 Aug",
-    day: "Week 10",
+    date: "Week 10",
+    day: "02 Aug",
     month: "August",
     fixtures: [
       { time: "TBD", teamA: "CHURCHILL", teamB: "PLUMTREE" },
