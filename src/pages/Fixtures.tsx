@@ -24,6 +24,7 @@ type FixtureDay = {
 
 const tabs = [
   { name: "CBZ Schools Rugby", key: "sbr2025" },
+  { name: "SA Schools Rugby", key: "sa_schools" },
   { name: "Zim Sables Games", key: "zim" },
   { name: "Derby Day", key: "derby" }
 ];
@@ -124,6 +125,97 @@ const zimSablesGames: FixtureDay[] = [ {
     fixtures: [
       { time: "11:30", teamA: "ZIMBABWE U20", teamB: "SHARKS ACADEMY" },
       { time: "14:30", teamA: "ZIMBABWE SABLES", teamB: "ZAMBIA" }
+    ]
+  }
+];
+
+// South Africa Schools Rugby fixtures
+const saSchoolsRugby: FixtureDay[] = [
+  {
+    date: "May 16th",
+    day: "Friday",
+    month: "May",
+    fixtures: [
+      { time: "TBD", teamA: "TIER 2 URBAN", teamB: "TIER 2 CD" },
+      { time: "TBD", teamA: "ST CHARLES COLLEGE", teamB: "CLIFTON SCHOOL" },
+      { time: "TBD", teamA: "MICHAELHOUSE", teamB: "NORTHWOOD SCHOOL" },
+      { time: "TBD", teamA: "KEARSNEY COLLEGE", teamB: "DURBAN HIGH SCHOOL" },
+      { time: "TBD", teamA: "MARITZBURG COLLEGE", teamB: "WESTVILLE BOYS' HIGH SCHOOL" },
+      { time: "TBD", teamA: "HILTON COLLEGE", teamB: "GLENWOOD HIGH SCHOOL" }
+    ]
+  },
+  {
+    date: "May 17th",
+    day: "Saturday",
+    month: "May",
+    fixtures: [
+      { time: "TBD", teamA: "AMANZIMTOTI HIGH SCHOOL", teamB: "KING EDWARD HIGH SCHOOL" },
+      { time: "TBD", teamA: "CURRO HILLCREST", teamB: "ASHTON COLLEGE BALLITO" },
+      { time: "TBD", teamA: "KINGSWAY HIGH SCHOOL", teamB: "HILLCREST HIGH SCHOOL" },
+      { time: "TBD", teamA: "PORT SHEPSTONE HIGH SCHOOL", teamB: "IXOPO HIGH SCHOOL" },
+      { time: "TBD", teamA: "DUNDEE HIGH SCHOOL", teamB: "GREYTOWN HIGH SCHOOL" },
+      { time: "TBD", teamA: "SAREL CILLIERS HIGH SCHOOL", teamB: "NEWCASTLE HIGH SCHOOL" },
+      { time: "TBD", teamA: "VRYHEID HIGH SCHOOL", teamB: "HOËRSKOOL RICHARDSBAAI" },
+      { time: "TBD", teamA: "WERDA SCHOOL", teamB: "PORT NATAL SCHOOL" },
+      { time: "TBD", teamA: "HOËRSKOOL PIONIER", teamB: "EMPANGENI HIGH SCHOOL" },
+      { time: "TBD", teamA: "GRANTLEIGH", teamB: "FELIXTON COLLEGE" },
+      { time: "TBD", teamA: "MEYER SAUERMAN", teamB: "GREY HIGH SCHOOL" }
+    ]
+  },
+  {
+    date: "May 24th",
+    day: "Saturday",
+    month: "May",
+    fixtures: [
+      { time: "TBD", teamA: "QUEEN'S COLLEGE", teamB: "GREY HIGH SCHOOL", location: "Away" }
+    ]
+  },
+  {
+    date: "May 31st",
+    day: "Saturday",
+    month: "May",
+    fixtures: [
+      { time: "TBD", teamA: "GREY HIGH SCHOOL", teamB: "ST ANDREW'S", location: "Home" }
+    ]
+  },
+  {
+    date: "June 7th",
+    day: "Saturday",
+    month: "June",
+    fixtures: [
+      { time: "TBD", teamA: "GREY HIGH SCHOOL", teamB: "DANIEL PIENAAR", location: "Home" }
+    ]
+  },
+  {
+    date: "July 26th",
+    day: "Saturday",
+    month: "July",
+    fixtures: [
+      { time: "TBD", teamA: "GREY HIGH SCHOOL", teamB: "FRAMESBY", location: "Home" }
+    ]
+  },
+  {
+    date: "August 2nd",
+    day: "Saturday",
+    month: "August",
+    fixtures: [
+      { time: "TBD", teamA: "GREY HIGH SCHOOL", teamB: "GREY COLLEGE", location: "Home" }
+    ]
+  },
+  {
+    date: "August 9th",
+    day: "Saturday",
+    month: "August",
+    fixtures: [
+      { time: "TBD", teamA: "MUIR", teamB: "GREY HIGH SCHOOL", location: "Away" }
+    ]
+  },
+  {
+    date: "August 16th",
+    day: "Saturday",
+    month: "August",
+    fixtures: [
+      { time: "TBD", teamA: "SELBORNE", teamB: "GREY HIGH SCHOOL", location: "Away" }
     ]
   }
 ];
@@ -349,7 +441,52 @@ const teamLogoMap: Record<string, string> = {
   "PLUMTREE": "/assets/logo.png",
   "MARONDERA HIGH": "/assets/logo.png",
   "GIFFORD": "/assets/logo.png",
-  "GOLDRIDGE": "/assets/logo.png"
+  "GOLDRIDGE": "/assets/logo.png",
+  
+  // South African Schools
+  "TIER 2 URBAN": "/assets/logo.png", // Placeholder
+  "TIER 2 CD": "/assets/logo.png", // Placeholder
+  "ST CHARLES COLLEGE": "/assets/SA logos/SA schools (Logo)/St Charles.png",
+  "CLIFTON SCHOOL": "/assets/SA logos/SA schools (Logo)/Clifton.png",
+  "MICHAELHOUSE": "/assets/SA logos/SA schools (Logo)/Michaelhouse.png",
+  "NORTHWOOD SCHOOL": "/assets/SA logos/SA schools (Logo)/Northwood.png",
+  "KEARSNEY COLLEGE": "/assets/SA logos/SA schools (Logo)/Kearsney College.png",
+  "DURBAN HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Durban High school.png",
+  "MARITZBURG COLLEGE": "/assets/SA logos/SA schools (Logo)/Maritzburg.png",
+  "WESTVILLE BOYS' HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Westville Boy's High School.png",
+  "HILTON COLLEGE": "/assets/SA logos/SA schools (Logo)/Hilton College.png",
+  "GLENWOOD HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Glenwood High School.png",
+  "AMANZIMTOTI HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Amanzimtoti High School.png",
+  "KING EDWARD HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/King Edward.png",
+  "CURRO HILLCREST": "/assets/SA logos/SA schools (Logo)/Curro Hillcrest.png",
+  "ASHTON COLLEGE BALLITO": "/assets/SA logos/SA schools (Logo)/Ashton college.png",
+  "KINGSWAY HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Kingsway High school.png",
+  "HILLCREST HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Hillcrest high school.png",
+  "PORT SHEPSTONE HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Port Shepstone high school.png",
+  "IXOPO HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Ixopo.png",
+  "DUNDEE HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Dundee high school.png",
+  "GREYTOWN HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Greytown.png",
+  "SAREL CILLIERS HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Sarel Cilliers high school.png",
+  "NEWCASTLE HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Newcastle.png",
+  "VRYHEID HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Vryheid high school.png",
+  "HOËRSKOOL RICHARDSBAAI": "/assets/SA logos/SA schools (Logo)/Hoërskool Richardsbaai.png",
+  "WERDA SCHOOL": "/assets/SA logos/SA schools (Logo)/Werda.png",
+  "PORT NATAL SCHOOL": "/assets/SA logos/SA schools (Logo)/Port Natal.png",
+  "HOËRSKOOL PIONIER": "/assets/SA logos/SA schools (Logo)/Hoërskool Pionier.png",
+  "EMPANGENI HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Empangeni.png",
+  "GRANTLEIGH": "/assets/SA logos/SA schools (Logo)/Grantleigh.png",
+  "FELIXTON COLLEGE": "/assets/SA logos/SA schools (Logo)/Felixton College.png",
+  
+  // Grey High School fixtures teams
+  "GREY HIGH SCHOOL": "/assets/SA logos/Grey High School.png", 
+  "MEYER SAUERMAN": "/assets/logo.png", // Placeholder
+  "QUEEN'S COLLEGE": "/assets/SA logos/QueensCollege.png",
+  "ST ANDREW'S": "/assets/StAndrews.png",
+  "DANIEL PIENAAR": "/assets/SA logos/Daniel Pienaar school.png",
+  "FRAMESBY": "/assets/SA logos/framesby school.png",
+  "GREY COLLEGE": "/assets/SA logos/Grey College.png",
+  "MUIR": "/assets/SA logos/Muir College.png",
+  "SELBORNE": "/assets/SA logos/Selborne College.png",
 };
 
 // Animation variants for staggered animations
@@ -436,6 +573,8 @@ const Fixtures: React.FC = () => {
 
   const [activeTab, setActiveTab] = useState("sbr2025");
   const [selectedMonth, setSelectedMonth] = useState("All");
+  const [teamSearchInput, setTeamSearchInput] = useState("");
+  const [cbzTeamSearchInput, setCbzTeamSearchInput] = useState("");
 
   const handleFixtureClick = (date: string, time: string, teamA: string, teamB: string) => {
     if (isHighlightedFixture(date, time, teamA, teamB)) {
@@ -444,15 +583,76 @@ const Fixtures: React.FC = () => {
     }
   };
 
+  // Handle search input changes
+  const handleTeamSearch = (input: string) => {
+    setTeamSearchInput(input);
+  };
+
+  // Handle clear search
+  const clearTeamSearch = () => {
+    setTeamSearchInput("");
+  };
+
+  // Handle CBZ team search input changes
+  const handleCbzTeamSearch = (input: string) => {
+    setCbzTeamSearchInput(input);
+  };
+
+  // Handle clear CBZ team search
+  const clearCbzTeamSearch = () => {
+    setCbzTeamSearchInput("");
+  };
+
   const filteredFixtures = (activeTab: string): FixtureDay[] => {
     if (activeTab === "derby") return derbyDay;
     if (activeTab === "zim") return zimSablesGames;
-    if (activeTab === "sbr2025") {
-      if (selectedMonth === "All") {
-        return sbr2025Games;
-      } else {
-        return sbr2025Games.filter(day => day.month === selectedMonth);
+    if (activeTab === "sa_schools") {
+      let fixtures = saSchoolsRugby;
+      
+      // Filter by month if a specific month is selected
+      if (selectedMonth !== "All") {
+        fixtures = fixtures.filter(day => day.month === selectedMonth);
       }
+      
+      // Filter by team search input
+      if (teamSearchInput.trim() !== "") {
+        const searchTerm = teamSearchInput.toUpperCase();
+        fixtures = fixtures.map(day => {
+          const filteredMatches = day.fixtures.filter(fixture => 
+            fixture.teamA.includes(searchTerm) || fixture.teamB.includes(searchTerm)
+          );
+          
+          return filteredMatches.length > 0 
+            ? { ...day, fixtures: filteredMatches } 
+            : null;
+        }).filter(Boolean) as FixtureDay[];
+      }
+      
+      return fixtures;
+    }
+    if (activeTab === "sbr2025") {
+      let fixtures = sbr2025Games;
+      
+      // Filter by month
+      if (selectedMonth !== "All") {
+        fixtures = fixtures.filter(day => day.month === selectedMonth);
+      }
+      
+      // Filter by CBZ team search
+      if (cbzTeamSearchInput.trim() !== "") {
+        const searchTerm = cbzTeamSearchInput.toUpperCase();
+        fixtures = fixtures.map(day => {
+          const filteredMatches = day.fixtures.filter(fixture => 
+            fixture.teamA.includes(searchTerm) || fixture.teamB.includes(searchTerm)
+          );
+          
+          return filteredMatches.length > 0 
+            ? { ...day, fixtures: filteredMatches } 
+            : null;
+        }).filter(Boolean) as FixtureDay[];
+      }
+      
+      return fixtures;
     }
     return [];
   };
@@ -461,13 +661,17 @@ const Fixtures: React.FC = () => {
   const hasFixtures = (): boolean => {
     if (activeTab === "derby") return derbyDay.length > 0;
     if (activeTab === "zim") return zimSablesGames.length > 0;
+    if (activeTab === "sa_schools") return saSchoolsRugby.length > 0;
     if (activeTab === "sbr2025") return sbr2025Games.length > 0;
     return false;
   };
 
   // Get unique months from SBR 2025 fixtures for the dropdown
   const months = ["All", ...Array.from(new Set(sbr2025Games.map(day => day.month)))];
-
+  
+  // Get unique months from SA Schools fixtures for the dropdown
+  const saMonths = ["All", ...Array.from(new Set(saSchoolsRugby.map(day => day.month)))];
+  
   return (
     <div className="relative text-scrummy-navyBlue">
       <div className="relative z-20">
@@ -527,14 +731,15 @@ const Fixtures: React.FC = () => {
               ))}
             </div>
 
-            {/* Month filter for SBR 2025 */}
+            {/* Month and Team filters for SBR 2025 */}
             {activeTab === "sbr2025" && (
-              <div className="flex justify-end mt-4">
+              <div className="flex justify-end mt-4 gap-2">
                 <div className="w-60">
                   <select
                     value={selectedMonth}
                     onChange={(e) => setSelectedMonth(e.target.value)}
-                    className="w-full px-4 py-2 rounded-lg bg-white border border-scrummy-navyBlue/20 text-scrummy-navyBlue font-semibold focus:outline-none focus:ring-2 focus:ring-scrummy-goldYellow"
+                    className="w-full px-3 py-2 rounded-lg bg-white border border-scrummy-navyBlue/20 text-scrummy-navyBlue font-semibold focus:outline-none focus:ring-2 focus:ring-scrummy-goldYellow"
+                    aria-label="Select month"
                   >
                     {months.map((month) => (
                       <option key={month} value={month}>
@@ -542,6 +747,68 @@ const Fixtures: React.FC = () => {
                       </option>
                     ))}
                   </select>
+                </div>
+                <div className="w-60">
+                  <div className="relative w-full">
+                    <input 
+                      type="text"
+                      value={cbzTeamSearchInput}
+                      onChange={(e) => handleCbzTeamSearch(e.target.value)}
+                      placeholder="Search for a school..."
+                      className="w-full px-3 py-2 rounded-lg bg-white border border-scrummy-navyBlue/20 text-scrummy-navyBlue font-semibold focus:outline-none focus:ring-2 focus:ring-scrummy-goldYellow pr-8"
+                      aria-label="Search for a school"
+                    />
+                    {cbzTeamSearchInput && (
+                      <button 
+                        onClick={clearCbzTeamSearch}
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-scrummy-navyBlue/50 hover:text-scrummy-navyBlue"
+                        aria-label="Clear search"
+                      >
+                        ✕
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {/* Month and Team filters for SA Schools */}
+            {activeTab === "sa_schools" && (
+              <div className="flex justify-end mt-4 gap-2">
+                <div className="w-60">
+                  <select
+                    value={selectedMonth}
+                    onChange={(e) => setSelectedMonth(e.target.value)}
+                    className="w-full px-3 py-2 rounded-lg bg-white border border-scrummy-navyBlue/20 text-scrummy-navyBlue font-semibold focus:outline-none focus:ring-2 focus:ring-scrummy-goldYellow"
+                    aria-label="Select month"
+                  >
+                    {saMonths.map((month) => (
+                      <option key={month} value={month}>
+                        {month === "All" ? "All Months" : month}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="w-60">
+                  <div className="relative w-full">
+                    <input 
+                      type="text"
+                      value={teamSearchInput}
+                      onChange={(e) => handleTeamSearch(e.target.value)}
+                      placeholder="Search for a school..."
+                      className="w-full px-3 py-2 rounded-lg bg-white border border-scrummy-navyBlue/20 text-scrummy-navyBlue font-semibold focus:outline-none focus:ring-2 focus:ring-scrummy-goldYellow pr-8"
+                      aria-label="Search for a school"
+                    />
+                    {teamSearchInput && (
+                      <button 
+                        onClick={clearTeamSearch}
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-scrummy-navyBlue/50 hover:text-scrummy-navyBlue"
+                        aria-label="Clear search"
+                      >
+                        ✕
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             )}
