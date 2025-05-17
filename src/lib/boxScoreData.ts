@@ -15,6 +15,11 @@ export type TeamStats = {
   lineoutAccuracy: string;
   penaltiesWon: number;
   penaltiesConceded: number;
+  possession?: number;
+  scrums?: { total: number; won: number };
+  lineouts?: { total: number; won: number };
+  turnovers?: number;
+  knockOns?: number;
 };
 
 export type BoxScoreData = {
@@ -926,8 +931,8 @@ finalScores.set(
 );
 
 finalScores.set(
-  generateMatchId("Week 1", "14:00", "WATERSHED", "HELLENIC"),
-  { teamAScore: 10, teamBScore: 41 }
+  generateMatchId("Week 1", "14:00", "HELLENIC", "WATERSHED"),
+  { teamAScore: 41, teamBScore: 10 }
 );
 
 // Add score for Rydings vs Nattie College match
@@ -974,36 +979,17 @@ finalScores.set(
   { teamAScore: 48, teamBScore: 16 }
 );
 
-
-
 // Create a box score for the Hellenic vs Watershed game
 const watershedVsHellenic: BoxScoreData = {
   matchInfo: {
-    teamA: "WATERSHED",
-    teamB: "HELLENIC",
+    teamA: "HELLENIC",
+    teamB: "WATERSHED",
     venue: "Hellenic Academy, Harare",
     date: "May 17th, 2025",
     kickoff: "14:00",
     weather: "Sunny, 25°C",
   },
   teamAPlayers: [
-    { name: "T. Makombe", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 1, penaltiesConceded: 0 },
-    { name: "K. Nyamushita", position: "14", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
-    { name: "Z. Chaita", position: "13", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
-    { name: "F. Wilson", position: "12", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
-    { name: "S. Gurupira", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
-    { name: "E. Mandizvidza", position: "10", tries: 0, kicks: "1/2 C, 1/1 PK", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
-    { name: "R. Tshuma", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
-    { name: "A. Majoni", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 1, penaltiesConceded: 0 },
-    { name: "T. Jonasi", position: "7", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 2, penaltiesConceded: 0 },
-    { name: "N. Mushonga", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
-    { name: "B. Gumbo", position: "5", tries: 0, kicks: "-", lineouts: "3/5", penaltiesWon: 0, penaltiesConceded: 0 },
-    { name: "P. Kateera", position: "4", tries: 0, kicks: "-", lineouts: "2/3", penaltiesWon: 0, penaltiesConceded: 0 },
-    { name: "K. Matsika", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
-    { name: "L. Musonza", position: "2", tries: 0, kicks: "-", lineouts: "1/1", penaltiesWon: 0, penaltiesConceded: 0 },
-    { name: "D. Zimucha", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
-  ],
-  teamBPlayers: [
     { name: "C. Dube", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
     { name: "M. Nyoni", position: "14", tries: 2, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
     { name: "J. Munemo", position: "13", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
@@ -1020,27 +1006,157 @@ const watershedVsHellenic: BoxScoreData = {
     { name: "F. Marowa", position: "2", tries: 0, kicks: "-", lineouts: "3/3", penaltiesWon: 0, penaltiesConceded: 0 },
     { name: "L. Musariri", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
   ],
+  teamBPlayers: [
+    { name: "T. Makombe", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 1, penaltiesConceded: 0 },
+    { name: "K. Nyamushita", position: "14", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Z. Chaita", position: "13", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "F. Wilson", position: "12", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "S. Gurupira", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "E. Mandizvidza", position: "10", tries: 0, kicks: "1/2 C, 1/1 PK", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "R. Tshuma", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "A. Majoni", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 1, penaltiesConceded: 0 },
+    { name: "T. Jonasi", position: "7", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 2, penaltiesConceded: 0 },
+    { name: "N. Mushonga", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "B. Gumbo", position: "5", tries: 0, kicks: "-", lineouts: "3/5", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "P. Kateera", position: "4", tries: 0, kicks: "-", lineouts: "2/3", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "K. Matsika", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "L. Musonza", position: "2", tries: 0, kicks: "-", lineouts: "1/1", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "D. Zimucha", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
   teamASummary: {
-    totalTries: 1,
-    totalConversions: "1/2 C, 1/1 PK",
-    lineoutAccuracy: "6/9 (67%)",
-    penaltiesWon: 4,
-    penaltiesConceded: 2,
-  },
-  teamBSummary: {
     totalTries: 6,
     totalConversions: "4/5 C, 1/1 PK",
     lineoutAccuracy: "12/13 (92%)",
     penaltiesWon: 5,
     penaltiesConceded: 1,
   },
+  teamBSummary: {
+    totalTries: 1,
+    totalConversions: "1/2 C, 1/1 PK",
+    lineoutAccuracy: "6/9 (67%)",
+    penaltiesWon: 4,
+    penaltiesConceded: 2,
+  },
 };
 
 // Add the box score to the map
 boxScores.set(
-  generateMatchId("Week 1", "14:00", "WATERSHED", "HELLENIC"),
+  generateMatchId("Week 1", "14:00", "HELLENIC", "WATERSHED"),
   watershedVsHellenic
 );
+
+// Create a box score for the Lomagundi vs Falcon game
+const lomagundiVsFalcon: BoxScoreData = {
+  matchInfo: {
+    teamA: "LOMAGUNDI",
+    teamB: "FALCON",
+    venue: "Lomagundi College, Chinhoyi",
+    date: "Week 1",
+    kickoff: "15:15",
+    weather: "Sunny, 26°C",
+  },
+  teamAPlayers: [
+    { name: "M. Mhaka", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "T. Marais", position: "14", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "L. Kawadza", position: "13", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "K. Makunike", position: "12", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "N. Chibaya", position: "11", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "L. Makore", position: "10", tries: 0, kicks: "5/7 C, 1/2 PK", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 2 },
+    { name: "B. Nyika", position: "9", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "T. Mugabe", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 1, penaltiesConceded: 0 },
+    { name: "G. Chimwanza", position: "7", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 2, penaltiesConceded: 0 },
+    { name: "D. Mutsvairo", position: "6", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "C. Mutasa", position: "5", tries: 0, kicks: "-", lineouts: "3/5", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "J. Mpofu", position: "4", tries: 0, kicks: "-", lineouts: "2/8", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "R. Chigwere", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 1, penaltiesConceded: 0 },
+    { name: "P. Ndlovu", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "M. Chipuriro", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamBPlayers: [
+    { name: "A. Sibanda", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "R. Ncube", position: "14", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "T. Dube", position: "13", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "L. Moyo", position: "12", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "B. Ndlovu", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "K. Maposa", position: "10", tries: 0, kicks: "0/2 C, 2/3 PK", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "M. Ndoro", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 2 },
+    { name: "S. Chigwada", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 1, penaltiesConceded: 0 },
+    { name: "N. Masuku", position: "7", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 2, penaltiesConceded: 1 },
+    { name: "P. Moyo", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 2 },
+    { name: "T. Mazarire", position: "5", tries: 0, kicks: "-", lineouts: "2/2", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "J. Kambarami", position: "4", tries: 0, kicks: "-", lineouts: "2/4", penaltiesWon: 1, penaltiesConceded: 0 },
+    { name: "L. Chirinda", position: "3", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 2 },
+    { name: "B. Ndebele", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "S. Musariri", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 7 }
+  ],
+  teamASummary: {
+    totalTries: 7,
+    totalConversions: "5/7 C, 1/2 PK",
+    lineoutAccuracy: "5/13 (38%)",
+    penaltiesWon: 4,
+    penaltiesConceded: 9,
+    possession: 36,
+    scrums: { total: 3, won: 3 },
+    lineouts: { total: 13, won: 5 },
+    turnovers: 7,
+    knockOns: 6
+  },
+  teamBSummary: {
+    totalTries: 2,
+    totalConversions: "0/2 C, 2/3 PK",
+    lineoutAccuracy: "4/6 (67%)",
+    penaltiesWon: 4,
+    penaltiesConceded: 17,
+    possession: 64,
+    scrums: { total: 9, won: 9 },
+    lineouts: { total: 6, won: 4 },
+    turnovers: 4,
+    knockOns: 3
+  },
+};
+
+// Add the box score to the map
+boxScores.set(
+  generateMatchId("Week 1", "15:15", "LOMAGUNDI", "FALCON"),
+  lomagundiVsFalcon
+);
+
+// Define tries with timestamps and conversion status
+const lomagundiTries = [
+  { time: "09:18", hasConversion: true },
+  { time: "22:44", hasConversion: false, isPenalty: true },
+  { time: "37:34", hasConversion: true },
+  { time: "51:04", hasConversion: false },
+  { time: "54:11", hasConversion: false },
+  { time: "56:12", hasConversion: true },
+  { time: "57:50", hasConversion: true },
+  { time: "67:21", hasConversion: true }
+];
+
+const falconTries = [
+  { time: "01:44", hasConversion: false, isPenalty: true },
+  { time: "24:46", hasConversion: false },
+  { time: "31:46", hasConversion: false },
+  { time: "50:48", hasConversion: false, isPenalty: true }
+];
+
+// Define kicking data
+const lomagundiKicks = [
+  { x: 0.7, y: 0.3, successful: true },
+  { x: 0.3, y: 0.5, successful: true },
+  { x: 0.6, y: 0.2, successful: true },
+  { x: 0.8, y: 0.5, successful: false },
+  { x: 0.2, y: 0.3, successful: true },
+  { x: 0.5, y: 0.4, successful: true }
+];
+
+const falconKicks = [
+  { x: 0.3, y: 0.8, successful: true },
+  { x: 0.7, y: 0.8, successful: true },
+  { x: 0.6, y: 0.6, successful: false },
+  { x: 0.2, y: 0.7, successful: false },
+  { x: 0.8, y: 0.8, successful: false }
+];
 
 // Export everything as before 
 export { generateMatchId }; 
