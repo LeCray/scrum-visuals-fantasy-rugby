@@ -920,6 +920,12 @@ finalScores.set(
   { teamAScore: 10, teamBScore: 41 }
 );
 
+// Add score for Rydings vs Nattie College match
+finalScores.set(
+  generateMatchId("Week 1", "TBA", "NATTIE COLLEGE", "RYDINGS"),
+  { teamAScore: 26, teamBScore: 62 }
+);
+
 // Add score for Gateway vs Hillcrest match
 finalScores.set(
   generateMatchId("Week 1", "14:00", "GATEWAY", "HILLCREST"),
