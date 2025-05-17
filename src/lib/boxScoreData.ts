@@ -916,6 +916,16 @@ finalScores.set(
 
 // Add scores for CBZ Schools Rugby matches
 finalScores.set(
+  generateMatchId("Week 1", "14:00", "ST JOHNS", "PRINCE EDWARD"),
+  { teamAScore: 32, teamBScore: 27 }
+);
+
+finalScores.set(
+  generateMatchId("Week 1", "14:00", "KYLE", "ST GEORGES"),
+  { teamAScore: 15, teamBScore: 31 }
+);
+
+finalScores.set(
   generateMatchId("Week 1", "14:00", "WATERSHED", "HELLENIC"),
   { teamAScore: 10, teamBScore: 41 }
 );
@@ -943,6 +953,28 @@ finalScores.set(
   generateMatchId("Week 1", "14:00", "ALLAN WILSON", "MILTON"),
   { teamAScore: 5, teamBScore: 38 }
 );
+
+finalScores.set(
+  generateMatchId("Week 1", "14:00", "GOLDRIDGE", "EAGLESVALE"),
+  { teamAScore: 3, teamBScore: 43 }
+);
+
+finalScores.set(
+  generateMatchId("Week 1", "14:00", "MIDLANDS CC", "HERITAGE"),
+  { teamAScore: 18, teamBScore: 21 }
+);
+
+finalScores.set(
+  generateMatchId("Week 1", "14:00", "PETERHOUSE", "CBC"),
+  { teamAScore: 57, teamBScore: 5 }
+);
+
+finalScores.set(
+  generateMatchId("Week 1", "15:15", "LOMAGUNDI", "FALCON"),
+  { teamAScore: 48, teamBScore: 16 }
+);
+
+
 
 // Create a box score for the Hellenic vs Watershed game
 const watershedVsHellenic: BoxScoreData = {
