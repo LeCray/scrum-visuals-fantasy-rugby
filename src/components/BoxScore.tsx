@@ -115,7 +115,7 @@ const PossessionCard: React.FC<{
   possessionB: number;
 }> = ({ teamA, teamB, possessionA, possessionB }) => {
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 md:p-6 shadow-md">
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
       <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-3 md:mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
         Possession
       </h2>
@@ -221,15 +221,15 @@ const PenaltiesCard: React.FC<{
   }) => (
     <div className={`${!isLast ? 'mb-5' : ''}`}>
       <div className="text-center font-semibold mb-2 text-gray-700">{title}</div>
-      <div className="grid grid-cols-2 gap-2">
-        <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-3 shadow-sm">
+      <div className="grid grid-cols-2 gap-1">
+        <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-2 shadow-sm">
           <DotVisualizer count={teamACount} colorClass="bg-blue-600" />
           <div className="text-center text-blue-700 font-bold mt-3 flex items-center justify-center gap-1.5">
             <span className="text-lg">{teamACount}</span>
             <span className="text-xs text-blue-600">Penalties</span>
           </div>
         </div>
-        <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-3 shadow-sm">
+        <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-2 shadow-sm">
           <DotVisualizer count={teamBCount} colorClass="bg-cyan-500" />
           <div className="text-center text-cyan-700 font-bold mt-3 flex items-center justify-center gap-1.5">
             <span className="text-lg">{teamBCount}</span>
@@ -241,7 +241,7 @@ const PenaltiesCard: React.FC<{
   );
   
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 md:p-6 shadow-md">
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
       <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-4 md:mb-5 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
         Penalties Conceded
       </h2>
@@ -317,7 +317,7 @@ const ScrumLineoutCard: React.FC<{
   const CircularProgress = ({ 
     percent, 
     colorClass, 
-    size = 80, 
+    size = 70, 
     won, 
     total 
   }: { 
@@ -404,10 +404,10 @@ const ScrumLineoutCard: React.FC<{
         )}
       </div>
       
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-3">
         {isCircular ? (
           <>
-            <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-4 shadow-sm flex flex-col items-center">
+            <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-3 shadow-sm flex flex-col items-center">
               <CircularProgress 
                 percent={teamAData.percent || 0} 
                 colorClass="stroke-blue-600" 
@@ -419,7 +419,7 @@ const ScrumLineoutCard: React.FC<{
                 <div className="text-xs text-blue-600">{teamAData.label || ''}</div>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-4 shadow-sm flex flex-col items-center">
+            <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-3 shadow-sm flex flex-col items-center">
               <CircularProgress 
                 percent={teamBData.percent || 0} 
                 colorClass="stroke-cyan-500" 
@@ -434,7 +434,7 @@ const ScrumLineoutCard: React.FC<{
           </>
         ) : (
           <>
-            <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-4 shadow-sm">
+            <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-3 shadow-sm">
               <div className="flex flex-col items-center">
                 <DotVisualizer count={teamAData.count || 0} colorClass="bg-blue-600" />
                 <div className="mt-3 text-center">
@@ -443,7 +443,7 @@ const ScrumLineoutCard: React.FC<{
                 </div>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-4 shadow-sm">
+            <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-3 shadow-sm">
               <div className="flex flex-col items-center">
                 <DotVisualizer count={teamBData.count || 0} colorClass="bg-cyan-500" />
                 <div className="mt-3 text-center">
@@ -459,7 +459,7 @@ const ScrumLineoutCard: React.FC<{
   );
   
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 md:p-6 shadow-md">
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
       <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-4 md:mb-6 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
         Set Piece Performance
       </h2>
@@ -549,13 +549,13 @@ const ScoringCard: React.FC<{
 }> = ({ teamA, teamB, triesA, triesB, kicksAtGoalA, kicksAtGoalB }) => {
   
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 md:p-6 shadow-md">
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
       <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-4 md:mb-6 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
         Scoring Summary
       </h2>
       
       {/* Points total */}
-      <div className="grid grid-cols-2 gap-4 mb-6">
+      <div className="grid grid-cols-2 gap-3 mb-6">
         <div className="text-center">
           <h3 className="font-bold text-blue-700 text-base md:text-lg mb-1">{teamA}</h3>
           <div className="bg-white rounded-lg p-4 shadow-sm">
@@ -780,7 +780,7 @@ const BoxScore: React.FC<BoxScoreProps> = ({
       <div className="relative z-10">
         {/* Header Section */}
         <header className="relative py-6 md:py-12 px-4 md:px-8">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <Link
               to="/fixtures"
               className="inline-flex items-center text-scrummy-navyBlue hover:text-scrummy-goldYellow transition-colors text-sm md:text-base"
@@ -844,7 +844,7 @@ const BoxScore: React.FC<BoxScoreProps> = ({
 
         {/* Main Content */}
         <main className="px-2 md:px-8">
-          <div className="max-w-7xl mx-auto space-y-6 md:space-y-8">
+          <div className="max-w-5xl mx-auto space-y-6 md:space-y-8">
             {/* Possession Card */}
             <PossessionCard 
               teamA={cleanTeamA}
@@ -892,7 +892,7 @@ const BoxScore: React.FC<BoxScoreProps> = ({
             />
 
             {/* Match Summary */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 md:p-6 shadow-md">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
               <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-3 md:mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
                 Match Summary
               </h2>
@@ -939,7 +939,7 @@ const BoxScore: React.FC<BoxScoreProps> = ({
             </div>
 
             {/* Key Section */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 md:p-6 shadow-md">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
               <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-3 md:mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
                 Key
               </h2>
