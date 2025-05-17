@@ -232,7 +232,7 @@ const sbr2025Games: FixtureDay[] = [
       { time: "14:00", teamA: "ST JOHNS", teamB: "PRINCE EDWARD", location: "St John's College, Harare" },
       { time: "14:00", teamA: "KYLE", teamB: "ST GEORGES", location: "Kyle College, Masvingo" },
       { time: "14:00", teamA: "GATEWAY", teamB: "HILLCREST", location: "Gateway High School, Harare" },
-      { time: "14:00", teamA: "WATERSHED", teamB: "HELLENIC", location: "Hellenic Academy, Harare" },
+      { time: "14:00", teamA: "HELLENIC", teamB: "WATERSHED", location: "Hellenic Academy, Harare" },
       { time: "14:00", teamA: "PETERHOUSE", teamB: "CBC", location: "Peterhouse Boys, Marondera" },
       { time: "14:00", teamA: "ALLAN WILSON", teamB: "MILTON", location: "Allan Wilson, Harare" },
       { time: "14:00", teamA: "MIDLANDS CC", teamB: "HERITAGE", location: "MCC, Gweru" },
@@ -530,7 +530,8 @@ const isHighlightedFixture = (date: string, time: string, teamA: string, teamB: 
     { date: "May 3rd", time: "11:40", teamA: "PRINCE EDWARD 1XV", teamB: "CHURCHILL 1XV" },
     { date: "May 3rd", time: "14:20", teamA: "FALCON 1XV", teamB: "ST ALBANS 1XV" },
     { date: "May 3rd", time: "15:40", teamA: "ST JOHN'S 1XV", teamB: "ST ANDREW'S 1XV" },
-    { date: "Week 1", time: "14:00", teamA: "WATERSHED", teamB: "HELLENIC" }
+    { date: "Week 1", time: "14:00", teamA: "HELLENIC", teamB: "WATERSHED" },
+    { date: "Week 1", time: "15:15", teamA: "LOMAGUNDI", teamB: "FALCON" }
   ];
 
   return highlightedGames.some(game => 
