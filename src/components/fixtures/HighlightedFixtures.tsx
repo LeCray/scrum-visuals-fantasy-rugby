@@ -97,6 +97,13 @@ export const highlightedFixtures: HighlightedFixture[] = [
     teamB: "ST ANDREW'S 1XV",
     venue: "St John's College",
   },
+  {
+    date: "Week 1",
+    time: "14:00",
+    teamA: "WATERSHED",
+    teamB: "HELLENIC",
+    venue: "Hellenic Academy, Harare",
+  },
 ];
 
 // Update the HighlightedFixtureCard component props
