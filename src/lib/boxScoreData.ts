@@ -9,6 +9,21 @@ export type Player = {
   penaltiesConceded: number;
 };
 
+// Type for try scoring data
+export type TryScore = {
+  time: string;
+  hasConversion: boolean;
+  isPenalty?: boolean;
+};
+
+// Type for kick data
+export type KickAtGoal = {
+  x: number;
+  y: number;
+  successful: boolean;
+};
+
+// Define the structure for a team summary
 export type TeamStats = {
   totalTries: number;
   totalConversions: string;
@@ -20,8 +35,33 @@ export type TeamStats = {
   lineouts?: { total: number; won: number };
   turnovers?: number;
   knockOns?: number;
+  // New stats from screenshots
+  cards?: { yellow: number; red: number };
+  mauls?: { total: number; won: number };
+  kicks?: {
+    fromHand?: { total: number; reclaimed: number };
+    inField?: { total: number; reclaimed: number };
+    toTouch?: { total: number };
+    dropOuts?: { total: number; reclaimed: number };
+    goalLine?: { total: number };
+    directToTouch?: { total: number };
+    success?: { total: number; successful: number };
+  };
+  attackingPenalties?: number;
+  defensivePenalties?: number;
+  scrumPenalties?: number;
+  penaltyCauses?: {
+    offside?: number;
+    ruckOffence?: number;
+    notReleasePlayer?: number;
+    violentFoulPlay?: number;
+    notReleasingBall?: number;
+    dangerousTackle?: number;
+    scrum?: number;
+  };
 };
 
+// Define the structure for a box score
 export type BoxScoreData = {
   matchInfo: {
     teamA: string;
@@ -31,10 +71,30 @@ export type BoxScoreData = {
     kickoff: string;
     weather: string;
   };
-  teamAPlayers: Player[];
-  teamBPlayers: Player[];
+  teamAPlayers: Array<{
+    name: string;
+    position: string;
+    tries: number;
+    kicks: string;
+    lineouts: string;
+    penaltiesWon: number;
+    penaltiesConceded: number;
+  }>;
+  teamBPlayers: Array<{
+    name: string;
+    position: string;
+    tries: number;
+    kicks: string;
+    lineouts: string;
+    penaltiesWon: number;
+    penaltiesConceded: number;
+  }>;
   teamASummary: TeamStats;
   teamBSummary: TeamStats;
+  tryDataA?: TryScore[];
+  tryDataB?: TryScore[];
+  kickDataA?: KickAtGoal[];
+  kickDataB?: KickAtGoal[];
 };
 
 // Example box score data for one match
@@ -979,6 +1039,35 @@ finalScores.set(
   { teamAScore: 48, teamBScore: 16 }
 );
 
+// Define tries with timestamps and conversion status for Hellenic vs Watershed
+const hellenicTries = [
+  { time: "08:52", hasConversion: true },
+  { time: "17:15", hasConversion: false },
+  { time: "26:15", hasConversion: false },
+  { time: "29:17", hasConversion: false },
+  { time: "56:02", hasConversion: true },
+  { time: "60:54", hasConversion: true },
+  { time: "70:47", hasConversion: false }
+];
+
+const watershedTries = [
+  { time: "40:04", hasConversion: false },
+  { time: "72:47", hasConversion: false }
+];
+
+// Define kicking data for Hellenic vs Watershed
+const hellenicKicks = [
+  { x: 0.3, y: 0.3, successful: true },
+  { x: 0.7, y: 0.3, successful: false },
+  { x: 0.2, y: 0.7, successful: false },
+  { x: 0.8, y: 0.7, successful: false }
+];
+
+const watershedKicks = [
+  { x: 0.7, y: 0.7, successful: false },
+  { x: 0.8, y: 0.7, successful: false }
+];
+
 // Create a box score for the Hellenic vs Watershed game
 const watershedVsHellenic: BoxScoreData = {
   matchInfo: {
@@ -1028,15 +1117,55 @@ const watershedVsHellenic: BoxScoreData = {
     totalConversions: "4/5 C, 1/1 PK",
     lineoutAccuracy: "12/13 (92%)",
     penaltiesWon: 5,
-    penaltiesConceded: 1,
+    penaltiesConceded: 5,
+    possession: 64,
+    scrums: { total: 7, won: 7 },
+    lineouts: { total: 9, won: 4 },
+    turnovers: 5,
+    knockOns: 11,
+    mauls: { total: 0, won: 0 },
+    kicks: {
+      fromHand: { total: 5, reclaimed: 2 },
+      inField: { total: 4, reclaimed: 2 },
+      toTouch: { total: 0 },
+      dropOuts: { total: 2, reclaimed: 1 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 4, successful: 1 }
+    },
+    attackingPenalties: 4,
+    defensivePenalties: 1,
+    scrumPenalties: 0
   },
   teamBSummary: {
     totalTries: 1,
     totalConversions: "1/2 C, 1/1 PK",
     lineoutAccuracy: "6/9 (67%)",
     penaltiesWon: 4,
-    penaltiesConceded: 2,
+    penaltiesConceded: 12,
+    possession: 36,
+    scrums: { total: 11, won: 9 },
+    lineouts: { total: 2, won: 1 },
+    turnovers: 10,
+    knockOns: 6,
+    mauls: { total: 0, won: 0 },
+    kicks: {
+      fromHand: { total: 14, reclaimed: 0 },
+      inField: { total: 10, reclaimed: 0 },
+      toTouch: { total: 4 },
+      dropOuts: { total: 0, reclaimed: 0 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 2, successful: 0 }
+    },
+    attackingPenalties: 7,
+    defensivePenalties: 4,
+    scrumPenalties: 0
   },
+  tryDataA: hellenicTries,
+  tryDataB: watershedTries,
+  kickDataA: hellenicKicks,
+  kickDataB: watershedKicks
 };
 
 // Add the box score to the map
@@ -1044,6 +1173,43 @@ boxScores.set(
   generateMatchId("Week 1", "14:00", "HELLENIC", "WATERSHED"),
   watershedVsHellenic
 );
+
+// Define tries with timestamps and conversion status
+const lomagundiTries = [
+  { time: "09:18", hasConversion: true },
+  { time: "22:44", hasConversion: false, isPenalty: true },
+  { time: "37:34", hasConversion: true },
+  { time: "51:04", hasConversion: false },
+  { time: "54:11", hasConversion: false },
+  { time: "56:12", hasConversion: true },
+  { time: "57:50", hasConversion: true },
+  { time: "67:21", hasConversion: true }
+];
+
+const falconTries = [
+  { time: "01:44", hasConversion: false, isPenalty: true },
+  { time: "24:46", hasConversion: false },
+  { time: "31:46", hasConversion: false },
+  { time: "50:48", hasConversion: false, isPenalty: true }
+];
+
+// Define kicking data
+const lomagundiKicks = [
+  { x: 0.7, y: 0.3, successful: true },
+  { x: 0.3, y: 0.5, successful: true },
+  { x: 0.6, y: 0.2, successful: true },
+  { x: 0.8, y: 0.5, successful: false },
+  { x: 0.2, y: 0.3, successful: true },
+  { x: 0.5, y: 0.4, successful: true }
+];
+
+const falconKicks = [
+  { x: 0.3, y: 0.8, successful: true },
+  { x: 0.7, y: 0.8, successful: true },
+  { x: 0.6, y: 0.6, successful: false },
+  { x: 0.2, y: 0.7, successful: false },
+  { x: 0.8, y: 0.8, successful: false }
+];
 
 // Create a box score for the Lomagundi vs Falcon game
 const lomagundiVsFalcon: BoxScoreData = {
@@ -1099,7 +1265,30 @@ const lomagundiVsFalcon: BoxScoreData = {
     scrums: { total: 3, won: 3 },
     lineouts: { total: 13, won: 5 },
     turnovers: 7,
-    knockOns: 6
+    knockOns: 6,
+    cards: { yellow: 1, red: 1 },
+    mauls: { total: 0, won: 0 },
+    kicks: {
+      fromHand: { total: 5, reclaimed: 0 },
+      inField: { total: 3, reclaimed: 1 },
+      toTouch: { total: 2 },
+      dropOuts: { total: 0, reclaimed: 0 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 10, successful: 6 }
+    },
+    attackingPenalties: 7,
+    defensivePenalties: 2,
+    scrumPenalties: 0,
+    penaltyCauses: {
+      offside: 2,
+      ruckOffence: 1,
+      notReleasePlayer: 1,
+      violentFoulPlay: 2,
+      notReleasingBall: 1,
+      dangerousTackle: 0,
+      scrum: 0
+    }
   },
   teamBSummary: {
     totalTries: 2,
@@ -1111,8 +1300,35 @@ const lomagundiVsFalcon: BoxScoreData = {
     scrums: { total: 9, won: 9 },
     lineouts: { total: 6, won: 4 },
     turnovers: 4,
-    knockOns: 3
+    knockOns: 3,
+    cards: { yellow: 1, red: 0 },
+    mauls: { total: 3, won: 3 },
+    kicks: {
+      fromHand: { total: 13, reclaimed: 0 },
+      inField: { total: 8, reclaimed: 1 },
+      toTouch: { total: 5 },
+      dropOuts: { total: 0, reclaimed: 0 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 2 },
+      success: { total: 5, successful: 2 }
+    },
+    attackingPenalties: 12,
+    defensivePenalties: 4,
+    scrumPenalties: 1,
+    penaltyCauses: {
+      offside: 6,
+      ruckOffence: 1,
+      notReleasePlayer: 1,
+      violentFoulPlay: 1,
+      notReleasingBall: 0,
+      dangerousTackle: 2,
+      scrum: 1
+    }
   },
+  tryDataA: lomagundiTries,
+  tryDataB: falconTries,
+  kickDataA: lomagundiKicks,
+  kickDataB: falconKicks
 };
 
 // Add the box score to the map
@@ -1121,42 +1337,5 @@ boxScores.set(
   lomagundiVsFalcon
 );
 
-// Define tries with timestamps and conversion status
-const lomagundiTries = [
-  { time: "09:18", hasConversion: true },
-  { time: "22:44", hasConversion: false, isPenalty: true },
-  { time: "37:34", hasConversion: true },
-  { time: "51:04", hasConversion: false },
-  { time: "54:11", hasConversion: false },
-  { time: "56:12", hasConversion: true },
-  { time: "57:50", hasConversion: true },
-  { time: "67:21", hasConversion: true }
-];
-
-const falconTries = [
-  { time: "01:44", hasConversion: false, isPenalty: true },
-  { time: "24:46", hasConversion: false },
-  { time: "31:46", hasConversion: false },
-  { time: "50:48", hasConversion: false, isPenalty: true }
-];
-
-// Define kicking data
-const lomagundiKicks = [
-  { x: 0.7, y: 0.3, successful: true },
-  { x: 0.3, y: 0.5, successful: true },
-  { x: 0.6, y: 0.2, successful: true },
-  { x: 0.8, y: 0.5, successful: false },
-  { x: 0.2, y: 0.3, successful: true },
-  { x: 0.5, y: 0.4, successful: true }
-];
-
-const falconKicks = [
-  { x: 0.3, y: 0.8, successful: true },
-  { x: 0.7, y: 0.8, successful: true },
-  { x: 0.6, y: 0.6, successful: false },
-  { x: 0.2, y: 0.7, successful: false },
-  { x: 0.8, y: 0.8, successful: false }
-];
-
-// Export everything as before 
+// Export functions
 export { generateMatchId }; 
