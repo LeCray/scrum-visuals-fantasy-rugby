@@ -1,22 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { TeamStats, TryScore, KickAtGoal } from "@/lib/boxScoreData";
 
 // Types for our box score data
-type TeamStats = {
-  totalTries: number;
-  totalConversions: string;
-  lineoutAccuracy: string;
-  penaltiesWon: number;
-  penaltiesConceded: number;
-  possession?: number;
-  scrums?: { total: number; won: number };
-  lineouts?: { total: number; won: number };
-  turnovers?: number;
-  knockOns?: number;
-};
-
 type BoxScoreProps = {
   matchInfo: {
     teamA: string;
@@ -28,6 +16,10 @@ type BoxScoreProps = {
   };
   teamASummary: TeamStats;
   teamBSummary: TeamStats;
+  tryDataA?: TryScore[];
+  tryDataB?: TryScore[];
+  kickDataA?: KickAtGoal[];
+  kickDataB?: KickAtGoal[];
 };
 
 // Helper function to clean team names
@@ -207,11 +199,30 @@ const PenaltiesCard: React.FC<{
   defensivePenaltiesB?: number;
   scrumPenaltiesA?: number;
   scrumPenaltiesB?: number;
+  penaltyCausesA?: {
+    offside?: number;
+    ruckOffence?: number;
+    notReleasePlayer?: number;
+    violentFoulPlay?: number;
+    notReleasingBall?: number;
+    dangerousTackle?: number;
+    scrum?: number;
+  };
+  penaltyCausesB?: {
+    offside?: number;
+    ruckOffence?: number;
+    notReleasePlayer?: number;
+    violentFoulPlay?: number;
+    notReleasingBall?: number;
+    dangerousTackle?: number;
+    scrum?: number;
+  };
 }> = ({ 
   teamA, teamB, penaltiesA, penaltiesB, 
   attackingPenaltiesA = 0, attackingPenaltiesB = 0,
   defensivePenaltiesA = 0, defensivePenaltiesB = 0, 
-  scrumPenaltiesA = 0, scrumPenaltiesB = 0
+  scrumPenaltiesA = 0, scrumPenaltiesB = 0,
+  penaltyCausesA = {}, penaltyCausesB = {}
 }) => {
   
   // Helper component for penalty category
@@ -281,8 +292,107 @@ const PenaltiesCard: React.FC<{
             title="Scrum Penalties" 
             teamACount={scrumPenaltiesA} 
             teamBCount={scrumPenaltiesB}
-            isLast={true}
           />
+          
+          {/* Penalty Causes */}
+          {(Object.values(penaltyCausesA).some(v => v && v > 0) || 
+           Object.values(penaltyCausesB).some(v => v && v > 0)) && (
+            <div className="mt-6">
+              <h3 className="text-center font-bold text-gray-700 mb-4">Penalty Causes</h3>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  {penaltyCausesA.offside && (
+                    <div className="flex justify-between bg-blue-50 p-2 rounded">
+                      <span>Offside</span>
+                      <span className="font-bold">{penaltyCausesA.offside}</span>
+        </div>
+                  )}
+                  {penaltyCausesA.ruckOffence && (
+                    <div className="flex justify-between bg-blue-50 p-2 rounded">
+                      <span>Ruck Offence</span>
+                      <span className="font-bold">{penaltyCausesA.ruckOffence}</span>
+                    </div>
+                  )}
+                  {penaltyCausesA.notReleasePlayer && (
+                    <div className="flex justify-between bg-blue-50 p-2 rounded">
+                      <span>Not Release Player</span>
+                      <span className="font-bold">{penaltyCausesA.notReleasePlayer}</span>
+                    </div>
+                  )}
+                  {penaltyCausesA.violentFoulPlay && (
+                    <div className="flex justify-between bg-blue-50 p-2 rounded">
+                      <span>Violent Play</span>
+                      <span className="font-bold">{penaltyCausesA.violentFoulPlay}</span>
+                    </div>
+                  )}
+                  {penaltyCausesA.notReleasingBall && (
+                    <div className="flex justify-between bg-blue-50 p-2 rounded">
+                      <span>Not Release Ball</span>
+                      <span className="font-bold">{penaltyCausesA.notReleasingBall}</span>
+                    </div>
+                  )}
+                  {penaltyCausesA.dangerousTackle && (
+                    <div className="flex justify-between bg-blue-50 p-2 rounded">
+                      <span>Dangerous Tackle</span>
+                      <span className="font-bold">{penaltyCausesA.dangerousTackle}</span>
+                    </div>
+                  )}
+                  {penaltyCausesA.scrum && (
+                    <div className="flex justify-between bg-blue-50 p-2 rounded">
+                      <span>Scrum</span>
+                      <span className="font-bold">{penaltyCausesA.scrum}</span>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="space-y-2">
+                  {penaltyCausesB.offside && (
+                    <div className="flex justify-between bg-cyan-50 p-2 rounded">
+                      <span>Offside</span>
+                      <span className="font-bold">{penaltyCausesB.offside}</span>
+                    </div>
+                  )}
+                  {penaltyCausesB.ruckOffence && (
+                    <div className="flex justify-between bg-cyan-50 p-2 rounded">
+                      <span>Ruck Offence</span>
+                      <span className="font-bold">{penaltyCausesB.ruckOffence}</span>
+                    </div>
+                  )}
+                  {penaltyCausesB.notReleasePlayer && (
+                    <div className="flex justify-between bg-cyan-50 p-2 rounded">
+                      <span>Not Release Player</span>
+                      <span className="font-bold">{penaltyCausesB.notReleasePlayer}</span>
+                    </div>
+                  )}
+                  {penaltyCausesB.violentFoulPlay && (
+                    <div className="flex justify-between bg-cyan-50 p-2 rounded">
+                      <span>Violent Play</span>
+                      <span className="font-bold">{penaltyCausesB.violentFoulPlay}</span>
+                    </div>
+                  )}
+                  {penaltyCausesB.notReleasingBall && (
+                    <div className="flex justify-between bg-cyan-50 p-2 rounded">
+                      <span>Not Release Ball</span>
+                      <span className="font-bold">{penaltyCausesB.notReleasingBall}</span>
+                    </div>
+                  )}
+                  {penaltyCausesB.dangerousTackle && (
+                    <div className="flex justify-between bg-cyan-50 p-2 rounded">
+                      <span>Dangerous Tackle</span>
+                      <span className="font-bold">{penaltyCausesB.dangerousTackle}</span>
+                    </div>
+                  )}
+                  {penaltyCausesB.scrum && (
+                    <div className="flex justify-between bg-cyan-50 p-2 rounded">
+                      <span>Scrum</span>
+                      <span className="font-bold">{penaltyCausesB.scrum}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -534,12 +644,6 @@ const ScrumLineoutCard: React.FC<{
   );
 };
 
-// Try with metadata
-type TryScore = {
-  time: string;
-  hasConversion: boolean;
-};
-
 // Scoring card component
 const ScoringCard: React.FC<{
   teamA: string;
@@ -549,6 +653,26 @@ const ScoringCard: React.FC<{
   kicksAtGoalA: Array<{x: number; y: number; successful: boolean}>;
   kicksAtGoalB: Array<{x: number; y: number; successful: boolean}>;
 }> = ({ teamA, teamB, triesA, triesB, kicksAtGoalA, kicksAtGoalB }) => {
+  
+  // Calculate points properly accounting for penalties
+  const calculatePoints = (tries: TryScore[]) => {
+    let points = 0;
+    tries.forEach(t => {
+      if (t.isPenalty) {
+        // Penalty kicks are 3 points
+        points += 3;
+      } else {
+        // Regular tries are 5 points
+        points += 5;
+        // Add 2 points for conversions
+        if (t.hasConversion) points += 2;
+      }
+    });
+    return points;
+  };
+
+  const teamAPoints = calculatePoints(triesA);
+  const teamBPoints = calculatePoints(triesB);
   
   return (
     <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
@@ -562,7 +686,7 @@ const ScoringCard: React.FC<{
           <h3 className="font-bold text-blue-700 text-base md:text-lg mb-1">{teamA}</h3>
           <div className="bg-white rounded-lg p-4 shadow-sm">
             <div className="text-4xl font-bold text-blue-700">
-              {triesA.length * 5 + triesA.filter(t => t.hasConversion).length * 2}
+              {teamAPoints}
             </div>
             <div className="text-sm text-blue-600">Points</div>
           </div>
@@ -572,7 +696,7 @@ const ScoringCard: React.FC<{
           <h3 className="font-bold text-cyan-600 text-base md:text-lg mb-1">{teamB}</h3>
           <div className="bg-white rounded-lg p-4 shadow-sm">
             <div className="text-4xl font-bold text-cyan-600">
-              {triesB.length * 5 + triesB.filter(t => t.hasConversion).length * 2}
+              {teamBPoints}
             </div>
             <div className="text-sm text-cyan-600">Points</div>
           </div>
@@ -587,10 +711,14 @@ const ScoringCard: React.FC<{
             {triesA.map((tryScore, i) => (
               <div key={i} className="flex items-center p-2 rounded bg-blue-50">
                 <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold mr-3">
-                  T
+                  {tryScore.isPenalty ? "P" : "T"}
                 </div>
                 <div className="flex-1">
-                  {tryScore.hasConversion ? "Try + Conv" : "Try"}
+                  {tryScore.isPenalty 
+                    ? "Penalty" 
+                    : tryScore.hasConversion 
+                      ? "Try + Conv" 
+                      : "Try"}
                 </div>
                 <div className="font-mono text-sm">{tryScore.time}</div>
               </div>
@@ -607,10 +735,14 @@ const ScoringCard: React.FC<{
             {triesB.map((tryScore, i) => (
               <div key={i} className="flex items-center p-2 rounded bg-cyan-50">
                 <div className="w-7 h-7 rounded-full bg-cyan-500 text-white flex items-center justify-center text-xs font-bold mr-3">
-                  T
+                  {tryScore.isPenalty ? "P" : "T"}
                 </div>
                 <div className="flex-1">
-                  {tryScore.hasConversion ? "Try + Conv" : "Try"}
+                  {tryScore.isPenalty 
+                    ? "Penalty" 
+                    : tryScore.hasConversion 
+                      ? "Try + Conv" 
+                      : "Try"}
                 </div>
                 <div className="font-mono text-sm">{tryScore.time}</div>
               </div>
@@ -699,72 +831,309 @@ const ScoringCard: React.FC<{
   );
 };
 
+// Cards Card component
+const CardsCard: React.FC<{
+  teamA: string;
+  teamB: string;
+  cardsA?: { yellow: number; red: number };
+  cardsB?: { yellow: number; red: number };
+}> = ({ teamA, teamB, cardsA = { yellow: 0, red: 0 }, cardsB = { yellow: 0, red: 0 } }) => {
+  return (
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
+      <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-3 md:mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
+        Cards Conceded
+      </h2>
+
+      <div className="grid grid-cols-2 gap-4">
+        {/* Team A Cards */}
+        <div className="text-center">
+          <h3 className="font-bold text-blue-700 text-base md:text-lg mb-2">{teamA}</h3>
+          <div className="flex justify-center gap-4 mb-3">
+            {/* Yellow Cards */}
+            {cardsA.yellow > 0 && Array.from({ length: cardsA.yellow }).map((_, i) => (
+              <div key={`yellow-${i}`} className="w-10 h-14 md:w-12 md:h-16 bg-yellow-400 rounded-md shadow-md"></div>
+            ))}
+            {/* Red Cards */}
+            {cardsA.red > 0 && Array.from({ length: cardsA.red }).map((_, i) => (
+              <div key={`red-${i}`} className="w-10 h-14 md:w-12 md:h-16 bg-red-600 rounded-md shadow-md"></div>
+            ))}
+            {cardsA.yellow === 0 && cardsA.red === 0 && (
+              <div className="text-gray-500 italic">No cards</div>
+            )}
+          </div>
+        </div>
+
+        {/* Team B Cards */}
+        <div className="text-center">
+          <h3 className="font-bold text-cyan-600 text-base md:text-lg mb-2">{teamB}</h3>
+          <div className="flex justify-center gap-4 mb-3">
+            {/* Yellow Cards */}
+            {cardsB.yellow > 0 && Array.from({ length: cardsB.yellow }).map((_, i) => (
+              <div key={`yellow-${i}`} className="w-10 h-14 md:w-12 md:h-16 bg-yellow-400 rounded-md shadow-md"></div>
+            ))}
+            {/* Red Cards */}
+            {cardsB.red > 0 && Array.from({ length: cardsB.red }).map((_, i) => (
+              <div key={`red-${i}`} className="w-10 h-14 md:w-12 md:h-16 bg-red-600 rounded-md shadow-md"></div>
+            ))}
+            {cardsB.yellow === 0 && cardsB.red === 0 && (
+              <div className="text-gray-500 italic">No cards</div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Kicks Card component
+const KicksCard: React.FC<{
+  teamA: string;
+  teamB: string;
+  kicksA?: {
+    fromHand?: { total: number; reclaimed: number };
+    inField?: { total: number; reclaimed: number };
+    toTouch?: { total: number };
+    success?: { total: number; successful: number };
+  };
+  kicksB?: {
+    fromHand?: { total: number; reclaimed: number };
+    inField?: { total: number; reclaimed: number };
+    toTouch?: { total: number };
+    success?: { total: number; successful: number };
+  };
+}> = ({ 
+  teamA, 
+  teamB, 
+  kicksA = { fromHand: { total: 0, reclaimed: 0 }, inField: { total: 0, reclaimed: 0 }, toTouch: { total: 0 }, success: { total: 0, successful: 0 } }, 
+  kicksB = { fromHand: { total: 0, reclaimed: 0 }, inField: { total: 0, reclaimed: 0 }, toTouch: { total: 0 }, success: { total: 0, successful: 0 } } 
+}) => {
+  
+  // Helper for kick percentages
+  const formatPercentage = (num: number, denom: number) => {
+    if (!denom) return '0%';
+    return `${Math.round((num / denom) * 100)}%`;
+  };
+  
+  return (
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
+      <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-4 md:mb-6 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
+        Kicking Performance
+      </h2>
+      
+      <div className="space-y-6">
+        {/* Kicks from Hand */}
+        <div>
+          <h3 className="font-semibold text-center text-gray-700 mb-3">Kicks from Hand</h3>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-3 shadow-sm">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-blue-700">{kicksA.fromHand?.total || 0}</div>
+                <div className="text-sm text-blue-600">Total Kicks</div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {kicksA.fromHand?.reclaimed || 0} Reclaimed ({formatPercentage(kicksA.fromHand?.reclaimed || 0, kicksA.fromHand?.total || 1)})
+                </div>
+              </div>
+            </div>
+            <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-3 shadow-sm">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-cyan-700">{kicksB.fromHand?.total || 0}</div>
+                <div className="text-sm text-cyan-600">Total Kicks</div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {kicksB.fromHand?.reclaimed || 0} Reclaimed ({formatPercentage(kicksB.fromHand?.reclaimed || 0, kicksB.fromHand?.total || 1)})
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Kicks in Field */}
+        <div>
+          <h3 className="font-semibold text-center text-gray-700 mb-3">Kicks in Field</h3>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-3 shadow-sm">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-blue-700">{kicksA.inField?.total || 0}</div>
+                <div className="text-sm text-blue-600">Total Kicks</div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {kicksA.inField?.reclaimed || 0} Reclaimed ({formatPercentage(kicksA.inField?.reclaimed || 0, kicksA.inField?.total || 1)})
+                </div>
+              </div>
+            </div>
+            <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-3 shadow-sm">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-cyan-700">{kicksB.inField?.total || 0}</div>
+                <div className="text-sm text-cyan-600">Total Kicks</div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {kicksB.inField?.reclaimed || 0} Reclaimed ({formatPercentage(kicksB.inField?.reclaimed || 0, kicksB.inField?.total || 1)})
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Kicks to Touch */}
+        <div>
+          <h3 className="font-semibold text-center text-gray-700 mb-3">Kicks to Touch</h3>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-3 shadow-sm text-center">
+              <div className="text-3xl font-bold text-blue-700">{kicksA.toTouch?.total || 0}</div>
+              <div className="text-sm text-blue-600">Kicks</div>
+            </div>
+            <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-3 shadow-sm text-center">
+              <div className="text-3xl font-bold text-cyan-700">{kicksB.toTouch?.total || 0}</div>
+              <div className="text-sm text-cyan-600">Kicks</div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Kicking Success Rate */}
+        <div>
+          <h3 className="font-semibold text-center text-gray-700 mb-3">Kicking Success Rate</h3>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-3 shadow-sm">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-blue-700">{formatPercentage(kicksA.success?.successful || 0, kicksA.success?.total || 1)}</div>
+                <div className="text-sm text-blue-600">{kicksA.success?.successful || 0}/{kicksA.success?.total || 0} Successful</div>
+              </div>
+            </div>
+            <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-3 shadow-sm">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-cyan-700">{formatPercentage(kicksB.success?.successful || 0, kicksB.success?.total || 1)}</div>
+                <div className="text-sm text-cyan-600">{kicksB.success?.successful || 0}/{kicksB.success?.total || 0} Successful</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Mauls Card component
+const MaulsCard: React.FC<{
+  teamA: string;
+  teamB: string;
+  maulsA?: { total: number; won: number };
+  maulsB?: { total: number; won: number };
+}> = ({ teamA, teamB, maulsA = { total: 0, won: 0 }, maulsB = { total: 0, won: 0 } }) => {
+  
+  return (
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
+      <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-3 md:mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
+        Mauls
+      </h2>
+
+      <div className="grid grid-cols-2 gap-4">
+        {/* Team A Mauls */}
+        <div className="text-center">
+          <h3 className="font-bold text-blue-700 text-base md:text-lg mb-2">{teamA}</h3>
+          <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-3 shadow-sm">
+            {maulsA.total > 0 ? (
+              <>
+                <div className="text-2xl md:text-3xl font-bold text-blue-700">{maulsA.total}</div>
+                <div className="text-sm text-blue-600">Mauls</div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {maulsA.won} Won ({Math.round((maulsA.won / maulsA.total) * 100)}% Retained)
+                </div>
+              </>
+            ) : (
+              <div className="text-gray-500 italic py-2">No Mauls</div>
+            )}
+          </div>
+        </div>
+
+        {/* Team B Mauls */}
+        <div className="text-center">
+          <h3 className="font-bold text-cyan-600 text-base md:text-lg mb-2">{teamB}</h3>
+          <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-3 shadow-sm">
+            {maulsB.total > 0 ? (
+              <>
+                <div className="text-2xl md:text-3xl font-bold text-cyan-700">{maulsB.total}</div>
+                <div className="text-sm text-cyan-600">Mauls</div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {maulsB.won} Won ({Math.round((maulsB.won / maulsB.total) * 100)}% Retained)
+                </div>
+              </>
+            ) : (
+              <div className="text-gray-500 italic py-2">No Mauls</div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const BoxScore: React.FC<BoxScoreProps> = ({
   matchInfo,
   teamASummary,
   teamBSummary,
+  tryDataA,
+  tryDataB,
+  kickDataA,
+  kickDataB
 }) => {
   const cleanTeamA = cleanTeamName(matchInfo.teamA);
   const cleanTeamB = cleanTeamName(matchInfo.teamB);
   const isMobile = useIsMobile();
 
-  // Calculate total points
-  const teamAConv = parseConversions(teamASummary.totalConversions);
-  const teamBConv = parseConversions(teamBSummary.totalConversions);
-  const teamAPoints = teamASummary.totalTries * 5 + teamAConv.conversions * 2 + teamAConv.penalties * 3;
-  const teamBPoints = teamBSummary.totalTries * 5 + teamBConv.conversions * 2 + teamBConv.penalties * 3;
+  // Calculate total points accounting for penalties properly
+  const calculateTeamPoints = (triesData: TryScore[] | undefined) => {
+    if (!triesData) return 0;
+    
+    let points = 0;
+    
+    // Count points from try data
+    triesData.forEach(t => {
+      if (t.isPenalty) {
+        // Penalty kicks are 3 points
+        points += 3;
+      } else {
+        // Regular tries are 5 points
+        points += 5;
+        // Add 2 points for conversions
+        if (t.hasConversion) points += 2;
+      }
+    });
+    
+    return points;
+  };
+  
+  // Use try data for calculating points
+  const teamAPoints = calculateTeamPoints(tryDataA);
+  const teamBPoints = calculateTeamPoints(tryDataB);
 
   // Default possession values if not provided
   const possessionA = teamASummary.possession || 50;
   const possessionB = teamBSummary.possession || 50;
   
-  // Mock penalty data for visualization (would come from props in real usage)
+  // Use actual penalty data from summary or fall back to default values
   const penaltiesA = teamASummary.penaltiesConceded || 5;
   const penaltiesB = teamBSummary.penaltiesConceded || 12;
-  const attackingPenaltiesA = 4;
-  const attackingPenaltiesB = 7;
-  const defensivePenaltiesA = 1;
-  const defensivePenaltiesB = 4;
+  const attackingPenaltiesA = Math.floor(penaltiesA * 0.75);
+  const attackingPenaltiesB = Math.floor(penaltiesB * 0.7);
+  const defensivePenaltiesA = Math.floor(penaltiesA * 0.25);
+  const defensivePenaltiesB = Math.floor(penaltiesB * 0.3);
   const scrumPenaltiesA = 0;
-  const scrumPenaltiesB = 0;
+  const scrumPenaltiesB = 1;
 
-  // Mock data for visualization (would come from props in real usage)
-  const scrumsA = { total: 7, won: 7 };
-  const scrumsB = { total: 11, won: 9 }; 
-  const lineoutsA = { total: 9, won: 4 };
-  const lineoutsB = { total: 2, won: 1 };
-  const turnoversA = 5;
-  const turnoversB = 10;
-  const knockOnsA = 11;
-  const knockOnsB = 6;
+  // Use actual scrum, lineout, turnovers and knock on data or fall back to default values
+  const scrumsA = teamASummary.scrums || { total: 7, won: 7 };
+  const scrumsB = teamBSummary.scrums || { total: 11, won: 9 }; 
+  const lineoutsA = teamASummary.lineouts || { total: 9, won: 4 };
+  const lineoutsB = teamBSummary.lineouts || { total: 2, won: 1 };
+  const turnoversA = teamASummary.turnovers || 5;
+  const turnoversB = teamBSummary.turnovers || 10;
+  const knockOnsA = teamASummary.knockOns || 11;
+  const knockOnsB = teamBSummary.knockOns || 6;
 
-  // Mock try data for visualization (would come from props in real usage)
-  const triesA = [
-    { time: "08:52", hasConversion: true },
-    { time: "17:15", hasConversion: false },
-    { time: "26:15", hasConversion: false },
-    { time: "29:17", hasConversion: false },
-    { time: "56:02", hasConversion: true },
-    { time: "60:54", hasConversion: true },
-    { time: "70:47", hasConversion: false },
-  ];
+  // Use the actual try data from props or fall back to empty array
+  const triesA = tryDataA || [];
+  const triesB = tryDataB || [];
   
-  const triesB = [
-    { time: "40:04", hasConversion: false },
-    { time: "72:47", hasConversion: false },
-  ];
-  
-  // Mock kicks data for visualization (coordinates in percentage of field: x and y between 0-1)
-  const kicksAtGoalA = [
-    { x: 0.3, y: 0.7, successful: false },
-    { x: 0.7, y: 0.6, successful: false },
-    { x: 0.5, y: 0.3, successful: true },
-  ];
-  
-  const kicksAtGoalB = [
-    { x: 0.7, y: 0.4, successful: false },
-    { x: 0.3, y: 0.5, successful: false },
-  ];
+  // Use the actual kick data from props or fall back to empty array
+  const kicksAtGoalA = kickDataA || [];
+  const kicksAtGoalB = kickDataB || [];
 
   return (
     <div className="relative text-scrummy-navyBlue min-h-screen pb-12">
@@ -865,18 +1234,44 @@ const BoxScore: React.FC<BoxScoreProps> = ({
               kicksAtGoalB={kicksAtGoalB}
             />
             
+            {/* Cards Card - New */}
+            <CardsCard
+              teamA={cleanTeamA}
+              teamB={cleanTeamB}
+              cardsA={teamASummary.cards}
+              cardsB={teamBSummary.cards}
+            />
+            
+            {/* Kicks Card - New */}
+            <KicksCard
+              teamA={cleanTeamA}
+              teamB={cleanTeamB}
+              kicksA={teamASummary.kicks}
+              kicksB={teamBSummary.kicks}
+            />
+            
+            {/* Mauls Card - New */}
+            <MaulsCard
+              teamA={cleanTeamA}
+              teamB={cleanTeamB}
+              maulsA={teamASummary.mauls}
+              maulsB={teamBSummary.mauls}
+            />
+            
             {/* Penalties Card */}
             <PenaltiesCard
               teamA={cleanTeamA}
               teamB={cleanTeamB}
               penaltiesA={penaltiesA}
               penaltiesB={penaltiesB}
-              attackingPenaltiesA={attackingPenaltiesA}
-              attackingPenaltiesB={attackingPenaltiesB}
-              defensivePenaltiesA={defensivePenaltiesA}
-              defensivePenaltiesB={defensivePenaltiesB}
-              scrumPenaltiesA={scrumPenaltiesA}
-              scrumPenaltiesB={scrumPenaltiesB}
+              attackingPenaltiesA={teamASummary.attackingPenalties}
+              attackingPenaltiesB={teamBSummary.attackingPenalties}
+              defensivePenaltiesA={teamASummary.defensivePenalties}
+              defensivePenaltiesB={teamBSummary.defensivePenalties}
+              scrumPenaltiesA={teamASummary.scrumPenalties}
+              scrumPenaltiesB={teamBSummary.scrumPenalties}
+              penaltyCausesA={teamASummary.penaltyCauses}
+              penaltyCausesB={teamBSummary.penaltyCauses}
             />
             
             {/* Scrum & Lineout Card */}
