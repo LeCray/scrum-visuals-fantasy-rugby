@@ -1064,6 +1064,23 @@ const MaulsCard: React.FC<{
   );
 };
 
+// Helper to count tries, conversions, and penalty kicks from try data
+function getTryStats(tryData: TryScore[] | undefined) {
+  let tries = 0;
+  let conversions = 0;
+  let penalties = 0;
+  if (!tryData) return { tries, conversions, penalties };
+  for (const t of tryData) {
+    if (t.isPenalty) {
+      penalties++;
+    } else {
+      tries++;
+      if (t.hasConversion) conversions++;
+    }
+  }
+  return { tries, conversions, penalties };
+}
+
 const BoxScore: React.FC<BoxScoreProps> = ({
   matchInfo,
   teamASummary,
@@ -1134,6 +1151,10 @@ const BoxScore: React.FC<BoxScoreProps> = ({
   // Use the actual kick data from props or fall back to empty array
   const kicksAtGoalA = kickDataA || [];
   const kicksAtGoalB = kickDataB || [];
+
+  // Calculate try stats
+  const tryStatsA = getTryStats(tryDataA);
+  const tryStatsB = getTryStats(tryDataB);
 
   return (
     <div className="relative text-scrummy-navyBlue min-h-screen pb-12">
@@ -1306,13 +1327,18 @@ const BoxScore: React.FC<BoxScoreProps> = ({
                     <tbody>
                       <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
                         <td className="p-2 md:p-3 font-medium text-xs md:text-base">Total Tries</td>
-                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamASummary.totalTries}</td>
-                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamBSummary.totalTries}</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{tryStatsA.tries}</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{tryStatsB.tries}</td>
                       </tr>
                       <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
                         <td className="p-2 md:p-3 font-medium text-xs md:text-base">Total Conversions</td>
-                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamASummary.totalConversions}</td>
-                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamBSummary.totalConversions}</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{tryStatsA.conversions}</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{tryStatsB.conversions}</td>
+                      </tr>
+                      <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
+                        <td className="p-2 md:p-3 font-medium text-xs md:text-base">Penalty Kicks</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{tryStatsA.penalties}</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{tryStatsB.penalties}</td>
                       </tr>
                       <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
                         <td className="p-2 md:p-3 font-medium text-xs md:text-base">Lineout Accuracy</td>

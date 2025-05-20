@@ -727,6 +727,96 @@ boxScores.set(
   stJohnsVsStAndrews
 );
 
+// Lomagundi vs Watershed (example data)
+const lomagundiVsWatershed: BoxScoreData = {
+  matchInfo: {
+    teamA: "LOMAGUNDI 1XV",
+    teamB: "WATERSHED 1XV",
+    venue: "Lomagundi College, Chinhoyi",
+    date: "May 10th, 2025",
+    kickoff: "14:00",
+    weather: "Sunny, 27°C",
+  },
+  teamAPlayers: [
+    { name: "M. Mhaka", position: "15", tries: 1, kicks: "1/1 C", lineouts: "2/2", penaltiesWon: 1, penaltiesConceded: 0 },
+    { name: "T. Marais", position: "14", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "L. Kawadza", position: "13", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 1, penaltiesConceded: 0 },
+    { name: "K. Makunike", position: "12", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "N. Chibaya", position: "11", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "L. Makore", position: "10", tries: 0, kicks: "2/3 PK", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "B. Nyika", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 1, penaltiesConceded: 0 },
+    { name: "T. Mugabe", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+  ],
+  teamBPlayers: [
+    { name: "T. Makombe", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "K. Nyamushita", position: "14", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Z. Chaita", position: "13", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "F. Wilson", position: "12", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "S. Gurupira", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "E. Mandizvidza", position: "10", tries: 0, kicks: "1/2 C, 1/1 PK", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "R. Tshuma", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 1 },
+    { name: "A. Majoni", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 1, penaltiesConceded: 0 },
+  ],
+  teamASummary: {
+    totalTries: 3,
+    totalConversions: "1/1 C, 2/3 PK",
+    lineoutAccuracy: "2/2 (100%)",
+    penaltiesWon: 3,
+    penaltiesConceded: 2,
+    possession: 55,
+    scrums: { total: 6, won: 5 },
+    lineouts: { total: 4, won: 3 },
+    turnovers: 4,
+    knockOns: 3,
+    cards: { yellow: 0, red: 0 },
+    mauls: { total: 1, won: 1 },
+    kicks: {
+      fromHand: { total: 6, reclaimed: 2 },
+      inField: { total: 3, reclaimed: 1 },
+      toTouch: { total: 2 },
+      dropOuts: { total: 1, reclaimed: 1 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 3, successful: 2 }
+    },
+    attackingPenalties: 2,
+    defensivePenalties: 1,
+    scrumPenalties: 0
+  },
+  teamBSummary: {
+    totalTries: 1,
+    totalConversions: "1/2 C, 1/1 PK",
+    lineoutAccuracy: "1/2 (50%)",
+    penaltiesWon: 1,
+    penaltiesConceded: 3,
+    possession: 45,
+    scrums: { total: 5, won: 4 },
+    lineouts: { total: 2, won: 1 },
+    turnovers: 5,
+    knockOns: 4,
+    cards: { yellow: 1, red: 0 },
+    mauls: { total: 0, won: 0 },
+    kicks: {
+      fromHand: { total: 5, reclaimed: 1 },
+      inField: { total: 2, reclaimed: 0 },
+      toTouch: { total: 1 },
+      dropOuts: { total: 0, reclaimed: 0 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 2, successful: 1 }
+    },
+    attackingPenalties: 1,
+    defensivePenalties: 2,
+    scrumPenalties: 1
+  }
+};
+
+// Add to boxScores map
+boxScores.set(
+  generateMatchId("May 10th", "14:00", "LOMAGUNDI 1XV", "WATERSHED 1XV"),
+  lomagundiVsWatershed
+);
+
 // Function to get box score by match details
 export const getBoxScore = (date: string, time: string, teamA: string, teamB: string) => {
   const matchId = generateMatchId(date, time, teamA, teamB);
@@ -1074,7 +1164,7 @@ const watershedVsHellenic: BoxScoreData = {
     teamA: "HELLENIC",
     teamB: "WATERSHED",
     venue: "Hellenic Academy, Harare",
-    date: "May 17th, 2025",
+    date: "Week 1",
     kickoff: "14:00",
     weather: "Sunny, 25°C",
   },
