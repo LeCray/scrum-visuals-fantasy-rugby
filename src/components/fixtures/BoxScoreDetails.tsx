@@ -1,11 +1,28 @@
 import React from 'react';
-import { BoxScoreData } from '../../lib/boxScoreData';
+import { BoxScoreData } from '../../lib/types';
 
 type BoxScoreDetailsProps = {
   boxScore: BoxScoreData;
+  isLoading?: boolean;
 };
 
-const BoxScoreDetails: React.FC<BoxScoreDetailsProps> = ({ boxScore }) => {
+const BoxScoreDetails: React.FC<BoxScoreDetailsProps> = ({ boxScore, isLoading = false }) => {
+  if (isLoading) {
+    return (
+      <div className="p-8 text-center">
+        <p className="text-gold-500">Loading box score data...</p>
+      </div>
+    );
+  }
+  
+  if (!boxScore) {
+    return (
+      <div className="p-8 text-center">
+        <p className="text-white">No box score data available for this match.</p>
+      </div>
+    );
+  }
+
   const { matchInfo, teamAPlayers, teamBPlayers, teamASummary, teamBSummary } = boxScore;
 
   const PlayerStats: React.FC<{ players: typeof teamAPlayers; teamName: string }> = ({ players, teamName }) => (
