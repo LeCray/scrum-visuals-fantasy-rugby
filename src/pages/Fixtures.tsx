@@ -247,11 +247,11 @@ const sbr2025Games: FixtureDay[] = [
     day: "24 May",
     month: "May",
     fixtures: [
-      { time: "TBD", teamA: "PRINCE EDWARD", teamB: "CHURCHILL" },
-      { time: "TBD", teamA: "ST GEORGES", teamB: "ST JOHNS" },
-      { time: "TBD", teamA: "HELLENIC", teamB: "VALE" },
+      { time: "12:30", teamA: "WATERSHED", teamB: "HILLCREST" },
+      { time: "15:00", teamA: "HELLENIC", teamB: "EAGLESVALE" },
+      { time: "15:30", teamA: "PRINCE EDWARD", teamB: "CHURCHILL" },
+      { time: "15:30", teamA: "ST GEORGES", teamB: "ST JOHNS" },
       { time: "TBD", teamA: "GATEWAY", teamB: "HERITAGE" },
-      { time: "TBD", teamA: "WATERSHED", teamB: "HILLCREST" },
       { time: "TBD", teamA: "PETERHOUSE", teamB: "LOMAGUNDI" },
       { time: "TBD", teamA: "FALCON", teamB: "CBC" }
     ]
