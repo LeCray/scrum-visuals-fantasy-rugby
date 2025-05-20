@@ -1,0 +1,164 @@
+{
+  "april-28th-13-00-milton-1xv-wise-owl-1xv": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "MILTON 1XV",
+      "teamB": "WISE OWL 1XV",
+      "date": "April 28th",
+      "time": "13:00"
+    }
+  },
+  "april-28th-15-40-rydings-1xv-heritage-1xv": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "RYDINGS 1XV",
+      "teamB": "HERITAGE 1XV",
+      "date": "April 28th",
+      "time": "15:40"
+    }
+  },
+  "april-29th-14-20-lomagundi-1xv-st-albans-1xv": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "LOMAGUNDI 1XV",
+      "teamB": "ST ALBANS 1XV",
+      "date": "April 29th",
+      "time": "14:20"
+    }
+  },
+  "april-29th-15-40-st-george-s-1xv-st-andrew-s-1xv": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "ST GEORGE'S 1XV",
+      "teamB": "ST ANDREW'S 1XV",
+      "date": "April 29th",
+      "time": "15:40"
+    }
+  },
+  "april-30th-13-00-goldridge-1xv-hillcrest-1xv": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "GOLDRIDGE 1XV",
+      "teamB": "HILLCREST 1XV",
+      "date": "April 30th",
+      "time": "13:00"
+    }
+  },
+  "april-30th-15-40-watershed-1xv-gateway-1xv": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "WATERSHED 1XV",
+      "teamB": "GATEWAY 1XV",
+      "date": "April 30th",
+      "time": "15:40"
+    }
+  },
+  "may-1st-13-20-peterhouse-1xv-st-andrew-s-1xv": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "PETERHOUSE 1XV",
+      "teamB": "ST ANDREW'S 1XV",
+      "date": "May 1st",
+      "time": "13:20"
+    }
+  },
+  "may-1st-15-00-falcon-1xv-eagles-1xv": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "FALCON 1XV",
+      "teamB": "EAGLES 1XV",
+      "date": "May 1st",
+      "time": "15:00"
+    }
+  },
+  "may-2nd-13-00-churchill-1xv-plumtree-1xv": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "CHURCHILL 1XV",
+      "teamB": "PLUMTREE 1XV",
+      "date": "May 2nd",
+      "time": "13:00"
+    }
+  },
+  "may-2nd-15-00-prince-edward-1xv-st-john-s-1xv": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "PRINCE EDWARD 1XV",
+      "teamB": "ST JOHN'S 1XV",
+      "date": "May 2nd",
+      "time": "15:00"
+    }
+  },
+  "may-1st-16-00-zam-steelers-sharks-academy": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "ZAM STEELERS",
+      "teamB": "SHARKS ACADEMY",
+      "date": "May 1st",
+      "time": "16:00"
+    }
+  },
+  "may-3rd-10-20-cbc-1xv-peterhouse-1xv": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "CBC 1XV",
+      "teamB": "PETERHOUSE 1XV",
+      "date": "May 3rd",
+      "time": "10:20"
+    }
+  },
+  "may-3rd-11-40-prince-edward-1xv-churchill-1xv": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "PRINCE EDWARD 1XV",
+      "teamB": "CHURCHILL 1XV",
+      "date": "May 3rd",
+      "time": "11:40"
+    }
+  },
+  "may-3rd-14-20-falcon-1xv-st-albans-1xv": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "FALCON 1XV",
+      "teamB": "ST ALBANS 1XV",
+      "date": "May 3rd",
+      "time": "14:20"
+    }
+  },
+  "may-3rd-15-40-st-john-s-1xv-st-andrew-s-1xv": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "ST JOHN'S 1XV",
+      "teamB": "ST ANDREW'S 1XV",
+      "date": "May 3rd",
+      "time": "15:40"
+    }
+  },
+  "may-10th-14-00-lomagundi-1xv-watershed-1xv": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "LOMAGUNDI 1XV",
+      "teamB": "WATERSHED 1XV",
+      "date": "May 10th",
+      "time": "14:00"
+    }
+  },
+  "week-1-14-00-hellenic-watershed": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "HELLENIC",
+      "teamB": "WATERSHED",
+      "date": "Week 1",
+      "time": "14:00"
+    }
+  },
+  "week-1-15-15-lomagundi-falcon": {
+    "note": "Data would be extracted here from variable: exampleBoxScore",
+    "matchInfo": {
+      "teamA": "LOMAGUNDI",
+      "teamB": "FALCON",
+      "date": "Week 1",
+      "time": "15:15"
+    }
+  }
+}

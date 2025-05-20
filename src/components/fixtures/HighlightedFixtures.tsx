@@ -1,115 +1,7 @@
-import React from 'react';
-import { boxScores, getBoxScore } from '../../lib/boxScoreData';
+import React, { useState, useEffect } from 'react';
+import { getBoxScore, getHighlightedFixtures } from '../../lib/dataService';
 import { useIsMobile } from '@/hooks/use-mobile';
-
-// Type for highlighted fixture data
-export type HighlightedFixture = {
-  date: string;
-  time: string;
-  teamA: string;
-  teamB: string;
-  venue: string;
-};
-
-// List of all highlighted fixtures
-export const highlightedFixtures: HighlightedFixture[] = [
-  {
-    date: "April 28th",
-    time: "13:00",
-    teamA: "MILTON 1XV",
-    teamB: "WISE OWL 1XV",
-    venue: "St John's College",
-  },
-  {
-    date: "April 28th",
-    time: "15:40",
-    teamA: "RYDINGS 1XV",
-    teamB: "HERITAGE 1XV",
-    venue: "St John's College",
-  },
-  {
-    date: "April 29th",
-    time: "14:20",
-    teamA: "LOMAGUNDI 1XV",
-    teamB: "ST ALBANS 1XV",
-    venue: "St John's College",
-  },
-  {
-    date: "April 29th",
-    time: "15:40",
-    teamA: "ST GEORGE'S 1XV",
-    teamB: "ST ANDREW'S 1XV",
-    venue: "St John's College",
-  },
-  {
-    date: "April 30th",
-    time: "13:00",
-    teamA: "GOLDRIDGE 1XV",
-    teamB: "HILLCREST 1XV",
-    venue: "St John's College",
-  },
-  {
-    date: "April 30th",
-    time: "15:40",
-    teamA: "WATERSHED 1XV",
-    teamB: "GATEWAY 1XV",
-    venue: "St John's College",
-  },
-  {
-    date: "May 1st",
-    time: "13:20",
-    teamA: "PETERHOUSE 1XV",
-    teamB: "ST ANDREW'S 1XV",
-    venue: "St John's College",
-  },
-  {
-    date: "May 1st",
-    time: "16:00",
-    teamA: "ZAM STEELERS",
-    teamB: "SHARKS ACADEMY",
-    venue: "St John's College",
-  },
-  {
-    date: "May 3rd",
-    time: "10:20",
-    teamA: "CBC 1XV",
-    teamB: "PETERHOUSE 1XV",
-    venue: "St John's College",
-  },
-  {
-    date: "May 3rd",
-    time: "11:40",
-    teamA: "PRINCE EDWARD 1XV",
-    teamB: "CHURCHILL 1XV",
-    venue: "St John's College",
-  },
-  {
-    date: "May 3rd",
-    time: "14:20",
-    teamA: "FALCON 1XV",
-    teamB: "ST ALBANS 1XV",
-    venue: "St John's College",
-  },
-  {
-    date: "May 3rd",
-    time: "15:40",
-    teamA: "ST JOHN'S 1XV",
-    teamB: "ST ANDREW'S 1XV",
-    venue: "St John's College",
-  },
-  {
-    date: "Week 1",
-    time: "14:00",
-    teamA: "WATERSHED",
-    teamB: "HELLENIC",
-    venue: "Hellenic Academy, Harare",
-  },
-];
-
-// Update the HighlightedFixtureCard component props
-type HighlightedFixtureCardProps = HighlightedFixture & {
-  onClick: (fixture: HighlightedFixture) => void;
-};
+import { HighlightedFixture } from '../../lib/types';
 
 // Helper to parse conversions and penalty kicks from summary string
 function parseConversions(conversionStr: string) {
@@ -141,6 +33,11 @@ function parseConversions(conversionStr: string) {
   return { conversions, penalties };
 }
 
+// Update the HighlightedFixtureCard component props
+type HighlightedFixtureCardProps = HighlightedFixture & {
+  onClick: (fixture: HighlightedFixture) => void;
+};
+
 // Update the HighlightedFixtureCard component
 export const HighlightedFixtureCard: React.FC<HighlightedFixtureCardProps> = ({
   date,
@@ -151,19 +48,32 @@ export const HighlightedFixtureCard: React.FC<HighlightedFixtureCardProps> = ({
   onClick,
 }) => {
   const isMobile = useIsMobile();
+  const [score, setScore] = useState<string>("0 - 0");
+  const [loading, setLoading] = useState<boolean>(true);
   
-  // Get the box score for this fixture
-  const boxScore = getBoxScore(date, time, teamA, teamB);
-
-  // Calculate the score if boxScore exists
-  let scoreDisplay = "0 - 0";
-  if (boxScore) {
-    const teamAConv = parseConversions(boxScore.teamASummary.totalConversions);
-    const teamBConv = parseConversions(boxScore.teamBSummary.totalConversions);
-    const teamApoints = boxScore.teamASummary.totalTries * 5 + teamAConv.conversions * 2 + teamAConv.penalties * 3;
-    const teamBpoints = boxScore.teamBSummary.totalTries * 5 + teamBConv.conversions * 2 + teamBConv.penalties * 3;
-    scoreDisplay = `${teamApoints} - ${teamBpoints}`;
-  }
+  useEffect(() => {
+    async function loadBoxScore() {
+      setLoading(true);
+      try {
+        const boxScore = await getBoxScore(date, time, teamA, teamB);
+        
+        // Calculate the score if boxScore exists
+        if (boxScore) {
+          const teamAConv = parseConversions(boxScore.teamASummary.totalConversions);
+          const teamBConv = parseConversions(boxScore.teamBSummary.totalConversions);
+          const teamApoints = boxScore.teamASummary.totalTries * 5 + teamAConv.conversions * 2 + teamAConv.penalties * 3;
+          const teamBpoints = boxScore.teamBSummary.totalTries * 5 + teamBConv.conversions * 2 + teamBConv.penalties * 3;
+          setScore(`${teamApoints} - ${teamBpoints}`);
+        }
+      } catch (error) {
+        console.error("Error loading box score:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    loadBoxScore();
+  }, [date, time, teamA, teamB]);
 
   return (
     <div 
@@ -181,7 +91,10 @@ export const HighlightedFixtureCard: React.FC<HighlightedFixtureCardProps> = ({
       </div>
       <div className="mt-2 text-sm text-gray-300 text-center">{venue}</div>
       <div className="mt-3 text-xl font-orbitron text-gold-500 text-center">
-        {scoreDisplay}
+        {loading ? 
+          <span className="text-sm text-gray-400">Loading...</span> : 
+          score
+        }
       </div>
     </div>
   );
@@ -195,17 +108,41 @@ type HighlightedFixturesProps = {
 // Update the main component
 const HighlightedFixtures: React.FC<HighlightedFixturesProps> = ({ onFixtureClick }) => {
   const isMobile = useIsMobile();
+  const [fixtures, setFixtures] = useState<HighlightedFixture[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    async function loadFixtures() {
+      setLoading(true);
+      try {
+        const data = await getHighlightedFixtures();
+        setFixtures(data);
+      } catch (error) {
+        console.error("Error loading fixtures:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    loadFixtures();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="p-8 text-center">
+        <p className="text-gold-500">Loading fixtures...</p>
+      </div>
+    );
+  }
 
   return (
     <div className={`grid gap-4 p-4 ${
-      isMobile 
-        ? 'grid-cols-1' 
-        : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+      isMobile ? 'grid-cols-1' : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
     }`}>
-      {highlightedFixtures.map((fixture, index) => (
+      {fixtures.map((fixture, index) => (
         <HighlightedFixtureCard 
-          key={index} 
-          {...fixture} 
+          key={index}
+          {...fixture}
           onClick={onFixtureClick}
         />
       ))}
