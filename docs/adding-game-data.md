@@ -150,6 +150,55 @@ const matchId = generateMatchId("May 10th", "14:00", "TEAM A NAME", "TEAM B NAME
 boxScores.set(matchId, teamAvsTeamB);
 ```
 
+## 4. Understanding Tab Filtering
+
+The application uses tabs to organize fixtures by competition or category. There are four main tabs:
+
+1. **CBZ Schools Rugby** (key: "sbr2025")
+2. **SA Schools Rugby** (key: "sa_schools")
+3. **Zim Sables Games** (key: "zim")
+4. **Derby Day** (key: "derby")
+
+### A. How to Add a Fixture to a Specific Tab
+
+When adding a new fixture, you need to add it to the correct fixture array in `src/pages/Fixtures.tsx` based on which tab it should appear under:
+
+- For **CBZ Schools Rugby** tab: Add to `sbr2025Games` array
+- For **SA Schools Rugby** tab: Add to `saSchoolsRugby` array
+- For **Zim Sables Games** tab: Add to `zimSablesGames` array
+- For **Derby Day** tab: Add to `derbyDay` array
+
+Example for adding to CBZ Schools Rugby (sbr2025Games):
+
+```javascript
+const sbr2025Games: FixtureDay[] = [
+  // ... existing weeks
+  {
+    date: "Week 11", // Use the appropriate week number
+    day: "09 Aug",   // Day and date
+    month: "August", // Month (important for filtering)
+    fixtures: [
+      { time: "14:00", teamA: "TEAM A NAME", teamB: "TEAM B NAME", location: "Venue Location" },
+      // Add more fixtures for this week as needed
+    ]
+  }
+];
+```
+
+### B. Filters Within Tabs
+
+Each tab has specific filtering capabilities:
+
+1. **CBZ Schools Rugby** and **SA Schools Rugby** tabs can be filtered by:
+   - **Month**: Users can select a specific month to view only those fixtures
+   - **Team Search**: Users can search for fixtures involving a specific team
+
+2. **Derby Day** and **Zim Sables Games** tabs show all fixtures in those categories without additional filtering.
+
+### C. Highlighting Games Across Tabs
+
+The highlighted games (with yellow borders) can come from any tab. The key is to add the game to the `highlightedGames` array as described in section 1B. This allows these games to have detailed statistics accessed by clicking on them.
+
 ## Important Notes
 
 1. **Match IDs**: Always use the `generateMatchId` function to create consistent match IDs
@@ -164,8 +213,9 @@ boxScores.set(matchId, teamAvsTeamB);
 
 Here's a complete example showing all the changes needed to add a new game:
 
-1. Add to `fixtures.json`
-2. Add to highlighted games list in `Fixtures.tsx`
-3. Create boxscore data in `boxScoreData.ts`
-4. Add to boxScores Map
-5. (Optional) Add to finalScores Map if you want to display the score without detailed boxscore data 
+1. Add to the appropriate fixtures array in `Fixtures.tsx` based on which tab it should appear under
+2. Add to `fixtures.json` to make it a highlighted fixture
+3. Add to highlightedGames list in `Fixtures.tsx` to show the yellow border
+4. Create boxscore data in `boxScoreData.ts`
+5. Add to boxScores Map
+6. (Optional) Add to finalScores Map if you want to display the score without detailed boxscore data 
