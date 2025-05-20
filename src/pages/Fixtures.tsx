@@ -247,13 +247,14 @@ const sbr2025Games: FixtureDay[] = [
     day: "24 May",
     month: "May",
     fixtures: [
-      { time: "12:30", teamA: "WATERSHED", teamB: "HILLCREST" },
-      { time: "15:00", teamA: "HELLENIC", teamB: "EAGLESVALE" },
-      { time: "15:30", teamA: "PRINCE EDWARD", teamB: "CHURCHILL" },
-      { time: "15:30", teamA: "ST GEORGES", teamB: "ST JOHNS" },
-      { time: "TBD", teamA: "GATEWAY", teamB: "HERITAGE" },
-      { time: "TBD", teamA: "PETERHOUSE", teamB: "LOMAGUNDI" },
-      { time: "TBD", teamA: "FALCON", teamB: "CBC" }
+      { time: "11:30", teamA: "GATEWAY", teamB: "HERITAGE" },
+      { time: "12:30", teamA: "WATERSHED", teamB: "HILLCREST", location: "Watershed College, Marondera" },
+      { time: "15:00", teamA: "HELLENIC", teamB: "EAGLESVALE", location: "Eaglesvale, Harare" },
+      { time: "15:30", teamA: "PRINCE EDWARD", teamB: "CHURCHILL", location: 
+        "Prince Edward, Harare" },
+      { time: "15:30", teamA: "ST GEORGES", teamB: "ST JOHNS", location: "St George's College, Harare" },
+      { time: "15:30", teamA: "FALCON", teamB: "CBC" },
+      { time: "TBD", teamA: "PETERHOUSE", teamB: "LOMAGUNDI" }
     ]
   },
   {
