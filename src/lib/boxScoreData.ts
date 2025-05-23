@@ -1121,7 +1121,7 @@ finalScores.set(
 
 finalScores.set(
   generateMatchId("Week 1", "14:00", "PETERHOUSE", "CBC"),
-  { teamAScore: 57, teamBScore: 5 }
+  { teamAScore: 37, teamBScore: 7 }
 );
 
 finalScores.set(
