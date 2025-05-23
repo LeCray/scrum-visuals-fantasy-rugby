@@ -288,7 +288,7 @@ const sbr2025Games: FixtureDay[] = [
     month: "June",
     fixtures: [
       { time: "TBD", teamA: "LOMAGUNDI", teamB: "CHURCHILL" },
-      { time: "TBD", teamA: "PRINCE EDWARD", teamB: "VALE" },
+      { time: "TBD", teamA: "PRINCE EDWARD", teamB: "EAGLESVALE" },
       { time: "TBD", teamA: "ST GEORGES", teamB: "CBC" },
       { time: "TBD", teamA: "ST JOHNS", teamB: "FALCON" },
       { time: "TBD", teamA: "HERITAGE", teamB: "WATERSHED" },
@@ -304,7 +304,7 @@ const sbr2025Games: FixtureDay[] = [
     fixtures: [
       { time: "TBD", teamA: "PH 7s", teamB: "" },
       { time: "TBD", teamA: "ALLAN WILSON", teamB: "CHURCHILL" },
-      { time: "TBD", teamA: "WATERSHED", teamB: "VALE" },
+      { time: "TBD", teamA: "WATERSHED", teamB: "EAGLESVALE" },
       { time: "TBD", teamA: "HERITAGE", teamB: "WISE OWL" }
     ]
   },
@@ -327,7 +327,7 @@ const sbr2025Games: FixtureDay[] = [
       { time: "TBD", teamA: "ST GEORGES", teamB: "PRINCE EDWARD" },
       { time: "TBD", teamA: "ST JOHNS", teamB: "PH" },
       { time: "TBD", teamA: "ALLAN WILSON", teamB: "MILTON" },
-      { time: "TBD", teamA: "VALE", teamB: "GATEWAY" },
+      { time: "TBD", teamA: "EAGLESVALE", teamB: "GATEWAY" },
       { time: "TBD", teamA: "HELLENIC", teamB: "LOMAGUNDI" },
       { time: "TBD", teamA: "ST IGNATIUS", teamB: "GOROMONZI" }
     ]
@@ -423,7 +423,6 @@ const teamLogoMap: Record<string, string> = {
   "GATEWAY": "/assets/Gateway.png",
   "HILLCREST": "/assets/Hillcrest.png",
   "HELLENIC": "/assets/Hellenic.png",
-  "VALE": "/assets/logo.png",
   "HERITAGE": "/assets/Heritage.png",
   "ALLAN WILSON": "/assets/Allan Wilson.png",
   "CRENBORNE": "/assets/logo.png",
