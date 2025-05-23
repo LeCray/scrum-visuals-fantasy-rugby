@@ -340,7 +340,7 @@ const sbr2025Games: FixtureDay[] = [
       { time: "TBD", teamA: "CHURCHILL", teamB: "PRINCE EDWARD" },
       { time: "TBD", teamA: "ST JOHNS", teamB: "ST GEORGES" },
       { time: "TBD", teamA: "ALLAN WILSON", teamB: "ST IGNATIUS" },
-      { time: "TBD", teamA: "GATEWAY", teamB: "RIPPLES" }
+      { time: "TBD", teamA: "GATEWAY", teamB: "RYDINGS" }
     ]
   },
   {
@@ -429,17 +429,16 @@ const teamLogoMap: Record<string, string> = {
   "MILTON": "/assets/Milton.png",
   "PH": "/assets/Peterhouse.png",
   "PH 7s": "/assets/Peterhouse.png",
-  "ST IGNATIUS": "/assets/logo.png",
-  "RIPPLES": "/assets/logo.png",
+  "ST IGNATIUS": "/assets/St Ignatius.png",
   "NATTIE COLLEGE": "/assets/Nattie.png",
   "GOROMONZI": "/assets/Goromonzi.png",
-  "ST JOHNS HIGH": "/assets/logo.png",
-  "KUTAMA": "/assets/logo.png",
-  "MUTARE": "/assets/logo.png",
-  "PETRA": "/assets/logo.png",
+  "ST JOHNS HIGH": "/assets/STJOHNSHIGH.png",
+  "KUTAMA": "/assets/Kutama.png",
+  "MUTARE": "/assets/Mutare Boys High.png",
+  "PETRA": "/assets/Petra College.png",
   "MIDLANDS CC": "/assets/MidlandsCC.png",
   "PLUMTREE": "/assets/logo.png",
-  "MARONDERA HIGH": "/assets/logo.png",
+  "MARONDERA HIGH": "/assets/Marondera high.png",
   "GIFFORD": "/assets/logo.png",
   
   // South African Schools
