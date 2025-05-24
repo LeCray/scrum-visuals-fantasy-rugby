@@ -1155,7 +1155,7 @@ finalScores.set(
 );
 
 finalScores.set(
-  generateMatchId("Week 1", "TBD", "PETERHOUSE", "LOMAGUNDI"),
+  generateMatchId("Week 2", "TBD", "PETERHOUSE", "LOMAGUNDI"),
   { teamAScore: 46, teamBScore: 23 }
 );
 
