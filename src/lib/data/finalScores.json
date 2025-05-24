@@ -226,5 +226,29 @@
   "week-1-15-15-lomagundi-falcon": {
     "teamAScore": 48,
     "teamBScore": 16
+  },
+  "week-2-11-30-gateway-heritage": {
+    "teamAScore": 5,
+    "teamBScore": 24
+  },
+  "week-2-12-30-watershed-hillcrest": {
+    "teamAScore": 32,
+    "teamBScore": 24
+  },
+  "week-2-15-00-hellenic-eaglesvale": {
+    "teamAScore": 35,
+    "teamBScore": 30
+  },
+  "week-2-15-30-prince-edward-churchill": {
+    "teamAScore": 26,
+    "teamBScore": 27
+  },
+  "week-2-15-30-st-georges-st-johns": {
+    "teamAScore": 45,
+    "teamBScore": 29
+  },
+  "week-2-TBD-peterhouse-lomagundi": {
+    "teamAScore": 46,
+    "teamBScore": 23
   }
 }
