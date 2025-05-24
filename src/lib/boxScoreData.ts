@@ -1155,6 +1155,11 @@ finalScores.set(
 );
 
 finalScores.set(
+  generateMatchId("Week 2", "15:30", "FALCON", "CBC"),
+  { teamAScore: 10, teamBScore: 0 }
+);
+
+finalScores.set(
   generateMatchId("Week 2", "TBD", "PETERHOUSE", "LOMAGUNDI"),
   { teamAScore: 46, teamBScore: 23 }
 );
