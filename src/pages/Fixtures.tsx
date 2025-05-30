@@ -175,7 +175,14 @@ const saSchoolsRugby: FixtureDay[] = [
     day: "Saturday",
     month: "May",
     fixtures: [
-      { time: "TBD", teamA: "GREY HIGH SCHOOL", teamB: "ST ANDREW'S", location: "Home" }
+      { time: "TBD", teamA: "GREY HIGH SCHOOL", teamB: "ST ANDREW'S", location: "LOWER FIELD" },
+      { time: "TBD", teamA: "MARITZBURG COLLEGE", teamB: "KEARSNEY COLLEGE"},
+      { time: "TBD", teamA: "WESTVILLE BOYS' HIGH SCHOOL", teamB: "GLENWOOD HIGH SCHOOL"},
+      { time: "TBD", teamA: "PRETORIA BOYS HIGH SCHOOL", teamB: "MICHEALHOUSE" },
+      { time: "TBD", teamA: "DURBAN HIGH SCHOOL", teamB: "HILTON COLLEGE"},
+      { time: "TBD", teamA: "GREYTOWN HIGH SCHOOL", teamB: "LADYSMITH HIGH SCHOOL"},
+      { time: "TBD", teamA: "NEWCASTLE HIGH SCHOOL", teamB: "PONGOLA AKADEMIE"},
+      { time: "TBD", teamA: "VRYHEID LANDBOU SCHOOL", teamB: "DUNDEE HIGH SCHOOL"}
     ]
   },
   {
