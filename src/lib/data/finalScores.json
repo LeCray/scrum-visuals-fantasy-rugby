@@ -183,6 +183,22 @@
     "teamAScore": 8,
     "teamBScore": 40
   },
+  "may-31st-tbd-grey-high-school-st-andrews": {
+    "teamAScore": 27,
+    "teamBScore": 28
+  },
+   "may-31st-tbd-maritzburg-college-kearsney-college": {
+    "teamAScore": 35,
+    "teamBScore": 20
+  },
+   "may-31st-tbd-westville-boys'-high-school-glenwood-high-school": {
+    "teamAScore": 42,
+    "teamBScore": 25
+  },
+   "may-31st-tbd-pretoria-boys-high-school-michealhouse": {
+    "teamAScore": 27,
+    "teamBScore": 28
+  },
   "week-1-14-00-st-johns-prince-edward": {
     "teamAScore": 32,
     "teamBScore": 27
@@ -255,4 +271,5 @@
     "teamAScore": 46,
     "teamBScore": 23
   }
+
 }
