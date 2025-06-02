@@ -1069,6 +1069,32 @@ finalScores.set(
   { teamAScore: 8, teamBScore: 40 }
 );
 
+// Add scores for May 31st SA Schools Rugby matches
+finalScores.set(
+  generateMatchId("May 31st", "TBD", "PRETORIA BOYS HIGH SCHOOL", "MICHEALHOUSE"),
+  { teamAScore: 24, teamBScore: 31 }
+);
+
+finalScores.set(
+  generateMatchId("May 31st", "TBD", "MARITZBURG COLLEGE", "KEARSNEY COLLEGE"),
+  { teamAScore: 35, teamBScore: 20 }
+);
+
+finalScores.set(
+  generateMatchId("May 31st", "TBD", "WESTVILLE BOYS' HIGH SCHOOL", "GLENWOOD HIGH SCHOOL"),
+  { teamAScore: 42, teamBScore: 25 }
+);
+
+finalScores.set(
+  generateMatchId("May 31st", "TBD", "DURBAN HIGH SCHOOL", "HILTON COLLEGE"),
+  { teamAScore: 26, teamBScore: 18 }
+);
+
+finalScores.set(
+  generateMatchId("May 31st", "TBD", "GREY HIGH SCHOOL", "ST ANDREW'S"),
+  { teamAScore: 27, teamBScore: 28 }
+);
+
 // Add scores for CBZ Schools Rugby matches
 finalScores.set(
   generateMatchId("Week 1", "14:00", "ST JOHNS", "PRINCE EDWARD"),
@@ -1464,3 +1490,12 @@ boxScores.set(
 
 // Export functions
 export { generateMatchId }; 
+
+// Add scores for May 31st SA Schools Rugby matches
+finalScores.set(
+  generateMatchId("May 31st", "TBD", "PRETORIA BOYS HIGH SCHOOL", "MICHEALHOUSE"),
+  { teamAScore: 24, teamBScore: 31 }
+);
+
+// Add scores for CBZ Schools Rugby matches
+// ... existing code ...
