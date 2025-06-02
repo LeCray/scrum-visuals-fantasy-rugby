@@ -1095,6 +1095,16 @@ finalScores.set(
   { teamAScore: 27, teamBScore: 28 }
 );
 
+finalScores.set(
+  generateMatchId("May 31st", "TBD", "GREYTOWN HIGH SCHOOL", "LADYSMITH HIGH SCHOOL"),
+  { teamAScore: 13, teamBScore: 12 }
+);
+
+finalScores.set(
+  generateMatchId("May 31st", "TBD", "VRYHEID LANDBOU SCHOOL", "DUNDEE HIGH SCHOOL"),
+  { teamAScore: 27, teamBScore: 24 }
+);
+
 // Add scores for CBZ Schools Rugby matches
 finalScores.set(
   generateMatchId("Week 1", "14:00", "ST JOHNS", "PRINCE EDWARD"),
