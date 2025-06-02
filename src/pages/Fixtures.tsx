@@ -454,6 +454,7 @@ const teamLogoMap: Record<string, string> = {
   "ST CHARLES COLLEGE": "/assets/SA logos/SA schools (Logo)/St Charles.png",
   "CLIFTON SCHOOL": "/assets/SA logos/SA schools (Logo)/Clifton.png",
   "MICHAELHOUSE": "/assets/SA logos/SA schools (Logo)/Michaelhouse.png",
+  "MICHEALHOUSE": "/assets/SA logos/SA schools (Logo)/Michaelhouse.png", // Alternative spelling
   "NORTHWOOD SCHOOL": "/assets/SA logos/SA schools (Logo)/Northwood.png",
   "KEARSNEY COLLEGE": "/assets/SA logos/SA schools (Logo)/Kearsney College.png",
   "DURBAN HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Durban High school.png",
@@ -474,6 +475,7 @@ const teamLogoMap: Record<string, string> = {
   "SAREL CILLIERS HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Sarel Cilliers high school.png",
   "NEWCASTLE HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Newcastle.png",
   "VRYHEID HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Vryheid high school.png",
+  "VRYHEID LANDBOU SCHOOL": "/assets/SA logos/SA schools (Logo)/VRYHEID LANDBOU SCHOOL.png",
   "HOËRSKOOL RICHARDSBAAI": "/assets/SA logos/SA schools (Logo)/Hoërskool Richardsbaai.png",
   "WERDA SCHOOL": "/assets/SA logos/SA schools (Logo)/Werda.png",
   "PORT NATAL SCHOOL": "/assets/SA logos/SA schools (Logo)/Port Natal.png",
@@ -481,6 +483,9 @@ const teamLogoMap: Record<string, string> = {
   "EMPANGENI HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Empangeni.png",
   "GRANTLEIGH": "/assets/SA logos/SA schools (Logo)/Grantleigh.png",
   "FELIXTON COLLEGE": "/assets/SA logos/SA schools (Logo)/Felixton College.png",
+  "PONGOLA AKADEMIE": "/assets/SA logos/SA schools (Logo)/PONGOLA AKADEMIE.png",
+  "LADYSMITH HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/LADYSMITH HIGH SCHOOL.png",
+  "PRETORIA BOYS HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/PRETORIA BOYS HIGH SCHOOL College.png",
   
   // Grey High School fixtures teams
   "GREY HIGH SCHOOL": "/assets/SA logos/Grey High School.png", 
