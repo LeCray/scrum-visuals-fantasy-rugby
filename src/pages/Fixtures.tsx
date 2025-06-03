@@ -269,11 +269,19 @@ const sbr2025Games: FixtureDay[] = [
     day: "07 June",
     month: "June",
     fixtures: [
-      { time: "TBD", teamA: "PRINCE EDWARD", teamB: "HILLCREST" },
-      { time: "TBD", teamA: "LOMAGUNDI", teamB: "ST GEORGES" },
-      { time: "TBD", teamA: "HELLENIC", teamB: "ST JOHNS" },
-      { time: "TBD", teamA: "FALCON", teamB: "PETERHOUSE" },
-      { time: "TBD", teamA: "MILTON", teamB: "CHURCHILL" }
+      { time: "09:00", teamA: "ST GEORGES 4TH", teamB: "ALLAN WILSON 1ST" },
+      { time: "10:30", teamA: "PETRA", teamB: "GATEWAY" },
+      { time: "12:05", teamA: "MIDLANDS CC", teamB: "GOLDRIDGE" },
+      { time: "12:30", teamA: "HERITAGE", teamB: "RYDINGS" },
+      { time: "12:30", teamA: "ELIS ROBINS", teamB: "MUTARE" },
+      { time: "12:50", teamA: "PRINCE EDWARD", teamB: "HILLCREST" },
+      { time: "13:20", teamA: "MILTON", teamB: "CHURCHILL" },
+      { time: "14:00", teamA: "ST GEORGES", teamB: "LOMAGUNDI" },
+      { time: "14:45", teamA: "HELLENIC", teamB: "ST JOHNS" },
+      { time: "15:00", teamA: "WISE OWL", teamB: "PLUMTREE" },
+      { time: "15:30", teamA: "KYLE", teamB: "WATERSHED" },
+      { time: "15:30", teamA: "FALCON", teamB: "PETERHOUSE" },
+      { time: "15:30", teamA: "CBC", teamB: "EAGLESVALE" }
     ]
   },
   {
@@ -427,11 +435,13 @@ const teamLogoMap: Record<string, string> = {
   "PRINCE EDWARD": "/assets/PrinceEdward.png",
   "KYLE": "/assets/Kyle.png",
   "ST GEORGES": "/assets/StGeorges.png",
+  "ST GEORGES 4TH": "/assets/StGeorges.png",
   "GATEWAY": "/assets/Gateway.png",
   "HILLCREST": "/assets/Hillcrest.png",
   "HELLENIC": "/assets/Hellenic.png",
   "HERITAGE": "/assets/Heritage.png",
   "ALLAN WILSON": "/assets/Allan Wilson.png",
+  "ALLAN WILSON 1ST": "/assets/Allan Wilson.png",
   "CRENBORNE": "/assets/logo.png",
   "MILTON": "/assets/Milton.png",
   "PH": "/assets/Peterhouse.png",
