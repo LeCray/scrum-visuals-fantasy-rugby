@@ -1069,6 +1069,17 @@ finalScores.set(
   { teamAScore: 8, teamBScore: 40 }
 );
 
+finalScores.set(
+  generateMatchId("May 17th", "TBD", "AMANZIMTOTI HIGH SCHOOL", "KING EDWARD HIGH SCHOOL"),
+  { teamAScore: 8, teamBScore: 40 }
+);
+
+finalScores.set(
+  generateMatchId("May 24th", "TBD", "QUEEN'S COLLEGE", "GREY HIGH SCHOOL"),
+  { teamAScore: 25, teamBScore: 24 }
+);
+
+
 // Add scores for May 31st SA Schools Rugby matches
 finalScores.set(
   generateMatchId("May 31st", "TBD", "PRETORIA BOYS HIGH SCHOOL", "MICHEALHOUSE"),
