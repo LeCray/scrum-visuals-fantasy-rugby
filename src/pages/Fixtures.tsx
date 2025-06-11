@@ -145,24 +145,6 @@ const saSchoolsRugby: FixtureDay[] = [
     ]
   },
   {
-    date: "May 17th",
-    day: "Saturday",
-    month: "May",
-    fixtures: [
-      { time: "TBD", teamA: "AMANZIMTOTI HIGH SCHOOL", teamB: "KING EDWARD HIGH SCHOOL" },
-      { time: "TBD", teamA: "CURRO HILLCREST", teamB: "ASHTON COLLEGE BALLITO" },
-      { time: "TBD", teamA: "KINGSWAY HIGH SCHOOL", teamB: "HILLCREST HIGH SCHOOL" },
-      { time: "TBD", teamA: "PORT SHEPSTONE HIGH SCHOOL", teamB: "IXOPO HIGH SCHOOL" },
-      { time: "TBD", teamA: "DUNDEE HIGH SCHOOL", teamB: "GREYTOWN HIGH SCHOOL" },
-      { time: "TBD", teamA: "SAREL CILLIERS HIGH SCHOOL", teamB: "NEWCASTLE HIGH SCHOOL" },
-      { time: "TBD", teamA: "VRYHEID HIGH SCHOOL", teamB: "HOËRSKOOL RICHARDSBAAI" },
-      { time: "TBD", teamA: "WERDA SCHOOL", teamB: "PORT NATAL SCHOOL" },
-      { time: "TBD", teamA: "HOËRSKOOL PIONIER", teamB: "EMPANGENI HIGH SCHOOL" },
-      { time: "TBD", teamA: "GRANTLEIGH", teamB: "FELIXTON COLLEGE" },
-      { time: "TBD", teamA: "MEYER SAUERMAN", teamB: "GREY HIGH SCHOOL" }
-    ]
-  },
-  {
     date: "May 24th",
     day: "Saturday",
     month: "May",

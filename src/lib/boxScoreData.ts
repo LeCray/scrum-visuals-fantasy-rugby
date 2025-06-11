@@ -1070,11 +1070,6 @@ finalScores.set(
 );
 
 finalScores.set(
-  generateMatchId("May 17th", "TBD", "AMANZIMTOTI HIGH SCHOOL", "KING EDWARD HIGH SCHOOL"),
-  { teamAScore: 8, teamBScore: 40 }
-);
-
-finalScores.set(
   generateMatchId("May 24th", "TBD", "QUEEN'S COLLEGE", "GREY HIGH SCHOOL"),
   { teamAScore: 25, teamBScore: 24 }
 );
@@ -1209,6 +1204,72 @@ finalScores.set(
 finalScores.set(
   generateMatchId("Week 2", "TBD", "PETERHOUSE", "LOMAGUNDI"),
   { teamAScore: 46, teamBScore: 23 }
+);
+
+// Add scores for Week 3 CBZ Schools Rugby matches
+finalScores.set(
+  generateMatchId("Week 3", "09:00", "ST GEORGES 4TH", "ALLAN WILSON 1ST"),
+  { teamAScore: 10, teamBScore: 25 }
+);
+
+finalScores.set(
+  generateMatchId("Week 3", "10:30", "PETRA", "GATEWAY"),
+  { teamAScore: 0, teamBScore: 48 }
+);
+
+finalScores.set(
+  generateMatchId("Week 3", "12:05", "MIDLANDS CC", "GOLDRIDGE"),
+  { teamAScore: 8, teamBScore: 14 }
+);
+
+finalScores.set(
+  generateMatchId("Week 3", "12:30", "HERITAGE", "RYDINGS"),
+  { teamAScore: 31, teamBScore: 20 }
+);
+
+finalScores.set(
+  generateMatchId("Week 3", "12:30", "ELIS ROBINS", "MUTARE"),
+  { teamAScore: 14, teamBScore: 17 }
+);
+
+finalScores.set(
+  generateMatchId("Week 3", "12:50", "PRINCE EDWARD", "HILLCREST"),
+  { teamAScore: 70, teamBScore: 15 }
+);
+
+finalScores.set(
+  generateMatchId("Week 3", "13:20", "MILTON", "CHURCHILL"),
+  { teamAScore: 5, teamBScore: 55 }
+);
+
+finalScores.set(
+  generateMatchId("Week 3", "14:00", "ST GEORGES", "LOMAGUNDI"),
+  { teamAScore: 34, teamBScore: 33 }
+);
+
+finalScores.set(
+  generateMatchId("Week 3", "14:45", "HELLENIC", "ST JOHNS"),
+  { teamAScore: 0, teamBScore: 33 }
+);
+
+finalScores.set(
+  generateMatchId("Week 3", "15:00", "WISE OWL", "PLUMTREE"),
+  { teamAScore: 31, teamBScore: 5 }
+);
+
+finalScores.set(
+  generateMatchId("Week 3", "15:30", "KYLE", "WATERSHED"),
+  { teamAScore: 29, teamBScore: 20 }
+);
+
+finalScores.set(
+  generateMatchId("Week 3", "15:30", "FALCON", "PETERHOUSE"),
+  { teamAScore: 30, teamBScore: 31 }
+);
+
+finalScores.set(
+  generateMatchId("Week 3", "15:30", "CBC", "EAGLESVALE"),
+  { teamAScore: 30, teamBScore: 7 }
 );
 
 // Define tries with timestamps and conversion status for Hellenic vs Watershed
