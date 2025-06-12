@@ -272,7 +272,7 @@ const sbr2025Games: FixtureDay[] = [
     month: "June",
     fixtures: [
       { time: "11:30", teamA: "MIDLANDS CC", teamB: "GATEWAY" },
-      { time: "12:00", teamA: "BMC", teamB: "ELLIS ROBINS SCHOOL" },
+      { time: "12:00", teamA: "BMC", teamB: "ELLIS ROBINS" },
       { time: "12:00", teamA: "MILTON", teamB: "WISE OWL" },
       { time: "12:30", teamA: "MUTARE", teamB: "VICTORIA HIGH" },
       { time: "13:00", teamA: "HILLCREST", teamB: "WATERSHED" },
@@ -446,6 +446,12 @@ const teamLogoMap: Record<string, string> = {
   "PLUMTREE": "/assets/logo.png",
   "MARONDERA HIGH": "/assets/Marondera high.png",
   "GIFFORD": "/assets/logo.png",
+  "ELIS ROBINS": "/assets/logo.png",
+  "BMC": "/assets/logo.png",
+  "VICTORIA HIGH": "/assets/logo.png",
+
+
+  
   
   // South African Schools
   "TIER 2 URBAN": "/assets/logo.png", // Placeholder
