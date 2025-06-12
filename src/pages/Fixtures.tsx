@@ -271,11 +271,18 @@ const sbr2025Games: FixtureDay[] = [
     day: "14 June",
     month: "June",
     fixtures: [
-      { time: "TBD", teamA: "CHURCHILL", teamB: "ALLAN WILSON" },
-      { time: "TBD", teamA: "FALCON", teamB: "ST GEORGES" },
-      { time: "TBD", teamA: "PETERHOUSE", teamB: "ST JOHNS" },
+      { time: "11:30", teamA: "MIDLANDS CC", teamB: "GATEWAY" },
+      { time: "12:00", teamA: "BMC", teamB: "ELLIS ROBINS SCHOOL" },
+      { time: "12:00", teamA: "MILTON", teamB: "WISE OWL" },
+      { time: "12:30", teamA: "MUTARE", teamB: "VICTORIA HIGH" },
+      { time: "13:00", teamA: "HILLCREST", teamB: "WATERSHED" },
+      { time: "13:30", teamA: "HELLENIC", teamB: "HERITAGE" },
+      { time: "14:45", teamA: "PETERHOUSE", teamB: "ST JOHNS" },
+      { time: "15:00", teamA: "CHURCHILL", teamB: "ALLAN WILSON" },
+      { time: "15:00", teamA: "EAGLESVALE", teamB: "PETRA" },
+      { time: "15:30", teamA: "FALCON", teamB: "ST GEORGES" },
+      { time: "15:30", teamA: "KYLE", teamB: "LOMAGUNDI" },
       { time: "TBD", teamA: "GOROMONZI", teamB: "CRENBORNE" },
-      { time: "TBD", teamA: "HELLENIC", teamB: "HERITAGE" },
       { time: "TBD", teamA: "ST JOHNS HIGH", teamB: "KUTAMA" }
     ]
   },
