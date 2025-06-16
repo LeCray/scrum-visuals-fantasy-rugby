@@ -172,6 +172,18 @@ const saSchoolsRugby: FixtureDay[] = [
     day: "Saturday",
     month: "June",
     fixtures: [
+      { time: "TBD", teamA: "KEARSNEY COLLEGE", teamB: "ST STITHIANS COLLEGE"},
+      { time: "TBD", teamA: "MICHAELHOUSE", teamB: "WESTVILLLE BOYS' HIGH SCHOOL"},
+      { time: "TBD", teamA: "ST CHARLES COLLEGE", teamB: "ST DAVID'S MARIST INANDA"},
+      { time: "TBD", teamA: "HILTON COLLEGE", teamB: "MARITZBURG COLLEGE"},
+      { time: "TBD", teamA: "HILLCREST HIGH SCHOOL", teamB: "HOWICK HIGH SCHOOL"}
+    ]
+  },
+  {
+    date: "June 14th",
+    day: "Saturday",
+    month: "June",
+    fixtures: [
       { time: "TBD", teamA: "GREY HIGH SCHOOL", teamB: "DANIEL PIENAAR", location: "Home" }
     ]
   },

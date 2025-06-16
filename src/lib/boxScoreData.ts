@@ -1111,6 +1111,32 @@ finalScores.set(
   { teamAScore: 27, teamBScore: 24 }
 );
 
+finalScores.set(
+  generateMatchId("June 14th", "TBD", "KEARSNEY COLLEGE", "ST STITHIANS COLLEGE"),
+  { teamAScore: 26, teamBScore: 25}
+);
+
+finalScores.set(
+  generateMatchId("June 14th", "TBD", "MICHAELHOUSE", "WESTVILLE BOYS' HIGH SCHOOL"),
+  { teamAScore: 20, teamBScore: 50 }
+);
+
+finalScores.set(
+  generateMatchId("June 14th", "TBD", "ST CHARLES COLLEGE", "ST DAVID'S MARIST INANDA"),
+  { teamAScore: 34, teamBScore: 6 }
+);
+
+finalScores.set(
+  generateMatchId("June 14th", "TBD", "HILTON COLLEGE", "MARITZBURG COLLEGE"),
+  { teamAScore: 20, teamBScore: 23 }
+);
+
+finalScores.set(
+  generateMatchId("June 14th", "TBD", "HILLCREST HIGH SCHOOL", "HOWICK HIGH SCHOOL"),
+  { teamAScore: 31, teamBScore: 46 }
+);
+
+
 // Add scores for CBZ Schools Rugby matches
 finalScores.set(
   generateMatchId("Week 1", "14:00", "ST JOHNS", "PRINCE EDWARD"),
@@ -1270,6 +1296,66 @@ finalScores.set(
 finalScores.set(
   generateMatchId("Week 3", "15:30", "CBC", "EAGLESVALE"),
   { teamAScore: 30, teamBScore: 7 }
+);
+
+finalScores.set(
+  generateMatchId("Week 4", "11:30", "MIDLANDS CC", "GATEWAY"),
+  { teamAScore: 23, teamBScore: 18 }
+);
+
+finalScores.set(
+  generateMatchId("Week 4", "12:00", "BMC", "ELLIS ROBINS"),
+  { teamAScore: 21, teamBScore: 15 }
+);
+
+finalScores.set(
+  generateMatchId("Week 4", "12:00", "MILTON", "WISE OWL"),
+  { teamAScore: 17, teamBScore: 18 }
+);
+
+finalScores.set(
+  generateMatchId("Week 4", "11:30", "MIDLANDS CC", "GATEWAY"),
+  { teamAScore: 23, teamBScore: 18 }
+);
+
+finalScores.set(
+  generateMatchId("Week 4", "12:30", "MUTARE", "VICTORIA HIGH"),
+  { teamAScore: 49, teamBScore: 0 }
+);
+
+finalScores.set(
+  generateMatchId("Week 4", "13:00", "HILLCREST","WATERSHED"),
+  { teamAScore: 32, teamBScore: 3 }
+);
+
+finalScores.set(
+  generateMatchId("Week 4", "13:30", "HELLENIC", "HERITAGE"),
+  { teamAScore: 50, teamBScore: 19 }
+);
+
+finalScores.set(
+  generateMatchId("Week 4", "13:30", "PETERHOUSE", "ST JOHNS"),
+  { teamAScore: 20, teamBScore: 19 }
+);
+
+finalScores.set(
+  generateMatchId("Week 4", "15:00", "CHURCHILL", "ALLAN WILSON"),
+  { teamAScore: 57, teamBScore: 0 }
+);
+
+finalScores.set(
+  generateMatchId("Week 4", "15:00", "EAGLESVALE", "PETRA"),
+  { teamAScore: 53, teamBScore: 0 }
+);
+
+finalScores.set(
+  generateMatchId("Week 4", "15:30", "FALCON", "ST GEORGES"),
+  { teamAScore: 20, teamBScore: 24 }
+);
+
+finalScores.set(
+  generateMatchId("Week 4", "15:30", "KYLE", "LOMAGUNDI"),
+  { teamAScore: 17, teamBScore: 58 }
 );
 
 // Define tries with timestamps and conversion status for Hellenic vs Watershed
