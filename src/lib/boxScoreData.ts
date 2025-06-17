@@ -43,7 +43,7 @@ export type TeamStats = {
     inField?: { total: number; reclaimed: number };
     toTouch?: { total: number };
     dropOuts?: { total: number; reclaimed: number };
-    goalLine?: { total: number };
+    goalLine?: { total: number; reclaimed?: number };
     directToTouch?: { total: number };
     success?: { total: number; successful: number };
   };
@@ -1111,32 +1111,6 @@ finalScores.set(
   { teamAScore: 27, teamBScore: 24 }
 );
 
-finalScores.set(
-  generateMatchId("June 14th", "TBD", "KEARSNEY COLLEGE", "ST STITHIANS COLLEGE"),
-  { teamAScore: 26, teamBScore: 25}
-);
-
-finalScores.set(
-  generateMatchId("June 14th", "TBD", "MICHAELHOUSE", "WESTVILLE BOYS' HIGH SCHOOL"),
-  { teamAScore: 20, teamBScore: 50 }
-);
-
-finalScores.set(
-  generateMatchId("June 14th", "TBD", "ST CHARLES COLLEGE", "ST DAVID'S MARIST INANDA"),
-  { teamAScore: 34, teamBScore: 6 }
-);
-
-finalScores.set(
-  generateMatchId("June 14th", "TBD", "HILTON COLLEGE", "MARITZBURG COLLEGE"),
-  { teamAScore: 20, teamBScore: 23 }
-);
-
-finalScores.set(
-  generateMatchId("June 14th", "TBD", "HILLCREST HIGH SCHOOL", "HOWICK HIGH SCHOOL"),
-  { teamAScore: 31, teamBScore: 46 }
-);
-
-
 // Add scores for CBZ Schools Rugby matches
 finalScores.set(
   generateMatchId("Week 1", "14:00", "ST JOHNS", "PRINCE EDWARD"),
@@ -1296,66 +1270,6 @@ finalScores.set(
 finalScores.set(
   generateMatchId("Week 3", "15:30", "CBC", "EAGLESVALE"),
   { teamAScore: 30, teamBScore: 7 }
-);
-
-finalScores.set(
-  generateMatchId("Week 4", "11:30", "MIDLANDS CC", "GATEWAY"),
-  { teamAScore: 23, teamBScore: 18 }
-);
-
-finalScores.set(
-  generateMatchId("Week 4", "12:00", "BMC", "ELLIS ROBINS"),
-  { teamAScore: 21, teamBScore: 15 }
-);
-
-finalScores.set(
-  generateMatchId("Week 4", "12:00", "MILTON", "WISE OWL"),
-  { teamAScore: 17, teamBScore: 18 }
-);
-
-finalScores.set(
-  generateMatchId("Week 4", "11:30", "MIDLANDS CC", "GATEWAY"),
-  { teamAScore: 23, teamBScore: 18 }
-);
-
-finalScores.set(
-  generateMatchId("Week 4", "12:30", "MUTARE", "VICTORIA HIGH"),
-  { teamAScore: 49, teamBScore: 0 }
-);
-
-finalScores.set(
-  generateMatchId("Week 4", "13:00", "HILLCREST","WATERSHED"),
-  { teamAScore: 32, teamBScore: 3 }
-);
-
-finalScores.set(
-  generateMatchId("Week 4", "13:30", "HELLENIC", "HERITAGE"),
-  { teamAScore: 50, teamBScore: 19 }
-);
-
-finalScores.set(
-  generateMatchId("Week 4", "13:30", "PETERHOUSE", "ST JOHNS"),
-  { teamAScore: 20, teamBScore: 19 }
-);
-
-finalScores.set(
-  generateMatchId("Week 4", "15:00", "CHURCHILL", "ALLAN WILSON"),
-  { teamAScore: 57, teamBScore: 0 }
-);
-
-finalScores.set(
-  generateMatchId("Week 4", "15:00", "EAGLESVALE", "PETRA"),
-  { teamAScore: 53, teamBScore: 0 }
-);
-
-finalScores.set(
-  generateMatchId("Week 4", "15:30", "FALCON", "ST GEORGES"),
-  { teamAScore: 20, teamBScore: 24 }
-);
-
-finalScores.set(
-  generateMatchId("Week 4", "15:30", "KYLE", "LOMAGUNDI"),
-  { teamAScore: 17, teamBScore: 58 }
 );
 
 // Define tries with timestamps and conversion status for Hellenic vs Watershed
@@ -1667,3 +1581,157 @@ finalScores.set(
 
 // Add scores for CBZ Schools Rugby matches
 // ... existing code ...
+
+// Add CBZ Week 4 score for Falcon vs St. George's
+finalScores.set(
+  generateMatchId("Week 4", "14:00", "FALCON", "ST GEORGE'S"),
+  { teamAScore: 20, teamBScore: 24 }
+);
+
+// Define tries with timestamps and conversion status for Falcon vs St. George's
+const falconVsStGeorgesFalconTries: TryScore[] = [
+  { time: "54:15", hasConversion: true },
+  { time: "64:45", hasConversion: true }
+];
+
+const falconVsStGeorgesFalconPenalties: TryScore[] = [
+  { time: "06:03", hasConversion: false, isPenalty: true },
+  { time: "13:28", hasConversion: false, isPenalty: true }
+];
+
+const falconVsStGeorgesStGeorgesTries: TryScore[] = [
+  { time: "00:53", hasConversion: true },
+  { time: "07:36", hasConversion: true },
+  { time: "45:25", hasConversion: true }
+];
+
+const falconVsStGeorgesStGeorgesPenalties: TryScore[] = [
+  { time: "51:33", hasConversion: false, isPenalty: true }
+];
+
+// Combine tries and penalties for scoring timeline
+const falconVsStGeorgesFalconScoring = [...falconVsStGeorgesFalconTries, ...falconVsStGeorgesFalconPenalties];
+const falconVsStGeorgesStGeorgesScoring = [...falconVsStGeorgesStGeorgesTries, ...falconVsStGeorgesStGeorgesPenalties];
+
+// Define kicking data from the field position diagrams
+const falconVsStGeorgesFalconKicks: KickAtGoal[] = [
+  { x: 0.3, y: 0.5, successful: true }, // Penalty kick
+  { x: 0.7, y: 0.4, successful: true }, // Penalty kick
+  { x: 0.4, y: 0.6, successful: true }, // Conversion
+  { x: 0.6, y: 0.3, successful: true }  // Conversion
+];
+
+const falconVsStGeorgesStGeorgesKicks: KickAtGoal[] = [
+  { x: 0.2, y: 0.4, successful: true }, // Conversion
+  { x: 0.8, y: 0.5, successful: true }, // Conversion
+  { x: 0.5, y: 0.7, successful: true }, // Conversion
+  { x: 0.6, y: 0.2, successful: false }, // Missed kick
+  { x: 0.4, y: 0.8, successful: false }, // Missed kick
+  { x: 0.3, y: 0.3, successful: true }  // Penalty kick
+];
+
+// Create a box score for the Falcon vs St. George's CBZ Week 4 game
+const falconVsStGeorgesCBZ: BoxScoreData = {
+  matchInfo: {
+    teamA: "FALCON",
+    teamB: "ST GEORGE'S",
+    venue: "CBZ Sports Club, Harare",
+    date: "Week 4",
+    kickoff: "14:00",
+    weather: "Partly Cloudy, 23°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "14", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "13", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "12", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "10", tries: 0, kicks: "4/4", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "8", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "7", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "5", tries: 0, kicks: "-", lineouts: "3/3", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "4", tries: 1, kicks: "-", lineouts: "3/4", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamBPlayers: [
+    { name: "-", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "14", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "13", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "12", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "10", tries: 0, kicks: "4/6", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "8", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "7", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "5", tries: 0, kicks: "-", lineouts: "4/5", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "4", tries: 0, kicks: "-", lineouts: "3/5", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamASummary: {
+    totalTries: 2,
+    totalConversions: "2/2 C, 2/2 PK",
+    lineoutAccuracy: "6/7 (86%)",
+    penaltiesWon: 0,
+    penaltiesConceded: 10,
+    possession: 63,
+    scrums: { total: 8, won: 8 },
+    lineouts: { total: 7, won: 6 },
+    turnovers: 6,
+    knockOns: 3,
+    mauls: { total: 4, won: 4 },
+    kicks: {
+      fromHand: { total: 12, reclaimed: 3 },
+      inField: { total: 9, reclaimed: 2 },
+      toTouch: { total: 3 },
+      dropOuts: { total: 2, reclaimed: 1 },
+      goalLine: { total: 1, reclaimed: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 4, successful: 4 }
+    },
+    attackingPenalties: 3,
+    defensivePenalties: 7,
+    scrumPenalties: 0
+  },
+  teamBSummary: {
+    totalTries: 3,
+    totalConversions: "3/3 C, 1/1 PK",
+    lineoutAccuracy: "7/10 (70%)",
+    penaltiesWon: 0,
+    penaltiesConceded: 10,
+    possession: 37,
+    scrums: { total: 2, won: 1 },
+    lineouts: { total: 10, won: 7 },
+    turnovers: 8,
+    knockOns: 9,
+    mauls: { total: 4, won: 4 },
+    kicks: {
+      fromHand: { total: 8, reclaimed: 0 },
+      inField: { total: 5, reclaimed: 0 },
+      toTouch: { total: 1 },
+      dropOuts: { total: 0, reclaimed: 0 },
+      goalLine: { total: 1, reclaimed: 1 },
+      directToTouch: { total: 0 },
+      success: { total: 6, successful: 4 }
+    },
+    attackingPenalties: 4,
+    defensivePenalties: 3,
+    scrumPenalties: 1
+  },
+  tryDataA: falconVsStGeorgesFalconScoring,
+  tryDataB: falconVsStGeorgesStGeorgesScoring,
+  kickDataA: falconVsStGeorgesFalconKicks,
+  kickDataB: falconVsStGeorgesStGeorgesKicks
+};
+
+// Add the CBZ Week 4 box score to the map
+boxScores.set(
+  generateMatchId("Week 4", "14:00", "FALCON", "ST GEORGE'S"),
+  falconVsStGeorgesCBZ
+);

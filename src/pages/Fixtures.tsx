@@ -172,18 +172,6 @@ const saSchoolsRugby: FixtureDay[] = [
     day: "Saturday",
     month: "June",
     fixtures: [
-      { time: "TBD", teamA: "KEARSNEY COLLEGE", teamB: "ST STITHIANS COLLEGE"},
-      { time: "TBD", teamA: "MICHAELHOUSE", teamB: "WESTVILLLE BOYS' HIGH SCHOOL"},
-      { time: "TBD", teamA: "ST CHARLES COLLEGE", teamB: "ST DAVID'S MARIST INANDA"},
-      { time: "TBD", teamA: "HILTON COLLEGE", teamB: "MARITZBURG COLLEGE"},
-      { time: "TBD", teamA: "HILLCREST HIGH SCHOOL", teamB: "HOWICK HIGH SCHOOL"}
-    ]
-  },
-  {
-    date: "June 14th",
-    day: "Saturday",
-    month: "June",
-    fixtures: [
       { time: "TBD", teamA: "GREY HIGH SCHOOL", teamB: "DANIEL PIENAAR", location: "Home" }
     ]
   },
@@ -292,7 +280,7 @@ const sbr2025Games: FixtureDay[] = [
       { time: "14:45", teamA: "PETERHOUSE", teamB: "ST JOHNS" },
       { time: "15:00", teamA: "CHURCHILL", teamB: "ALLAN WILSON" },
       { time: "15:00", teamA: "EAGLESVALE", teamB: "PETRA" },
-      { time: "15:30", teamA: "FALCON", teamB: "ST GEORGES" },
+      { time: "14:00", teamA: "FALCON", teamB: "ST GEORGE'S" },
       { time: "15:30", teamA: "KYLE", teamB: "LOMAGUNDI" },
       { time: "TBD", teamA: "GOROMONZI", teamB: "CRENBORNE" },
       { time: "TBD", teamA: "ST JOHNS HIGH", teamB: "KUTAMA" }
@@ -559,7 +547,8 @@ const isHighlightedFixture = (date: string, time: string, teamA: string, teamB: 
     { date: "May 3rd", time: "14:20", teamA: "FALCON 1XV", teamB: "ST ALBANS 1XV" },
     { date: "May 3rd", time: "15:40", teamA: "ST JOHN'S 1XV", teamB: "ST ANDREW'S 1XV" },
     { date: "Week 1", time: "14:00", teamA: "HELLENIC", teamB: "WATERSHED" },
-    { date: "Week 1", time: "15:15", teamA: "LOMAGUNDI", teamB: "FALCON" }
+    { date: "Week 1", time: "15:15", teamA: "LOMAGUNDI", teamB: "FALCON" },
+    { date: "Week 4", time: "14:00", teamA: "FALCON", teamB: "ST GEORGE'S" }
   ];
 
   return highlightedGames.some(game => 

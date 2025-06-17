@@ -55,6 +55,7 @@ const teamLogoMap: Record<string, string> = {
   "LOMAGUNDI": "/assets/Lomagundi.png",
   "ST ALBANS 1XV": "/assets/StAlbans.png",
   "ST GEORGE'S 1XV": "/assets/StGeorges.png",
+  "ST GEORGE'S": "/assets/StGeorges.png",
   "ST ANDREW'S 1XV": "/assets/StAndrews.png",
   "CBC 2XV": "/assets/CBC.png",
   "PRINCE EDWARD 1XV": "/assets/PrinceEdward.png",

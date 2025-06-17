@@ -43,7 +43,7 @@ export type TeamStats = {
     inField?: { total: number; reclaimed: number };
     toTouch?: { total: number };
     dropOuts?: { total: number; reclaimed: number };
-    goalLine?: { total: number };
+    goalLine?: { total: number; reclaimed?: number };
     directToTouch?: { total: number };
     success?: { total: number; successful: number };
   };
