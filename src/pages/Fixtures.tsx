@@ -162,9 +162,7 @@ const saSchoolsRugby: FixtureDay[] = [
       { time: "TBD", teamA: "WESTVILLE BOYS' HIGH SCHOOL", teamB: "GLENWOOD HIGH SCHOOL"},
       { time: "TBD", teamA: "PRETORIA BOYS HIGH SCHOOL", teamB: "MICHEALHOUSE" },
       { time: "TBD", teamA: "DURBAN HIGH SCHOOL", teamB: "HILTON COLLEGE"},
-      { time: "TBD", teamA: "GREYTOWN HIGH SCHOOL", teamB: "LADYSMITH HIGH SCHOOL"},
-      { time: "TBD", teamA: "NEWCASTLE HIGH SCHOOL", teamB: "PONGOLA AKADEMIE"},
-      { time: "TBD", teamA: "VRYHEID LANDBOU SCHOOL", teamB: "DUNDEE HIGH SCHOOL"}
+      { time: "TBD", teamA: "GREYTOWN HIGH SCHOOL", teamB: "LADYSMITH HIGH SCHOOL"}
     ]
   },
   {
@@ -281,9 +279,7 @@ const sbr2025Games: FixtureDay[] = [
       { time: "15:00", teamA: "CHURCHILL", teamB: "ALLAN WILSON" },
       { time: "15:00", teamA: "EAGLESVALE", teamB: "PETRA" },
       { time: "14:00", teamA: "FALCON", teamB: "ST GEORGE'S" },
-      { time: "15:30", teamA: "KYLE", teamB: "LOMAGUNDI" },
-      { time: "TBD", teamA: "GOROMONZI", teamB: "CRENBORNE" },
-      { time: "TBD", teamA: "ST JOHNS HIGH", teamB: "KUTAMA" }
+      { time: "15:30", teamA: "KYLE", teamB: "LOMAGUNDI" }
     ]
   },
   {
@@ -291,14 +287,16 @@ const sbr2025Games: FixtureDay[] = [
     day: "28 June",
     month: "June",
     fixtures: [
-      { time: "TBD", teamA: "LOMAGUNDI", teamB: "CHURCHILL" },
-      { time: "TBD", teamA: "PRINCE EDWARD", teamB: "EAGLESVALE" },
-      { time: "TBD", teamA: "ST GEORGES", teamB: "CBC" },
-      { time: "TBD", teamA: "ST JOHNS", teamB: "FALCON" },
-      { time: "TBD", teamA: "HERITAGE", teamB: "WATERSHED" },
-      { time: "TBD", teamA: "HELLENIC", teamB: "PETERHOUSE" },
-      { time: "TBD", teamA: "MUTARE", teamB: "HILLCREST" },
-      { time: "TBD", teamA: "PETRA", teamB: "MIDLANDS CC" }
+      { time: "10:15", teamA: "GATEWAY", teamB: "ST JOHNS HIGH" },
+      { time: "11:00", teamA: "MILTON", teamB: "GIFFORD" }
+      { time: "12:00", teamA: "PETRA", teamB: "MIDLANDS CC" },
+      { time: "12:30", teamA: "HERITAGE", teamB: "WATERSHED" },
+      { time: "13:45", teamA: "LOMAGUNDI", teamB: "CHURCHILL" },
+      { time: "13:45", teamA: "HELLENIC", teamB: "PETERHOUSE" },
+      { time: "15:00", teamA: "ST JOHNS", teamB: "FALCON" },
+      { time: "15:00", teamA: "MUTARE", teamB: "HILLCREST" },
+      { time: "15:30", teamA: "PRINCE EDWARD", teamB: "EAGLESVALE" },
+      { time: "15:30", teamA: "ST GEORGES", teamB: "CBC" },
     ]
   },
   {
@@ -441,12 +439,12 @@ const teamLogoMap: Record<string, string> = {
   "ST JOHNS HIGH": "/assets/STJOHNSHIGH.png",
   "KUTAMA": "/assets/Kutama.png",
   "MUTARE": "/assets/Mutare Boys High.png",
-  "PETRA": "/assets/Petra College.png",
+  "PETRA": "/assets/logo.png",
   "MIDLANDS CC": "/assets/MidlandsCC.png",
   "PLUMTREE": "/assets/logo.png",
   "MARONDERA HIGH": "/assets/Marondera high.png",
   "GIFFORD": "/assets/logo.png",
-  "ELIS ROBINS": "/assets/logo.png",
+  "ELLIS ROBINS": "/assets/logo.png",
   "BMC": "/assets/logo.png",
   "VICTORIA HIGH": "/assets/logo.png",
 
