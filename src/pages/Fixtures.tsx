@@ -288,7 +288,7 @@ const sbr2025Games: FixtureDay[] = [
     month: "June",
     fixtures: [
       { time: "10:15", teamA: "GATEWAY", teamB: "ST JOHNS HIGH" },
-      { time: "11:00", teamA: "MILTON", teamB: "GIFFORD" }
+      { time: "11:00", teamA: "MILTON", teamB: "GIFFORD" },
       { time: "12:00", teamA: "PETRA", teamB: "MIDLANDS CC" },
       { time: "12:30", teamA: "HERITAGE", teamB: "WATERSHED" },
       { time: "13:45", teamA: "LOMAGUNDI", teamB: "CHURCHILL" },
@@ -296,7 +296,7 @@ const sbr2025Games: FixtureDay[] = [
       { time: "15:00", teamA: "ST JOHNS", teamB: "FALCON" },
       { time: "15:00", teamA: "MUTARE", teamB: "HILLCREST" },
       { time: "15:30", teamA: "PRINCE EDWARD", teamB: "EAGLESVALE" },
-      { time: "15:30", teamA: "ST GEORGES", teamB: "CBC" },
+      { time: "15:30", teamA: "ST GEORGES", teamB: "CBC" }
     ]
   },
   {
