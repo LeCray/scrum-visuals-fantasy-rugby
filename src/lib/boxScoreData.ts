@@ -1319,7 +1319,12 @@ finalScores.set(
 
 finalScores.set(
   generateMatchId("Week 4", "15:30", "KYLE", "LOMAGUNDI"),
-  { teamAScore: 17, teamBScore: 58 }////
+  { teamAScore: 17, teamBScore: 58 }
+);
+
+finalScores.set(
+  generateMatchId("Week 4", "15:30", "ST JOHNS", "WISE OWL"),
+  { teamAScore: 54, teamBScore: 21 }
 );
 // Define tries with timestamps and conversion status for Hellenic vs Watershed
 const hellenicTries = [
@@ -1783,4 +1788,146 @@ const falconVsStGeorgesCBZ: BoxScoreData = {
 boxScores.set(
   generateMatchId("Week 4", "14:00", "FALCON", "ST GEORGE'S"),
   falconVsStGeorgesCBZ
+);
+
+// Define tries with timestamps and conversion status for St. John's vs Wise Owl
+const stJohnsVsWiseOwlStJohnsTries: TryScore[] = [
+  { time: "07:07", hasConversion: true },
+  { time: "10:42", hasConversion: true },
+  { time: "14:50", hasConversion: true },
+  { time: "18:46", hasConversion: false },
+  { time: "40:17", hasConversion: true },
+  { time: "49:39", hasConversion: true },
+  { time: "57:24", hasConversion: true },
+  { time: "67:47", hasConversion: true }
+];
+
+const stJohnsVsWiseOwlWiseOwlTries: TryScore[] = [
+  { time: "22:37", hasConversion: true },
+  { time: "28:28", hasConversion: true },
+  { time: "32:20", hasConversion: true }
+];
+
+// Define kicking data from the field position diagrams - St John's had several kicks from various positions
+const stJohnsVsWiseOwlStJohnsKicks: KickAtGoal[] = [
+  { x: 0.4, y: 0.3, successful: true },   // Conversion
+  { x: 0.6, y: 0.4, successful: true },   // Conversion
+  { x: 0.3, y: 0.5, successful: true },   // Conversion
+  { x: 0.7, y: 0.6, successful: false },  // Missed conversion
+  { x: 0.2, y: 0.4, successful: true },   // Conversion
+  { x: 0.8, y: 0.3, successful: true },   // Conversion
+  { x: 0.5, y: 0.7, successful: true },   // Conversion
+  { x: 0.6, y: 0.5, successful: true }    // Conversion
+];
+
+const stJohnsVsWiseOwlWiseOwlKicks: KickAtGoal[] = [
+  { x: 0.7, y: 0.3, successful: true },   // Conversion
+  { x: 0.3, y: 0.6, successful: true },   // Conversion
+  { x: 0.4, y: 0.4, successful: true }    // Conversion
+];
+
+// Create a box score for the St. John's vs Wise Owl CBZ Week 4 game
+const stJohnsVsWiseOwlCBZ: BoxScoreData = {
+  matchInfo: {
+    teamA: "ST JOHNS",
+    teamB: "WISE OWL",
+    venue: "CBZ Sports Club, Harare",
+    date: "Week 4",
+    kickoff: "15:30",
+    weather: "Sunny, 24°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "14", tries: 2, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "13", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "12", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "11", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "10", tries: 0, kicks: "7/8", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "8", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "7", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "5", tries: 0, kicks: "-", lineouts: "4/4", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "4", tries: 1, kicks: "-", lineouts: "3/4", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamBPlayers: [
+    { name: "-", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "14", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "13", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "12", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "10", tries: 0, kicks: "3/3", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "8", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "7", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "5", tries: 0, kicks: "-", lineouts: "3/4", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "4", tries: 0, kicks: "-", lineouts: "2/3", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamASummary: {
+    totalTries: 8,
+    totalConversions: "7/8 C",
+    lineoutAccuracy: "7/8 (88%)",
+    penaltiesWon: 0,
+    penaltiesConceded: 22,
+    possession: 46,
+    scrums: { total: 0, won: 0 },
+    lineouts: { total: 8, won: 7 },
+    turnovers: 0,
+    knockOns: 0,
+    mauls: { total: 0, won: 0 },
+    kicks: {
+      fromHand: { total: 7, reclaimed: 0 },
+      inField: { total: 5, reclaimed: 0 },
+      toTouch: { total: 1 },
+      dropOuts: { total: 0, reclaimed: 0 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 8, successful: 7 }
+    },
+    attackingPenalties: 0,
+    defensivePenalties: 22,
+    scrumPenalties: 0
+  },
+  teamBSummary: {
+    totalTries: 3,
+    totalConversions: "3/3 C",
+    lineoutAccuracy: "5/7 (71%)",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+    possession: 54,
+    scrums: { total: 0, won: 0 },
+    lineouts: { total: 7, won: 5 },
+    turnovers: 0,
+    knockOns: 0,
+    mauls: { total: 0, won: 0 },
+    kicks: {
+      fromHand: { total: 4, reclaimed: 1 },
+      inField: { total: 4, reclaimed: 1 },
+      toTouch: { total: 0 },
+      dropOuts: { total: 0, reclaimed: 0 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 3, successful: 3 }
+    },
+    attackingPenalties: 0,
+    defensivePenalties: 0,
+    scrumPenalties: 0
+  },
+  tryDataA: stJohnsVsWiseOwlStJohnsTries,
+  tryDataB: stJohnsVsWiseOwlWiseOwlTries,
+  kickDataA: stJohnsVsWiseOwlStJohnsKicks,
+  kickDataB: stJohnsVsWiseOwlWiseOwlKicks
+};
+
+// Add the CBZ Week 4 St Johns vs Wise Owl box score to the map
+boxScores.set(
+  generateMatchId("Week 4", "15:30", "ST JOHNS", "WISE OWL"),
+  stJohnsVsWiseOwlCBZ
 );

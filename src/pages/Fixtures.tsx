@@ -279,7 +279,8 @@ const sbr2025Games: FixtureDay[] = [
       { time: "15:00", teamA: "CHURCHILL", teamB: "ALLAN WILSON" },
       { time: "15:00", teamA: "EAGLESVALE", teamB: "PETRA" },
       { time: "14:00", teamA: "FALCON", teamB: "ST GEORGE'S" },
-      { time: "15:30", teamA: "KYLE", teamB: "LOMAGUNDI" }
+      { time: "15:30", teamA: "KYLE", teamB: "LOMAGUNDI" },
+      { time: "15:30", teamA: "ST JOHNS", teamB: "WISE OWL", location: "CBZ Sports Club, Harare" }
     ]
   },
   {
@@ -546,7 +547,8 @@ const isHighlightedFixture = (date: string, time: string, teamA: string, teamB: 
     { date: "May 3rd", time: "15:40", teamA: "ST JOHN'S 1XV", teamB: "ST ANDREW'S 1XV" },
     { date: "Week 1", time: "14:00", teamA: "HELLENIC", teamB: "WATERSHED" },
     { date: "Week 1", time: "15:15", teamA: "LOMAGUNDI", teamB: "FALCON" },
-    { date: "Week 4", time: "14:00", teamA: "FALCON", teamB: "ST GEORGE'S" }
+    { date: "Week 4", time: "14:00", teamA: "FALCON", teamB: "ST GEORGE'S" },
+    { date: "Week 4", time: "15:30", teamA: "ST JOHNS", teamB: "WISE OWL" }
   ];
 
   return highlightedGames.some(game => 
