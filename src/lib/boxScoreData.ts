@@ -1321,6 +1321,47 @@ finalScores.set(
   generateMatchId("Week 4", "15:30", "KYLE", "LOMAGUNDI"),
   { teamAScore: 17, teamBScore: 58 }////
 );
+
+finalScores.set(
+  generateMatchId("Week 4", "15:30", "KYLE", "LOMAGUNDI"),
+  { teamAScore: 17, teamBScore: 58 }////
+);
+
+finalScores.set(
+  generateMatchId("Week 5", "10:15", "GATEWAY", "ST JOHNS HIGH"),
+  { teamAScore: 56, teamBScore: 0 }////
+);
+
+finalScores.set(
+  generateMatchId("Week 5", "11:00", "MILTON", "GIFFORD"),
+  { teamAScore: 57, teamBScore: 7 }////
+);
+
+finalScores.set(
+  generateMatchId("Week 5", "12:00", "PETRA", "THORNHILL"),
+  { teamAScore: 70, teamBScore: 0 }////
+);
+
+finalScores.set(
+  generateMatchId("Week 5", "12:30", "HERITAGE", "WATERSHED"),
+  { teamAScore: 10, teamBScore: 7 }////
+);
+
+finalScores.set(
+  generateMatchId("Week 5", "13:45", "LOMAGUNDI", "CHURCHILL"),
+  { teamAScore: 44, teamBScore: 20 }////
+);
+
+finalScores.set(
+  generateMatchId("Week 5", "15:00", "MUTARE", "HILLCREST"),
+  { teamAScore: 12, teamBScore: 13 }////
+);
+
+finalScores.set(
+  generateMatchId("Week 5", "15:30", "PRINCE EDWARD", "EAGLESVALE"),
+  { teamAScore: 15, teamBScore: 18 }////
+);
+
 // Define tries with timestamps and conversion status for Hellenic vs Watershed
 const hellenicTries = [
   { time: "08:52", hasConversion: true },
