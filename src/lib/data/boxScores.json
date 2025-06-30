@@ -160,5 +160,69 @@
       "date": "Week 1",
       "time": "15:15"
     }
+  },
+  "week-4-15-30-st-john-s-college-wise-owl-marondera": {
+    "matchInfo": {
+      "teamA": "ST JOHN'S COLLEGE",
+      "teamB": "WISE OWL MARONDERA",
+      "date": "Week 4",
+      "time": "15:30",
+      "venue": "CBZ Sports Club, Harare",
+      "finalScore": {
+        "teamA": 54,
+        "teamB": 21
+      }
+    },
+    "possession": {
+      "teamA": 46,
+      "teamB": 54,
+      "breakdown": {
+        "completeMatch": { "teamA": 46, "teamB": 54 },
+        "firstHalf": { "teamA": 52, "teamB": 48 },
+        "secondHalf": { "teamA": 39, "teamB": 61 }
+      }
+    },
+    "tries": {
+      "teamA": {
+        "count": 8,
+        "conversionRate": 88,
+        "scoringTimes": ["07:07", "10:42", "14:50", "18:46", "40:17", "49:39", "57:24", "67:47"]
+      },
+      "teamB": {
+        "count": 3,
+        "conversionRate": 100,
+        "scoringTimes": ["22:37", "28:28", "32:20"]
+      }
+    },
+    "kicksAtGoal": {
+      "teamA": {
+        "attempts": 8,
+        "successful": 7,
+        "successRate": 88
+      },
+      "teamB": {
+        "attempts": 3,
+        "successful": 3,
+        "successRate": 100
+      }
+    },
+    "kicksFromHand": {
+      "teamA": {
+        "total": 7,
+        "inField": { "attempts": 5, "reclaimed": 0, "reclaimRate": 0 },
+        "toTouch": { "all": 1, "fiftyTwentyTwo": 0, "directlyToTouchOutside22": 0 }
+      },
+      "teamB": {
+        "total": 4,
+        "inField": { "attempts": 4, "reclaimed": 1, "reclaimRate": 25 },
+        "toTouch": { "all": 0, "fiftyTwentyTwo": 0, "directlyToTouchOutside22": 0 }
+      }
+    },
+    "matchDuration": "71:38",
+    "timeline": {
+      "ballInPlayTime": "31:52",
+      "scrumTime": "14:37",
+      "kickAtGoalTime": "09:23"
+    }
   }
 }
