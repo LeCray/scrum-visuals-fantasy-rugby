@@ -548,7 +548,8 @@ const isHighlightedFixture = (date: string, time: string, teamA: string, teamB: 
     { date: "Week 1", time: "14:00", teamA: "HELLENIC", teamB: "WATERSHED" },
     { date: "Week 1", time: "15:15", teamA: "LOMAGUNDI", teamB: "FALCON" },
     { date: "Week 4", time: "14:00", teamA: "FALCON", teamB: "ST GEORGE'S" },
-    { date: "Week 4", time: "15:30", teamA: "ST JOHNS", teamB: "WISE OWL" }
+    { date: "Week 4", time: "15:30", teamA: "ST JOHNS", teamB: "WISE OWL" },
+    { date: "Week 5", time: "15:00", teamA: "ST JOHNS", teamB: "FALCON" }
   ];
 
   return highlightedGames.some(game => 

@@ -1326,6 +1326,11 @@ finalScores.set(
   generateMatchId("Week 4", "15:30", "ST JOHNS", "WISE OWL"),
   { teamAScore: 54, teamBScore: 21 }
 );
+
+finalScores.set(
+  generateMatchId("Week 5", "15:00", "ST JOHNS", "FALCON"),
+  { teamAScore: 26, teamBScore: 22 }
+);
 // Define tries with timestamps and conversion status for Hellenic vs Watershed
 const hellenicTries = [
   { time: "08:52", hasConversion: true },
@@ -1930,4 +1935,147 @@ const stJohnsVsWiseOwlCBZ: BoxScoreData = {
 boxScores.set(
   generateMatchId("Week 4", "15:30", "ST JOHNS", "WISE OWL"),
   stJohnsVsWiseOwlCBZ
+);
+
+// Define tries and penalties with timestamps for St. Johns vs Falcon Week 5
+const stJohnsVsFalconStJohnsScoring: TryScore[] = [
+  { time: "09:08", hasConversion: true },  // Try (Con) - 7 points
+  { time: "16:06", hasConversion: false, isPenalty: true },  // Penalty - 3 points
+  { time: "53:45", hasConversion: false, isPenalty: true },  // Penalty - 3 points
+  { time: "60:30", hasConversion: false, isPenalty: true },  // Penalty - 3 points
+  { time: "63:33", hasConversion: false, isPenalty: true },  // Drop Goal - 3 points
+  { time: "73:44", hasConversion: true }   // Try (Con) - 7 points
+];
+
+const stJohnsVsFalconFalconScoring: TryScore[] = [
+  { time: "13:08", hasConversion: false, isPenalty: true },  // Penalty - 3 points
+  { time: "18:04", hasConversion: true },  // Try (Con) - 7 points
+  { time: "24:42", hasConversion: false, isPenalty: true },  // Penalty - 3 points
+  { time: "37:50", hasConversion: false, isPenalty: true },  // Penalty - 3 points
+  { time: "51:32", hasConversion: false, isPenalty: true },  // Penalty - 3 points
+  { time: "58:17", hasConversion: false, isPenalty: true }   // Penalty - 3 points
+];
+
+// Define kicking data from the field position diagrams
+const stJohnsVsFalconStJohnsKicks: KickAtGoal[] = [
+  { x: 0.5, y: 0.4, successful: true },   // Conversion
+  { x: 0.3, y: 0.6, successful: true },   // Penalty
+  { x: 0.7, y: 0.3, successful: true },   // Penalty
+  { x: 0.4, y: 0.5, successful: true },   // Penalty
+  { x: 0.6, y: 0.7, successful: true }    // Conversion
+];
+
+const stJohnsVsFalconFalconKicks: KickAtGoal[] = [
+  { x: 0.2, y: 0.4, successful: true },   // Penalty
+  { x: 0.8, y: 0.5, successful: true },   // Conversion
+  { x: 0.6, y: 0.3, successful: true },   // Penalty
+  { x: 0.4, y: 0.6, successful: true },   // Penalty
+  { x: 0.7, y: 0.2, successful: true },   // Penalty
+  { x: 0.3, y: 0.7, successful: true }    // Penalty
+];
+
+// Create a box score for the St. Johns vs Falcon CBZ Week 5 game
+const stJohnsVsFalconCBZ: BoxScoreData = {
+  matchInfo: {
+    teamA: "ST JOHNS",
+    teamB: "FALCON",
+    venue: "CBZ Sports Club, Harare",
+    date: "Week 5",
+    kickoff: "15:00",
+    weather: "Sunny, 22°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "14", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "13", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "12", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "10", tries: 0, kicks: "5/5", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "8", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "7", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "5", tries: 0, kicks: "-", lineouts: "4/4", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "4", tries: 0, kicks: "-", lineouts: "3/4", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamBPlayers: [
+    { name: "-", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "14", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "13", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "12", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "10", tries: 0, kicks: "6/6", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "7", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "5", tries: 0, kicks: "-", lineouts: "1/3", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "4", tries: 0, kicks: "-", lineouts: "0/3", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamASummary: {
+    totalTries: 2,
+    totalConversions: "2/2 C, 3/3 PK, 1/1 DG",
+    lineoutAccuracy: "7/8 (88%)",
+    penaltiesWon: 0,
+    penaltiesConceded: 13,
+    possession: 44,
+    scrums: { total: 7, won: 6 },
+    lineouts: { total: 8, won: 7 },
+    turnovers: 1,
+    knockOns: 9,
+    mauls: { total: 5, won: 5 },
+    kicks: {
+      fromHand: { total: 8, reclaimed: 3 },
+      inField: { total: 5, reclaimed: 3 },
+      toTouch: { total: 2 },
+      dropOuts: { total: 2, reclaimed: 1 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 5, successful: 5 }
+    },
+    attackingPenalties: 7,
+    defensivePenalties: 4,
+    scrumPenalties: 1
+  },
+  teamBSummary: {
+    totalTries: 1,
+    totalConversions: "1/1 C, 5/5 PK",
+    lineoutAccuracy: "1/6 (17%)",
+    penaltiesWon: 0,
+    penaltiesConceded: 12,
+    possession: 56,
+    scrums: { total: 11, won: 11 },
+    lineouts: { total: 6, won: 1 },
+    turnovers: 5,
+    knockOns: 6,
+    mauls: { total: 2, won: 2 },
+    kicks: {
+      fromHand: { total: 12, reclaimed: 2 },
+      inField: { total: 7, reclaimed: 2 },
+      toTouch: { total: 5 },
+      dropOuts: { total: 0, reclaimed: 0 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 6, successful: 6 }
+    },
+    attackingPenalties: 3,
+    defensivePenalties: 3,
+    scrumPenalties: 2
+  },
+  tryDataA: stJohnsVsFalconStJohnsScoring,
+  tryDataB: stJohnsVsFalconFalconScoring,
+  kickDataA: stJohnsVsFalconStJohnsKicks,
+  kickDataB: stJohnsVsFalconFalconKicks
+};
+
+// Add the CBZ Week 5 St Johns vs Falcon box score to the map
+boxScores.set(
+  generateMatchId("Week 5", "15:00", "ST JOHNS", "FALCON"),
+  stJohnsVsFalconCBZ
 );
