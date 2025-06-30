@@ -1331,6 +1331,11 @@ finalScores.set(
   generateMatchId("Week 5", "15:00", "ST JOHNS", "FALCON"),
   { teamAScore: 26, teamBScore: 22 }
 );
+
+finalScores.set(
+  generateMatchId("Week 5", "15:30", "ST GEORGES", "CBC"),
+  { teamAScore: 43, teamBScore: 5 }
+);
 // Define tries with timestamps and conversion status for Hellenic vs Watershed
 const hellenicTries = [
   { time: "08:52", hasConversion: true },
@@ -2078,4 +2083,144 @@ const stJohnsVsFalconCBZ: BoxScoreData = {
 boxScores.set(
   generateMatchId("Week 5", "15:00", "ST JOHNS", "FALCON"),
   stJohnsVsFalconCBZ
+);
+
+// Define tries and penalties with timestamps for St. Georges vs CBC Week 5
+const stGeorgesVsCbcStGeorgesScoring: TryScore[] = [
+  { time: "02:30", hasConversion: false, isPenalty: true },  // Penalty - 3 points
+  { time: "12:37", hasConversion: true },   // Try (Con) - 7 points
+  { time: "18:37", hasConversion: true },   // Try (Con) - 7 points
+  { time: "31:11", hasConversion: false },  // Try (No Con) - 5 points
+  { time: "37:50", hasConversion: true },   // Try (Con) - 7 points
+  { time: "65:07", hasConversion: true },   // Try (Con) - 7 points
+  { time: "73:53", hasConversion: true }    // Try (Con) - 7 points
+];
+
+const stGeorgesVsCbcCbcScoring: TryScore[] = [
+  { time: "62:20", hasConversion: false }   // Try (No Con) - 5 points
+];
+
+// Define kicking data from the field position diagrams
+const stGeorgesVsCbcStGeorgesKicks: KickAtGoal[] = [
+  { x: 0.5, y: 0.4, successful: true },    // Penalty
+  { x: 0.4, y: 0.3, successful: true },    // Conversion
+  { x: 0.6, y: 0.5, successful: true },    // Conversion
+  { x: 0.3, y: 0.6, successful: false },   // Missed conversion
+  { x: 0.7, y: 0.4, successful: true },    // Conversion
+  { x: 0.2, y: 0.5, successful: true },    // Conversion
+  { x: 0.8, y: 0.3, successful: true },    // Conversion
+  { x: 0.4, y: 0.7, successful: false },   // Missed kick
+  { x: 0.6, y: 0.2, successful: false }    // Missed kick
+];
+
+const stGeorgesVsCbcCbcKicks: KickAtGoal[] = [
+  { x: 0.7, y: 0.6, successful: false },   // Missed kick
+  { x: 0.3, y: 0.4, successful: false },   // Missed conversion
+  { x: 0.5, y: 0.3, successful: false }    // Missed kick
+];
+
+// Create a box score for the St. Georges vs CBC Week 5 game
+const stGeorgesVsCbcCBZ: BoxScoreData = {
+  matchInfo: {
+    teamA: "ST GEORGES",
+    teamB: "CBC",
+    venue: "CBZ Sports Club, Harare",
+    date: "Week 5",
+    kickoff: "15:30",
+    weather: "Sunny, 23°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "14", tries: 2, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "13", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "12", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "10", tries: 0, kicks: "6/9", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "8", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "7", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "5", tries: 0, kicks: "-", lineouts: "5/6", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "4", tries: 0, kicks: "-", lineouts: "4/6", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamBPlayers: [
+    { name: "-", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "14", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "13", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "12", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "10", tries: 0, kicks: "0/3", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "7", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "5", tries: 0, kicks: "-", lineouts: "3/4", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "4", tries: 0, kicks: "-", lineouts: "2/3", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamASummary: {
+    totalTries: 6,
+    totalConversions: "5/6 C, 1/3 PK",
+    lineoutAccuracy: "9/12 (75%)",
+    penaltiesWon: 0,
+    penaltiesConceded: 5,
+    possession: 54,
+    scrums: { total: 9, won: 9 },
+    lineouts: { total: 12, won: 9 },
+    turnovers: 5,
+    knockOns: 8,
+    mauls: { total: 2, won: 2 },
+    kicks: {
+      fromHand: { total: 10, reclaimed: 2 },
+      inField: { total: 8, reclaimed: 2 },
+      toTouch: { total: 2 },
+      dropOuts: { total: 1, reclaimed: 1 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 9, successful: 6 }
+    },
+    attackingPenalties: 3,
+    defensivePenalties: 2,
+    scrumPenalties: 0
+  },
+  teamBSummary: {
+    totalTries: 1,
+    totalConversions: "0/1 C",
+    lineoutAccuracy: "5/7 (71%)",
+    penaltiesWon: 0,
+    penaltiesConceded: 8,
+    possession: 46,
+    scrums: { total: 7, won: 7 },
+    lineouts: { total: 7, won: 5 },
+    turnovers: 8,
+    knockOns: 6,
+    mauls: { total: 4, won: 3 },
+    kicks: {
+      fromHand: { total: 13, reclaimed: 1 },
+      inField: { total: 10, reclaimed: 1 },
+      toTouch: { total: 3 },
+      dropOuts: { total: 1, reclaimed: 1 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 3, successful: 0 }
+    },
+    attackingPenalties: 5,
+    defensivePenalties: 3,
+    scrumPenalties: 0
+  },
+  tryDataA: stGeorgesVsCbcStGeorgesScoring,
+  tryDataB: stGeorgesVsCbcCbcScoring,
+  kickDataA: stGeorgesVsCbcStGeorgesKicks,
+  kickDataB: stGeorgesVsCbcCbcKicks
+};
+
+// Add the CBZ Week 5 St Georges vs CBC box score to the map
+boxScores.set(
+  generateMatchId("Week 5", "15:30", "ST GEORGES", "CBC"),
+  stGeorgesVsCbcCBZ
 );
