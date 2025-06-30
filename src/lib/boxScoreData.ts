@@ -1336,6 +1336,11 @@ finalScores.set(
   generateMatchId("Week 5", "15:30", "ST GEORGES", "CBC"),
   { teamAScore: 43, teamBScore: 5 }
 );
+
+finalScores.set(
+  generateMatchId("Week 5", "13:45", "HELLENIC", "PETERHOUSE"),
+  { teamAScore: 26, teamBScore: 33 }
+);
 // Define tries with timestamps and conversion status for Hellenic vs Watershed
 const hellenicTries = [
   { time: "08:52", hasConversion: true },
@@ -2223,4 +2228,160 @@ const stGeorgesVsCbcCBZ: BoxScoreData = {
 boxScores.set(
   generateMatchId("Week 5", "15:30", "ST GEORGES", "CBC"),
   stGeorgesVsCbcCBZ
+);
+
+// Define tries and penalties with timestamps for Hellenic vs Peterhouse Week 5
+const hellenicVsPeterhouseHellenicScoring: TryScore[] = [
+  { time: "03:47", hasConversion: false },  // Try (No Con) - 5 points
+  { time: "18:57", hasConversion: true },   // Try (Con) - 7 points
+  { time: "70:32", hasConversion: true },   // Try (Con) - 7 points
+  { time: "76:34", hasConversion: true }    // Try (Con) - 7 points
+];
+
+const hellenicVsPeterhousePeterhouseScoring: TryScore[] = [
+  { time: "21:43", hasConversion: false },  // Try (No Con) - 5 points
+  { time: "37:19", hasConversion: true },   // Try (Con) - 7 points
+  { time: "38:45", hasConversion: true },   // Try (Con) - 7 points
+  { time: "61:58", hasConversion: true },   // Try (Con) - 7 points
+  { time: "67:10", hasConversion: true }    // Try (Con) - 7 points
+];
+
+// Define kicking data from the field position diagrams
+const hellenicVsPeterhouseHellenicKicks: KickAtGoal[] = [
+  { x: 0.3, y: 0.4, successful: false },   // Missed kick
+  { x: 0.2, y: 0.6, successful: true },    // Successful conversion
+  { x: 0.8, y: 0.5, successful: true },    // Successful conversion
+  { x: 0.7, y: 0.3, successful: true }     // Successful conversion
+];
+
+const hellenicVsPeterhousePeterhouseKicks: KickAtGoal[] = [
+  { x: 0.6, y: 0.4, successful: false },   // Missed conversion
+  { x: 0.4, y: 0.5, successful: true },    // Successful conversion
+  { x: 0.5, y: 0.3, successful: true },    // Successful conversion
+  { x: 0.3, y: 0.6, successful: true },    // Successful conversion
+  { x: 0.7, y: 0.4, successful: true }     // Successful conversion
+];
+
+// Create a box score for the Hellenic vs Peterhouse Week 5 game
+const hellenicVsPeterhouseCBZ: BoxScoreData = {
+  matchInfo: {
+    teamA: "HELLENIC",
+    teamB: "PETERHOUSE",
+    venue: "CBZ Sports Club, Harare",
+    date: "Week 5",
+    kickoff: "13:45",
+    weather: "Sunny, 24°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "14", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "13", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "12", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "10", tries: 0, kicks: "3/4", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "8", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "7", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "5", tries: 0, kicks: "-", lineouts: "4/5", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "4", tries: 0, kicks: "-", lineouts: "3/4", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "1", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamBPlayers: [
+    { name: "-", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "14", tries: 2, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "13", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "12", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "10", tries: 0, kicks: "4/5", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "8", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "7", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "5", tries: 0, kicks: "-", lineouts: "5/6", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "4", tries: 0, kicks: "-", lineouts: "4/5", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamASummary: {
+    totalTries: 4,
+    totalConversions: "3/4 C",
+    lineoutAccuracy: "7/9 (78%)",
+    penaltiesWon: 0,
+    penaltiesConceded: 11,
+    possession: 43,
+    scrums: { total: 8, won: 7 },
+    lineouts: { total: 9, won: 7 },
+    turnovers: 6,
+    knockOns: 5,
+    mauls: { total: 3, won: 2 },
+    kicks: {
+      fromHand: { total: 8, reclaimed: 2 },
+      inField: { total: 6, reclaimed: 2 },
+      toTouch: { total: 2 },
+      dropOuts: { total: 0, reclaimed: 0 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 4, successful: 3 }
+    },
+    attackingPenalties: 4,
+    defensivePenalties: 5,
+    scrumPenalties: 1,
+    penaltyCauses: {
+      offside: 3,
+      ruckOffence: 2,
+      notReleasePlayer: 1,
+      notReleasingBall: 2,
+      dangerousTackle: 1,
+      scrum: 1,
+      violentFoulPlay: 1
+    }
+  },
+  teamBSummary: {
+    totalTries: 5,
+    totalConversions: "4/5 C",
+    lineoutAccuracy: "9/11 (82%)",
+    penaltiesWon: 0,
+    penaltiesConceded: 15,
+    possession: 57,
+    scrums: { total: 9, won: 8 },
+    lineouts: { total: 11, won: 9 },
+    turnovers: 4,
+    knockOns: 3,
+    mauls: { total: 4, won: 4 },
+    kicks: {
+      fromHand: { total: 9, reclaimed: 1 },
+      inField: { total: 5, reclaimed: 1 },
+      toTouch: { total: 3 },
+      dropOuts: { total: 2, reclaimed: 2 },
+      goalLine: { total: 2, reclaimed: 2 },
+      directToTouch: { total: 0 },
+      success: { total: 5, successful: 4 }
+    },
+    attackingPenalties: 11,
+    defensivePenalties: 2,
+    scrumPenalties: 0,
+    penaltyCauses: {
+      offside: 6,
+      ruckOffence: 4,
+      notReleasePlayer: 2,
+      notReleasingBall: 1,
+      dangerousTackle: 1,
+      scrum: 0,
+      violentFoulPlay: 1
+    }
+  },
+  tryDataA: hellenicVsPeterhouseHellenicScoring,
+  tryDataB: hellenicVsPeterhousePeterhouseScoring,
+  kickDataA: hellenicVsPeterhouseHellenicKicks,
+  kickDataB: hellenicVsPeterhousePeterhouseKicks
+};
+
+// Add the CBZ Week 5 Hellenic vs Peterhouse box score to the map
+boxScores.set(
+  generateMatchId("Week 5", "13:45", "HELLENIC", "PETERHOUSE"),
+  hellenicVsPeterhouseCBZ
 );
