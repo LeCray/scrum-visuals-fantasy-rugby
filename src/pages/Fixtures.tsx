@@ -698,63 +698,79 @@ const Fixtures: React.FC = () => {
   const saMonths = ["All", ...Array.from(new Set(saSchoolsRugby.map(day => day.month)))];
   
   return (
-    <div className="relative text-scrummy-navyBlue">
-      <div className="relative z-20">
-        {/* Logo background overlay */}
-        <div
-          className="absolute inset-x-0 top-[160px] md:top-[180px] h-[500px] pointer-events-none"
-          style={{
-            backgroundImage: "url('/assets/logo.png')",
-            backgroundSize: "contain",
-            backgroundPosition: "center top",
-            backgroundRepeat: "no-repeat"
-          }}
-        />
-
-        {/* HEADER */}
-        <header className="relative py-16 md:py-24 px-4 md:px-8">
-          <div className="max-w-6xl mx-auto relative z-10">
-            <Link to="/" className="text-scrummy-navyBlue hover:text-scrummy-goldYellow flex items-center gap-1">
-              <ChevronLeft size={20} /> <span>Back to Home</span>
-            </Link>
-            <motion.h1
-              className="mt-8 text-4xl md:text-7xl font-bold text-center mb-16 md:mb-24 font-orbitron relative z-10"
-              initial={{ y: -20 }} animate={{ y: 0 }} transition={{ duration: 0.6 }}
-            >
-              <span className="text-scrummy-navyBlue">Schools Rugby</span>
-              <span className="block text-scrummy-goldYellow">Fixtures & Results</span>
-            </motion.h1>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      {/* Modern Header */}
+      <header className="bg-white/90 backdrop-blur-md border-b border-gray-200/50 sticky top-0 z-20">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2 text-scrummy-navy hover:text-scrummy-blue transition-colors">
+            <ChevronLeft className="w-5 h-5" />
+            <span className="font-medium">Back to Home</span>
+          </Link>
+          <div className="flex items-center gap-4">
+            <img src="/assets/logo.png" alt="SCRUMMY" className="h-10" />
+            <span className="font-orbitron font-bold text-scrummy-navy">SCRUMMY</span>
           </div>
-        </header>
+          <div className="w-24" /> {/* Spacer for balance */}
+        </div>
+      </header>
 
-        {/* MAIN content */}
-        <main className="relative z-10 px-4 md:px-8 pb-16 md:pb-24">
-          <div className="max-w-6xl mx-auto space-y-4 mt-24">
-            {/* Legend for highlighted games */}
-            <div className="flex flex-col items-center gap-1 text-scrummy-navyBlue">
+      {/* Hero Section */}
+      <section className="py-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-scrummy-navy/5 to-scrummy-blue/5" />
+        <div className="max-w-6xl mx-auto px-4 text-center relative z-10">
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
+          >
+            <h1 className="text-4xl md:text-6xl font-bold font-orbitron text-scrummy-navy leading-tight">
+              Schools Rugby
+              <span className="block text-scrummy-goldYellow">Fixtures & Results</span>
+            </h1>
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+              Complete coverage of school boy rugby across Zimbabwe and South Africa
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* MAIN content */}
+      <main className="pb-16">
+        <div className="max-w-6xl mx-auto px-4 space-y-8">
+          {/* Legend for highlighted games */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+            <div className="flex flex-col lg:flex-row items-center gap-4 text-scrummy-navy">
               <div className="flex items-center gap-3">
                 <img src="/assets/logo.png" alt="SCRUMMY" className="w-12 h-12" />
-                <p className="text-base md:text-lg font-orbitron">Below is a schedule of all the Schools Rugby fixtures. Games marked with a<span className="text-scrummy-goldYellow"> yellow border</span> and SCRUMMY logo are ones that will have detailed player and game stats.</p>
+                <div>
+                  <p className="text-base md:text-lg font-semibold">
+                    Games marked with a <span className="text-scrummy-goldYellow">yellow border</span> and SCRUMMY logo have detailed player and game stats.
+                  </p>
+                  <p className="text-sm text-gray-600">All times are in CAT (Central Africa Time)</p>
+                </div>
               </div>
-              <p className="text-sm text-scrummy-navyBlue/70">All times are in CAT (Central Africa Time)</p>
             </div>
+          </div>
 
-            {/* Tabs */}
-            <div className="flex justify-center mt-8">
+          {/* Tabs */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 shadow-lg max-w-4xl mx-auto">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
               {tabs.map((tab) => (
                 <button
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
-                  className={`px-4 py-2 mx-2 rounded-lg font-bold ${
+                  className={`px-4 py-3 rounded-lg font-semibold transition-all duration-300 ${
                     activeTab === tab.key
-                      ? "bg-scrummy-goldYellow text-scrummy-navyBlue"
-                      : "bg-scrummy-navyBlue text-white hover:bg-scrummy-goldYellow hover:text-scrummy-navyBlue"
+                      ? "bg-scrummy-goldYellow text-scrummy-navy shadow-md"
+                      : "text-scrummy-navy hover:bg-scrummy-goldYellow/20"
                   }`}
                 >
                   {tab.name}
                 </button>
               ))}
             </div>
+          </div>
 
             {/* Month and Team filters for SBR 2025 */}
             {activeTab === "sbr2025" && (
@@ -838,23 +854,23 @@ const Fixtures: React.FC = () => {
               </div>
             )}
 
-            <div className="mt-16 space-y-8">
-              {!hasFixtures() ? (
-                <div className="text-center bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-md">
-                  <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navyBlue mb-4">
-                    Stay Tuned
-                  </h2>
-                  <p className="text-base text-scrummy-navyBlue/70">
-                    Check back soon for updates!
-                  </p>
-                </div>
+          <div className="mt-8 space-y-8">
+            {!hasFixtures() ? (
+              <div className="text-center bg-white/80 backdrop-blur-sm rounded-xl p-8 shadow-lg">
+                <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navy mb-4">
+                  Stay Tuned
+                </h2>
+                <p className="text-base text-gray-600">
+                  Check back soon for updates!
+                </p>
+              </div>
               ) : (
                 filteredFixtures(activeTab).map((day, idx) => (
-                  <div key={idx} className={`bg-white/60 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-md ${day.day === "FEATURED MATCHES" ? "col-span-full" : ""}`}>
+                  <div key={idx} className={`bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-200/50 ${day.day === "FEATURED MATCHES" ? "col-span-full" : ""}`}>
                     {day.day === "FEATURED MATCHES" ? (
                       <>
-                        <h2 className="text-3xl md:text-4xl font-bold mb-6 font-orbitron border-b border-scrummy-goldYellow pb-4 flex flex-col md:flex-row md:items-end">
-                          <span className="text-scrummy-navyBlue">{day.date}</span>
+                        <h2 className="text-3xl md:text-4xl font-bold mb-6 font-orbitron border-b border-scrummy-goldYellow/30 pb-4 flex flex-col md:flex-row md:items-end">
+                          <span className="text-scrummy-navy">{day.date}</span>
                           <span className="text-scrummy-goldYellow text-2xl md:ml-3">{day.day}</span>
                         </h2>
                         <motion.div
@@ -875,7 +891,7 @@ const Fixtures: React.FC = () => {
                                   className="absolute top-4 right-4 w-12 h-12 opacity-80" 
                                 />
                                 <CardContent className="p-6 flex flex-col h-full">
-                                  <div className="text-xl font-bold text-scrummy-navyBlue bg-scrummy-goldYellow inline-flex rounded-lg px-4 py-2 self-start mb-4">
+                                  <div className="text-xl font-bold text-scrummy-navy bg-scrummy-goldYellow inline-flex rounded-lg px-4 py-2 self-start mb-4">
                                     {f.time}
                                   </div>
                                   <div className="flex items-center justify-center flex-grow gap-8 md:gap-16">
@@ -888,7 +904,7 @@ const Fixtures: React.FC = () => {
                                           className="w-32 h-32 mx-auto mb-2 object-contain" 
                                         />
                                       )}
-                                      <p className="text-xl font-bold text-scrummy-navyBlue">{f.teamA}</p>
+                                      <p className="text-xl font-bold text-scrummy-navy">{f.teamA}</p>
                                     </div>
                                     {/* VS */}
                                     <div className="flex-none">
@@ -913,7 +929,7 @@ const Fixtures: React.FC = () => {
                                           className="w-32 h-32 mx-auto mb-2 object-contain" 
                                         />
                                       )}
-                                      <p className="text-xl font-bold text-scrummy-navyBlue">{f.teamB}</p>
+                                      <p className="text-xl font-bold text-scrummy-navy">{f.teamB}</p>
                                     </div>
                                   </div>
                                   {/* Add streaming link for first match */}
@@ -958,8 +974,8 @@ const Fixtures: React.FC = () => {
                       </>
                     ) : (
                       <>
-                        <h2 className="text-xl md:text-2xl font-semibold mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 flex flex-col md:flex-row md:items-end">
-                          <span className="text-scrummy-navyBlue">{day.date}</span>
+                        <h2 className="text-xl md:text-2xl font-semibold mb-4 font-orbitron border-b border-gray-200 pb-2 flex flex-col md:flex-row md:items-end">
+                          <span className="text-scrummy-navy">{day.date}</span>
                           <span className="text-scrummy-goldYellow text-lg md:ml-3">{day.day}</span>
                         </h2>
                         <motion.div
@@ -1012,8 +1028,8 @@ const Fixtures: React.FC = () => {
                                       isCancelled 
                                         ? 'text-red-500 bg-red-50'
                                         : isHighlighted 
-                                          ? 'text-scrummy-navyBlue bg-scrummy-goldYellow' 
-                                          : 'text-scrummy-goldYellow bg-scrummy-navyBlue'
+                                          ? 'text-scrummy-navy bg-scrummy-goldYellow' 
+                                          : 'text-scrummy-goldYellow bg-scrummy-navy'
                                     } inline-flex rounded px-2 py-1 self-start mb-0.5 mt-2 ml-2 z-10`}>
                                       {f.time}
                                     </div>
@@ -1028,7 +1044,7 @@ const Fixtures: React.FC = () => {
                                             className="w-24 h-24 mx-auto mb-0.5 object-contain" 
                                           />
                                         )}
-                                        <p className="text-base font-medium text-scrummy-navyBlue">{f.teamA}</p>
+                                        <p className="text-base font-medium text-scrummy-navy">{f.teamA}</p>
                                       </div>
                                       {/* Score or VS */}
                                       <div className="flex-none flex flex-col items-center justify-center">
@@ -1037,7 +1053,7 @@ const Fixtures: React.FC = () => {
                                         ) : showFinal ? (
                                           scoreDisplay
                                         ) : (
-                                          <p className="text-scrummy-navyBlue/60 font-semibold text-base">vs</p>
+                                          <p className="text-gray-400 font-semibold text-base">vs</p>
                                         )}
                                       </div>
                                       {/* Team B */}
@@ -1049,13 +1065,13 @@ const Fixtures: React.FC = () => {
                                             className="w-24 h-24 mx-auto mb-0.5 object-contain" 
                                           />
                                         )}
-                                        <p className="text-base font-medium text-scrummy-navyBlue">{f.teamB}</p>
+                                        <p className="text-base font-medium text-scrummy-navy">{f.teamB}</p>
                                       </div>
                                     </div>
 
                                     {/* Location display below team info */}
                                     {f.location && (
-                                      <div className="text-xs text-center font-medium text-scrummy-navyBlue/70 mt-2">
+                                      <div className="text-xs text-center font-medium text-gray-500 mt-2">
                                         {f.location}
                                       </div>
                                     )}
@@ -1071,11 +1087,11 @@ const Fixtures: React.FC = () => {
                 ))
               )}
             </div>
-            <div className="mt-12 text-center text-sm text-scrummy-navyBlue/70">
-            </div>
+          <div className="mt-12 text-center text-sm text-gray-500">
+            {/* Footer space */}
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 };
