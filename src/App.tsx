@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Fixtures from "./pages/Fixtures";
 import BoxScorePage from "./pages/BoxScorePage";
+import About from "./pages/About";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/fixtures" element={<Fixtures />} />
+          <Route path="/about" element={<About />} />
           <Route path="/box-score/:matchId" element={<BoxScorePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
