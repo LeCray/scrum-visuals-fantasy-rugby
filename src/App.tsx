@@ -8,6 +8,8 @@ import NotFound from "./pages/NotFound";
 import Fixtures from "./pages/Fixtures";
 import BoxScorePage from "./pages/BoxScorePage";
 import About from "./pages/About";
+import AfricaCupHub from "./pages/AfricaCupHub";
+import AfricaCupTeams from "./pages/AfricaCupTeams";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -23,6 +25,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/fixtures" element={<Fixtures />} />
           <Route path="/about" element={<About />} />
+          <Route path="/africa-cup" element={<AfricaCupHub />} />
+          <Route path="/africa-cup/teams" element={<AfricaCupTeams />} />
           <Route path="/box-score/:matchId" element={<BoxScorePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

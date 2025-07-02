@@ -115,6 +115,12 @@ const Index: React.FC = () => {
               Fixtures
             </Link>
             <Link 
+              to="/africa-cup" 
+              className="text-white hover:text-scrummy-goldYellow font-medium transition-colors"
+            >
+              Africa Cup
+            </Link>
+            <Link 
               to="/about" 
               className="text-white hover:text-scrummy-goldYellow font-medium transition-colors"
             >

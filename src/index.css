@@ -71,4 +71,23 @@
   .input-field {
     @apply bg-white/80 backdrop-blur-sm border border-blue-100 rounded-lg py-3 px-4 w-full focus:outline-none focus:ring-2 focus:ring-scrummy-blue transition-all duration-300;
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
