@@ -10,7 +10,11 @@ const zimbabwePlayerImages: Record<string, string> = {
   'Jason Fraser': '/assets/Zimbabwe Players/Jason Fraser.png',
   'Trevor Gurwe': '/assets/Zimbabwe Players/Trevor Gurwe.png',
   'Brandon Mudzekenyedzi': '/assets/Zimbabwe Players/Brandon Mudzekenyedzi.png',
-  'Ian Prior': '/assets/Zimbabwe Players/Ian Prior.png'
+  'Ian Prior': '/assets/Zimbabwe Players/Ian Prior.png',
+  'Victor Mupunga': '/assets/Zimbabwe Players/Victor Mupunga.png',
+  'Hilton Mudariki': '/assets/Zimbabwe Players/Hilton Mudariki.png',
+  'Dion Khumalo': '/assets/Zimbabwe Players/Dion Khumalo.png',
+  'Aiden Burnett': '/assets/Zimbabwe Players/Aiden Burnett.png'
 };
 
 // Timezone conversion utility
