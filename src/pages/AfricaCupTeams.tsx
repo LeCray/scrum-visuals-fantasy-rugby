@@ -1,0 +1,680 @@
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ChevronLeft, Users, Star, Menu, X } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+
+// Team data structure
+const teams = [
+  {
+    id: 'zimbabwe',
+    name: 'Zimbabwe Sables',
+    flag: '🇿🇼',
+    country: 'Zimbabwe',
+    roster: [
+      // Hookers
+      { name: 'Bryan Chiang', position: 'Hooker', age: 28, info: 'Experienced hooker with solid lineout throwing' },
+      { name: 'Simba Mandioma', position: 'Hooker', age: 26, info: 'Mobile hooker with strong scrummaging' },
+      
+      // Props
+      { name: 'Victor Mupunga', position: 'Prop', age: 29, info: 'Powerful tighthead prop' },
+      { name: 'Tyran Fagan', position: 'Prop', age: 27, info: 'Solid front row forward' },
+      { name: 'Zvikomborero Chimoto', position: 'Prop', age: 25, info: 'Strong scrummaging prop' },
+      { name: 'Cleopas Kundiona', position: 'Prop', age: 28, info: 'Experienced front row anchor' },
+      { name: 'Brian Makamure', position: 'Prop', age: 26, info: 'Versatile front row player' },
+      { name: 'Bornwell Gwinji', position: 'Prop', age: 24, info: 'Dynamic young prop' },
+      
+      // Second Row
+      { name: 'Kudakwashe Nyakufaringwa', position: '2nd Row', age: 27, info: 'Lineout specialist and leader' },
+      { name: 'Simba Siraha', position: '2nd Row', age: 25, info: 'Athletic lock forward' },
+      { name: 'Tadiwa Gwashu', position: '2nd Row', age: 26, info: 'Powerful lineout option' },
+      { name: 'Brian Nyaude', position: '2nd Row', age: 24, info: 'Mobile second row forward' },
+      
+      // Back Row
+      { name: 'Jason Fraser', position: 'Back Row', age: 30, info: 'Captain and experienced campaigner' },
+      { name: 'Aiden Burnett', position: 'Back Row', age: 25, info: 'Dynamic loose forward' },
+      { name: 'Dylan Utete', position: 'Back Row', age: 23, info: 'Mobile back row player' },
+      { name: 'Godfrey Muzanargwo', position: 'Back Row', age: 27, info: 'Powerful ball carrier' },
+      { name: 'Tinotenda Mavesere', position: 'Back Row', age: 24, info: 'Athletic loose forward' },
+      
+      // Half Backs
+      { name: 'Hilton Mudariki', position: 'Half Back', age: 24, info: 'Quick service from the base' },
+      { name: 'Keegan Joubert', position: 'Half Back', age: 22, info: 'Promising young scrum-half' },
+      { name: 'Liam Larkan', position: 'Half Back', age: 26, info: 'Experienced half back' },
+      { name: 'Ian Prior', position: 'Half Back', age: 28, info: 'Veteran playmaker' },
+      { name: 'Lenience Tambwera', position: 'Half Back', age: 23, info: 'Quick-thinking half back' },
+      { name: 'Tyrone Gombe', position: 'Half Back', age: 25, info: 'Versatile half back option' },
+      
+      // Centres
+      { name: 'Brandon Mudzekenyedzi', position: 'Centre', age: 25, info: 'Powerful center with pace' },
+      { name: 'Dion Khumalo', position: 'Centre', age: 24, info: 'Creative center with good hands' },
+      { name: 'Kudzai Mashawi', position: 'Centre', age: 26, info: 'Strong defensive center' },
+      
+      // Outside Backs
+      { name: 'Trevor Gurwe', position: 'Outside Back', age: 27, info: 'Pacy winger with finishing ability' },
+      { name: 'Matthew McNab', position: 'Outside Back', age: 25, info: 'Versatile back three player' },
+      { name: 'Tapiwa Mafura', position: 'Outside Back', age: 23, info: 'Electric winger with pace' },
+      { name: 'Takudzwa Musingwini', position: 'Outside Back', age: 24, info: 'Solid fullback option' },
+      { name: 'Edward Sigauke', position: 'Outside Back', age: 26, info: 'Experienced outside back' }
+    ]
+  },
+  {
+    id: 'algeria',
+    name: 'Algeria',
+    flag: '🇩🇿',
+    country: 'Algeria',
+    roster: [
+      { name: 'Yacine Bensaha', position: 'Hooker', age: 28, info: 'National team captain and leader' },
+      { name: 'Karim Boudjemaa', position: 'Prop', age: 30, info: 'Experienced front row anchor' },
+      { name: 'Ahmed Tafat', position: '2nd Row', age: 27, info: 'Lineout specialist' },
+      { name: 'Sofiane Guitouni', position: 'Back Row', age: 25, info: 'Mobile loose forward' },
+      { name: 'Yasser Boudaoud', position: 'Half Back', age: 24, info: 'Quick-thinking scrum-half' },
+      { name: 'Nassim Lalaoui', position: 'Fly Half', age: 26, info: 'Creative playmaker' },
+      { name: 'Bilal Bouguetof', position: 'Centre', age: 25, info: 'Strong defensive center' },
+      { name: 'Rami Bouchar', position: 'Winger', age: 23, info: 'Pacy finisher on the wing' }
+    ]
+  },
+  {
+    id: 'namibia',
+    name: 'Namibia',
+    flag: '🇳🇦',
+    country: 'Namibia',
+    roster: [
+      // Forwards
+      { name: 'Haitembu Shikufa', position: 'Prop', age: 27, info: 'Powerful front row forward' },
+      { name: 'Jason Benade', position: 'Hooker', age: 29, info: 'Experienced hooker with solid lineout throwing' },
+      { name: 'Otja Auala', position: 'Prop', age: 26, info: 'Strong scrummaging prop' },
+      { name: 'Sidney Halupe', position: '2nd Row', age: 25, info: 'Athletic lock forward' },
+      { name: 'Louis van der Westhuizen', position: '2nd Row', age: 28, info: 'Lineout specialist' },
+      { name: 'Armand Combrinck', position: 'Back Row', age: 24, info: 'Dynamic loose forward' },
+      { name: 'Torsten van Jaarsveld', position: 'Hooker', age: 29, info: 'Experienced hooker with leadership qualities' },
+      { name: 'Aranos Coetzee', position: 'Back Row', age: 27, info: 'Powerful ball carrier' },
+      { name: 'Adriaan Ludick', position: 'Prop', age: 25, info: 'Solid front row anchor' },
+      { name: 'Oliver Kurz', position: 'Back Row', age: 26, info: 'Mobile loose forward' },
+      { name: 'Tiaan de Klerk', position: '2nd Row', age: 24, info: 'Powerful lineout option' },
+      { name: 'Wian Conradie', position: 'Back Row', age: 23, info: 'Athletic back row player' },
+      { name: 'Johan Retief', position: 'Prop', age: 28, info: 'Veteran front row with experience' },
+      { name: 'Max Katjijeko', position: '2nd Row', age: 26, info: 'Athletic lineout option' },
+      { name: 'Richard Hardwick', position: 'Back Row', age: 25, info: 'Experienced loose forward' },
+      { name: 'Adriaan Booysen', position: 'Back Row', age: 24, info: 'Mobile back row player' },
+      { name: 'Prince !Gaoseb', position: 'Hooker', age: 27, info: 'Dynamic hooker with good hands' },
+      
+      // Backs
+      { name: 'Jacques Theron', position: 'Half Back', age: 25, info: 'Quick-thinking scrum-half' },
+      { name: 'AJ Kearns', position: 'Half Back', age: 24, info: 'Creative playmaker' },
+      { name: 'Tiaan Swanepoel', position: 'Outside Back', age: 26, info: 'Versatile fullback option' },
+      { name: 'Andre van der Berg', position: 'Centre', age: 27, info: 'Powerful center with good hands' },
+      { name: 'Le Roux Malan', position: 'Outside Back', age: 23, info: 'Pacy winger with finishing ability' },
+      { name: 'Danco Burger', position: 'Centre', age: 25, info: 'Strong ball-carrying center' },
+      { name: 'Alcino Izaacs', position: 'Outside Back', age: 24, info: 'Electric winger with pace' },
+      { name: 'Jurgen Meyer', position: 'Centre', age: 26, info: 'Experienced center with leadership' },
+      { name: 'Cliven Loubser', position: 'Half Back', age: 27, info: 'Goal-kicking fly-half' },
+      { name: 'Danie van der Merwe', position: 'Outside Back', age: 25, info: 'Solid outside back option' },
+      { name: 'Jay Cee Nel', position: 'Outside Back', age: 28, info: 'Experienced back three player' }
+    ]
+  },
+  {
+    id: 'kenya',
+    name: 'Kenya Simbas',
+    flag: '🇰🇪',
+    country: 'Kenya',
+    roster: [
+      // Forwards
+      // Props
+      { name: 'Ephraim Oduor', position: 'Prop', age: 29, info: 'Experienced front row leader' },
+      { name: 'Edward Mwaura', position: 'Prop', age: 27, info: 'Powerful tighthead prop' },
+      { name: 'Vincent Mwikhali', position: 'Prop', age: 26, info: 'Solid front row anchor' },
+      { name: 'Wilhite Mususi', position: 'Prop', age: 24, info: 'Strong scrummaging prop' },
+      
+      // Hookers
+      { name: 'Teddy Akala', position: 'Hooker', age: 28, info: 'Solid lineout thrower' },
+      { name: 'Eugine Sifuna', position: 'Hooker', age: 25, info: 'Mobile hooker with good hands' },
+      
+      // Locks
+      { name: 'Hibrahim Ayoo', position: '2nd Row', age: 26, info: 'Athletic lock forward' },
+      { name: 'Thomas Okeyo', position: '2nd Row', age: 28, info: 'Lineout specialist' },
+      { name: 'Andycole Omollo', position: '2nd Row', age: 24, info: 'Powerful lineout option' },
+      { name: 'Emmanuel Slungi', position: '2nd Row', age: 27, info: 'Experienced second row' },
+      
+      // Back Row
+      { name: 'George Nyambua', position: 'Back Row', age: 28, info: 'Captain and inspirational leader' },
+      { name: 'Patrick Sabatia', position: 'Back Row', age: 26, info: 'Dynamic loose forward' },
+      { name: 'David Bunduki', position: 'Back Row', age: 25, info: 'Powerful ball carrier' },
+      { name: 'Obat Kuke', position: 'Back Row', age: 24, info: 'Mobile back row player' },
+      { name: 'Bethuel Anami', position: 'Back Row', age: 27, info: 'Athletic loose forward' },
+      { name: 'Elkeans Musonye', position: 'Back Row', age: 23, info: 'Promising young forward' },
+      
+      // Backs
+      // Scrum Halves
+      { name: 'Samuel Asati', position: 'Half Back', age: 25, info: 'Quick-thinking scrum-half' },
+      { name: 'Brian Tanga', position: 'Half Back', age: 26, info: 'Experienced scrum-half' },
+      
+      // Fly Halves
+      { name: 'Barry Young', position: 'Half Back', age: 24, info: 'Creative playmaker and goal-kicker' },
+      { name: 'Brian Wahinya', position: 'Half Back', age: 23, info: 'Promising young fly-half' },
+      
+      // Centres
+      { name: 'Walter Okoth', position: 'Centre', age: 28, info: 'Experienced center and leader' },
+      { name: 'Samuel Ovwamu', position: 'Centre', age: 25, info: 'Powerful ball-carrying center' },
+      { name: 'Bryceson Adaka', position: 'Centre', age: 24, info: 'Creative center with good hands' },
+      { name: 'John Okoth', position: 'Centre', age: 26, info: 'Strong defensive center' },
+      
+      // Wingers
+      { name: 'Griffin Chao', position: 'Outside Back', age: 23, info: 'Pacy finisher with electric pace' },
+      { name: 'Timothy Omela', position: 'Outside Back', age: 25, info: 'Powerful wing with finishing ability' },
+      
+      // Full Backs
+      { name: 'Jone Kubu', position: 'Outside Back', age: 25, info: 'Safe fullback under pressure' },
+      { name: 'Derick Ashiundu', position: 'Outside Back', age: 27, info: 'Versatile back three player' }
+    ]
+  },
+  {
+    id: 'uganda',
+    name: 'Uganda',
+    flag: '🇺🇬',
+    country: 'Uganda',
+    roster: [
+      // Forwards
+      { name: 'Bwambale Nathan Asiimire', position: 'Prop', age: 26, info: 'Powerful front row forward' },
+      { name: 'Edward Emiemu', position: 'Hooker', age: 28, info: 'Solid lineout thrower' },
+      { name: 'Ssenteza Wycliff Santos', position: 'Prop', age: 27, info: 'Strong scrummaging prop' },
+      { name: 'Ayebazibwe Blair', position: '2nd Row', age: 25, info: 'Athletic lock forward' },
+      { name: 'Kivumbi Saul', position: 'Back Row', age: 29, info: 'Experienced loose forward' },
+      { name: 'Kimbowa Collin', position: '2nd Row', age: 26, info: 'Lineout specialist' },
+      { name: 'Maido Fahad', position: 'Prop', age: 24, info: 'Dynamic young prop' },
+      { name: 'Emong Eliphaz', position: 'Hooker', age: 27, info: 'Mobile hooker with good hands' },
+      { name: 'Opio Julius', position: 'Back Row', age: 25, info: 'Powerful ball carrier' },
+      { name: 'Gongodyo Sydney', position: '2nd Row', age: 28, info: 'Experienced second row' },
+      { name: 'Wandera Brian', position: 'Back Row', age: 24, info: 'Mobile loose forward' },
+      { name: 'Byron Oketayot', position: 'Back Row', age: 28, info: 'Captain and inspirational leader' },
+      { name: 'Frank Kidega', position: 'Back Row', age: 30, info: 'Vice Captain with vast experience' },
+      { name: 'Ogena Pius', position: 'Prop', age: 26, info: 'Solid front row anchor' },
+      { name: 'Desire Ayera', position: 'Prop', age: 30, info: 'Veteran front row with leadership qualities' },
+      { name: 'Aturinda Alex', position: '2nd Row', age: 25, info: 'Athletic lineout option' },
+      
+      // Backs
+      { name: 'Conrad Wanyama Wandera', position: 'Half Back', age: 27, info: 'Vice Captain and experienced scrum-half' },
+      { name: 'Massanganzira Isaac', position: 'Half Back', age: 25, info: 'Creative playmaker' },
+      { name: 'Aaron Ofoywroth', position: 'Centre', age: 25, info: 'Powerful center with good hands' },
+      { name: 'Philip Wokorach', position: 'Half Back', age: 31, info: 'Veteran scrum-half with pace' },
+      { name: 'Kasito Adrian', position: 'Outside Back', age: 24, info: 'Pacy winger with finishing ability' },
+      { name: 'Ivan Otema', position: 'Half Back', age: 26, info: 'Creative playmaker and goal-kicker' },
+      { name: 'Jadwong Joseph Aredo', position: 'Centre', age: 23, info: 'Promising young center' },
+      { name: 'Ssembusi Shakim', position: 'Outside Back', age: 25, info: 'Versatile back three player' },
+      { name: 'Liam Walker Christopher', position: 'Outside Back', age: 26, info: 'Solid fullback option' },
+      { name: 'Timothy Kisiga', position: 'Centre', age: 24, info: 'Strong ball-carrying center' },
+      { name: 'Ampeirwe William Nkore', position: 'Outside Back', age: 27, info: 'Experienced outside back' },
+      { name: 'Munyani Ian Arnold', position: 'Outside Back', age: 23, info: 'Electric winger with pace' }
+    ]
+  },
+  {
+    id: 'senegal',
+    name: 'Senegal',
+    flag: '🇸🇳',
+    country: 'Senegal',
+    roster: [
+      { name: 'Alioune Ndiaye', position: 'Back Row', age: 30, info: 'Captain and inspirational leader' },
+      { name: 'Mamadou Diop', position: 'Hooker', age: 27, info: 'Solid lineout thrower' },
+      { name: 'Ibrahima Fall', position: 'Prop', age: 29, info: 'Experienced front row anchor' },
+      { name: 'Cheikh Diallo', position: '2nd Row', age: 28, info: 'Lineout specialist and leader' },
+      { name: 'Abdou Seck', position: 'Half Back', age: 26, info: 'Quick service provider' },
+      { name: 'Modou Faye', position: 'Fly Half', age: 25, info: 'Creative playmaker' },
+      { name: 'Serigne Dia', position: 'Centre', age: 27, info: 'Powerful ball-carrying center' },
+      { name: 'Landing Badji', position: 'Winger', age: 23, info: 'Speedster with finishing ability' }
+    ]
+  },
+  {
+    id: 'cotedivoire',
+    name: 'Côte d\'Ivoire',
+    flag: '🇨🇮',
+    country: 'Côte d\'Ivoire',
+    roster: [
+      { name: 'Adama Coulibaly', position: 'Back Row', age: 29, info: 'Captain and experienced leader' },
+      { name: 'Koffi Kouame', position: 'Hooker', age: 28, info: 'Experienced hooker with solid lineout skills' },
+      { name: 'Didier Yao', position: 'Prop', age: 30, info: 'Veteran prop with international experience' },
+      { name: 'Seydou Doumbia', position: '2nd Row', age: 27, info: 'Athletic lineout option' },
+      { name: 'Maxime Dago', position: 'Half Back', age: 26, info: 'Quick-thinking scrum-half' },
+      { name: 'Jean-Baptiste Anoh', position: 'Fly Half', age: 25, info: 'Creative playmaker and goal-kicker' },
+      { name: 'Franck Kone', position: 'Centre', age: 27, info: 'Powerful center with good hands' },
+      { name: 'Serge Bile', position: 'Winger', age: 23, info: 'Pacy finisher on the wing' }
+    ]
+  },
+  {
+    id: 'morocco',
+    name: 'Morocco',
+    flag: '🇲🇦',
+    country: 'Morocco',
+    roster: [
+      // Forwards (Les Avants)
+      { name: 'Aanikid Nassim', position: 'Prop', age: 26, info: 'Powerful front row forward' },
+      { name: 'Achahbar Adil', position: 'Hooker', age: 28, info: 'Experienced hooker with solid lineout throwing' },
+      { name: 'Ait Naceur Nail', position: 'Prop', age: 25, info: 'Strong scrummaging prop' },
+      { name: 'Bachiri Theo', position: '2nd Row', age: 24, info: 'Athletic lock forward' },
+      { name: 'Bouamrane Nabil', position: '2nd Row', age: 27, info: 'Lineout specialist' },
+      { name: 'Boukanoucha Jibril', position: 'Back Row', age: 23, info: 'Dynamic loose forward' },
+      { name: 'Boukanoucha Amine', position: 'Back Row', age: 25, info: 'Mobile back row player' },
+      { name: 'El Kadri Naoufal', position: 'Prop', age: 29, info: 'Veteran front row with experience' },
+      { name: 'El Ansari Elias', position: 'Hooker', age: 26, info: 'Reliable hooker with good hands' },
+      { name: 'El Khaoulani Billal', position: 'Back Row', age: 24, info: 'Powerful ball carrier' },
+      { name: 'El Fakir Zakaria', position: '2nd Row', age: 27, info: 'Tall lineout jumper' },
+      { name: 'El Khattabi Ilan', position: 'Back Row', age: 22, info: 'Athletic loose forward' },
+      { name: 'El Gharbaoui Reda', position: 'Prop', age: 28, info: 'Strong scrummaging specialist' },
+      { name: 'El Yahyaoui Ilian', position: 'Back Row', age: 25, info: 'Versatile back row option' },
+      { name: 'Fadli Bilal', position: '2nd Row', age: 26, info: 'Powerful lineout option' },
+      { name: 'Hou Youness', position: 'Back Row', age: 23, info: 'Mobile loose forward' },
+      { name: 'Haimiche Hassan', position: 'Hooker', age: 27, info: 'Dynamic hooker with leadership' },
+      
+      // Backs (Les Trois-Quarts)
+      { name: 'Jaoudat Soheyl', position: 'Half Back', age: 25, info: 'Quick-thinking scrum-half' },
+      { name: 'Jnaoui Samir', position: 'Half Back', age: 24, info: 'Creative playmaker' },
+      { name: 'Peutin Louis', position: 'Outside Back', age: 26, info: 'Versatile fullback option' },
+      { name: 'Khaouti Karim', position: 'Centre', age: 27, info: 'Powerful center with good hands' },
+      { name: 'Tirefort Valentin', position: 'Outside Back', age: 23, info: 'Pacy winger with finishing ability' },
+      { name: 'Maamry Yassine', position: 'Centre', age: 25, info: 'Strong ball-carrying center' },
+      { name: 'Qadiri Karim', position: 'Outside Back', age: 24, info: 'Electric winger with pace' },
+      { name: 'Ouazzani Jad', position: 'Centre', age: 26, info: 'Experienced center with leadership' },
+      { name: 'Laabidate Smail', position: 'Half Back', age: 27, info: 'Tactical fly-half' },
+      { name: 'Terki Nassim', position: 'Outside Back', age: 25, info: 'Solid outside back option' },
+      { name: 'El Youmouri Nassim', position: 'Outside Back', age: 28, info: 'Experienced back three player' }
+    ]
+  }
+];
+
+const AfricaCupTeams: React.FC = () => {
+  const [selectedTeam, setSelectedTeam] = useState(teams[0]);
+  const [expandedPlayer, setExpandedPlayer] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-white to-[#D0E3FF]">
+      {/* Header Navigation */}
+      <header className="bg-scrummy-navy shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <Link to="/" className="flex items-center gap-2 text-white hover:text-scrummy-goldYellow transition-colors">
+              <ChevronLeft className="w-5 h-5" />
+              <span className="font-medium">Back to SCRUMMY</span>
+            </Link>
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-6">
+              <Link to="/africa-cup" className="text-white hover:text-scrummy-goldYellow transition-colors">
+                Tournament Hub
+              </Link>
+              <Link to="/africa-cup/teams" className="text-scrummy-goldYellow font-semibold">
+                Teams & Rosters
+              </Link>
+              <Link to="/africa-cup/fixtures" className="text-white hover:text-scrummy-goldYellow transition-colors">
+                Fixtures
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden text-white hover:text-scrummy-goldYellow transition-colors"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden mt-4 pb-4 border-t border-scrummy-goldYellow/20"
+            >
+              <div className="space-y-2 pt-4">
+                <Link to="/africa-cup" className="block text-white hover:text-scrummy-goldYellow transition-colors py-2">
+                  Tournament Hub
+                </Link>
+                <Link to="/africa-cup/teams" className="block text-scrummy-goldYellow font-semibold py-2">
+                  Teams & Rosters
+                </Link>
+                <Link to="/africa-cup/fixtures" className="block text-white hover:text-scrummy-goldYellow transition-colors py-2">
+                  Fixtures
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </div>
+      </header>
+
+      {/* Page Header */}
+      <section className="relative py-8 sm:py-12 md:py-16 overflow-hidden">
+        {/* Background with geometric elements */}
+        <div className="absolute inset-0 bg-gradient-to-br from-scrummy-navy via-scrummy-blue to-blue-900">
+          {/* Geometric shapes */}
+          <div className="absolute top-0 right-0 w-32 md:w-64 h-full bg-gradient-to-br from-orange-500/30 to-red-500/30 transform skew-x-12 translate-x-16 md:translate-x-32"></div>
+          <div className="absolute top-0 right-8 md:right-16 w-24 md:w-48 h-full bg-gradient-to-br from-yellow-400/20 to-orange-500/20 transform skew-x-12 translate-x-8 md:translate-x-16"></div>
+          <div className="absolute bottom-0 left-0 w-28 md:w-56 h-full bg-gradient-to-tr from-teal-500/25 to-green-500/25 transform -skew-x-12 -translate-x-14 md:-translate-x-28"></div>
+        </div>
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/20" />
+
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
+            {/* Badge */}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-3 md:px-4 py-2 text-white mb-4 md:mb-6"
+            >
+              <Users className="w-4 h-4" />
+              <span className="text-sm font-medium">8 Competing Nations</span>
+            </motion.div>
+
+            <motion.h1 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-3 md:mb-4"
+            >
+              Teams & Rosters
+            </motion.h1>
+            
+            <motion.p 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-6 md:mb-8 px-4"
+            >
+              Meet the warriors representing their nations in Rugby Africa Cup 2025
+            </motion.p>
+
+            {/* Stats */}
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="flex flex-wrap justify-center gap-4 md:gap-8 text-white/80 text-sm px-4"
+            >
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 bg-scrummy-goldYellow rounded-full"></span>
+                <span>200+ Elite Players</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 bg-scrummy-goldYellow rounded-full"></span>
+                <span>African Champions</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 bg-scrummy-goldYellow rounded-full"></span>
+                <span>RWC 2027 Dreams</span>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Team Selector */}
+      <section className="py-6 md:py-8 bg-scrummy-navy/5">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex overflow-x-auto gap-2 md:gap-3 pb-4" style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
+          }}>
+            {teams.map((team, index) => (
+              <motion.button
+                key={team.id}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  setSelectedTeam(team);
+                  setExpandedPlayer(null);
+                }}
+                className={`flex-shrink-0 min-w-[120px] md:min-w-[140px]`}
+              >
+                <div className={`px-4 md:px-6 py-2 md:py-3 rounded-full transition-all duration-300 border-2 ${
+                  selectedTeam.id === team.id
+                    ? 'border-scrummy-goldYellow bg-scrummy-goldYellow text-scrummy-navy shadow-lg'
+                    : 'border-gray-300 bg-white hover:border-scrummy-goldYellow/70 hover:shadow-md'
+                }`}>
+                  <div className="flex items-center gap-2 md:gap-3">
+                    <span className="text-lg md:text-xl">{team.flag}</span>
+                    <span className={`font-bold text-xs md:text-sm whitespace-nowrap ${
+                      selectedTeam.id === team.id ? 'text-scrummy-navy' : 'text-scrummy-navy'
+                    }`}>
+                      {team.country}
+                    </span>
+                  </div>
+                </div>
+              </motion.button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Selected Team Info */}
+      <section className="py-6 md:py-8 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            key={selectedTeam.id}
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            <Card className="bg-gradient-to-r from-scrummy-navy to-scrummy-blue text-white mb-6 md:mb-8">
+              <CardContent className="p-4 md:p-8">
+                <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-4">
+                  <div className="flex items-center gap-3 md:gap-4 text-center sm:text-left">
+                    <span className="text-4xl md:text-6xl">{selectedTeam.flag}</span>
+                    <div>
+                      <h2 className="text-xl md:text-3xl font-black">{selectedTeam.name}</h2>
+                      <p className="text-sm md:text-lg opacity-90">{selectedTeam.roster.length} squad members</p>
+                    </div>
+                  </div>
+                  <Link to="/download">
+                    <Button className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold text-sm md:text-base px-4 md:px-6">
+                      <Star className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+                      Vote in App
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Player Roster by Position */}
+            <div className="space-y-6 md:space-y-8">
+              {/* Forwards Section */}
+              <div>
+                <div className="mb-4 md:mb-6">
+                  <h3 className="text-xl md:text-2xl font-bold text-scrummy-navy">Forwards</h3>
+                  <p className="text-gray-600 text-sm">The pack - power and precision</p>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 md:gap-4">
+                  {selectedTeam.roster
+                    .filter(player => ['Hooker', 'Prop', '2nd Row', 'Back Row'].includes(player.position))
+                    .map((player, index) => {
+                const isExpanded = expandedPlayer === `${selectedTeam.id}-${player.name}`;
+                return (
+                  <motion.div
+                    key={`${selectedTeam.id}-${player.name}`}
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.02, duration: 0.3 }}
+                    layout
+                  >
+                    <div 
+                      className="cursor-pointer group transition-all duration-300 hover:scale-[1.02] p-2"
+                      onClick={() => setExpandedPlayer(isExpanded ? null : `${selectedTeam.id}-${player.name}`)}
+                    >
+                      {/* Player Mugshot Placeholder */}
+                      <div className="relative mb-3">
+                        <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-scrummy-navy to-scrummy-blue rounded-full flex items-center justify-center mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg">
+                          <Users className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                        </div>
+                        {isExpanded && (
+                          <div className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
+                            <span className="text-xs md:text-sm text-scrummy-navy">✓</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Player Info - Always Visible */}
+                      <div className="text-center space-y-2 mb-3">
+                        <h3 className="font-bold text-scrummy-navy text-xs md:text-sm leading-tight">{player.name}</h3>
+                        <span className="inline-block bg-scrummy-goldYellow/20 text-scrummy-goldYellow font-semibold text-xs px-2 py-1 rounded-full">
+                          {player.position}
+                        </span>
+                      </div>
+
+                      {/* Expanded Details */}
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="space-y-3 border-t border-gray-200 pt-3 mt-3"
+                        >
+                          <div className="text-center">
+                            <span className="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
+                              Age {player.age}
+                            </span>
+                          </div>
+                          <p className="text-gray-600 text-xs leading-relaxed text-center">{player.info}</p>
+                          
+                          {/* Vote Button */}
+                          <Link to="/download">
+                            <button 
+                              className="w-full bg-gradient-to-r from-scrummy-goldYellow to-yellow-400 text-scrummy-navy font-bold text-xs py-2 px-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-200"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              ⭐ Vote Top Dawg
+                            </button>
+                          </Link>
+                        </motion.div>
+                      )}
+                    </div>
+                  </motion.div>
+                );
+                   })}
+                </div>
+              </div>
+
+              {/* Backs Section */}
+              <div>
+                <div className="mb-4 md:mb-6">
+                  <h3 className="text-xl md:text-2xl font-bold text-scrummy-navy">Backs</h3>
+                  <p className="text-gray-600 text-sm">Speed, skill and finesse</p>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 md:gap-4">
+                  {selectedTeam.roster
+                    .filter(player => ['Half Back', 'Centre', 'Outside Back'].includes(player.position))
+                    .map((player, index) => {
+                const isExpanded = expandedPlayer === `${selectedTeam.id}-${player.name}`;
+                return (
+                  <motion.div
+                    key={`${selectedTeam.id}-${player.name}`}
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.02, duration: 0.3 }}
+                    layout
+                  >
+                    <div 
+                      className="cursor-pointer group transition-all duration-300 hover:scale-[1.02] p-2"
+                      onClick={() => setExpandedPlayer(isExpanded ? null : `${selectedTeam.id}-${player.name}`)}
+                    >
+                      {/* Player Mugshot Placeholder */}
+                      <div className="relative mb-3">
+                        <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-scrummy-navy to-scrummy-blue rounded-full flex items-center justify-center mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg">
+                          <Users className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                        </div>
+                        {isExpanded && (
+                          <div className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
+                            <span className="text-xs md:text-sm text-scrummy-navy">✓</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Player Info - Always Visible */}
+                      <div className="text-center space-y-2 mb-3">
+                        <h3 className="font-bold text-scrummy-navy text-xs md:text-sm leading-tight">{player.name}</h3>
+                        <span className="inline-block bg-scrummy-goldYellow/20 text-scrummy-goldYellow font-semibold text-xs px-2 py-1 rounded-full">
+                          {player.position}
+                        </span>
+                      </div>
+
+                      {/* Expanded Details */}
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="space-y-3 border-t border-gray-200 pt-3 mt-3"
+                        >
+                          <div className="text-center">
+                            <span className="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
+                              Age {player.age}
+                            </span>
+                          </div>
+                          <p className="text-gray-600 text-xs leading-relaxed text-center">{player.info}</p>
+                          
+                          {/* Vote Button */}
+                          <Link to="/download">
+                            <button 
+                              className="w-full bg-gradient-to-r from-scrummy-goldYellow to-yellow-400 text-scrummy-navy font-bold text-xs py-2 px-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-200"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              ⭐ Vote Top Dawg
+                            </button>
+                          </Link>
+                        </motion.div>
+                      )}
+                    </div>
+                  </motion.div>
+                );
+                   })}
+                </div>
+              </div>
+            </div>
+
+            {/* App Download CTA */}
+            <motion.div
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+              className="mt-8 md:mt-12"
+            >
+              <Card className="bg-scrummy-navy/5 border-scrummy-goldYellow border-2">
+                <CardContent className="p-6 md:p-8 text-center">
+                  <h3 className="text-xl md:text-2xl font-bold text-scrummy-navy mb-3">Cast Your Vote!</h3>
+                  <p className="text-gray-700 mb-6 max-w-2xl mx-auto text-sm md:text-base">
+                    Download the SCRUMMY app to vote for {selectedTeam.name} and your favorite players. 
+                    Join thousands of rugby fans making their voices heard!
+                  </p>
+                  <Link to="/download">
+                    <Button 
+                      size="lg" 
+                      className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-6 md:px-8 py-3 text-base md:text-lg"
+                    >
+                      📱 Download SCRUMMY App Now
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default AfricaCupTeams; 
