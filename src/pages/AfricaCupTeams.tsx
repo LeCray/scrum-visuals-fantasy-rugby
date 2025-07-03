@@ -281,6 +281,31 @@ const teams = [
   }
 ];
 
+// Zimbabwe player image mapping
+const zimbabwePlayerImages: Record<string, string> = {
+  'Bryan Chiang': '/assets/Zimbabwe Players/Bryan Chiang.png',
+  'Simba Mandioma': '/assets/Zimbabwe Players/Simba Mandioma.png',
+  'Victor Mupunga': '/assets/Zimbabwe Players/Victor Mupunga.png',
+  'Tyran Fagan': '/assets/Zimbabwe Players/Tyran Fagan.png',
+  'Bornwell Gwinji': '/assets/Zimbabwe Players/Bornwell Gwinji.png',
+  'Brian Nyaude': '/assets/Zimbabwe Players/Brian Nyaude.png',
+  'Jason Fraser': '/assets/Zimbabwe Players/Jason Fraser.png',
+  'Dylan Utete': '/assets/Zimbabwe Players/Dylan Utete.png',
+  'Godfrey Muzanargwo': '/assets/Zimbabwe Players/Godfrey Muzanargwo.png',
+  'Hilton Mudariki': '/assets/Zimbabwe Players/Hilton Mudariki.png',
+  'Keegan Joubert': '/assets/Zimbabwe Players/Keegan Joubert.png',
+  'Liam Larkan': '/assets/Zimbabwe Players/Liam Larkan.png',
+  'Ian Prior': '/assets/Zimbabwe Players/Ian Prior.png',
+  'Brandon Mudzekenyedzi': '/assets/Zimbabwe Players/Brandon Mudzekenyedzi.png',
+  'Dion Khumalo': '/assets/Zimbabwe Players/Dion Khumalo.png',
+  'Kudzai Mashawi': '/assets/Zimbabwe Players/Kudzai Mashawi.png',
+  'Trevor Gurwe': '/assets/Zimbabwe Players/Trevor Gurwe.png',
+  'Tapiwa Mafura': '/assets/Zimbabwe Players/Tapiwa Mafura.png',
+  'Takudzwa Musingwini': '/assets/Zimbabwe Players/Takudzwa Musingwini.png',
+  'Edward Sigauke': '/assets/Zimbabwe Players/Edward Sigauke.png',
+  'Tinotenda Mavesere': '/assets/Zimbabwe Players/Tinotenda Mavesere.png'
+};
+
 const AfricaCupTeams: React.FC = () => {
   const [selectedTeam, setSelectedTeam] = useState(teams[0]);
   const [expandedPlayer, setExpandedPlayer] = useState<string | null>(null);
@@ -496,7 +521,7 @@ const AfricaCupTeams: React.FC = () => {
                   <h3 className="text-xl md:text-2xl font-bold text-scrummy-navy">Forwards</h3>
                   <p className="text-gray-600 text-sm">The pack - power and precision</p>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 md:gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-3 md:gap-4">
                   {selectedTeam.roster
                     .filter(player => ['Hooker', 'Prop', '2nd Row', 'Back Row'].includes(player.position))
                     .map((player, index) => {
@@ -513,11 +538,19 @@ const AfricaCupTeams: React.FC = () => {
                       className="cursor-pointer group transition-all duration-300 hover:scale-[1.02] p-2"
                       onClick={() => setExpandedPlayer(isExpanded ? null : `${selectedTeam.id}-${player.name}`)}
                     >
-                      {/* Player Mugshot Placeholder */}
+                      {/* Player Mugshot */}
                       <div className="relative mb-3">
-                        <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-scrummy-navy to-scrummy-blue rounded-full flex items-center justify-center mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg">
-                          <Users className="w-6 h-6 md:w-8 md:h-8 text-white" />
-                        </div>
+                        {selectedTeam.id === 'zimbabwe' && zimbabwePlayerImages[player.name] ? (
+                          <img 
+                            src={zimbabwePlayerImages[player.name]} 
+                            alt={player.name}
+                            className="w-24 h-32 md:w-32 md:h-40 object-cover mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg border-2 border-scrummy-goldYellow rounded-lg"
+                          />
+                        ) : (
+                          <div className="w-24 h-32 md:w-32 md:h-40 bg-gradient-to-br from-scrummy-navy to-scrummy-blue rounded-full flex items-center justify-center mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg">
+                            <Users className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                          </div>
+                        )}
                         {isExpanded && (
                           <div className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
                             <span className="text-xs md:text-sm text-scrummy-navy">✓</span>
@@ -573,7 +606,7 @@ const AfricaCupTeams: React.FC = () => {
                   <h3 className="text-xl md:text-2xl font-bold text-scrummy-navy">Backs</h3>
                   <p className="text-gray-600 text-sm">Speed, skill and finesse</p>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 md:gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-3 md:gap-4">
                   {selectedTeam.roster
                     .filter(player => ['Half Back', 'Centre', 'Outside Back'].includes(player.position))
                     .map((player, index) => {
@@ -590,11 +623,19 @@ const AfricaCupTeams: React.FC = () => {
                       className="cursor-pointer group transition-all duration-300 hover:scale-[1.02] p-2"
                       onClick={() => setExpandedPlayer(isExpanded ? null : `${selectedTeam.id}-${player.name}`)}
                     >
-                      {/* Player Mugshot Placeholder */}
+                      {/* Player Mugshot */}
                       <div className="relative mb-3">
-                        <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-scrummy-navy to-scrummy-blue rounded-full flex items-center justify-center mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg">
-                          <Users className="w-6 h-6 md:w-8 md:h-8 text-white" />
-                        </div>
+                        {selectedTeam.id === 'zimbabwe' && zimbabwePlayerImages[player.name] ? (
+                          <img 
+                            src={zimbabwePlayerImages[player.name]} 
+                            alt={player.name}
+                            className="w-24 h-32 md:w-32 md:h-40 object-cover mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg border-2 border-scrummy-goldYellow rounded-lg"
+                          />
+                        ) : (
+                          <div className="w-24 h-32 md:w-32 md:h-40 bg-gradient-to-br from-scrummy-navy to-scrummy-blue rounded-full flex items-center justify-center mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg">
+                            <Users className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                          </div>
+                        )}
                         {isExpanded && (
                           <div className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
                             <span className="text-xs md:text-sm text-scrummy-navy">✓</span>
