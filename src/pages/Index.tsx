@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import WaitlistForm from "../components/WaitlistForm";
-import { Instagram, Facebook, Youtube, ChevronLeft, ChevronRight } from "lucide-react";
+import { Instagram, Facebook, Youtube, ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
 import { FaTiktok } from 'react-icons/fa';
 
 // Featured events data - includes major international tournaments
@@ -33,14 +33,14 @@ const featuredEvents = [
   },
   {
     id: 3,
-    title: "Rugby Africa Cup",
+    title: "Rugby Africa Cup 2025",
     subtitle: "African Rugby Union Championship",
-    date: "June 2025",
-    location: "Multiple African Venues",
+    date: "July 8-19, 2025",
+    location: "Kampala, Uganda",
     gradient: "from-orange-600 via-amber-500 to-yellow-500",
     upcoming: true,
     international: true,
-    matchCount: 24
+    matchCount: 16
   },
   {
     id: 4,
@@ -69,16 +69,59 @@ const featuredEvents = [
 const Index: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [hasCompletedFullCycle, setHasCompletedFullCycle] = useState(false);
+  const [showAfricaCupBanner, setShowAfricaCupBanner] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Auto-advance slideshow
+  // Auto-advance slideshow - sticks to Africa Cup (index 2) after full cycle
   useEffect(() => {
     if (!isAutoPlaying) return;
     
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % featuredEvents.length);
+      setCurrentSlide((prev) => {
+        const nextSlide = prev + 1;
+        
+        // If we've reached the end and haven't completed a full cycle yet
+        if (nextSlide >= featuredEvents.length && !hasCompletedFullCycle) {
+          setHasCompletedFullCycle(true);
+          return 2; // Go to Africa Cup slide (index 2)
+        }
+        
+        // If we've completed a full cycle, stay on Africa Cup
+        if (hasCompletedFullCycle) {
+          return 2; // Stay on Africa Cup slide
+        }
+        
+        // Normal cycling through slides
+        return nextSlide % featuredEvents.length;
+      });
     }, 6000);
 
     return () => clearInterval(interval);
+  }, [isAutoPlaying, hasCompletedFullCycle]);
+
+  // Transition to Africa Cup banner after 2 seconds on Africa Cup slide
+  useEffect(() => {
+    if (hasCompletedFullCycle && currentSlide === 2) {
+      const timer = setTimeout(() => {
+        setShowAfricaCupBanner(true);
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    } else if (currentSlide !== 2) {
+      setShowAfricaCupBanner(false);
+    }
+  }, [hasCompletedFullCycle, currentSlide]);
+
+  // Resume autoplay after 2 seconds of manual navigation
+  useEffect(() => {
+    if (!isAutoPlaying) {
+      const timer = setTimeout(() => {
+        setIsAutoPlaying(true);
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
   }, [isAutoPlaying]);
 
   const nextSlide = () => {
@@ -101,7 +144,9 @@ const Index: React.FC = () => {
           <Link to="/" className="font-bold text-scrummy-goldYellow text-xl hover:text-white transition-colors">
             SCRUMMY
           </Link>
-          <nav className="flex items-center space-x-8">
+          
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-8">
             <Link 
               to="/" 
               className="text-white hover:text-scrummy-goldYellow font-medium transition-colors"
@@ -115,6 +160,12 @@ const Index: React.FC = () => {
               Fixtures
             </Link>
             <Link 
+              to="/africa-cup" 
+              className="text-white hover:text-scrummy-goldYellow font-medium transition-colors"
+            >
+              Africa Cup
+            </Link>
+            <Link 
               to="/about" 
               className="text-white hover:text-scrummy-goldYellow font-medium transition-colors"
             >
@@ -122,79 +173,146 @@ const Index: React.FC = () => {
             </Link>
             <Link 
               to="/newsletter" 
-              className="text-white hover:text-scrummy-goldYellow font-medium transition-colors"
+              className="text-white hover:text-scrummy-goldYellow font-medium transition-colors blur-sm opacity-50 pointer-events-none"
             >
               Newsletter
             </Link>
-            <Button className="bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-semibold px-4 py-2">
-              Join Beta
-            </Button>
+            <Link to="/download">
+              <Button className="bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-semibold px-4 py-2 blur-sm opacity-50 pointer-events-none">
+                Download App
+              </Button>
+            </Link>
           </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden text-white hover:text-scrummy-goldYellow transition-colors p-2"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="lg:hidden bg-scrummy-navy/98 backdrop-blur-md border-t border-scrummy-goldYellow/20"
+            >
+              <nav className="px-4 py-4 space-y-4">
+                <Link 
+                  to="/" 
+                  className="block text-white hover:text-scrummy-goldYellow font-medium transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Home
+                </Link>
+                <Link 
+                  to="/fixtures" 
+                  className="block text-white hover:text-scrummy-goldYellow font-medium transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Fixtures
+                </Link>
+                <Link 
+                  to="/africa-cup" 
+                  className="block text-white hover:text-scrummy-goldYellow font-medium transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Africa Cup
+                </Link>
+                <Link 
+                  to="/about" 
+                  className="block text-white hover:text-scrummy-goldYellow font-medium transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  About
+                </Link>
+                <Link 
+                  to="/newsletter" 
+                  className="block text-white hover:text-scrummy-goldYellow font-medium transition-colors py-2 blur-sm opacity-50 pointer-events-none"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Newsletter
+                </Link>
+                <Link to="/download" onClick={() => setMobileMenuOpen(false)}>
+                  <Button className="bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-semibold px-6 py-3 w-full blur-sm opacity-50 pointer-events-none">
+                    Download App
+                  </Button>
+                </Link>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Featured Events Slideshow */}
-      <section className="relative h-[35vh] overflow-hidden">
+      <section className="relative h-[50vh] sm:h-[45vh] md:h-[40vh] lg:h-[35vh] overflow-hidden">
         <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0, scale: 1.02 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-            className={`absolute inset-0 bg-gradient-to-r ${currentEvent.gradient}`}
-          >
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/30" />
-            
-            {/* Content */}
-            <div className="relative z-10 h-full flex items-center">
-              <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
+          {!showAfricaCupBanner ? (
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0, scale: 1.02 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              className={`absolute inset-0 bg-gradient-to-r ${currentEvent.gradient}`}
+            >
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/30" />
+              
+              {/* Content */}
+              <div className="relative z-10 h-full flex items-center">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-6 md:gap-8 items-center">
                 {/* Left Content */}
-                <motion.div
+            <motion.div
                   initial={{ x: -30, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.3 }}
-                  className="text-white space-y-4"
+                  className="text-white space-y-3 md:space-y-4 text-center md:text-left"
                 >
                   {/* Event Badge */}
-                  <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium">
+                  <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-xs sm:text-sm font-medium">
                     {currentEvent.upcoming && <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />}
                     {currentEvent.upcoming ? "Upcoming" : currentEvent.featured ? "Featured" : currentEvent.international ? "International" : "Tournament"}
                   </div>
 
                   <div>
-                    <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-3">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-2 md:mb-3">
                       {currentEvent.title}
                     </h1>
-                    <p className="text-lg md:text-xl text-white/90 mb-4">
+                    <p className="text-base sm:text-lg md:text-xl text-white/90 mb-3 md:mb-4">
                       {currentEvent.subtitle}
                     </p>
                   </div>
 
                   {/* Event Details */}
-                  <div className="flex flex-wrap gap-4 text-white/80 text-sm mb-6">
+                  <div className="flex flex-wrap justify-center md:justify-start gap-3 md:gap-4 text-white/80 text-xs sm:text-sm mb-4 md:mb-6">
                     <span>📅 {currentEvent.date}</span>
                     <span>📍 {currentEvent.location}</span>
                     <span>🏉 {currentEvent.matchCount} Matches</span>
                   </div>
 
                   {/* CTA Buttons */}
-                  <div className="flex gap-3">
-                    <Link to="/fixtures">
-                      <Button size="lg" className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-semibold">
-                        View Fixtures
+                  <div className="flex justify-center md:justify-start gap-3">
+                    <Link to={currentEvent.id === 3 ? "/africa-cup" : "/fixtures"}>
+                      <Button size="lg" className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-semibold px-6 sm:px-8 py-3 text-sm sm:text-base">
+                        {currentEvent.id === 3 ? "Explore Africa Cup" : "View Fixtures"}
                       </Button>
                     </Link>
                   </div>
-                </motion.div>
+          </motion.div>
 
                 {/* Right Content - Stats Card */}
-                <motion.div
+          <motion.div
                   initial={{ x: 30, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.5 }}
-                  className="hidden md:block"
+                  className="hidden lg:block"
                 >
                   <Card className="bg-white/10 backdrop-blur-md border-white/20 overflow-hidden">
                     <CardContent className="p-6">
@@ -214,49 +332,285 @@ const Index: React.FC = () => {
               </div>
             </div>
           </motion.div>
+          ) : (
+            // Africa Cup Banner with Animations
+          <motion.div
+              key="africa-cup-banner"
+              initial={{ 
+                clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
+                opacity: 0
+              }}
+              animate={{
+                clipPath: "polygon(0 0%, 100% 0%, 100% 100%, 0 100%)",
+                opacity: 1
+              }}
+              exit={{ 
+                clipPath: "polygon(0 0%, 100% 0%, 100% 0%, 0 0%)",
+                opacity: 0
+              }}
+              transition={{ 
+                duration: 1.5, 
+                ease: "easeInOut",
+                clipPath: { duration: 1.2, ease: "easeOut" },
+                opacity: { duration: 0.8, ease: "easeInOut" }
+              }}
+              className="absolute inset-0 bg-gradient-to-br from-slate-900 to-black"
+            >
+              {/* Animated Geometric Elements */}
+              <motion.div
+                initial={{ x: 100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+                className="absolute top-0 right-0 w-80 h-full bg-gradient-to-br from-teal-500/40 to-green-500/40 transform skew-x-12 translate-x-40"
+              />
+              <motion.div
+                initial={{ x: 80, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 1.3, delay: 0.2, ease: "easeOut" }}
+                className="absolute top-0 right-16 w-64 h-full bg-gradient-to-br from-yellow-400/30 to-orange-500/30 transform skew-x-12 translate-x-24"
+              />
+              <motion.div
+                initial={{ x: -100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 1.4, delay: 0.1, ease: "easeOut" }}
+                className="absolute bottom-0 left-0 w-48 h-full bg-gradient-to-tr from-orange-500/40 to-red-500/40 transform -skew-x-12 -translate-x-24"
+              />
+
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/30" />
+
+              {/* Content */}
+              <div className="relative z-10 h-full flex items-center">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-6 md:gap-8 items-center">
+                  {/* Left Content */}
+                  <motion.div
+                    initial={{ x: -50, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.8, duration: 0.8 }}
+                    className="text-white space-y-3 md:space-y-4 text-center md:text-left"
+                  >
+                    {/* Tournament Badge */}
+                    <motion.div
+                      animate={{ 
+                        scale: [1, 1.05, 1],
+                        rotate: [0, 1, -1, 0]
+                      }}
+                      transition={{ 
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-xs sm:text-sm font-medium"
+                    >
+                      <span className="w-2 h-2 bg-orange-400 rounded-full animate-pulse" />
+                      Tournament
+          </motion.div>
+
+                    <div>
+                      <motion.h1 
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 1, duration: 0.6 }}
+                        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-2 md:mb-3"
+                      >
+                        Rugby Africa Cup 2025
+                      </motion.h1>
+          <motion.p
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 1.2, duration: 0.6 }}
+                        className="text-base sm:text-lg md:text-xl text-white/90 mb-3 md:mb-4"
+                      >
+                        African Rugby Union Championship
+          </motion.p>
+                    </div>
+
+                    {/* Event Details */}
+                    <motion.div
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 1.4, duration: 0.6 }}
+                      className="flex flex-wrap justify-center md:justify-start gap-3 md:gap-4 text-white/80 text-xs sm:text-sm mb-4 md:mb-6"
+                    >
+                      <span>📅 July 8-19, 2025</span>
+                      <span>📍 Kampala, Uganda</span>
+                      <span>🏉 8 Nations</span>
+                    </motion.div>
+
+                                         {/* CTA Buttons */}
+                     <motion.div
+                       initial={{ y: 20, opacity: 0 }}
+                       animate={{ y: 0, opacity: 1 }}
+                       transition={{ delay: 1.6, duration: 0.6 }}
+                       className="flex justify-center md:justify-start gap-3"
+                     >
+                       <Link to="/africa-cup">
+                         <motion.div
+                           animate={{ 
+                             y: [0, -8, 0],
+                             scale: [1, 1.05, 1],
+                             boxShadow: [
+                               "0 4px 6px -1px rgba(251, 191, 36, 0.3)",
+                               "0 10px 25px -3px rgba(251, 191, 36, 0.6)",
+                               "0 4px 6px -1px rgba(251, 191, 36, 0.3)"
+                             ]
+                           }}
+                           transition={{ 
+                             duration: 2.5,
+                             repeat: Infinity,
+                             ease: "easeInOut"
+                           }}
+                           whileHover={{ 
+                             scale: 1.1,
+                             y: -5,
+                             boxShadow: "0 20px 25px -5px rgba(251, 191, 36, 0.8)",
+                             transition: { duration: 0.2 }
+                           }}
+                           whileTap={{ scale: 0.95 }}
+                           className="relative"
+                         >
+                           <Button size="lg" className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold transition-all duration-300 relative overflow-hidden group px-6 sm:px-8 py-3 text-sm sm:text-base">
+                             <motion.span
+                               animate={{ 
+                                 textShadow: [
+                                   "0 0 0px rgba(30, 58, 138, 0.5)",
+                                   "0 0 10px rgba(30, 58, 138, 0.8)",
+                                   "0 0 0px rgba(30, 58, 138, 0.5)"
+                                 ]
+                               }}
+                               transition={{ 
+                                 duration: 2,
+                                 repeat: Infinity,
+                                 ease: "easeInOut"
+                               }}
+                             >
+                               🚀 Explore Africa Cup
+                             </motion.span>
+                             
+                             {/* Animated background pulse */}
+                             <motion.div
+                               className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-orange-300 opacity-0 group-hover:opacity-20"
+                               animate={{ 
+                                 scale: [1, 1.2, 1],
+                                 opacity: [0, 0.1, 0]
+                               }}
+                               transition={{ 
+                                 duration: 2,
+                                 repeat: Infinity,
+                                 ease: "easeInOut"
+                               }}
+                             />
+                             
+                             {/* Sparkle effect */}
+                             <motion.div
+                               className="absolute top-1 right-1 w-2 h-2 bg-white rounded-full"
+                               animate={{ 
+                                 scale: [0, 1, 0],
+                                 rotate: [0, 180, 360]
+                               }}
+                               transition={{ 
+                                 duration: 3,
+                                 repeat: Infinity,
+                                 ease: "easeInOut",
+                                 delay: 0.5
+                               }}
+                             />
+                           </Button>
+                         </motion.div>
+                       </Link>
+                     </motion.div>
+                  </motion.div>
+
+                  {/* Right Content - Stats Card */}
+                  <motion.div
+                    initial={{ x: 50, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 1.0, duration: 0.8 }}
+                    className="hidden lg:block"
+                  >
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 overflow-hidden">
+                      <CardContent className="p-6">
+                        <div className="text-center text-white space-y-4">
+                          <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ 
+                              duration: 8,
+                              repeat: Infinity,
+                              ease: "linear"
+                            }}
+                            className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto"
+                          >
+                            <span className="text-xl font-bold text-white">RAC</span>
+                          </motion.div>
+                          <div>
+                            <p className="text-lg font-semibold">Africa Cup Coverage</p>
+                            <p className="text-sm opacity-80">8 Competing Nations</p>
+                            <p className="text-sm opacity-80">Live Tournament Updates</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          )}
         </AnimatePresence>
 
         {/* Navigation Controls */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-2 text-white transition-all"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 active:bg-white/40 backdrop-blur-sm rounded-full p-3 sm:p-2 text-white transition-all touch-manipulation"
         >
-          <ChevronLeft className="w-5 h-5" />
+          <ChevronLeft className="w-6 h-6 sm:w-5 sm:h-5" />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-2 text-white transition-all"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 active:bg-white/40 backdrop-blur-sm rounded-full p-3 sm:p-2 text-white transition-all touch-manipulation"
         >
-          <ChevronRight className="w-5 h-5" />
+          <ChevronRight className="w-6 h-6 sm:w-5 sm:h-5" />
         </button>
 
         {/* Slide Indicators */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-          {featuredEvents.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                index === currentSlide ? 'bg-white' : 'bg-white/40'
-              }`}
-            />
-          ))}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20">
+          <div className="flex gap-3 sm:gap-2 mb-2">
+            {featuredEvents.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setCurrentSlide(index);
+                  setIsAutoPlaying(false);
+                }}
+                className={`w-3 h-3 sm:w-2 sm:h-2 rounded-full transition-all touch-manipulation ${
+                  index === currentSlide ? 'bg-white' : 'bg-white/40'
+                } ${index === 2 && hasCompletedFullCycle ? 'ring-2 ring-scrummy-goldYellow' : ''}`}
+              />
+            ))}
+          </div>
+          {hasCompletedFullCycle && (
+            <div className="text-center">
+              <div className="inline-flex items-center gap-1 bg-scrummy-goldYellow/90 text-scrummy-navy px-2 py-1 rounded-full text-xs font-semibold">
+                <span className="w-1.5 h-1.5 bg-scrummy-navy rounded-full animate-pulse"></span>
+                {showAfricaCupBanner ? "Live Africa Cup Banner" : "Featuring Africa Cup"}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
       {/* Main Value Proposition */}
-      <section className="py-16 bg-scrummy-navy/5">
-        <div className="max-w-6xl mx-auto px-4 text-center">
+      <section className="py-12 sm:py-16 bg-scrummy-navy/5">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="space-y-6"
+            className="space-y-4 sm:space-y-6"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-scrummy-navy">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-scrummy-navy">
               The Home of <span className="text-scrummy-goldYellow">School Boy Rugby</span>
             </h2>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
               Live fixtures, real-time results, and comprehensive statistics from school boy rugby competitions 
               across Zimbabwe and South Africa. Plus the coming fantasy rugby revolution.
             </p>
@@ -265,80 +619,80 @@ const Index: React.FC = () => {
       </section>
 
       {/* Two-Column Features */}
-      <section className="py-12 bg-gradient-to-r from-scrummy-navy/10 to-scrummy-blue/10">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-stretch">
+      <section className="py-8 sm:py-12 bg-gradient-to-r from-scrummy-navy/10 to-scrummy-blue/10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-stretch">
             {/* Live Data Section */}
-            <motion.div
+          <motion.div
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.6 }}
             >
               <Card className="h-full bg-white/90 backdrop-blur-sm border-scrummy-navy/20 shadow-xl">
-                <CardContent className="p-8">
-                  <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium mb-6">
+                <CardContent className="p-6 sm:p-8">
+                  <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
                     <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                     Live Now
                   </div>
-                  <h3 className="text-2xl font-bold text-scrummy-navy mb-4">
+                  <h3 className="text-xl sm:text-2xl font-bold text-scrummy-navy mb-3 sm:mb-4">
                     Real-Time Rugby Intelligence
                   </h3>
-                  <p className="text-gray-600 leading-relaxed mb-6">
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4 sm:mb-6">
                     Stay connected to every match with live scores, detailed statistics, and comprehensive fixture information. 
                     Our platform tracks every try, conversion, and penalty as it happens.
                   </p>
-                  <div className="space-y-3 mb-6">
+                  <div className="space-y-3 mb-4 sm:mb-6">
                     <div className="flex items-center gap-3">
-                      <div className="w-6 h-6 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
                         <span className="text-scrummy-navy font-bold text-xs">✓</span>
                       </div>
-                      <span className="text-gray-700 text-sm">Live match updates and scores</span>
+                      <span className="text-gray-700 text-xs sm:text-sm">Live match updates and scores</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <div className="w-6 h-6 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
                         <span className="text-scrummy-navy font-bold text-xs">✓</span>
                       </div>
-                      <span className="text-gray-700 text-sm">Detailed player and team statistics</span>
+                      <span className="text-gray-700 text-xs sm:text-sm">Detailed player and team statistics</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <div className="w-6 h-6 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
                         <span className="text-scrummy-navy font-bold text-xs">✓</span>
                       </div>
-                      <span className="text-gray-700 text-sm">Complete fixture schedules</span>
+                      <span className="text-gray-700 text-xs sm:text-sm">Complete fixture schedules</span>
                     </div>
                   </div>
                   <Link to="/fixtures">
-                    <Button className="bg-scrummy-navy text-white hover:bg-scrummy-blue w-full">
+                    <Button className="bg-scrummy-navy text-white hover:bg-scrummy-blue w-full py-3 sm:py-2 text-sm sm:text-base">
                       Explore Live Fixtures
                     </Button>
                   </Link>
                 </CardContent>
               </Card>
-            </motion.div>
+          </motion.div>
 
             {/* Fantasy App Section */}
-            <motion.div
+          <motion.div
               initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <Card className="h-full bg-gradient-to-br from-scrummy-goldYellow/20 to-scrummy-gold/30 border-scrummy-goldYellow/30 shadow-xl">
-                <CardContent className="p-8">
-                  <div className="inline-flex items-center gap-2 bg-scrummy-goldYellow/80 text-scrummy-navy px-3 py-1 rounded-full text-sm font-medium mb-6">
+                <CardContent className="p-6 sm:p-8">
+                  <div className="inline-flex items-center gap-2 bg-scrummy-goldYellow/80 text-scrummy-navy px-3 py-1 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
                     Coming Soon
                   </div>
-                  <h3 className="text-2xl font-bold text-scrummy-navy mb-4">
+                  <h3 className="text-xl sm:text-2xl font-bold text-scrummy-navy mb-3 sm:mb-4">
                     Fantasy Rugby Revolution
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed mb-6">
+              </h3>
+                  <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-4 sm:mb-6">
                     Build your dream team with real school boy rugby players. Create leagues with friends, 
                     track performance, and compete for glory in the first fantasy platform dedicated to school rugby.
                   </p>
-                  <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-scrummy-goldYellow/40 mb-6">
-                    <h4 className="font-semibold text-scrummy-navy mb-2 text-sm">Join the Beta Waitlist</h4>
-                    <p className="text-xs text-gray-600 mb-3">
+                  <div className="bg-white/60 backdrop-blur-sm rounded-lg p-3 sm:p-4 border border-scrummy-goldYellow/40 mb-4 sm:mb-6">
+                    <h4 className="font-semibold text-scrummy-navy mb-2 text-xs sm:text-sm">Join the Beta Waitlist</h4>
+                    <p className="text-xs text-gray-600 mb-2 sm:mb-3">
                       Be among the first to experience fantasy school boy rugby.
-                    </p>
+              </p>
                     <WaitlistForm />
                   </div>
                 </CardContent>
@@ -349,25 +703,25 @@ const Index: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-scrummy-navy to-scrummy-blue text-white py-8">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+      <footer className="bg-gradient-to-r from-scrummy-navy to-scrummy-blue text-white py-6 sm:py-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
             <div className="text-center md:text-left">
-              <h3 className="font-bold text-scrummy-goldYellow text-lg mb-2">SCRUMMY</h3>
-              <p className="text-white/80 text-sm">The Home of School Boy Rugby</p>
+              <h3 className="font-bold text-scrummy-goldYellow text-base sm:text-lg mb-1 sm:mb-2">SCRUMMY</h3>
+              <p className="text-white/80 text-xs sm:text-sm">The Home of School Boy Rugby</p>
             </div>
             
-            <div className="flex gap-6">
-              <a href="https://www.instagram.com/scrummyapp_/" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors">
+            <div className="flex gap-4 sm:gap-6">
+              <a href="https://www.instagram.com/scrummyapp_/" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
                 <Instagram size={20} />
               </a>
-              <a href="https://www.facebook.com/profile.php?id=61574057183440" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors">
+              <a href="https://www.facebook.com/profile.php?id=61574057183440" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
                 <Facebook size={20} />
               </a>
-              <a href="https://www.tiktok.com/@scrummy_fantasy" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors">
+              <a href="https://www.tiktok.com/@scrummy_fantasy" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
                 <FaTiktok size={20} />
               </a>
-              <a href="https://www.youtube.com/channel/UCnKVk_L_fda9OuA5vDZBmmA" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors">
+              <a href="https://www.youtube.com/channel/UCnKVk_L_fda9OuA5vDZBmmA" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
                 <Youtube size={20} />
               </a>
             </div>
@@ -378,7 +732,7 @@ const Index: React.FC = () => {
           </div>
         </div>
       </footer>
-    </div>
+      </div>
   );
 };
 
