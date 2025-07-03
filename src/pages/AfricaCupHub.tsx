@@ -5,6 +5,14 @@ import { ChevronLeft, Calendar, MapPin, Users, Trophy, ChevronRight, Star, Downl
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
+// Zimbabwe player image mapping
+const zimbabwePlayerImages: Record<string, string> = {
+  'Jason Fraser': '/assets/Zimbabwe Players/Jason Fraser.png',
+  'Trevor Gurwe': '/assets/Zimbabwe Players/Trevor Gurwe.png',
+  'Brandon Mudzekenyedzi': '/assets/Zimbabwe Players/Brandon Mudzekenyedzi.png',
+  'Ian Prior': '/assets/Zimbabwe Players/Ian Prior.png'
+};
+
 // Timezone conversion utility
 const convertToLocalTime = (timeStr: string, date: string = '2025-07-08') => {
   // Parse the EAT time (UTC+3)
@@ -451,10 +459,10 @@ const AfricaCupHub: React.FC = () => {
                   <div className="space-y-6 sm:space-y-8">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                       {[
-                        { name: "Tendai Mtawarira", team: "Zimbabwe", flag: "🇿🇼", position: "Prop", votes: "2,847" },
-                        { name: "Saliou Diallo", team: "Senegal", flag: "🇸🇳", position: "Fly-half", votes: "2,134" },
-                        { name: "Johan Tromp", team: "Namibia", flag: "🇳🇦", position: "Lock", votes: "1,923" },
-                        { name: "Collins Injera", team: "Kenya", flag: "🇰🇪", position: "Wing", votes: "1,756" }
+                        { name: "Jason Fraser", team: "Zimbabwe", flag: "🇿🇼", position: "Captain • Back Row", votes: "3,247" },
+                        { name: "Trevor Gurwe", team: "Zimbabwe", flag: "🇿🇼", position: "Outside Back", votes: "2,891" },
+                        { name: "Brandon Mudzekenyedzi", team: "Zimbabwe", flag: "🇿🇼", position: "Centre", votes: "2,654" },
+                        { name: "Ian Prior", team: "Zimbabwe", flag: "🇿🇼", position: "Half Back", votes: "2,183" }
                       ].map((player, index) => (
                         <motion.div
                           key={index}
@@ -469,7 +477,20 @@ const AfricaCupHub: React.FC = () => {
                         >
                           <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-scrummy-goldYellow bg-gradient-to-br from-white to-yellow-50 cursor-pointer group">
                             <CardContent className="p-3 sm:p-4 text-center">
-                              <div className="text-2xl sm:text-3xl mb-2">{player.flag}</div>
+                              {/* Player Image */}
+                              <div className="mb-3">
+                                {zimbabwePlayerImages[player.name] ? (
+                                  <img 
+                                    src={zimbabwePlayerImages[player.name]} 
+                                    alt={player.name}
+                                    className="w-16 h-20 sm:w-20 sm:h-24 object-cover mx-auto rounded-lg shadow-md border-2 border-scrummy-goldYellow"
+                                  />
+                                ) : (
+                                  <div className="w-16 h-20 sm:w-20 sm:h-24 bg-gradient-to-br from-scrummy-navy to-scrummy-blue rounded-lg flex items-center justify-center mx-auto">
+                                    <span className="text-2xl sm:text-3xl">{player.flag}</span>
+                                  </div>
+                                )}
+                              </div>
                               <h4 className="font-bold text-scrummy-navy text-xs sm:text-sm mb-1 leading-tight">{player.name}</h4>
                               <p className="text-xs text-gray-600 mb-1">{player.team} • {player.position}</p>
                               <div className="flex items-center justify-center gap-1 mb-2 sm:mb-3">
@@ -495,27 +516,27 @@ const AfricaCupHub: React.FC = () => {
                     </div>
 
                     <Card className="bg-gradient-to-r from-orange-500 to-red-500 text-white">
-                      <CardContent className="p-6 sm:p-8 text-center">
-                        <h4 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">🗳️ Live Voting Results</h4>
-                        <p className="text-sm sm:text-lg text-white/90 mb-4 sm:mb-6">
+                      <CardContent className="p-4 sm:p-5 text-center">
+                        <h4 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">🗳️ Live Voting Results</h4>
+                        <p className="text-xs sm:text-sm text-white/90 mb-3 sm:mb-4">
                           Over 15,000 fans have voted! Join them in the SCRUMMY app to vote for your favorite teams and players.
                         </p>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 text-center">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 text-center">
                           <div>
-                            <div className="text-lg sm:text-2xl font-bold">🇿🇼 28%</div>
-                            <div className="text-xs sm:text-sm opacity-80">Zimbabwe Leading</div>
+                            <div className="text-base sm:text-lg font-bold">🇿🇼 28%</div>
+                            <div className="text-xs opacity-80">Zimbabwe Leading</div>
                           </div>
                           <div>
-                            <div className="text-lg sm:text-2xl font-bold">🇰🇪 22%</div>
-                            <div className="text-xs sm:text-sm opacity-80">Kenya Close</div>
+                            <div className="text-base sm:text-lg font-bold">🇰🇪 22%</div>
+                            <div className="text-xs opacity-80">Kenya Close</div>
                           </div>
                           <div>
-                            <div className="text-lg sm:text-2xl font-bold">🇳🇦 19%</div>
-                            <div className="text-xs sm:text-sm opacity-80">Namibia Strong</div>
+                            <div className="text-base sm:text-lg font-bold">🇳🇦 19%</div>
+                            <div className="text-xs opacity-80">Namibia Strong</div>
                           </div>
                           <div>
-                            <div className="text-lg sm:text-2xl font-bold">🇺🇬 16%</div>
-                            <div className="text-xs sm:text-sm opacity-80">Uganda Rising</div>
+                            <div className="text-base sm:text-lg font-bold">🇺🇬 16%</div>
+                            <div className="text-xs opacity-80">Uganda Rising</div>
                           </div>
                         </div>
                       </CardContent>
