@@ -216,7 +216,7 @@ const PrivacyPolicy: React.FC = () => {
                       </li>
                     </ul>
                     <p className="text-gray-700 leading-relaxed mt-4">
-                      To exercise these rights, please contact us at <a href="mailto:info@scrummy-app.com" className="text-scrummy-navy hover:text-scrummy-blue underline">info@scrummy-app.com</a>.
+                      To exercise these rights, please contact us at <a href="mailto:info@scrummy-app.ai" className="text-scrummy-navy hover:text-scrummy-blue underline">info@scrummy-app.ai</a>.
                     </p>
                   </CardContent>
                 </Card>
@@ -231,7 +231,7 @@ const PrivacyPolicy: React.FC = () => {
                       If you have any questions about this Privacy Policy or our data practices, please contact us:
                     </p>
                     <div className="space-y-2 text-gray-700">
-                      <p><strong>Email:</strong> <a href="mailto:info@scrummy-app.com" className="text-scrummy-navy hover:text-scrummy-blue underline">info@scrummy-app.com</a></p>
+                      <p><strong>Email:</strong> <a href="mailto:info@scrummy-app.ai" className="text-scrummy-navy hover:text-scrummy-blue underline">info@scrummy-app.ai</a></p>
                       <p><strong>Address:</strong> Athstat LLC, 40736 Chevington Ln, Leesburg, VA 20175, United States</p>
                       <p><strong>Phone:</strong> +1 321-961-6401</p>
                     </div>

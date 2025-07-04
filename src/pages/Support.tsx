@@ -32,7 +32,7 @@ const Support: React.FC = () => {
     },
     {
       question: "How do I report a bug or technical issue?",
-      answer: "You can report bugs directly through the app's settings menu or contact our support team at info@scrummy-app.com. Please include details about your device, app version, and the issue you're experiencing."
+      answer: "You can report bugs using our online bug report form or contact our support team at info@scrummy-app.ai. Please include details about your device, app version, and the issue you're experiencing."
     },
     {
       question: "Can I change my profile information?",
@@ -40,7 +40,7 @@ const Support: React.FC = () => {
     },
     {
       question: "How do I delete my account?",
-      answer: "To delete your account, go to Settings > Account > Delete Account in the app, or contact our support team at info@scrummy-app.com. Please note that this action is irreversible."
+      answer: "To delete your account, go to Settings > Account > Delete Account in the app, or contact our support team at info@scrummy-app.ai. Please note that this action is irreversible."
     }
   ];
 
@@ -178,10 +178,10 @@ const Support: React.FC = () => {
 
                   <Button 
                     className="bg-scrummy-navy text-white hover:bg-scrummy-blue w-full"
-                    onClick={() => window.open('mailto:info@scrummy-app.com?subject=SCRUMMY App Support', '_blank')}
+                    onClick={() => window.open('mailto:info@scrummy-app.ai?subject=SCRUMMY App Support', '_blank')}
                   >
                     <Mail className="w-4 h-4 mr-2" />
-                    info@scrummy-app.com
+                    info@scrummy-app.ai
                   </Button>
                 </CardContent>
               </Card>
@@ -229,12 +229,12 @@ const Support: React.FC = () => {
                   
                   <div>
                     <h3 className="text-xl font-bold text-scrummy-navy mb-2">Report Issues</h3>
-                    <p className="text-gray-600 mb-4">Report bugs and technical issues</p>
+                    <p className="text-gray-600 mb-4">Use our online form to report bugs</p>
                   </div>
 
                   <Button 
                     className="bg-red-600 text-white hover:bg-red-700 w-full"
-                    onClick={() => window.open('mailto:info@scrummy-app.com?subject=Bug Report - SCRUMMY App', '_blank')}
+                    onClick={() => window.open('https://form.jotform.com/251844112364149', '_blank')}
                   >
                     <Bug className="w-4 h-4 mr-2" />
                     Report Bug
