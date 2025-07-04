@@ -27,6 +27,9 @@ const DownloadPage: React.FC = () => {
               <Link to="/africa-cup" className="text-white hover:text-scrummy-goldYellow transition-colors">
                 Africa Cup
               </Link>
+              <Link to="/support" className="text-white hover:text-scrummy-goldYellow transition-colors">
+                Support
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -53,6 +56,9 @@ const DownloadPage: React.FC = () => {
                 </Link>
                 <Link to="/africa-cup" className="block text-white hover:text-scrummy-goldYellow transition-colors py-2">
                   Africa Cup
+                </Link>
+                <Link to="/support" className="block text-white hover:text-scrummy-goldYellow transition-colors py-2">
+                  Support
                 </Link>
               </div>
             </motion.div>

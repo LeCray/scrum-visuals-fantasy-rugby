@@ -13,6 +13,8 @@ import AfricaCupTeams from "./pages/AfricaCupTeams";
 import AfricaCupFixtures from "./pages/AfricaCupFixtures";
 import AfricaCupBoxScore from "./pages/AfricaCupBoxScore";
 import Download from "./pages/Download";
+import Support from "./pages/Support";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -33,6 +35,8 @@ const App = () => (
           <Route path="/africa-cup/fixtures" element={<AfricaCupFixtures />} />
           <Route path="/africa-cup/box-score/:matchId" element={<AfricaCupBoxScore />} />
           <Route path="/download" element={<Download />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/box-score/:matchId" element={<BoxScorePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

@@ -711,19 +711,38 @@ const Index: React.FC = () => {
               <p className="text-white/80 text-xs sm:text-sm">The Home of School Boy Rugby</p>
             </div>
             
-            <div className="flex gap-4 sm:gap-6">
-              <a href="https://www.instagram.com/scrummyapp_/" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
-                <Instagram size={20} />
-              </a>
-              <a href="https://www.facebook.com/profile.php?id=61574057183440" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
-                <Facebook size={20} />
-              </a>
-              <a href="https://www.tiktok.com/@scrummy_fantasy" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
-                <FaTiktok size={20} />
-              </a>
-              <a href="https://www.youtube.com/channel/UCnKVk_L_fda9OuA5vDZBmmA" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
-                <Youtube size={20} />
-              </a>
+            <div className="flex flex-col md:flex-row gap-4 sm:gap-6 items-center">
+              {/* Navigation Links */}
+              <div className="flex gap-4 text-sm">
+                <Link to="/support" className="hover:text-scrummy-goldYellow transition-colors">
+                  Support
+                </Link>
+                <Link to="/privacy" className="hover:text-scrummy-goldYellow transition-colors">
+                  Privacy
+                </Link>
+                <Link to="/download" className="hover:text-scrummy-goldYellow transition-colors">
+                  Download
+                </Link>
+                <Link to="/africa-cup" className="hover:text-scrummy-goldYellow transition-colors">
+                  Africa Cup
+                </Link>
+              </div>
+              
+              {/* Social Media Links */}
+              <div className="flex gap-4 sm:gap-6">
+                <a href="https://www.instagram.com/scrummyapp_/" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
+                  <Instagram size={20} />
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61574057183440" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
+                  <Facebook size={20} />
+                </a>
+                <a href="https://www.tiktok.com/@scrummy_fantasy" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
+                  <FaTiktok size={20} />
+                </a>
+                <a href="https://www.youtube.com/channel/UCnKVk_L_fda9OuA5vDZBmmA" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
+                  <Youtube size={20} />
+                </a>
+              </div>
             </div>
             
             <div className="text-center md:text-right">
