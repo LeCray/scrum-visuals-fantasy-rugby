@@ -5,8 +5,25 @@ import { ChevronLeft, Users, Star, Menu, X } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
+// Type definition for Africa Cup team players
+type AfricaCupPlayer = {
+  name: string;
+  position: string;
+  info: string;
+  age?: number;
+  height?: string;
+  weight?: string;
+  club?: string;
+};
+
 // Team data structure
-const teams = [
+const teams: Array<{
+  id: string;
+  name: string;
+  flag: string;
+  country: string;
+  roster: AfricaCupPlayer[];
+}> = [
   {
     id: 'zimbabwe',
     name: 'Zimbabwe Sables',
@@ -14,49 +31,51 @@ const teams = [
     country: 'Zimbabwe',
     roster: [
       // Hookers
-      { name: 'Bryan Chiang', position: 'Hooker', age: 21, height: '1.75m', weight: '105kg', club: 'Old Harlians', info: 'Experienced hooker with solid lineout throwing' },
+      { name: 'Bryan Chiang', position: 'Hooker', age: 21, height: '1.75m', weight: '105kg', club: 'Manchester Met/Broughton Park RFC/Old Hararians', info: 'Experienced hooker with solid lineout throwing' },
       { name: 'Simba Mandioma', position: 'Hooker', age: 32, height: '1.70m', weight: '101kg', club: 'Old Hararians/Harare Province', info: 'Mobile hooker with strong scrummaging' },
-      { name: 'Liam Larkan', position: 'Hooker', age: 27, info: 'Experienced hooker with leadership qualities' },
+      { name: 'Liam Larkan', position: 'Hooker', age: 27, height: '1.82m', weight: '103kg', club: 'Pirates RFC- South Africa', info: 'Experienced hooker with leadership qualities' },
       
       // Props
-      { name: 'Victor Mupunga', position: 'Prop', age: 25, height: '1.81m', weight: '127kg', club: 'Club Sportif Nution', info: 'Powerful tighthead prop' },
-      { name: 'Tyran Fagan', position: 'Prop', info: 'Solid front row forward' },
+      { name: 'Victor Mupunga', position: 'Prop', age: 25, height: '1.81m', weight: '127kg', club: 'Union Sportive Bressane- France', info: 'Powerful tighthead prop' },
+      { name: 'Tyran Fagan', position: 'Prop', age: 33, height: '1.83m', weight: '105kg', club: 'Bizkaia Gernika RT- Spain', info: 'Solid front row forward' },
       { name: 'Zvikomborero Chimoto', position: 'Prop', age: 26, height: '1.71m', weight: '114kg', club: 'Old Hararians/Harare Province', info: 'Strong scrummaging prop' },
-      { name: 'Cleopas Kundiona', position: 'Prop', age: 26, height: '1.81m', weight: '118kg', club: 'Nevers France', info: 'Experienced front row anchor' },
+      { name: 'Cleopas Kundiona', position: 'Prop', age: 26, height: '1.81m', weight: '118kg', club: 'Northampton Saints- UK', info: 'Experienced front row anchor' },
       { name: 'Brian Makamure', position: 'Prop', age: 34, height: '1.72m', weight: '106kg', club: 'Old Hararians', info: 'Versatile front row player' },
-      { name: 'Bornwell Gwinji', position: 'Prop', age: 27, height: '1.77m', weight: '118kg', club: 'Gernika Rugby Club', info: 'Dynamic young prop' },
+      { name: 'Bornwell Gwinji', position: 'Prop', age: 27, height: '1.77m', weight: '118kg', club: 'Gernika Rugby Club- Spain', info: 'Dynamic young prop' },
       
       // Second Row
-      { name: 'Kudakwashe Nyakufaringwa', position: '2nd Row', age: 31, height: '2m', weight: '127kg', club: 'Lublin', info: 'Lineout specialist and leader' },
-      { name: 'Simba Siraha', position: '2nd Row', age: 22, height: '1.95m', weight: '100kg', club: 'Old Hararians/Harare', info: 'Athletic lock forward' },
-      { name: 'Tadiwa Gwashu', position: '2nd Row', info: 'Powerful lineout option' },
-      { name: 'Brian Nyaude', position: '2nd Row', age: 24, height: '1.96m', weight: '92kg', club: 'Old Hararians', info: 'Mobile second row forward' },
+      { name: 'Kudakwashe Nyakufaringwa', position: '2nd Row', age: 31, height: '2.00m', weight: '127kg', club: 'Budowlan Lublin RFC-Poland', info: 'Lineout specialist and leader' },
+      { name: 'Simba Siraha', position: '2nd Row', age: 22, height: '1.95m', weight: '100kg', club: 'Budmex rugby Bialystok-Poland', info: 'Athletic lock forward' },
+      { name: 'Tadiwa Gwashu', position: '2nd Row', age: 23, height: '1.90m', weight: '106kg', club: 'Harare Sports Club', info: 'Powerful lineout option' },
+      { name: 'Brian Nyaude', position: '2nd Row', age: 30, height: '1.96m', weight: '92kg', club: 'Old Hararians', info: 'Mobile second row forward' },
       
       // Back Row
-      { name: 'Jason Fraser', position: 'Back Row', info: 'Captain and experienced campaigner' },
-      { name: 'Aiden Burnett', position: 'Back Row', age: 27, height: '1.89m', weight: '114kg', club: 'Old Hararians / Harare Province', info: 'Dynamic loose forward' },
-      { name: 'Dylan Utete', position: 'Back Row', info: 'Mobile back row player' },
-      { name: 'Godfrey Muzanargwo', position: 'Back Row', age: 26, height: '1.93m', weight: '110kg', club: 'Griquas', info: 'Powerful ball carrier' },
-      { name: 'Tinotenda Mavesere', position: 'Back Row', age: 26, info: 'Athletic loose forward' },
+      { name: 'Jason Fraser', position: 'Back Row', age: 34, height: '1.96m', weight: '108kg', club: 'Nevers-France', info: 'Captain and experienced campaigner' },
+      { name: 'Aiden Burnett', position: 'Back Row', age: 27, height: '1.89m', weight: '114kg', club: 'Old Hararians/Harare Province', info: 'Dynamic loose forward' },
+      { name: 'Dylan Utete', position: 'Back Row', age: 25, height: '1.87m', weight: '111kg', club: 'Okman Rugby- South Korea', info: 'Mobile back row player' },
+      { name: 'Godfrey Muzanargwo', position: 'Back Row', age: 26, height: '1.93m', weight: '110kg', club: 'Valke -South Africa', info: 'Powerful ball carrier' },
+      { name: 'Tinotenda Mavesere', position: 'Back Row', age: 26, height: '1.89m', weight: '105kg', club: 'The Sharks- South Africa', info: 'Athletic loose forward' },
       
       // Half Backs
       { name: 'Hilton Mudariki', position: 'Half Back', age: 32, height: '1.72m', weight: '80kg', club: 'Old Hararians', info: 'Quick service from the base' },
       { name: 'Keegan Joubert', position: 'Half Back', age: 24, height: '1.74m', weight: '85kg', club: 'Durbell Rugby Club/Western Province', info: 'Promising young scrum-half' },
-      { name: 'Ian Prior', position: 'Half Back', age: 34, info: 'Veteran playmaker' },
-      { name: 'Lenience Tambwera', position: 'Half Back', info: 'Quick-thinking half back' },
-      { name: 'Tyrone Gombe', position: 'Half Back', info: 'Versatile half back option' },
+      { name: 'Tyrone Gombe', position: 'Half Back', age: 19, height: '1.64m', weight: '75kg', club: 'Western Province Academy', info: 'Versatile half back option' },
+      
+      // Fly Halves
+      { name: 'Ian Prior', position: 'Fly Half', age: 34, height: '1.79m', weight: '83kg', club: 'Associates Rugby Club-Australia', info: 'Veteran playmaker' },
+      { name: 'Lenience Tambwera', position: 'Fly Half', age: 32, height: '1.88m', weight: '98kg', club: 'Harare Sports Club', info: 'Quick-thinking fly half' },
       
       // Centres
-      { name: 'Brandon Mudzekenyedzi', position: 'Centre', age: 22, height: '1.84m', weight: '104kg', club: 'College Rovers', info: 'Powerful center with pace' },
+      { name: 'Brandon Mudzekenyedzi', position: 'Centre', age: 28, height: '1.84m', weight: '104kg', club: 'Okman Rugby- South Korea', info: 'Powerful center with pace' },
       { name: 'Dion Khumalo', position: 'Centre', age: 22, height: '1.73m', weight: '92kg', club: 'Old Hararians', info: 'Creative center with good hands' },
       { name: 'Kudzai Mashawi', position: 'Centre', age: 31, height: '1.78m', weight: '109kg', club: 'Harare Sports Club', info: 'Strong defensive center' },
       
       // Outside Backs
-      { name: 'Trevor Gurwe', position: 'Outside Back', age: 21, club: 'Old Georgians', info: 'Pacy winger with finishing ability' },
-      { name: 'Matthew McNab', position: 'Outside Back', info: 'Versatile back three player' },
-      { name: 'Tapiwa Mafura', position: 'Outside Back', age: 28, height: '1.74m', weight: '80kg', club: 'Lions', info: 'Electric winger with pace' },
-      { name: 'Takudzwa Musingwini', position: 'Outside Back', age: 22, height: '1.78m', weight: '89kg', club: 'Old Hararians', info: 'Solid fullback option' },
-      { name: 'Edward Sigauke', position: 'Outside Back', info: 'Experienced outside back' }
+      { name: 'Trevor Gurwe', position: 'Outside Back', age: 21, height: '1.85m', weight: '93kg', club: 'Old Georgians', info: 'Pacy winger with finishing ability' },
+      { name: 'Matthew McNab', position: 'Outside Back', age: 27, height: '1.88m', weight: '95kg', club: 'Doncaster Knights-UK', info: 'Versatile back three player' },
+      { name: 'Tapiwa Mafura', position: 'Outside Back', age: 28, height: '1.74m', weight: '80kg', club: 'Lions-South Africa', info: 'Electric winger with pace' },
+      { name: 'Takudzwa Musingwini', position: 'Outside Back', age: 22, height: '1.78m', weight: '89kg', club: 'Iowa Central Community College- USA', info: 'Solid fullback option' },
+      { name: 'Edward Sigauke', position: 'Outside Back', age: 21, height: '1.69m', weight: '85kg', club: 'Varsity College- South Africa', info: 'Experienced outside back' }
     ]
   },
   {
@@ -672,7 +691,7 @@ const AfricaCupTeams: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-3 md:gap-4">
                   {selectedTeam.roster
-                    .filter(player => ['Half Back', 'Centre', 'Outside Back'].includes(player.position))
+                    .filter(player => ['Half Back', 'Fly Half', 'Centre', 'Outside Back'].includes(player.position))
                     .map((player, index) => {
                 const isExpanded = expandedPlayer === `${selectedTeam.id}-${player.name}`;
                 return (
