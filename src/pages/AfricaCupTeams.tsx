@@ -16,11 +16,11 @@ const teams = [
       // Hookers
       { name: 'Bryan Chiang', position: 'Hooker', age: 21, info: 'Experienced hooker with solid lineout throwing' },
       { name: 'Simba Mandioma', position: 'Hooker', age: 32, info: 'Mobile hooker with strong scrummaging' },
-      { name: 'Liam Larkan', position: 'Hooker', age: 26, info: 'Experienced hooker with leadership qualities' },
+      { name: 'Liam Larkan', position: 'Hooker', age: 27, info: 'Experienced hooker with leadership qualities' },
       
       // Props
       { name: 'Victor Mupunga', position: 'Prop', age: 25, info: 'Powerful tighthead prop' },
-      { name: 'Tyran Fagan', position: 'Prop', age: 27, info: 'Solid front row forward' },
+      { name: 'Tyran Fagan', position: 'Prop', info: 'Solid front row forward' },
       { name: 'Zvikomborero Chimoto', position: 'Prop', age: 26, info: 'Strong scrummaging prop' },
       { name: 'Cleopas Kundiona', position: 'Prop', age: 26, info: 'Experienced front row anchor' },
       { name: 'Brian Makamure', position: 'Prop', age: 34, info: 'Versatile front row player' },
@@ -29,22 +29,22 @@ const teams = [
       // Second Row
       { name: 'Kudakwashe Nyakufaringwa', position: '2nd Row', age: 31, info: 'Lineout specialist and leader' },
       { name: 'Simba Siraha', position: '2nd Row', age: 22, info: 'Athletic lock forward' },
-      { name: 'Tadiwa Gwashu', position: '2nd Row', age: 26, info: 'Powerful lineout option' },
+      { name: 'Tadiwa Gwashu', position: '2nd Row', info: 'Powerful lineout option' },
       { name: 'Brian Nyaude', position: '2nd Row', age: 24, info: 'Mobile second row forward' },
       
       // Back Row
-      { name: 'Jason Fraser', position: 'Back Row', age: 30, info: 'Captain and experienced campaigner' },
+      { name: 'Jason Fraser', position: 'Back Row', info: 'Captain and experienced campaigner' },
       { name: 'Aiden Burnett', position: 'Back Row', age: 27, info: 'Dynamic loose forward' },
-      { name: 'Dylan Utete', position: 'Back Row', age: 23, info: 'Mobile back row player' },
+      { name: 'Dylan Utete', position: 'Back Row', info: 'Mobile back row player' },
       { name: 'Godfrey Muzanargwo', position: 'Back Row', age: 26, info: 'Powerful ball carrier' },
-      { name: 'Tinotenda Mavesere', position: 'Back Row', age: 24, info: 'Athletic loose forward' },
+      { name: 'Tinotenda Mavesere', position: 'Back Row', age: 26, info: 'Athletic loose forward' },
       
       // Half Backs
       { name: 'Hilton Mudariki', position: 'Half Back', age: 32, info: 'Quick service from the base' },
       { name: 'Keegan Joubert', position: 'Half Back', age: 24, info: 'Promising young scrum-half' },
-      { name: 'Ian Prior', position: 'Half Back', age: 28, info: 'Veteran playmaker' },
-      { name: 'Lenience Tambwera', position: 'Half Back', age: 23, info: 'Quick-thinking half back' },
-      { name: 'Tyrone Gombe', position: 'Half Back', age: 25, info: 'Versatile half back option' },
+      { name: 'Ian Prior', position: 'Half Back', age: 34, info: 'Veteran playmaker' },
+      { name: 'Lenience Tambwera', position: 'Half Back', info: 'Quick-thinking half back' },
+      { name: 'Tyrone Gombe', position: 'Half Back', info: 'Versatile half back option' },
       
       // Centres
       { name: 'Brandon Mudzekenyedzi', position: 'Centre', age: 22, info: 'Powerful center with pace' },
@@ -52,11 +52,11 @@ const teams = [
       { name: 'Kudzai Mashawi', position: 'Centre', age: 31, info: 'Strong defensive center' },
       
       // Outside Backs
-      { name: 'Trevor Gurwe', position: 'Outside Back', age: 27, info: 'Pacy winger with finishing ability' },
-      { name: 'Matthew McNab', position: 'Outside Back', age: 25, info: 'Versatile back three player' },
+      { name: 'Trevor Gurwe', position: 'Outside Back', age: 21, info: 'Pacy winger with finishing ability' },
+      { name: 'Matthew McNab', position: 'Outside Back', info: 'Versatile back three player' },
       { name: 'Tapiwa Mafura', position: 'Outside Back', age: 28, info: 'Electric winger with pace' },
       { name: 'Takudzwa Musingwini', position: 'Outside Back', age: 22, info: 'Solid fullback option' },
-      { name: 'Edward Sigauke', position: 'Outside Back', age: 26, info: 'Experienced outside back' }
+      { name: 'Edward Sigauke', position: 'Outside Back', info: 'Experienced outside back' }
     ]
   },
   {
@@ -65,14 +65,14 @@ const teams = [
     flag: '🇩🇿',
     country: 'Algeria',
     roster: [
-      { name: 'Yacine Bensaha', position: 'Hooker', age: 28, info: 'National team captain and leader' },
-      { name: 'Karim Boudjemaa', position: 'Prop', age: 30, info: 'Experienced front row anchor' },
-      { name: 'Ahmed Tafat', position: '2nd Row', age: 27, info: 'Lineout specialist' },
-      { name: 'Sofiane Guitouni', position: 'Back Row', age: 25, info: 'Mobile loose forward' },
-      { name: 'Yasser Boudaoud', position: 'Half Back', age: 24, info: 'Quick-thinking scrum-half' },
-      { name: 'Nassim Lalaoui', position: 'Fly Half', age: 26, info: 'Creative playmaker' },
-      { name: 'Bilal Bouguetof', position: 'Centre', age: 25, info: 'Strong defensive center' },
-      { name: 'Rami Bouchar', position: 'Winger', age: 23, info: 'Pacy finisher on the wing' }
+      { name: 'Yacine Bensaha', position: 'Hooker', info: 'National team captain and leader' },
+      { name: 'Karim Boudjemaa', position: 'Prop', info: 'Experienced front row anchor' },
+      { name: 'Ahmed Tafat', position: '2nd Row', info: 'Lineout specialist' },
+      { name: 'Sofiane Guitouni', position: 'Back Row', info: 'Mobile loose forward' },
+      { name: 'Yasser Boudaoud', position: 'Half Back', info: 'Quick-thinking scrum-half' },
+      { name: 'Nassim Lalaoui', position: 'Fly Half', info: 'Creative playmaker' },
+      { name: 'Bilal Bouguetof', position: 'Centre', info: 'Strong defensive center' },
+      { name: 'Rami Bouchar', position: 'Winger', info: 'Pacy finisher on the wing' }
     ]
   },
   {
@@ -82,36 +82,36 @@ const teams = [
     country: 'Namibia',
     roster: [
       // Forwards
-      { name: 'Haitembu Shikufa', position: 'Prop', age: 27, info: 'Powerful front row forward' },
-      { name: 'Jason Benade', position: 'Hooker', age: 29, info: 'Experienced hooker with solid lineout throwing' },
-      { name: 'Otja Auala', position: 'Prop', age: 26, info: 'Strong scrummaging prop' },
-      { name: 'Sidney Halupe', position: '2nd Row', age: 25, info: 'Athletic lock forward' },
-      { name: 'Louis van der Westhuizen', position: '2nd Row', age: 28, info: 'Lineout specialist' },
-      { name: 'Armand Combrinck', position: 'Back Row', age: 24, info: 'Dynamic loose forward' },
-      { name: 'Torsten van Jaarsveld', position: 'Hooker', age: 29, info: 'Experienced hooker with leadership qualities' },
-      { name: 'Aranos Coetzee', position: 'Back Row', age: 27, info: 'Powerful ball carrier' },
-      { name: 'Adriaan Ludick', position: 'Prop', age: 25, info: 'Solid front row anchor' },
-      { name: 'Oliver Kurz', position: 'Back Row', age: 26, info: 'Mobile loose forward' },
-      { name: 'Tiaan de Klerk', position: '2nd Row', age: 24, info: 'Powerful lineout option' },
-      { name: 'Wian Conradie', position: 'Back Row', age: 23, info: 'Athletic back row player' },
-      { name: 'Johan Retief', position: 'Prop', age: 28, info: 'Veteran front row with experience' },
-      { name: 'Max Katjijeko', position: '2nd Row', age: 26, info: 'Athletic lineout option' },
-      { name: 'Richard Hardwick', position: 'Back Row', age: 25, info: 'Experienced loose forward' },
-      { name: 'Adriaan Booysen', position: 'Back Row', age: 24, info: 'Mobile back row player' },
-      { name: 'Prince !Gaoseb', position: 'Hooker', age: 27, info: 'Dynamic hooker with good hands' },
+      { name: 'Haitembu Shikufa', position: 'Prop', info: 'Powerful front row forward' },
+      { name: 'Jason Benade', position: 'Hooker', info: 'Experienced hooker with solid lineout throwing' },
+      { name: 'Otja Auala', position: 'Prop', info: 'Strong scrummaging prop' },
+      { name: 'Sidney Halupe', position: '2nd Row', info: 'Athletic lock forward' },
+      { name: 'Louis van der Westhuizen', position: '2nd Row', info: 'Lineout specialist' },
+      { name: 'Armand Combrinck', position: 'Back Row', info: 'Dynamic loose forward' },
+      { name: 'Torsten van Jaarsveld', position: 'Hooker', info: 'Experienced hooker with leadership qualities' },
+      { name: 'Aranos Coetzee', position: 'Back Row', info: 'Powerful ball carrier' },
+      { name: 'Adriaan Ludick', position: 'Prop', info: 'Solid front row anchor' },
+      { name: 'Oliver Kurz', position: 'Back Row', info: 'Mobile loose forward' },
+      { name: 'Tiaan de Klerk', position: '2nd Row', info: 'Powerful lineout option' },
+      { name: 'Wian Conradie', position: 'Back Row', info: 'Athletic back row player' },
+      { name: 'Johan Retief', position: 'Prop', info: 'Veteran front row with experience' },
+      { name: 'Max Katjijeko', position: '2nd Row', info: 'Athletic lineout option' },
+      { name: 'Richard Hardwick', position: 'Back Row', info: 'Experienced loose forward' },
+      { name: 'Adriaan Booysen', position: 'Back Row', info: 'Mobile back row player' },
+      { name: 'Prince !Gaoseb', position: 'Hooker', info: 'Dynamic hooker with good hands' },
       
       // Backs
-      { name: 'Jacques Theron', position: 'Half Back', age: 25, info: 'Quick-thinking scrum-half' },
-      { name: 'AJ Kearns', position: 'Half Back', age: 24, info: 'Creative playmaker' },
-      { name: 'Tiaan Swanepoel', position: 'Outside Back', age: 26, info: 'Versatile fullback option' },
-      { name: 'Andre van der Berg', position: 'Centre', age: 27, info: 'Powerful center with good hands' },
-      { name: 'Le Roux Malan', position: 'Outside Back', age: 23, info: 'Pacy winger with finishing ability' },
-      { name: 'Danco Burger', position: 'Centre', age: 25, info: 'Strong ball-carrying center' },
-      { name: 'Alcino Izaacs', position: 'Outside Back', age: 24, info: 'Electric winger with pace' },
-      { name: 'Jurgen Meyer', position: 'Centre', age: 26, info: 'Experienced center with leadership' },
-      { name: 'Cliven Loubser', position: 'Half Back', age: 27, info: 'Goal-kicking fly-half' },
-      { name: 'Danie van der Merwe', position: 'Outside Back', age: 25, info: 'Solid outside back option' },
-      { name: 'Jay Cee Nel', position: 'Outside Back', age: 28, info: 'Experienced back three player' }
+      { name: 'Jacques Theron', position: 'Half Back', info: 'Quick-thinking scrum-half' },
+      { name: 'AJ Kearns', position: 'Half Back', info: 'Creative playmaker' },
+      { name: 'Tiaan Swanepoel', position: 'Outside Back', info: 'Versatile fullback option' },
+      { name: 'Andre van der Berg', position: 'Centre', info: 'Powerful center with good hands' },
+      { name: 'Le Roux Malan', position: 'Outside Back', info: 'Pacy winger with finishing ability' },
+      { name: 'Danco Burger', position: 'Centre', info: 'Strong ball-carrying center' },
+      { name: 'Alcino Izaacs', position: 'Outside Back', info: 'Electric winger with pace' },
+      { name: 'Jurgen Meyer', position: 'Centre', info: 'Experienced center with leadership' },
+      { name: 'Cliven Loubser', position: 'Half Back', info: 'Goal-kicking fly-half' },
+      { name: 'Danie van der Merwe', position: 'Outside Back', info: 'Solid outside back option' },
+      { name: 'Jay Cee Nel', position: 'Outside Back', info: 'Experienced back three player' }
     ]
   },
   {
@@ -122,51 +122,51 @@ const teams = [
     roster: [
       // Forwards
       // Props
-      { name: 'Ephraim Oduor', position: 'Prop', age: 29, info: 'Experienced front row leader' },
-      { name: 'Edward Mwaura', position: 'Prop', age: 27, info: 'Powerful tighthead prop' },
-      { name: 'Vincent Mwikhali', position: 'Prop', age: 26, info: 'Solid front row anchor' },
-      { name: 'Wilhite Mususi', position: 'Prop', age: 24, info: 'Strong scrummaging prop' },
+      { name: 'Ephraim Oduor', position: 'Prop', info: 'Experienced front row leader' },
+      { name: 'Edward Mwaura', position: 'Prop', info: 'Powerful tighthead prop' },
+      { name: 'Vincent Mwikhali', position: 'Prop', info: 'Solid front row anchor' },
+      { name: 'Wilhite Mususi', position: 'Prop', info: 'Strong scrummaging prop' },
       
       // Hookers
-      { name: 'Teddy Akala', position: 'Hooker', age: 28, info: 'Solid lineout thrower' },
-      { name: 'Eugine Sifuna', position: 'Hooker', age: 25, info: 'Mobile hooker with good hands' },
+      { name: 'Teddy Akala', position: 'Hooker', info: 'Solid lineout thrower' },
+      { name: 'Eugine Sifuna', position: 'Hooker', info: 'Mobile hooker with good hands' },
       
       // Locks
-      { name: 'Hibrahim Ayoo', position: '2nd Row', age: 26, info: 'Athletic lock forward' },
-      { name: 'Thomas Okeyo', position: '2nd Row', age: 28, info: 'Lineout specialist' },
-      { name: 'Andycole Omollo', position: '2nd Row', age: 24, info: 'Powerful lineout option' },
-      { name: 'Emmanuel Slungi', position: '2nd Row', age: 27, info: 'Experienced second row' },
+      { name: 'Hibrahim Ayoo', position: '2nd Row', info: 'Athletic lock forward' },
+      { name: 'Thomas Okeyo', position: '2nd Row', info: 'Lineout specialist' },
+      { name: 'Andycole Omollo', position: '2nd Row', info: 'Powerful lineout option' },
+      { name: 'Emmanuel Slungi', position: '2nd Row', info: 'Experienced second row' },
       
       // Back Row
-      { name: 'George Nyambua', position: 'Back Row', age: 28, info: 'Captain and inspirational leader' },
-      { name: 'Patrick Sabatia', position: 'Back Row', age: 26, info: 'Dynamic loose forward' },
-      { name: 'David Bunduki', position: 'Back Row', age: 25, info: 'Powerful ball carrier' },
-      { name: 'Obat Kuke', position: 'Back Row', age: 24, info: 'Mobile back row player' },
-      { name: 'Bethuel Anami', position: 'Back Row', age: 27, info: 'Athletic loose forward' },
-      { name: 'Elkeans Musonye', position: 'Back Row', age: 23, info: 'Promising young forward' },
+      { name: 'George Nyambua', position: 'Back Row', info: 'Captain and inspirational leader' },
+      { name: 'Patrick Sabatia', position: 'Back Row', info: 'Dynamic loose forward' },
+      { name: 'David Bunduki', position: 'Back Row', info: 'Powerful ball carrier' },
+      { name: 'Obat Kuke', position: 'Back Row', info: 'Mobile back row player' },
+      { name: 'Bethuel Anami', position: 'Back Row', info: 'Athletic loose forward' },
+      { name: 'Elkeans Musonye', position: 'Back Row', info: 'Promising young forward' },
       
       // Backs
       // Scrum Halves
-      { name: 'Samuel Asati', position: 'Half Back', age: 25, info: 'Quick-thinking scrum-half' },
-      { name: 'Brian Tanga', position: 'Half Back', age: 26, info: 'Experienced scrum-half' },
+      { name: 'Samuel Asati', position: 'Half Back', info: 'Quick-thinking scrum-half' },
+      { name: 'Brian Tanga', position: 'Half Back', info: 'Experienced scrum-half' },
       
       // Fly Halves
-      { name: 'Barry Young', position: 'Half Back', age: 24, info: 'Creative playmaker and goal-kicker' },
-      { name: 'Brian Wahinya', position: 'Half Back', age: 23, info: 'Promising young fly-half' },
+      { name: 'Barry Young', position: 'Half Back', info: 'Creative playmaker and goal-kicker' },
+      { name: 'Brian Wahinya', position: 'Half Back', info: 'Promising young fly-half' },
       
       // Centres
-      { name: 'Walter Okoth', position: 'Centre', age: 28, info: 'Experienced center and leader' },
-      { name: 'Samuel Ovwamu', position: 'Centre', age: 25, info: 'Powerful ball-carrying center' },
-      { name: 'Bryceson Adaka', position: 'Centre', age: 24, info: 'Creative center with good hands' },
-      { name: 'John Okoth', position: 'Centre', age: 26, info: 'Strong defensive center' },
+      { name: 'Walter Okoth', position: 'Centre', info: 'Experienced center and leader' },
+      { name: 'Samuel Ovwamu', position: 'Centre', info: 'Powerful ball-carrying center' },
+      { name: 'Bryceson Adaka', position: 'Centre', info: 'Creative center with good hands' },
+      { name: 'John Okoth', position: 'Centre', info: 'Strong defensive center' },
       
       // Wingers
-      { name: 'Griffin Chao', position: 'Outside Back', age: 23, info: 'Pacy finisher with electric pace' },
-      { name: 'Timothy Omela', position: 'Outside Back', age: 25, info: 'Powerful wing with finishing ability' },
+      { name: 'Griffin Chao', position: 'Outside Back', info: 'Pacy finisher with electric pace' },
+      { name: 'Timothy Omela', position: 'Outside Back', info: 'Powerful wing with finishing ability' },
       
       // Full Backs
-      { name: 'Jone Kubu', position: 'Outside Back', age: 25, info: 'Safe fullback under pressure' },
-      { name: 'Derick Ashiundu', position: 'Outside Back', age: 27, info: 'Versatile back three player' }
+      { name: 'Jone Kubu', position: 'Outside Back', info: 'Safe fullback under pressure' },
+      { name: 'Derick Ashiundu', position: 'Outside Back', info: 'Versatile back three player' }
     ]
   },
   {
@@ -176,36 +176,36 @@ const teams = [
     country: 'Uganda',
     roster: [
       // Forwards
-      { name: 'Bwambale Nathan Asiimire', position: 'Prop', age: 26, info: 'Powerful front row forward' },
-      { name: 'Edward Emiemu', position: 'Hooker', age: 28, info: 'Solid lineout thrower' },
-      { name: 'Ssenteza Wycliff Santos', position: 'Prop', age: 27, info: 'Strong scrummaging prop' },
-      { name: 'Ayebazibwe Blair', position: '2nd Row', age: 25, info: 'Athletic lock forward' },
-      { name: 'Kivumbi Saul', position: 'Back Row', age: 29, info: 'Experienced loose forward' },
-      { name: 'Kimbowa Collin', position: '2nd Row', age: 26, info: 'Lineout specialist' },
-      { name: 'Maido Fahad', position: 'Prop', age: 24, info: 'Dynamic young prop' },
-      { name: 'Emong Eliphaz', position: 'Hooker', age: 27, info: 'Mobile hooker with good hands' },
-      { name: 'Opio Julius', position: 'Back Row', age: 25, info: 'Powerful ball carrier' },
-      { name: 'Gongodyo Sydney', position: '2nd Row', age: 28, info: 'Experienced second row' },
-      { name: 'Wandera Brian', position: 'Back Row', age: 24, info: 'Mobile loose forward' },
-      { name: 'Byron Oketayot', position: 'Back Row', age: 28, info: 'Captain and inspirational leader' },
-      { name: 'Frank Kidega', position: 'Back Row', age: 30, info: 'Vice Captain with vast experience' },
-      { name: 'Ogena Pius', position: 'Prop', age: 26, info: 'Solid front row anchor' },
-      { name: 'Desire Ayera', position: 'Prop', age: 30, info: 'Veteran front row with leadership qualities' },
-      { name: 'Aturinda Alex', position: '2nd Row', age: 25, info: 'Athletic lineout option' },
+      { name: 'Bwambale Nathan Asiimire', position: 'Prop', info: 'Powerful front row forward' },
+      { name: 'Edward Emiemu', position: 'Hooker', info: 'Solid lineout thrower' },
+      { name: 'Ssenteza Wycliff Santos', position: 'Prop', info: 'Strong scrummaging prop' },
+      { name: 'Ayebazibwe Blair', position: '2nd Row', info: 'Athletic lock forward' },
+      { name: 'Kivumbi Saul', position: 'Back Row', info: 'Experienced loose forward' },
+      { name: 'Kimbowa Collin', position: '2nd Row', info: 'Lineout specialist' },
+      { name: 'Maido Fahad', position: 'Prop', info: 'Dynamic young prop' },
+      { name: 'Emong Eliphaz', position: 'Hooker', info: 'Mobile hooker with good hands' },
+      { name: 'Opio Julius', position: 'Back Row', info: 'Powerful ball carrier' },
+      { name: 'Gongodyo Sydney', position: '2nd Row', info: 'Experienced second row' },
+      { name: 'Wandera Brian', position: 'Back Row', info: 'Mobile loose forward' },
+      { name: 'Byron Oketayot', position: 'Back Row', info: 'Captain and inspirational leader' },
+      { name: 'Frank Kidega', position: 'Back Row', info: 'Vice Captain with vast experience' },
+      { name: 'Ogena Pius', position: 'Prop', info: 'Solid front row anchor' },
+      { name: 'Desire Ayera', position: 'Prop', info: 'Veteran front row with leadership qualities' },
+      { name: 'Aturinda Alex', position: '2nd Row', info: 'Athletic lineout option' },
       
       // Backs
-      { name: 'Conrad Wanyama Wandera', position: 'Half Back', age: 27, info: 'Vice Captain and experienced scrum-half' },
-      { name: 'Massanganzira Isaac', position: 'Half Back', age: 25, info: 'Creative playmaker' },
-      { name: 'Aaron Ofoywroth', position: 'Centre', age: 25, info: 'Powerful center with good hands' },
-      { name: 'Philip Wokorach', position: 'Half Back', age: 31, info: 'Veteran scrum-half with pace' },
-      { name: 'Kasito Adrian', position: 'Outside Back', age: 24, info: 'Pacy winger with finishing ability' },
-      { name: 'Ivan Otema', position: 'Half Back', age: 26, info: 'Creative playmaker and goal-kicker' },
-      { name: 'Jadwong Joseph Aredo', position: 'Centre', age: 23, info: 'Promising young center' },
-      { name: 'Ssembusi Shakim', position: 'Outside Back', age: 25, info: 'Versatile back three player' },
-      { name: 'Liam Walker Christopher', position: 'Outside Back', age: 26, info: 'Solid fullback option' },
-      { name: 'Timothy Kisiga', position: 'Centre', age: 24, info: 'Strong ball-carrying center' },
-      { name: 'Ampeirwe William Nkore', position: 'Outside Back', age: 27, info: 'Experienced outside back' },
-      { name: 'Munyani Ian Arnold', position: 'Outside Back', age: 23, info: 'Electric winger with pace' }
+      { name: 'Conrad Wanyama Wandera', position: 'Half Back', info: 'Vice Captain and experienced scrum-half' },
+      { name: 'Massanganzira Isaac', position: 'Half Back', info: 'Creative playmaker' },
+      { name: 'Aaron Ofoywroth', position: 'Centre', info: 'Powerful center with good hands' },
+      { name: 'Philip Wokorach', position: 'Half Back', info: 'Veteran scrum-half with pace' },
+      { name: 'Kasito Adrian', position: 'Outside Back', info: 'Pacy winger with finishing ability' },
+      { name: 'Ivan Otema', position: 'Half Back', info: 'Creative playmaker and goal-kicker' },
+      { name: 'Jadwong Joseph Aredo', position: 'Centre', info: 'Promising young center' },
+      { name: 'Ssembusi Shakim', position: 'Outside Back', info: 'Versatile back three player' },
+      { name: 'Liam Walker Christopher', position: 'Outside Back', info: 'Solid fullback option' },
+      { name: 'Timothy Kisiga', position: 'Centre', info: 'Strong ball-carrying center' },
+      { name: 'Ampeirwe William Nkore', position: 'Outside Back', info: 'Experienced outside back' },
+      { name: 'Munyani Ian Arnold', position: 'Outside Back', info: 'Electric winger with pace' }
     ]
   },
   {
@@ -214,14 +214,14 @@ const teams = [
     flag: '🇸🇳',
     country: 'Senegal',
     roster: [
-      { name: 'Alioune Ndiaye', position: 'Back Row', age: 30, info: 'Captain and inspirational leader' },
-      { name: 'Mamadou Diop', position: 'Hooker', age: 27, info: 'Solid lineout thrower' },
-      { name: 'Ibrahima Fall', position: 'Prop', age: 29, info: 'Experienced front row anchor' },
-      { name: 'Cheikh Diallo', position: '2nd Row', age: 28, info: 'Lineout specialist and leader' },
-      { name: 'Abdou Seck', position: 'Half Back', age: 26, info: 'Quick service provider' },
-      { name: 'Modou Faye', position: 'Fly Half', age: 25, info: 'Creative playmaker' },
-      { name: 'Serigne Dia', position: 'Centre', age: 27, info: 'Powerful ball-carrying center' },
-      { name: 'Landing Badji', position: 'Winger', age: 23, info: 'Speedster with finishing ability' }
+      { name: 'Alioune Ndiaye', position: 'Back Row', info: 'Captain and inspirational leader' },
+      { name: 'Mamadou Diop', position: 'Hooker', info: 'Solid lineout thrower' },
+      { name: 'Ibrahima Fall', position: 'Prop', info: 'Experienced front row anchor' },
+      { name: 'Cheikh Diallo', position: '2nd Row', info: 'Lineout specialist and leader' },
+      { name: 'Abdou Seck', position: 'Half Back', info: 'Quick service provider' },
+      { name: 'Modou Faye', position: 'Fly Half', info: 'Creative playmaker' },
+      { name: 'Serigne Dia', position: 'Centre', info: 'Powerful ball-carrying center' },
+      { name: 'Landing Badji', position: 'Winger', info: 'Speedster with finishing ability' }
     ]
   },
   {
@@ -230,14 +230,14 @@ const teams = [
     flag: '🇨🇮',
     country: 'Côte d\'Ivoire',
     roster: [
-      { name: 'Adama Coulibaly', position: 'Back Row', age: 29, info: 'Captain and experienced leader' },
-      { name: 'Koffi Kouame', position: 'Hooker', age: 28, info: 'Experienced hooker with solid lineout skills' },
-      { name: 'Didier Yao', position: 'Prop', age: 30, info: 'Veteran prop with international experience' },
-      { name: 'Seydou Doumbia', position: '2nd Row', age: 27, info: 'Athletic lineout option' },
-      { name: 'Maxime Dago', position: 'Half Back', age: 26, info: 'Quick-thinking scrum-half' },
-      { name: 'Jean-Baptiste Anoh', position: 'Fly Half', age: 25, info: 'Creative playmaker and goal-kicker' },
-      { name: 'Franck Kone', position: 'Centre', age: 27, info: 'Powerful center with good hands' },
-      { name: 'Serge Bile', position: 'Winger', age: 23, info: 'Pacy finisher on the wing' }
+      { name: 'Adama Coulibaly', position: 'Back Row', info: 'Captain and experienced leader' },
+      { name: 'Koffi Kouame', position: 'Hooker', info: 'Experienced hooker with solid lineout skills' },
+      { name: 'Didier Yao', position: 'Prop', info: 'Veteran prop with international experience' },
+      { name: 'Seydou Doumbia', position: '2nd Row', info: 'Athletic lineout option' },
+      { name: 'Maxime Dago', position: 'Half Back', info: 'Quick-thinking scrum-half' },
+      { name: 'Jean-Baptiste Anoh', position: 'Fly Half', info: 'Creative playmaker and goal-kicker' },
+      { name: 'Franck Kone', position: 'Centre', info: 'Powerful center with good hands' },
+      { name: 'Serge Bile', position: 'Winger', info: 'Pacy finisher on the wing' }
     ]
   },
   {
@@ -247,36 +247,36 @@ const teams = [
     country: 'Morocco',
     roster: [
       // Forwards (Les Avants)
-      { name: 'Aanikid Nassim', position: 'Prop', age: 26, info: 'Powerful front row forward' },
-      { name: 'Achahbar Adil', position: 'Hooker', age: 28, info: 'Experienced hooker with solid lineout throwing' },
-      { name: 'Ait Naceur Nail', position: 'Prop', age: 25, info: 'Strong scrummaging prop' },
-      { name: 'Bachiri Theo', position: '2nd Row', age: 24, info: 'Athletic lock forward' },
-      { name: 'Bouamrane Nabil', position: '2nd Row', age: 27, info: 'Lineout specialist' },
-      { name: 'Boukanoucha Jibril', position: 'Back Row', age: 23, info: 'Dynamic loose forward' },
-      { name: 'Boukanoucha Amine', position: 'Back Row', age: 25, info: 'Mobile back row player' },
-      { name: 'El Kadri Naoufal', position: 'Prop', age: 29, info: 'Veteran front row with experience' },
-      { name: 'El Ansari Elias', position: 'Hooker', age: 26, info: 'Reliable hooker with good hands' },
-      { name: 'El Khaoulani Billal', position: 'Back Row', age: 24, info: 'Powerful ball carrier' },
-      { name: 'El Fakir Zakaria', position: '2nd Row', age: 27, info: 'Tall lineout jumper' },
-      { name: 'El Khattabi Ilan', position: 'Back Row', age: 22, info: 'Athletic loose forward' },
-      { name: 'El Gharbaoui Reda', position: 'Prop', age: 28, info: 'Strong scrummaging specialist' },
-      { name: 'El Yahyaoui Ilian', position: 'Back Row', age: 25, info: 'Versatile back row option' },
-      { name: 'Fadli Bilal', position: '2nd Row', age: 26, info: 'Powerful lineout option' },
-      { name: 'Hou Youness', position: 'Back Row', age: 23, info: 'Mobile loose forward' },
-      { name: 'Haimiche Hassan', position: 'Hooker', age: 27, info: 'Dynamic hooker with leadership' },
+      { name: 'Aanikid Nassim', position: 'Prop', info: 'Powerful front row forward' },
+      { name: 'Achahbar Adil', position: 'Hooker', info: 'Experienced hooker with solid lineout throwing' },
+      { name: 'Ait Naceur Nail', position: 'Prop', info: 'Strong scrummaging prop' },
+      { name: 'Bachiri Theo', position: '2nd Row', info: 'Athletic lock forward' },
+      { name: 'Bouamrane Nabil', position: '2nd Row', info: 'Lineout specialist' },
+      { name: 'Boukanoucha Jibril', position: 'Back Row', info: 'Dynamic loose forward' },
+      { name: 'Boukanoucha Amine', position: 'Back Row', info: 'Mobile back row player' },
+      { name: 'El Kadri Naoufal', position: 'Prop', info: 'Veteran front row with experience' },
+      { name: 'El Ansari Elias', position: 'Hooker', info: 'Reliable hooker with good hands' },
+      { name: 'El Khaoulani Billal', position: 'Back Row', info: 'Powerful ball carrier' },
+      { name: 'El Fakir Zakaria', position: '2nd Row', info: 'Tall lineout jumper' },
+      { name: 'El Khattabi Ilan', position: 'Back Row', info: 'Athletic loose forward' },
+      { name: 'El Gharbaoui Reda', position: 'Prop', info: 'Strong scrummaging specialist' },
+      { name: 'El Yahyaoui Ilian', position: 'Back Row', info: 'Versatile back row option' },
+      { name: 'Fadli Bilal', position: '2nd Row', info: 'Powerful lineout option' },
+      { name: 'Hou Youness', position: 'Back Row', info: 'Mobile loose forward' },
+      { name: 'Haimiche Hassan', position: 'Hooker', info: 'Dynamic hooker with leadership' },
       
       // Backs (Les Trois-Quarts)
-      { name: 'Jaoudat Soheyl', position: 'Half Back', age: 25, info: 'Quick-thinking scrum-half' },
-      { name: 'Jnaoui Samir', position: 'Half Back', age: 24, info: 'Creative playmaker' },
-      { name: 'Peutin Louis', position: 'Outside Back', age: 26, info: 'Versatile fullback option' },
-      { name: 'Khaouti Karim', position: 'Centre', age: 27, info: 'Powerful center with good hands' },
-      { name: 'Tirefort Valentin', position: 'Outside Back', age: 23, info: 'Pacy winger with finishing ability' },
-      { name: 'Maamry Yassine', position: 'Centre', age: 25, info: 'Strong ball-carrying center' },
-      { name: 'Qadiri Karim', position: 'Outside Back', age: 24, info: 'Electric winger with pace' },
-      { name: 'Ouazzani Jad', position: 'Centre', age: 26, info: 'Experienced center with leadership' },
-      { name: 'Laabidate Smail', position: 'Half Back', age: 27, info: 'Tactical fly-half' },
-      { name: 'Terki Nassim', position: 'Outside Back', age: 25, info: 'Solid outside back option' },
-      { name: 'El Youmouri Nassim', position: 'Outside Back', age: 28, info: 'Experienced back three player' }
+      { name: 'Jaoudat Soheyl', position: 'Half Back', info: 'Quick-thinking scrum-half' },
+      { name: 'Jnaoui Samir', position: 'Half Back', info: 'Creative playmaker' },
+      { name: 'Peutin Louis', position: 'Outside Back', info: 'Versatile fullback option' },
+      { name: 'Khaouti Karim', position: 'Centre', info: 'Powerful center with good hands' },
+      { name: 'Tirefort Valentin', position: 'Outside Back', info: 'Pacy winger with finishing ability' },
+      { name: 'Maamry Yassine', position: 'Centre', info: 'Strong ball-carrying center' },
+      { name: 'Qadiri Karim', position: 'Outside Back', info: 'Electric winger with pace' },
+      { name: 'Ouazzani Jad', position: 'Centre', info: 'Experienced center with leadership' },
+      { name: 'Laabidate Smail', position: 'Half Back', info: 'Tactical fly-half' },
+      { name: 'Terki Nassim', position: 'Outside Back', info: 'Solid outside back option' },
+      { name: 'El Youmouri Nassim', position: 'Outside Back', info: 'Experienced back three player' }
     ]
   }
 ];
@@ -587,7 +587,9 @@ const AfricaCupTeams: React.FC = () => {
                           <img 
                             src={selectedTeam.id === 'zimbabwe' ? zimbabwePlayerImages[player.name] : kenyaPlayerImages[player.name]} 
                             alt={player.name}
-                            className="w-24 h-32 md:w-32 md:h-40 object-cover mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg border-2 border-scrummy-goldYellow rounded-lg"
+                            className={`w-24 h-32 md:w-32 md:h-40 object-cover mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg border-2 border-scrummy-goldYellow rounded-lg ${
+                              selectedTeam.id === 'kenya' ? 'scale-110' : ''
+                            }`}
                           />
                         ) : (
                           <div className="w-24 h-32 md:w-32 md:h-40 bg-gradient-to-br from-scrummy-navy to-scrummy-blue rounded-full flex items-center justify-center mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg">
@@ -673,7 +675,9 @@ const AfricaCupTeams: React.FC = () => {
                           <img 
                             src={selectedTeam.id === 'zimbabwe' ? zimbabwePlayerImages[player.name] : kenyaPlayerImages[player.name]} 
                             alt={player.name}
-                            className="w-24 h-32 md:w-32 md:h-40 object-cover mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg border-2 border-scrummy-goldYellow rounded-lg"
+                            className={`w-24 h-32 md:w-32 md:h-40 object-cover mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg border-2 border-scrummy-goldYellow rounded-lg ${
+                              selectedTeam.id === 'kenya' ? 'scale-110' : ''
+                            }`}
                           />
                         ) : (
                           <div className="w-24 h-32 md:w-32 md:h-40 bg-gradient-to-br from-scrummy-navy to-scrummy-blue rounded-full flex items-center justify-center mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg">

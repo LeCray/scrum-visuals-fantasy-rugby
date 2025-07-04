@@ -476,9 +476,9 @@ const AfricaCupHub: React.FC = () => {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                       {[
                         { name: "Jason Fraser", team: "Zimbabwe", flag: "🇿🇼", position: "Captain • Back Row", votes: "3,247" },
-                        { name: "Trevor Gurwe", team: "Zimbabwe", flag: "🇿🇼", position: "Outside Back", votes: "2,891" },
+                        { name: "George Nyambua", team: "Kenya", flag: "🇰🇪", position: "Captain • Back Row", votes: "2,891" },
                         { name: "Brandon Mudzekenyedzi", team: "Zimbabwe", flag: "🇿🇼", position: "Centre", votes: "2,654" },
-                        { name: "Ian Prior", team: "Zimbabwe", flag: "🇿🇼", position: "Half Back", votes: "2,183" }
+                        { name: "Samuel Asati", team: "Kenya", flag: "🇰🇪", position: "Half Back", votes: "2,183" }
                       ].map((player, index) => (
                         <motion.div
                           key={index}
@@ -499,7 +499,9 @@ const AfricaCupHub: React.FC = () => {
                                   <img 
                                     src={zimbabwePlayerImages[player.name] || kenyaPlayerImages[player.name]} 
                                     alt={player.name}
-                                    className="w-16 h-20 sm:w-20 sm:h-24 object-cover mx-auto rounded-lg shadow-md border-2 border-scrummy-goldYellow"
+                                    className={`w-16 h-20 sm:w-20 sm:h-24 mx-auto rounded-lg shadow-md border-2 border-scrummy-goldYellow ${
+                                      kenyaPlayerImages[player.name] ? 'object-cover object-bottom' : 'object-cover'
+                                    }`}
                                   />
                                 ) : (
                                   <div className="w-16 h-20 sm:w-20 sm:h-24 bg-gradient-to-br from-scrummy-navy to-scrummy-blue rounded-lg flex items-center justify-center mx-auto">
