@@ -14,48 +14,48 @@ const teams = [
     country: 'Zimbabwe',
     roster: [
       // Hookers
-      { name: 'Bryan Chiang', position: 'Hooker', age: 21, height: '1.75m', weight: '105kg', info: 'Experienced hooker with solid lineout throwing' },
-      { name: 'Simba Mandioma', position: 'Hooker', age: 32, height: '1.70m', weight: '101kg', info: 'Mobile hooker with strong scrummaging' },
+      { name: 'Bryan Chiang', position: 'Hooker', age: 21, height: '1.75m', weight: '105kg', club: 'Old Harlians', info: 'Experienced hooker with solid lineout throwing' },
+      { name: 'Simba Mandioma', position: 'Hooker', age: 32, height: '1.70m', weight: '101kg', club: 'Old Hararians/Harare Province', info: 'Mobile hooker with strong scrummaging' },
       { name: 'Liam Larkan', position: 'Hooker', age: 27, info: 'Experienced hooker with leadership qualities' },
       
       // Props
-      { name: 'Victor Mupunga', position: 'Prop', age: 25, height: '1.81m', weight: '127kg', info: 'Powerful tighthead prop' },
+      { name: 'Victor Mupunga', position: 'Prop', age: 25, height: '1.81m', weight: '127kg', club: 'Club Sportif Nution', info: 'Powerful tighthead prop' },
       { name: 'Tyran Fagan', position: 'Prop', info: 'Solid front row forward' },
-      { name: 'Zvikomborero Chimoto', position: 'Prop', age: 26, height: '1.71m', weight: '114kg', info: 'Strong scrummaging prop' },
-      { name: 'Cleopas Kundiona', position: 'Prop', age: 26, height: '1.81m', weight: '118kg', info: 'Experienced front row anchor' },
-      { name: 'Brian Makamure', position: 'Prop', age: 34, height: '1.72m', weight: '106kg', info: 'Versatile front row player' },
-      { name: 'Bornwell Gwinji', position: 'Prop', age: 27, height: '1.77m', weight: '118kg', info: 'Dynamic young prop' },
+      { name: 'Zvikomborero Chimoto', position: 'Prop', age: 26, height: '1.71m', weight: '114kg', club: 'Old Hararians/Harare Province', info: 'Strong scrummaging prop' },
+      { name: 'Cleopas Kundiona', position: 'Prop', age: 26, height: '1.81m', weight: '118kg', club: 'Nevers France', info: 'Experienced front row anchor' },
+      { name: 'Brian Makamure', position: 'Prop', age: 34, height: '1.72m', weight: '106kg', club: 'Old Hararians', info: 'Versatile front row player' },
+      { name: 'Bornwell Gwinji', position: 'Prop', age: 27, height: '1.77m', weight: '118kg', club: 'Gernika Rugby Club', info: 'Dynamic young prop' },
       
       // Second Row
-      { name: 'Kudakwashe Nyakufaringwa', position: '2nd Row', age: 31, height: '2m', weight: '127kg', info: 'Lineout specialist and leader' },
-      { name: 'Simba Siraha', position: '2nd Row', age: 22, height: '1.95m', weight: '100kg', info: 'Athletic lock forward' },
+      { name: 'Kudakwashe Nyakufaringwa', position: '2nd Row', age: 31, height: '2m', weight: '127kg', club: 'Lublin', info: 'Lineout specialist and leader' },
+      { name: 'Simba Siraha', position: '2nd Row', age: 22, height: '1.95m', weight: '100kg', club: 'Old Hararians/Harare', info: 'Athletic lock forward' },
       { name: 'Tadiwa Gwashu', position: '2nd Row', info: 'Powerful lineout option' },
-      { name: 'Brian Nyaude', position: '2nd Row', age: 24, height: '1.96m', weight: '92kg', info: 'Mobile second row forward' },
+      { name: 'Brian Nyaude', position: '2nd Row', age: 24, height: '1.96m', weight: '92kg', club: 'Old Hararians', info: 'Mobile second row forward' },
       
       // Back Row
       { name: 'Jason Fraser', position: 'Back Row', info: 'Captain and experienced campaigner' },
-      { name: 'Aiden Burnett', position: 'Back Row', age: 27, height: '1.89m', weight: '114kg', info: 'Dynamic loose forward' },
+      { name: 'Aiden Burnett', position: 'Back Row', age: 27, height: '1.89m', weight: '114kg', club: 'Old Hararians / Harare Province', info: 'Dynamic loose forward' },
       { name: 'Dylan Utete', position: 'Back Row', info: 'Mobile back row player' },
-      { name: 'Godfrey Muzanargwo', position: 'Back Row', age: 26, height: '1.93m', weight: '110kg', info: 'Powerful ball carrier' },
+      { name: 'Godfrey Muzanargwo', position: 'Back Row', age: 26, height: '1.93m', weight: '110kg', club: 'Griquas', info: 'Powerful ball carrier' },
       { name: 'Tinotenda Mavesere', position: 'Back Row', age: 26, info: 'Athletic loose forward' },
       
       // Half Backs
-      { name: 'Hilton Mudariki', position: 'Half Back', age: 32, height: '1.72m', weight: '80kg', info: 'Quick service from the base' },
-      { name: 'Keegan Joubert', position: 'Half Back', age: 24, height: '1.74m', weight: '85kg', info: 'Promising young scrum-half' },
+      { name: 'Hilton Mudariki', position: 'Half Back', age: 32, height: '1.72m', weight: '80kg', club: 'Old Hararians', info: 'Quick service from the base' },
+      { name: 'Keegan Joubert', position: 'Half Back', age: 24, height: '1.74m', weight: '85kg', club: 'Durbell Rugby Club/Western Province', info: 'Promising young scrum-half' },
       { name: 'Ian Prior', position: 'Half Back', age: 34, info: 'Veteran playmaker' },
       { name: 'Lenience Tambwera', position: 'Half Back', info: 'Quick-thinking half back' },
       { name: 'Tyrone Gombe', position: 'Half Back', info: 'Versatile half back option' },
       
       // Centres
-      { name: 'Brandon Mudzekenyedzi', position: 'Centre', age: 22, height: '1.84m', weight: '104kg', info: 'Powerful center with pace' },
-      { name: 'Dion Khumalo', position: 'Centre', age: 22, height: '1.73m', weight: '92kg', info: 'Creative center with good hands' },
-      { name: 'Kudzai Mashawi', position: 'Centre', age: 31, height: '1.78m', weight: '109kg', info: 'Strong defensive center' },
+      { name: 'Brandon Mudzekenyedzi', position: 'Centre', age: 22, height: '1.84m', weight: '104kg', club: 'College Rovers', info: 'Powerful center with pace' },
+      { name: 'Dion Khumalo', position: 'Centre', age: 22, height: '1.73m', weight: '92kg', club: 'Old Hararians', info: 'Creative center with good hands' },
+      { name: 'Kudzai Mashawi', position: 'Centre', age: 31, height: '1.78m', weight: '109kg', club: 'Harare Sports Club', info: 'Strong defensive center' },
       
       // Outside Backs
-      { name: 'Trevor Gurwe', position: 'Outside Back', age: 21, info: 'Pacy winger with finishing ability' },
+      { name: 'Trevor Gurwe', position: 'Outside Back', age: 21, club: 'Old Georgians', info: 'Pacy winger with finishing ability' },
       { name: 'Matthew McNab', position: 'Outside Back', info: 'Versatile back three player' },
-      { name: 'Tapiwa Mafura', position: 'Outside Back', age: 28, height: '1.74m', weight: '80kg', info: 'Electric winger with pace' },
-      { name: 'Takudzwa Musingwini', position: 'Outside Back', age: 22, height: '1.78m', weight: '89kg', info: 'Solid fullback option' },
+      { name: 'Tapiwa Mafura', position: 'Outside Back', age: 28, height: '1.74m', weight: '80kg', club: 'Lions', info: 'Electric winger with pace' },
+      { name: 'Takudzwa Musingwini', position: 'Outside Back', age: 22, height: '1.78m', weight: '89kg', club: 'Old Hararians', info: 'Solid fullback option' },
       { name: 'Edward Sigauke', position: 'Outside Back', info: 'Experienced outside back' }
     ]
   },
@@ -637,6 +637,11 @@ const AfricaCupTeams: React.FC = () => {
                                   {player.weight}
                                 </span>
                               )}
+                              {player.club && (
+                                <span className="inline-block bg-purple-100 text-purple-600 text-xs px-2 py-1 rounded-full">
+                                  {player.club}
+                                </span>
+                              )}
                             </div>
                           </div>
                           <p className="text-gray-600 text-xs leading-relaxed text-center">{player.info}</p>
@@ -659,7 +664,7 @@ const AfricaCupTeams: React.FC = () => {
                 </div>
               </div>
 
-              {/* Backs Section */}
+                                    {/* Backs Section */}
               <div>
                 <div className="mb-4 md:mb-6">
                   <h3 className="text-xl md:text-2xl font-bold text-scrummy-navy">Backs</h3>
@@ -737,6 +742,11 @@ const AfricaCupTeams: React.FC = () => {
                               {player.weight && (
                                 <span className="inline-block bg-green-100 text-green-600 text-xs px-2 py-1 rounded-full">
                                   {player.weight}
+                                </span>
+                              )}
+                              {player.club && (
+                                <span className="inline-block bg-purple-100 text-purple-600 text-xs px-2 py-1 rounded-full">
+                                  {player.club}
                                 </span>
                               )}
                             </div>
