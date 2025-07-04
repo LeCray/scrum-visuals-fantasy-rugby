@@ -36,7 +36,7 @@ const teams: Array<{
       { name: 'Liam Larkan', position: 'Hooker', age: 27, height: '1.82m', weight: '103kg', club: 'Pirates RFC- South Africa', info: 'Experienced hooker with leadership qualities' },
       
       // Props
-      { name: 'Victor Mupunga', position: 'Prop', age: 25, height: '1.81m', weight: '127kg', club: 'Union Sportive Bressane- France', info: 'Powerful tighthead prop' },
+      { name: 'Victor Mupunga', position: 'Prop', age: 25, height: '1.81m', weight: '127kg', club: 'Union Sportive Bressane- France', info: 'Powerful loosehead prop' },
       { name: 'Tyran Fagan', position: 'Prop', age: 33, height: '1.83m', weight: '105kg', club: 'Bizkaia Gernika RT- Spain', info: 'Solid front row forward' },
       { name: 'Zvikomborero Chimoto', position: 'Prop', age: 26, height: '1.71m', weight: '114kg', club: 'Old Hararians/Harare Province', info: 'Strong scrummaging prop' },
       { name: 'Cleopas Kundiona', position: 'Prop', age: 26, height: '1.81m', weight: '118kg', club: 'Northampton Saints- UK', info: 'Experienced front row anchor' },

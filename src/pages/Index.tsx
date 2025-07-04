@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import WaitlistForm from "../components/WaitlistForm";
 import { Instagram, Facebook, Youtube, ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
 import { FaTiktok } from 'react-icons/fa';
 
@@ -123,6 +122,8 @@ const Index: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [isAutoPlaying]);
+
+
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % featuredEvents.length);
@@ -612,7 +613,7 @@ const Index: React.FC = () => {
             </h2>
             <p className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
               Live fixtures, real-time results, and comprehensive statistics from school boy rugby competitions 
-              across Zimbabwe and South Africa. Plus the coming fantasy rugby revolution.
+              across Zimbabwe and South Africa. Experience rugby like never before.
             </p>
           </motion.div>
         </div>
@@ -670,8 +671,8 @@ const Index: React.FC = () => {
               </Card>
           </motion.div>
 
-            {/* Fantasy App Section */}
-          <motion.div
+            {/* Download App Section */}
+            <motion.div
               initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -679,22 +680,40 @@ const Index: React.FC = () => {
               <Card className="h-full bg-gradient-to-br from-scrummy-goldYellow/20 to-scrummy-gold/30 border-scrummy-goldYellow/30 shadow-xl">
                 <CardContent className="p-6 sm:p-8">
                   <div className="inline-flex items-center gap-2 bg-scrummy-goldYellow/80 text-scrummy-navy px-3 py-1 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
-                    Coming Soon
+                    Download App
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-scrummy-navy mb-3 sm:mb-4">
-                    Fantasy Rugby Revolution
-              </h3>
+                    Get the SCRUMMY App
+                  </h3>
                   <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-4 sm:mb-6">
-                    Build your dream team with real school boy rugby players. Create leagues with friends, 
-                    track performance, and compete for glory in the first fantasy platform dedicated to school rugby.
+                    Vote for your favorite players, get live match updates, and join the rugby community. 
+                    Free on Android with iOS coming soon.
                   </p>
-                  <div className="bg-white/60 backdrop-blur-sm rounded-lg p-3 sm:p-4 border border-scrummy-goldYellow/40 mb-4 sm:mb-6">
-                    <h4 className="font-semibold text-scrummy-navy mb-2 text-xs sm:text-sm">Join the Beta Waitlist</h4>
-                    <p className="text-xs text-gray-600 mb-2 sm:mb-3">
-                      Be among the first to experience fantasy school boy rugby.
-              </p>
-                    <WaitlistForm />
+                  <div className="space-y-3 mb-4 sm:mb-6">
+                    <div className="flex items-center gap-3">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
+                        <span className="text-scrummy-navy font-bold text-xs">✓</span>
+                      </div>
+                      <span className="text-gray-700 text-xs sm:text-sm">Vote for players and teams</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
+                        <span className="text-scrummy-navy font-bold text-xs">✓</span>
+                      </div>
+                      <span className="text-gray-700 text-xs sm:text-sm">Live scores and match updates</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
+                        <span className="text-scrummy-navy font-bold text-xs">✓</span>
+                      </div>
+                      <span className="text-gray-700 text-xs sm:text-sm">Follow tournaments and leagues</span>
+                    </div>
                   </div>
+                  <Link to="/download">
+                    <Button className="bg-scrummy-navy text-white hover:bg-scrummy-blue w-full py-3 sm:py-2 text-sm sm:text-base">
+                      Download App
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             </motion.div>
