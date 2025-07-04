@@ -270,7 +270,7 @@ const DownloadPage: React.FC = () => {
                   <Button 
                     size="lg" 
                     className="bg-green-600 text-white hover:bg-green-700 font-semibold px-6 md:px-8 py-3 rounded-xl w-full"
-                    onClick={() => window.open('#', '_blank')}
+                    onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
                   >
                     <span className="mr-2">🤖</span>
                     Download for Android
@@ -357,7 +357,7 @@ const DownloadPage: React.FC = () => {
               </Button>
               <Button 
                 className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold flex-1"
-                onClick={() => window.open('#', '_blank')}
+                onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
               >
                 🤖 Google Play
               </Button>
