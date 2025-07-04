@@ -17,6 +17,18 @@ const zimbabwePlayerImages: Record<string, string> = {
   'Aiden Burnett': '/assets/Zimbabwe Players/Aiden Burnett.png'
 };
 
+// Kenya player image mapping
+const kenyaPlayerImages: Record<string, string> = {
+  'George Nyambua': '/assets/Kenya players /G.Nyambua.png',
+  'Patrick Sabatia': '/assets/Kenya players /P.Sabatia.png',
+  'Edward Mwaura': '/assets/Kenya players /E.Mwaura.png',
+  'Samuel Asati': '/assets/Kenya players /S.Asati.png',
+  'Walter Okoth': '/assets/Kenya players /W.Okoth.png',
+  'Griffin Chao': '/assets/Kenya players /G.Chao.png',
+  'Timothy Omela': '/assets/Kenya players /T.Omela.png',
+  'Jone Kubu': '/assets/Kenya players /J.Kubu.png'
+};
+
 // Timezone conversion utility
 const convertToLocalTime = (timeStr: string, date: string = '2025-07-08') => {
   // Parse the EAT time (UTC+3)
@@ -483,9 +495,9 @@ const AfricaCupHub: React.FC = () => {
                             <CardContent className="p-3 sm:p-4 text-center">
                               {/* Player Image */}
                               <div className="mb-3">
-                                {zimbabwePlayerImages[player.name] ? (
+                                {zimbabwePlayerImages[player.name] || kenyaPlayerImages[player.name] ? (
                                   <img 
-                                    src={zimbabwePlayerImages[player.name]} 
+                                    src={zimbabwePlayerImages[player.name] || kenyaPlayerImages[player.name]} 
                                     alt={player.name}
                                     className="w-16 h-20 sm:w-20 sm:h-24 object-cover mx-auto rounded-lg shadow-md border-2 border-scrummy-goldYellow"
                                   />
