@@ -5,6 +5,7 @@ import { ChevronLeft, Download, Smartphone, Users, Trophy, Vote, Star, Menu, X }
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 
+
 const DownloadPage: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -161,33 +162,42 @@ const DownloadPage: React.FC = () => {
                 {/* Phone Frame */}
                 <div className="w-40 h-72 lg:w-48 lg:h-80 bg-gradient-to-br from-gray-900 to-black rounded-3xl p-2 shadow-2xl">
                   <div className="w-full h-full bg-gradient-to-br from-scrummy-navy to-scrummy-blue rounded-2xl overflow-hidden relative">
-                    {/* Screen Content */}
-                    <div className="p-3 lg:p-4 text-white">
-                      <div className="flex items-center gap-2 mb-3 lg:mb-4">
+                    {/* Clean App Interface */}
+                    <div className="p-3 lg:p-4 text-white h-full flex flex-col">
+                      {/* Header */}
+                      <div className="flex items-center gap-2 mb-4">
                         <div className="w-6 h-6 lg:w-8 lg:h-8 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
-                          <span className="text-scrummy-navy font-bold text-xs">S</span>
+                          <span className="text-scrummy-navy font-bold text-xs lg:text-sm">S</span>
                         </div>
                         <span className="font-bold text-xs lg:text-sm">SCRUMMY</span>
                       </div>
                       
-                      <div className="space-y-2 lg:space-y-3">
-                        <div className="bg-white/10 rounded-lg p-2 lg:p-3">
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs">🇿🇼 Zimbabwe vs Morocco 🇲🇦</span>
-                          </div>
-                          <div className="text-center mt-1 lg:mt-2">
-                            <span className="text-base lg:text-lg font-bold">24 - 17</span>
-                          </div>
+                      {/* Main Content */}
+                      <div className="flex-1 space-y-3">
+                        <div className="bg-white/10 rounded-lg p-3 text-center">
+                          <div className="text-xs mb-2 opacity-80">Rugby Africa Cup</div>
+                          <div className="text-sm font-semibold">Live Tournament</div>
                         </div>
                         
-                        <div className="bg-white/10 rounded-lg p-2">
-                          <div className="text-xs mb-1">Vote for Top Player</div>
-                          <div className="flex items-center gap-2">
-                            <div className="w-3 h-3 lg:w-4 lg:h-4 bg-scrummy-goldYellow rounded-full"></div>
-                            <span className="text-xs">T. Mtawarira</span>
-                            <div className="ml-auto text-xs">⭐ 2.8K</div>
+                        <div className="bg-white/10 rounded-lg p-3">
+                          <div className="text-xs mb-2 opacity-80">Vote for Your Champions</div>
+                          <div className="flex items-center justify-center gap-2">
+                            <div className="w-3 h-3 bg-scrummy-goldYellow rounded-full"></div>
+                            <span className="text-xs">Cast Your Vote</span>
                           </div>
                         </div>
+
+                        <div className="bg-white/10 rounded-lg p-3 text-center">
+                          <div className="text-xs mb-1 opacity-80">Follow Teams</div>
+                          <div className="text-xs">🏉 8 Nations Competing</div>
+                        </div>
+                      </div>
+                      
+                      {/* Bottom Navigation */}
+                      <div className="flex justify-around pt-3 border-t border-white/20">
+                        <div className="w-4 h-4 lg:w-5 lg:h-5 bg-scrummy-goldYellow rounded opacity-80"></div>
+                        <div className="w-4 h-4 lg:w-5 lg:h-5 bg-white/30 rounded"></div>
+                        <div className="w-4 h-4 lg:w-5 lg:h-5 bg-white/30 rounded"></div>
                       </div>
                     </div>
                     
