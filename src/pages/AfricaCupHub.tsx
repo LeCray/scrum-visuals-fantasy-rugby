@@ -19,14 +19,14 @@ const zimbabwePlayerImages: Record<string, string> = {
 
 // Kenya player image mapping
 const kenyaPlayerImages: Record<string, string> = {
-  'George Nyambua': '/assets/Kenya players /G.Nyambua.png',
-  'Patrick Sabatia': '/assets/Kenya players /P.Sabatia.png',
-  'Edward Mwaura': '/assets/Kenya players /E.Mwaura.png',
-  'Samuel Asati': '/assets/Kenya players /S.Asati.png',
-  'Walter Okoth': '/assets/Kenya players /W.Okoth.png',
-  'Griffin Chao': '/assets/Kenya players /G.Chao.png',
-  'Timothy Omela': '/assets/Kenya players /T.Omela.png',
-  'Jone Kubu': '/assets/Kenya players /J.Kubu.png'
+  'George Nyambua': '/assets/Kenya Simbas players/G.Nyambua.png',
+  'Patrick Sabatia': '/assets/Kenya Simbas players/P.Sabatia.png',
+  'Edward Mwaura': '/assets/Kenya Simbas players/E.Mwaura.png',
+  'Samuel Asati': '/assets/Kenya Simbas players/S.Asati.png',
+  'Walter Okoth': '/assets/Kenya Simbas players/W.Okoth.png',
+  'Griffin Chao': '/assets/Kenya Simbas players/G.Chao.png',
+  'Timothy Omela': '/assets/Kenya Simbas players/T.Omela.png',
+  'Jone Kubu': '/assets/Kenya Simbas players/J.Kubu.png'
 };
 
 // Timezone conversion utility
