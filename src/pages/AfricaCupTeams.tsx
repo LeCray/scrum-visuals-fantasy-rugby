@@ -14,48 +14,48 @@ const teams = [
     country: 'Zimbabwe',
     roster: [
       // Hookers
-      { name: 'Bryan Chiang', position: 'Hooker', age: 28, info: 'Experienced hooker with solid lineout throwing' },
-      { name: 'Simba Mandioma', position: 'Hooker', age: 26, info: 'Mobile hooker with strong scrummaging' },
+      { name: 'Bryan Chiang', position: 'Hooker', age: 21, info: 'Experienced hooker with solid lineout throwing' },
+      { name: 'Simba Mandioma', position: 'Hooker', age: 32, info: 'Mobile hooker with strong scrummaging' },
+      { name: 'Liam Larkan', position: 'Hooker', age: 26, info: 'Experienced hooker with leadership qualities' },
       
       // Props
-      { name: 'Victor Mupunga', position: 'Prop', age: 29, info: 'Powerful tighthead prop' },
+      { name: 'Victor Mupunga', position: 'Prop', age: 25, info: 'Powerful tighthead prop' },
       { name: 'Tyran Fagan', position: 'Prop', age: 27, info: 'Solid front row forward' },
-      { name: 'Zvikomborero Chimoto', position: 'Prop', age: 25, info: 'Strong scrummaging prop' },
-      { name: 'Cleopas Kundiona', position: 'Prop', age: 28, info: 'Experienced front row anchor' },
-      { name: 'Brian Makamure', position: 'Prop', age: 26, info: 'Versatile front row player' },
-      { name: 'Bornwell Gwinji', position: 'Prop', age: 24, info: 'Dynamic young prop' },
+      { name: 'Zvikomborero Chimoto', position: 'Prop', age: 26, info: 'Strong scrummaging prop' },
+      { name: 'Cleopas Kundiona', position: 'Prop', age: 26, info: 'Experienced front row anchor' },
+      { name: 'Brian Makamure', position: 'Prop', age: 34, info: 'Versatile front row player' },
+      { name: 'Bornwell Gwinji', position: 'Prop', age: 27, info: 'Dynamic young prop' },
       
       // Second Row
-      { name: 'Kudakwashe Nyakufaringwa', position: '2nd Row', age: 27, info: 'Lineout specialist and leader' },
-      { name: 'Simba Siraha', position: '2nd Row', age: 25, info: 'Athletic lock forward' },
+      { name: 'Kudakwashe Nyakufaringwa', position: '2nd Row', age: 31, info: 'Lineout specialist and leader' },
+      { name: 'Simba Siraha', position: '2nd Row', age: 22, info: 'Athletic lock forward' },
       { name: 'Tadiwa Gwashu', position: '2nd Row', age: 26, info: 'Powerful lineout option' },
       { name: 'Brian Nyaude', position: '2nd Row', age: 24, info: 'Mobile second row forward' },
       
       // Back Row
       { name: 'Jason Fraser', position: 'Back Row', age: 30, info: 'Captain and experienced campaigner' },
-      { name: 'Aiden Burnett', position: 'Back Row', age: 25, info: 'Dynamic loose forward' },
+      { name: 'Aiden Burnett', position: 'Back Row', age: 27, info: 'Dynamic loose forward' },
       { name: 'Dylan Utete', position: 'Back Row', age: 23, info: 'Mobile back row player' },
-      { name: 'Godfrey Muzanargwo', position: 'Back Row', age: 27, info: 'Powerful ball carrier' },
+      { name: 'Godfrey Muzanargwo', position: 'Back Row', age: 26, info: 'Powerful ball carrier' },
       { name: 'Tinotenda Mavesere', position: 'Back Row', age: 24, info: 'Athletic loose forward' },
       
       // Half Backs
-      { name: 'Hilton Mudariki', position: 'Half Back', age: 24, info: 'Quick service from the base' },
-      { name: 'Keegan Joubert', position: 'Half Back', age: 22, info: 'Promising young scrum-half' },
-      { name: 'Liam Larkan', position: 'Half Back', age: 26, info: 'Experienced half back' },
+      { name: 'Hilton Mudariki', position: 'Half Back', age: 32, info: 'Quick service from the base' },
+      { name: 'Keegan Joubert', position: 'Half Back', age: 24, info: 'Promising young scrum-half' },
       { name: 'Ian Prior', position: 'Half Back', age: 28, info: 'Veteran playmaker' },
       { name: 'Lenience Tambwera', position: 'Half Back', age: 23, info: 'Quick-thinking half back' },
       { name: 'Tyrone Gombe', position: 'Half Back', age: 25, info: 'Versatile half back option' },
       
       // Centres
-      { name: 'Brandon Mudzekenyedzi', position: 'Centre', age: 25, info: 'Powerful center with pace' },
-      { name: 'Dion Khumalo', position: 'Centre', age: 24, info: 'Creative center with good hands' },
-      { name: 'Kudzai Mashawi', position: 'Centre', age: 26, info: 'Strong defensive center' },
+      { name: 'Brandon Mudzekenyedzi', position: 'Centre', age: 22, info: 'Powerful center with pace' },
+      { name: 'Dion Khumalo', position: 'Centre', age: 22, info: 'Creative center with good hands' },
+      { name: 'Kudzai Mashawi', position: 'Centre', age: 31, info: 'Strong defensive center' },
       
       // Outside Backs
       { name: 'Trevor Gurwe', position: 'Outside Back', age: 27, info: 'Pacy winger with finishing ability' },
       { name: 'Matthew McNab', position: 'Outside Back', age: 25, info: 'Versatile back three player' },
-      { name: 'Tapiwa Mafura', position: 'Outside Back', age: 23, info: 'Electric winger with pace' },
-      { name: 'Takudzwa Musingwini', position: 'Outside Back', age: 24, info: 'Solid fullback option' },
+      { name: 'Tapiwa Mafura', position: 'Outside Back', age: 28, info: 'Electric winger with pace' },
+      { name: 'Takudzwa Musingwini', position: 'Outside Back', age: 22, info: 'Solid fullback option' },
       { name: 'Edward Sigauke', position: 'Outside Back', age: 26, info: 'Experienced outside back' }
     ]
   },
@@ -316,6 +316,38 @@ const zimbabwePlayerImages: Record<string, string> = {
   'Edward Sigauke': '/assets/Zimbabwe Players/Edward Sigauke.png'
 };
 
+// Kenya player image mapping
+const kenyaPlayerImages: Record<string, string> = {
+  'Ephraim Oduor': '/assets/Kenya players /E.Oduor.png',
+  'Edward Mwaura': '/assets/Kenya players /E.Mwaura.png',
+  'Vincent Mwikhali': '/assets/Kenya players /V.Mwikhali.png',
+  'Wilhite Mususi': '/assets/Kenya players /W.Mususi.png',
+  'Teddy Akala': '/assets/Kenya players /T.Akala.png',
+  'Eugine Sifuna': '/assets/Kenya players /E.Sifuna.png',
+  'Hibrahim Ayoo': '/assets/Kenya players /H.Ayoo.png',
+  'Thomas Okeyo': '/assets/Kenya players /T.Okeyo.png',
+  'Andycole Omollo': '/assets/Kenya players /A.Omollo.png',
+  'Emmanuel Slungi': '/assets/Kenya players /E.Silungi.png',
+  'George Nyambua': '/assets/Kenya players /G.Nyambua.png',
+  'Patrick Sabatia': '/assets/Kenya players /P.Sabatia.png',
+  'David Bunduki': '/assets/Kenya players /D.Bunduki.png',
+  'Obat Kuke': '/assets/Kenya players /K.Obat.png',
+  'Bethuel Anami': '/assets/Kenya players /B.Anami.png',
+  'Elkeans Musonye': '/assets/Kenya players /E.Musonye.png',
+  'Samuel Asati': '/assets/Kenya players /S.Asati.png',
+  'Brian Tanga': '/assets/Kenya players /B.Tanga.png',
+  'Barry Young': '/assets/Kenya players /B.Young.png',
+  'Brian Wahinya': '/assets/Kenya players /B.Wahinya.png',
+  'Walter Okoth': '/assets/Kenya players /W.Okoth.png',
+  'Samuel Ovwamu': '/assets/Kenya players /S.Ovwamu.png',
+  'Bryceson Adaka': '/assets/Kenya players /B.Adaka.png',
+  'John Okoth': '/assets/Kenya players /J.Okoth.png',
+  'Griffin Chao': '/assets/Kenya players /G.Chao.png',
+  'Timothy Omela': '/assets/Kenya players /T.Omela.png',
+  'Jone Kubu': '/assets/Kenya players /J.Kubu.png',
+  'Derick Ashiundu': '/assets/Kenya players /D.Ashiundu.png'
+};
+
 const AfricaCupTeams: React.FC = () => {
   const [selectedTeam, setSelectedTeam] = useState(teams[0]);
   const [expandedPlayer, setExpandedPlayer] = useState<string | null>(null);
@@ -550,9 +582,10 @@ const AfricaCupTeams: React.FC = () => {
                     >
                       {/* Player Mugshot */}
                       <div className="relative mb-3">
-                        {selectedTeam.id === 'zimbabwe' && zimbabwePlayerImages[player.name] ? (
+                        {(selectedTeam.id === 'zimbabwe' && zimbabwePlayerImages[player.name]) || 
+                         (selectedTeam.id === 'kenya' && kenyaPlayerImages[player.name]) ? (
                           <img 
-                            src={zimbabwePlayerImages[player.name]} 
+                            src={selectedTeam.id === 'zimbabwe' ? zimbabwePlayerImages[player.name] : kenyaPlayerImages[player.name]} 
                             alt={player.name}
                             className="w-24 h-32 md:w-32 md:h-40 object-cover mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg border-2 border-scrummy-goldYellow rounded-lg"
                           />
@@ -635,9 +668,10 @@ const AfricaCupTeams: React.FC = () => {
                     >
                       {/* Player Mugshot */}
                       <div className="relative mb-3">
-                        {selectedTeam.id === 'zimbabwe' && zimbabwePlayerImages[player.name] ? (
+                        {(selectedTeam.id === 'zimbabwe' && zimbabwePlayerImages[player.name]) || 
+                         (selectedTeam.id === 'kenya' && kenyaPlayerImages[player.name]) ? (
                           <img 
-                            src={zimbabwePlayerImages[player.name]} 
+                            src={selectedTeam.id === 'zimbabwe' ? zimbabwePlayerImages[player.name] : kenyaPlayerImages[player.name]} 
                             alt={player.name}
                             className="w-24 h-32 md:w-32 md:h-40 object-cover mx-auto group-hover:scale-105 transition-transform duration-300 shadow-lg border-2 border-scrummy-goldYellow rounded-lg"
                           />
