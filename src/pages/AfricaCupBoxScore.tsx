@@ -240,7 +240,7 @@ const AfricaCupBoxScore: React.FC = () => {
                   size="lg" 
                   className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-8 py-3 text-lg"
                 >
-                  📱 Download SCRUMMY App
+                  📱 Play SCRUMMY App
                 </Button>
               </CardContent>
             </Card>

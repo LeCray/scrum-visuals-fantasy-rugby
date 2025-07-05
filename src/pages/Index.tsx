@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Instagram, Facebook, Youtube, ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
+import { Instagram, Facebook, Youtube, ChevronLeft, ChevronRight, Menu, X, Globe } from "lucide-react";
 import { FaTiktok } from 'react-icons/fa';
 
 // Featured events data - includes major international tournaments
@@ -178,11 +178,13 @@ const Index: React.FC = () => {
             >
               Newsletter
             </Link>
-            <Link to="/download">
-              <Button className="bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-semibold px-4 py-2 blur-sm opacity-50 pointer-events-none">
-                Download App
-              </Button>
-            </Link>
+            <Button 
+              className="bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-semibold px-4 py-2"
+              onClick={() => window.open('https://scrummy-app.ai', '_blank')}
+            >
+              <Globe className="w-4 h-4 mr-2" />
+              Launch Web App
+            </Button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -240,11 +242,16 @@ const Index: React.FC = () => {
                 >
                   Newsletter
                 </Link>
-                <Link to="/download" onClick={() => setMobileMenuOpen(false)}>
-                  <Button className="bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-semibold px-6 py-3 w-full blur-sm opacity-50 pointer-events-none">
-                    Download App
-                  </Button>
-                </Link>
+                <Button 
+                  className="bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-semibold px-6 py-3 w-full"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    window.open('https://scrummy-app.ai', '_blank');
+                  }}
+                >
+                  <Globe className="w-4 h-4 mr-2" />
+                  Launch Web App
+                </Button>
               </nav>
             </motion.div>
           )}
@@ -671,7 +678,7 @@ const Index: React.FC = () => {
               </Card>
           </motion.div>
 
-            {/* Download App Section */}
+            {/* Web App Section */}
             <motion.div
               initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -679,15 +686,16 @@ const Index: React.FC = () => {
             >
               <Card className="h-full bg-gradient-to-br from-scrummy-goldYellow/20 to-scrummy-gold/30 border-scrummy-goldYellow/30 shadow-xl">
                 <CardContent className="p-6 sm:p-8">
-                  <div className="inline-flex items-center gap-2 bg-scrummy-goldYellow/80 text-scrummy-navy px-3 py-1 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
-                    Download App
+                  <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    Available Now
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-scrummy-navy mb-3 sm:mb-4">
-                    Get the SCRUMMY App
+                    Use SCRUMMY Web App
                   </h3>
                   <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-4 sm:mb-6">
-                    Vote for your favorite players, get live match updates, and join the rugby community. 
-                    Free on Android with iOS coming soon.
+                    Access all SCRUMMY features instantly in your browser. Vote for your favorite players, 
+                    get live match updates, and join the rugby community. No download required!
                   </p>
                   <div className="space-y-3 mb-4 sm:mb-6">
                     <div className="flex items-center gap-3">
@@ -709,11 +717,13 @@ const Index: React.FC = () => {
                       <span className="text-gray-700 text-xs sm:text-sm">Follow tournaments and leagues</span>
                     </div>
                   </div>
-                  <Link to="/download">
-                    <Button className="bg-scrummy-navy text-white hover:bg-scrummy-blue w-full py-3 sm:py-2 text-sm sm:text-base">
-                      Download App
-                    </Button>
-                  </Link>
+                  <Button 
+                    className="bg-scrummy-navy text-white hover:bg-scrummy-blue w-full py-3 sm:py-2 text-sm sm:text-base"
+                    onClick={() => window.open('https://scrummy-app.ai', '_blank')}
+                  >
+                    <Globe className="w-4 h-4 mr-2" />
+                    Launch Web App
+                  </Button>
                 </CardContent>
               </Card>
             </motion.div>

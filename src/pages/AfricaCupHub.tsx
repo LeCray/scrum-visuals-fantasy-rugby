@@ -276,7 +276,7 @@ const AfricaCupHub: React.FC = () => {
                 >
                   <Download className="w-5 h-5 text-scrummy-navy" />
                 </motion.div>
-                <span className="text-base font-bold text-scrummy-navy">Download SCRUMMY</span>
+                <span className="text-base font-bold text-scrummy-navy">Play SCRUMMY</span>
                 <motion.div
                   animate={{ 
                     x: [0, 4, 0],
@@ -312,7 +312,7 @@ const AfricaCupHub: React.FC = () => {
             <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
               {currentSlide === 0 && "Eight African rugby nations competing for continental supremacy"}
               {currentSlide === 1 && "Vote for your favorite teams and top players in real-time"}
-              {currentSlide === 2 && "Download SCRUMMY to follow every match and vote for your favorites"}
+                                {currentSlide === 2 && "Play SCRUMMY to follow every match and vote for your favorites"}
             </p>
           </div>
 
@@ -571,7 +571,7 @@ const AfricaCupHub: React.FC = () => {
                           <Download className="w-8 h-8 text-scrummy-navy" />
                         </div>
                         
-                        <h3 className="text-xl font-bold mb-2">Download SCRUMMY Now!</h3>
+                        <h3 className="text-xl font-bold mb-2">Play SCRUMMY Now!</h3>
                         <p className="text-sm mb-3 opacity-90">
                           Vote for your champions, follow live matches, and compete with fans across Africa.
                         </p>
@@ -597,7 +597,7 @@ const AfricaCupHub: React.FC = () => {
                             whileTap={{ scale: 0.95 }}
                           >
                             <Button className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-4 py-2 text-sm transition-all duration-300 hover:shadow-xl">
-                              📱 Download SCRUMMY App
+                              📱 Play SCRUMMY App
                             </Button>
                           </motion.div>
                         </Link>
@@ -681,7 +681,7 @@ const AfricaCupHub: React.FC = () => {
                         size="lg" 
                         className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-8 py-3 text-lg transition-all duration-300 hover:shadow-xl"
                       >
-                        📱 Download SCRUMMY App
+                        📱 Play SCRUMMY App
                       </Button>
                     </Link>
                 </motion.div>

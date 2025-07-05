@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ChevronLeft, Download, Smartphone, Users, Trophy, Vote, Star, Menu, X } from 'lucide-react';
+import { ChevronLeft, Download, Smartphone, Users, Trophy, Vote, Star, Menu, X, Globe, Clock } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 
@@ -107,17 +107,17 @@ const DownloadPage: React.FC = () => {
                     ease: "easeInOut"
                   }}
                 >
-                  <Download className="w-4 h-4" />
+                  <Globe className="w-4 h-4" />
                 </motion.div>
-                <span className="text-white">Mobile App</span>
+                <span className="text-white">Available Now</span>
               </div>
 
               <div>
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-tight mb-3 text-white">
-                  Download SCRUMMY
+                  Access SCRUMMY
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl text-white/90 mb-4 max-w-md mx-auto md:mx-0">
-                  The ultimate rugby app for voting, live scores, and fan community
+                  Use the web app now, mobile apps coming soon
                 </p>
               </div>
 
@@ -143,9 +143,13 @@ const DownloadPage: React.FC = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button size="lg" className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold transition-all duration-300 hover:shadow-lg">
-                    <Smartphone className="w-5 h-5 mr-2" />
-                    Download Now
+                  <Button 
+                    size="lg" 
+                    className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold transition-all duration-300 hover:shadow-lg"
+                    onClick={() => window.open('https://scrummy-app.ai', '_blank')}
+                  >
+                    <Globe className="w-5 h-5 mr-2" />
+                    Launch Web App
                   </Button>
                 </motion.div>
               </div>
@@ -207,11 +211,11 @@ const DownloadPage: React.FC = () => {
                 </div>
                 
                 {/* Floating badges */}
-                <div className="absolute -top-2 -right-2 bg-scrummy-goldYellow text-scrummy-navy px-2 py-1 rounded-full text-xs font-bold">
-                  FREE
+                <div className="absolute -top-2 -right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">
+                  LIVE
                 </div>
-                <div className="absolute -bottom-2 -left-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">
-                  ⭐ 4.8
+                <div className="absolute -bottom-2 -left-2 bg-scrummy-goldYellow text-scrummy-navy px-2 py-1 rounded-full text-xs font-bold">
+                  WEB
                 </div>
               </div>
             </motion.div>
@@ -229,70 +233,114 @@ const DownloadPage: React.FC = () => {
             className="text-center mb-8 md:mb-12"
           >
             <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navy mb-4">Choose Your Platform</h2>
-            <p className="text-gray-600">Available for both iOS and Android devices</p>
+            <p className="text-gray-600">Web app available now, mobile apps coming soon</p>
+          </motion.div>
+
+          {/* Web App - Featured */}
+          <motion.div
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="mb-8 md:mb-12"
+          >
+            <Card className="text-center p-6 md:p-8 bg-gradient-to-br from-scrummy-goldYellow/10 to-scrummy-gold/10 border-2 border-scrummy-goldYellow hover:shadow-xl transition-all duration-300">
+              <CardContent className="space-y-4 md:space-y-6">
+                <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-r from-scrummy-goldYellow to-scrummy-gold rounded-2xl flex items-center justify-center mx-auto">
+                  <Globe className="w-10 h-10 md:w-12 md:h-12 text-scrummy-navy" />
+                </div>
+                
+                <div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-scrummy-navy mb-2">Web App</h3>
+                  <p className="text-gray-600 mb-4 md:mb-6">Access SCRUMMY directly in your browser - no download required!</p>
+                  <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                    <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                    Available Now
+                  </div>
+                </div>
+
+                <Button 
+                  size="lg" 
+                  className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-8 py-4 rounded-xl w-full max-w-sm mx-auto text-lg"
+                  onClick={() => window.open('https://scrummy-app.ai', '_blank')}
+                >
+                  <Globe className="w-5 h-5 mr-2" />
+                  Launch Web App
+                </Button>
+                
+                <p className="text-xs text-gray-500">Works on all devices with a modern browser</p>
+              </CardContent>
+            </Card>
           </motion.div>
 
           <div className="grid gap-6 md:grid-cols-2 md:gap-8 mb-12 md:mb-16">
-            {/* iPhone Download */}
+            {/* iPhone Download - Coming Soon */}
             <motion.div
               initial={{ x: -30, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.6 }}
               whileHover={{ y: -5 }}
             >
-              <Card className="text-center p-6 md:p-8 hover:shadow-xl transition-all duration-300 border-2 hover:border-scrummy-goldYellow">
+              <Card className="text-center p-6 md:p-8 hover:shadow-xl transition-all duration-300 border-2 opacity-75">
                 <CardContent className="space-y-4 md:space-y-6">
-                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl flex items-center justify-center mx-auto">
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-gray-300 to-gray-400 rounded-2xl flex items-center justify-center mx-auto">
                     <Smartphone className="w-8 h-8 md:w-10 md:h-10 text-white" />
                   </div>
                   
                   <div>
                     <h3 className="text-xl md:text-2xl font-bold text-scrummy-navy mb-2">iPhone</h3>
-                    <p className="text-gray-600 mb-4 md:mb-6">Download from the App Store</p>
+                    <p className="text-gray-600 mb-4 md:mb-6">Coming soon to the App Store</p>
+                    <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
+                      <Clock className="w-4 h-4" />
+                      Coming Soon
+                    </div>
                   </div>
 
                   <Button 
                     size="lg" 
-                    className="bg-black text-white hover:bg-gray-800 font-semibold px-6 md:px-8 py-3 rounded-xl w-full"
-                    onClick={() => window.open('#', '_blank')}
+                    className="bg-gray-300 text-gray-500 cursor-not-allowed font-semibold px-6 md:px-8 py-3 rounded-xl w-full"
+                    disabled
                   >
                     <span className="mr-2">📱</span>
-                    Download for iOS
+                    Coming Soon
                   </Button>
                   
-                  <p className="text-xs text-gray-500">Requires iOS 14.0 or later</p>
+                  <p className="text-xs text-gray-500">Will require iOS 14.0 or later</p>
                 </CardContent>
               </Card>
             </motion.div>
 
-            {/* Android Download */}
+            {/* Android Download - Coming Soon */}
             <motion.div
               initial={{ x: 30, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.6 }}
               whileHover={{ y: -5 }}
             >
-              <Card className="text-center p-6 md:p-8 hover:shadow-xl transition-all duration-300 border-2 hover:border-scrummy-goldYellow">
+              <Card className="text-center p-6 md:p-8 hover:shadow-xl transition-all duration-300 border-2 opacity-75">
                 <CardContent className="space-y-4 md:space-y-6">
-                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto">
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-gray-300 to-gray-400 rounded-2xl flex items-center justify-center mx-auto">
                     <Smartphone className="w-8 h-8 md:w-10 md:h-10 text-white" />
                   </div>
                   
                   <div>
                     <h3 className="text-xl md:text-2xl font-bold text-scrummy-navy mb-2">Android</h3>
-                    <p className="text-gray-600 mb-4 md:mb-6">Download from Google Play</p>
+                    <p className="text-gray-600 mb-4 md:mb-6">Coming soon to Google Play</p>
+                    <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
+                      <Clock className="w-4 h-4" />
+                      Coming Soon
+                    </div>
                   </div>
 
                   <Button 
                     size="lg" 
-                    className="bg-green-600 text-white hover:bg-green-700 font-semibold px-6 md:px-8 py-3 rounded-xl w-full"
-                    onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
+                    className="bg-gray-300 text-gray-500 cursor-not-allowed font-semibold px-6 md:px-8 py-3 rounded-xl w-full"
+                    disabled
                   >
                     <span className="mr-2">🤖</span>
-                    Download for Android
+                    Coming Soon
                   </Button>
                   
-                  <p className="text-xs text-gray-500">Requires Android 8.0 or later</p>
+                  <p className="text-xs text-gray-500">Will require Android 8.0 or later</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -362,20 +410,22 @@ const DownloadPage: React.FC = () => {
           >
             <h3 className="text-xl md:text-2xl font-bold mb-4">Ready to Join the Action?</h3>
             <p className="text-white/90 mb-6 text-sm md:text-base">
-              Don't miss out on the rugby excitement. Download SCRUMMY today and be part of the community!
+              Start using SCRUMMY today with our web app. Mobile apps coming soon!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
               <Button 
                 className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold flex-1"
-                onClick={() => window.open('#', '_blank')}
+                onClick={() => window.open('https://scrummy-app.ai', '_blank')}
               >
-                📱 iOS App Store
+                <Globe className="w-4 h-4 mr-2" />
+                Launch Web App
               </Button>
               <Button 
-                className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold flex-1"
-                onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
+                className="bg-gray-600 text-white cursor-not-allowed font-bold flex-1"
+                disabled
               >
-                🤖 Google Play
+                <Clock className="w-4 h-4 mr-2" />
+                Mobile Apps Soon
               </Button>
             </div>
           </motion.div>

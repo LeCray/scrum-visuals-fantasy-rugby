@@ -810,7 +810,7 @@ const AfricaCupTeams: React.FC = () => {
                       size="lg" 
                       className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-6 md:px-8 py-3 text-base md:text-lg"
                     >
-                      📱 Download SCRUMMY App Now
+                      📱 Play SCRUMMY App Now
                     </Button>
                   </Link>
                 </CardContent>
