@@ -642,9 +642,9 @@ const AfricaCupTeams: React.FC = () => {
                           <div className="text-center space-y-2">
                             <div className="flex flex-wrap justify-center gap-1">
                               {player.age && (
-                                <span className="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
-                                  Age {player.age}
-                                </span>
+                            <span className="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
+                              Age {player.age}
+                            </span>
                               )}
                               {player.height && (
                                 <span className="inline-block bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded-full">
@@ -683,7 +683,7 @@ const AfricaCupTeams: React.FC = () => {
                 </div>
               </div>
 
-                                    {/* Backs Section */}
+              {/* Backs Section */}
               <div>
                 <div className="mb-4 md:mb-6">
                   <h3 className="text-xl md:text-2xl font-bold text-scrummy-navy">Backs</h3>
@@ -749,9 +749,9 @@ const AfricaCupTeams: React.FC = () => {
                           <div className="text-center space-y-2">
                             <div className="flex flex-wrap justify-center gap-1">
                               {player.age && (
-                                <span className="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
-                                  Age {player.age}
-                                </span>
+                            <span className="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
+                              Age {player.age}
+                            </span>
                               )}
                               {player.height && (
                                 <span className="inline-block bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded-full">

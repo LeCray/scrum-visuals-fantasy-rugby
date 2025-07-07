@@ -184,7 +184,7 @@ const Index: React.FC = () => {
             >
               <Globe className="w-4 h-4 mr-2" />
               Launch Web App
-            </Button>
+              </Button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -251,7 +251,7 @@ const Index: React.FC = () => {
                 >
                   <Globe className="w-4 h-4 mr-2" />
                   Launch Web App
-                </Button>
+                  </Button>
               </nav>
             </motion.div>
           )}
@@ -679,7 +679,7 @@ const Index: React.FC = () => {
           </motion.div>
 
             {/* Web App Section */}
-            <motion.div
+          <motion.div
               initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -692,7 +692,7 @@ const Index: React.FC = () => {
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-scrummy-navy mb-3 sm:mb-4">
                     Use SCRUMMY Web App
-                  </h3>
+              </h3>
                   <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-4 sm:mb-6">
                     Access all SCRUMMY features instantly in your browser. Vote for your favorite players, 
                     get live match updates, and join the rugby community. No download required!
@@ -758,19 +758,19 @@ const Index: React.FC = () => {
               </div>
               
               {/* Social Media Links */}
-              <div className="flex gap-4 sm:gap-6">
-                <a href="https://www.instagram.com/scrummyapp_/" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
-                  <Instagram size={20} />
-                </a>
-                <a href="https://www.facebook.com/profile.php?id=61574057183440" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
-                  <Facebook size={20} />
-                </a>
-                <a href="https://www.tiktok.com/@scrummy_fantasy" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
-                  <FaTiktok size={20} />
-                </a>
-                <a href="https://www.youtube.com/channel/UCnKVk_L_fda9OuA5vDZBmmA" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
-                  <Youtube size={20} />
-                </a>
+            <div className="flex gap-4 sm:gap-6">
+              <a href="https://www.instagram.com/scrummyapp_/" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
+                <Instagram size={20} />
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61574057183440" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
+                <Facebook size={20} />
+              </a>
+              <a href="https://www.tiktok.com/@scrummy_fantasy" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
+                <FaTiktok size={20} />
+              </a>
+              <a href="https://www.youtube.com/channel/UCnKVk_L_fda9OuA5vDZBmmA" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors p-2 sm:p-0">
+                <Youtube size={20} />
+              </a>
               </div>
             </div>
             

@@ -305,7 +305,21 @@ const sbr2025Games: FixtureDay[] = [
     day: "05 July",
     month: "July",
     fixtures: [
-      { time: "TBD", teamA: "PH 7s", teamB: "" },
+      { time: "9:00", teamA: "MIDLANDS CC", teamB: "CBC" },
+      { time: "10:00", teamA: "BMC", teamB: "TYNWALD" },
+      { time: "11:00", teamA: "HILLCREST", teamB: "KYLE" },
+      { time: "12:00", teamA: "RYDINGS", teamB: "MILTON" },
+      { time: "13:00", teamA: "MARIST", teamB: "ST JOSEPH" },
+      { time: "14:00", teamA: "ST AUGUSTINES", teamB: "MUTAMBARA" },
+      { time: "15:00", teamA: "MUTARE", teamB: "ST JOSEPH" },
+      { time: "9:30", teamA: "ST AUGUSTINES", teamB: "FIRST CLASS" },
+      { time: "10:30", teamA: "FIRST CLASS", teamB: "MUTAMBARA" },
+      { time: "11:30", teamA: "MUTARE", teamB: "FIRST CLASS" },
+      { time: "12:30", teamA: "MARIST", teamB: "ST AUGUSTINES" },
+      { time: "13:30", teamA: "MUTARE", teamB: "MARIST", location: "Manicaland U20 Nash Rugby Final" },
+      { time: "14:30", teamA: "MUTARE", teamB: "MARIST" },
+      { time: "15:30", teamA: "PLUMTREE", teamB: "PETRA" },
+      { time: "16:00", teamA: "GATEWAY", teamB: "WISE OWL" },
       { time: "TBD", teamA: "ALLAN WILSON", teamB: "CHURCHILL" },
       { time: "TBD", teamA: "WATERSHED", teamB: "EAGLESVALE" },
       { time: "TBD", teamA: "HERITAGE", teamB: "WISE OWL" }
@@ -447,7 +461,13 @@ const teamLogoMap: Record<string, string> = {
   "GIFFORD": "/assets/logo.png",
   "ELLIS ROBINS": "/assets/logo.png",
   "BMC": "/assets/logo.png",
+  "TYNWALD": "/assets/logo.png",
   "VICTORIA HIGH": "/assets/logo.png",
+  "MARIST": "/assets/logo.png",
+  "ST JOSEPH": "/assets/logo.png",
+  "ST AUGUSTINES": "/assets/logo.png",
+  "MUTAMBARA": "/assets/logo.png",
+  "FIRST CLASS": "/assets/logo.png",
 
 
   

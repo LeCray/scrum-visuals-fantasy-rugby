@@ -2426,3 +2426,80 @@ boxScores.set(
   generateMatchId("Week 5", "13:45", "HELLENIC", "PETERHOUSE"),
   hellenicVsPeterhouseCBZ
 );
+
+// Add CBZ Week 6 (July 5th) final scores
+finalScores.set(
+  generateMatchId("Week 6", "9:00", "MIDLANDS CC", "CBC"),
+  { teamAScore: 15, teamBScore: 19 }
+);
+
+finalScores.set(
+  generateMatchId("Week 6", "10:00", "BMC", "TYNWALD"),
+  { teamAScore: 26, teamBScore: 5 }
+);
+
+finalScores.set(
+  generateMatchId("Week 6", "11:00", "HILLCREST", "KYLE"),
+  { teamAScore: 26, teamBScore: 24 }
+);
+
+finalScores.set(
+  generateMatchId("Week 6", "12:00", "RYDINGS", "MILTON"),
+  { teamAScore: 13, teamBScore: 20 }
+);
+
+finalScores.set(
+  generateMatchId("Week 6", "13:00", "MARIST", "ST JOSEPH"),
+  { teamAScore: 26, teamBScore: 0 }
+);
+
+finalScores.set(
+  generateMatchId("Week 6", "14:00", "ST AUGUSTINES", "MUTAMBARA"),
+  { teamAScore: 29, teamBScore: 0 }
+);
+
+finalScores.set(
+  generateMatchId("Week 6", "15:00", "MUTARE", "ST JOSEPH"),
+  { teamAScore: 36, teamBScore: 0 }
+);
+
+finalScores.set(
+  generateMatchId("Week 6", "9:30", "ST AUGUSTINES", "FIRST CLASS"),
+  { teamAScore: 35, teamBScore: 0 }
+);
+
+finalScores.set(
+  generateMatchId("Week 6", "10:30", "FIRST CLASS", "MUTAMBARA"),
+  { teamAScore: 31, teamBScore: 0 }
+);
+
+finalScores.set(
+  generateMatchId("Week 6", "11:30", "MUTARE", "FIRST CLASS"),
+  { teamAScore: 38, teamBScore: 0 }
+);
+
+finalScores.set(
+  generateMatchId("Week 6", "12:30", "MARIST", "ST AUGUSTINES"),
+  { teamAScore: 21, teamBScore: 7 }
+);
+
+// Manicaland U20 Nash Rugby Final
+finalScores.set(
+  generateMatchId("Week 6", "13:30", "MUTARE", "MARIST"),
+  { teamAScore: 27, teamBScore: 8 }
+);
+
+finalScores.set(
+  generateMatchId("Week 6", "14:30", "MUTARE", "MARIST"),
+  { teamAScore: 15, teamBScore: 7 }
+);
+
+finalScores.set(
+  generateMatchId("Week 6", "15:30", "PLUMTREE", "PETRA"),
+  { teamAScore: 52, teamBScore: 0 }
+);
+
+finalScores.set(
+  generateMatchId("Week 6", "16:00", "GATEWAY", "WISE OWL"),
+  { teamAScore: 62, teamBScore: 10 }
+);
