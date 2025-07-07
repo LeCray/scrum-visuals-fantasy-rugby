@@ -7,12 +7,12 @@ import { Button } from '@/components/ui/button';
 
 // Zimbabwe player image mapping
 const zimbabwePlayerImages: Record<string, string> = {
-  'Jason Fraser': '/assets/Zimbabwe Players/Jason Fraser.png',
+  'Hilton Mudariki': '/assets/Zimbabwe Players/Hilton Mudariki.png',
   'Trevor Gurwe': '/assets/Zimbabwe Players/Trevor Gurwe.png',
   'Brandon Mudzekenyedzi': '/assets/Zimbabwe Players/Brandon Mudzekenyedzi.png',
   'Ian Prior': '/assets/Zimbabwe Players/Ian Prior.png',
   'Victor Mupunga': '/assets/Zimbabwe Players/Victor Mupunga.png',
-  'Hilton Mudariki': '/assets/Zimbabwe Players/Hilton Mudariki.png',
+  'Jason Fraser': '/assets/Zimbabwe Players/Jason Fraser.png',
   'Dion Khumalo': '/assets/Zimbabwe Players/Dion Khumalo.png',
   'Aiden Burnett': '/assets/Zimbabwe Players/Aiden Burnett.png'
 };
@@ -475,7 +475,7 @@ const AfricaCupHub: React.FC = () => {
                   <div className="space-y-6 sm:space-y-8">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                       {[
-                        { name: "Jason Fraser", team: "Zimbabwe", flag: "🇿🇼", position: "Captain • Back Row", votes: "3,247" },
+                        { name: "Hilton Mudariki", team: "Zimbabwe", flag: "🇿🇼", position: "Captain • Half Back", votes: "3,247" },
                         { name: "George Nyambua", team: "Kenya", flag: "🇰🇪", position: "Captain • Back Row", votes: "2,891" },
                         { name: "Brandon Mudzekenyedzi", team: "Zimbabwe", flag: "🇿🇼", position: "Centre", votes: "2,654" },
                         { name: "Samuel Asati", team: "Kenya", flag: "🇰🇪", position: "Half Back", votes: "2,183" }

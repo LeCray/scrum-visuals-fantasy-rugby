@@ -50,14 +50,14 @@ const teams: Array<{
       { name: 'Brian Nyaude', position: '2nd Row', age: 30, height: '1.96m', weight: '92kg', club: 'Old Hararians', info: 'Mobile second row forward' },
       
       // Back Row
-      { name: 'Jason Fraser', position: 'Back Row', age: 34, height: '1.96m', weight: '108kg', club: 'Nevers-France', info: 'Captain and experienced campaigner' },
+      { name: 'Jason Fraser', position: 'Back Row', age: 34, height: '1.96m', weight: '108kg', club: 'Nevers-France', info: 'Experienced campaigner' },
       { name: 'Aiden Burnett', position: 'Back Row', age: 27, height: '1.89m', weight: '114kg', club: 'Old Hararians/Harare Province', info: 'Dynamic loose forward' },
       { name: 'Dylan Utete', position: 'Back Row', age: 25, height: '1.87m', weight: '111kg', club: 'Okman Rugby- South Korea', info: 'Mobile back row player' },
       { name: 'Godfrey Muzanargwo', position: 'Back Row', age: 26, height: '1.93m', weight: '110kg', club: 'Valke -South Africa', info: 'Powerful ball carrier' },
       { name: 'Tinotenda Mavesere', position: 'Back Row', age: 26, height: '1.89m', weight: '105kg', club: 'The Sharks- South Africa', info: 'Athletic loose forward' },
       
       // Half Backs
-      { name: 'Hilton Mudariki', position: 'Half Back', age: 32, height: '1.72m', weight: '80kg', club: 'Old Hararians', info: 'Quick service from the base' },
+      { name: 'Hilton Mudariki', position: 'Half Back', age: 32, height: '1.72m', weight: '80kg', club: 'Old Hararians', info: 'Captain and experienced scrum-half' },
       { name: 'Keegan Joubert', position: 'Half Back', age: 24, height: '1.74m', weight: '85kg', club: 'Durbell Rugby Club/Western Province', info: 'Promising young scrum-half' },
       { name: 'Tyrone Gombe', position: 'Half Back', age: 19, height: '1.64m', weight: '75kg', club: 'Western Province Academy', info: 'Versatile half back option' },
       
