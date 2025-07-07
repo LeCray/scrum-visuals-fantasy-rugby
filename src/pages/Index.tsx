@@ -26,7 +26,7 @@ const featuredEvents = [
     date: "August 2025",
     location: "England, United Kingdom",
     gradient: "from-pink-600 via-rose-500 to-pink-700",
-    upcoming: true,
+    comingSoon: true,
     international: true,
     matchCount: 32
   },
@@ -141,9 +141,9 @@ const Index: React.FC = () => {
     <div className="min-h-screen bg-white">
       {/* Navigation Header */}
       <header className="bg-scrummy-navy/95 backdrop-blur-md border-b border-scrummy-goldYellow/20 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <Link to="/" className="font-bold text-scrummy-goldYellow text-xl hover:text-white transition-colors">
-            SCRUMMY
+        <div className="w-full pr-4 py-3 flex items-center justify-between">
+          <Link to="/" className="flex items-center hover:scale-105 transition-transform duration-200 pl-2">
+            <img src="/assets/Scrummy-logo/SCRUMMY Logo Exception_On Dark BG (3).svg" alt="SCRUMMY Logo" className="h-14 w-auto opacity-95 hover:opacity-100" />
           </Link>
           
           {/* Desktop Navigation */}
@@ -285,8 +285,8 @@ const Index: React.FC = () => {
                 >
                   {/* Event Badge */}
                   <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-xs sm:text-sm font-medium">
-                    {currentEvent.upcoming && <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />}
-                    {currentEvent.upcoming ? "Upcoming" : currentEvent.featured ? "Featured" : currentEvent.international ? "International" : "Tournament"}
+                    {(currentEvent.upcoming || currentEvent.comingSoon) && <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />}
+                    {currentEvent.comingSoon ? "Coming Soon" : currentEvent.upcoming ? "Upcoming" : currentEvent.featured ? "Featured" : currentEvent.international ? "International" : "Tournament"}
                   </div>
 
                   <div>
@@ -307,11 +307,17 @@ const Index: React.FC = () => {
 
                   {/* CTA Buttons */}
                   <div className="flex justify-center md:justify-start gap-3">
-                    <Link to={currentEvent.id === 3 ? "/africa-cup" : "/fixtures"}>
-                      <Button size="lg" className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-semibold px-6 sm:px-8 py-3 text-sm sm:text-base">
-                        {currentEvent.id === 3 ? "Explore Africa Cup" : "View Fixtures"}
+                    {currentEvent.comingSoon ? (
+                      <Button size="lg" className="bg-gray-400 text-white cursor-not-allowed px-6 sm:px-8 py-3 text-sm sm:text-base" disabled>
+                        Coming Soon
                       </Button>
-                    </Link>
+                    ) : (
+                      <Link to={currentEvent.id === 3 ? "/africa-cup" : "/fixtures"}>
+                        <Button size="lg" className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-semibold px-6 sm:px-8 py-3 text-sm sm:text-base">
+                          {currentEvent.id === 3 ? "Explore Africa Cup" : "View Fixtures"}
+                        </Button>
+                      </Link>
+                    )}
                   </div>
           </motion.div>
 
