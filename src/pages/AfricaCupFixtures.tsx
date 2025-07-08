@@ -5,63 +5,132 @@ import { ChevronLeft, Calendar, MapPin, Clock, Trophy, Download, BarChart3, Menu
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 
+// Helper function to convert date format
+const convertDateFormat = (dateStr: string): string => {
+  const monthMap: { [key: string]: string } = {
+    'January': '01', 'February': '02', 'March': '03', 'April': '04',
+    'May': '05', 'June': '06', 'July': '07', 'August': '08',
+    'September': '09', 'October': '10', 'November': '11', 'December': '12'
+  };
+  
+  // Parse "July 8, 2025" format
+  const parts = dateStr.split(' ');
+  if (parts.length === 3) {
+    const month = monthMap[parts[0]];
+    const day = parts[1].replace(',', '').padStart(2, '0');
+    const year = parts[2];
+    return `${year}-${month}-${day}`;
+  }
+  
+  // Default fallback
+  return '2025-07-08';
+};
+
+// Timezone conversion utility (same as AfricaCupHub)
+const convertToLocalTime = (timeStr: string, date: string = '2025-07-08') => {
+  try {
+    // Parse the EAT time (UTC+3)
+    const [time, period] = timeStr.split(/(?=[AP]M)/);
+    let [hours, minutes] = time.split(':').map(Number);
+    
+    if (period === 'PM' && hours !== 12) hours += 12;
+    if (period === 'AM' && hours === 12) hours = 0;
+    
+    // Create date in EAT timezone (UTC+3)
+    const eatTime = new Date(`${date}T${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:00+03:00`);
+    
+    // Check if date is valid
+    if (isNaN(eatTime.getTime())) {
+      throw new Error('Invalid date');
+    }
+    
+    // Get user's timezone
+    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    
+    // Format for user's local timezone
+    const localTime = eatTime.toLocaleTimeString('en-US', {
+      timeZone: userTimezone,
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true
+    });
+    
+    // Get timezone abbreviation
+    const timezoneName = eatTime.toLocaleTimeString('en-US', {
+      timeZone: userTimezone,
+      timeZoneName: 'short'
+    }).split(' ').slice(-1)[0];
+    
+    return {
+      localTime,
+      timezoneName,
+      originalTime: timeStr,
+      isEAT: userTimezone === 'Africa/Kampala' || userTimezone.includes('Africa/Nairobi')
+    };
+  } catch (error) {
+    // Fallback to original time if conversion fails
+    return {
+      localTime: timeStr,
+      timezoneName: 'EAT',
+      originalTime: timeStr,
+      isEAT: true
+    };
+  }
+};
+
 const fixtures = [
   {
     round: 'Quarter Finals',
-    date: 'July 12, 2025',
+    date: 'July 8, 2025',
     matches: [
       {
         id: 1,
         team1: { name: 'Zimbabwe', flag: '🇿🇼' },
         team2: { name: 'Morocco', flag: '🇲🇦' },
-        time: '14:00',
-        venue: 'Mandela National Stadium, Kampala'
+        time: '10:00AM',
+        venue: 'Mandela National Stadium, Kampala',
+        finalScore: { team1: 43, team2: 8 },
+        status: 'completed'
       },
       {
         id: 2,
         team1: { name: 'Algeria', flag: '🇩🇿' },
         team2: { name: 'Uganda', flag: '🇺🇬' },
-        time: '16:30',
+        time: '04:00PM',
         venue: 'Mandela National Stadium, Kampala'
-      }
-    ]
-  },
-  {
-    round: 'Quarter Finals',
-    date: 'July 13, 2025',
-    matches: [
+      },
       {
         id: 3,
         team1: { name: 'Namibia', flag: '🇳🇦' },
         team2: { name: 'Senegal', flag: '🇸🇳' },
-        time: '14:00',
+        time: '02:00PM',
         venue: 'Mandela National Stadium, Kampala'
       },
       {
         id: 4,
         team1: { name: 'Kenya', flag: '🇰🇪' },
         team2: { name: 'Côte d\'Ivoire', flag: '🇨🇮' },
-        time: '16:30',
+        time: '12:00PM',
         venue: 'Mandela National Stadium, Kampala'
       }
     ]
   },
   {
     round: 'Semi Finals',
-    date: 'July 16, 2025',
+    date: 'July 13, 2025',
     matches: [
       {
         id: 5,
         team1: { name: 'QF1 Winner', flag: '🏆' },
         team2: { name: 'QF2 Winner', flag: '🏆' },
-        time: '14:00',
+        time: '02:00PM',
         venue: 'Mandela National Stadium, Kampala'
       },
       {
         id: 6,
         team1: { name: 'QF3 Winner', flag: '🏆' },
         team2: { name: 'QF4 Winner', flag: '🏆' },
-        time: '16:30',
+        time: '04:30PM',
         venue: 'Mandela National Stadium, Kampala'
       }
     ]
@@ -74,7 +143,7 @@ const fixtures = [
         id: 7,
         team1: { name: 'SF1 Winner', flag: '🏆' },
         team2: { name: 'SF2 Winner', flag: '🏆' },
-        time: '16:00',
+        time: '04:00PM',
         venue: 'Mandela National Stadium, Kampala'
       }
     ]
@@ -234,7 +303,9 @@ const AfricaCupFixtures: React.FC = () => {
 
                 {/* Matches */}
                 <div className="grid gap-4 md:gap-6 md:grid-cols-2">
-                  {roundData.matches.map((match, matchIndex) => (
+                  {roundData.matches.map((match, matchIndex) => {
+                    const timeInfo = convertToLocalTime(match.time, convertDateFormat(roundData.date));
+                    return (
                     <motion.div
                       key={match.id}
                       initial={{ y: 20, opacity: 0 }}
@@ -250,7 +321,16 @@ const AfricaCupFixtures: React.FC = () => {
                             <div className="flex items-center justify-between mb-3 md:mb-4">
                               <div className="flex items-center gap-2 text-gray-600">
                                 <Clock className="w-4 h-4" />
-                                <span className="font-medium text-sm md:text-base">{match.time}</span>
+                                <div className="text-sm md:text-base">
+                                  <div className="font-medium">
+                                    {timeInfo.isEAT ? timeInfo.originalTime : timeInfo.localTime} {timeInfo.isEAT ? 'EAT' : timeInfo.timezoneName}
+                                  </div>
+                                  {!timeInfo.isEAT && (
+                                    <div className="text-xs text-gray-500">
+                                      {timeInfo.originalTime} EAT
+                                    </div>
+                                  )}
+                                </div>
                               </div>
                               <div className="text-right">
                                 <span className="text-sm font-bold text-scrummy-navy">Match {match.id}</span>
@@ -264,8 +344,14 @@ const AfricaCupFixtures: React.FC = () => {
                                 <span className="font-bold text-scrummy-navy text-sm md:text-base truncate">{match.team1.name}</span>
                               </div>
                               <div className="text-center mx-2 md:mx-4">
-                                <div className="text-xl md:text-2xl font-bold text-scrummy-navy mb-1">0 - 0</div>
-                                <div className="text-xs text-gray-500">Full Time</div>
+                                <div className="text-xl md:text-2xl font-bold text-scrummy-navy mb-1">
+                                  {match.finalScore ? `${match.finalScore.team1} - ${match.finalScore.team2}` : 'vs'}
+                                </div>
+                                <div className="text-xs text-gray-500">
+                                  {match.finalScore ? 'Full Time' : (
+                                    timeInfo.isEAT ? timeInfo.originalTime : `${timeInfo.localTime} (${timeInfo.originalTime} EAT)`
+                                  )}
+                                </div>
                               </div>
                               <div className="flex items-center gap-2 md:gap-3 flex-1 justify-end">
                                 <span className="font-bold text-scrummy-navy text-sm md:text-base truncate">{match.team2.name}</span>
@@ -288,14 +374,18 @@ const AfricaCupFixtures: React.FC = () => {
                             {/* Stats Update Notice */}
                             <div className="mt-3 pt-3 border-t border-gray-200">
                               <div className="text-center text-xs text-gray-500">
-                                📊 Match statistics will be updated after the game
+                                {match.finalScore ? 
+                                  '🏆 Match completed - Full statistics available' : 
+                                  '📊 Match statistics will be updated after the game'
+                                }
                               </div>
                             </div>
                           </CardContent>
                         </Card>
                       </Link>
                     </motion.div>
-                  ))}
+                    );
+                  })}
                 </div>
               </motion.div>
             ))}

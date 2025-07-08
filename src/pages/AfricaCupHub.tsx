@@ -378,7 +378,9 @@ const AfricaCupHub: React.FC = () => {
                             homeTeam: { name: "Zimbabwe", flag: "🇿🇼", code: "ZIM" },
                             awayTeam: { name: "Morocco", flag: "🇲🇦", code: "MAR" },
                             match: "QF1",
-                            matchId: "1"
+                            matchId: "1",
+                            finalScore: { home: 43, away: 8 },
+                            status: "completed"
                           },
                           {
                             time: "04:00PM",
@@ -446,7 +448,12 @@ const AfricaCupHub: React.FC = () => {
                                 </div>
                                 
                                 <div className="px-2 sm:px-4">
-                                  <div className="text-lg sm:text-2xl font-bold text-red-500">VS</div>
+                                  <div className="text-lg sm:text-2xl font-bold text-red-500">
+                                    {match.finalScore ? `${match.finalScore.home} - ${match.finalScore.away}` : 'VS'}
+                                  </div>
+                                  {match.finalScore && (
+                                    <div className="text-xs text-gray-500 text-center">Final</div>
+                                  )}
                                 </div>
                                 
                                 <div className="flex items-center gap-2 sm:gap-3 flex-1 justify-end">

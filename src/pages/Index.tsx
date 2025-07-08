@@ -312,11 +312,11 @@ const Index: React.FC = () => {
                         Coming Soon
                       </Button>
                     ) : (
-                      <Link to={currentEvent.id === 3 ? "/africa-cup" : "/fixtures"}>
-                        <Button size="lg" className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-semibold px-6 sm:px-8 py-3 text-sm sm:text-base">
-                          {currentEvent.id === 3 ? "Explore Africa Cup" : "View Fixtures"}
-                        </Button>
-                      </Link>
+                    <Link to={currentEvent.id === 3 ? "/africa-cup" : "/fixtures"}>
+                      <Button size="lg" className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-semibold px-6 sm:px-8 py-3 text-sm sm:text-base">
+                        {currentEvent.id === 3 ? "Explore Africa Cup" : "View Fixtures"}
+                      </Button>
+                    </Link>
                     )}
                   </div>
           </motion.div>

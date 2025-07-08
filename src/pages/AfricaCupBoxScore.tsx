@@ -6,14 +6,93 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
 
-const matchData: Record<string, { team1: { name: string; flag: string }; team2: { name: string; flag: string }; date: string; time: string }> = {
-  '1': { team1: { name: 'Zimbabwe', flag: '🇿🇼' }, team2: { name: 'Morocco', flag: '🇲🇦' }, date: 'July 12, 2025', time: '14:00' },
-  '2': { team1: { name: 'Algeria', flag: '🇩🇿' }, team2: { name: 'Uganda', flag: '🇺🇬' }, date: 'July 12, 2025', time: '16:30' },
-  '3': { team1: { name: 'Namibia', flag: '🇳🇦' }, team2: { name: 'Senegal', flag: '🇸🇳' }, date: 'July 13, 2025', time: '14:00' },
-  '4': { team1: { name: 'Kenya', flag: '🇰🇪' }, team2: { name: 'Côte d\'Ivoire', flag: '🇨🇮' }, date: 'July 13, 2025', time: '16:30' },
-  '5': { team1: { name: 'QF1 Winner', flag: '🏆' }, team2: { name: 'QF2 Winner', flag: '🏆' }, date: 'July 16, 2025', time: '14:00' },
-  '6': { team1: { name: 'QF3 Winner', flag: '🏆' }, team2: { name: 'QF4 Winner', flag: '🏆' }, date: 'July 16, 2025', time: '16:30' },
-  '7': { team1: { name: 'SF1 Winner', flag: '🏆' }, team2: { name: 'SF2 Winner', flag: '🏆' }, date: 'July 19, 2025', time: '16:00' }
+// Timezone conversion utility (same as other Africa Cup pages)
+const convertToLocalTime = (timeStr: string, date: string = '2025-07-08') => {
+  try {
+    // Parse the EAT time (UTC+3)
+    const [time, period] = timeStr.split(/(?=[AP]M)/);
+    let [hours, minutes] = time.split(':').map(Number);
+    
+    if (period === 'PM' && hours !== 12) hours += 12;
+    if (period === 'AM' && hours === 12) hours = 0;
+    
+    // Create date in EAT timezone (UTC+3)
+    const eatTime = new Date(`${date}T${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:00+03:00`);
+    
+    // Check if date is valid
+    if (isNaN(eatTime.getTime())) {
+      throw new Error('Invalid date');
+    }
+    
+    // Get user's timezone
+    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    
+    // Format for user's local timezone
+    const localTime = eatTime.toLocaleTimeString('en-US', {
+      timeZone: userTimezone,
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true
+    });
+    
+    // Get timezone abbreviation
+    const timezoneName = eatTime.toLocaleTimeString('en-US', {
+      timeZone: userTimezone,
+      timeZoneName: 'short'
+    }).split(' ').slice(-1)[0];
+    
+    return {
+      localTime,
+      timezoneName,
+      originalTime: timeStr,
+      isEAT: userTimezone === 'Africa/Kampala' || userTimezone.includes('Africa/Nairobi')
+    };
+  } catch (error) {
+    // Fallback to original time if conversion fails
+    return {
+      localTime: timeStr,
+      timezoneName: 'EAT',
+      originalTime: timeStr,
+      isEAT: true
+    };
+  }
+};
+
+// Date conversion utility (same as fixtures page)
+const convertDateFormat = (dateStr: string) => {
+  try {
+    // If it's already in the correct format, return as is
+    if (dateStr.includes('-') && dateStr.includes('2025')) {
+      return dateStr;
+    }
+    
+    // Convert "July 8, 2025" to "2025-07-08"
+    const date = new Date(dateStr);
+    
+    // Validate date
+    if (isNaN(date.getTime())) {
+      throw new Error('Invalid date format');
+    }
+    
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+  } catch (error) {
+    // Return original if conversion fails
+    return dateStr;
+  }
+};
+
+const matchData: Record<string, { team1: { name: string; flag: string }; team2: { name: string; flag: string }; date: string; time: string; finalScore?: { team1: number; team2: number } }> = {
+  '1': { team1: { name: 'Zimbabwe', flag: '🇿🇼' }, team2: { name: 'Morocco', flag: '🇲🇦' }, date: 'July 8, 2025', time: '10:00AM', finalScore: { team1: 43, team2: 8 } },
+  '2': { team1: { name: 'Algeria', flag: '🇩🇿' }, team2: { name: 'Uganda', flag: '🇺🇬' }, date: 'July 8, 2025', time: '04:00PM' },
+  '3': { team1: { name: 'Namibia', flag: '🇳🇦' }, team2: { name: 'Senegal', flag: '🇸🇳' }, date: 'July 8, 2025', time: '02:00PM' },
+  '4': { team1: { name: 'Kenya', flag: '🇰🇪' }, team2: { name: 'Côte d\'Ivoire', flag: '🇨🇮' }, date: 'July 8, 2025', time: '12:00PM' },
+  '5': { team1: { name: 'QF1 Winner', flag: '🏆' }, team2: { name: 'QF2 Winner', flag: '🏆' }, date: 'July 13, 2025', time: '02:00PM' },
+  '6': { team1: { name: 'QF3 Winner', flag: '🏆' }, team2: { name: 'QF4 Winner', flag: '🏆' }, date: 'July 13, 2025', time: '04:30PM' },
+  '7': { team1: { name: 'SF1 Winner', flag: '🏆' }, team2: { name: 'SF2 Winner', flag: '🏆' }, date: 'July 19, 2025', time: '04:00PM' }
 };
 
 const AfricaCupBoxScore: React.FC = () => {
@@ -23,6 +102,8 @@ const AfricaCupBoxScore: React.FC = () => {
   if (!match) {
     return <div>Match not found</div>;
   }
+
+  const timeInfo = convertToLocalTime(match.time, convertDateFormat(match.date));
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-[#D0E3FF]">
@@ -67,7 +148,13 @@ const AfricaCupBoxScore: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-1">
                   <Clock className="w-4 h-4" />
-                  <span>{match.time}</span>
+                  <span>
+                    {timeInfo.isEAT ? (
+                      `${timeInfo.originalTime} EAT`
+                    ) : (
+                      `${timeInfo.localTime} (${timeInfo.originalTime} EAT)`
+                    )}
+                  </span>
                 </div>
                 <div className="flex items-center gap-1">
                   <MapPin className="w-4 h-4" />
@@ -84,8 +171,12 @@ const AfricaCupBoxScore: React.FC = () => {
               </div>
               
               <div className="text-center">
-                <div className="text-6xl font-black mb-2">0 - 0</div>
-                <div className="text-sm text-white/80">Full Time</div>
+                <div className="text-6xl font-black mb-2">
+                  {match.finalScore ? `${match.finalScore.team1} - ${match.finalScore.team2}` : '0 - 0'}
+                </div>
+                <div className="text-sm text-white/80">
+                  {match.finalScore ? 'Full Time' : 'Upcoming'}
+                </div>
               </div>
               
               <div className="text-center">
@@ -95,9 +186,17 @@ const AfricaCupBoxScore: React.FC = () => {
             </div>
 
             {/* Status Notice */}
-            <div className="flex items-center justify-center gap-2 bg-orange-500/20 text-orange-200 px-4 py-2 rounded-full text-sm">
+            <div className={`flex items-center justify-center gap-2 px-4 py-2 rounded-full text-sm ${
+              match.finalScore 
+                ? 'bg-green-500/20 text-green-200' 
+                : 'bg-orange-500/20 text-orange-200'
+            }`}>
               <AlertCircle className="w-4 h-4" />
-              <span>Match statistics will be updated after the game</span>
+              <span>
+                {match.finalScore 
+                  ? 'Match completed - Final score updated' 
+                  : 'Match statistics will be updated after the game'}
+              </span>
             </div>
           </motion.div>
         </div>
