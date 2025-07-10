@@ -16,6 +16,7 @@ import Download from "./pages/Download";
 import Support from "./pages/Support";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ZimbabweSBRGraphic from "./pages/ZimbabweSBRGraphic";
+
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -39,6 +40,7 @@ const App = () => (
           <Route path="/support" element={<Support />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/zimbabwe-sbr-graphic" element={<ZimbabweSBRGraphic />} />
+
           <Route path="/box-score/:matchId" element={<BoxScorePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
