@@ -385,7 +385,7 @@ const AfricaCupHub: React.FC = () => {
                           {
                             time: "04:00PM",
                             homeTeam: { name: "Algeria", flag: "🇩🇿", code: "ALG" },
-                            awayTeam: { name: "Côte d'Ivoire", flag: "🇺🇬", code: "UGA" },
+                            awayTeam: { name: "Côte d'Ivoire", flag: "🇨🇮", code: "CIV" },
                             match: "QF2",
                             matchId: "2",
                             finalScore: { home: 41, away: 6 },
@@ -394,7 +394,7 @@ const AfricaCupHub: React.FC = () => {
                           {
                             time: "12:00PM",
                             homeTeam: { name: "Kenya", flag: "🇰🇪", code: "KEN" },
-                            awayTeam: { name: "Uganda", flag: "🇨🇮", code: "CIV" },
+                            awayTeam: { name: "Uganda", flag: "🇺🇬", code: "UGD" },
                             match: "QF3",
                             matchId: "4",
                             finalScore: { home: 32, away: 24 },
