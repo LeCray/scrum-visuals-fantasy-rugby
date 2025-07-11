@@ -34,16 +34,16 @@ const convertToLocalTime = (timeStr: string, date: string = '2025-07-08') => {
   // Parse the EAT time (UTC+3)
   const [time, period] = timeStr.split(/(?=[AP]M)/);
   let [hours, minutes] = time.split(':').map(Number);
-  
+
   if (period === 'PM' && hours !== 12) hours += 12;
   if (period === 'AM' && hours === 12) hours = 0;
-  
+
   // Create date in EAT timezone (UTC+3)
   const eatTime = new Date(`${date}T${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:00+03:00`);
-  
+
   // Get user's timezone
   const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  
+
   // Format for user's local timezone
   const localTime = eatTime.toLocaleTimeString('en-US', {
     timeZone: userTimezone,
@@ -51,13 +51,13 @@ const convertToLocalTime = (timeStr: string, date: string = '2025-07-08') => {
     minute: '2-digit',
     hour12: true
   });
-  
+
   // Get timezone abbreviation
   const timezoneName = eatTime.toLocaleTimeString('en-US', {
     timeZone: userTimezone,
     timeZoneName: 'short'
   }).split(' ').slice(-1)[0];
-  
+
   return {
     localTime,
     timezoneName,
@@ -76,7 +76,7 @@ const AfricaCupHub: React.FC = () => {
   // Auto-advance slideshow
   useEffect(() => {
     if (!isAutoPlaying) return;
-    
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 8000); // 8 seconds per slide
@@ -104,7 +104,7 @@ const AfricaCupHub: React.FC = () => {
             <span className="font-medium hidden sm:block">Back to SCRUMMY</span>
             <span className="font-medium sm:hidden">SCRUMMY</span>
           </Link>
-          
+
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
             <Link to="/africa-cup" className="text-scrummy-goldYellow font-semibold">
@@ -138,22 +138,22 @@ const AfricaCupHub: React.FC = () => {
               className="md:hidden bg-scrummy-navy/98 backdrop-blur-md border-t border-scrummy-goldYellow/20"
             >
               <nav className="px-4 py-4 space-y-4">
-                <Link 
-                  to="/africa-cup" 
+                <Link
+                  to="/africa-cup"
                   className="block text-scrummy-goldYellow font-semibold py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Tournament Hub
                 </Link>
-                <Link 
-                  to="/africa-cup/teams" 
+                <Link
+                  to="/africa-cup/teams"
                   className="block text-white hover:text-scrummy-goldYellow transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Teams & Rosters
                 </Link>
-                <Link 
-                  to="/africa-cup/fixtures" 
+                <Link
+                  to="/africa-cup/fixtures"
                   className="block text-white hover:text-scrummy-goldYellow transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -263,35 +263,35 @@ const AfricaCupHub: React.FC = () => {
                 className="group"
               >
                 <div className="bg-gradient-to-r from-scrummy-goldYellow to-yellow-400 border-2 border-scrummy-gold rounded-full px-6 py-3 flex items-center gap-3 text-scrummy-navy hover:from-scrummy-gold hover:to-scrummy-goldYellow transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                <motion.div
-                  animate={{ 
-                    rotate: [0, 15, -15, 0],
-                    scale: [1, 1.1, 1]
-                  }}
-                  transition={{ 
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                >
-                  <Download className="w-5 h-5 text-scrummy-navy" />
-                </motion.div>
-                <span className="text-base font-bold text-scrummy-navy">Play SCRUMMY</span>
-                <motion.div
-                  animate={{ 
-                    x: [0, 4, 0],
-                    scale: [1, 1.2, 1]
-                  }}
-                  transition={{ 
-                    duration: 1.5,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                >
-                  <ChevronRight className="w-4 h-4 text-scrummy-navy" />
-                </motion.div>
-              </div>
-            </motion.div>
+                  <motion.div
+                    animate={{
+                      rotate: [0, 15, -15, 0],
+                      scale: [1, 1.1, 1]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <Download className="w-5 h-5 text-scrummy-navy" />
+                  </motion.div>
+                  <span className="text-base font-bold text-scrummy-navy">Play SCRUMMY</span>
+                  <motion.div
+                    animate={{
+                      x: [0, 4, 0],
+                      scale: [1, 1.2, 1]
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <ChevronRight className="w-4 h-4 text-scrummy-navy" />
+                  </motion.div>
+                </div>
+              </motion.div>
             </Link>
           </div>
         </div>
@@ -312,7 +312,7 @@ const AfricaCupHub: React.FC = () => {
             <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
               {currentSlide === 0 && "Eight African rugby nations competing for continental supremacy"}
               {currentSlide === 1 && "Vote for your favorite teams and top players in real-time"}
-                                {currentSlide === 2 && "Play SCRUMMY to follow every match and vote for your favorites"}
+              {currentSlide === 2 && "Play SCRUMMY to follow every match and vote for your favorites"}
             </p>
           </div>
 
@@ -342,16 +342,16 @@ const AfricaCupHub: React.FC = () => {
                       <div className="flex justify-center sm:justify-end mb-4">
                         <Link to="/africa-cup/fixtures">
                           <motion.div
-                            animate={{ 
+                            animate={{
                               y: [0, -8, 0],
                               scale: [1, 1.05, 1]
                             }}
-                            transition={{ 
+                            transition={{
                               duration: 2,
                               repeat: Infinity,
                               ease: "easeInOut"
                             }}
-                            whileHover={{ 
+                            whileHover={{
                               scale: 1.1,
                               y: -5
                             }}
@@ -360,7 +360,7 @@ const AfricaCupHub: React.FC = () => {
                             <span>View All Fixtures</span>
                             <motion.div
                               animate={{ x: [0, 3, 0] }}
-                              transition={{ 
+                              transition={{
                                 duration: 1.5,
                                 repeat: Infinity,
                                 ease: "easeInOut"
@@ -385,89 +385,95 @@ const AfricaCupHub: React.FC = () => {
                           {
                             time: "04:00PM",
                             homeTeam: { name: "Algeria", flag: "🇩🇿", code: "ALG" },
-                            awayTeam: { name: "Uganda", flag: "🇺🇬", code: "UGA" },
+                            awayTeam: { name: "Côte d'Ivoire", flag: "🇺🇬", code: "UGA" },
                             match: "QF2",
-                            matchId: "2"
+                            matchId: "2",
+                            finalScore: { home: 41, away: 6 },
+                            status: "completed"
                           },
                           {
                             time: "12:00PM",
                             homeTeam: { name: "Kenya", flag: "🇰🇪", code: "KEN" },
-                            awayTeam: { name: "Côte d'Ivoire", flag: "🇨🇮", code: "CIV" },
+                            awayTeam: { name: "Uganda", flag: "🇨🇮", code: "CIV" },
                             match: "QF3",
-                            matchId: "4"
+                            matchId: "4",
+                            finalScore: { home: 32, away: 24 },
+                            status: "completed"
                           },
                           {
                             time: "02:00PM",
                             homeTeam: { name: "Namibia", flag: "🇳🇦", code: "NAM" },
                             awayTeam: { name: "Senegal", flag: "🇸🇳", code: "SEN" },
                             match: "QF4",
-                            matchId: "3"
+                            matchId: "3",
+                            finalScore: { home: 55, away: 17 },
+                            status: "completed"
                           }
                         ].map((match, index) => {
                           const timeInfo = convertToLocalTime(match.time);
                           return (
-                          <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1, duration: 0.4 }}
-                            whileHover={{ 
-                              scale: 1.02,
-                              transition: { duration: 0.2 }
-                            }}
-                          >
-                            <Link to={`/africa-cup/box-score/${match.matchId}`}>
-                              <Card className="hover:shadow-xl transition-all duration-300 border-2 hover:border-red-400 bg-gradient-to-r from-white to-red-50 cursor-pointer group">
-                                <CardContent className="p-4 sm:p-6">
-                              <div className="flex items-center justify-between mb-3 sm:mb-4">
-                                <div className="flex items-center gap-2">
-                                  <span className="bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs font-bold">
-                                    {match.match}
-                                  </span>
-                                  <span className="text-xs sm:text-sm text-gray-600 hidden sm:block">Quarter Final</span>
-                                </div>
-                                <div className="text-right">
-                                  <div className="font-bold text-scrummy-navy text-xs sm:text-sm">
-                                    {timeInfo.isEAT ? timeInfo.originalTime : timeInfo.localTime} {timeInfo.isEAT ? 'EAT' : timeInfo.timezoneName}
-                                  </div>
-                                  {!timeInfo.isEAT && (
-                                    <div className="text-xs text-gray-500">
-                                      {timeInfo.originalTime} EAT
+                            <motion.div
+                              key={index}
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: index * 0.1, duration: 0.4 }}
+                              whileHover={{
+                                scale: 1.02,
+                                transition: { duration: 0.2 }
+                              }}
+                            >
+                              <Link to={`/africa-cup/box-score/${match.matchId}`}>
+                                <Card className="hover:shadow-xl transition-all duration-300 border-2 hover:border-red-400 bg-gradient-to-r from-white to-red-50 cursor-pointer group">
+                                  <CardContent className="p-4 sm:p-6">
+                                    <div className="flex items-center justify-between mb-3 sm:mb-4">
+                                      <div className="flex items-center gap-2">
+                                        <span className="bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs font-bold">
+                                          {match.match}
+                                        </span>
+                                        <span className="text-xs sm:text-sm text-gray-600 hidden sm:block">Quarter Final</span>
+                                      </div>
+                                      <div className="text-right">
+                                        <div className="font-bold text-scrummy-navy text-xs sm:text-sm">
+                                          {timeInfo.isEAT ? timeInfo.originalTime : timeInfo.localTime} {timeInfo.isEAT ? 'EAT' : timeInfo.timezoneName}
+                                        </div>
+                                        {!timeInfo.isEAT && (
+                                          <div className="text-xs text-gray-500">
+                                            {timeInfo.originalTime} EAT
+                                          </div>
+                                        )}
+                                      </div>
                                     </div>
-                                  )}
-                                </div>
-                              </div>
-                              
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2 sm:gap-3 flex-1">
-                                  <span className="text-lg sm:text-2xl">{match.homeTeam.flag}</span>
-                                  <div>
-                                    <div className="font-bold text-scrummy-navy text-xs sm:text-sm">{match.homeTeam.name}</div>
-                                    <div className="text-xs text-gray-500">{match.homeTeam.code}</div>
-                                  </div>
-                                </div>
-                                
-                                <div className="px-2 sm:px-4">
-                                  <div className="text-lg sm:text-2xl font-bold text-red-500">
-                                    {match.finalScore ? `${match.finalScore.home} - ${match.finalScore.away}` : 'VS'}
-                                  </div>
-                                  {match.finalScore && (
-                                    <div className="text-xs text-gray-500 text-center">Final</div>
-                                  )}
-                                </div>
-                                
-                                <div className="flex items-center gap-2 sm:gap-3 flex-1 justify-end">
-                                  <div className="text-right">
-                                    <div className="font-bold text-scrummy-navy text-xs sm:text-sm">{match.awayTeam.name}</div>
-                                    <div className="text-xs text-gray-500">{match.awayTeam.code}</div>
-                                  </div>
-                                  <span className="text-lg sm:text-2xl">{match.awayTeam.flag}</span>
-                                </div>
-                              </div>
-                            </CardContent>
-                          </Card>
-                            </Link>
-                          </motion.div>
+
+                                    <div className="flex items-center justify-between">
+                                      <div className="flex items-center gap-2 sm:gap-3 flex-1">
+                                        <span className="text-lg sm:text-2xl">{match.homeTeam.flag}</span>
+                                        <div>
+                                          <div className="font-bold text-scrummy-navy text-xs sm:text-sm">{match.homeTeam.name}</div>
+                                          <div className="text-xs text-gray-500">{match.homeTeam.code}</div>
+                                        </div>
+                                      </div>
+
+                                      <div className="px-2 sm:px-4">
+                                        <div className="text-lg sm:text-2xl font-bold text-red-500">
+                                          {match.finalScore ? `${match.finalScore.home} - ${match.finalScore.away}` : 'VS'}
+                                        </div>
+                                        {match.finalScore && (
+                                          <div className="text-xs text-gray-500 text-center">Final</div>
+                                        )}
+                                      </div>
+
+                                      <div className="flex items-center gap-2 sm:gap-3 flex-1 justify-end">
+                                        <div className="text-right">
+                                          <div className="font-bold text-scrummy-navy text-xs sm:text-sm">{match.awayTeam.name}</div>
+                                          <div className="text-xs text-gray-500">{match.awayTeam.code}</div>
+                                        </div>
+                                        <span className="text-lg sm:text-2xl">{match.awayTeam.flag}</span>
+                                      </div>
+                                    </div>
+                                  </CardContent>
+                                </Card>
+                              </Link>
+                            </motion.div>
                           );
                         })}
                       </div>
@@ -492,7 +498,7 @@ const AfricaCupHub: React.FC = () => {
                           initial={{ scale: 0.8, opacity: 0 }}
                           animate={{ scale: 1, opacity: 1 }}
                           transition={{ delay: index * 0.1 }}
-                          whileHover={{ 
+                          whileHover={{
                             scale: 1.05,
                             y: -5,
                             transition: { duration: 0.2 }
@@ -503,12 +509,11 @@ const AfricaCupHub: React.FC = () => {
                               {/* Player Image */}
                               <div className="mb-3">
                                 {zimbabwePlayerImages[player.name] || kenyaPlayerImages[player.name] ? (
-                                  <img 
-                                    src={zimbabwePlayerImages[player.name] || kenyaPlayerImages[player.name]} 
+                                  <img
+                                    src={zimbabwePlayerImages[player.name] || kenyaPlayerImages[player.name]}
                                     alt={player.name}
-                                    className={`w-16 h-20 sm:w-20 sm:h-24 mx-auto rounded-lg shadow-md border-2 border-scrummy-goldYellow ${
-                                      kenyaPlayerImages[player.name] ? 'object-cover object-bottom' : 'object-cover'
-                                    }`}
+                                    className={`w-16 h-20 sm:w-20 sm:h-24 mx-auto rounded-lg shadow-md border-2 border-scrummy-goldYellow ${kenyaPlayerImages[player.name] ? 'object-cover object-bottom' : 'object-cover'
+                                      }`}
                                   />
                                 ) : (
                                   <div className="w-16 h-20 sm:w-20 sm:h-24 bg-gradient-to-br from-scrummy-navy to-scrummy-blue rounded-lg flex items-center justify-center mx-auto">
@@ -577,12 +582,12 @@ const AfricaCupHub: React.FC = () => {
                         <div className="w-16 h-16 bg-scrummy-goldYellow rounded-full flex items-center justify-center mx-auto mb-3">
                           <Download className="w-8 h-8 text-scrummy-navy" />
                         </div>
-                        
+
                         <h3 className="text-xl font-bold mb-2">Play SCRUMMY Now!</h3>
                         <p className="text-sm mb-3 opacity-90">
                           Vote for your champions, follow live matches, and compete with fans across Africa.
                         </p>
-                        
+
                         <div className="grid grid-cols-3 gap-2 mb-4 text-xs">
                           <div className="bg-white/10 p-2 rounded">
                             <Vote className="w-4 h-4 mx-auto mb-1" />
@@ -597,7 +602,7 @@ const AfricaCupHub: React.FC = () => {
                             <div className="font-bold text-xs">Fan Community</div>
                           </div>
                         </div>
-                        
+
                         <Link to="/download">
                           <motion.div
                             whileHover={{ scale: 1.05 }}
@@ -608,7 +613,7 @@ const AfricaCupHub: React.FC = () => {
                             </Button>
                           </motion.div>
                         </Link>
-                        
+
                         <p className="text-xs opacity-60 mt-2">Join 50,000+ rugby fans</p>
                       </CardContent>
                     </Card>
@@ -628,7 +633,7 @@ const AfricaCupHub: React.FC = () => {
             >
               <ChevronLeft className="w-5 h-5" />
             </motion.button>
-            
+
             {/* Slide Indicators */}
             <div className="flex gap-2">
               {slides.map((_, index) => (
@@ -637,15 +642,14 @@ const AfricaCupHub: React.FC = () => {
                   onClick={() => setCurrentSlide(index)}
                   whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 0.9 }}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentSlide 
-                      ? 'bg-scrummy-goldYellow shadow-lg' 
-                      : 'bg-gray-300 hover:bg-gray-400'
-                  }`}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide
+                    ? 'bg-scrummy-goldYellow shadow-lg'
+                    : 'bg-gray-300 hover:bg-gray-400'
+                    }`}
                 />
               ))}
             </div>
-            
+
             <motion.button
               onClick={nextSlide}
               whileHover={{ scale: 1.1 }}
@@ -683,14 +687,14 @@ const AfricaCupHub: React.FC = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                                      <Link to="/download">
-                      <Button 
-                        size="lg" 
-                        className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-8 py-3 text-lg transition-all duration-300 hover:shadow-xl"
-                      >
-                        📱 Play SCRUMMY App
-                      </Button>
-                    </Link>
+                  <Link to="/download">
+                    <Button
+                      size="lg"
+                      className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-8 py-3 text-lg transition-all duration-300 hover:shadow-xl"
+                    >
+                      📱 Play SCRUMMY App
+                    </Button>
+                  </Link>
                 </motion.div>
               </CardContent>
             </Card>
@@ -706,7 +710,7 @@ const AfricaCupHub: React.FC = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              whileHover={{ 
+              whileHover={{
                 y: -5,
                 transition: { duration: 0.2 }
               }}
@@ -730,7 +734,7 @@ const AfricaCupHub: React.FC = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              whileHover={{ 
+              whileHover={{
                 y: -3,
                 transition: { duration: 0.2 }
               }}
@@ -753,7 +757,7 @@ const AfricaCupHub: React.FC = () => {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.6 }}
-              whileHover={{ 
+              whileHover={{
                 y: -3,
                 transition: { duration: 0.2 }
               }}
