@@ -95,7 +95,7 @@ const fixtures = [
       {
         id: 2,
         team1: { name: 'Algeria', flag: '🇩🇿' },
-        team2: { name: 'Uganda', flag: '🇺🇬' },
+        team2: { name: 'Côte d\'Ivoire', flag: '🇨🇮' },
         time: '04:00PM',
         venue: 'Mandela National Stadium, Kampala',
         finalScore: { team1: 41, team2: 6 },
@@ -113,7 +113,7 @@ const fixtures = [
       {
         id: 4,
         team1: { name: 'Kenya', flag: '🇰🇪' },
-        team2: { name: 'Côte d\'Ivoire', flag: '🇨🇮' },
+        team2: { name: 'Uganda', flag: '🇺🇬' },
         time: '12:00PM',
         venue: 'Mandela National Stadium, Kampala',
         finalScore: { team1: 32, team2: 24 },
