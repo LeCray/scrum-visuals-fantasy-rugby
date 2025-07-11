@@ -87,11 +87,11 @@ const convertDateFormat = (dateStr: string) => {
 
 const matchData: Record<string, { team1: { name: string; flag: string }; team2: { name: string; flag: string }; date: string; time: string; finalScore?: { team1: number; team2: number } }> = {
   '1': { team1: { name: 'Zimbabwe', flag: '🇿🇼' }, team2: { name: 'Morocco', flag: '🇲🇦' }, date: 'July 8, 2025', time: '10:00AM', finalScore: { team1: 43, team2: 8 } },
-  '2': { team1: { name: 'Algeria', flag: '🇩🇿' }, team2: { name: 'Uganda', flag: '🇺🇬' }, date: 'July 8, 2025', time: '04:00PM', finalScore: { team1: 41, team2: 6 } },
+  '2': { team1: { name: 'Algeria', flag: '🇩🇿' }, team2: { name: 'Côte d\'Ivoire', flag: '🇨🇮' }, date: 'July 8, 2025', time: '04:00PM', finalScore: { team1: 41, team2: 6 } },
   '3': { team1: { name: 'Namibia', flag: '🇳🇦' }, team2: { name: 'Senegal', flag: '🇸🇳' }, date: 'July 8, 2025', time: '02:00PM', finalScore: { team1: 55, team2: 17 } },
-  '4': { team1: { name: 'Kenya', flag: '🇰🇪' }, team2: { name: 'Côte d\'Ivoire', flag: '🇨🇮' }, date: 'July 8, 2025', time: '12:00PM', finalScore: { team1: 32, team2: 24 } },
-  '5': { team1: { name: 'QF1 Winner', flag: '🏆' }, team2: { name: 'QF2 Winner', flag: '🏆' }, date: 'July 13, 2025', time: '02:00PM' },
-  '6': { team1: { name: 'QF3 Winner', flag: '🏆' }, team2: { name: 'QF4 Winner', flag: '🏆' }, date: 'July 13, 2025', time: '04:30PM' },
+  '4': { team1: { name: 'Kenya', flag: '🇰🇪' }, team2: { name: 'Uganda', flag: '🇺🇬' }, date: 'July 8, 2025', time: '12:00PM', finalScore: { team1: 32, team2: 24 } },
+  '5': { team1: { name: 'Algeria', flag: '🇩🇿' }, team2: { name: 'Namibia', flag: '🇳🇦' }, date: 'July 13, 2025', time: '02:00PM' },
+  '6': { team1: { name: 'Zimbabwe', flag: '🇿🇼' }, team2: { name: 'Kenya', flag: '🇰🇪' }, date: 'July 13, 2025', time: '04:30PM' },
   '7': { team1: { name: 'SF1 Winner', flag: '🏆' }, team2: { name: 'SF2 Winner', flag: '🏆' }, date: 'July 19, 2025', time: '04:00PM' }
 };
 

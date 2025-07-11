@@ -127,15 +127,15 @@ const fixtures = [
     matches: [
       {
         id: 5,
-        team1: { name: 'QF1 Winner', flag: '🏆' },
-        team2: { name: 'QF2 Winner', flag: '🏆' },
+        team1: { name: 'Algeria', flag: '🇩🇿' },
+        team2: { name: 'Namibia', flag: '🇳🇦' },
         time: '02:00PM',
         venue: 'Mandela National Stadium, Kampala'
       },
       {
         id: 6,
-        team1: { name: 'QF3 Winner', flag: '🏆' },
-        team2: { name: 'QF4 Winner', flag: '🏆' },
+        team1: { name: 'Zimbabwe', flag: '🇿🇼' },
+        team2: { name: 'Kenya', flag: '🇰🇪' },
         time: '04:30PM',
         venue: 'Mandela National Stadium, Kampala'
       }
