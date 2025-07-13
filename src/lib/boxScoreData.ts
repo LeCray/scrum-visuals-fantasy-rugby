@@ -2500,6 +2500,6 @@ finalScores.set(
 );
 
 finalScores.set(
-  generateMatchId("Week 6", "16:00", "GATEWAY", "WISE OWL"),
+  generateMatchId("Week 6", "16:00", "PETERHOUSE", "WISE OWL"),
   { teamAScore: 62, teamBScore: 10 }
 );

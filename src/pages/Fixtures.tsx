@@ -319,7 +319,7 @@ const sbr2025Games: FixtureDay[] = [
       { time: "13:30", teamA: "MUTARE", teamB: "MARIST", location: "Manicaland U20 Nash Rugby Final" },
       { time: "14:30", teamA: "MUTARE", teamB: "MARIST" },
       { time: "15:30", teamA: "PLUMTREE", teamB: "PETRA" },
-      { time: "16:00", teamA: "GATEWAY", teamB: "WISE OWL" },
+      { time: "16:00", teamA: "PETERHOUSE", teamB: "WISE OWL" },
       { time: "TBD", teamA: "ALLAN WILSON", teamB: "CHURCHILL" },
       { time: "TBD", teamA: "WATERSHED", teamB: "EAGLESVALE" },
       { time: "TBD", teamA: "HERITAGE", teamB: "WISE OWL" }
