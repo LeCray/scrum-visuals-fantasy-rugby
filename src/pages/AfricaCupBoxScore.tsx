@@ -90,7 +90,7 @@ const matchData: Record<string, { team1: { name: string; flag: string }; team2: 
   '2': { team1: { name: 'Algeria', flag: '🇩🇿' }, team2: { name: 'Côte d\'Ivoire', flag: '🇨🇮' }, date: 'July 8, 2025', time: '04:00PM', finalScore: { team1: 41, team2: 6 } },
   '3': { team1: { name: 'Namibia', flag: '🇳🇦' }, team2: { name: 'Senegal', flag: '🇸🇳' }, date: 'July 8, 2025', time: '02:00PM', finalScore: { team1: 55, team2: 17 } },
   '4': { team1: { name: 'Kenya', flag: '🇰🇪' }, team2: { name: 'Uganda', flag: '🇺🇬' }, date: 'July 8, 2025', time: '12:00PM', finalScore: { team1: 32, team2: 24 } },
-  '5': { team1: { name: 'Algeria', flag: '🇩🇿' }, team2: { name: 'Namibia', flag: '🇳🇦' }, date: 'July 13, 2025', time: '02:00PM' },
+  '5': { team1: { name: 'Algeria', flag: '🇩🇿' }, team2: { name: 'Namibia', flag: '🇳🇦' }, date: 'July 13, 2025', time: '02:00PM', finalScore: { team1: 7, team2: 21 } },
   '6': { team1: { name: 'Zimbabwe', flag: '🇿🇼' }, team2: { name: 'Kenya', flag: '🇰🇪' }, date: 'July 13, 2025', time: '04:30PM', finalScore: { team1: 29, team2: 23 } },
   '7': { team1: { name: 'SF1 Winner', flag: '🏆' }, team2: { name: 'SF2 Winner', flag: '🏆' }, date: 'July 19, 2025', time: '04:00PM' }
 };
@@ -1581,6 +1581,616 @@ const AfricaCupBoxScore: React.FC = () => {
                               <span className="font-bold text-scrummy-navy">5</span>
                               <span className="text-gray-400">vs</span>
                               <span className="font-bold text-red-600">1</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+
+              </div>
+            </div>
+          ) : matchId === '5' ? (
+            // Comprehensive Algeria vs Namibia Boxscore
+            <div className="space-y-8">
+              
+              {/* Match Details */}
+              <motion.div
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.1, duration: 0.6 }}
+              >
+                <div className="text-center mb-8">
+                  <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg inline-block">
+                    <div className="text-sm text-gray-600 mb-2">Match Duration: 102:06 | Total Events: 1,111</div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Possession Bar */}
+              <motion.div
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+              >
+                <Card className="bg-white/90 backdrop-blur-sm shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-lg text-gray-800">
+                      <Clock className="w-5 h-5" />
+                      Possession
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="mb-6">
+                      <div className="flex justify-between mb-2">
+                        <span className="font-bold text-scrummy-navy">🇩🇿 Algeria</span>
+                        <span className="font-bold text-red-600">Namibia 🇳🇦</span>
+                      </div>
+                      <div className="w-full h-8 bg-gray-200 rounded-lg overflow-hidden flex">
+                        <div 
+                          className="h-full bg-scrummy-navy flex items-center justify-center text-white font-bold text-sm"
+                          style={{ width: '50.6%' }}
+                        >
+                          50.6%
+                        </div>
+                        <div 
+                          className="h-full bg-red-500 flex items-center justify-center text-white font-bold text-sm"
+                          style={{ width: '49.4%' }}
+                        >
+                          49.4%
+                        </div>
+                      </div>
+                      <div className="flex justify-between mt-1 text-xs text-gray-500">
+                        <span>Time: 14:23</span>
+                        <span>Time: 14:04</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Stats Grid */}
+              <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                
+                {/* Scoring */}
+                <motion.div
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.3, duration: 0.6 }}
+                >
+                  <Card className="bg-white/90 backdrop-blur-sm shadow-lg">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="flex items-center gap-2 text-lg text-gray-800">
+                        <Target className="w-5 h-5" />
+                        Scoring
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="space-y-6">
+                        {/* Tries */}
+                        <div className="border-b border-gray-100 pb-4">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Tries</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">1</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">2</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="flex gap-1">
+                              <div className="w-3 h-3 rounded-full bg-scrummy-navy"></div>
+                            </div>
+                            <span className="text-xs text-gray-500">vs</span>
+                            <div className="flex gap-1">
+                              {[...Array(2)].map((_, i) => (
+                                <div key={i} className="w-3 h-3 rounded-full bg-red-500"></div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Conversions */}
+                        <div className="border-b border-gray-100 pb-4">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Conversions</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">1/2</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">1/4</span>
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs text-gray-500 w-16">Algeria</span>
+                              <div className="flex-1 bg-gray-200 rounded-full h-2">
+                                <div className="bg-scrummy-navy h-2 rounded-full" style={{ width: '50.0%' }}></div>
+                              </div>
+                              <span className="text-xs text-gray-500 w-8">50.0%</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs text-gray-500 w-16">Namibia</span>
+                              <div className="flex-1 bg-gray-200 rounded-full h-2">
+                                <div className="bg-red-500 h-2 rounded-full" style={{ width: '25.0%' }}></div>
+                              </div>
+                              <span className="text-xs text-gray-500 w-8">25.0%</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Penalty Goals */}
+                        <div className="pb-2">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Penalty Goals</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">0/0</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">3/6</span>
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs text-gray-500 w-16">Algeria</span>
+                              <div className="flex-1 bg-gray-200 rounded-full h-2">
+                                <div className="bg-scrummy-navy h-2 rounded-full" style={{ width: '0%' }}></div>
+                              </div>
+                              <span className="text-xs text-gray-500 w-8">0%</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs text-gray-500 w-16">Namibia</span>
+                              <div className="flex-1 bg-gray-200 rounded-full h-2">
+                                <div className="bg-red-500 h-2 rounded-full" style={{ width: '50.0%' }}></div>
+                              </div>
+                              <span className="text-xs text-gray-500 w-8">50.0%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+
+                {/* Attack */}
+                <motion.div
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4, duration: 0.6 }}
+                >
+                  <Card className="bg-white/90 backdrop-blur-sm shadow-lg">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="flex items-center gap-2 text-lg text-gray-800">
+                        <TrendingUp className="w-5 h-5" />
+                        Attack
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="space-y-6">
+                        {/* Passes */}
+                        <div className="border-b border-gray-100 pb-4">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Passes</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">103</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">76</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Ball Carries */}
+                        <div className="border-b border-gray-100 pb-4">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Ball Carries</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">72</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">70</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Linebreaks */}
+                        <div className="border-b border-gray-100 pb-4">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Linebreaks</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">4</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">3</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Offloads */}
+                        <div className="pb-2">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Offloads</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">6</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">6</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+
+                {/* Defense */}
+                <motion.div
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.6 }}
+                >
+                  <Card className="bg-white/90 backdrop-blur-sm shadow-lg">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="flex items-center gap-2 text-lg text-gray-800">
+                        <Shield className="w-5 h-5" />
+                        Defense
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="space-y-6">
+                        {/* Tackles Made */}
+                        <div className="border-b border-gray-100 pb-4">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Tackles Made</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">78</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">89</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Tackles Missed */}
+                        <div className="border-b border-gray-100 pb-4">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Tackles Missed</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">18</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">23</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Tackle Success % */}
+                        <div className="pb-2">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Tackle Success %</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">40.4%</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">39.7%</span>
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs text-gray-500 w-16">Algeria</span>
+                              <div className="flex-1 bg-gray-200 rounded-full h-2">
+                                <div className="bg-scrummy-navy h-2 rounded-full" style={{ width: '40.4%' }}></div>
+                              </div>
+                              <span className="text-xs text-gray-500 w-8">40.4%</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs text-gray-500 w-16">Namibia</span>
+                              <div className="flex-1 bg-gray-200 rounded-full h-2">
+                                <div className="bg-red-500 h-2 rounded-full" style={{ width: '39.7%' }}></div>
+                              </div>
+                              <span className="text-xs text-gray-500 w-8">39.7%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+
+                {/* Set Piece */}
+                <motion.div
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.6, duration: 0.6 }}
+                >
+                  <Card className="bg-white/90 backdrop-blur-sm shadow-lg">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="flex items-center gap-2 text-lg text-gray-800">
+                        <RotateCcw className="w-5 h-5" />
+                        Set Piece
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="space-y-6">
+                        {/* Lineouts Won */}
+                        <div className="border-b border-gray-100 pb-4">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Lineouts Won</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">12/14</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">12/16</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <div className="flex-1">
+                              <div className="flex gap-1 mb-1">
+                                {[...Array(12)].map((_, i) => (
+                                  <CheckCircle key={i} className="w-3 h-3 text-scrummy-navy" />
+                                ))}
+                                {[...Array(2)].map((_, i) => (
+                                  <XCircle key={i} className="w-3 h-3 text-gray-300" />
+                                ))}
+                              </div>
+                              <span className="text-xs text-gray-500">Algeria (85.7%)</span>
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex gap-1 mb-1">
+                                {[...Array(12)].map((_, i) => (
+                                  <CheckCircle key={i} className="w-3 h-3 text-red-500" />
+                                ))}
+                                {[...Array(4)].map((_, i) => (
+                                  <XCircle key={i} className="w-3 h-3 text-gray-300" />
+                                ))}
+                              </div>
+                              <span className="text-xs text-gray-500">Namibia (75.0%)</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Scrums Won */}
+                        <div className="border-b border-gray-100 pb-4">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Scrums Won</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">6/6</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">7/9</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <div className="flex-1">
+                              <div className="flex gap-1 mb-1">
+                                {[...Array(6)].map((_, i) => (
+                                  <CheckCircle key={i} className="w-3 h-3 text-scrummy-navy" />
+                                ))}
+                              </div>
+                              <span className="text-xs text-gray-500">Algeria (100.0%)</span>
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex gap-1 mb-1">
+                                {[...Array(7)].map((_, i) => (
+                                  <CheckCircle key={i} className="w-3 h-3 text-red-500" />
+                                ))}
+                                {[...Array(2)].map((_, i) => (
+                                  <XCircle key={i} className="w-3 h-3 text-gray-300" />
+                                ))}
+                              </div>
+                              <span className="text-xs text-gray-500">Namibia (77.8%)</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Mauls Won */}
+                        <div className="pb-2">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Mauls Won</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">3/5</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">5/5</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <div className="flex-1">
+                              <div className="flex gap-1 mb-1">
+                                {[...Array(3)].map((_, i) => (
+                                  <CheckCircle key={i} className="w-3 h-3 text-scrummy-navy" />
+                                ))}
+                                {[...Array(2)].map((_, i) => (
+                                  <XCircle key={i} className="w-3 h-3 text-gray-300" />
+                                ))}
+                              </div>
+                              <span className="text-xs text-gray-500">Algeria (60.0%)</span>
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex gap-1 mb-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <CheckCircle key={i} className="w-3 h-3 text-red-500" />
+                                ))}
+                              </div>
+                              <span className="text-xs text-gray-500">Namibia (100.0%)</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+
+                {/* Breakdown */}
+                <motion.div
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.7, duration: 0.6 }}
+                >
+                  <Card className="bg-white/90 backdrop-blur-sm shadow-lg">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="flex items-center gap-2 text-lg text-gray-800">
+                        <Circle className="w-5 h-5" />
+                        Breakdown
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="space-y-6">
+                        {/* Rucks Won */}
+                        <div className="border-b border-gray-100 pb-4">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Rucks Won</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">43/47</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">49/51</span>
+                            </div>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs text-gray-500 w-16">Algeria</span>
+                              <div className="flex-1 bg-gray-200 rounded-full h-2">
+                                <div className="bg-scrummy-navy h-2 rounded-full" style={{ width: '91.5%' }}></div>
+                              </div>
+                              <span className="text-xs text-gray-500 w-8">91.5%</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs text-gray-500 w-16">Namibia</span>
+                              <div className="flex-1 bg-gray-200 rounded-full h-2">
+                                <div className="bg-red-500 h-2 rounded-full" style={{ width: '96.1%' }}></div>
+                              </div>
+                              <span className="text-xs text-gray-500 w-8">96.1%</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Turnovers Conceded */}
+                        <div className="pb-2">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Turnovers Conceded</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">42</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">32</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+
+                {/* Discipline */}
+                <motion.div
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.8, duration: 0.6 }}
+                >
+                  <Card className="bg-white/90 backdrop-blur-sm shadow-lg">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="flex items-center gap-2 text-lg text-gray-800">
+                        <AlertTriangle className="w-5 h-5" />
+                        Discipline
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="space-y-6">
+                        {/* Penalties Conceded */}
+                        <div className="border-b border-gray-100 pb-4">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Penalties Conceded</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">24</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">22</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <div className="flex-1">
+                              <div className="flex gap-1 mb-1 flex-wrap">
+                                {[...Array(24)].map((_, i) => (
+                                  <div key={i} className="w-2 h-6 bg-scrummy-navy rounded"></div>
+                                ))}
+                              </div>
+                              <span className="text-xs text-gray-500">Algeria</span>
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex gap-1 mb-1 flex-wrap">
+                                {[...Array(22)].map((_, i) => (
+                                  <div key={i} className="w-2 h-6 bg-red-500 rounded"></div>
+                                ))}
+                              </div>
+                              <span className="text-xs text-gray-500">Namibia</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Cards */}
+                        <div className="pb-2">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Cards</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">0</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">1</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <div className="flex-1">
+                              <div className="flex gap-1 mb-1">
+                                <span className="text-xs text-gray-500">No cards</span>
+                              </div>
+                              <span className="text-xs text-gray-500">Algeria</span>
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex gap-1 mb-1">
+                                <div className="w-4 h-6 bg-yellow-500 rounded"></div>
+                              </div>
+                              <span className="text-xs text-gray-500">Namibia</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+
+                {/* Kicking */}
+                <motion.div
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.9, duration: 0.6 }}
+                >
+                  <Card className="bg-white/90 backdrop-blur-sm shadow-lg">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="flex items-center gap-2 text-lg text-gray-800">
+                        <Play className="w-5 h-5" />
+                        Kicking
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="space-y-6">
+                        {/* Total Kicks */}
+                        <div className="border-b border-gray-100 pb-4">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Total Kicks</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">38</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">54</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Kicks Not Retained */}
+                        <div className="border-b border-gray-100 pb-4">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Kicks Not Retained</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">13</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">14</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Kicks Into Touch */}
+                        <div className="pb-2">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-medium text-gray-700 text-sm">Kicks Into Touch</span>
+                            <div className="flex items-center gap-4 text-sm">
+                              <span className="font-bold text-scrummy-navy">6</span>
+                              <span className="text-gray-400">vs</span>
+                              <span className="font-bold text-red-600">8</span>
                             </div>
                           </div>
                         </div>

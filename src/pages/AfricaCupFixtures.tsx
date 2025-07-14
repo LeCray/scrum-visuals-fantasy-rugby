@@ -130,14 +130,18 @@ const fixtures = [
         team1: { name: 'Algeria', flag: '🇩🇿' },
         team2: { name: 'Namibia', flag: '🇳🇦' },
         time: '02:00PM',
-        venue: 'Mandela National Stadium, Kampala'
+        venue: 'Mandela National Stadium, Kampala',
+        finalScore: { team1: 7, team2: 21 },
+        status: 'completed'
       },
       {
         id: 6,
         team1: { name: 'Zimbabwe', flag: '🇿🇼' },
         team2: { name: 'Kenya', flag: '🇰🇪' },
         time: '04:30PM',
-        venue: 'Mandela National Stadium, Kampala'
+        venue: 'Mandela National Stadium, Kampala',
+        finalScore: { team1: 29, team2: 23 },
+        status: 'completed'
       }
     ]
   },
