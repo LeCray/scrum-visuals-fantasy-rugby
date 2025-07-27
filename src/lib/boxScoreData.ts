@@ -2503,3 +2503,297 @@ finalScores.set(
   generateMatchId("Week 6", "16:00", "PETERHOUSE", "WISE OWL"),
   { teamAScore: 62, teamBScore: 10 }
 );
+
+// Add scores for Week 7 CBZ Schools Rugby matches - 12 July 2025
+finalScores.set(
+  generateMatchId("Week 7", "14:00", "KYLE", "CHURCHILL"),
+  { teamAScore: 5, teamBScore: 24 }
+);
+
+finalScores.set(
+  generateMatchId("Week 7", "14:00", "WISE OWL", "PRINCE EDWARD"),
+  { teamAScore: 25, teamBScore: 19 }
+);
+
+finalScores.set(
+  generateMatchId("Week 7", "14:00", "HELLENIC", "FALCON"),
+  { teamAScore: 29, teamBScore: 36 }
+);
+
+finalScores.set(
+  generateMatchId("Week 7", "14:00", "ST JOHNS", "LOMAGUNDI"),
+  { teamAScore: 15, teamBScore: 28 }
+);
+
+finalScores.set(
+  generateMatchId("Week 7", "14:00", "GOROMONZI", "SAMUEL CENTENARY"),
+  { teamAScore: 19, teamBScore: 7 }
+);
+
+finalScores.set(
+  generateMatchId("Week 7", "14:00", "TYNWALD", "NATTIE COLLEGE"),
+  { teamAScore: 18, teamBScore: 17 }
+);
+
+// Add scores for Week 8 CBZ Schools Rugby matches - 19 July 2025
+finalScores.set(
+  generateMatchId("Week 8", "14:00", "MIDLANDS CC", "NATTIE COLLEGE"),
+  { teamAScore: 54, teamBScore: 0 }
+);
+
+finalScores.set(
+  generateMatchId("Week 8", "14:00", "CHURCHILL", "WISE OWL"),
+  { teamAScore: 28, teamBScore: 25 }
+);
+
+finalScores.set(
+  generateMatchId("Week 8", "14:00", "LORD BRIGHTON", "ALLAN WILSON"),
+  { teamAScore: 19, teamBScore: 17 }
+);
+
+finalScores.set(
+  generateMatchId("Week 8", "14:00", "LOMAGUNDI", "HELLENIC"),
+  { teamAScore: 43, teamBScore: 29 }
+);
+
+finalScores.set(
+  generateMatchId("Week 8", "14:00", "BMC", "RYDINGS"),
+  { teamAScore: 19, teamBScore: 26 }
+);
+
+finalScores.set(
+  generateMatchId("Week 8", "14:00", "ST JOHNS", "PH"),
+  { teamAScore: 20, teamBScore: 22 }
+);
+
+finalScores.set(
+  generateMatchId("Week 8", "14:00", "ST GEORGES", "PRINCE EDWARD"),
+  { teamAScore: 41, teamBScore: 27 }
+);
+
+finalScores.set(
+  generateMatchId("Week 8", "14:00", "CBC", "WATERSHED"),
+  { teamAScore: 57, teamBScore: 17 }
+);
+
+finalScores.set(
+  generateMatchId("Week 8", "14:00", "HILLCREST", "HERITAGE"),
+  { teamAScore: 25, teamBScore: 30 }
+);
+
+finalScores.set(
+  generateMatchId("Week 8", "14:00", "GATEWAY", "EAGLESVALE"),
+  { teamAScore: 5, teamBScore: 27 }
+);
+
+// Add scores for Week 9 CBZ Schools Rugby matches - 26 July 2025
+finalScores.set(
+  generateMatchId("Week 9", "14:00", "LOMAGUNDI", "CBC"),
+  { teamAScore: 35, teamBScore: 27 }
+);
+
+finalScores.set(
+  generateMatchId("Week 9", "14:00", "HILLCREST", "EAGLESVALE"),
+  { teamAScore: 5, teamBScore: 39 }
+);
+
+finalScores.set(
+  generateMatchId("Week 9", "14:00", "ST JOHNS", "ST GEORGES"),
+  { teamAScore: 29, teamBScore: 27 }
+);
+
+finalScores.set(
+  generateMatchId("Week 9", "14:00", "PETERHOUSE", "FALCON"),
+  { teamAScore: 20, teamBScore: 29 }
+);
+
+finalScores.set(
+  generateMatchId("Week 9", "14:00", "CHURCHILL", "PRINCE EDWARD"),
+  { teamAScore: 29, teamBScore: 8 }
+);
+
+finalScores.set(
+  generateMatchId("Week 9", "14:00", "WATERSHED", "MIDLANDS CC"),
+  { teamAScore: 15, teamBScore: 34 }
+);
+
+finalScores.set(
+  generateMatchId("Week 9", "14:00", "GOLDRIDGE", "HERITAGE"),
+  { teamAScore: 9, teamBScore: 20 }
+);
+
+finalScores.set(
+  generateMatchId("Week 9", "14:00", "MILTON", "PLUMTREE"),
+  { teamAScore: 5, teamBScore: 15 }
+);
+
+finalScores.set(
+  generateMatchId("Week 9", "14:00", "WISE OWL", "KUTAMA"),
+  { teamAScore: 37, teamBScore: 50 }
+);
+
+finalScores.set(
+  generateMatchId("Week 9", "14:00", "BMC", "LORD BRIGHTON"),
+  { teamAScore: 26, teamBScore: 31 }
+);
+
+// CBZ Week 9 St Johns vs St Georges Boxscore Data
+const stJohnsVsStGeorgesCBZWeek9: BoxScoreData = {
+  matchInfo: {
+    teamA: "ST JOHNS",
+    teamB: "ST GEORGES",
+    venue: "CBZ Sports Club, Harare",
+    date: "Week 9",
+    kickoff: "14:00",
+    weather: "Clear, 22°C"
+  },
+  teamAPlayers: [
+    { name: "-", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "14", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "13", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "12", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "11", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "10", tries: 0, kicks: "7/9", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "8", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "7", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "5", tries: 0, kicks: "-", lineouts: "5/4", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "4", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamBPlayers: [
+    { name: "-", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "14", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "13", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "12", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "10", tries: 0, kicks: "3/6", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "8", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "7", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "5", tries: 0, kicks: "-", lineouts: "5/8", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "4", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamASummary: {
+    totalTries: 2,
+    totalConversions: "2/2",
+    lineoutAccuracy: "4/4",
+    penaltiesWon: 0,
+    penaltiesConceded: 11,
+    possession: 52,
+    scrums: { total: 10, won: 8 },
+    lineouts: { total: 4, won: 5 },
+    mauls: { total: 3, won: 2 },
+    turnovers: 4,
+    knockOns: 5,
+    cards: { yellow: 1, red: 0 }
+  },
+  teamBSummary: {
+    totalTries: 4,
+    totalConversions: "2/4",
+    lineoutAccuracy: "5/8",
+    penaltiesWon: 0,
+    penaltiesConceded: 10,
+    possession: 48,
+    scrums: { total: 6, won: 6 },
+    lineouts: { total: 8, won: 5 },
+    mauls: { total: 4, won: 2 },
+    turnovers: 2,
+    knockOns: 9,
+    cards: { yellow: 0, red: 0 }
+  },
+  tryDataA: [
+    {
+      time: "2:49",
+      hasConversion: true,
+      isPenalty: false
+    },
+    {
+      time: "49:34",
+      hasConversion: true,
+      isPenalty: false
+    },
+    // Penalty goals
+    {
+      time: "22:10",
+      hasConversion: false,
+      isPenalty: true
+    },
+    {
+      time: "35:42",
+      hasConversion: false,
+      isPenalty: true
+    },
+    {
+      time: "43:23",
+      hasConversion: false,
+      isPenalty: true
+    },
+    {
+      time: "62:34",
+      hasConversion: false,
+      isPenalty: true
+    },
+    {
+      time: "69:44",
+      hasConversion: false,
+      isPenalty: true
+    }
+  ],
+  tryDataB: [
+    {
+      time: "23:09",
+      hasConversion: false,
+      isPenalty: false
+    },
+    {
+      time: "29:32",
+      hasConversion: true,
+      isPenalty: false
+    },
+    {
+      time: "44:14",
+      hasConversion: true,
+      isPenalty: false
+    },
+    {
+      time: "64:51",
+      hasConversion: false,
+      isPenalty: false
+    },
+    // Penalty goal
+    {
+      time: "54:04",
+      hasConversion: false,
+      isPenalty: true
+    }
+  ],
+  kickDataA: [
+    { x: 0.5, y: 0.3, successful: true },  // Conversion 2:49
+    { x: 0.35, y: 0.25, successful: true }, // Penalty 22:10
+    { x: 0.65, y: 0.28, successful: true }, // Penalty 35:42
+    { x: 0.5, y: 0.42, successful: true },  // Penalty 43:23
+    { x: 0.5, y: 0.18, successful: true },  // Conversion 49:34
+    { x: 0.65, y: 0.38, successful: true }, // Penalty 62:34
+    { x: 0.35, y: 0.32, successful: true }  // Penalty 69:44
+  ],
+  kickDataB: [
+    { x: 0.35, y: 0.45, successful: false }, // Missed penalty 14:33
+    { x: 0.5, y: 0.25, successful: true },   // Conversion 29:32
+    { x: 0.65, y: 0.2, successful: true },   // Conversion 44:14
+    { x: 0.5, y: 0.33, successful: true },   // Penalty 54:04
+    { x: 0.35, y: 0.28, successful: false }, // Missed conversion 64:51
+    { x: 0.5, y: 0.35, successful: false }   // Missed penalty 66:16
+  ]
+};
+
+// Add the CBZ Week 9 boxscore to the map
+const stJohnsVsStGeorgesWeek9MatchId = generateMatchId("Week 9", "14:00", "ST JOHNS", "ST GEORGES");
+boxScores.set(stJohnsVsStGeorgesWeek9MatchId, stJohnsVsStGeorgesCBZWeek9);
