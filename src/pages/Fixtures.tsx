@@ -330,10 +330,12 @@ const sbr2025Games: FixtureDay[] = [
     day: "12 July",
     month: "July",
     fixtures: [
-      { time: "TBD", teamA: "ST JOHNS", teamB: "LOMAGUNDI" },
-      { time: "TBD", teamA: "WISE OWL", teamB: "PRINCE EDWARD" },
-      { time: "TBD", teamA: "HELLENIC", teamB: "FALCON" },
-      { time: "TBD", teamA: "CBC", teamB: "MILTON" }
+      { time: "14:00", teamA: "KYLE", teamB: "CHURCHILL" },
+      { time: "14:00", teamA: "WISE OWL", teamB: "PRINCE EDWARD" },
+      { time: "14:00", teamA: "HELLENIC", teamB: "FALCON" },
+      { time: "14:00", teamA: "ST JOHNS", teamB: "LOMAGUNDI" },
+      { time: "14:00", teamA: "GOROMONZI", teamB: "SAMUEL CENTENARY" },
+      { time: "14:00", teamA: "TYNWALD", teamB: "NATTIE COLLEGE" }
     ]
   },
   {
@@ -341,12 +343,16 @@ const sbr2025Games: FixtureDay[] = [
     day: "19 July",
     month: "July",
     fixtures: [
-      { time: "TBD", teamA: "ST GEORGES", teamB: "PRINCE EDWARD" },
-      { time: "TBD", teamA: "ST JOHNS", teamB: "PH" },
-      { time: "TBD", teamA: "ALLAN WILSON", teamB: "MILTON" },
-      { time: "TBD", teamA: "EAGLESVALE", teamB: "GATEWAY" },
-      { time: "TBD", teamA: "HELLENIC", teamB: "LOMAGUNDI" },
-      { time: "TBD", teamA: "ST IGNATIUS", teamB: "GOROMONZI" }
+      { time: "14:00", teamA: "MIDLANDS CC", teamB: "NATTIE COLLEGE" },
+      { time: "14:00", teamA: "CHURCHILL", teamB: "WISE OWL" },
+      { time: "14:00", teamA: "LORD BRIGHTON", teamB: "ALLAN WILSON" },
+      { time: "14:00", teamA: "LOMAGUNDI", teamB: "HELLENIC" },
+      { time: "14:00", teamA: "BMC", teamB: "RYDINGS" },
+      { time: "14:00", teamA: "ST JOHNS", teamB: "PH" },
+      { time: "14:00", teamA: "ST GEORGES", teamB: "PRINCE EDWARD" },
+      { time: "14:00", teamA: "CBC", teamB: "WATERSHED" },
+      { time: "14:00", teamA: "HILLCREST", teamB: "HERITAGE" },
+      { time: "14:00", teamA: "GATEWAY", teamB: "EAGLESVALE" }
     ]
   },
   {
@@ -354,10 +360,16 @@ const sbr2025Games: FixtureDay[] = [
     day: "26 July",
     month: "July",
     fixtures: [
-      { time: "TBD", teamA: "CHURCHILL", teamB: "PRINCE EDWARD" },
-      { time: "TBD", teamA: "ST JOHNS", teamB: "ST GEORGES" },
-      { time: "TBD", teamA: "ALLAN WILSON", teamB: "ST IGNATIUS" },
-      { time: "TBD", teamA: "GATEWAY", teamB: "RYDINGS" }
+      { time: "14:00", teamA: "LOMAGUNDI", teamB: "CBC" },
+      { time: "14:00", teamA: "HILLCREST", teamB: "EAGLESVALE" },
+      { time: "14:00", teamA: "ST JOHNS", teamB: "ST GEORGES" },
+      { time: "14:00", teamA: "PETERHOUSE", teamB: "FALCON" },
+      { time: "14:00", teamA: "CHURCHILL", teamB: "PRINCE EDWARD" },
+      { time: "14:00", teamA: "WATERSHED", teamB: "MIDLANDS CC" },
+      { time: "14:00", teamA: "GOLDRIDGE", teamB: "HERITAGE" },
+      { time: "14:00", teamA: "MILTON", teamB: "PLUMTREE" },
+      { time: "14:00", teamA: "WISE OWL", teamB: "KUTAMA" },
+      { time: "14:00", teamA: "BMC", teamB: "LORD BRIGHTON" }
     ]
   },
   {
@@ -429,6 +441,7 @@ const teamLogoMap: Record<string, string> = {
   "WISE OWL 2XV": "/assets/WiseOwl.png",
   "PRINCE EDWARD 2XV": "/assets/PrinceEdward.png",
   "LORD BRIGHTON 2XV": "/assets/LordBrighton.png",
+  "LORD BRIGHTON": "/assets/LordBrighton.png",
   
   // SBR Season 2025 teams
   "WISE OWL": "/assets/WiseOwl.png",
@@ -451,6 +464,7 @@ const teamLogoMap: Record<string, string> = {
   "ST IGNATIUS": "/assets/St Ignatius.png",
   "NATTIE COLLEGE": "/assets/Nattie.png",
   "GOROMONZI": "/assets/Goromonzi.png",
+  "SAMUEL CENTENARY": "/assets/logo.png",
   "ST JOHNS HIGH": "/assets/STJOHNSHIGH.png",
   "KUTAMA": "/assets/Kutama.png",
   "MUTARE": "/assets/Mutare Boys High.png",
@@ -571,7 +585,8 @@ const isHighlightedFixture = (date: string, time: string, teamA: string, teamB: 
     { date: "Week 4", time: "15:30", teamA: "ST JOHNS", teamB: "WISE OWL" },
     { date: "Week 5", time: "13:45", teamA: "HELLENIC", teamB: "PETERHOUSE" },
     { date: "Week 5", time: "15:00", teamA: "ST JOHNS", teamB: "FALCON" },
-    { date: "Week 5", time: "15:30", teamA: "ST GEORGES", teamB: "CBC" }
+    { date: "Week 5", time: "15:30", teamA: "ST GEORGES", teamB: "CBC" },
+    { date: "Week 9", time: "14:00", teamA: "ST JOHNS", teamB: "ST GEORGES" }
   ];
 
   return highlightedGames.some(game => 
