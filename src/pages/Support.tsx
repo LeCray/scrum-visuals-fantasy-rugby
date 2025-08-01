@@ -370,15 +370,15 @@ const Support: React.FC = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
               <Button 
                 className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold flex-1"
-                onClick={() => window.open('#', '_blank')}
+                onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
               >
-                📱 Download for iOS
+                Download for iOS
               </Button>
               <Button 
                 className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold flex-1"
                 onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
               >
-                🤖 Download for Android
+                Download for Android
               </Button>
             </div>
           </motion.div>

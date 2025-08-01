@@ -25,9 +25,6 @@ const DownloadPage: React.FC = () => {
               <Link to="/" className="text-white hover:text-scrummy-goldYellow transition-colors">
                 Home
               </Link>
-              <Link to="/africa-cup" className="text-white hover:text-scrummy-goldYellow transition-colors">
-                Africa Cup
-              </Link>
               <Link to="/support" className="text-white hover:text-scrummy-goldYellow transition-colors">
                 Support
               </Link>
@@ -54,9 +51,6 @@ const DownloadPage: React.FC = () => {
               <div className="space-y-2 pt-4">
                 <Link to="/" className="block text-white hover:text-scrummy-goldYellow transition-colors py-2">
                   Home
-                </Link>
-                <Link to="/africa-cup" className="block text-white hover:text-scrummy-goldYellow transition-colors py-2">
-                  Africa Cup
                 </Link>
                 <Link to="/support" className="block text-white hover:text-scrummy-goldYellow transition-colors py-2">
                   Support
@@ -233,7 +227,7 @@ const DownloadPage: React.FC = () => {
             className="text-center mb-8 md:mb-12"
           >
             <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navy mb-4">Choose Your Platform</h2>
-            <p className="text-gray-600">Web app available now, mobile apps coming soon</p>
+            <p className="text-gray-600">Available on iOS, Android, and as a web app</p>
           </motion.div>
 
           {/* Web App - Featured */}
@@ -273,74 +267,72 @@ const DownloadPage: React.FC = () => {
           </motion.div>
 
           <div className="grid gap-6 md:grid-cols-2 md:gap-8 mb-12 md:mb-16">
-            {/* iPhone Download - Coming Soon */}
+            {/* iPhone Download - Available Now */}
             <motion.div
               initial={{ x: -30, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.6 }}
               whileHover={{ y: -5 }}
             >
-              <Card className="text-center p-6 md:p-8 hover:shadow-xl transition-all duration-300 border-2 opacity-75">
+              <Card className="text-center p-6 md:p-8 hover:shadow-xl transition-all duration-300 border-2 border-scrummy-goldYellow/30">
                 <CardContent className="space-y-4 md:space-y-6">
-                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-gray-300 to-gray-400 rounded-2xl flex items-center justify-center mx-auto">
-                    <Smartphone className="w-8 h-8 md:w-10 md:h-10 text-white" />
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-scrummy-goldYellow to-scrummy-gold rounded-2xl flex items-center justify-center mx-auto">
+                    <Smartphone className="w-8 h-8 md:w-10 md:h-10 text-scrummy-navy" />
                   </div>
                   
                   <div>
                     <h3 className="text-xl md:text-2xl font-bold text-scrummy-navy mb-2">iPhone</h3>
-                    <p className="text-gray-600 mb-4 md:mb-6">Coming soon to the App Store</p>
-                    <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
-                      <Clock className="w-4 h-4" />
-                      Coming Soon
+                    <p className="text-gray-600 mb-4 md:mb-6">Available now on the App Store</p>
+                    <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                      <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                      Available Now
                     </div>
                   </div>
 
                   <Button 
                     size="lg" 
-                    className="bg-gray-300 text-gray-500 cursor-not-allowed font-semibold px-6 md:px-8 py-3 rounded-xl w-full"
-                    disabled
+                    className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-6 md:px-8 py-3 rounded-xl w-full"
+                    onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
                   >
-                    <span className="mr-2">📱</span>
-                    Coming Soon
+                    Download for iOS
                   </Button>
                   
-                  <p className="text-xs text-gray-500">Will require iOS 14.0 or later</p>
+                  <p className="text-xs text-gray-500">Requires iOS 18.0 or later</p>
                 </CardContent>
               </Card>
             </motion.div>
 
-            {/* Android Download - Coming Soon */}
+            {/* Android Download - Available Now */}
             <motion.div
               initial={{ x: 30, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.6 }}
               whileHover={{ y: -5 }}
             >
-              <Card className="text-center p-6 md:p-8 hover:shadow-xl transition-all duration-300 border-2 opacity-75">
+              <Card className="text-center p-6 md:p-8 hover:shadow-xl transition-all duration-300 border-2 border-scrummy-navy/30">
                 <CardContent className="space-y-4 md:space-y-6">
-                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-gray-300 to-gray-400 rounded-2xl flex items-center justify-center mx-auto">
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-scrummy-navy to-scrummy-blue rounded-2xl flex items-center justify-center mx-auto">
                     <Smartphone className="w-8 h-8 md:w-10 md:h-10 text-white" />
                   </div>
                   
                   <div>
                     <h3 className="text-xl md:text-2xl font-bold text-scrummy-navy mb-2">Android</h3>
-                    <p className="text-gray-600 mb-4 md:mb-6">Coming soon to Google Play</p>
-                    <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
-                      <Clock className="w-4 h-4" />
-                      Coming Soon
+                    <p className="text-gray-600 mb-4 md:mb-6">Available now on Google Play</p>
+                    <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                      <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                      Available Now
                     </div>
                   </div>
 
                   <Button 
                     size="lg" 
-                    className="bg-gray-300 text-gray-500 cursor-not-allowed font-semibold px-6 md:px-8 py-3 rounded-xl w-full"
-                    disabled
+                    className="bg-scrummy-navy text-white hover:bg-scrummy-blue font-bold px-6 md:px-8 py-3 rounded-xl w-full"
+                    onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
                   >
-                    <span className="mr-2">🤖</span>
-                    Coming Soon
+                    Download for Android
                   </Button>
                   
-                  <p className="text-xs text-gray-500">Will require Android 8.0 or later</p>
+                  <p className="text-xs text-gray-500">Requires Android 8.0 or later</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -391,7 +383,7 @@ const DownloadPage: React.FC = () => {
                     <Star className="w-5 h-5 fill-current" />
                   </div>
                   <p className="text-gray-600 text-sm">
-                    <span className="font-semibold">50,000+</span> rugby fans already using SCRUMMY
+                    <span className="font-semibold">100+</span> downloads on Google Play, now available on iOS too!
                   </p>
                 </div>
               </CardContent>
@@ -410,22 +402,20 @@ const DownloadPage: React.FC = () => {
           >
             <h3 className="text-xl md:text-2xl font-bold mb-4">Ready to Join the Action?</h3>
             <p className="text-white/90 mb-6 text-sm md:text-base">
-              Start using SCRUMMY today with our web app. Mobile apps coming soon!
+              Download SCRUMMY now on iOS and Android, or use our web app!
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
               <Button 
                 className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold flex-1"
-                onClick={() => window.open('https://scrummy-app.ai', '_blank')}
+                onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
               >
-                <Globe className="w-4 h-4 mr-2" />
-                Launch Web App
+                Download for iOS
               </Button>
               <Button 
-                className="bg-gray-600 text-white cursor-not-allowed font-bold flex-1"
-                disabled
+                className="bg-white text-scrummy-navy hover:bg-gray-100 font-bold flex-1"
+                onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
               >
-                <Clock className="w-4 h-4 mr-2" />
-                Mobile Apps Soon
+                Download for Android
               </Button>
             </div>
           </motion.div>

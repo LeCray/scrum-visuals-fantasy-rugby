@@ -115,10 +115,30 @@ const Index: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<typeof zimbabwePlayers[0] | null>(null);
   const [activePhoneIndex, setActivePhoneIndex] = useState(1); // Start with middle phone (index 1)
+  const [screenWidth, setScreenWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
 
   const spinForPlayer = () => {
     const randomPlayer = zimbabwePlayers[Math.floor(Math.random() * zimbabwePlayers.length)];
     setSelectedPlayer(randomPlayer);
+  };
+
+  // Track screen width for responsive card spacing
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Calculate responsive card spacing based on screen width
+  const getCardSpacing = () => {
+    if (screenWidth >= 1536) return 120; // 2xl screens
+    if (screenWidth >= 1280) return 100; // xl screens  
+    if (screenWidth >= 1024) return 80;  // lg screens
+    if (screenWidth >= 768) return 70;   // md screens
+    return 60; // sm and smaller screens
   };
 
   // Cycle through phones for animation
@@ -368,7 +388,7 @@ const Index: React.FC = () => {
               </div>
               
         {/* 3. CONNECT - Combined Experience Section */}
-        <div className="max-w-[95vw] mx-auto px-4 sm:px-6 mt-16 overflow-hidden">
+        <div className="max-w-[95vw] xl:max-w-[90vw] 2xl:max-w-[85vw] mx-auto px-4 sm:px-6 mt-16 overflow-hidden">
             {/* Meet Players & Build Your Dream XV */}
             <div className="text-center mb-12">
               <h2 className="font-orbitron text-3xl md:text-4xl font-bold text-[#001E5C] mb-4 drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]">
@@ -394,11 +414,11 @@ const Index: React.FC = () => {
                 </div>
               </div>
               
-              <div className="relative flex justify-center items-end h-[280px] sm:h-[320px] lg:h-[360px] xl:h-[380px] px-2 sm:px-4">
+              <div className="relative flex justify-center items-end h-[280px] sm:h-[320px] lg:h-[360px] xl:h-[400px] 2xl:h-[440px] px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
             {zimbabwePlayers.slice(0, 3).map((player, index) => (
           <motion.div
                 key={index}
-            initial={{ y: 50, opacity: 0, rotate: index === 0 ? -8 : index === 2 ? 8 : 0, x: index === 0 ? -40 : index === 2 ? 40 : 0 }}
+            initial={{ y: 50, opacity: 0, rotate: index === 0 ? -8 : index === 2 ? 8 : 0, x: index === 0 ? -getCardSpacing() : index === 2 ? getCardSpacing() : 0 }}
             animate={{ 
               y: [0, -35, 5, 0], 
               scale: [1, 1.12, 0.98, 1],
@@ -409,7 +429,7 @@ const Index: React.FC = () => {
                 index === 0 ? -8 : index === 2 ? 8 : 0
               ],
               opacity: 1, 
-              x: index === 0 ? -40 : index === 2 ? 40 : 0 
+              x: index === 0 ? -getCardSpacing() : index === 2 ? getCardSpacing() : 0 
             }}
                 transition={{ 
               duration: 0.8, 
@@ -439,7 +459,7 @@ const Index: React.FC = () => {
                   transformOrigin: 'center bottom',
                   zIndex: index === 1 ? 20 : index === 0 ? 10 : 15
                 }}
-                className={`absolute shadow-2xl rounded-lg flex flex-col transition-all duration-500 hover:scale-110 hover:rotate-0 hover:z-30 hover:-translate-y-8 overflow-hidden text-white h-[240px] sm:h-[280px] lg:h-[320px] w-[160px] sm:w-[180px] lg:w-[200px] xl:w-[220px] cursor-pointer ${
+                className={`absolute shadow-2xl rounded-lg flex flex-col transition-all duration-500 hover:scale-110 hover:rotate-0 hover:z-30 hover:-translate-y-8 overflow-hidden text-white h-[240px] sm:h-[280px] lg:h-[320px] xl:h-[360px] 2xl:h-[400px] w-[160px] sm:w-[180px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] cursor-pointer ${
                   index === 1 
                     ? 'bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-700'
                     : index === 2 
@@ -484,14 +504,14 @@ const Index: React.FC = () => {
             ))}
         </div>
 
-              <div className="text-center mt-8 space-y-4">
-            <Button 
-              onClick={spinForPlayer}
-                  className="bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-8 py-3 mb-4"
+              <div className="text-center mt-8 space-y-4 relative z-[100]">
+            <button 
+              className="inline-flex items-center justify-center bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-8 py-3 mb-4 rounded-md cursor-pointer relative z-[101] transition-colors"
+              onClick={() => window.location.href = '/#/download'}
             >
               <Shuffle className="w-5 h-5 mr-2" />
               🔁 Meet Another Player
-            </Button>
+            </button>
                 
 
               </div>
@@ -614,15 +634,16 @@ const Index: React.FC = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="text-center space-y-3 sm:space-y-4">
+                <div className="text-center space-y-3 sm:space-y-4 relative z-[100]">
                   <p className="text-xs text-white/80 px-2">
                     Need more players? Add forwards, backs, or a super sub to complete your squad.
                   </p>
-                  <Link to="/download">
-                    <Button className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-4 sm:px-6 py-2 w-full mb-4 text-sm">
-                      ⚡ Complete Your Team
-                    </Button>
-                  </Link>
+                  <button 
+                    className="inline-flex items-center justify-center bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-4 sm:px-6 py-2 w-full mb-4 text-sm rounded-md cursor-pointer relative z-[101] transition-colors"
+                    onClick={() => window.location.href = '/#/download'}
+                  >
+                    ⚡ Complete Your Team
+                  </button>
                   
 
                 </div>
@@ -631,7 +652,7 @@ const Index: React.FC = () => {
           </div>
           
           {/* Main Download CTA */}
-          <div className="mt-8 bg-scrummy-navy/5 rounded-xl p-6 border border-scrummy-goldYellow/20">
+          <div className="mt-8 bg-scrummy-navy/5 rounded-xl p-6 border border-scrummy-goldYellow/20 relative z-[100]">
             <div className="text-center">
               <div className="flex justify-center mb-4">
                 <div className="w-14 h-14 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
@@ -644,17 +665,19 @@ const Index: React.FC = () => {
               <p className="text-sm text-gray-600 mb-4 max-w-sm mx-auto">
                 Download the app for live stats, fantasy leagues, and exclusive features
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Link to="/download">
-                  <Button className="bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-6 py-3">
-                    iOS App Store
-                  </Button>
-                </Link>
-                <Link to="/download">
-                  <Button className="bg-scrummy-navy hover:bg-scrummy-blue text-white font-bold px-6 py-3">
-                    Google Play
-                  </Button>
-                </Link>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center relative z-[100]">
+                <button 
+                  className="inline-flex items-center justify-center bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-6 py-3 rounded-md cursor-pointer relative z-[101] transition-colors"
+                  onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
+                >
+                  iOS App Store
+                </button>
+                <button 
+                  className="inline-flex items-center justify-center bg-scrummy-navy hover:bg-scrummy-blue text-white font-bold px-6 py-3 rounded-md cursor-pointer relative z-[101] transition-colors"
+                  onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
+                >
+                  Google Play
+                </button>
               </div>
             </div>
           </div>
