@@ -3,66 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Instagram, Facebook, Youtube, ChevronLeft, ChevronRight, Menu, X, Globe, Shuffle } from "lucide-react";
+import { Instagram, Facebook, Youtube, Menu, X, Globe, Shuffle } from "lucide-react";
 import { FaTiktok } from 'react-icons/fa';
 import ThreeScene from "../components/ThreeScene";
 
-// Featured events data - includes major international tournaments
-const featuredEvents = [
-  {
-    id: 1,
-    title: "CBZ Schools Rugby Championship",
-    subtitle: "Zimbabwe's Premier School Rugby Tournament",
-    date: "March 2025",
-    location: "Harare, Zimbabwe",
-    gradient: "from-scrummy-navy via-scrummy-blue to-scrummy-electricBlue",
-    upcoming: true,
-    featured: true,
-    matchCount: 45
-  },
-  {
-    id: 2,
-    title: "Women's Rugby World Cup",
-    subtitle: "International Women's Rugby Championship",
-    date: "August 2025",
-    location: "England, United Kingdom",
-    gradient: "from-pink-600 via-rose-500 to-pink-700",
-    comingSoon: true,
-    international: true,
-    matchCount: 32
-  },
-  {
-    id: 3,
-    title: "Rugby Africa Cup 2025",
-    subtitle: "African Rugby Union Championship",
-    date: "July 8-19, 2025",
-    location: "Kampala, Uganda",
-    gradient: "from-scrummy-goldYellow via-scrummy-gold to-scrummy-yellow",
-    upcoming: true,
-    international: true,
-    matchCount: 16
-  },
-  {
-    id: 4,
-    title: "SA Schools Rugby Championship",
-    subtitle: "South African Inter-School Tournament",
-    date: "April 2025",
-    location: "Cape Town, South Africa",
-    gradient: "from-scrummy-navy to-scrummy-blue",
-    upcoming: true,
-    matchCount: 38
-  },
-  {
-    id: 5,
-    title: "Derby Day Rugby Festival",
-    subtitle: "Traditional School Rugby Rivalries",
-    date: "May 2025",
-    location: "Multiple Venues, Zimbabwe",
-    gradient: "from-scrummy-electricBlue via-scrummy-blue to-scrummy-navy",
-    featured: true,
-    matchCount: 18
-  }
-];
 
 // Women's Rugby Players Data
 const zimbabwePlayers = [
@@ -168,53 +112,26 @@ const zimbabwePlayers = [
 ];
 
 const Index: React.FC = () => {
-  // Focus on Women's Rugby World Cup (index 1)
-  const [currentSlide, setCurrentSlide] = useState(1);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<typeof zimbabwePlayers[0] | null>(null);
-
-  // Auto-advance slideshow - DISABLED to focus on Women's Rugby World Cup
-  // useEffect(() => {
-  //   if (!isAutoPlaying) return;
-  //   
-  //   const interval = setInterval(() => {
-  //     setCurrentSlide((prev) => (prev + 1) % featuredEvents.length);
-  //   }, 5000); // 5 seconds per slide
-
-  //   return () => clearInterval(interval);
-  // }, [isAutoPlaying]);
-
-  // Resume autoplay after manual navigation - DISABLED
-  // useEffect(() => {
-  //   if (!isAutoPlaying) {
-  //     const timer = setTimeout(() => {
-  //       setIsAutoPlaying(true);
-  //     }, 3000); // Resume after 3 seconds
-
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [isAutoPlaying]);
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % featuredEvents.length);
-    setIsAutoPlaying(false);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + featuredEvents.length) % featuredEvents.length);
-    setIsAutoPlaying(false);
-  };
+  const [activePhoneIndex, setActivePhoneIndex] = useState(1); // Start with middle phone (index 1)
 
   const spinForPlayer = () => {
     const randomPlayer = zimbabwePlayers[Math.floor(Math.random() * zimbabwePlayers.length)];
     setSelectedPlayer(randomPlayer);
   };
 
-  const currentEvent = featuredEvents[currentSlide];
+  // Cycle through phones for animation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActivePhoneIndex((prev) => (prev + 1) % 3); // Cycle 0, 1, 2, 0, 1, 2...
+    }, 3000); // Change every 3 seconds
+
+        return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 overflow-x-hidden">
       {/* Navigation Header */}
       <header className="bg-scrummy-navy/95 backdrop-blur-md border-b border-scrummy-goldYellow/20 sticky top-0 z-50">
         <div className="w-full pr-4 py-3 flex items-center justify-between">
@@ -226,7 +143,6 @@ const Index: React.FC = () => {
           <nav className="hidden lg:flex items-center space-x-8">
             <Link to="/" className="text-white hover:text-scrummy-goldYellow font-medium transition-colors">Home</Link>
             <Link to="/fixtures" className="text-white hover:text-scrummy-goldYellow font-medium transition-colors">Fixtures</Link>
-            <Link to="/africa-cup" className="text-white hover:text-scrummy-goldYellow font-medium transition-colors">Africa Cup</Link>
             <Link to="/about" className="text-white hover:text-scrummy-goldYellow font-medium transition-colors">About</Link>
 
           </nav>
@@ -253,7 +169,6 @@ const Index: React.FC = () => {
               <nav className="px-4 py-4 space-y-4">
                 <Link to="/" className="block text-white hover:text-scrummy-goldYellow font-medium transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Home</Link>
                 <Link to="/fixtures" className="block text-white hover:text-scrummy-goldYellow font-medium transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Fixtures</Link>
-                <Link to="/africa-cup" className="block text-white hover:text-scrummy-goldYellow font-medium transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Africa Cup</Link>
                 <Link to="/about" className="block text-white hover:text-scrummy-goldYellow font-medium transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>About</Link>
 
               </nav>
@@ -263,197 +178,238 @@ const Index: React.FC = () => {
       </header>
 
       {/* 1. Hero Section - Scrummy Brand Introduction */}
-      <section className="py-16 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-scrummy-navy/5 to-scrummy-blue/5" />
-        {/* ThreeScene Background - Just like the old site */}
-        <ThreeScene />
+      <section className="py-12 relative overflow-hidden">
+        {/* Brand Book Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FFC603] via-[#1196F5] to-[#001E5C]" />
+        
+        {/* Rugby Ball Pattern Overlay */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-8 left-12 w-16 h-10 border-2 border-white rounded-full transform rotate-12"></div>
+          <div className="absolute top-20 right-16 w-12 h-7 border-2 border-white rounded-full transform -rotate-45"></div>
+          <div className="absolute bottom-16 left-20 w-20 h-12 border-2 border-white rounded-full transform rotate-45"></div>
+          <div className="absolute bottom-8 right-12 w-14 h-8 border-2 border-white rounded-full transform -rotate-12"></div>
+          <div className="absolute top-1/2 left-8 w-10 h-6 border-2 border-white rounded-full transform rotate-90"></div>
+          <div className="absolute top-1/3 right-8 w-18 h-11 border-2 border-white rounded-full transform -rotate-30"></div>
+        </div>
+
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/20" />
         
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="space-y-4"
+            className="space-y-3"
           >
-            <h1 className="text-4xl md:text-6xl font-bold font-orbitron text-scrummy-navy leading-tight">
+            <h1 className="text-4xl md:text-6xl font-bold font-orbitron text-white leading-tight drop-shadow-lg">
               FANTASY RUGBY
-              <span className="block text-scrummy-goldYellow">IS ABOUT TO GET SCRUMMY</span>
+              <span className="block text-white">IS ABOUT TO GET</span>
+              <span className="block text-[#FFC603] drop-shadow-xl">SCRUMMY</span>
             </h1>
-            <p className="text-lg md:text-xl text-scrummy-blue max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto drop-shadow-md">
               Be the First to Join the Scrum!
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* 2. Tournament Coverage - Box Banner */}
-      <section className="py-4">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.5 }}
-              className={`bg-gradient-to-r ${currentEvent.gradient} rounded-xl p-6 text-white relative overflow-hidden`}
+
+
+      {/* 2. Feature Showcase */}
+      <section className="py-12 relative overflow-hidden">
+        {/* Extended Brand Gradient Background - Flows into Meet Players */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FFC603]/20 via-[#1196F5]/15 to-[#001E5C]/20" />
+        
+        {/* Rugby Ball Pattern Overlay - Extended to cover Meet Players */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-12 left-20 w-14 h-8 border-2 border-white rounded-full transform rotate-45"></div>
+          <div className="absolute top-32 right-24 w-10 h-6 border-2 border-white rounded-full transform -rotate-30"></div>
+          <div className="absolute bottom-20 left-16 w-16 h-10 border-2 border-white rounded-full transform rotate-12"></div>
+          <div className="absolute bottom-32 right-20 w-12 h-7 border-2 border-white rounded-full transform -rotate-45"></div>
+          <div className="absolute top-1/2 left-1/4 w-8 h-5 border-2 border-white rounded-full transform rotate-60"></div>
+          <div className="absolute top-1/3 right-1/4 w-14 h-8 border-2 border-white rounded-full transform -rotate-15"></div>
+          {/* Additional patterns for Meet Players area */}
+          <div className="absolute bottom-0 left-1/3 w-12 h-7 border-2 border-white rounded-full transform rotate-30" style={{ top: '120%' }}></div>
+          <div className="absolute bottom-0 right-1/4 w-10 h-6 border-2 border-white rounded-full transform -rotate-60" style={{ top: '140%' }}></div>
+              </div>
+
+        <div className="max-w-[95vw] mx-auto px-4 sm:px-6 relative z-10">
+          <div className="grid md:grid-cols-3 gap-8 justify-center">
+            {/* Phone 1 - Build Your Team */}
+            <motion.div 
+              className="text-center"
+              animate={{
+                scale: activePhoneIndex === 0 ? 1.1 : 0.9,
+                y: activePhoneIndex === 0 ? -16 : 8,
+                opacity: activePhoneIndex === 0 ? 1 : 0.8,
+                zIndex: activePhoneIndex === 0 ? 20 : 1
+              }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
             >
-              {/* Content */}
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
-                {/* Left Content */}
-                <div className="flex-1 text-center md:text-left">
-                  <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-medium mb-2">
-                    {(currentEvent.upcoming || currentEvent.comingSoon) && <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />}
-                    {currentEvent.comingSoon ? "Coming Soon" : currentEvent.upcoming ? "Upcoming" : currentEvent.featured ? "Featured" : currentEvent.international ? "International" : "Tournament"}
-                  </div>
-                  <h3 className="text-xl md:text-2xl font-bold mb-1">{currentEvent.title}</h3>
-                  <p className="text-sm opacity-90 mb-2">{currentEvent.subtitle}</p>
-                  <div className="flex flex-wrap justify-center md:justify-start gap-3 text-xs opacity-80">
-                    <span>📅 {currentEvent.date}</span>
-                    <span>📍 {currentEvent.location}</span>
-                    <span>🏉 {currentEvent.matchCount} Matches</span>
-                  </div>
-                </div>
-
-                {/* Right Content - CTA */}
-                <div className="flex-shrink-0">
-                  {currentEvent.comingSoon ? (
-                    <Link to="/download">
-                      <Button className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-semibold px-6 py-2">
-                        Download App
-                      </Button>
-                    </Link>
-                  ) : (
-                    <Link to={currentEvent.id === 3 ? "/africa-cup" : "/fixtures"}>
-                      <Button className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-semibold px-6 py-2">
-                        {currentEvent.id === 3 ? "Explore Africa Cup" : "View Fixtures"}
-                      </Button>
-                    </Link>
-                  )}
-                </div>
-              </div>
-
-              {/* Navigation Controls */}
-              <button
-                onClick={prevSlide}
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-2 text-white transition-all"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                onClick={nextSlide}
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-2 text-white transition-all"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Slide Indicators */}
-          <div className="flex justify-center gap-2 mt-3">
-            {featuredEvents.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setCurrentSlide(index);
-                  setIsAutoPlaying(false);
+                             <motion.div 
+                 className="relative mx-auto mb-4 w-32 h-56 bg-black rounded-[1.5rem] p-1"
+                 animate={{
+                   boxShadow: activePhoneIndex === 0 
+                     ? "0 25px 50px -12px rgba(0,0,0,0.6)" 
+                     : "0 10px 25px -3px rgba(0,0,0,0.3)",
+                   y: activePhoneIndex === 0 ? [0, -8, 0] : 0
+                 }}
+                transition={{ 
+                  duration: 0.6,
+                  y: activePhoneIndex === 0 ? { 
+                    duration: 1.5, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  } : { duration: 0.6 }
                 }}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentSlide ? 'bg-scrummy-navy' : 'bg-gray-300'
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. What is SCRUMMY */}
-      <section className="py-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="bg-white/80 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-gray-200/50 text-center">
-            <h2 className="font-orbitron text-2xl md:text-3xl font-bold text-scrummy-navy mb-6">
-              What is <span className="text-scrummy-blue">SCRUMMY</span>?
-            </h2>
-            
-            <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-white/60 backdrop-blur-sm rounded-lg p-6 shadow-sm border border-gray-200/30">
-                <div className="w-12 h-12 bg-scrummy-goldYellow rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">👥</span>
+              >
+                <div className="w-full h-full bg-white rounded-[1rem] overflow-hidden relative">
+                  <div className="absolute top-0 left-0 right-0 h-6 bg-black/5 flex items-center justify-center">
+                    <div className="w-20 h-3 bg-black rounded-full"></div>
+                  </div>
+                  <img 
+                    src="/assets/App headshots/WhatsApp Image 2025-07-28 at 14.53.53.jpeg" 
+                    alt="Team Building Interface"
+                    className="w-full h-full object-cover object-center mt-6"
+                  />
                 </div>
-                <h3 className="font-bold text-lg text-scrummy-navy mb-2">Build Your Team</h3>
-                <p className="text-gray-600 text-sm">Select 5-6 players to create your fantasy rugby squad and compete with friends</p>
+            </motion.div>
+              <h3 className="font-bold text-xl text-[#001E5C] mb-3 drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]">Build Your Team</h3>
+              <p className="text-[#001E5C]/90 text-sm max-w-xs mx-auto drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]">Select 5-6 players to create your fantasy rugby squad and compete with friends</p>
+            </motion.div>
+            
+            {/* Phone 2 - Make Predictions */}
+            <motion.div 
+              className="text-center"
+              animate={{
+                scale: activePhoneIndex === 1 ? 1.1 : 0.9,
+                y: activePhoneIndex === 1 ? -16 : 8,
+                opacity: activePhoneIndex === 1 ? 1 : 0.8,
+                zIndex: activePhoneIndex === 1 ? 20 : 1
+              }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+            >
+                             <motion.div 
+                 className="relative mx-auto mb-4 w-32 h-56 bg-black rounded-[1.5rem] p-1"
+                 animate={{
+                   boxShadow: activePhoneIndex === 1 
+                     ? "0 25px 50px -12px rgba(0,0,0,0.6)" 
+                     : "0 10px 25px -3px rgba(0,0,0,0.3)",
+                   y: activePhoneIndex === 1 ? [0, -8, 0] : 0
+                 }}
+                transition={{ 
+                  duration: 0.6,
+                  y: activePhoneIndex === 1 ? { 
+                    duration: 1.5, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  } : { duration: 0.6 }
+                }}
+              >
+                <div className="w-full h-full bg-white rounded-[1rem] overflow-hidden relative">
+                  <div className="absolute top-0 left-0 right-0 h-6 bg-black/5 flex items-center justify-center">
+                    <div className="w-20 h-3 bg-black rounded-full"></div>
+                  </div>
+                  <img 
+                    src="/assets/App headshots/WhatsApp Image 2025-07-28 at 14.53.52.jpeg" 
+                    alt="Match Predictions Interface"
+                    className="w-full h-full object-cover object-center mt-6"
+                  />
+          </div>
+              </motion.div>
+              <h3 className="font-bold text-xl text-[#001E5C] mb-3 drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]">Make Predictions</h3>
+              <p className="text-[#001E5C]/90 text-sm max-w-xs mx-auto drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]">Predict match outcomes from professional rugby to school finals - every match, every level</p>
+            </motion.div>
+            
+            {/* Phone 3 - Compete & Win */}
+            <motion.div 
+              className="text-center"
+              animate={{
+                scale: activePhoneIndex === 2 ? 1.1 : 0.9,
+                y: activePhoneIndex === 2 ? -16 : 8,
+                opacity: activePhoneIndex === 2 ? 1 : 0.8,
+                zIndex: activePhoneIndex === 2 ? 20 : 1
+              }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+            >
+                             <motion.div 
+                 className="relative mx-auto mb-4 w-32 h-56 bg-black rounded-[1.5rem] p-1"
+                 animate={{
+                   boxShadow: activePhoneIndex === 2 
+                     ? "0 25px 50px -12px rgba(0,0,0,0.6)" 
+                     : "0 10px 25px -3px rgba(0,0,0,0.3)",
+                   y: activePhoneIndex === 2 ? [0, -8, 0] : 0
+                 }}
+                transition={{ 
+                  duration: 0.6,
+                  y: activePhoneIndex === 2 ? { 
+                    duration: 1.5, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  } : { duration: 0.6 }
+                }}
+              >
+                <div className="w-full h-full bg-white rounded-[1rem] overflow-hidden relative">
+                  <div className="absolute top-0 left-0 right-0 h-6 bg-black/5 flex items-center justify-center">
+                    <div className="w-20 h-3 bg-black rounded-full"></div>
+                </div>
+                  <img 
+                    src="/assets/App headshots/WhatsApp Image 2025-07-28 at 15.24.09.jpeg" 
+                    alt="Competition Leaderboard Interface"
+                    className="w-full h-full object-cover object-center mt-6"
+                  />
+              </div>
+              </motion.div>
+              <h3 className="font-bold text-xl text-[#001E5C] mb-3 drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]">Compete & Win</h3>
+              <p className="text-[#001E5C]/90 text-sm max-w-xs mx-auto drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]">Join leagues, climb leaderboards, and win prizes in weekly fantasy competitions</p>
+            </motion.div>
+                </div>
               </div>
               
-              <div className="bg-white/60 backdrop-blur-sm rounded-lg p-6 shadow-sm border border-gray-200/30">
-                <div className="w-12 h-12 bg-scrummy-goldYellow rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">🎯</span>
-                </div>
-                <h3 className="font-bold text-lg text-scrummy-navy mb-2">Make Predictions</h3>
-                <p className="text-gray-600 text-sm">Predict match outcomes from professional rugby to school finals - every match, every level</p>
-              </div>
-              
-              <div className="bg-white/60 backdrop-blur-sm rounded-lg p-6 shadow-sm border border-gray-200/30">
-                <div className="w-12 h-12 bg-scrummy-goldYellow rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">🏆</span>
-                </div>
-                <h3 className="font-bold text-lg text-scrummy-navy mb-2">Compete & Win</h3>
-                <p className="text-gray-600 text-sm">Join leagues, climb leaderboards, and win prizes in weekly fantasy competitions</p>
-              </div>
-            </div>
-            
-            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-              The only platform that covers <span className="font-semibold text-scrummy-navy">every match at every level</span> - 
-              from Springboks internationals to local school derbies. Fantasy rugby just got scrummy!
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. CONNECT - Combined Experience Section */}
-      <section className="py-8 section-meet-player">
-        <div className="max-w-[95vw] mx-auto px-4 sm:px-6">
-          <div className="bg-white/80 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-gray-200/50">
+        {/* 3. CONNECT - Combined Experience Section */}
+        <div className="max-w-[95vw] mx-auto px-4 sm:px-6 mt-16 overflow-hidden">
             {/* Meet Players & Build Your Dream XV */}
             <div className="text-center mb-12">
-              <h2 className="font-orbitron text-3xl md:text-4xl font-bold text-scrummy-navy mb-4">
+              <h2 className="font-orbitron text-3xl md:text-4xl font-bold text-[#001E5C] mb-4 drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]">
                 Meet Players & Build Your Dream XV
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-[#001E5C]/90 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]">
                 Discover the stars and create your ultimate team
               </p>
             </div>
 
-          <div className="grid lg:grid-cols-2 gap-16 xl:gap-20 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 xl:gap-20 items-start">
             {/* Left Side - Meet a Player */}
             <div className="space-y-8">
               <div className="text-center">
-                <h3 className="font-orbitron text-2xl font-bold text-scrummy-navy mb-4">
+                <h3 className="font-orbitron text-2xl font-bold text-[#001E5C] mb-4 drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]">
                   Meet a Player
                 </h3>
-                <p className="text-gray-600 mb-4">Discover the stars driving the game forward</p>
-                <div className="bg-scrummy-navy/5 rounded-lg p-4">
-                  <p className="text-sm text-gray-700 leading-relaxed">
+                <p className="text-[#001E5C]/90 mb-4 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]">Discover the stars driving the game forward</p>
+                <div className="p-4">
+                  <p className="text-sm text-[#001E5C]/80 leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.4)]">
                     Explore detailed player profiles, stats, and performance ratings. Click any card to dive deep into their career highlights, playing style, and current form.
                   </p>
                 </div>
               </div>
               
-              <div className="relative flex justify-center items-end h-[320px] lg:h-[360px] xl:h-[380px]">
+              <div className="relative flex justify-center items-end h-[280px] sm:h-[320px] lg:h-[360px] xl:h-[380px] px-2 sm:px-4">
             {zimbabwePlayers.slice(0, 3).map((player, index) => (
           <motion.div
                 key={index}
-            initial={{ y: 50, opacity: 0, rotate: index === 0 ? -20 : index === 2 ? 20 : 0, x: index === 0 ? -100 : index === 2 ? 100 : 0 }}
+            initial={{ y: 50, opacity: 0, rotate: index === 0 ? -8 : index === 2 ? 8 : 0, x: index === 0 ? -40 : index === 2 ? 40 : 0 }}
             animate={{ 
               y: [0, -35, 5, 0], 
               scale: [1, 1.12, 0.98, 1],
               rotate: [
-                index === 0 ? -20 : index === 2 ? 20 : 0,
-                index === 0 ? -18 : index === 2 ? 18 : 2,
-                index === 0 ? -22 : index === 2 ? 22 : -1,
-                index === 0 ? -20 : index === 2 ? 20 : 0
+                index === 0 ? -8 : index === 2 ? 8 : 0,
+                index === 0 ? -6 : index === 2 ? 6 : 2,
+                index === 0 ? -10 : index === 2 ? 10 : -1,
+                index === 0 ? -8 : index === 2 ? 8 : 0
               ],
               opacity: 1, 
-              x: index === 0 ? -100 : index === 2 ? 100 : 0 
+              x: index === 0 ? -40 : index === 2 ? 40 : 0 
             }}
                 transition={{ 
               duration: 0.8, 
@@ -483,7 +439,7 @@ const Index: React.FC = () => {
                   transformOrigin: 'center bottom',
                   zIndex: index === 1 ? 20 : index === 0 ? 10 : 15
                 }}
-                className={`absolute shadow-2xl rounded-lg flex flex-col transition-all duration-500 hover:scale-110 hover:rotate-0 hover:z-30 hover:-translate-y-8 overflow-hidden text-white h-[280px] lg:h-[320px] w-[180px] lg:w-[200px] xl:w-[220px] cursor-pointer ${
+                className={`absolute shadow-2xl rounded-lg flex flex-col transition-all duration-500 hover:scale-110 hover:rotate-0 hover:z-30 hover:-translate-y-8 overflow-hidden text-white h-[240px] sm:h-[280px] lg:h-[320px] w-[160px] sm:w-[180px] lg:w-[200px] xl:w-[220px] cursor-pointer ${
                   index === 1 
                     ? 'bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-700'
                     : index === 2 
@@ -537,23 +493,7 @@ const Index: React.FC = () => {
               🔁 Meet Another Player
             </Button>
                 
-                {/* Download CTA */}
-                <div className="bg-scrummy-navy/5 rounded-lg p-4 border border-scrummy-goldYellow/30">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
-                      <span className="text-lg">📱</span>
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-scrummy-navy text-sm">Full Player Database</h4>
-                      <p className="text-xs text-gray-600">1000+ detailed profiles</p>
-                    </div>
-                  </div>
-                  <Link to="/download">
-                    <Button className="bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-4 py-2 w-full text-sm">
-                      Get the App →
-                    </Button>
-                  </Link>
-                </div>
+
               </div>
             </div>
 
@@ -571,12 +511,12 @@ const Index: React.FC = () => {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-blue-600 to-purple-600 text-white rounded-2xl p-4 xl:p-6 space-y-4 min-h-[400px]">
+              <div className="bg-gradient-to-br from-[#FFC603] via-[#1196F5] to-[#001E5C] text-white rounded-2xl p-3 sm:p-4 xl:p-6 space-y-3 sm:space-y-4 min-h-[380px] sm:min-h-[400px]">
                 {/* Team Builder Header */}
                 <div className="flex justify-between items-center">
-                  <h4 className="text-xl font-bold">Edit Your Team</h4>
+                  <h4 className="text-lg sm:text-xl font-bold">Edit Your Team</h4>
                   <div className="flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500 sm:w-[14px] sm:h-[14px]">
                       <circle cx="8" cy="8" r="6"></circle>
                       <path d="M18.09 10.37A6 6 0 1 1 10.34 18"></path>
                       <path d="M7 6h1v4"></path>
@@ -587,7 +527,7 @@ const Index: React.FC = () => {
                 </div>
 
                 {/* Rugby Pitch with Players */}
-                <div className="relative bg-green-700 rounded-2xl p-4 h-[360px] w-full overflow-hidden">
+                <div className="relative bg-green-700 rounded-2xl p-3 sm:p-4 h-[340px] sm:h-[360px] w-full overflow-hidden">
                   {/* Simple Center Line */}
                   <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute left-4 right-4 top-1/2 h-0.5 bg-white/20 transform -translate-y-0.5"></div>
@@ -599,9 +539,9 @@ const Index: React.FC = () => {
                   </div>
                   
                                     {/* Player Cards on Pitch */}
-                  <div className="relative z-10 flex flex-col justify-center items-center gap-4 p-3 h-full">
-                    {/* Top Row - 4 Players */}
-                    <div className="flex justify-center items-center gap-3">
+                  <div className="relative z-10 flex flex-col justify-center items-center gap-3 sm:gap-4 p-2 sm:p-3 h-full">
+                    {/* Top Row - 4 Players (2x2 on mobile, 4x1 on larger screens) */}
+                    <div className="grid grid-cols-2 sm:flex sm:justify-center sm:items-center gap-2 sm:gap-3">
                       {[
                         { name: "Ellie Kildunne", position: "Fullback", team: "England Women", pr: 94, image: "/assets/Women's card pics style/England_ Ellie kildunne.png", flagEmoji: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
                         { name: "Ruby Tui", position: "Wing", team: "New Zealand Black Ferns", pr: 96, image: "/assets/Women's card pics style/New Zealand_ Ruby Tui.png", flagEmoji: "🇳🇿" },
@@ -609,7 +549,7 @@ const Index: React.FC = () => {
                         { name: "Siokapesi Palu", position: "Prop", team: "Australia Wallaroos", pr: 87, image: "/assets/Women's card pics style/Australia_ Siokapesi Palu.png", flagEmoji: "🇦🇺" }
                       ].map((player, index) => (
                         <div key={index} className="relative">
-                          <div className="group relative shadow-xl rounded-lg flex flex-col transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden transform-style-3d bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-700 text-white h-[160px] w-[100px] cursor-pointer">
+                          <div className="group relative shadow-xl rounded-lg flex flex-col transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden transform-style-3d bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-700 text-white h-[130px] sm:h-[160px] w-[100px] sm:w-[100px] cursor-pointer">
                             <div className="absolute top-2 right-2 z-10">
                               <div className="w-6 h-6 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
                                 <span className="text-sm">
@@ -624,13 +564,13 @@ const Index: React.FC = () => {
                                 className="w-full object-scale-down object-top"
                               />
                             </div>
-                            <div className="p-2 flex-[1] bg-yellow-500/10">
+                            <div className="p-1.5 sm:p-2 flex-[1] bg-yellow-500/10">
                               <div className="flex items-center gap-1 mb-1">
-                                <h3 className="text-xs font-bold truncate flex-1">{player.name}</h3>
+                                <h3 className="text-[10px] sm:text-xs font-bold truncate flex-1">{player.name}</h3>
                               </div>
                               <div className="flex justify-between items-center text-sm">
-                                <div className="text-xs truncate">{player.position}</div>
-                                <div className="text-xs font-medium">PR {player.pr}</div>
+                                <div className="text-[9px] sm:text-xs truncate">{player.position}</div>
+                                <div className="text-[9px] sm:text-xs font-medium">PR {player.pr}</div>
                               </div>
                             </div>
                           </div>
@@ -644,7 +584,7 @@ const Index: React.FC = () => {
                         { name: "Alba Capell", position: "Flanker", team: "Spain Women", pr: 85, image: "/assets/Women's card pics style/Spain_ Alba Capell.png", flagEmoji: "🇪🇸" }
                       ].map((player, index) => (
                         <div key={index} className="relative">
-                          <div className="group relative shadow-xl rounded-lg flex flex-col transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden transform-style-3d bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-700 text-white h-[160px] w-[100px] cursor-pointer">
+                          <div className="group relative shadow-xl rounded-lg flex flex-col transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden transform-style-3d bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-700 text-white h-[130px] sm:h-[160px] w-[100px] sm:w-[100px] cursor-pointer">
                             <div className="absolute top-2 right-2 z-10">
                               <div className="w-6 h-6 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
                                 <span className="text-sm">{player.flagEmoji}</span>
@@ -657,13 +597,13 @@ const Index: React.FC = () => {
                                 className="w-full object-scale-down object-top"
                               />
                             </div>
-                            <div className="p-2 flex-[1] bg-yellow-500/10">
+                            <div className="p-1.5 sm:p-2 flex-[1] bg-yellow-500/10">
                               <div className="flex items-center gap-1 mb-1">
-                                <h3 className="text-xs font-bold truncate flex-1">{player.name}</h3>
+                                <h3 className="text-[10px] sm:text-xs font-bold truncate flex-1">{player.name}</h3>
                               </div>
                               <div className="flex justify-between items-center text-sm">
-                                <div className="text-xs truncate">{player.position}</div>
-                                <div className="text-xs font-medium">PR {player.pr}</div>
+                                <div className="text-[9px] sm:text-xs truncate">{player.position}</div>
+                                <div className="text-[9px] sm:text-xs font-medium">PR {player.pr}</div>
                               </div>
                             </div>
                           </div>
@@ -674,12 +614,12 @@ const Index: React.FC = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="text-center space-y-4">
-                  <p className="text-xs text-white/80">
+                <div className="text-center space-y-3 sm:space-y-4">
+                  <p className="text-xs text-white/80 px-2">
                     Need more players? Add forwards, backs, or a super sub to complete your squad.
                   </p>
                   <Link to="/download">
-                    <Button className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-6 py-2 w-full mb-4">
+                    <Button className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-4 sm:px-6 py-2 w-full mb-4 text-sm">
                       ⚡ Complete Your Team
                     </Button>
                   </Link>
@@ -730,73 +670,160 @@ const Index: React.FC = () => {
               </p>
             </div>
 
-            {/* Social Media Cards */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
-              {[
-                { platform: "IG", handle: "@scrummyapp_", content: "URC Final Highlights", time: "2h", color: "from-purple-600 to-pink-500", stats: "2.4k ❤️ 156 💬", url: "https://www.instagram.com/scrummyapp_/" },
-                { platform: "TT", handle: "@scrummy_hub", content: "Kolbe's Magic Step compilation", time: "4h", color: "from-teal-600 to-green-500", stats: "8.2k ❤️ 342 💬", url: "https://www.tiktok.com/@scrummy_hub" },
-                { platform: "FB", handle: "Scrummy Rugby", content: "Player Stats Weekly update", time: "6h", color: "from-blue-600 to-indigo-600", stats: "1.8k ❤️ 89 💬", url: "https://www.facebook.com/profile.php?id=61574057183440" },
-                { platform: "𝕏", handle: "@scrummyapp_", content: "School Rugby Rising stars", time: "1d", color: "from-gray-800 to-black", stats: "5.7k ❤️ 234 💬", url: "https://x.com/scrummyapp_" },
-                { platform: "YT", handle: "@ScrummySports", content: "The Breakdown: URC Review", time: "2h", color: "from-red-600 to-red-800", stats: "12.4k 👁 89 💬", url: "https://www.youtube.com/@ScrummySports" }
-              ].map((post, index) => (
-                <Card key={index} className={`bg-gradient-to-r ${post.color} text-white hover:scale-105 transition-transform duration-300 cursor-pointer`} onClick={() => window.open(post.url, '_blank')}>
+            {/* Social Media Feeds - Mixed Approach */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+              
+              {/* Instagram - Styled Card */}
+              <Card className="bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:scale-105 transition-transform duration-300 cursor-pointer" onClick={() => window.open('https://www.instagram.com/scrummyapp_/', '_blank')}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                      <Instagram className="w-5 h-5 text-purple-600" />
+                    </div>
+                    <span className="text-xs bg-white/20 px-2 py-1 rounded-full">2h</span>
+                  </div>
+                  <h3 className="font-bold mb-2">Latest Rugby Highlights</h3>
+                  <p className="text-sm opacity-90 mb-3">@scrummyapp_</p>
+                  <p className="text-xs opacity-80">2.4k ❤️ 156 💬</p>
+                  <div className="mt-2 text-xs opacity-70">Tap to view on Instagram</div>
+                </CardContent>
+              </Card>
+
+              {/* TikTok - Styled Card */}
+              <Card className="bg-gradient-to-r from-teal-600 to-green-500 text-white hover:scale-105 transition-transform duration-300 cursor-pointer" onClick={() => window.open('https://www.tiktok.com/@scrummy_hub', '_blank')}>
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between mb-3">
                       <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
-                        <span className="text-white font-bold text-xs">{post.platform}</span>
+                      <span className="text-white font-bold text-xs">TT</span>
                       </div>
-                      <span className="text-xs bg-white/20 px-2 py-1 rounded-full">{post.time}</span>
+                    <span className="text-xs bg-white/20 px-2 py-1 rounded-full">4h</span>
                     </div>
-                    <h3 className="font-bold mb-2">{post.content}</h3>
-                    <p className="text-sm opacity-90 mb-3">{post.handle}</p>
-                    <p className="text-xs opacity-80">{post.stats}</p>
+                  <h3 className="font-bold mb-2">Kolbe's Magic Steps</h3>
+                  <p className="text-sm opacity-90 mb-3">@scrummy_hub</p>
+                  <p className="text-xs opacity-80">8.2k ❤️ 342 💬</p>
+                  <div className="mt-2 text-xs opacity-70">Tap to view on TikTok</div>
                   </CardContent>
                 </Card>
-              ))}
+
+              {/* Facebook - Styled Card */}
+              <Card className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:scale-105 transition-transform duration-300 cursor-pointer" onClick={() => window.open('https://www.facebook.com/profile.php?id=61574057183440', '_blank')}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                      <Facebook className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <span className="text-xs bg-white/20 px-2 py-1 rounded-full">6h</span>
+                  </div>
+                  <h3 className="font-bold mb-2">Player Stats Update</h3>
+                  <p className="text-sm opacity-90 mb-3">Scrummy Rugby</p>
+                  <p className="text-xs opacity-80">1.8k ❤️ 89 💬</p>
+                  <div className="mt-2 text-xs opacity-70">Tap to view on Facebook</div>
+                </CardContent>
+              </Card>
+
+              {/* Twitter/X - Styled Card */}
+              <Card className="bg-gradient-to-r from-gray-800 to-black text-white hover:scale-105 transition-transform duration-300 cursor-pointer" onClick={() => window.open('https://x.com/scrummyapp_', '_blank')}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                      <span className="text-black font-bold text-xs">𝕏</span>
+                    </div>
+                    <span className="text-xs bg-white/20 px-2 py-1 rounded-full">1d</span>
+                  </div>
+                  <h3 className="font-bold mb-2">School Rugby Rising Stars</h3>
+                  <p className="text-sm opacity-90 mb-3">@scrummyapp_</p>
+                  <p className="text-xs opacity-80">5.7k ❤️ 234 💬</p>
+                  <div className="mt-2 text-xs opacity-70">Tap to view on X</div>
+                </CardContent>
+              </Card>
+
+
+
             </div>
                 
-            {/* YouTube Channel Section */}
-            <div className="bg-gradient-to-r from-slate-900 to-black text-white rounded-2xl p-8 mb-12">
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div>
+                        {/* YouTube & News Section */}
+            <div className="grid lg:grid-cols-2 gap-8 mb-12">
+              {/* YouTube Channel Section */}
+              <div className="bg-gradient-to-r from-slate-900 to-black text-white rounded-2xl p-6">
+                {/* Embedded YouTube Video */}
+                <div className="relative aspect-video rounded-lg overflow-hidden shadow-2xl">
+                  <iframe 
+                    src="https://www.youtube.com/embed/o9lknRnPxMM"
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 'none' }}
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full"
+                  ></iframe>
+                </div>
+                <div className="mt-4">
                   <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">NEW</span>
-                  <h3 className="text-2xl font-bold mt-4 mb-2">Scrummy Sports on YouTube</h3>
-                  <p className="text-white/80 mb-4">Rugby analysis, highlights & player features</p>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
-                      <span className="text-2xl">🎥</span>
-                    </div>
-                    <div>
-                      <p className="text-sm opacity-80">Latest Content</p>
-                      <p className="text-sm">🔔 Subscribe for rugby insights</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-3">
+                  <h3 className="text-xl font-bold mt-2 mb-1">Scrummy Sports on YouTube</h3>
+                  <p className="text-white/60 text-sm">Watch our latest rugby analysis</p>
+                  <div className="flex gap-2 mt-3">
                     <Button 
-                      className="bg-red-600 hover:bg-red-700 text-white"
+                      className="bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-2"
                       onClick={() => window.open('https://www.youtube.com/@ScrummySports', '_blank')}
                     >
                       🎥 Visit Channel
                     </Button>
-                                         <Button 
-                       className="bg-white text-black hover:bg-gray-200 border-2 border-white"
-                       onClick={() => window.open('https://www.youtube.com/@ScrummySports?sub_confirmation=1', '_blank')}
-                     >
-                       + Subscribe
-                     </Button>
+                    <Button 
+                      className="bg-white text-black hover:bg-gray-200 border-2 border-white text-sm px-4 py-2"
+                      onClick={() => window.open('https://www.youtube.com/@ScrummySports?sub_confirmation=1', '_blank')}
+                    >
+                      + Subscribe
+                    </Button>
                   </div>
                 </div>
-                <div>
-                  <div className="space-y-4">
-                    <div className="bg-white/10 rounded-lg p-4">
-                      <span className="text-xs text-green-400">Analysis</span>
-                      <h4 className="font-bold">Player Performance Breakdowns</h4>
-                      <p className="text-sm opacity-80">Deep dives into what makes top rugby players special...</p>
+              </div>
+
+              {/* Women's Rugby News Section */}
+              <div className="space-y-4">
+                <h3 className="text-2xl font-bold text-scrummy-navy mb-4">Women's Rugby Headlines</h3>
+                
+                {/* News Preview 1 */}
+                <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-white/30 hover:scale-105 transition-transform duration-300 cursor-pointer shadow-lg"
+                     onClick={() => window.open('https://www.rugbypass.com/news/wallaroos-stars-timely-return-to-face-wales-before-rugby-world-cup', '_blank')}>
+                  <div className="flex gap-4">
+                    <div className="w-20 h-16 bg-gradient-to-br from-green-500 to-yellow-400 rounded-lg flex items-center justify-center text-white font-bold text-xs">
+                      AUS
                     </div>
-                    <div className="bg-white/10 rounded-lg p-4">
-                      <span className="text-xs text-blue-400">Features</span>
-                      <h4 className="font-bold">Match Highlights & Fantasy Tips</h4>
-                      <p className="text-sm opacity-80">Essential viewing for fantasy rugby managers and rugby fans...</p>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-scrummy-navy text-sm mb-1">Maya Stewart Returns From Injury</h4>
+                      <p className="text-xs text-gray-600 mb-2">Australia's all-time leading try-scorer makes crucial comeback ahead of Rugby World Cup</p>
+                      <span className="text-xs text-blue-600 font-medium">Read more on RugbyPass →</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* News Preview 2 */}
+                <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-white/30 hover:scale-105 transition-transform duration-300 cursor-pointer shadow-lg"
+                     onClick={() => window.open('https://www.rugbypass.com/news/levi-and-nathan-among-sevens-stars-sharpening-for-svns-series-at-nextgen-7s', '_blank')}>
+                  <div className="flex gap-4">
+                    <div className="w-20 h-16 bg-gradient-to-br from-purple-500 to-pink-400 rounded-lg flex items-center justify-center text-white font-bold text-xs">
+                      7s
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-scrummy-navy text-sm mb-1">Rising Stars Prepare for SVNS Series</h4>
+                      <p className="text-xs text-gray-600 mb-2">Next generation of sevens talent showcased at development tournament</p>
+                      <span className="text-xs text-blue-600 font-medium">Read more on RugbyPass →</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* News Preview 3 */}
+                <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-white/30 hover:scale-105 transition-transform duration-300 cursor-pointer shadow-lg"
+                     onClick={() => window.open('https://www.rugbypass.com/news/the-bremners-sisters-competing-for-the-same-black-ferns-shirt', '_blank')}>
+                  <div className="flex gap-4">
+                    <div className="w-20 h-16 bg-gradient-to-br from-black to-gray-600 rounded-lg flex items-center justify-center text-white font-bold text-xs">
+                      NZ
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-scrummy-navy text-sm mb-1">The Bremners: Sisters Battle for Same Jersey</h4>
+                      <p className="text-xs text-gray-600 mb-2">Family rivalry adds intrigue to New Zealand's World Cup selection</p>
+                      <span className="text-xs text-blue-600 font-medium">Read more on RugbyPass →</span>
                     </div>
                   </div>
                 </div>
@@ -851,7 +878,7 @@ const Index: React.FC = () => {
 
             {/* Toggle Buttons */}
             <div className="flex justify-center mb-8">
-              <div className="bg-white rounded-lg p-1 shadow-lg">
+              <div className="bg-white/20 backdrop-blur-sm rounded-lg p-1 shadow-lg border border-white/30">
                 <button className="px-6 py-2 rounded-md text-gray-600 hover:text-scrummy-navy transition-colors">
                   Professional Rugby
                 </button>
@@ -864,7 +891,7 @@ const Index: React.FC = () => {
             {/* Match Cards */}
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               {/* Live Match Card */}
-              <Card className="bg-white border-2 border-green-200 hover:border-green-400 transition-all duration-300">
+              <Card className="bg-white/20 backdrop-blur-sm border-2 border-white/30 hover:border-white/50 transition-all duration-300">
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div>
@@ -907,7 +934,7 @@ const Index: React.FC = () => {
               </Card>
 
               {/* Upcoming Match Card */}
-              <Card className="bg-white border-2 border-scrummy-navy/10 hover:border-scrummy-goldYellow/50 transition-all duration-300">
+              <Card className="bg-white/20 backdrop-blur-sm border-2 border-white/30 hover:border-white/50 transition-all duration-300">
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div>
@@ -980,7 +1007,6 @@ const Index: React.FC = () => {
                 <p className="text-sm opacity-80">- Rugby fan from Cape Town</p>
               </div>
               <p className="text-lg">Experience rugby without limits - join the conversation!</p>
-            </div>
           </div>
           </div>
         </div>
@@ -1049,13 +1075,7 @@ const Index: React.FC = () => {
         </AnimatePresence>
       </section>
 
-
-
-
-
-
-
-      {/* 5. Final CTA Block */}
+      {/* 4. Final CTA Block */}
       <section className="py-8 bg-gradient-to-r from-scrummy-navy to-scrummy-blue text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="font-orbitron text-3xl md:text-4xl font-bold mb-6">
