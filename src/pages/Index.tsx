@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Instagram, Facebook, Youtube, Menu, X, Globe, Shuffle } from "lucide-react";
+import { Instagram, Facebook, Youtube, Menu, X, Globe, Shuffle, Calendar, Trophy, Smartphone } from "lucide-react";
 import { FaTiktok } from 'react-icons/fa';
 import ThreeScene from "../components/ThreeScene";
 
@@ -164,6 +164,7 @@ const Index: React.FC = () => {
             <Link to="/" className="text-white hover:text-scrummy-goldYellow font-medium transition-colors">Home</Link>
             <Link to="/fixtures" className="text-white hover:text-scrummy-goldYellow font-medium transition-colors">Fixtures</Link>
             <Link to="/about" className="text-white hover:text-scrummy-goldYellow font-medium transition-colors">About</Link>
+            <Link to="/download" className="bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-4 py-2 rounded-md transition-colors">Download App</Link>
 
           </nav>
 
@@ -190,6 +191,7 @@ const Index: React.FC = () => {
                 <Link to="/" className="block text-white hover:text-scrummy-goldYellow font-medium transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Home</Link>
                 <Link to="/fixtures" className="block text-white hover:text-scrummy-goldYellow font-medium transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Fixtures</Link>
                 <Link to="/about" className="block text-white hover:text-scrummy-goldYellow font-medium transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>About</Link>
+                <Link to="/download" className="block bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-4 py-3 rounded-md transition-colors text-center" onClick={() => setMobileMenuOpen(false)}>Download App</Link>
 
               </nav>
             </motion.div>
@@ -233,8 +235,6 @@ const Index: React.FC = () => {
           </motion.div>
         </div>
       </section>
-
-
 
       {/* 2. Feature Showcase */}
       <section className="py-12 relative overflow-hidden">
@@ -389,14 +389,11 @@ const Index: React.FC = () => {
               
         {/* 3. CONNECT - Combined Experience Section */}
         <div className="max-w-[95vw] xl:max-w-[90vw] 2xl:max-w-[85vw] mx-auto px-4 sm:px-6 mt-16 overflow-hidden">
-            {/* Meet Players & Build Your Dream XV */}
+            {/* Meet Players & Build Your Dream Team */}
             <div className="text-center mb-12">
               <h2 className="font-orbitron text-3xl md:text-4xl font-bold text-[#001E5C] mb-4 drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]">
-                Meet Players & Build Your Dream XV
+                Meet Players & Build Your Dream Team
               </h2>
-              <p className="text-lg text-[#001E5C]/90 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]">
-                Discover the stars and create your ultimate team
-              </p>
             </div>
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 xl:gap-20 items-start">
@@ -517,11 +514,11 @@ const Index: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Side - Build Your Dream XV */}
+            {/* Right Side - Build Your Dream Team */}
             <div className="space-y-8">
               <div className="text-center">
                 <h3 className="font-orbitron text-2xl font-bold text-scrummy-navy mb-4">
-                  Build Your Dream XV
+                  Build Your Dream Team
                 </h3>
                 <p className="text-gray-600 mb-4">Create your ultimate team and compete</p>
                 <div className="bg-scrummy-navy/5 rounded-lg p-4">
@@ -1140,7 +1137,6 @@ const Index: React.FC = () => {
               <h4 className="font-orbitron font-bold text-scrummy-goldYellow mb-4">Quick Links</h4>
               <div className="space-y-2">
                 <Link to="/fixtures" className="block text-white/80 hover:text-scrummy-goldYellow transition-colors">Fixtures</Link>
-                <Link to="/africa-cup" className="block text-white/80 hover:text-scrummy-goldYellow transition-colors">Africa Cup</Link>
                 <Link to="/about" className="block text-white/80 hover:text-scrummy-goldYellow transition-colors">About</Link>
               </div>
             </div>

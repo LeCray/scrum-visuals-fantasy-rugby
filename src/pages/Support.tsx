@@ -64,9 +64,6 @@ const Support: React.FC = () => {
               <Link to="/" className="text-white hover:text-scrummy-goldYellow transition-colors">
                 Home
               </Link>
-              <Link to="/africa-cup" className="text-white hover:text-scrummy-goldYellow transition-colors">
-                Africa Cup
-              </Link>
               <Link to="/download" className="text-white hover:text-scrummy-goldYellow transition-colors">
                 Download
               </Link>
@@ -93,9 +90,6 @@ const Support: React.FC = () => {
               <div className="space-y-2 pt-4">
                 <Link to="/" className="block text-white hover:text-scrummy-goldYellow transition-colors py-2">
                   Home
-                </Link>
-                <Link to="/africa-cup" className="block text-white hover:text-scrummy-goldYellow transition-colors py-2">
-                  Africa Cup
                 </Link>
                 <Link to="/download" className="block text-white hover:text-scrummy-goldYellow transition-colors py-2">
                   Download
