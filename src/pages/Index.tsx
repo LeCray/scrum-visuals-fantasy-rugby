@@ -851,7 +851,7 @@ const Index: React.FC = () => {
             </div>
 
             {/* Social Follow Buttons */}
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-3 relative z-[102]">
               <Button 
                 className="bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:from-pink-600 hover:to-purple-600"
                 onClick={() => window.open('https://www.instagram.com/scrummyapp_/', '_blank')}
@@ -1157,10 +1157,13 @@ const Index: React.FC = () => {
                 <a href="https://www.facebook.com/profile.php?id=61574057183440" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors">
                   <Facebook size={24} />
               </a>
-                <a href="https://www.tiktok.com/@scrummy_fantasy" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors">
+                <a href="https://www.tiktok.com/@scrummy_hub" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors">
                   <FaTiktok size={24} />
               </a>
-                <a href="https://www.youtube.com/channel/UCnKVk_L_fda9OuA5vDZBmmA" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors">
+                <a href="https://x.com/scrummyapp_" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors">
+                  <span className="text-xl">𝕏</span>
+              </a>
+                <a href="https://www.youtube.com/@ScrummySports" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors">
                   <Youtube size={24} />
               </a>
               </div>
