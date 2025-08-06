@@ -404,8 +404,8 @@ const Index: React.FC = () => {
                   Meet a Player
                 </h3>
                 <p className="text-[#001E5C]/90 mb-4 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]">Discover the stars driving the game forward</p>
-                <div className="p-4">
-                  <p className="text-sm text-[#001E5C]/80 leading-relaxed drop-shadow-[0_1px_2px_rgba(255,255,255,0.4)]">
+                <div className="bg-scrummy-navy/5 rounded-lg p-4">
+                  <p className="text-sm text-gray-700 leading-relaxed">
                     Explore detailed player profiles, stats, and performance ratings. Click any card to dive deep into their career highlights, playing style, and current form.
                   </p>
                 </div>
