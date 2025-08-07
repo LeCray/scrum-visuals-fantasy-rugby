@@ -1,0 +1,62 @@
+{
+  "1st XV Peterhouse": {
+    "total_actions": 790,
+    "possession_percentage": 46.912114014251785,
+    "passes": {
+      "total": 88,
+      "accurate": 87,
+      "accuracy_pct": 98.86363636363636
+    },
+    "tackles": {
+      "total": 183,
+      "missed": 41,
+      "success_pct": 77.59562841530054
+    },
+    "ball_carries": {
+      "total": 59,
+      "dominant": 10,
+      "dominance_pct": 16.94915254237288
+    },
+    "ruck_arrivals": {
+      "total": 126,
+      "effective": 79,
+      "efficiency_pct": 62.698412698412696
+    },
+    "kicks": {
+      "total": 26,
+      "good": 24,
+      "success_pct": 92.3076923076923
+    },
+    "errors": 0
+  },
+  "St Georges": {
+    "total_actions": 894,
+    "possession_percentage": 53.087885985748215,
+    "passes": {
+      "total": 103,
+      "accurate": 100,
+      "accuracy_pct": 97.0873786407767
+    },
+    "tackles": {
+      "total": 120,
+      "missed": 29,
+      "success_pct": 75.83333333333333
+    },
+    "ball_carries": {
+      "total": 98,
+      "dominant": 16,
+      "dominance_pct": 16.3265306122449
+    },
+    "ruck_arrivals": {
+      "total": 236,
+      "effective": 141,
+      "efficiency_pct": 59.7457627118644
+    },
+    "kicks": {
+      "total": 33,
+      "good": 28,
+      "success_pct": 84.84848484848484
+    },
+    "errors": 0
+  }
+}

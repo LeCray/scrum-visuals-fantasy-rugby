@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { TeamStats, TryScore, KickAtGoal, falconVsStJohnsPlayerData } from "@/lib/boxScoreData";
+import { TeamStats, TryScore, KickAtGoal, falconVsStJohnsPlayerData, peterhouseVsStGeorgesPlayerData, generateMatchId } from "@/lib/boxScoreData";
 import PlayerBoxScore from "./PlayerBoxScore";
 
 // Types for our box score data
@@ -1128,6 +1128,21 @@ const BoxScore: React.FC<BoxScoreProps> = ({
   const teamAPoints = calculateTeamPoints(tryDataA);
   const teamBPoints = calculateTeamPoints(tryDataB);
 
+  // Get the correct player data based on the match
+  const getPlayerData = () => {
+    const matchId = generateMatchId(matchInfo.date, matchInfo.kickoff, matchInfo.teamA, matchInfo.teamB);
+    
+    // Map of match IDs to their corresponding player data
+    const playerDataMap: Record<string, any[]> = {
+      [generateMatchId("Week 10", "14:00", "FALCON", "ST JOHNS")]: falconVsStJohnsPlayerData,
+      [generateMatchId("Week 10", "15:00", "PETERHOUSE", "ST GEORGES")]: peterhouseVsStGeorgesPlayerData,
+    };
+    
+    return playerDataMap[matchId] || [];
+  };
+
+  const currentPlayerData = getPlayerData();
+
   // Default possession values if not provided
   const possessionA = teamASummary.possession || 50;
   const possessionB = teamBSummary.possession || 50;
@@ -1418,11 +1433,18 @@ const BoxScore: React.FC<BoxScoreProps> = ({
             )}
 
             {/* Player View */}
-            {viewMode === 'player' && (
+            {viewMode === 'player' && currentPlayerData.length > 0 && (
               <PlayerBoxScore
                 matchInfo={matchInfo}
-                playerData={falconVsStJohnsPlayerData}
+                playerData={currentPlayerData}
               />
+            )}
+            
+            {/* Show message if no player data available */}
+            {viewMode === 'player' && currentPlayerData.length === 0 && (
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md text-center">
+                <p className="text-scrummy-navyBlue">Player statistics not available for this match.</p>
+              </div>
             )}
 
             <div className="text-center text-xs md:text-sm text-scrummy-navyBlue/70 mt-6 md:mt-8">

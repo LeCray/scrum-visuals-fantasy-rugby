@@ -2976,3 +2976,194 @@ export const falconVsStJohnsPlayerData = [
   { playerCode: "O 15", playerNumber: 15, team: "ST JOHNS", totalActions: 16, passesTotal: 2, passesAccurate: 1, passAccuracyPct: 50.0, tacklesTotal: 4, tacklesMissed: 3, tackleSuccessPct: 25.0, ballCarriesTotal: 1, ballCarriesDominant: 1, carryDominancePct: 100.0, ruckArrivalsTotal: 1, ruckArrivalsEffective: 0, ruckEfficiencyPct: 0.0, kicksTotal: 4, kicksGood: 3, kickSuccessPct: 75.0, errors: 0 },
   { playerCode: "O 21", playerNumber: 21, team: "ST JOHNS", totalActions: 15, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 7, tacklesMissed: 4, tackleSuccessPct: 42.9, ballCarriesTotal: 1, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 3, ruckArrivalsEffective: 1, ruckEfficiencyPct: 33.3, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 }
 ];
+
+// Add score for Week 10 Peterhouse vs St Georges match
+finalScores.set(
+  generateMatchId("Week 10", "15:00", "PETERHOUSE", "ST GEORGES"),
+  { teamAScore: 17, teamBScore: 31 }
+);
+
+// Define tries with timestamps and conversion status for Peterhouse vs St Georges Week 10
+const peterhouseVsStGeorgesWeek10PeterhouseTries: TryScore[] = [
+  { time: "33:19", hasConversion: true },   // H 11 try (1999s / 60 = 33:19)
+  { time: "68:57", hasConversion: true },   // H 7 try (4137s / 60 = 68:57)
+  { time: "45:00", hasConversion: false, isPenalty: true }        // Penalty goal (3 points)
+];
+
+const peterhouseVsStGeorgesWeek10StGeorgesTries: TryScore[] = [
+  { time: "41:26", hasConversion: true },   // O 99 try (2486s / 60 = 41:26) - 5+2=7
+  { time: "46:50", hasConversion: false },  // O 8 try (2810s / 60 = 46:50) - 5+0=5  
+  { time: "71:25", hasConversion: true },   // O 6 try (4285s / 60 = 71:25) - 5+2=7
+  { time: "25:00", hasConversion: false, isPenalty: true },       // Penalty goal 1 (3 points)
+  { time: "55:00", hasConversion: false, isPenalty: true },       // Penalty goal 2 (3 points)
+  { time: "65:00", hasConversion: false, isPenalty: true },       // Penalty goal 3 (3 points)
+  { time: "75:00", hasConversion: false, isPenalty: true }        // Penalty goal 4 (3 points)
+];
+
+// Define kicking data based on try conversions and penalty goals
+const peterhouseVsStGeorgesWeek10PeterhouseKicks: KickAtGoal[] = [
+  { x: 0.5, y: 0.4, successful: true },    // Conversion for H 11 try
+  { x: 0.6, y: 0.3, successful: true },    // Conversion for H 7 try
+  { x: 0.4, y: 0.6, successful: true }     // Penalty goal (3 points)
+];
+
+const peterhouseVsStGeorgesWeek10StGeorgesKicks: KickAtGoal[] = [
+  { x: 0.3, y: 0.5, successful: true },    // Conversion for O 99 try
+  { x: 0.7, y: 0.4, successful: true },    // Conversion for O 8 try
+  { x: 0.2, y: 0.6, successful: true },    // Conversion for O 6 try
+  { x: 0.8, y: 0.3, successful: true },    // Penalty goal 1 (3 points)
+  { x: 0.5, y: 0.7, successful: true },    // Penalty goal 2 (3 points)
+  { x: 0.4, y: 0.2, successful: true },    // Penalty goal 3 (3 points)
+  { x: 0.6, y: 0.8, successful: true }     // Penalty goal 4 (3 points)
+];
+
+// Create a box score for the Peterhouse vs St Georges Week 10 game
+const peterhouseVsStGeorgesWeek10: BoxScoreData = {
+  matchInfo: {
+    teamA: "PETERHOUSE",
+    teamB: "ST GEORGES",
+    venue: "Peterhouse School, Marondera",
+    date: "Week 10",
+    kickoff: "15:00",
+    weather: "Sunny, 26°C",
+  },
+  teamAPlayers: [
+    { name: "Fantiso Panashe", position: "15", tries: 0, kicks: "3/5", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Musekiwa Russell", position: "14", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Maringa Andrew Cpt", position: "13", tries: 0, kicks: "8/8", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Chikwanda Christian", position: "12", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Masamha Munashe", position: "11", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Watt James", position: "10", tries: 0, kicks: "13/13", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Grant Reece", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Madzima Tendayi", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Zimbango Prosper", position: "7", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Dube Bongani", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Mawoyo Mufarowashe", position: "5", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Musavaya Bernard", position: "4", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Mutyatyu Mukudzei vc", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Kafesu Taro", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Ndimutseyi Tanatswa", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamBPlayers: [
+    { name: "Zane Sibanda", position: "15", tries: 0, kicks: "0/1", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Dylan Burton", position: "14", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Scott Wenham", position: "13", tries: 0, kicks: "1/1", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "James Thompson (c)", position: "12", tries: 0, kicks: "1/2", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Max Mugari", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Callum Orford", position: "10", tries: 0, kicks: "21/22", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Joshua Littlewood", position: "9", tries: 0, kicks: "5/5", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Joshua Saunders", position: "8", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Takomborerwa Chigangacha", position: "7", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Tian Muller", position: "6", tries: 1, kicks: "0/1", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Alastair Carle", position: "5", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Ruan Nel", position: "4", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Ethan Fouché", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Jasper May", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "Tinotenda Dhimairo", position: "1", tries: 0, kicks: "0/1", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "O 99", position: "99", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamASummary: {
+    totalTries: 2,
+    totalConversions: "2/2 C",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+    possession: 47,
+    scrums: { total: 0, won: 0 },
+    lineouts: { total: 0, won: 0 },
+    turnovers: 0,
+    knockOns: 0,
+    mauls: { total: 0, won: 0 },
+    kicks: {
+      fromHand: { total: 26, reclaimed: 24 },
+      inField: { total: 0, reclaimed: 0 },
+      toTouch: { total: 0 },
+      dropOuts: { total: 0, reclaimed: 0 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 3, successful: 3 }
+    },
+    attackingPenalties: 0,
+    defensivePenalties: 0,
+    scrumPenalties: 0
+  },
+  teamBSummary: {
+    totalTries: 3,
+    totalConversions: "3/3 C",
+    lineoutAccuracy: "-",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+    possession: 53,
+    scrums: { total: 0, won: 0 },
+    lineouts: { total: 0, won: 0 },
+    turnovers: 0,
+    knockOns: 0,
+    mauls: { total: 0, won: 0 },
+    kicks: {
+      fromHand: { total: 33, reclaimed: 28 },
+      inField: { total: 0, reclaimed: 0 },
+      toTouch: { total: 0 },
+      dropOuts: { total: 0, reclaimed: 0 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 7, successful: 7 }
+    },
+    attackingPenalties: 0,
+    defensivePenalties: 0,
+    scrumPenalties: 0
+  },
+  tryDataA: peterhouseVsStGeorgesWeek10PeterhouseTries,
+  tryDataB: peterhouseVsStGeorgesWeek10StGeorgesTries,
+  kickDataA: peterhouseVsStGeorgesWeek10PeterhouseKicks,
+  kickDataB: peterhouseVsStGeorgesWeek10StGeorgesKicks
+};
+
+// Add the Week 10 Peterhouse vs St Georges box score to the map
+boxScores.set(
+  generateMatchId("Week 10", "15:00", "PETERHOUSE", "ST GEORGES"),
+  peterhouseVsStGeorgesWeek10
+);
+
+// Player data processing for Peterhouse vs St Georges Week 10
+export const peterhouseVsStGeorgesPlayerData = [
+  // Peterhouse players (H team)
+  { playerCode: "Kafesu Taro", playerNumber: 2, team: "PETERHOUSE", totalActions: 88, passesTotal: 2, passesAccurate: 2, passAccuracyPct: 100.0, tacklesTotal: 16, tacklesMissed: 4, tackleSuccessPct: 75.0, ballCarriesTotal: 5, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 7, ruckArrivalsEffective: 4, ruckEfficiencyPct: 57.1, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Mutyatyu Mukudzei vc", playerNumber: 3, team: "PETERHOUSE", totalActions: 86, passesTotal: 1, passesAccurate: 1, passAccuracyPct: 100.0, tacklesTotal: 15, tacklesMissed: 4, tackleSuccessPct: 73.3, ballCarriesTotal: 11, ballCarriesDominant: 1, carryDominancePct: 9.1, ruckArrivalsTotal: 10, ruckArrivalsEffective: 8, ruckEfficiencyPct: 80.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Dube Bongani", playerNumber: 6, team: "PETERHOUSE", totalActions: 83, passesTotal: 2, passesAccurate: 2, passAccuracyPct: 100.0, tacklesTotal: 19, tacklesMissed: 3, tackleSuccessPct: 84.2, ballCarriesTotal: 4, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 17, ruckArrivalsEffective: 9, ruckEfficiencyPct: 52.9, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Musavaya Bernard", playerNumber: 4, team: "PETERHOUSE", totalActions: 82, passesTotal: 1, passesAccurate: 1, passAccuracyPct: 100.0, tacklesTotal: 15, tacklesMissed: 2, tackleSuccessPct: 86.7, ballCarriesTotal: 4, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 13, ruckArrivalsEffective: 8, ruckEfficiencyPct: 61.5, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Madzima Tendayi", playerNumber: 8, team: "PETERHOUSE", totalActions: 81, passesTotal: 3, passesAccurate: 3, passAccuracyPct: 100.0, tacklesTotal: 10, tacklesMissed: 0, tackleSuccessPct: 100.0, ballCarriesTotal: 5, ballCarriesDominant: 2, carryDominancePct: 40.0, ruckArrivalsTotal: 8, ruckArrivalsEffective: 5, ruckEfficiencyPct: 62.5, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Zimbango Prosper", playerNumber: 7, team: "PETERHOUSE", totalActions: 65, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 21, tacklesMissed: 5, tackleSuccessPct: 76.2, ballCarriesTotal: 5, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 9, ruckArrivalsEffective: 8, ruckEfficiencyPct: 88.9, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Mawoyo Mufarowashe", playerNumber: 5, team: "PETERHOUSE", totalActions: 65, passesTotal: 5, passesAccurate: 5, passAccuracyPct: 100.0, tacklesTotal: 7, tacklesMissed: 2, tackleSuccessPct: 71.4, ballCarriesTotal: 4, ballCarriesDominant: 2, carryDominancePct: 50.0, ruckArrivalsTotal: 5, ruckArrivalsEffective: 5, ruckEfficiencyPct: 100.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Grant Reece", playerNumber: 9, team: "PETERHOUSE", totalActions: 64, passesTotal: 42, passesAccurate: 42, passAccuracyPct: 100.0, tacklesTotal: 8, tacklesMissed: 3, tackleSuccessPct: 62.5, ballCarriesTotal: 2, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 3, ruckArrivalsEffective: 3, ruckEfficiencyPct: 100.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Ndimutseyi Tanatswa", playerNumber: 1, team: "PETERHOUSE", totalActions: 56, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 6, tacklesMissed: 1, tackleSuccessPct: 83.3, ballCarriesTotal: 0, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 12, ruckArrivalsEffective: 3, ruckEfficiencyPct: 25.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Watt James", playerNumber: 10, team: "PETERHOUSE", totalActions: 52, passesTotal: 13, passesAccurate: 13, passAccuracyPct: 100.0, tacklesTotal: 7, tacklesMissed: 2, tackleSuccessPct: 71.4, ballCarriesTotal: 2, ballCarriesDominant: 1, carryDominancePct: 50.0, ruckArrivalsTotal: 8, ruckArrivalsEffective: 7, ruckEfficiencyPct: 87.5, kicksTotal: 13, kicksGood: 13, kickSuccessPct: 100.0, errors: 0 },
+  { playerCode: "Maringa Andrew Cpt", playerNumber: 13, team: "PETERHOUSE", totalActions: 49, passesTotal: 11, passesAccurate: 10, passAccuracyPct: 90.9, tacklesTotal: 9, tacklesMissed: 1, tackleSuccessPct: 88.9, ballCarriesTotal: 1, ballCarriesDominant: 1, carryDominancePct: 100.0, ruckArrivalsTotal: 6, ruckArrivalsEffective: 5, ruckEfficiencyPct: 83.3, kicksTotal: 8, kicksGood: 8, kickSuccessPct: 100.0, errors: 0 },
+  { playerCode: "Chikwanda Christian", playerNumber: 12, team: "PETERHOUSE", totalActions: 48, passesTotal: 4, passesAccurate: 4, passAccuracyPct: 100.0, tacklesTotal: 15, tacklesMissed: 5, tackleSuccessPct: 66.7, ballCarriesTotal: 4, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 11, ruckArrivalsEffective: 5, ruckEfficiencyPct: 45.5, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Mahlangu Themba", playerNumber: 17, team: "PETERHOUSE", totalActions: 41, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 8, tacklesMissed: 3, tackleSuccessPct: 62.5, ballCarriesTotal: 3, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 9, ruckArrivalsEffective: 3, ruckEfficiencyPct: 33.3, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Fantiso Panashe", playerNumber: 15, team: "PETERHOUSE", totalActions: 29, passesTotal: 3, passesAccurate: 3, passAccuracyPct: 100.0, tacklesTotal: 5, tacklesMissed: 2, tackleSuccessPct: 60.0, ballCarriesTotal: 2, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 4, ruckArrivalsEffective: 2, ruckEfficiencyPct: 50.0, kicksTotal: 5, kicksGood: 3, kickSuccessPct: 60.0, errors: 0 },
+  { playerCode: "Musekiwa Russell", playerNumber: 14, team: "PETERHOUSE", totalActions: 28, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 16, tacklesMissed: 1, tackleSuccessPct: 93.8, ballCarriesTotal: 3, ballCarriesDominant: 1, carryDominancePct: 33.3, ruckArrivalsTotal: 2, ruckArrivalsEffective: 2, ruckEfficiencyPct: 100.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Masamha Munashe", playerNumber: 11, team: "PETERHOUSE", totalActions: 15, passesTotal: 1, passesAccurate: 1, passAccuracyPct: 100.0, tacklesTotal: 2, tacklesMissed: 1, tackleSuccessPct: 50.0, ballCarriesTotal: 2, ballCarriesDominant: 1, carryDominancePct: 50.0, ruckArrivalsTotal: 1, ruckArrivalsEffective: 1, ruckEfficiencyPct: 100.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Maertens Douglas", playerNumber: 23, team: "PETERHOUSE", totalActions: 12, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 4, tacklesMissed: 2, tackleSuccessPct: 50.0, ballCarriesTotal: 2, ballCarriesDominant: 1, carryDominancePct: 50.0, ruckArrivalsTotal: 1, ruckArrivalsEffective: 1, ruckEfficiencyPct: 100.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+
+  // St Georges players (O team)
+  { playerCode: "Tian Muller", playerNumber: 6, team: "ST GEORGES", totalActions: 112, passesTotal: 1, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 12, tacklesMissed: 4, tackleSuccessPct: 66.7, ballCarriesTotal: 10, ballCarriesDominant: 2, carryDominancePct: 20.0, ruckArrivalsTotal: 21, ruckArrivalsEffective: 12, ruckEfficiencyPct: 57.1, kicksTotal: 1, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 99", playerNumber: 99, team: "ST GEORGES", totalActions: 111, passesTotal: 2, passesAccurate: 2, passAccuracyPct: 100.0, tacklesTotal: 10, tacklesMissed: 1, tackleSuccessPct: 90.0, ballCarriesTotal: 6, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 27, ruckArrivalsEffective: 14, ruckEfficiencyPct: 51.9, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Jasper May", playerNumber: 2, team: "ST GEORGES", totalActions: 106, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 10, tacklesMissed: 2, tackleSuccessPct: 80.0, ballCarriesTotal: 7, ballCarriesDominant: 1, carryDominancePct: 14.3, ruckArrivalsTotal: 26, ruckArrivalsEffective: 19, ruckEfficiencyPct: 73.1, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Callum Orford", playerNumber: 10, team: "ST GEORGES", totalActions: 99, passesTotal: 14, passesAccurate: 14, passAccuracyPct: 100.0, tacklesTotal: 8, tacklesMissed: 3, tackleSuccessPct: 62.5, ballCarriesTotal: 4, ballCarriesDominant: 2, carryDominancePct: 50.0, ruckArrivalsTotal: 21, ruckArrivalsEffective: 14, ruckEfficiencyPct: 66.7, kicksTotal: 22, kicksGood: 21, kickSuccessPct: 95.5, errors: 0 },
+  { playerCode: "Joshua Saunders", playerNumber: 8, team: "ST GEORGES", totalActions: 98, passesTotal: 5, passesAccurate: 5, passAccuracyPct: 100.0, tacklesTotal: 14, tacklesMissed: 4, tackleSuccessPct: 71.4, ballCarriesTotal: 11, ballCarriesDominant: 1, carryDominancePct: 9.1, ruckArrivalsTotal: 18, ruckArrivalsEffective: 13, ruckEfficiencyPct: 72.2, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Ethan Fouché", playerNumber: 3, team: "ST GEORGES", totalActions: 92, passesTotal: 1, passesAccurate: 1, passAccuracyPct: 100.0, tacklesTotal: 9, tacklesMissed: 2, tackleSuccessPct: 77.8, ballCarriesTotal: 6, ballCarriesDominant: 1, carryDominancePct: 16.7, ruckArrivalsTotal: 17, ruckArrivalsEffective: 8, ruckEfficiencyPct: 47.1, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Tinotenda Dhimairo", playerNumber: 1, team: "ST GEORGES", totalActions: 91, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 12, tacklesMissed: 1, tackleSuccessPct: 91.7, ballCarriesTotal: 9, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 13, ruckArrivalsEffective: 5, ruckEfficiencyPct: 38.5, kicksTotal: 1, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Takomborerwa Chigangacha", playerNumber: 7, team: "ST GEORGES", totalActions: 89, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 5, tacklesMissed: 0, tackleSuccessPct: 100.0, ballCarriesTotal: 2, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 26, ruckArrivalsEffective: 16, ruckEfficiencyPct: 61.5, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Joshua Littlewood", playerNumber: 9, team: "ST GEORGES", totalActions: 76, passesTotal: 58, passesAccurate: 58, passAccuracyPct: 100.0, tacklesTotal: 4, tacklesMissed: 3, tackleSuccessPct: 25.0, ballCarriesTotal: 1, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 2, ruckArrivalsEffective: 1, ruckEfficiencyPct: 50.0, kicksTotal: 5, kicksGood: 5, kickSuccessPct: 100.0, errors: 0 },
+  { playerCode: "Ruan Nel", playerNumber: 4, team: "ST GEORGES", totalActions: 59, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 7, tacklesMissed: 1, tackleSuccessPct: 85.7, ballCarriesTotal: 6, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 17, ruckArrivalsEffective: 8, ruckEfficiencyPct: 47.1, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "Scott Wenham", playerNumber: 13, team: "ST GEORGES", totalActions: 52, passesTotal: 3, passesAccurate: 2, passAccuracyPct: 66.7, tacklesTotal: 8, tacklesMissed: 2, tackleSuccessPct: 75.0, ballCarriesTotal: 8, ballCarriesDominant: 3, carryDominancePct: 37.5, ruckArrivalsTotal: 14, ruckArrivalsEffective: 10, ruckEfficiencyPct: 71.4, kicksTotal: 1, kicksGood: 1, kickSuccessPct: 100.0, errors: 0 },
+  { playerCode: "James Thompson (c)", playerNumber: 12, team: "ST GEORGES", totalActions: 46, passesTotal: 4, passesAccurate: 4, passAccuracyPct: 100.0, tacklesTotal: 4, tacklesMissed: 2, tackleSuccessPct: 50.0, ballCarriesTotal: 13, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 9, ruckArrivalsEffective: 6, ruckEfficiencyPct: 66.7, kicksTotal: 2, kicksGood: 1, kickSuccessPct: 50.0, errors: 0 },
+  { playerCode: "O 20", playerNumber: 20, team: "ST GEORGES", totalActions: 24, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 4, tacklesMissed: 2, tackleSuccessPct: 50.0, ballCarriesTotal: 2, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 5, ruckArrivalsEffective: 3, ruckEfficiencyPct: 60.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 21", playerNumber: 21, team: "ST GEORGES", totalActions: 24, passesTotal: 14, passesAccurate: 13, passAccuracyPct: 92.9, tacklesTotal: 1, tacklesMissed: 0, tackleSuccessPct: 100.0, ballCarriesTotal: 2, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 2, ruckArrivalsEffective: 1, ruckEfficiencyPct: 50.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 15", playerNumber: 15, team: "ST GEORGES", totalActions: 22, passesTotal: 1, passesAccurate: 1, passAccuracyPct: 100.0, tacklesTotal: 1, tacklesMissed: 0, tackleSuccessPct: 100.0, ballCarriesTotal: 4, ballCarriesDominant: 3, carryDominancePct: 75.0, ruckArrivalsTotal: 4, ruckArrivalsEffective: 3, ruckEfficiencyPct: 75.0, kicksTotal: 1, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 14", playerNumber: 14, team: "ST GEORGES", totalActions: 15, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 4, tacklesMissed: 1, tackleSuccessPct: 75.0, ballCarriesTotal: 3, ballCarriesDominant: 1, carryDominancePct: 33.3, ruckArrivalsTotal: 4, ruckArrivalsEffective: 2, ruckEfficiencyPct: 50.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 5", playerNumber: 5, team: "ST GEORGES", totalActions: 14, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 3, tacklesMissed: 0, tackleSuccessPct: 100.0, ballCarriesTotal: 0, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 2, ruckArrivalsEffective: 2, ruckEfficiencyPct: 100.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 11", playerNumber: 11, team: "ST GEORGES", totalActions: 9, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 1, tacklesMissed: 1, tackleSuccessPct: 0.0, ballCarriesTotal: 3, ballCarriesDominant: 2, carryDominancePct: 66.7, ruckArrivalsTotal: 2, ruckArrivalsEffective: 0, ruckEfficiencyPct: 0.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 23", playerNumber: 23, team: "ST GEORGES", totalActions: 9, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 1, tacklesMissed: 0, tackleSuccessPct: 100.0, ballCarriesTotal: 0, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 4, ruckArrivalsEffective: 2, ruckEfficiencyPct: 50.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 16", playerNumber: 16, team: "ST GEORGES", totalActions: 7, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 2, tacklesMissed: 0, tackleSuccessPct: 100.0, ballCarriesTotal: 1, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 2, ruckArrivalsEffective: 2, ruckEfficiencyPct: 100.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 }
+];

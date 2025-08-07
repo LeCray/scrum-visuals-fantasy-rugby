@@ -1,0 +1,189 @@
+{
+  "total_instances": 1684,
+  "match_duration": 5369.0,
+  "match_name": "1st XV Peterhouse vs St Georges",
+  "is_granular_format": true,
+  "team_stats": {
+    "1st XV Peterhouse": {
+      "total_actions": 790,
+      "action_types": {
+        "H 13": 41,
+        "H 6": 65,
+        "H 10": 44,
+        "H 8": 70,
+        "H 1": 44,
+        "H 9": 61,
+        "H 3": 76,
+        "H 4": 68,
+        "H 7": 53,
+        "H 5": 60,
+        "H 12": 38,
+        "H 14": 25,
+        "H 11": 14,
+        "H 2": 66,
+        "H 15": 23,
+        "H 17": 32,
+        "H 23": 10
+      }
+    },
+    "St Georges": {
+      "total_actions": 894,
+      "action_types": {
+        "O 10": 75,
+        "O 6": 88,
+        "O 12": 34,
+        "O 3": 75,
+        "O 1": 77,
+        "O 2": 70,
+        "O 14": 11,
+        "O 11": 7,
+        "O 7": 63,
+        "O 99": 84,
+        "O 13": 36,
+        "O 9": 74,
+        "O 8": 79,
+        "O 4": 42,
+        "O 15": 17,
+        "O 5": 12,
+        "O 20": 19,
+        "O 23": 5,
+        "O 21": 21,
+        "O 16": 5
+      }
+    }
+  },
+  "action_types": {
+    "O 10": 75,
+    "H 13": 41,
+    "O 6": 88,
+    "O 12": 34,
+    "H 6": 65,
+    "H 10": 44,
+    "H 8": 70,
+    "H 1": 44,
+    "H 9": 61,
+    "H 3": 76,
+    "O 3": 75,
+    "O 1": 77,
+    "H 4": 68,
+    "H 7": 53,
+    "H 5": 60,
+    "O 2": 70,
+    "O 14": 11,
+    "H 12": 38,
+    "H 14": 25,
+    "O 11": 7,
+    "O 7": 63,
+    "O 99": 84,
+    "O 13": 36,
+    "O 9": 74,
+    "O 8": 79,
+    "O 4": 42,
+    "H 11": 14,
+    "O 15": 17,
+    "H 2": 66,
+    "O 5": 12,
+    "H 15": 23,
+    "O 20": 19,
+    "H 17": 32,
+    "H 23": 10,
+    "O 23": 5,
+    "O 21": 21,
+    "O 16": 5
+  },
+  "periods": [],
+  "granular_analytics": {
+    "passing_analysis": {
+      "total_passes": 191,
+      "accurate": 187,
+      "inaccurate": 4,
+      "accuracy_percentage": 97.90575916230367
+    },
+    "tackle_analysis": {
+      "Tackle Neutral": 199,
+      "Missed Tackle": 70,
+      "Tackle Negative": 34
+    },
+    "ball_carry_analysis": {
+      "Ball Carry Neutral": 131,
+      "Ball Carry Dominant": 26
+    },
+    "ruck_analysis": {
+      "Ruck Arrival Effective": 220,
+      "Ruck Arrival Ineffective": 123,
+      "Ruck Arrival Dominant": 19
+    },
+    "set_piece_analysis": {
+      "Scrum Involvement": 291,
+      "Lineout Involvement": 205,
+      "Successful Throw": 19,
+      "Unsuccessful Throw": 2
+    },
+    "error_analysis": {
+      "total_errors": 31,
+      "by_player": {
+        "O 7": 1,
+        "O 12": 2,
+        "H 14": 1,
+        "H 13": 3,
+        "O 6": 2,
+        "O 10": 3,
+        "O 15": 1,
+        "H 15": 2,
+        "H 8": 3,
+        "H 7": 2,
+        "H 3": 1,
+        "H 23": 2,
+        "H 2": 3,
+        "H 6": 2,
+        "O 13": 1,
+        "O 21": 2
+      }
+    },
+    "player_performance": {
+      "most_active_players": [
+        [
+          "O 6",
+          88
+        ],
+        [
+          "O 99",
+          84
+        ],
+        [
+          "O 8",
+          79
+        ],
+        [
+          "O 1",
+          77
+        ],
+        [
+          "H 3",
+          76
+        ],
+        [
+          "O 10",
+          75
+        ],
+        [
+          "O 3",
+          75
+        ],
+        [
+          "O 9",
+          74
+        ],
+        [
+          "H 8",
+          70
+        ],
+        [
+          "O 2",
+          70
+        ]
+      ],
+      "total_unique_players": 37
+    }
+  }
+}
