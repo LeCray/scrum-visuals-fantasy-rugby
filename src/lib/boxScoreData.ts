@@ -2801,7 +2801,7 @@ boxScores.set(stJohnsVsStGeorgesWeek9MatchId, stJohnsVsStGeorgesCBZWeek9);
 // Add score for Week 10 CBZ Schools Rugby match - 02 Aug 2025
 finalScores.set(
   generateMatchId("Week 10", "14:00", "FALCON", "ST JOHNS"),
-  { teamAScore: 29, teamBScore: 10 }
+  { teamAScore: 33, teamBScore: 14 }
 );
 
 // Define tries with timestamps and conversion status for Falcon vs St Johns Week 10
@@ -2982,6 +2982,51 @@ finalScores.set(
   generateMatchId("Week 10", "15:00", "PETERHOUSE", "ST GEORGES"),
   { teamAScore: 17, teamBScore: 31 }
 );
+
+// Add all Week 10 match scores
+finalScores.set(
+  generateMatchId("Week 10", "14:00", "LOMAGUNDI", "PRINCE EDWARD"),
+  { teamAScore: 64, teamBScore: 10 }
+);
+
+finalScores.set(
+  generateMatchId("Week 10", "14:00", "MARONDERA", "MUTARE"),
+  { teamAScore: 13, teamBScore: 16 }
+);
+
+finalScores.set(
+  generateMatchId("Week 10", "14:00", "WISE OWL", "HILLCREST"),
+  { teamAScore: 53, teamBScore: 36 }
+);
+
+// PH 17-31 Saints is already added above as PETERHOUSE vs ST GEORGES
+
+finalScores.set(
+  generateMatchId("Week 10", "14:00", "HERITAGE", "KYLE"),
+  { teamAScore: 30, teamBScore: 16 }
+);
+
+finalScores.set(
+  generateMatchId("Week 10", "14:00", "ST IGNATIUS", "TYNWALD"),
+  { teamAScore: 38, teamBScore: 3 }
+);
+
+finalScores.set(
+  generateMatchId("Week 10", "14:00", "WATERSHED", "GATEWAY"),
+  { teamAScore: 30, teamBScore: 29 }
+);
+
+finalScores.set(
+  generateMatchId("Week 10", "14:00", "CBC", "HELLENIC"),
+  { teamAScore: 26, teamBScore: 24 }
+);
+
+finalScores.set(
+  generateMatchId("Week 10", "14:00", "EAGLESVALE", "MIDLANDS CC"),
+  { teamAScore: 24, teamBScore: 12 }
+);
+
+// Falcon 33-14 Johns is already added above as FALCON vs ST JOHNS
 
 // Define tries with timestamps and conversion status for Peterhouse vs St Georges Week 10
 const peterhouseVsStGeorgesWeek10PeterhouseTries: TryScore[] = [

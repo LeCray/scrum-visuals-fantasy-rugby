@@ -377,16 +377,16 @@ const sbr2025Games: FixtureDay[] = [
     day: "02 Aug",
     month: "August",
     fixtures: [
-      { time: "TBD", teamA: "CHURCHILL", teamB: "PLUMTREE" },
-      { time: "TBD", teamA: "LOMAGUNDI", teamB: "PRINCE EDWARD" },
-      { time: "TBD", teamA: "PETERHOUSE", teamB: "ST GEORGES" },
-      { time: "TBD", teamA: "FALCON", teamB: "ST JOHNS" },
-      { time: "TBD", teamA: "GATEWAY", teamB: "WATERSHED" },
-      { time: "TBD", teamA: "HERITAGE", teamB: "KYLE" },
-      { time: "TBD", teamA: "MARONDERA HIGH", teamB: "MUTARE" },
-      { time: "TBD", teamA: "HELLENIC", teamB: "CBC" },
-      { time: "TBD", teamA: "GIFFORD", teamB: "MILTON" },
-      { time: "TBD", teamA: "GOLDRIDGE", teamB: "PETRA" }
+      { time: "14:00", teamA: "LOMAGUNDI", teamB: "PRINCE EDWARD" },
+      { time: "14:00", teamA: "MARONDERA", teamB: "MUTARE" },
+      { time: "14:00", teamA: "WISE OWL", teamB: "HILLCREST" },
+      { time: "15:00", teamA: "PETERHOUSE", teamB: "ST GEORGES" },
+      { time: "14:00", teamA: "HERITAGE", teamB: "KYLE" },
+      { time: "14:00", teamA: "ST IGNATIUS", teamB: "TYNWALD" },
+      { time: "14:00", teamA: "WATERSHED", teamB: "GATEWAY" },
+      { time: "14:00", teamA: "CBC", teamB: "HELLENIC" },
+      { time: "14:00", teamA: "EAGLESVALE", teamB: "MIDLANDS CC" },
+      { time: "14:00", teamA: "FALCON", teamB: "ST JOHNS" }
     ]
   }
 ];
