@@ -1,0 +1,193 @@
+{
+  "total_instances": 1520,
+  "match_duration": 4716.0,
+  "match_name": "Falcon College vs St John's",
+  "is_granular_format": true,
+  "team_stats": {
+    "Falcon College": {
+      "total_actions": 822,
+      "action_types": {
+        "H 10": 55,
+        "H 13": 29,
+        "H 8": 75,
+        "H 9": 83,
+        "H 15": 30,
+        "H 12": 40,
+        "H 6": 60,
+        "H 4": 72,
+        "H 2": 74,
+        "H 3": 57,
+        "H 1": 62,
+        "H 14": 20,
+        "H 7": 64,
+        "H 11": 17,
+        "H 5": 71,
+        "H 19": 4,
+        "H 23": 5,
+        "H 17": 4
+      }
+    },
+    "St John's": {
+      "total_actions": 698,
+      "action_types": {
+        "O 12": 45,
+        "O 6": 68,
+        "O 1": 41,
+        "O 3": 54,
+        "O 9": 47,
+        "O 10": 44,
+        "O 7": 75,
+        "O 5": 62,
+        "O 2": 54,
+        "O 8": 59,
+        "O 13": 14,
+        "O 4": 50,
+        "O 14": 24,
+        "O 11": 13,
+        "O 15": 14,
+        "O 21": 12,
+        "O 17": 18,
+        "O 22": 4
+      }
+    }
+  },
+  "action_types": {
+    "H 10": 55,
+    "O 12": 45,
+    "H 13": 29,
+    "O 6": 68,
+    "O 1": 41,
+    "O 3": 54,
+    "O 9": 47,
+    "O 10": 44,
+    "H 8": 75,
+    "H 9": 83,
+    "H 15": 30,
+    "O 7": 75,
+    "H 12": 40,
+    "H 6": 60,
+    "O 5": 62,
+    "H 4": 72,
+    "H 2": 74,
+    "O 2": 54,
+    "H 3": 57,
+    "H 1": 62,
+    "H 14": 20,
+    "H 7": 64,
+    "O 8": 59,
+    "O 13": 14,
+    "H 11": 17,
+    "H 5": 71,
+    "O 4": 50,
+    "O 14": 24,
+    "O 11": 13,
+    "O 15": 14,
+    "H 19": 4,
+    "H 23": 5,
+    "O 21": 12,
+    "O 17": 18,
+    "O 22": 4,
+    "H 17": 4
+  },
+  "periods": [],
+  "granular_analytics": {
+    "passing_analysis": {
+      "total_passes": 174,
+      "accurate": 170,
+      "inaccurate": 4,
+      "accuracy_percentage": 97.70114942528735
+    },
+    "tackle_analysis": {
+      "Tackle Neutral": 132,
+      "Tackle Negative": 34,
+      "Missed Tackle": 66,
+      "Tackle Dominant": 2
+    },
+    "ball_carry_analysis": {
+      "Ball Carry Neutral": 81,
+      "Ball Carry Dominant": 24,
+      "Ball Carry Negative": 2
+    },
+    "ruck_analysis": {
+      "Ruck Arrival Effective": 168,
+      "Ruck Arrival Ineffective": 94,
+      "Ruck Arrival Dominant": 15
+    },
+    "set_piece_analysis": {
+      "Scrum Involvement": 377,
+      "Lineout Involvement": 177,
+      "Unsuccessful Throw": 5,
+      "Successful Throw": 10
+    },
+    "error_analysis": {
+      "total_errors": 38,
+      "by_player": {
+        "H 13": 4,
+        "O 10": 6,
+        "O 13": 1,
+        "H 5": 1,
+        "O 5": 2,
+        "O 14": 3,
+        "H 14": 2,
+        "H 12": 1,
+        "H 2": 3,
+        "H 15": 3,
+        "H 10": 1,
+        "O 8": 1,
+        "H 8": 1,
+        "O 15": 1,
+        "O 7": 2,
+        "O 12": 1,
+        "H 1": 1,
+        "O 2": 2,
+        "O 4": 1,
+        "H 4": 1
+      }
+    },
+    "player_performance": {
+      "most_active_players": [
+        [
+          "H 9",
+          83
+        ],
+        [
+          "H 8",
+          75
+        ],
+        [
+          "O 7",
+          75
+        ],
+        [
+          "H 2",
+          74
+        ],
+        [
+          "H 4",
+          72
+        ],
+        [
+          "H 5",
+          71
+        ],
+        [
+          "O 6",
+          68
+        ],
+        [
+          "H 7",
+          64
+        ],
+        [
+          "O 5",
+          62
+        ],
+        [
+          "H 1",
+          62
+        ]
+      ],
+      "total_unique_players": 36
+    }
+  }
+}

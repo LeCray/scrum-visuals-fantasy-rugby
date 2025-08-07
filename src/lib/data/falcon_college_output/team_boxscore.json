@@ -1,0 +1,62 @@
+{
+  "Falcon College": {
+    "total_actions": 822,
+    "possession_percentage": 54.07894736842105,
+    "passes": {
+      "total": 123,
+      "accurate": 122,
+      "accuracy_pct": 99.1869918699187
+    },
+    "tackles": {
+      "total": 60,
+      "missed": 20,
+      "success_pct": 66.66666666666666
+    },
+    "ball_carries": {
+      "total": 78,
+      "dominant": 17,
+      "dominance_pct": 21.794871794871796
+    },
+    "ruck_arrivals": {
+      "total": 204,
+      "effective": 133,
+      "efficiency_pct": 65.19607843137256
+    },
+    "kicks": {
+      "total": 28,
+      "good": 24,
+      "success_pct": 85.71428571428571
+    },
+    "errors": 0
+  },
+  "St John's": {
+    "total_actions": 698,
+    "possession_percentage": 45.921052631578945,
+    "passes": {
+      "total": 51,
+      "accurate": 48,
+      "accuracy_pct": 94.11764705882352
+    },
+    "tackles": {
+      "total": 174,
+      "missed": 46,
+      "success_pct": 73.5632183908046
+    },
+    "ball_carries": {
+      "total": 29,
+      "dominant": 7,
+      "dominance_pct": 24.137931034482758
+    },
+    "ruck_arrivals": {
+      "total": 73,
+      "effective": 35,
+      "efficiency_pct": 47.94520547945205
+    },
+    "kicks": {
+      "total": 25,
+      "good": 16,
+      "success_pct": 64.0
+    },
+    "errors": 0
+  }
+}

@@ -1,0 +1,1860 @@
+id,start_time,end_time,duration,code,label_group,label_text,label_index
+1,5655.0,5665.0,10.0,H 10,Kick,Good Kick,0
+2,5658.0,5668.0,10.0,O 12,Outcome,Ball Caught,0
+3,5661.0,5671.0,10.0,O 12,Ball Carry,Ball Carry Neutral,0
+4,5661.0,5671.0,10.0,H 13,Tackle,Tackle Neutral,0
+5,5664.0,5674.0,10.0,O 6,OOA,1st,0
+5,5664.0,5674.0,10.0,O 6,Ruck Arrival,Ruck Arrival Effective,1
+6,5665.0,5675.0,10.0,O 1,Ruck Arrival,Ruck Arrival Effective,0
+6,5665.0,5675.0,10.0,O 1,OOA,2nd,1
+7,5665.0,5675.0,10.0,O 3,Ruck Arrival,Ruck Arrival Ineffective,0
+7,5665.0,5675.0,10.0,O 3,OOA,3rd,1
+8,5666.0,5676.0,10.0,O 9,Pass,Pass Accurate,0
+9,5667.0,5677.0,10.0,O 10,Kick,Good Kick,0
+10,5670.0,5680.0,10.0,H 8,Outcome,Ball Caught,0
+11,5673.0,5683.0,10.0,H 9,Pass,Pass Accurate,0
+12,5677.0,5687.0,10.0,H 15,Ball Carry,Ball Carry Neutral,0
+13,5677.0,5687.0,10.0,O 7,Tackle,Tackle Neutral,0
+14,5678.0,5688.0,10.0,H 12,OOA,2nd,0
+14,5678.0,5688.0,10.0,H 12,Ruck Arrival,Ruck Arrival Effective,1
+15,5679.0,5689.0,10.0,H 6,OOA,1st,0
+15,5679.0,5689.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,1
+16,5682.0,5692.0,10.0,H 9,Pass,Pass Accurate,0
+17,5686.0,5696.0,10.0,O 5,Tackle,Tackle Neutral,0
+18,5686.0,5696.0,10.0,H 4,Ball Carry,Ball Carry Neutral,0
+19,5686.0,5696.0,10.0,H 2,OOA,1st,0
+19,5686.0,5696.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+20,5686.0,5696.0,10.0,O 2,Tackle,Tackle Neutral,0
+21,5687.0,5697.0,10.0,H 3,OOA,2nd,0
+21,5687.0,5697.0,10.0,H 3,Ruck Arrival,Ruck Arrival Ineffective,1
+22,5688.0,5698.0,10.0,H 9,Pass,Pass Accurate,0
+23,5690.0,5700.0,10.0,H 10,Pass,Pass Accurate,0
+24,5690.0,5700.0,10.0,H 1,Pass,Pass Accurate,0
+25,5695.0,5705.0,10.0,O 3,Tackle,Tackle Negative,0
+26,5695.0,5705.0,10.0,O 7,Tackle,Tackle Negative,0
+27,5695.0,5705.0,10.0,H 14,Ball Carry,Ball Carry Dominant,0
+28,5696.0,5706.0,10.0,H 13,OOA,1st,0
+28,5696.0,5706.0,10.0,H 13,Ruck Arrival,Ruck Arrival Effective,1
+29,5696.0,5706.0,10.0,H 7,OOA,2nd,0
+29,5696.0,5706.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+30,5699.0,5709.0,10.0,H 9,Pass,Pass Accurate,0
+31,5700.0,5710.0,10.0,H 10,Pass,Pass Accurate,0
+32,5702.0,5712.0,10.0,O 6,Tackle,Missed Tackle,0
+33,5705.0,5715.0,10.0,O 1,Tackle,Tackle Negative,0
+34,5705.0,5715.0,10.0,H 3,Ball Carry,Ball Carry Dominant,0
+35,5705.0,5715.0,10.0,O 8,Tackle,Tackle Negative,0
+36,5707.0,5717.0,10.0,H 2,OOA,2nd,0
+36,5707.0,5717.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+37,5707.0,5717.0,10.0,H 1,OOA,1st,0
+37,5707.0,5717.0,10.0,H 1,Ruck Arrival,Ruck Arrival Effective,1
+38,5711.0,5721.0,10.0,H 9,Pass,Pass Accurate,0
+39,5712.0,5722.0,10.0,H 10,Pass,Pass Accurate,0
+40,5714.0,5724.0,10.0,H 12,Pass,Pass Accurate,0
+41,5716.0,5726.0,10.0,H 15,Ball Carry,Ball Carry Neutral,0
+42,5716.0,5726.0,10.0,O 12,Tackle,Tackle Neutral,0
+43,5716.0,5726.0,10.0,O 13,Tackle,Tackle Neutral,0
+44,5717.0,5727.0,10.0,H 12,Ruck Arrival,Ruck Arrival Effective,0
+44,5717.0,5727.0,10.0,H 12,OOA,2nd,1
+45,5717.0,5727.0,10.0,H 6,OOA,1st,0
+45,5717.0,5727.0,10.0,H 6,Ruck Arrival,Ruck Arrival Ineffective,1
+46,5717.0,5727.0,10.0,H 11,Ruck Arrival,Ruck Arrival Effective,0
+46,5717.0,5727.0,10.0,H 11,OOA,3rd,1
+47,5718.0,5728.0,10.0,H 8,Ruck Arrival,Ruck Arrival Ineffective,0
+47,5718.0,5728.0,10.0,H 8,OOA,4th +,1
+48,5722.0,5732.0,10.0,H 9,Pass,Pass Accurate,0
+49,5723.0,5733.0,10.0,H 10,Pass,Pass Accurate,0
+50,5725.0,5735.0,10.0,O 6,Tackle,Missed Tackle,0
+51,5726.0,5736.0,10.0,H 2,Ball Carry,Ball Carry Neutral,0
+52,5726.0,5736.0,10.0,O 2,Tackle,Tackle Neutral,0
+53,5726.0,5736.0,10.0,O 8,Tackle,Tackle Neutral,0
+54,5726.0,5736.0,10.0,O 8,Outcomes,Penalty Lost,0
+55,5727.0,5737.0,10.0,H 3,OOA,1st,0
+55,5727.0,5737.0,10.0,H 3,Ruck Arrival,Ruck Arrival Effective,1
+56,5727.0,5737.0,10.0,H 1,OOA,2nd,0
+56,5727.0,5737.0,10.0,H 1,Ruck Arrival,Ruck Arrival Effective,1
+57,5728.0,5738.0,10.0,H 9,Pass,Pass Accurate,0
+58,5730.0,5740.0,10.0,H 4,Pass,Pass Accurate,0
+59,5732.0,5742.0,10.0,H 13,Tags,Error,0
+60,5799.0,5809.0,10.0,H 15,Kick,Bad Kick,0
+61,5834.0,5844.0,10.0,O 10,Kick,Good Kick,0
+62,5838.0,5848.0,10.0,H 8,Outcome,Ball Caught,0
+63,5840.0,5850.0,10.0,H 8,Ball Carry,Ball Carry Neutral,0
+64,5840.0,5850.0,10.0,H 14,OOA,2nd,0
+64,5840.0,5850.0,10.0,H 14,Ruck Arrival,Ruck Arrival Ineffective,1
+65,5840.0,5850.0,10.0,H 7,OOA,1st,0
+65,5840.0,5850.0,10.0,H 7,Ruck Arrival,Ruck Arrival Ineffective,1
+66,5840.0,5850.0,10.0,O 13,Tackle,Tackle Neutral,0
+67,5841.0,5851.0,10.0,H 13,OOA,3rd,0
+67,5841.0,5851.0,10.0,H 13,Ruck Arrival,Ruck Arrival Ineffective,1
+68,5842.0,5852.0,10.0,O 12,Counter Ruck,Counter Ruck Effective,0
+69,5850.0,5860.0,10.0,H 9,Ball Carry,Ball Carry Neutral,0
+70,5850.0,5860.0,10.0,O 2,Tackle,Tackle Neutral,0
+71,5850.0,5860.0,10.0,O 13,Tackle,Tackle Neutral,0
+72,5851.0,5861.0,10.0,H 13,OOA,1st,0
+72,5851.0,5861.0,10.0,H 13,Ruck Arrival,Ruck Arrival Effective,1
+73,5851.0,5861.0,10.0,H 7,OOA,2nd,0
+73,5851.0,5861.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+74,5853.0,5863.0,10.0,H 8,Pass,Pass Accurate,0
+75,5856.0,5866.0,10.0,O 6,Tackle,Tackle Neutral,0
+76,5856.0,5866.0,10.0,O 3,Tackle,Tackle Neutral,0
+77,5856.0,5866.0,10.0,H 1,Ball Carry,Ball Carry Neutral,0
+78,5858.0,5868.0,10.0,H 4,OOA,1st,0
+78,5858.0,5868.0,10.0,H 4,Ruck Arrival,Ruck Arrival Dominant,1
+79,5858.0,5868.0,10.0,H 5,OOA,2nd,0
+79,5858.0,5868.0,10.0,H 5,Ruck Arrival,Ruck Arrival Effective,1
+80,5860.0,5870.0,10.0,H 8,OOA,3rd,0
+80,5860.0,5870.0,10.0,H 8,Ruck Arrival,Ruck Arrival Effective,1
+81,5862.0,5872.0,10.0,H 9,Pass,Pass Accurate,0
+82,5864.0,5874.0,10.0,H 10,Pass,Pass Accurate,0
+83,5866.0,5876.0,10.0,H 13,Tags,Error,0
+83,5866.0,5876.0,10.0,H 13,Outcomes,Ball Lost,1
+84,5866.0,5876.0,10.0,H 7,Pass,Pass Accurate,0
+85,5907.0,5917.0,10.0,O 6,Set Piece,Scrum Involvement,0
+86,5907.0,5917.0,10.0,O 1,Set Piece,Scrum Involvement,0
+87,5907.0,5917.0,10.0,O 3,Set Piece,Scrum Involvement,0
+88,5907.0,5917.0,10.0,H 8,Set Piece,Scrum Involvement,0
+89,5907.0,5917.0,10.0,O 7,Set Piece,Scrum Involvement,0
+90,5907.0,5917.0,10.0,O 5,Set Piece,Scrum Involvement,0
+91,5907.0,5917.0,10.0,H 4,Set Piece,Scrum Involvement,0
+92,5907.0,5917.0,10.0,H 2,Set Piece,Scrum Involvement,0
+93,5907.0,5917.0,10.0,H 3,Set Piece,Scrum Involvement,0
+94,5907.0,5917.0,10.0,H 1,Set Piece,Scrum Involvement,0
+95,5907.0,5917.0,10.0,O 2,Set Piece,Scrum Involvement,0
+96,5907.0,5917.0,10.0,H 7,Set Piece,Scrum Involvement,0
+97,5907.0,5917.0,10.0,O 8,Set Piece,Scrum Involvement,0
+98,5907.0,5917.0,10.0,H 6,Set Piece,Scrum Involvement,0
+99,5907.0,5917.0,10.0,H 5,Set Piece,Scrum Involvement,0
+100,5907.0,5917.0,10.0,O 4,Set Piece,Scrum Involvement,0
+101,5931.0,5941.0,10.0,O 6,Set Piece,Scrum Involvement,0
+102,5931.0,5941.0,10.0,O 1,Set Piece,Scrum Involvement,0
+103,5931.0,5941.0,10.0,O 3,Set Piece,Scrum Involvement,0
+104,5931.0,5941.0,10.0,H 8,Set Piece,Scrum Involvement,0
+105,5931.0,5941.0,10.0,O 7,Set Piece,Scrum Involvement,0
+106,5931.0,5941.0,10.0,O 5,Set Piece,Scrum Involvement,0
+107,5931.0,5941.0,10.0,H 4,Set Piece,Scrum Involvement,0
+108,5931.0,5941.0,10.0,H 2,Set Piece,Scrum Involvement,0
+109,5931.0,5941.0,10.0,H 3,Set Piece,Scrum Involvement,0
+110,5931.0,5941.0,10.0,H 1,Set Piece,Scrum Involvement,0
+111,5931.0,5941.0,10.0,O 2,Set Piece,Scrum Involvement,0
+112,5931.0,5941.0,10.0,H 7,Set Piece,Scrum Involvement,0
+113,5931.0,5941.0,10.0,O 8,Set Piece,Scrum Involvement,0
+114,5931.0,5941.0,10.0,H 6,Set Piece,Scrum Involvement,0
+115,5931.0,5941.0,10.0,H 5,Set Piece,Scrum Involvement,0
+116,5931.0,5941.0,10.0,O 4,Set Piece,Scrum Involvement,0
+117,5937.0,5947.0,10.0,O 9,Pass,Pass Accurate,0
+118,5938.0,5948.0,10.0,O 10,Kick,Bad Kick,0
+119,5943.0,5953.0,10.0,H 11,Carry,Ball Dropped,0
+120,5945.0,5955.0,10.0,O 14,Tackle,Missed Tackle,0
+121,5949.0,5959.0,10.0,O 12,Tackle,Missed Tackle,0
+122,5950.0,5960.0,10.0,H 13,Offload,Unsuccessful Offload,0
+122,5950.0,5960.0,10.0,H 13,Tags,Error,1
+122,5950.0,5960.0,10.0,H 13,Outcomes,Ball Lost,2
+123,5954.0,5964.0,10.0,O 12,OOA,3rd,0
+123,5954.0,5964.0,10.0,O 12,Ruck Arrival,Ruck Arrival Ineffective,1
+124,5954.0,5964.0,10.0,O 13,OOA,2nd,0
+124,5954.0,5964.0,10.0,O 13,Ruck Arrival,Ruck Arrival Effective,1
+125,5954.0,5964.0,10.0,O 11,OOA,1st,0
+125,5954.0,5964.0,10.0,O 11,Ruck Arrival,Ruck Arrival Effective,1
+126,5955.0,5965.0,10.0,O 6,OOA,4th +,0
+126,5955.0,5965.0,10.0,O 6,Ruck Arrival,Ruck Arrival Ineffective,1
+127,5956.0,5966.0,10.0,O 9,Pass,Pass Accurate,0
+128,5958.0,5968.0,10.0,O 7,Pass,Pass Accurate,0
+129,5960.0,5970.0,10.0,O 10,Pass,Pass Accurate,0
+130,5964.0,5974.0,10.0,H 1,Tackle,Missed Tackle,0
+131,5965.0,5975.0,10.0,H 10,Tackle,Missed Tackle,0
+132,5966.0,5976.0,10.0,O 15,Ball Carry,Ball Carry Dominant,0
+133,5966.0,5976.0,10.0,H 2,Tackle,Tackle Negative,0
+134,5967.0,5977.0,10.0,O 1,OOA,1st,0
+134,5967.0,5977.0,10.0,O 1,Ruck Arrival,Ruck Arrival Dominant,1
+135,5968.0,5978.0,10.0,O 3,OOA,2nd,0
+135,5968.0,5978.0,10.0,O 3,Ruck Arrival,Ruck Arrival Ineffective,1
+136,5970.0,5980.0,10.0,O 9,Pass,Pass Accurate,0
+137,5972.0,5982.0,10.0,H 4,Tackle,Tackle Neutral,0
+138,5972.0,5982.0,10.0,O 2,Ball Carry,Ball Carry Neutral,0
+139,5973.0,5983.0,10.0,H 10,Counter Ruck,Counter Ruck Ineffective,0
+140,5973.0,5983.0,10.0,O 7,OOA,1st,0
+140,5973.0,5983.0,10.0,O 7,Ruck Arrival,Ruck Arrival Effective,1
+141,5973.0,5983.0,10.0,H 5,Counter Ruck,Counter Ruck Ineffective,0
+142,5974.0,5984.0,10.0,O 8,OOA,2nd,0
+142,5974.0,5984.0,10.0,O 8,Ruck Arrival,Ruck Arrival Ineffective,1
+143,5975.0,5985.0,10.0,O 9,Pass,Pass Accurate,0
+144,5976.0,5986.0,10.0,O 10,Kick,Bad Kick,0
+144,5976.0,5986.0,10.0,O 10,Tags,Error,1
+145,5980.0,5990.0,10.0,O 13,Tags,Error,0
+146,5982.0,5992.0,10.0,O 10,Tackle,Missed Tackle,0
+147,5985.0,5995.0,10.0,H 10,Ball Carry,Ball Carry Neutral,0
+148,5985.0,5995.0,10.0,O 1,Tackle,Tackle Neutral,0
+149,5986.0,5996.0,10.0,H 6,OOA,1st,0
+149,5986.0,5996.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,1
+150,5987.0,5997.0,10.0,H 2,OOA,2nd,0
+150,5987.0,5997.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+151,5987.0,5997.0,10.0,H 3,OOA,3rd,0
+151,5987.0,5997.0,10.0,H 3,Ruck Arrival,Ruck Arrival Ineffective,1
+152,5987.0,5997.0,10.0,O 8,Counter Ruck,Counter Ruck Ineffective,0
+153,5988.0,5998.0,10.0,H 7,Ruck Arrival,Ruck Arrival Ineffective,0
+153,5988.0,5998.0,10.0,H 7,OOA,4th +,1
+154,5990.0,6000.0,10.0,H 9,Pass,Pass Accurate,0
+155,5995.0,6005.0,10.0,O 7,Tackle,Missed Tackle,0
+156,5997.0,6007.0,10.0,O 1,Tackle,Tackle Negative,0
+157,5997.0,6007.0,10.0,O 9,Tackle,Tackle Negative,0
+158,5997.0,6007.0,10.0,H 1,Ball Carry,Ball Carry Dominant,0
+159,5997.0,6007.0,10.0,O 10,Tackle,Tackle Negative,0
+160,5998.0,6008.0,10.0,H 4,OOA,1st,0
+160,5998.0,6008.0,10.0,H 4,Ruck Arrival,Ruck Arrival Effective,1
+161,5998.0,6008.0,10.0,H 5,OOA,2nd,0
+161,5998.0,6008.0,10.0,H 5,Ruck Arrival,Ruck Arrival Effective,1
+162,6001.0,6011.0,10.0,H 9,Carry,Linebreak,0
+163,6002.0,6012.0,10.0,O 10,Tackle,Missed Tackle,0
+164,6005.0,6015.0,10.0,H 9,Pass,Pass Accurate,0
+165,6009.0,6019.0,10.0,H 13,Carry,Try,0
+166,6061.0,6071.0,10.0,H 15,Kick,Good Kick,0
+167,6090.0,6100.0,10.0,O 10,Kick,Good Kick,0
+168,6093.0,6103.0,10.0,H 12,Outcome,Ball Caught,0
+169,6095.0,6105.0,10.0,O 7,Tackle,Tackle Neutral,0
+170,6095.0,6105.0,10.0,H 12,Ball Carry,Ball Carry Neutral,0
+171,6096.0,6106.0,10.0,H 8,OOA,1st,0
+171,6096.0,6106.0,10.0,H 8,Ruck Arrival,Ruck Arrival Effective,1
+172,6097.0,6107.0,10.0,H 2,OOA,2nd,0
+172,6097.0,6107.0,10.0,H 2,Ruck Arrival,Ruck Arrival Ineffective,1
+173,6097.0,6107.0,10.0,H 7,OOA,3rd,0
+173,6097.0,6107.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+174,6100.0,6110.0,10.0,H 9,Pass,Pass Accurate,0
+175,6101.0,6111.0,10.0,H 10,Pass,Pass Accurate,0
+176,6104.0,6114.0,10.0,O 6,Tackle,Tackle Neutral,0
+177,6104.0,6114.0,10.0,O 1,Tackle,Tackle Neutral,0
+178,6104.0,6114.0,10.0,O 3,Tackle,Tackle Neutral,0
+179,6104.0,6114.0,10.0,H 4,Ball Carry,Ball Carry Neutral,0
+180,6105.0,6115.0,10.0,H 1,OOA,2nd,0
+180,6105.0,6115.0,10.0,H 1,Ruck Arrival,Ruck Arrival Effective,1
+181,6105.0,6115.0,10.0,H 5,OOA,1st,0
+181,6105.0,6115.0,10.0,H 5,Ruck Arrival,Ruck Arrival Ineffective,1
+182,6106.0,6116.0,10.0,H 8,OOA,3rd,0
+182,6106.0,6116.0,10.0,H 8,Ruck Arrival,Ruck Arrival Effective,1
+183,6111.0,6121.0,10.0,H 9,Kick,Good Kick,0
+184,6118.0,6128.0,10.0,H 10,Ball Carry,Ball Carry Neutral,0
+185,6118.0,6128.0,10.0,O 14,Tackle,Tackle Neutral,0
+186,6120.0,6130.0,10.0,H 8,OOA,1st,0
+186,6120.0,6130.0,10.0,H 8,Ruck Arrival,Ruck Arrival Ineffective,1
+187,6120.0,6130.0,10.0,H 12,OOA,2nd,0
+187,6120.0,6130.0,10.0,H 12,Ruck Arrival,Ruck Arrival Effective,1
+188,6121.0,6131.0,10.0,H 7,OOA,3rd,0
+188,6121.0,6131.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+189,6124.0,6134.0,10.0,H 9,Pass,Pass Accurate,0
+190,6137.0,6147.0,10.0,H 5,Outcomes,Ball Lost,0
+190,6137.0,6147.0,10.0,H 5,Tags,Error,1
+191,6178.0,6188.0,10.0,O 6,Set Piece,Scrum Involvement,0
+192,6178.0,6188.0,10.0,O 1,Set Piece,Scrum Involvement,0
+193,6178.0,6188.0,10.0,O 3,Set Piece,Scrum Involvement,0
+194,6178.0,6188.0,10.0,H 8,Set Piece,Scrum Involvement,0
+195,6178.0,6188.0,10.0,O 7,Set Piece,Scrum Involvement,0
+196,6178.0,6188.0,10.0,O 5,Set Piece,Scrum Involvement,0
+197,6178.0,6188.0,10.0,H 4,Set Piece,Scrum Involvement,0
+198,6178.0,6188.0,10.0,H 2,Set Piece,Scrum Involvement,0
+199,6178.0,6188.0,10.0,H 3,Set Piece,Scrum Involvement,0
+200,6178.0,6188.0,10.0,H 1,Set Piece,Scrum Involvement,0
+201,6178.0,6188.0,10.0,O 2,Set Piece,Scrum Involvement,0
+202,6178.0,6188.0,10.0,H 7,Set Piece,Scrum Involvement,0
+203,6178.0,6188.0,10.0,O 8,Set Piece,Scrum Involvement,0
+204,6178.0,6188.0,10.0,H 6,Set Piece,Scrum Involvement,0
+205,6178.0,6188.0,10.0,H 5,Set Piece,Scrum Involvement,0
+206,6178.0,6188.0,10.0,O 4,Set Piece,Scrum Involvement,0
+207,6218.0,6228.0,10.0,O 6,Set Piece,Scrum Involvement,0
+208,6218.0,6228.0,10.0,O 1,Set Piece,Scrum Involvement,0
+209,6218.0,6228.0,10.0,O 3,Set Piece,Scrum Involvement,0
+210,6218.0,6228.0,10.0,H 8,Set Piece,Scrum Involvement,0
+211,6218.0,6228.0,10.0,O 7,Set Piece,Scrum Involvement,0
+212,6218.0,6228.0,10.0,O 5,Set Piece,Scrum Involvement,0
+213,6218.0,6228.0,10.0,H 4,Set Piece,Scrum Involvement,0
+214,6218.0,6228.0,10.0,H 2,Set Piece,Scrum Involvement,0
+215,6218.0,6228.0,10.0,H 3,Set Piece,Scrum Involvement,0
+216,6218.0,6228.0,10.0,H 1,Set Piece,Scrum Involvement,0
+217,6218.0,6228.0,10.0,O 2,Set Piece,Scrum Involvement,0
+218,6218.0,6228.0,10.0,H 7,Set Piece,Scrum Involvement,0
+219,6218.0,6228.0,10.0,O 8,Set Piece,Scrum Involvement,0
+220,6218.0,6228.0,10.0,H 6,Set Piece,Scrum Involvement,0
+221,6218.0,6228.0,10.0,H 5,Set Piece,Scrum Involvement,0
+222,6218.0,6228.0,10.0,O 4,Set Piece,Scrum Involvement,0
+223,6226.0,6236.0,10.0,H 4,Tackle,Tackle Neutral,0
+224,6226.0,6236.0,10.0,O 8,Ball Carry,Ball Carry Neutral,0
+225,6228.0,6238.0,10.0,O 6,OOA,1st,0
+225,6228.0,6238.0,10.0,O 6,Ruck Arrival,Ruck Arrival Effective,1
+226,6229.0,6239.0,10.0,O 1,OOA,2nd,0
+226,6229.0,6239.0,10.0,O 1,Ruck Arrival,Ruck Arrival Ineffective,1
+227,6229.0,6239.0,10.0,O 3,OOA,3rd,0
+227,6229.0,6239.0,10.0,O 3,Ruck Arrival,Ruck Arrival Effective,1
+228,6229.0,6239.0,10.0,O 7,OOA,4th +,0
+228,6229.0,6239.0,10.0,O 7,Ruck Arrival,Ruck Arrival Ineffective,1
+229,6231.0,6241.0,10.0,O 9,Pass,Pass Accurate,0
+230,6231.0,6241.0,10.0,O 5,Pass,Pass Inaccurate,0
+230,6231.0,6241.0,10.0,O 5,Tags,Error,1
+231,6234.0,6244.0,10.0,H 13,Tags,Error,0
+232,6275.0,6285.0,10.0,O 6,Set Piece,Scrum Involvement,0
+233,6275.0,6285.0,10.0,O 1,Set Piece,Scrum Involvement,0
+234,6275.0,6285.0,10.0,O 3,Set Piece,Scrum Involvement,0
+235,6275.0,6285.0,10.0,H 8,Set Piece,Scrum Involvement,0
+236,6275.0,6285.0,10.0,O 7,Set Piece,Scrum Involvement,0
+237,6275.0,6285.0,10.0,O 5,Set Piece,Scrum Involvement,0
+238,6275.0,6285.0,10.0,H 4,Set Piece,Scrum Involvement,0
+239,6275.0,6285.0,10.0,H 2,Set Piece,Scrum Involvement,0
+240,6275.0,6285.0,10.0,H 3,Set Piece,Scrum Involvement,0
+241,6275.0,6285.0,10.0,H 1,Set Piece,Scrum Involvement,0
+242,6275.0,6285.0,10.0,O 2,Set Piece,Scrum Involvement,0
+243,6275.0,6285.0,10.0,H 7,Set Piece,Scrum Involvement,0
+244,6275.0,6285.0,10.0,O 8,Set Piece,Scrum Involvement,0
+245,6275.0,6285.0,10.0,H 6,Set Piece,Scrum Involvement,0
+246,6275.0,6285.0,10.0,H 5,Set Piece,Scrum Involvement,0
+247,6275.0,6285.0,10.0,O 4,Set Piece,Scrum Involvement,0
+248,6278.0,6288.0,10.0,O 9,Pass,Pass Accurate,0
+249,6280.0,6290.0,10.0,O 10,Kick,Bad Kick,0
+249,6280.0,6290.0,10.0,O 10,Tags,Error,1
+250,6283.0,6293.0,10.0,O 15,Tackle,Missed Tackle,0
+251,6283.0,6293.0,10.0,O 13,Tackle,Missed Tackle,0
+252,6285.0,6295.0,10.0,O 14,Tackle,Missed Tackle,0
+253,6288.0,6298.0,10.0,O 12,Tackle,Missed Tackle,0
+254,6290.0,6300.0,10.0,H 9,Ball Carry,Ball Carry Dominant,0
+255,6290.0,6300.0,10.0,H 11,OOA,1st,0
+255,6290.0,6300.0,10.0,H 11,Ruck Arrival,Ruck Arrival Ineffective,1
+256,6290.0,6300.0,10.0,O 14,Tackle,Tackle Negative,0
+257,6291.0,6301.0,10.0,H 12,OOA,2nd,0
+257,6291.0,6301.0,10.0,H 12,Ruck Arrival,Ruck Arrival Effective,1
+258,6292.0,6302.0,10.0,O 6,Counter Ruck,Counter Ruck Ineffective,0
+259,6293.0,6303.0,10.0,H 7,OOA,3rd,0
+259,6293.0,6303.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+260,6295.0,6305.0,10.0,H 8,Pass,Pass Accurate,0
+261,6298.0,6308.0,10.0,O 6,Tackle,Tackle Neutral,0
+262,6298.0,6308.0,10.0,O 7,Tackle,Tackle Neutral,0
+263,6298.0,6308.0,10.0,H 5,Ball Carry,Ball Carry Neutral,0
+264,6299.0,6309.0,10.0,H 8,OOA,3rd,0
+264,6299.0,6309.0,10.0,H 8,Ruck Arrival,Ruck Arrival Ineffective,1
+265,6299.0,6309.0,10.0,H 4,OOA,1st,0
+265,6299.0,6309.0,10.0,H 4,Ruck Arrival,Ruck Arrival Effective,1
+266,6299.0,6309.0,10.0,H 2,OOA,2nd,0
+266,6299.0,6309.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+267,6302.0,6312.0,10.0,H 9,Kick,Good Kick,0
+268,6305.0,6315.0,10.0,H 10,Ball Carry,Ball Carry Neutral,0
+269,6305.0,6315.0,10.0,O 5,Tackle,Tackle Neutral,0
+270,6305.0,6315.0,10.0,O 4,Tackle,Tackle Neutral,0
+271,6306.0,6316.0,10.0,H 6,OOA,1st,0
+271,6306.0,6316.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,1
+272,6307.0,6317.0,10.0,H 3,OOA,2nd,0
+272,6307.0,6317.0,10.0,H 3,Ruck Arrival,Ruck Arrival Effective,1
+273,6308.0,6318.0,10.0,H 2,OOA,3rd,0
+273,6308.0,6318.0,10.0,H 2,Ruck Arrival,Ruck Arrival Ineffective,1
+274,6309.0,6319.0,10.0,H 9,Pass,Pass Accurate,0
+275,6312.0,6322.0,10.0,O 6,Tackle,Tackle Neutral,0
+276,6312.0,6322.0,10.0,H 12,Ball Carry,Ball Carry Neutral,0
+277,6312.0,6322.0,10.0,O 13,Tackle,Tackle Neutral,0
+278,6313.0,6323.0,10.0,H 4,OOA,1st,0
+278,6313.0,6323.0,10.0,H 4,Ruck Arrival,Ruck Arrival Dominant,1
+279,6313.0,6323.0,10.0,H 2,OOA,3rd,0
+279,6313.0,6323.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+280,6313.0,6323.0,10.0,H 5,OOA,2nd,0
+280,6313.0,6323.0,10.0,H 5,Ruck Arrival,Ruck Arrival Effective,1
+281,6315.0,6325.0,10.0,H 8,OOA,4th +,0
+281,6315.0,6325.0,10.0,H 8,Ruck Arrival,Ruck Arrival Ineffective,1
+282,6316.0,6326.0,10.0,H 9,Kick,Good Kick,0
+283,6318.0,6328.0,10.0,O 12,Tackle,Tackle Neutral,0
+284,6319.0,6329.0,10.0,O 5,Tackle,Tackle Neutral,0
+285,6319.0,6329.0,10.0,H 3,Ball Carry,Ball Carry Neutral,0
+286,6319.0,6329.0,10.0,H 6,OOA,1st,0
+286,6319.0,6329.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,1
+287,6320.0,6330.0,10.0,H 1,OOA,2nd,0
+287,6320.0,6330.0,10.0,H 1,Ruck Arrival,Ruck Arrival Effective,1
+288,6322.0,6332.0,10.0,H 9,Pass,Pass Accurate,0
+289,6325.0,6335.0,10.0,H 13,Ball Carry,Ball Carry Neutral,0
+290,6326.0,6336.0,10.0,H 10,OOA,1st,0
+290,6326.0,6336.0,10.0,H 10,Ruck Arrival,Ruck Arrival Effective,1
+291,6326.0,6336.0,10.0,H 11,OOA,2nd,0
+291,6326.0,6336.0,10.0,H 11,Ruck Arrival,Ruck Arrival Effective,1
+292,6327.0,6337.0,10.0,H 2,OOA,3rd,0
+292,6327.0,6337.0,10.0,H 2,Ruck Arrival,Ruck Arrival Ineffective,1
+293,6328.0,6338.0,10.0,H 9,Pass,Pass Accurate,0
+294,6328.0,6338.0,10.0,O 7,Tackle,Tackle Neutral,0
+295,6332.0,6342.0,10.0,O 1,Tackle,Tackle Neutral,0
+296,6332.0,6342.0,10.0,H 4,Ball Carry,Ball Carry Neutral,0
+297,6332.0,6342.0,10.0,O 2,Tackle,Tackle Neutral,0
+298,6332.0,6342.0,10.0,H 5,OOA,1st,0
+298,6332.0,6342.0,10.0,H 5,Ruck Arrival,Ruck Arrival Dominant,1
+299,6333.0,6343.0,10.0,H 2,OOA,2nd,0
+299,6333.0,6343.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+300,6336.0,6346.0,10.0,H 9,Pass,Pass Accurate,0
+301,6340.0,6350.0,10.0,O 6,Tackle,Tackle Neutral,0
+302,6340.0,6350.0,10.0,H 1,Ball Carry,Ball Carry Neutral,0
+303,6340.0,6350.0,10.0,O 8,Tackle,Tackle Neutral,0
+304,6341.0,6351.0,10.0,H 6,OOA,1st,0
+304,6341.0,6351.0,10.0,H 6,Ruck Arrival,Ruck Arrival Dominant,1
+305,6342.0,6352.0,10.0,H 8,OOA,3rd,0
+305,6342.0,6352.0,10.0,H 8,Ruck Arrival,Ruck Arrival Ineffective,1
+306,6342.0,6352.0,10.0,H 3,OOA,2nd,0
+306,6342.0,6352.0,10.0,H 3,Ruck Arrival,Ruck Arrival Effective,1
+307,6345.0,6355.0,10.0,H 9,Pass,Pass Accurate,0
+308,6347.0,6357.0,10.0,O 10,Tackle,Tackle Neutral,0
+309,6347.0,6357.0,10.0,H 12,Ball Carry,Ball Carry Neutral,0
+310,6347.0,6357.0,10.0,O 4,Tackle,Tackle Neutral,0
+311,6349.0,6359.0,10.0,H 10,OOA,1st,0
+311,6349.0,6359.0,10.0,H 10,Ruck Arrival,Ruck Arrival Effective,1
+312,6349.0,6359.0,10.0,O 12,Counter Ruck,Counter Ruck Ineffective,0
+313,6349.0,6359.0,10.0,H 7,OOA,2nd,0
+313,6349.0,6359.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+314,6350.0,6360.0,10.0,H 2,OOA,3rd,0
+314,6350.0,6360.0,10.0,H 2,Ruck Arrival,Ruck Arrival Ineffective,1
+315,6352.0,6362.0,10.0,H 9,Pass,Pass Accurate,0
+316,6354.0,6364.0,10.0,O 6,Tackle,Tackle Neutral,0
+317,6354.0,6364.0,10.0,H 3,Ball Carry,Ball Carry Neutral,0
+318,6354.0,6364.0,10.0,O 4,Tackle,Tackle Neutral,0
+319,6355.0,6365.0,10.0,H 2,OOA,2nd,0
+319,6355.0,6365.0,10.0,H 2,Ruck Arrival,Ruck Arrival Ineffective,1
+320,6355.0,6365.0,10.0,H 6,OOA,1st,0
+320,6355.0,6365.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,1
+321,6364.0,6374.0,10.0,O 3,Tackle,Tackle Neutral,0
+322,6364.0,6374.0,10.0,O 5,Tackle,Tackle Neutral,0
+323,6364.0,6374.0,10.0,H 4,Ball Carry,Ball Carry Neutral,0
+324,6364.0,6374.0,10.0,H 2,OOA,3rd,0
+324,6364.0,6374.0,10.0,H 2,Ruck Arrival,Ruck Arrival Ineffective,1
+325,6364.0,6374.0,10.0,H 1,OOA,1st,0
+325,6364.0,6374.0,10.0,H 1,Ruck Arrival,Ruck Arrival Ineffective,1
+326,6364.0,6374.0,10.0,O 2,Tackle,Tackle Neutral,0
+327,6365.0,6375.0,10.0,H 5,OOA,2nd,0
+327,6365.0,6375.0,10.0,H 5,Ruck Arrival,Ruck Arrival Ineffective,1
+328,6366.0,6376.0,10.0,H 8,Ball Carry,Ball Carry Neutral,0
+329,6366.0,6376.0,10.0,O 5,Tackle,Tackle Neutral,0
+330,6366.0,6376.0,10.0,O 2,Tackle,Tackle Neutral,0
+331,6367.0,6377.0,10.0,H 2,OOA,2nd,0
+331,6367.0,6377.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+332,6367.0,6377.0,10.0,H 7,OOA,3rd,0
+332,6367.0,6377.0,10.0,H 7,Ruck Arrival,Ruck Arrival Ineffective,1
+333,6367.0,6377.0,10.0,H 5,OOA,1st,0
+333,6367.0,6377.0,10.0,H 5,Ruck Arrival,Ruck Arrival Effective,1
+334,6369.0,6379.0,10.0,H 9,Pass,Pass Accurate,0
+335,6371.0,6381.0,10.0,H 10,Pass,Pass Accurate,0
+336,6371.0,6381.0,10.0,O 7,Tackle,Missed Tackle,0
+337,6373.0,6383.0,10.0,H 15,Carry,Try,0
+338,6373.0,6383.0,10.0,O 11,Tackle,Missed Tackle,0
+339,6430.0,6440.0,10.0,H 15,Kick,Good Kick,0
+340,6459.0,6469.0,10.0,H 15,Kick,Good Kick,0
+341,6460.0,6470.0,10.0,H 12,Outcome,Ball Caught,0
+342,6462.0,6472.0,10.0,O 7,Tackle,Tackle Neutral,0
+343,6462.0,6472.0,10.0,H 7,OOA,1st,0
+343,6462.0,6472.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+344,6463.0,6473.0,10.0,H 8,OOA,3rd,0
+344,6463.0,6473.0,10.0,H 8,Ruck Arrival,Ruck Arrival Ineffective,1
+345,6463.0,6473.0,10.0,H 2,OOA,2nd,0
+345,6463.0,6473.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+345,6463.0,6473.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,2
+346,6464.0,6474.0,10.0,H 9,Pass,Pass Accurate,0
+347,6467.0,6477.0,10.0,O 6,Tackle,Tackle Neutral,0
+348,6467.0,6477.0,10.0,H 4,Ball Carry,Ball Carry Neutral,0
+349,6467.0,6477.0,10.0,H 5,OOA,1st,0
+349,6467.0,6477.0,10.0,H 5,Ruck Arrival,Ruck Arrival Effective,1
+350,6468.0,6478.0,10.0,H 6,OOA,2nd,0
+350,6468.0,6478.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,1
+351,6469.0,6479.0,10.0,H 8,Ruck Arrival,Ruck Arrival Ineffective,0
+351,6469.0,6479.0,10.0,H 8,OOA,3rd,1
+352,6469.0,6479.0,10.0,H 2,OOA,4th +,0
+352,6469.0,6479.0,10.0,H 2,Ruck Arrival,Ruck Arrival Ineffective,1
+353,6475.0,6485.0,10.0,H 9,Kick,Good Kick,0
+354,6479.0,6489.0,10.0,O 14,Carry,Ball Dropped,0
+355,6481.0,6491.0,10.0,O 14,Ball Carry,Ball Carry Neutral,0
+356,6483.0,6493.0,10.0,O 15,OOA,1st,0
+356,6483.0,6493.0,10.0,O 15,Ruck Arrival,Ruck Arrival Ineffective,1
+357,6484.0,6494.0,10.0,O 14,Tags,Error,0
+357,6484.0,6494.0,10.0,O 14,Outcomes,Ball Lost,1
+358,6525.0,6535.0,10.0,O 6,Set Piece,Scrum Involvement,0
+359,6525.0,6535.0,10.0,O 1,Set Piece,Scrum Involvement,0
+360,6525.0,6535.0,10.0,O 3,Set Piece,Scrum Involvement,0
+361,6525.0,6535.0,10.0,H 8,Set Piece,Scrum Involvement,0
+362,6525.0,6535.0,10.0,O 7,Set Piece,Scrum Involvement,0
+363,6525.0,6535.0,10.0,O 5,Set Piece,Scrum Involvement,0
+364,6525.0,6535.0,10.0,H 4,Set Piece,Scrum Involvement,0
+365,6525.0,6535.0,10.0,H 2,Set Piece,Scrum Involvement,0
+366,6525.0,6535.0,10.0,H 3,Set Piece,Scrum Involvement,0
+367,6525.0,6535.0,10.0,H 1,Set Piece,Scrum Involvement,0
+368,6525.0,6535.0,10.0,O 2,Set Piece,Scrum Involvement,0
+369,6525.0,6535.0,10.0,H 7,Set Piece,Scrum Involvement,0
+370,6525.0,6535.0,10.0,O 8,Set Piece,Scrum Involvement,0
+371,6525.0,6535.0,10.0,H 6,Set Piece,Scrum Involvement,0
+372,6525.0,6535.0,10.0,H 5,Set Piece,Scrum Involvement,0
+373,6525.0,6535.0,10.0,O 4,Set Piece,Scrum Involvement,0
+374,6530.0,6540.0,10.0,H 9,Pass,Pass Accurate,0
+375,6531.0,6541.0,10.0,H 12,Pass,Pass Accurate,0
+376,6533.0,6543.0,10.0,H 10,Pass,Pass Accurate,0
+377,6534.0,6544.0,10.0,H 15,Ball Carry,Ball Carry Neutral,0
+378,6535.0,6545.0,10.0,H 10,OOA,1st,0
+378,6535.0,6545.0,10.0,H 10,Ruck Arrival,Ruck Arrival Ineffective,1
+379,6535.0,6545.0,10.0,O 12,Tackle,Tackle Neutral,0
+380,6535.0,6545.0,10.0,O 13,Tackle,Tackle Neutral,0
+381,6536.0,6546.0,10.0,H 13,OOA,3rd,0
+381,6536.0,6546.0,10.0,H 13,Ruck Arrival,Ruck Arrival Ineffective,1
+382,6536.0,6546.0,10.0,H 7,OOA,2nd,0
+382,6536.0,6546.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+383,6536.0,6546.0,10.0,H 11,OOA,3rd,0
+383,6536.0,6546.0,10.0,H 11,Ruck Arrival,Ruck Arrival Effective,1
+384,6537.0,6547.0,10.0,H 8,OOA,4th +,0
+384,6537.0,6547.0,10.0,H 8,Ruck Arrival,Ruck Arrival Ineffective,1
+385,6538.0,6548.0,10.0,H 9,Pass,Pass Accurate,0
+386,6542.0,6552.0,10.0,H 4,Offload,Successful Offload,0
+387,6543.0,6553.0,10.0,O 13,Tackle,Tackle Neutral,0
+388,6544.0,6554.0,10.0,H 14,Ball Carry,Ball Carry Neutral,0
+389,6544.0,6554.0,10.0,O 11,Tackle,Tackle Neutral,0
+390,6546.0,6556.0,10.0,H 14,Tags,Error,0
+390,6546.0,6556.0,10.0,H 14,Outcomes,Ball Lost,1
+391,6594.0,6604.0,10.0,O 6,Set Piece,Scrum Involvement,0
+392,6594.0,6604.0,10.0,O 1,Set Piece,Scrum Involvement,0
+393,6594.0,6604.0,10.0,O 3,Set Piece,Scrum Involvement,0
+394,6594.0,6604.0,10.0,H 8,Set Piece,Scrum Involvement,0
+395,6594.0,6604.0,10.0,O 7,Set Piece,Scrum Involvement,0
+396,6594.0,6604.0,10.0,O 5,Set Piece,Scrum Involvement,0
+397,6594.0,6604.0,10.0,H 4,Set Piece,Scrum Involvement,0
+398,6594.0,6604.0,10.0,H 2,Set Piece,Scrum Involvement,0
+399,6594.0,6604.0,10.0,H 3,Set Piece,Scrum Involvement,0
+400,6594.0,6604.0,10.0,H 1,Set Piece,Scrum Involvement,0
+401,6594.0,6604.0,10.0,O 2,Set Piece,Scrum Involvement,0
+402,6594.0,6604.0,10.0,H 7,Set Piece,Scrum Involvement,0
+403,6594.0,6604.0,10.0,O 8,Set Piece,Scrum Involvement,0
+404,6594.0,6604.0,10.0,H 6,Set Piece,Scrum Involvement,0
+405,6594.0,6604.0,10.0,H 5,Set Piece,Scrum Involvement,0
+406,6594.0,6604.0,10.0,O 4,Set Piece,Scrum Involvement,0
+407,6598.0,6608.0,10.0,O 9,Pass,Pass Accurate,0
+408,6600.0,6610.0,10.0,H 10,Tackle,Missed Tackle,0
+409,6602.0,6612.0,10.0,O 10,Offload,Successful Offload,0
+410,6602.0,6612.0,10.0,O 12,Carry,Linebreak,0
+411,6604.0,6614.0,10.0,O 12,Offload,Successful Offload,0
+412,6607.0,6617.0,10.0,H 12,Tackle,Missed Tackle,0
+413,6609.0,6619.0,10.0,O 12,Tackle,Tackle Neutral,0
+414,6609.0,6619.0,10.0,H 13,Ball Carry,Ball Carry Neutral,0
+415,6609.0,6619.0,10.0,H 7,Tackle,Tackle Neutral,0
+416,6610.0,6620.0,10.0,O 12,OOA,2nd,0
+416,6610.0,6620.0,10.0,O 12,Ruck Arrival,Ruck Arrival Ineffective,1
+417,6610.0,6620.0,10.0,O 7,OOA,1st,0
+417,6610.0,6620.0,10.0,O 7,Ruck Arrival,Ruck Arrival Effective,1
+418,6611.0,6621.0,10.0,O 9,Pass,Pass Accurate,0
+419,6614.0,6624.0,10.0,O 15,Offload,Unsuccessful Offload,0
+420,6614.0,6624.0,10.0,O 14,Tags,Error,0
+421,6615.0,6625.0,10.0,H 11,Ball Steals,Steal from Intercept,0
+422,6616.0,6626.0,10.0,O 6,Tackle,Tackle Neutral,0
+423,6616.0,6626.0,10.0,H 11,Ball Carry,Ball Carry Neutral,0
+424,6616.0,6626.0,10.0,O 4,Tackle,Tackle Neutral,0
+425,6617.0,6627.0,10.0,H 8,OOA,1st,0
+425,6617.0,6627.0,10.0,H 8,Ruck Arrival,Ruck Arrival Ineffective,1
+426,6618.0,6628.0,10.0,H 6,OOA,2nd,0
+426,6618.0,6628.0,10.0,H 6,Ruck Arrival,Ruck Arrival Ineffective,1
+427,6727.0,6737.0,10.0,H 1,Set Piece,Scrum Involvement,0
+428,6727.0,6737.0,10.0,H 19,Set Piece,Scrum Involvement,0
+429,6728.0,6738.0,10.0,O 6,Set Piece,Scrum Involvement,0
+430,6728.0,6738.0,10.0,O 1,Set Piece,Scrum Involvement,0
+431,6728.0,6738.0,10.0,O 3,Set Piece,Scrum Involvement,0
+432,6728.0,6738.0,10.0,H 8,Set Piece,Scrum Involvement,0
+433,6728.0,6738.0,10.0,O 7,Set Piece,Scrum Involvement,0
+434,6728.0,6738.0,10.0,O 5,Set Piece,Scrum Involvement,0
+435,6728.0,6738.0,10.0,H 4,Set Piece,Scrum Involvement,0
+436,6728.0,6738.0,10.0,H 2,Set Piece,Scrum Involvement,0
+437,6728.0,6738.0,10.0,H 3,Set Piece,Scrum Involvement,0
+438,6728.0,6738.0,10.0,O 2,Set Piece,Scrum Involvement,0
+439,6728.0,6738.0,10.0,O 8,Set Piece,Scrum Involvement,0
+440,6728.0,6738.0,10.0,H 6,Set Piece,Scrum Involvement,0
+441,6728.0,6738.0,10.0,H 5,Set Piece,Scrum Involvement,0
+442,6728.0,6738.0,10.0,O 4,Set Piece,Scrum Involvement,0
+443,6730.0,6740.0,10.0,H 8,Pass,Pass Accurate,0
+444,6731.0,6741.0,10.0,H 9,Pass,Pass Accurate,0
+445,6732.0,6742.0,10.0,H 12,Tags,Error,0
+445,6732.0,6742.0,10.0,H 12,Outcomes,Ball Lost,1
+446,6735.0,6745.0,10.0,O 10,Ball Steals,Steal from Intercept,0
+447,6739.0,6749.0,10.0,O 10,Ball Carry,Ball Carry Dominant,0
+448,6739.0,6749.0,10.0,H 10,Tackle,Tackle Negative,0
+449,6741.0,6751.0,10.0,O 12,OOA,2nd,0
+449,6741.0,6751.0,10.0,O 12,Ruck Arrival,Ruck Arrival Effective,1
+450,6741.0,6751.0,10.0,O 13,OOA,2nd,0
+450,6741.0,6751.0,10.0,O 13,Ruck Arrival,Ruck Arrival Effective,1
+451,6742.0,6752.0,10.0,O 11,OOA,3rd,0
+451,6742.0,6752.0,10.0,O 11,Ruck Arrival,Ruck Arrival Ineffective,1
+452,6744.0,6754.0,10.0,O 9,Pass,Pass Accurate,0
+453,6745.0,6755.0,10.0,O 7,Pass,Pass Accurate,0
+454,6747.0,6757.0,10.0,O 10,Kick,Bad Kick,0
+454,6747.0,6757.0,10.0,O 10,Tags,Error,1
+455,6779.0,6789.0,10.0,O 1,Set Piece,Lineout Involvement,0
+456,6779.0,6789.0,10.0,O 3,Set Piece,Lineout Involvement,0
+457,6779.0,6789.0,10.0,O 7,Set Piece,Lineout Involvement,0
+458,6779.0,6789.0,10.0,O 5,Set Piece,Lineout Involvement,0
+459,6779.0,6789.0,10.0,H 4,Set Piece,Lineout Involvement,0
+460,6779.0,6789.0,10.0,H 2,Set Piece,Lineout Involvement,0
+460,6779.0,6789.0,10.0,H 2,Set Piece,Unsuccessful Throw,1
+460,6779.0,6789.0,10.0,H 2,Tags,Error,2
+461,6779.0,6789.0,10.0,H 3,Set Piece,Lineout Involvement,0
+462,6779.0,6789.0,10.0,H 1,Set Piece,Lineout Involvement,0
+463,6779.0,6789.0,10.0,H 5,Set Piece,Lineout Involvement,0
+464,6819.0,6829.0,10.0,O 6,Set Piece,Scrum Involvement,0
+465,6819.0,6829.0,10.0,O 1,Set Piece,Scrum Involvement,0
+466,6819.0,6829.0,10.0,O 3,Set Piece,Scrum Involvement,0
+467,6819.0,6829.0,10.0,H 8,Set Piece,Scrum Involvement,0
+468,6819.0,6829.0,10.0,O 7,Set Piece,Scrum Involvement,0
+469,6819.0,6829.0,10.0,O 5,Set Piece,Scrum Involvement,0
+470,6819.0,6829.0,10.0,H 4,Set Piece,Scrum Involvement,0
+471,6819.0,6829.0,10.0,H 2,Set Piece,Scrum Involvement,0
+472,6819.0,6829.0,10.0,H 3,Set Piece,Scrum Involvement,0
+473,6819.0,6829.0,10.0,H 1,Set Piece,Scrum Involvement,0
+474,6819.0,6829.0,10.0,O 2,Set Piece,Scrum Involvement,0
+475,6819.0,6829.0,10.0,O 8,Set Piece,Scrum Involvement,0
+476,6819.0,6829.0,10.0,H 6,Set Piece,Scrum Involvement,0
+477,6819.0,6829.0,10.0,H 5,Set Piece,Scrum Involvement,0
+478,6819.0,6829.0,10.0,O 4,Set Piece,Scrum Involvement,0
+479,6819.0,6829.0,10.0,H 19,Set Piece,Scrum Involvement,0
+480,6823.0,6833.0,10.0,O 1,Outcomes,Penalty Lost,0
+481,6850.0,6860.0,10.0,H 15,Kick,Bad Kick,0
+481,6850.0,6860.0,10.0,H 15,Tags,Error,1
+482,6853.0,6863.0,10.0,O 14,Carry,Ball Dropped,0
+482,6853.0,6863.0,10.0,O 14,Tags,Error,1
+483,6854.0,6864.0,10.0,O 9,Outcomes,Penalty Lost,0
+484,6887.0,6897.0,10.0,H 9,Pass,Pass Accurate,0
+485,6889.0,6899.0,10.0,H 4,Pass,Pass Accurate,0
+486,6891.0,6901.0,10.0,H 10,Pass,Pass Inaccurate,0
+486,6891.0,6901.0,10.0,H 10,Outcomes,Ball Lost,1
+486,6891.0,6901.0,10.0,H 10,Tags,Error,2
+487,6930.0,6940.0,10.0,O 6,Set Piece,Scrum Involvement,0
+488,6930.0,6940.0,10.0,O 1,Set Piece,Scrum Involvement,0
+489,6930.0,6940.0,10.0,O 3,Set Piece,Scrum Involvement,0
+490,6930.0,6940.0,10.0,H 8,Set Piece,Scrum Involvement,0
+491,6930.0,6940.0,10.0,O 7,Set Piece,Scrum Involvement,0
+492,6930.0,6940.0,10.0,O 5,Set Piece,Scrum Involvement,0
+493,6930.0,6940.0,10.0,H 4,Set Piece,Scrum Involvement,0
+494,6930.0,6940.0,10.0,H 2,Set Piece,Scrum Involvement,0
+495,6930.0,6940.0,10.0,H 3,Set Piece,Scrum Involvement,0
+496,6930.0,6940.0,10.0,H 1,Set Piece,Scrum Involvement,0
+497,6930.0,6940.0,10.0,O 2,Set Piece,Scrum Involvement,0
+498,6930.0,6940.0,10.0,O 8,Set Piece,Scrum Involvement,0
+499,6930.0,6940.0,10.0,H 6,Set Piece,Scrum Involvement,0
+500,6930.0,6940.0,10.0,H 5,Set Piece,Scrum Involvement,0
+501,6930.0,6940.0,10.0,O 4,Set Piece,Scrum Involvement,0
+502,6930.0,6940.0,10.0,H 19,Set Piece,Scrum Involvement,0
+503,6964.0,6974.0,10.0,O 6,Set Piece,Scrum Involvement,0
+504,6964.0,6974.0,10.0,O 1,Set Piece,Scrum Involvement,0
+505,6964.0,6974.0,10.0,O 3,Set Piece,Scrum Involvement,0
+506,6964.0,6974.0,10.0,H 8,Set Piece,Scrum Involvement,0
+507,6964.0,6974.0,10.0,O 7,Set Piece,Scrum Involvement,0
+508,6964.0,6974.0,10.0,O 5,Set Piece,Scrum Involvement,0
+509,6964.0,6974.0,10.0,H 4,Set Piece,Scrum Involvement,0
+510,6964.0,6974.0,10.0,H 2,Set Piece,Scrum Involvement,0
+511,6964.0,6974.0,10.0,H 3,Set Piece,Scrum Involvement,0
+512,6964.0,6974.0,10.0,H 1,Set Piece,Scrum Involvement,0
+513,6964.0,6974.0,10.0,O 2,Set Piece,Scrum Involvement,0
+514,6964.0,6974.0,10.0,O 8,Set Piece,Scrum Involvement,0
+515,6964.0,6974.0,10.0,H 6,Set Piece,Scrum Involvement,0
+516,6964.0,6974.0,10.0,H 5,Set Piece,Scrum Involvement,0
+517,6964.0,6974.0,10.0,O 4,Set Piece,Scrum Involvement,0
+518,6964.0,6974.0,10.0,H 19,Set Piece,Scrum Involvement,0
+519,6966.0,6976.0,10.0,O 9,Pass,Pass Accurate,0
+520,6968.0,6978.0,10.0,O 10,Pass,Pass Accurate,0
+521,6973.0,6983.0,10.0,O 13,Pass,Pass Accurate,0
+522,6976.0,6986.0,10.0,O 7,Offload,Unsuccessful Offload,0
+523,6977.0,6987.0,10.0,O 8,Tags,Error,0
+523,6977.0,6987.0,10.0,O 8,Outcomes,Ball Lost,1
+524,7022.0,7032.0,10.0,O 6,Set Piece,Scrum Involvement,0
+525,7022.0,7032.0,10.0,O 1,Set Piece,Scrum Involvement,0
+526,7022.0,7032.0,10.0,O 3,Set Piece,Scrum Involvement,0
+527,7022.0,7032.0,10.0,H 8,Set Piece,Scrum Involvement,0
+528,7022.0,7032.0,10.0,O 7,Set Piece,Scrum Involvement,0
+529,7022.0,7032.0,10.0,O 5,Set Piece,Scrum Involvement,0
+530,7022.0,7032.0,10.0,H 4,Set Piece,Scrum Involvement,0
+531,7022.0,7032.0,10.0,H 2,Set Piece,Scrum Involvement,0
+532,7022.0,7032.0,10.0,H 3,Set Piece,Scrum Involvement,0
+533,7022.0,7032.0,10.0,H 1,Set Piece,Scrum Involvement,0
+534,7022.0,7032.0,10.0,O 2,Set Piece,Scrum Involvement,0
+535,7022.0,7032.0,10.0,H 7,Set Piece,Scrum Involvement,0
+536,7022.0,7032.0,10.0,O 8,Set Piece,Scrum Involvement,0
+537,7022.0,7032.0,10.0,H 6,Set Piece,Scrum Involvement,0
+538,7022.0,7032.0,10.0,H 5,Set Piece,Scrum Involvement,0
+539,7022.0,7032.0,10.0,O 4,Set Piece,Scrum Involvement,0
+540,7065.0,7075.0,10.0,O 6,Set Piece,Scrum Involvement,0
+541,7065.0,7075.0,10.0,O 1,Set Piece,Scrum Involvement,0
+542,7065.0,7075.0,10.0,O 3,Set Piece,Scrum Involvement,0
+543,7065.0,7075.0,10.0,H 8,Set Piece,Scrum Involvement,0
+544,7065.0,7075.0,10.0,O 7,Set Piece,Scrum Involvement,0
+545,7065.0,7075.0,10.0,O 5,Set Piece,Scrum Involvement,0
+546,7065.0,7075.0,10.0,H 4,Set Piece,Scrum Involvement,0
+547,7065.0,7075.0,10.0,H 2,Set Piece,Scrum Involvement,0
+548,7065.0,7075.0,10.0,H 3,Set Piece,Scrum Involvement,0
+549,7065.0,7075.0,10.0,H 1,Set Piece,Scrum Involvement,0
+550,7065.0,7075.0,10.0,O 2,Set Piece,Scrum Involvement,0
+551,7065.0,7075.0,10.0,H 7,Set Piece,Scrum Involvement,0
+552,7065.0,7075.0,10.0,O 8,Set Piece,Scrum Involvement,0
+553,7065.0,7075.0,10.0,H 6,Set Piece,Scrum Involvement,0
+554,7065.0,7075.0,10.0,H 5,Set Piece,Scrum Involvement,0
+555,7065.0,7075.0,10.0,O 4,Set Piece,Scrum Involvement,0
+556,7069.0,7079.0,10.0,H 8,Pass,Pass Accurate,0
+557,7071.0,7081.0,10.0,H 9,Pass,Pass Accurate,0
+558,7074.0,7084.0,10.0,H 15,Ball Carry,Ball Carry Dominant,0
+559,7074.0,7084.0,10.0,O 9,Tackle,Tackle Negative,0
+560,7075.0,7085.0,10.0,H 8,OOA,1st,0
+560,7075.0,7085.0,10.0,H 8,Ruck Arrival,Ruck Arrival Effective,1
+561,7076.0,7086.0,10.0,H 14,OOA,3rd,0
+561,7076.0,7086.0,10.0,H 14,Ruck Arrival,Ruck Arrival Ineffective,1
+562,7076.0,7086.0,10.0,H 7,OOA,2nd,0
+562,7076.0,7086.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+563,7079.0,7089.0,10.0,H 9,Pass,Pass Accurate,0
+564,7080.0,7090.0,10.0,O 5,Tackle,Missed Tackle,0
+565,7082.0,7092.0,10.0,O 8,Tackle,Missed Tackle,0
+566,7082.0,7092.0,10.0,O 13,Tackle,Tackle Neutral,0
+567,7083.0,7093.0,10.0,H 4,Ball Carry,Ball Carry Neutral,0
+568,7083.0,7093.0,10.0,H 5,OOA,1st,0
+568,7083.0,7093.0,10.0,H 5,Ruck Arrival,Ruck Arrival Ineffective,1
+569,7084.0,7094.0,10.0,H 7,OOA,3rd,0
+569,7084.0,7094.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+570,7084.0,7094.0,10.0,H 6,OOA,2nd,0
+570,7084.0,7094.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,1
+571,7087.0,7097.0,10.0,H 9,Pass,Pass Accurate,0
+572,7088.0,7098.0,10.0,H 10,Pass,Pass Accurate,0
+573,7089.0,7099.0,10.0,H 3,Pass,Pass Accurate,0
+574,7090.0,7100.0,10.0,H 23,Pass,Pass Accurate,0
+575,7091.0,7101.0,10.0,O 12,Tackle,Tackle Neutral,0
+576,7091.0,7101.0,10.0,H 13,Ball Carry,Ball Carry Neutral,0
+577,7091.0,7101.0,10.0,O 4,Tackle,Tackle Neutral,0
+578,7092.0,7102.0,10.0,H 23,OOA,1st,0
+578,7092.0,7102.0,10.0,H 23,Ruck Arrival,Ruck Arrival Effective,1
+579,7093.0,7103.0,10.0,O 12,Counter Ruck,Counter Ruck Ineffective,0
+580,7093.0,7103.0,10.0,H 8,OOA,2nd,0
+580,7093.0,7103.0,10.0,H 8,Ruck Arrival,Ruck Arrival Effective,1
+581,7095.0,7105.0,10.0,O 3,Counter Ruck,Counter Ruck Ineffective,0
+582,7097.0,7107.0,10.0,H 9,Pass,Pass Accurate,0
+583,7099.0,7109.0,10.0,O 5,Tackle,Missed Tackle,0
+584,7100.0,7110.0,10.0,O 1,Tackle,Missed Tackle,0
+585,7100.0,7110.0,10.0,H 1,Carry,Linebreak,0
+586,7105.0,7115.0,10.0,O 15,Tackle,Missed Tackle,0
+587,7106.0,7116.0,10.0,H 1,Ball Carry,Ball Carry Dominant,0
+588,7106.0,7116.0,10.0,O 10,Tackle,Tackle Negative,0
+589,7108.0,7118.0,10.0,H 5,OOA,1st,0
+589,7108.0,7118.0,10.0,H 5,Ruck Arrival,Ruck Arrival Dominant,1
+590,7110.0,7120.0,10.0,H 9,Pass,Pass Accurate,0
+591,7111.0,7121.0,10.0,H 10,Pass,Pass Accurate,0
+592,7112.0,7122.0,10.0,H 8,Ball Carry,Ball Carry Neutral,0
+593,7112.0,7122.0,10.0,O 13,Tackle,Tackle Neutral,0
+594,7114.0,7124.0,10.0,H 10,OOA,1st,0
+594,7114.0,7124.0,10.0,H 10,Ruck Arrival,Ruck Arrival Ineffective,1
+595,7114.0,7124.0,10.0,H 8,Tags,Error,0
+595,7114.0,7124.0,10.0,H 8,Outcomes,Ball Lost,1
+596,7114.0,7124.0,10.0,H 14,OOA,2nd,0
+596,7114.0,7124.0,10.0,H 14,Ruck Arrival,Ruck Arrival Ineffective,1
+597,7157.0,7167.0,10.0,O 6,Set Piece,Scrum Involvement,0
+598,7157.0,7167.0,10.0,O 1,Set Piece,Scrum Involvement,0
+599,7157.0,7167.0,10.0,O 3,Set Piece,Scrum Involvement,0
+600,7157.0,7167.0,10.0,H 8,Set Piece,Scrum Involvement,0
+601,7157.0,7167.0,10.0,O 7,Set Piece,Scrum Involvement,0
+602,7157.0,7167.0,10.0,O 5,Set Piece,Scrum Involvement,0
+603,7157.0,7167.0,10.0,H 4,Set Piece,Scrum Involvement,0
+604,7157.0,7167.0,10.0,H 2,Set Piece,Scrum Involvement,0
+605,7157.0,7167.0,10.0,H 3,Set Piece,Scrum Involvement,0
+606,7157.0,7167.0,10.0,H 1,Set Piece,Scrum Involvement,0
+607,7157.0,7167.0,10.0,O 2,Set Piece,Scrum Involvement,0
+608,7157.0,7167.0,10.0,H 7,Set Piece,Scrum Involvement,0
+609,7157.0,7167.0,10.0,O 8,Set Piece,Scrum Involvement,0
+610,7157.0,7167.0,10.0,H 6,Set Piece,Scrum Involvement,0
+611,7157.0,7167.0,10.0,H 5,Set Piece,Scrum Involvement,0
+612,7157.0,7167.0,10.0,O 4,Set Piece,Scrum Involvement,0
+613,7163.0,7173.0,10.0,O 9,Pass,Pass Accurate,0
+614,7166.0,7176.0,10.0,H 10,Tackle,Missed Tackle,0
+615,7167.0,7177.0,10.0,H 23,Tackle,Missed Tackle,0
+616,7168.0,7178.0,10.0,O 10,Ball Carry,Ball Carry Neutral,0
+617,7168.0,7178.0,10.0,H 7,Tackle,Tackle Neutral,0
+618,7169.0,7179.0,10.0,O 12,OOA,1st,0
+618,7169.0,7179.0,10.0,O 12,Ruck Arrival,Ruck Arrival Dominant,1
+619,7170.0,7180.0,10.0,O 7,OOA,2nd,0
+619,7170.0,7180.0,10.0,O 7,Ruck Arrival,Ruck Arrival Ineffective,1
+620,7171.0,7181.0,10.0,O 11,OOA,3rd,0
+620,7171.0,7181.0,10.0,O 11,Ruck Arrival,Ruck Arrival Effective,1
+621,7173.0,7183.0,10.0,O 9,Pass,Pass Accurate,0
+622,7175.0,7185.0,10.0,H 5,Tackle,Missed Tackle,0
+623,7176.0,7186.0,10.0,H 10,Tackle,Missed Tackle,0
+624,7181.0,7191.0,10.0,H 2,Tackle,Tackle Neutral,0
+625,7181.0,7191.0,10.0,O 8,Tackle,Tackle Neutral,0
+626,7181.0,7191.0,10.0,H 6,Tackle,Tackle Neutral,0
+627,7182.0,7192.0,10.0,O 12,OOA,1st,0
+627,7182.0,7192.0,10.0,O 12,Ruck Arrival,Ruck Arrival Effective,1
+628,7182.0,7192.0,10.0,O 6,OOA,2nd,0
+628,7182.0,7192.0,10.0,O 6,Ruck Arrival,Ruck Arrival Effective,1
+629,7183.0,7193.0,10.0,O 7,OOA,3rd,0
+629,7183.0,7193.0,10.0,O 7,Ruck Arrival,Ruck Arrival Effective,1
+630,7184.0,7194.0,10.0,O 9,Pass,Pass Accurate,0
+631,7187.0,7197.0,10.0,O 15,Kick,Good Kick,0
+632,7225.0,7235.0,10.0,H 4,Set Piece,Lineout Involvement,0
+633,7225.0,7235.0,10.0,H 2,Set Piece,Lineout Involvement,0
+633,7225.0,7235.0,10.0,H 2,Set Piece,Successful Throw,1
+634,7225.0,7235.0,10.0,H 3,Set Piece,Lineout Involvement,0
+635,7225.0,7235.0,10.0,H 5,Set Piece,Lineout Involvement,0
+636,7226.0,7236.0,10.0,O 3,Set Piece,Lineout Involvement,0
+637,7226.0,7236.0,10.0,O 7,Set Piece,Lineout Involvement,0
+638,7226.0,7236.0,10.0,O 5,Set Piece,Lineout Involvement,0
+639,7227.0,7237.0,10.0,H 5,Pass,Pass Accurate,0
+640,7228.0,7238.0,10.0,H 9,Pass,Pass Accurate,0
+641,7229.0,7239.0,10.0,H 10,Pass,Pass Accurate,0
+642,7232.0,7242.0,10.0,O 6,Tackle,Tackle Neutral,0
+643,7232.0,7242.0,10.0,H 1,Ball Carry,Ball Carry Neutral,0
+644,7232.0,7242.0,10.0,O 4,Tackle,Tackle Neutral,0
+645,7233.0,7243.0,10.0,H 6,OOA,1st,0
+645,7233.0,7243.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,1
+646,7234.0,7244.0,10.0,H 8,OOA,2nd,0
+646,7234.0,7244.0,10.0,H 8,Ruck Arrival,Ruck Arrival Effective,1
+647,7238.0,7248.0,10.0,H 9,Pass,Pass Accurate,0
+648,7240.0,7250.0,10.0,H 10,Kick,Bad Kick,0
+649,7246.0,7256.0,10.0,H 10,Outcomes,Penalty Lost,0
+650,7275.0,7285.0,10.0,O 10,Kick,Good Kick,0
+651,7299.0,7309.0,10.0,O 1,Set Piece,Lineout Involvement,0
+652,7299.0,7309.0,10.0,O 3,Set Piece,Lineout Involvement,0
+653,7299.0,7309.0,10.0,H 8,Set Piece,Lineout Involvement,0
+654,7299.0,7309.0,10.0,O 7,Set Piece,Lineout Involvement,0
+655,7299.0,7309.0,10.0,O 5,Set Piece,Lineout Involvement,0
+656,7299.0,7309.0,10.0,H 4,Set Piece,Lineout Involvement,0
+657,7299.0,7309.0,10.0,H 3,Set Piece,Lineout Involvement,0
+658,7299.0,7309.0,10.0,H 1,Set Piece,Lineout Involvement,0
+659,7299.0,7309.0,10.0,O 2,Set Piece,Lineout Involvement,0
+659,7299.0,7309.0,10.0,O 2,Set Piece,Successful Throw,1
+660,7299.0,7309.0,10.0,H 7,Set Piece,Lineout Involvement,0
+661,7299.0,7309.0,10.0,O 8,Set Piece,Lineout Involvement,0
+662,7299.0,7309.0,10.0,H 6,Set Piece,Lineout Involvement,0
+663,7299.0,7309.0,10.0,H 5,Set Piece,Lineout Involvement,0
+664,7299.0,7309.0,10.0,O 4,Set Piece,Lineout Involvement,0
+665,7300.0,7310.0,10.0,O 6,Set Piece,Lineout Involvement,0
+666,7319.0,7329.0,10.0,O 6,Set Piece,Lineout Involvement,0
+667,7319.0,7329.0,10.0,O 1,Set Piece,Lineout Involvement,0
+668,7319.0,7329.0,10.0,O 3,Set Piece,Lineout Involvement,0
+669,7319.0,7329.0,10.0,H 8,Set Piece,Lineout Involvement,0
+670,7319.0,7329.0,10.0,O 7,Set Piece,Lineout Involvement,0
+671,7319.0,7329.0,10.0,O 5,Set Piece,Lineout Involvement,0
+672,7319.0,7329.0,10.0,H 4,Set Piece,Lineout Involvement,0
+673,7319.0,7329.0,10.0,H 3,Set Piece,Lineout Involvement,0
+674,7319.0,7329.0,10.0,H 1,Set Piece,Lineout Involvement,0
+675,7319.0,7329.0,10.0,O 2,Set Piece,Lineout Involvement,0
+675,7319.0,7329.0,10.0,O 2,Set Piece,Successful Throw,1
+676,7319.0,7329.0,10.0,H 7,Set Piece,Lineout Involvement,0
+677,7319.0,7329.0,10.0,O 8,Set Piece,Lineout Involvement,0
+678,7319.0,7329.0,10.0,H 6,Set Piece,Lineout Involvement,0
+679,7319.0,7329.0,10.0,H 5,Set Piece,Lineout Involvement,0
+680,7319.0,7329.0,10.0,O 4,Set Piece,Lineout Involvement,0
+681,7329.0,7339.0,10.0,O 9,Pass,Pass Accurate,0
+682,7329.0,7339.0,10.0,H 6,Outcomes,Penalty Lost,0
+683,7330.0,7340.0,10.0,O 10,Kick,Good Kick,0
+684,7336.0,7346.0,10.0,H 14,Carry,Ball Dropped,0
+685,7385.0,7395.0,10.0,O 6,Set Piece,Lineout Involvement,0
+686,7385.0,7395.0,10.0,O 1,Set Piece,Lineout Involvement,0
+687,7385.0,7395.0,10.0,O 3,Set Piece,Lineout Involvement,0
+688,7385.0,7395.0,10.0,H 8,Set Piece,Lineout Involvement,0
+689,7385.0,7395.0,10.0,O 7,Set Piece,Lineout Involvement,0
+690,7385.0,7395.0,10.0,O 5,Set Piece,Lineout Involvement,0
+691,7385.0,7395.0,10.0,H 4,Set Piece,Lineout Involvement,0
+692,7385.0,7395.0,10.0,H 3,Set Piece,Lineout Involvement,0
+693,7385.0,7395.0,10.0,H 1,Set Piece,Lineout Involvement,0
+694,7385.0,7395.0,10.0,O 2,Set Piece,Lineout Involvement,0
+694,7385.0,7395.0,10.0,O 2,Set Piece,Successful Throw,1
+695,7385.0,7395.0,10.0,H 7,Set Piece,Lineout Involvement,0
+696,7385.0,7395.0,10.0,O 8,Set Piece,Lineout Involvement,0
+697,7385.0,7395.0,10.0,H 6,Set Piece,Lineout Involvement,0
+698,7385.0,7395.0,10.0,H 5,Set Piece,Lineout Involvement,0
+699,7385.0,7395.0,10.0,O 4,Set Piece,Lineout Involvement,0
+700,7392.0,7402.0,10.0,H 3,Tackle,Tackle Neutral,0
+701,7392.0,7402.0,10.0,H 7,Tackle,Tackle Neutral,0
+702,7392.0,7402.0,10.0,O 8,Tackle,Tackle Neutral,0
+703,7393.0,7403.0,10.0,O 6,OOA,1st,0
+703,7393.0,7403.0,10.0,O 6,Ruck Arrival,Ruck Arrival Effective,1
+704,7394.0,7404.0,10.0,O 1,OOA,3rd,0
+704,7394.0,7404.0,10.0,O 1,Ruck Arrival,Ruck Arrival Ineffective,1
+705,7394.0,7404.0,10.0,O 7,OOA,2nd,0
+705,7394.0,7404.0,10.0,O 7,Ruck Arrival,Ruck Arrival Effective,1
+706,7395.0,7405.0,10.0,O 9,Pass,Pass Accurate,0
+707,7397.0,7407.0,10.0,O 10,Pass,Pass Accurate,0
+708,7398.0,7408.0,10.0,O 13,Pass,Pass Accurate,0
+709,7400.0,7410.0,10.0,O 15,Pass,Pass Inaccurate,0
+709,7400.0,7410.0,10.0,O 15,Tags,Error,1
+710,7401.0,7411.0,10.0,H 12,Tackle,Missed Tackle,0
+711,7404.0,7414.0,10.0,H 13,Tackle,Tackle Negative,0
+712,7404.0,7414.0,10.0,O 14,Ball Carry,Ball Carry Dominant,0
+713,7406.0,7416.0,10.0,H 11,OOA,1st,0
+713,7406.0,7416.0,10.0,H 11,Ruck Arrival,Ruck Arrival Dominant,1
+714,7410.0,7420.0,10.0,O 9,Pass,Pass Accurate,0
+715,7412.0,7422.0,10.0,O 5,Offload,Successful Offload,0
+716,7415.0,7425.0,10.0,O 6,Offload,Successful Offload,0
+717,7418.0,7428.0,10.0,H 14,Tackle,Missed Tackle,0
+718,7421.0,7431.0,10.0,H 10,Tackle,Missed Tackle,0
+719,7422.0,7432.0,10.0,O 2,Carry,Try,0
+720,7477.0,7487.0,10.0,O 15,Kick,Good Kick,0
+721,7502.0,7512.0,10.0,O 10,Kick,Good Kick,0
+722,7504.0,7514.0,10.0,O 5,Outcome,Ball Caught,0
+722,7504.0,7514.0,10.0,O 5,Tags,Error,1
+722,7504.0,7514.0,10.0,O 5,Outcomes,Ball Lost,2
+723,7536.0,7546.0,10.0,H 4,Set Piece,Lineout Involvement,0
+724,7536.0,7546.0,10.0,H 2,Set Piece,Lineout Involvement,0
+724,7536.0,7546.0,10.0,H 2,Set Piece,Unsuccessful Throw,1
+724,7536.0,7546.0,10.0,H 2,Outcomes,Ball Lost,2
+725,7536.0,7546.0,10.0,H 3,Set Piece,Lineout Involvement,0
+726,7536.0,7546.0,10.0,H 5,Set Piece,Lineout Involvement,0
+727,7537.0,7547.0,10.0,O 3,Set Piece,Lineout Involvement,0
+728,7537.0,7547.0,10.0,O 7,Set Piece,Lineout Involvement,0
+729,7537.0,7547.0,10.0,O 5,Set Piece,Lineout Involvement,0
+730,7538.0,7548.0,10.0,O 7,Ball Steals,Steal from Set Piece,0
+731,7539.0,7549.0,10.0,H 2,Tackle,Tackle Neutral,0
+732,7539.0,7549.0,10.0,O 2,Ball Carry,Ball Carry Neutral,0
+733,7541.0,7551.0,10.0,O 7,OOA,1st,0
+733,7541.0,7551.0,10.0,O 7,Ruck Arrival,Ruck Arrival Dominant,1
+734,7543.0,7553.0,10.0,O 9,Pass,Pass Accurate,0
+735,7545.0,7555.0,10.0,O 12,Pass,Pass Accurate,0
+736,7546.0,7556.0,10.0,H 1,Tackle,Missed Tackle,0
+737,7548.0,7558.0,10.0,O 1,Ball Carry,Ball Carry Neutral,0
+738,7548.0,7558.0,10.0,H 7,Tackle,Tackle Neutral,0
+739,7549.0,7559.0,10.0,O 6,OOA,1st,0
+739,7549.0,7559.0,10.0,O 6,Ruck Arrival,Ruck Arrival Effective,1
+740,7549.0,7559.0,10.0,O 4,OOA,2nd,0
+740,7549.0,7559.0,10.0,O 4,Ruck Arrival,Ruck Arrival Effective,1
+741,7552.0,7562.0,10.0,O 9,Pass,Pass Accurate,0
+742,7558.0,7568.0,10.0,H 2,Tackle,Tackle Neutral,0
+743,7558.0,7568.0,10.0,O 8,Ball Carry,Ball Carry Neutral,0
+744,7558.0,7568.0,10.0,H 5,Tackle,Tackle Neutral,0
+745,7559.0,7569.0,10.0,O 12,OOA,2nd,0
+745,7559.0,7569.0,10.0,O 12,Ruck Arrival,Ruck Arrival Effective,1
+746,7559.0,7569.0,10.0,O 7,OOA,1st,0
+746,7559.0,7569.0,10.0,O 7,Ruck Arrival,Ruck Arrival Dominant,1
+747,7561.0,7571.0,10.0,O 3,OOA,3rd,0
+747,7561.0,7571.0,10.0,O 3,Ruck Arrival,Ruck Arrival Ineffective,1
+748,7561.0,7571.0,10.0,O 9,Pass,Pass Accurate,0
+749,7564.0,7574.0,10.0,O 6,Ball Carry,Ball Carry Neutral,0
+750,7564.0,7574.0,10.0,H 4,Tackle,Tackle Neutral,0
+751,7565.0,7575.0,10.0,O 5,OOA,1st,0
+751,7565.0,7575.0,10.0,O 5,Ruck Arrival,Ruck Arrival Effective,1
+752,7565.0,7575.0,10.0,O 4,OOA,2nd,0
+752,7565.0,7575.0,10.0,O 4,Ruck Arrival,Ruck Arrival Effective,1
+753,7566.0,7576.0,10.0,H 7,Counter Ruck,Counter Ruck Ineffective,0
+754,7568.0,7578.0,10.0,O 9,Pass,Pass Accurate,0
+755,7569.0,7579.0,10.0,O 10,Kick,Bad Kick,0
+756,7572.0,7582.0,10.0,H 13,Carry,Ball Dropped,0
+757,7575.0,7585.0,10.0,O 14,Tackle,Missed Tackle,0
+758,7577.0,7587.0,10.0,O 14,Tackle,Missed Tackle,0
+759,7578.0,7588.0,10.0,H 13,Offload,Unsuccessful Offload,0
+760,7581.0,7591.0,10.0,O 4,Tackle,Missed Tackle,0
+761,7584.0,7594.0,10.0,O 15,Tackle,Tackle Negative,0
+762,7584.0,7594.0,10.0,H 12,Ball Carry,Ball Carry Dominant,0
+763,7584.0,7594.0,10.0,H 6,OOA,1st,0
+763,7584.0,7594.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,1
+764,7584.0,7594.0,10.0,O 14,Tackle,Tackle Negative,0
+765,7585.0,7595.0,10.0,H 15,OOA,2nd,0
+765,7585.0,7595.0,10.0,H 15,Ruck Arrival,Ruck Arrival Effective,1
+766,7587.0,7597.0,10.0,H 9,Pass,Pass Accurate,0
+767,7602.0,7612.0,10.0,O 6,Ball Steals,Steal from Set Piece,0
+768,7602.0,7612.0,10.0,H 4,Outcomes,Ball Lost,0
+769,7606.0,7616.0,10.0,O 6,Offload,Successful Offload,0
+770,7610.0,7620.0,10.0,H 10,Tackle,Tackle Negative,0
+771,7610.0,7620.0,10.0,O 9,Ball Carry,Ball Carry Dominant,0
+772,7611.0,7621.0,10.0,O 8,OOA,1st,0
+772,7611.0,7621.0,10.0,O 8,Ruck Arrival,Ruck Arrival Ineffective,1
+773,7612.0,7622.0,10.0,O 5,OOA,2nd,0
+773,7612.0,7622.0,10.0,O 5,Ruck Arrival,Ruck Arrival Effective,1
+773,7612.0,7622.0,10.0,O 5,Ruck Arrival,Ruck Arrival Effective,2
+774,7614.0,7624.0,10.0,O 14,Pass,Pass Accurate,0
+775,7616.0,7626.0,10.0,O 7,Pass,Pass Accurate,0
+776,7619.0,7629.0,10.0,O 12,Ball Carry,Ball Carry Neutral,0
+777,7619.0,7629.0,10.0,H 13,Tackle,Tackle Neutral,0
+778,7620.0,7630.0,10.0,O 12,Offload,Successful Offload,0
+779,7623.0,7633.0,10.0,O 7,Pass,Pass Inaccurate,0
+779,7623.0,7633.0,10.0,O 7,Tags,Error,1
+779,7623.0,7633.0,10.0,O 7,Outcomes,Ball Lost,2
+780,8233.0,8243.0,10.0,O 10,Kick,Good Kick,0
+781,8237.0,8247.0,10.0,O 12,Outcome,Ball Caught,0
+782,8238.0,8248.0,10.0,O 5,Tackle,Missed Tackle,0
+783,8239.0,8249.0,10.0,O 21,Tackle,Missed Tackle,0
+784,8241.0,8251.0,10.0,H 12,Ball Carry,Ball Carry Neutral,0
+785,8241.0,8251.0,10.0,O 14,Tackle,Tackle Neutral,0
+786,8242.0,8252.0,10.0,H 8,OOA,2nd,0
+786,8242.0,8252.0,10.0,H 8,Ruck Arrival,Ruck Arrival Effective,1
+787,8242.0,8252.0,10.0,H 6,OOA,1st,0
+787,8242.0,8252.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,1
+788,8243.0,8253.0,10.0,O 7,Counter Ruck,Counter Ruck Ineffective,0
+789,8244.0,8254.0,10.0,H 3,OOA,4th +,0
+789,8244.0,8254.0,10.0,H 3,Ruck Arrival,Ruck Arrival Ineffective,1
+790,8244.0,8254.0,10.0,H 11,Ruck Arrival,Ruck Arrival Ineffective,0
+790,8244.0,8254.0,10.0,H 11,OOA,3rd,1
+791,8247.0,8257.0,10.0,H 9,Pass,Pass Accurate,0
+792,8248.0,8258.0,10.0,H 10,Pass,Pass Accurate,0
+793,8250.0,8260.0,10.0,O 6,Tackle,Tackle Neutral,0
+794,8250.0,8260.0,10.0,O 1,Tackle,Tackle Neutral,0
+795,8250.0,8260.0,10.0,H 4,OOA,1st,0
+795,8250.0,8260.0,10.0,H 4,Ruck Arrival,Ruck Arrival Ineffective,1
+796,8250.0,8260.0,10.0,H 5,Ball Carry,Ball Carry Neutral,0
+797,8251.0,8261.0,10.0,H 7,OOA,2nd,0
+797,8251.0,8261.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+798,8252.0,8262.0,10.0,H 2,OOA,3rd,0
+798,8252.0,8262.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+799,8259.0,8269.0,10.0,H 9,Kick,Good Kick,0
+800,8266.0,8276.0,10.0,H 2,Tags,Error,0
+801,8269.0,8279.0,10.0,O 7,Offload,Successful Offload,0
+802,8270.0,8280.0,10.0,O 5,Pass,Pass Accurate,0
+803,8272.0,8282.0,10.0,O 12,Pass,Pass Accurate,0
+804,8274.0,8284.0,10.0,O 14,Carry,Try,0
+805,8275.0,8285.0,10.0,H 13,Tackle,Missed Tackle,0
+806,8335.0,8345.0,10.0,O 10,Kick,Good Kick,0
+807,8357.0,8367.0,10.0,H 10,Kick,Good Kick,0
+808,8361.0,8371.0,10.0,O 7,Tags,Error,0
+808,8361.0,8371.0,10.0,O 7,Outcomes,Ball Lost,1
+809,8395.0,8405.0,10.0,O 6,Set Piece,Scrum Involvement,0
+810,8395.0,8405.0,10.0,O 1,Set Piece,Scrum Involvement,0
+811,8395.0,8405.0,10.0,O 3,Set Piece,Scrum Involvement,0
+812,8395.0,8405.0,10.0,H 8,Set Piece,Scrum Involvement,0
+813,8395.0,8405.0,10.0,O 7,Set Piece,Scrum Involvement,0
+814,8395.0,8405.0,10.0,O 5,Set Piece,Scrum Involvement,0
+815,8395.0,8405.0,10.0,H 4,Set Piece,Scrum Involvement,0
+816,8395.0,8405.0,10.0,H 2,Set Piece,Scrum Involvement,0
+817,8395.0,8405.0,10.0,H 3,Set Piece,Scrum Involvement,0
+818,8395.0,8405.0,10.0,H 1,Set Piece,Scrum Involvement,0
+819,8395.0,8405.0,10.0,O 2,Set Piece,Scrum Involvement,0
+820,8395.0,8405.0,10.0,H 7,Set Piece,Scrum Involvement,0
+821,8395.0,8405.0,10.0,O 8,Set Piece,Scrum Involvement,0
+822,8395.0,8405.0,10.0,H 6,Set Piece,Scrum Involvement,0
+823,8395.0,8405.0,10.0,H 5,Set Piece,Scrum Involvement,0
+824,8395.0,8405.0,10.0,O 4,Set Piece,Scrum Involvement,0
+825,8399.0,8409.0,10.0,H 8,Pass,Pass Accurate,0
+826,8401.0,8411.0,10.0,H 9,Pass,Pass Accurate,0
+827,8403.0,8413.0,10.0,H 14,Ball Carry,Ball Carry Neutral,0
+828,8403.0,8413.0,10.0,O 11,Tackle,Tackle Negative,0
+829,8404.0,8414.0,10.0,O 6,Counter Ruck,Counter Ruck Ineffective,0
+830,8404.0,8414.0,10.0,H 9,OOA,1st,0
+830,8404.0,8414.0,10.0,H 9,Ruck Arrival,Ruck Arrival Ineffective,1
+831,8404.0,8414.0,10.0,H 6,OOA,2nd,0
+831,8404.0,8414.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,1
+832,8405.0,8415.0,10.0,H 8,OOA,2nd,0
+832,8405.0,8415.0,10.0,H 8,Ruck Arrival,Ruck Arrival Effective,1
+833,8407.0,8417.0,10.0,H 9,Pass,Pass Accurate,0
+834,8410.0,8420.0,10.0,O 7,Tackle,Missed Tackle,0
+835,8411.0,8421.0,10.0,O 1,Tackle,Tackle Neutral,0
+836,8411.0,8421.0,10.0,H 4,Ball Carry,Ball Carry Neutral,0
+837,8411.0,8421.0,10.0,O 2,Tackle,Tackle Neutral,0
+838,8412.0,8422.0,10.0,H 7,OOA,1st,0
+838,8412.0,8422.0,10.0,H 7,Ruck Arrival,Ruck Arrival Ineffective,1
+839,8412.0,8422.0,10.0,H 5,OOA,2nd,0
+839,8412.0,8422.0,10.0,H 5,Ruck Arrival,Ruck Arrival Effective,1
+840,8413.0,8423.0,10.0,O 12,Counter Ruck,Counter Ruck Ineffective,0
+841,8414.0,8424.0,10.0,H 9,Pass,Pass Accurate,0
+842,8415.0,8425.0,10.0,H 3,Pass,Pass Accurate,0
+843,8416.0,8426.0,10.0,H 10,Pass,Pass Accurate,0
+844,8417.0,8427.0,10.0,H 12,Pass,Pass Accurate,0
+845,8418.0,8428.0,10.0,O 14,Tackle,Missed Tackle,0
+846,8418.0,8428.0,10.0,O 21,Tackle,Missed Tackle,0
+847,8421.0,8431.0,10.0,H 13,Ball Carry,Ball Carry Neutral,0
+848,8421.0,8431.0,10.0,O 5,Tackle,Tackle Neutral,0
+849,8422.0,8432.0,10.0,H 12,OOA,1st,0
+849,8422.0,8432.0,10.0,H 12,Ruck Arrival,Ruck Arrival Effective,1
+850,8423.0,8433.0,10.0,H 2,OOA,2nd,0
+850,8423.0,8433.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+851,8426.0,8436.0,10.0,H 9,Pass,Pass Accurate,0
+852,8429.0,8439.0,10.0,O 1,Tackle,Tackle Neutral,0
+853,8429.0,8439.0,10.0,H 3,Ball Carry,Ball Carry Neutral,0
+854,8429.0,8439.0,10.0,O 2,Tackle,Tackle Neutral,0
+855,8430.0,8440.0,10.0,H 1,OOA,1st,0
+855,8430.0,8440.0,10.0,H 1,Ruck Arrival,Ruck Arrival Effective,1
+856,8430.0,8440.0,10.0,H 5,OOA,2nd,0
+856,8430.0,8440.0,10.0,H 5,Ruck Arrival,Ruck Arrival Effective,1
+857,8431.0,8441.0,10.0,H 2,OOA,3rd,0
+857,8431.0,8441.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+858,8432.0,8442.0,10.0,H 9,Pass,Pass Accurate,0
+859,8433.0,8443.0,10.0,H 10,Pass,Pass Accurate,0
+860,8436.0,8446.0,10.0,H 11,Ball Carry,Ball Carry Neutral,0
+861,8437.0,8447.0,10.0,H 10,OOA,2nd,0
+861,8437.0,8447.0,10.0,H 10,Ruck Arrival,Ruck Arrival Effective,1
+862,8437.0,8447.0,10.0,O 7,Tackle,Tackle Neutral,0
+863,8437.0,8447.0,10.0,H 2,OOA,1st,0
+863,8437.0,8447.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+864,8439.0,8449.0,10.0,H 9,Pass,Pass Accurate,0
+865,8441.0,8451.0,10.0,H 4,Pass,Pass Accurate,0
+866,8442.0,8452.0,10.0,H 8,Pass,Pass Accurate,0
+867,8443.0,8453.0,10.0,H 14,Pass,Pass Accurate,0
+868,8444.0,8454.0,10.0,H 7,Carry,Try,0
+869,8444.0,8454.0,10.0,O 11,Tackle,Missed Tackle,0
+870,8527.0,8537.0,10.0,H 15,Kick,Good Kick,0
+871,8557.0,8567.0,10.0,H 15,Kick,Good Kick,0
+872,8560.0,8570.0,10.0,H 12,Outcome,Ball Caught,0
+873,8560.0,8570.0,10.0,O 21,Tackle,Tackle Neutral,0
+874,8562.0,8572.0,10.0,H 8,OOA,1st,0
+874,8562.0,8572.0,10.0,H 8,Ruck Arrival,Ruck Arrival Dominant,1
+875,8562.0,8572.0,10.0,H 12,Ball Carry,Ball Carry Neutral,0
+876,8563.0,8573.0,10.0,H 11,OOA,2nd,0
+876,8563.0,8573.0,10.0,H 11,OOA,2nd,1
+876,8563.0,8573.0,10.0,H 11,Ruck Arrival,Ruck Arrival Effective,2
+877,8564.0,8574.0,10.0,H 9,Pass,Pass Accurate,0
+878,8566.0,8576.0,10.0,O 1,Tackle,Tackle Neutral,0
+879,8567.0,8577.0,10.0,O 6,Tackle,Tackle Neutral,0
+880,8567.0,8577.0,10.0,H 4,Ball Carry,Ball Carry Neutral,0
+881,8567.0,8577.0,10.0,H 2,OOA,1st,0
+881,8567.0,8577.0,10.0,H 2,Ruck Arrival,Ruck Arrival Dominant,1
+882,8568.0,8578.0,10.0,H 5,OOA,2nd,0
+882,8568.0,8578.0,10.0,H 5,Ruck Arrival,Ruck Arrival Effective,1
+883,8571.0,8581.0,10.0,H 9,Kick,Good Kick,0
+884,8574.0,8584.0,10.0,O 15,Outcome,Ball Caught,0
+885,8576.0,8586.0,10.0,O 15,Kick,Bad Kick,0
+886,8579.0,8589.0,10.0,H 2,Outcome,Ball Caught,0
+887,8580.0,8590.0,10.0,O 15,Tackle,Missed Tackle,0
+888,8581.0,8591.0,10.0,O 21,Tackle,Tackle Neutral,0
+889,8582.0,8592.0,10.0,H 2,Ball Carry,Ball Carry Neutral,0
+890,8582.0,8592.0,10.0,H 11,OOA,2nd,0
+890,8582.0,8592.0,10.0,H 11,Ruck Arrival,Ruck Arrival Effective,1
+891,8583.0,8593.0,10.0,H 3,OOA,1st,0
+891,8583.0,8593.0,10.0,H 3,Ruck Arrival,Ruck Arrival Ineffective,1
+892,8586.0,8596.0,10.0,H 9,Pass,Pass Accurate,0
+893,8589.0,8599.0,10.0,O 1,Tackle,Tackle Neutral,0
+894,8589.0,8599.0,10.0,O 2,Tackle,Tackle Neutral,0
+895,8589.0,8599.0,10.0,H 5,Ball Carry,Ball Carry Neutral,0
+896,8590.0,8600.0,10.0,H 1,OOA,2nd,0
+896,8590.0,8600.0,10.0,H 1,Ruck Arrival,Ruck Arrival Effective,1
+897,8590.0,8600.0,10.0,H 5,OOA,1st,0
+897,8590.0,8600.0,10.0,H 5,Ruck Arrival,Ruck Arrival Effective,1
+898,8592.0,8602.0,10.0,H 9,Pass,Pass Accurate,0
+899,8595.0,8605.0,10.0,H 13,Pass,Pass Accurate,0
+900,8598.0,8608.0,10.0,H 15,Pass,Pass Accurate,0
+901,8600.0,8610.0,10.0,O 10,Tackle,Missed Tackle,0
+902,8601.0,8611.0,10.0,O 7,Tackle,Tackle Negative,0
+903,8601.0,8611.0,10.0,H 14,Ball Carry,Ball Carry Dominant,0
+904,8602.0,8612.0,10.0,H 15,Tags,Error,0
+904,8602.0,8612.0,10.0,H 15,Outcomes,Ball Lost,1
+905,8602.0,8612.0,10.0,H 14,Offload,Successful Offload,0
+906,8603.0,8613.0,10.0,O 12,Ball Steals,Steal from Intercept,0
+907,8678.0,8688.0,10.0,O 6,Set Piece,Scrum Involvement,0
+908,8678.0,8688.0,10.0,O 1,Set Piece,Scrum Involvement,0
+909,8678.0,8688.0,10.0,O 3,Set Piece,Scrum Involvement,0
+910,8678.0,8688.0,10.0,H 8,Set Piece,Scrum Involvement,0
+911,8678.0,8688.0,10.0,O 7,Set Piece,Scrum Involvement,0
+912,8678.0,8688.0,10.0,O 5,Set Piece,Scrum Involvement,0
+913,8678.0,8688.0,10.0,H 4,Set Piece,Scrum Involvement,0
+914,8678.0,8688.0,10.0,H 2,Set Piece,Scrum Involvement,0
+915,8678.0,8688.0,10.0,H 3,Set Piece,Scrum Involvement,0
+916,8678.0,8688.0,10.0,H 1,Set Piece,Scrum Involvement,0
+917,8678.0,8688.0,10.0,O 2,Set Piece,Scrum Involvement,0
+918,8678.0,8688.0,10.0,H 7,Set Piece,Scrum Involvement,0
+919,8678.0,8688.0,10.0,O 8,Set Piece,Scrum Involvement,0
+920,8678.0,8688.0,10.0,H 6,Set Piece,Scrum Involvement,0
+921,8678.0,8688.0,10.0,H 5,Set Piece,Scrum Involvement,0
+922,8678.0,8688.0,10.0,O 4,Set Piece,Scrum Involvement,0
+923,8683.0,8693.0,10.0,O 9,Kick,Good Kick,0
+924,8686.0,8696.0,10.0,O 10,Offload,Successful Offload,0
+925,8686.0,8696.0,10.0,O 12,Tags,Error,0
+925,8686.0,8696.0,10.0,O 12,Outcomes,Ball Lost,1
+926,8687.0,8697.0,10.0,H 12,Ball Steals,Steal from Intercept,0
+927,8688.0,8698.0,10.0,O 11,Tackle,Missed Tackle,0
+928,8689.0,8699.0,10.0,H 12,Offload,Successful Offload,0
+929,8691.0,8701.0,10.0,O 12,Tackle,Missed Tackle,0
+930,8692.0,8702.0,10.0,H 13,Ball Carry,Ball Carry Dominant,0
+931,8692.0,8702.0,10.0,O 5,Tackle,Tackle Negative,0
+932,8693.0,8703.0,10.0,H 8,OOA,2nd,0
+932,8693.0,8703.0,10.0,H 8,Ruck Arrival,Ruck Arrival Effective,1
+933,8693.0,8703.0,10.0,H 7,OOA,1st,0
+933,8693.0,8703.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+934,8694.0,8704.0,10.0,H 12,OOA,4th +,0
+934,8694.0,8704.0,10.0,H 12,Ruck Arrival,Ruck Arrival Ineffective,1
+935,8694.0,8704.0,10.0,H 6,OOA,3rd,0
+935,8694.0,8704.0,10.0,H 6,Ruck Arrival,Ruck Arrival Ineffective,1
+936,8696.0,8706.0,10.0,H 9,Pass,Pass Accurate,0
+937,8697.0,8707.0,10.0,O 14,Tackle,Missed Tackle,0
+938,8699.0,8709.0,10.0,O 12,Tackle,Missed Tackle,0
+939,8700.0,8710.0,10.0,H 10,Carry,Try,0
+940,8753.0,8763.0,10.0,H 15,Kick,Good Kick,0
+941,8781.0,8791.0,10.0,O 10,Kick,Bad Kick,0
+941,8781.0,8791.0,10.0,O 10,Tags,Error,1
+941,8781.0,8791.0,10.0,O 10,Outcomes,Ball Lost,2
+942,8828.0,8838.0,10.0,O 6,Set Piece,Scrum Involvement,0
+943,8828.0,8838.0,10.0,O 1,Set Piece,Scrum Involvement,0
+944,8828.0,8838.0,10.0,O 3,Set Piece,Scrum Involvement,0
+945,8828.0,8838.0,10.0,H 8,Set Piece,Scrum Involvement,0
+946,8828.0,8838.0,10.0,O 5,Set Piece,Scrum Involvement,0
+947,8828.0,8838.0,10.0,H 4,Set Piece,Scrum Involvement,0
+948,8828.0,8838.0,10.0,H 2,Set Piece,Scrum Involvement,0
+949,8828.0,8838.0,10.0,H 3,Set Piece,Scrum Involvement,0
+950,8828.0,8838.0,10.0,H 1,Set Piece,Scrum Involvement,0
+951,8828.0,8838.0,10.0,O 2,Set Piece,Scrum Involvement,0
+952,8828.0,8838.0,10.0,H 7,Set Piece,Scrum Involvement,0
+953,8828.0,8838.0,10.0,O 8,Set Piece,Scrum Involvement,0
+954,8828.0,8838.0,10.0,H 6,Set Piece,Scrum Involvement,0
+955,8828.0,8838.0,10.0,H 5,Set Piece,Scrum Involvement,0
+956,8828.0,8838.0,10.0,O 4,Set Piece,Scrum Involvement,0
+957,8829.0,8839.0,10.0,O 9,Set Piece,Scrum Involvement,0
+958,8830.0,8840.0,10.0,H 9,Pass,Pass Accurate,0
+959,8832.0,8842.0,10.0,H 12,Pass,Pass Accurate,0
+960,8833.0,8843.0,10.0,H 10,Pass,Pass Accurate,0
+961,8837.0,8847.0,10.0,H 10,OOA,1st,0
+961,8837.0,8847.0,10.0,H 10,Ruck Arrival,Ruck Arrival Effective,1
+962,8837.0,8847.0,10.0,H 13,OOA,2nd,0
+962,8837.0,8847.0,10.0,H 13,Ruck Arrival,Ruck Arrival Effective,1
+963,8838.0,8848.0,10.0,H 11,Ball Carry,Ball Carry Neutral,0
+964,8838.0,8848.0,10.0,O 14,Tackle,Tackle Neutral,0
+965,8839.0,8849.0,10.0,H 8,OOA,3rd,0
+965,8839.0,8849.0,10.0,H 8,Ruck Arrival,Ruck Arrival Ineffective,1
+966,8840.0,8850.0,10.0,O 7,Counter Ruck,Counter Ruck Ineffective,0
+967,8842.0,8852.0,10.0,H 9,Pass,Pass Accurate,0
+968,8844.0,8854.0,10.0,O 3,Tackle,Tackle Neutral,0
+969,8844.0,8854.0,10.0,H 5,Ball Carry,Ball Carry Neutral,0
+970,8844.0,8854.0,10.0,O 10,Tackle,Tackle Neutral,0
+971,8844.0,8854.0,10.0,H 6,OOA,1st,0
+971,8844.0,8854.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,1
+972,8845.0,8855.0,10.0,H 4,OOA,2nd,0
+972,8845.0,8855.0,10.0,H 4,Ruck Arrival,Ruck Arrival Effective,1
+973,8848.0,8858.0,10.0,H 9,Pass,Pass Accurate,0
+974,8849.0,8859.0,10.0,H 3,Pass,Pass Accurate,0
+975,8850.0,8860.0,10.0,H 1,Tags,Error,0
+975,8850.0,8860.0,10.0,H 1,Outcomes,Ball Lost,1
+976,8903.0,8913.0,10.0,O 6,Set Piece,Scrum Involvement,0
+977,8903.0,8913.0,10.0,O 1,Set Piece,Scrum Involvement,0
+978,8903.0,8913.0,10.0,O 3,Set Piece,Scrum Involvement,0
+979,8903.0,8913.0,10.0,H 8,Set Piece,Scrum Involvement,0
+980,8903.0,8913.0,10.0,O 7,Set Piece,Scrum Involvement,0
+981,8903.0,8913.0,10.0,O 5,Set Piece,Scrum Involvement,0
+982,8903.0,8913.0,10.0,H 4,Set Piece,Scrum Involvement,0
+983,8903.0,8913.0,10.0,H 2,Set Piece,Scrum Involvement,0
+984,8903.0,8913.0,10.0,H 3,Set Piece,Scrum Involvement,0
+985,8903.0,8913.0,10.0,H 1,Set Piece,Scrum Involvement,0
+986,8903.0,8913.0,10.0,O 2,Set Piece,Scrum Involvement,0
+987,8903.0,8913.0,10.0,H 7,Set Piece,Scrum Involvement,0
+988,8903.0,8913.0,10.0,O 8,Set Piece,Scrum Involvement,0
+989,8903.0,8913.0,10.0,H 6,Set Piece,Scrum Involvement,0
+990,8903.0,8913.0,10.0,H 5,Set Piece,Scrum Involvement,0
+991,8903.0,8913.0,10.0,O 4,Set Piece,Scrum Involvement,0
+992,8905.0,8915.0,10.0,O 1,Outcomes,Penalty Lost,0
+993,8951.0,8961.0,10.0,H 15,Kick,Bad Kick,0
+993,8951.0,8961.0,10.0,H 15,Tags,Error,1
+993,8951.0,8961.0,10.0,H 15,Outcomes,Ball Lost,2
+994,8954.0,8964.0,10.0,O 14,Ball Steals,Steal from Intercept,0
+995,8955.0,8965.0,10.0,O 14,Pass,Pass Accurate,0
+996,8961.0,8971.0,10.0,H 5,Tackle,Tackle Neutral,0
+997,8961.0,8971.0,10.0,O 10,Ball Carry,Ball Carry Neutral,0
+998,8961.0,8971.0,10.0,H 8,Tackle,Tackle Neutral,0
+999,8962.0,8972.0,10.0,O 14,OOA,1st,0
+999,8962.0,8972.0,10.0,O 14,Ruck Arrival,Ruck Arrival Effective,1
+1000,8962.0,8972.0,10.0,O 3,OOA,2nd,0
+1000,8962.0,8972.0,10.0,O 3,Ruck Arrival,Ruck Arrival Ineffective,1
+1001,8964.0,8974.0,10.0,O 9,Pass,Pass Accurate,0
+1002,8967.0,8977.0,10.0,H 3,Tackle,Tackle Neutral,0
+1003,8968.0,8978.0,10.0,O 8,Tackle,Tackle Neutral,0
+1004,8968.0,8978.0,10.0,O 6,OOA,1st,0
+1004,8968.0,8978.0,10.0,O 6,Ruck Arrival,Ruck Arrival Ineffective,1
+1005,8969.0,8979.0,10.0,O 2,OOA,2nd,0
+1005,8969.0,8979.0,10.0,O 2,Ruck Arrival,Ruck Arrival Effective,1
+1006,8970.0,8980.0,10.0,O 9,Pass,Pass Accurate,0
+1007,8971.0,8981.0,10.0,O 15,Pass,Pass Accurate,0
+1008,8975.0,8985.0,10.0,O 10,Ball Carry,Ball Carry Neutral,0
+1009,8975.0,8985.0,10.0,H 12,Tackle,Tackle Neutral,0
+1010,8975.0,8985.0,10.0,H 7,Tackle,Tackle Neutral,0
+1011,8976.0,8986.0,10.0,O 5,OOA,1st,0
+1011,8976.0,8986.0,10.0,O 5,Ruck Arrival,Ruck Arrival Effective,1
+1012,8977.0,8987.0,10.0,O 12,OOA,2nd,0
+1012,8977.0,8987.0,10.0,O 12,Ruck Arrival,Ruck Arrival Effective,1
+1013,8979.0,8989.0,10.0,O 9,Pass,Pass Accurate,0
+1014,8981.0,8991.0,10.0,H 1,Tackle,Missed Tackle,0
+1015,8981.0,8991.0,10.0,H 4,Tackle,Missed Tackle,0
+1016,8983.0,8993.0,10.0,O 7,Ball Carry,Ball Carry Neutral,0
+1017,8983.0,8993.0,10.0,H 7,Tackle,Tackle Neutral,0
+1018,8984.0,8994.0,10.0,O 8,OOA,1st,0
+1018,8984.0,8994.0,10.0,O 8,Ruck Arrival,Ruck Arrival Dominant,1
+1019,8984.0,8994.0,10.0,O 3,OOA,2nd,0
+1019,8984.0,8994.0,10.0,O 3,Ruck Arrival,Ruck Arrival Effective,1
+1020,8986.0,8996.0,10.0,O 9,Pass,Pass Accurate,0
+1021,8990.0,9000.0,10.0,H 1,Tackle,Missed Tackle,0
+1022,8990.0,9000.0,10.0,H 4,Tackle,Missed Tackle,0
+1023,8993.0,9003.0,10.0,O 12,Ball Carry,Ball Carry Neutral,0
+1024,8993.0,9003.0,10.0,H 2,Tackle,Tackle Neutral,0
+1025,8993.0,9003.0,10.0,H 3,Tackle,Tackle Neutral,0
+1026,8993.0,9003.0,10.0,H 7,Tackle,Tackle Neutral,0
+1027,8994.0,9004.0,10.0,O 5,OOA,1st,0
+1027,8994.0,9004.0,10.0,O 5,Ruck Arrival,Ruck Arrival Effective,1
+1028,8995.0,9005.0,10.0,O 8,OOA,2nd,0
+1028,8995.0,9005.0,10.0,O 8,Ruck Arrival,Ruck Arrival Effective,1
+1029,8998.0,9008.0,10.0,H 5,Tackle,Tackle Neutral,0
+1030,8999.0,9009.0,10.0,O 9,Ball Carry,Ball Carry Neutral,0
+1031,9000.0,9010.0,10.0,H 5,Outcomes,Penalty Lost,0
+1032,9024.0,9034.0,10.0,O 10,Kick,Bad Kick,0
+1033,9027.0,9037.0,10.0,H 12,Outcome,Ball Caught,0
+1033,9027.0,9037.0,10.0,H 12,Pass,Pass Accurate,1
+1034,9040.0,9050.0,10.0,H 14,Outcomes,Ball Lost,0
+1035,9087.0,9097.0,10.0,O 6,Set Piece,Scrum Involvement,0
+1036,9087.0,9097.0,10.0,O 3,Set Piece,Scrum Involvement,0
+1037,9087.0,9097.0,10.0,H 8,Set Piece,Scrum Involvement,0
+1038,9087.0,9097.0,10.0,O 7,Set Piece,Scrum Involvement,0
+1039,9087.0,9097.0,10.0,O 5,Set Piece,Scrum Involvement,0
+1040,9087.0,9097.0,10.0,H 4,Set Piece,Scrum Involvement,0
+1041,9087.0,9097.0,10.0,H 2,Set Piece,Scrum Involvement,0
+1042,9087.0,9097.0,10.0,H 3,Set Piece,Scrum Involvement,0
+1043,9087.0,9097.0,10.0,H 1,Set Piece,Scrum Involvement,0
+1044,9087.0,9097.0,10.0,O 2,Set Piece,Scrum Involvement,0
+1045,9087.0,9097.0,10.0,H 7,Set Piece,Scrum Involvement,0
+1046,9087.0,9097.0,10.0,O 8,Set Piece,Scrum Involvement,0
+1047,9087.0,9097.0,10.0,H 6,Set Piece,Scrum Involvement,0
+1048,9087.0,9097.0,10.0,H 5,Set Piece,Scrum Involvement,0
+1049,9087.0,9097.0,10.0,O 4,Set Piece,Scrum Involvement,0
+1050,9088.0,9098.0,10.0,O 17,Set Piece,Scrum Involvement,0
+1051,9125.0,9135.0,10.0,O 6,Set Piece,Scrum Involvement,0
+1052,9125.0,9135.0,10.0,O 3,Set Piece,Scrum Involvement,0
+1053,9125.0,9135.0,10.0,H 8,Set Piece,Scrum Involvement,0
+1054,9125.0,9135.0,10.0,O 7,Set Piece,Scrum Involvement,0
+1055,9125.0,9135.0,10.0,O 5,Set Piece,Scrum Involvement,0
+1056,9125.0,9135.0,10.0,H 4,Set Piece,Scrum Involvement,0
+1057,9125.0,9135.0,10.0,H 2,Set Piece,Scrum Involvement,0
+1058,9125.0,9135.0,10.0,H 3,Set Piece,Scrum Involvement,0
+1059,9125.0,9135.0,10.0,H 1,Set Piece,Scrum Involvement,0
+1060,9125.0,9135.0,10.0,O 2,Set Piece,Scrum Involvement,0
+1061,9125.0,9135.0,10.0,H 7,Set Piece,Scrum Involvement,0
+1062,9125.0,9135.0,10.0,O 8,Set Piece,Scrum Involvement,0
+1063,9125.0,9135.0,10.0,H 6,Set Piece,Scrum Involvement,0
+1064,9125.0,9135.0,10.0,H 5,Set Piece,Scrum Involvement,0
+1065,9125.0,9135.0,10.0,O 4,Set Piece,Scrum Involvement,0
+1066,9125.0,9135.0,10.0,O 17,Set Piece,Scrum Involvement,0
+1067,9129.0,9139.0,10.0,O 17,Outcomes,Penalty Lost,0
+1068,9138.0,9148.0,10.0,H 9,Pass,Pass Accurate,0
+1069,9142.0,9152.0,10.0,H 10,Ball Carry,Ball Carry Dominant,0
+1070,9142.0,9152.0,10.0,O 6,Tackle,Tackle Negative,0
+1071,9142.0,9152.0,10.0,O 11,Tackle,Tackle Negative,0
+1072,9143.0,9153.0,10.0,H 7,OOA,1st,0
+1072,9143.0,9153.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+1073,9143.0,9153.0,10.0,O 3,Counter Ruck,Counter Ruck Ineffective,0
+1074,9144.0,9154.0,10.0,H 6,OOA,3rd,0
+1074,9144.0,9154.0,10.0,H 6,Ruck Arrival,Ruck Arrival Ineffective,1
+1075,9144.0,9154.0,10.0,H 8,OOA,4th +,0
+1075,9144.0,9154.0,10.0,H 8,Ruck Arrival,Ruck Arrival Ineffective,1
+1076,9144.0,9154.0,10.0,H 2,OOA,2nd,0
+1076,9144.0,9154.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+1077,9146.0,9156.0,10.0,H 9,Pass,Pass Accurate,0
+1078,9149.0,9159.0,10.0,O 7,Tackle,Tackle Neutral,0
+1079,9149.0,9159.0,10.0,O 5,Tackle,Tackle Neutral,0
+1080,9149.0,9159.0,10.0,H 5,Ball Carry,Ball Carry Neutral,0
+1081,9150.0,9160.0,10.0,H 4,OOA,1st,0
+1081,9150.0,9160.0,10.0,H 4,Ruck Arrival,Ruck Arrival Effective,1
+1082,9150.0,9160.0,10.0,H 3,OOA,2nd,0
+1082,9150.0,9160.0,10.0,H 3,Ruck Arrival,Ruck Arrival Ineffective,1
+1083,9152.0,9162.0,10.0,O 7,Counter Ruck,Counter Ruck Ineffective,0
+1084,9157.0,9167.0,10.0,H 4,Ball Carry,Ball Carry Neutral,0
+1085,9157.0,9167.0,10.0,O 17,Tackle,Tackle Neutral,0
+1086,9158.0,9168.0,10.0,O 9,Tackle,Missed Tackle,0
+1087,9159.0,9169.0,10.0,H 2,OOA,1st,0
+1087,9159.0,9169.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+1088,9159.0,9169.0,10.0,H 3,OOA,2nd,0
+1088,9159.0,9169.0,10.0,H 3,Ruck Arrival,Ruck Arrival Effective,1
+1089,9160.0,9170.0,10.0,H 9,Pass,Pass Accurate,0
+1090,9162.0,9172.0,10.0,H 10,Kick,Good Kick,0
+1091,9170.0,9180.0,10.0,H 13,Tackle,Tackle Negative,0
+1092,9171.0,9181.0,10.0,O 11,Ball Carry,Ball Carry Dominant,0
+1093,9172.0,9182.0,10.0,O 8,OOA,2nd,0
+1093,9172.0,9182.0,10.0,O 8,Ruck Arrival,Ruck Arrival Effective,1
+1094,9172.0,9182.0,10.0,O 21,OOA,1st,0
+1094,9172.0,9182.0,10.0,O 21,Ruck Arrival,Ruck Arrival Effective,1
+1095,9174.0,9184.0,10.0,O 9,Pass,Pass Accurate,0
+1096,9176.0,9186.0,10.0,O 5,Offload,Successful Offload,0
+1097,9177.0,9187.0,10.0,O 7,Offload,Successful Offload,0
+1098,9179.0,9189.0,10.0,O 12,Carry,Linebreak,0
+1099,9181.0,9191.0,10.0,O 12,Ball Carry,Ball Carry Dominant,0
+1100,9181.0,9191.0,10.0,H 12,Tackle,Tackle Negative,0
+1101,9182.0,9192.0,10.0,O 12,Offload,Successful Offload,0
+1102,9207.0,9217.0,10.0,H 4,Outcomes,Penalty Lost,0
+1103,9210.0,9220.0,10.0,O 9,Pass,Pass Accurate,0
+1104,9212.0,9222.0,10.0,O 10,Pass,Pass Accurate,0
+1105,9214.0,9224.0,10.0,H 10,Tackle,Tackle Neutral,0
+1106,9215.0,9225.0,10.0,H 12,Tackle,Tackle Neutral,0
+1107,9215.0,9225.0,10.0,O 21,Ball Carry,Ball Carry Neutral,0
+1108,9215.0,9225.0,10.0,O 10,OOA,1st,0
+1108,9215.0,9225.0,10.0,O 10,Ruck Arrival,Ruck Arrival Effective,1
+1109,9216.0,9226.0,10.0,O 5,OOA,2nd,0
+1109,9216.0,9226.0,10.0,O 5,Ruck Arrival,Ruck Arrival Effective,1
+1110,9218.0,9228.0,10.0,O 6,OOA,4th +,0
+1110,9218.0,9228.0,10.0,O 6,Ruck Arrival,Ruck Arrival Ineffective,1
+1111,9219.0,9229.0,10.0,O 9,Pass,Pass Accurate,0
+1112,9241.0,9251.0,10.0,O 10,Kick,Good Kick,0
+1113,9274.0,9284.0,10.0,O 6,Set Piece,Lineout Involvement,0
+1114,9274.0,9284.0,10.0,O 3,Set Piece,Lineout Involvement,0
+1115,9274.0,9284.0,10.0,H 8,Set Piece,Lineout Involvement,0
+1116,9274.0,9284.0,10.0,O 7,Set Piece,Lineout Involvement,0
+1117,9274.0,9284.0,10.0,O 5,Set Piece,Lineout Involvement,0
+1118,9274.0,9284.0,10.0,H 4,Set Piece,Lineout Involvement,0
+1119,9274.0,9284.0,10.0,H 3,Set Piece,Lineout Involvement,0
+1120,9274.0,9284.0,10.0,H 1,Set Piece,Lineout Involvement,0
+1121,9274.0,9284.0,10.0,O 2,Set Piece,Lineout Involvement,0
+1121,9274.0,9284.0,10.0,O 2,Set Piece,Successful Throw,1
+1122,9274.0,9284.0,10.0,H 7,Set Piece,Lineout Involvement,0
+1123,9274.0,9284.0,10.0,O 8,Set Piece,Lineout Involvement,0
+1124,9274.0,9284.0,10.0,H 6,Set Piece,Lineout Involvement,0
+1125,9274.0,9284.0,10.0,H 5,Set Piece,Lineout Involvement,0
+1126,9274.0,9284.0,10.0,O 4,Set Piece,Lineout Involvement,0
+1127,9274.0,9284.0,10.0,O 17,Set Piece,Lineout Involvement,0
+1128,9289.0,9299.0,10.0,O 6,Outcomes,Penalty Lost,0
+1129,9313.0,9323.0,10.0,H 15,Kick,Good Kick,0
+1130,9346.0,9356.0,10.0,O 3,Set Piece,Lineout Involvement,0
+1131,9346.0,9356.0,10.0,O 7,Set Piece,Lineout Involvement,0
+1132,9346.0,9356.0,10.0,O 5,Set Piece,Lineout Involvement,0
+1133,9346.0,9356.0,10.0,O 4,Set Piece,Lineout Involvement,0
+1134,9346.0,9356.0,10.0,O 17,Set Piece,Lineout Involvement,0
+1135,9346.0,9356.0,10.0,H 4,Set Piece,Lineout Involvement,0
+1136,9346.0,9356.0,10.0,H 3,Set Piece,Lineout Involvement,0
+1137,9346.0,9356.0,10.0,H 1,Set Piece,Lineout Involvement,0
+1138,9346.0,9356.0,10.0,H 5,Set Piece,Lineout Involvement,0
+1139,9347.0,9357.0,10.0,H 2,Set Piece,Lineout Involvement,0
+1139,9347.0,9357.0,10.0,H 2,Set Piece,Unsuccessful Throw,1
+1139,9347.0,9357.0,10.0,H 2,Tags,Error,2
+1139,9347.0,9357.0,10.0,H 2,Outcomes,Ball Lost,3
+1140,9380.0,9390.0,10.0,O 6,Set Piece,Lineout Involvement,0
+1141,9380.0,9390.0,10.0,O 3,Set Piece,Lineout Involvement,0
+1142,9380.0,9390.0,10.0,O 7,Set Piece,Lineout Involvement,0
+1143,9380.0,9390.0,10.0,O 5,Set Piece,Lineout Involvement,0
+1144,9380.0,9390.0,10.0,O 2,Set Piece,Lineout Involvement,0
+1144,9380.0,9390.0,10.0,O 2,Set Piece,Unsuccessful Throw,1
+1144,9380.0,9390.0,10.0,O 2,Tags,Error,2
+1145,9380.0,9390.0,10.0,O 8,Set Piece,Lineout Involvement,0
+1146,9380.0,9390.0,10.0,O 4,Set Piece,Lineout Involvement,0
+1147,9380.0,9390.0,10.0,O 17,Set Piece,Lineout Involvement,0
+1148,9380.0,9390.0,10.0,H 8,Set Piece,Lineout Involvement,0
+1149,9380.0,9390.0,10.0,H 4,Set Piece,Lineout Involvement,0
+1150,9380.0,9390.0,10.0,H 3,Set Piece,Lineout Involvement,0
+1151,9380.0,9390.0,10.0,H 1,Set Piece,Lineout Involvement,0
+1152,9380.0,9390.0,10.0,H 7,Set Piece,Lineout Involvement,0
+1153,9380.0,9390.0,10.0,H 6,Set Piece,Lineout Involvement,0
+1154,9380.0,9390.0,10.0,H 5,Set Piece,Lineout Involvement,0
+1155,9425.0,9435.0,10.0,H 9,Pass,Pass Accurate,0
+1156,9429.0,9439.0,10.0,H 1,Ball Carry,Ball Carry Dominant,0
+1157,9429.0,9439.0,10.0,O 7,Tackle,Tackle Negative,0
+1158,9431.0,9441.0,10.0,O 17,Tackle,Tackle Negative,0
+1159,9431.0,9441.0,10.0,H 2,OOA,1st,0
+1159,9431.0,9441.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+1160,9431.0,9441.0,10.0,H 3,OOA,2nd,0
+1160,9431.0,9441.0,10.0,H 3,Ruck Arrival,Ruck Arrival Effective,1
+1161,9432.0,9442.0,10.0,O 8,Counter Ruck,Counter Ruck Ineffective,0
+1162,9432.0,9442.0,10.0,H 8,OOA,3rd,0
+1162,9432.0,9442.0,10.0,H 8,Ruck Arrival,Ruck Arrival Effective,1
+1163,9433.0,9443.0,10.0,H 9,Pass,Pass Accurate,0
+1164,9435.0,9445.0,10.0,H 5,Ball Carry,Ball Carry Neutral,0
+1165,9435.0,9445.0,10.0,O 12,Tackle,Tackle Neutral,0
+1166,9436.0,9446.0,10.0,O 6,Tackle,Tackle Neutral,0
+1167,9436.0,9446.0,10.0,H 4,Ruck Arrival,Ruck Arrival Effective,0
+1167,9436.0,9446.0,10.0,H 4,OOA,1st,1
+1168,9437.0,9447.0,10.0,H 6,OOA,2nd,0
+1168,9437.0,9447.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,1
+1169,9439.0,9449.0,10.0,H 9,Pass,Pass Accurate,0
+1170,9443.0,9453.0,10.0,H 10,Ball Carry,Ball Carry Neutral,0
+1171,9443.0,9453.0,10.0,O 6,Tackle,Tackle Neutral,0
+1172,9443.0,9453.0,10.0,O 21,Tackle,Tackle Neutral,0
+1173,9443.0,9453.0,10.0,H 12,OOA,1st,0
+1173,9443.0,9453.0,10.0,H 12,Ruck Arrival,Ruck Arrival Effective,1
+1174,9444.0,9454.0,10.0,H 13,OOA,2nd,0
+1174,9444.0,9454.0,10.0,H 13,Ruck Arrival,Ruck Arrival Effective,1
+1175,9444.0,9454.0,10.0,H 7,OOA,3rd,0
+1175,9444.0,9454.0,10.0,H 7,Ruck Arrival,Ruck Arrival Ineffective,1
+1175,9444.0,9454.0,10.0,H 7,Ruck Arrival,Ruck Arrival Ineffective,2
+1176,9447.0,9457.0,10.0,H 9,Pass,Pass Accurate,0
+1177,9448.0,9458.0,10.0,H 3,Pass,Pass Accurate,0
+1178,9449.0,9459.0,10.0,O 8,Tackle,Missed Tackle,0
+1179,9449.0,9459.0,10.0,O 17,Tackle,Missed Tackle,0
+1180,9449.0,9459.0,10.0,H 1,Carry,Linebreak,0
+1181,9453.0,9463.0,10.0,O 11,Tackle,Missed Tackle,0
+1182,9454.0,9464.0,10.0,O 22,Tackle,Missed Tackle,0
+1183,9456.0,9466.0,10.0,O 7,Tackle,Tackle Negative,0
+1184,9456.0,9466.0,10.0,H 1,Ball Carry,Ball Carry Dominant,0
+1185,9456.0,9466.0,10.0,O 22,Tackle,Tackle Negative,0
+1186,9458.0,9468.0,10.0,H 14,OOA,1st,0
+1186,9458.0,9468.0,10.0,H 14,Ruck Arrival,Ruck Arrival Effective,1
+1187,9459.0,9469.0,10.0,H 6,OOA,2nd,0
+1187,9459.0,9469.0,10.0,H 6,Ruck Arrival,Ruck Arrival Ineffective,1
+1188,9460.0,9470.0,10.0,H 9,Pass,Pass Accurate,0
+1189,9463.0,9473.0,10.0,O 11,Tackle,Missed Tackle,0
+1190,9465.0,9475.0,10.0,O 2,Tackle,Tackle Neutral,0
+1191,9465.0,9475.0,10.0,O 4,Tackle,Tackle Neutral,0
+1192,9465.0,9475.0,10.0,H 15,Ball Carry,Ball Carry Neutral,0
+1193,9466.0,9476.0,10.0,H 7,OOA,1st,0
+1193,9466.0,9476.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+1194,9466.0,9476.0,10.0,H 5,OOA,2nd,0
+1194,9466.0,9476.0,10.0,H 5,Ruck Arrival,Ruck Arrival Effective,1
+1195,9467.0,9477.0,10.0,H 8,OOA,3rd,0
+1195,9467.0,9477.0,10.0,H 8,Ruck Arrival,Ruck Arrival Ineffective,1
+1196,9467.0,9477.0,10.0,H 6,OOA,4th +,0
+1196,9467.0,9477.0,10.0,H 6,Ruck Arrival,Ruck Arrival Ineffective,1
+1197,9468.0,9478.0,10.0,H 2,OOA,4th +,0
+1197,9468.0,9478.0,10.0,H 2,Ruck Arrival,Ruck Arrival Ineffective,1
+1198,9473.0,9483.0,10.0,H 9,Pass,Pass Accurate,0
+1199,9474.0,9484.0,10.0,H 10,Pass,Pass Accurate,0
+1200,9478.0,9488.0,10.0,H 12,Offload,Successful Offload,0
+1201,9478.0,9488.0,10.0,O 10,Tackle,Missed Tackle,0
+1202,9478.0,9488.0,10.0,O 12,Tackle,Missed Tackle,0
+1203,9479.0,9489.0,10.0,H 13,Carry,Try,0
+1204,9527.0,9537.0,10.0,H 15,Kick,Good Kick,0
+1205,9555.0,9565.0,10.0,O 10,Kick,Good Kick,0
+1206,9559.0,9569.0,10.0,H 10,Outcome,Ball Caught,0
+1206,9559.0,9569.0,10.0,H 10,Pass,Pass Accurate,1
+1207,9562.0,9572.0,10.0,H 15,Kick,Good Kick,0
+1208,9595.0,9605.0,10.0,O 6,Set Piece,Lineout Involvement,0
+1209,9595.0,9605.0,10.0,O 3,Set Piece,Lineout Involvement,0
+1210,9595.0,9605.0,10.0,H 8,Set Piece,Lineout Involvement,0
+1211,9595.0,9605.0,10.0,O 7,Set Piece,Lineout Involvement,0
+1212,9595.0,9605.0,10.0,O 5,Set Piece,Lineout Involvement,0
+1213,9595.0,9605.0,10.0,H 4,Set Piece,Lineout Involvement,0
+1214,9595.0,9605.0,10.0,H 3,Set Piece,Lineout Involvement,0
+1215,9595.0,9605.0,10.0,H 1,Set Piece,Lineout Involvement,0
+1216,9595.0,9605.0,10.0,O 2,Set Piece,Lineout Involvement,0
+1216,9595.0,9605.0,10.0,O 2,Set Piece,Successful Throw,1
+1217,9595.0,9605.0,10.0,H 7,Set Piece,Lineout Involvement,0
+1218,9595.0,9605.0,10.0,O 8,Set Piece,Lineout Involvement,0
+1219,9595.0,9605.0,10.0,H 6,Set Piece,Lineout Involvement,0
+1220,9595.0,9605.0,10.0,H 5,Set Piece,Lineout Involvement,0
+1221,9595.0,9605.0,10.0,O 4,Set Piece,Lineout Involvement,0
+1222,9595.0,9605.0,10.0,O 17,Set Piece,Lineout Involvement,0
+1223,9609.0,9619.0,10.0,O 3,OOA,1st,0
+1223,9609.0,9619.0,10.0,O 3,Ruck Arrival,Ruck Arrival Effective,1
+1224,9610.0,9620.0,10.0,H 2,Tackle,Tackle Neutral,0
+1225,9610.0,9620.0,10.0,O 8,Ball Carry,Ball Carry Neutral,0
+1226,9610.0,9620.0,10.0,O 4,OOA,2nd,0
+1226,9610.0,9620.0,10.0,O 4,Ruck Arrival,Ruck Arrival Ineffective,1
+1227,9612.0,9622.0,10.0,O 9,Pass,Pass Accurate,0
+1228,9614.0,9624.0,10.0,H 8,Tackle,Tackle Neutral,0
+1229,9614.0,9624.0,10.0,O 10,Ball Carry,Ball Carry Neutral,0
+1230,9616.0,9626.0,10.0,O 6,Ruck Arrival,Ruck Arrival Ineffective,0
+1230,9616.0,9626.0,10.0,O 6,OOA,3rd,1
+1231,9616.0,9626.0,10.0,O 9,OOA,1st,0
+1231,9616.0,9626.0,10.0,O 9,Ruck Arrival,Ruck Arrival Ineffective,1
+1232,9616.0,9626.0,10.0,O 14,OOA,3rd,0
+1232,9616.0,9626.0,10.0,O 14,Ruck Arrival,Ruck Arrival Ineffective,1
+1233,9620.0,9630.0,10.0,H 5,Outcomes,Penalty Lost,0
+1234,9635.0,9645.0,10.0,O 9,Pass,Pass Accurate,0
+1235,9639.0,9649.0,10.0,H 7,Tackle,Tackle Neutral,0
+1236,9639.0,9649.0,10.0,O 7,Ball Carry,Ball Carry Neutral,0
+1237,9639.0,9649.0,10.0,H 4,Tackle,Tackle Neutral,0
+1238,9639.0,9649.0,10.0,O 8,OOA,1st,0
+1238,9639.0,9649.0,10.0,O 8,Ruck Arrival,Ruck Arrival Ineffective,1
+1239,9640.0,9650.0,10.0,O 17,OOA,2nd,0
+1239,9640.0,9650.0,10.0,O 17,Ruck Arrival,Ruck Arrival Ineffective,1
+1240,9640.0,9650.0,10.0,O 5,OOA,3rd,0
+1240,9640.0,9650.0,10.0,O 5,Ruck Arrival,Ruck Arrival Ineffective,1
+1241,9641.0,9651.0,10.0,O 9,Pass,Pass Accurate,0
+1242,9644.0,9654.0,10.0,O 2,Ball Carry,Ball Carry Neutral,0
+1243,9645.0,9655.0,10.0,H 2,Tackle,Tackle Neutral,0
+1244,9646.0,9656.0,10.0,O 4,OOA,1st,0
+1244,9646.0,9656.0,10.0,O 4,Ruck Arrival,Ruck Arrival Ineffective,1
+1245,9646.0,9656.0,10.0,O 3,OOA,2nd,0
+1245,9646.0,9656.0,10.0,O 3,Ruck Arrival,Ruck Arrival Ineffective,1
+1246,9647.0,9657.0,10.0,O 21,OOA,3rd,0
+1246,9647.0,9657.0,10.0,O 21,Ruck Arrival,Ruck Arrival Ineffective,1
+1247,9649.0,9659.0,10.0,O 2,Outcomes,Penalty Lost,0
+1247,9649.0,9659.0,10.0,O 2,Outcomes,Ball Lost,1
+1248,9671.0,9681.0,10.0,H 15,Kick,Good Kick,0
+1249,9705.0,9715.0,10.0,H 4,Set Piece,Lineout Involvement,0
+1250,9705.0,9715.0,10.0,H 2,Set Piece,Lineout Involvement,0
+1250,9705.0,9715.0,10.0,H 2,Set Piece,Successful Throw,1
+1251,9705.0,9715.0,10.0,H 1,Set Piece,Lineout Involvement,0
+1252,9705.0,9715.0,10.0,H 5,Set Piece,Lineout Involvement,0
+1253,9705.0,9715.0,10.0,O 3,Set Piece,Lineout Involvement,0
+1254,9705.0,9715.0,10.0,O 5,Set Piece,Lineout Involvement,0
+1255,9705.0,9715.0,10.0,O 4,Set Piece,Lineout Involvement,0
+1256,9707.0,9717.0,10.0,H 5,Pass,Pass Accurate,0
+1257,9708.0,9718.0,10.0,H 9,Pass,Pass Accurate,0
+1258,9710.0,9720.0,10.0,H 10,Pass,Pass Accurate,0
+1259,9713.0,9723.0,10.0,H 12,Offload,Successful Offload,0
+1260,9715.0,9725.0,10.0,O 12,Tackle,Tackle Negative,0
+1261,9715.0,9725.0,10.0,H 13,Ball Carry,Ball Carry Dominant,0
+1262,9717.0,9727.0,10.0,H 8,OOA,1st,0
+1262,9717.0,9727.0,10.0,H 8,Ruck Arrival,Ruck Arrival Effective,1
+1263,9717.0,9727.0,10.0,H 7,OOA,2nd,0
+1263,9717.0,9727.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+1264,9718.0,9728.0,10.0,H 9,Pass,Pass Accurate,0
+1265,9719.0,9729.0,10.0,H 10,Pass,Pass Accurate,0
+1266,9721.0,9731.0,10.0,H 11,Pass,Pass Accurate,0
+1267,9723.0,9733.0,10.0,H 15,Ball Carry,Ball Carry Neutral,0
+1268,9723.0,9733.0,10.0,O 12,Tackle,Tackle Neutral,0
+1269,9723.0,9733.0,10.0,O 8,Tackle,Tackle Neutral,0
+1270,9723.0,9733.0,10.0,H 6,OOA,1st,0
+1270,9723.0,9733.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,1
+1271,9724.0,9734.0,10.0,H 11,OOA,2nd,0
+1271,9724.0,9734.0,10.0,H 11,Ruck Arrival,Ruck Arrival Effective,1
+1272,9726.0,9736.0,10.0,O 12,Counter Ruck,Counter Ruck Ineffective,0
+1273,9726.0,9736.0,10.0,O 8,Counter Ruck,Counter Ruck Ineffective,0
+1274,9729.0,9739.0,10.0,H 9,Pass,Pass Accurate,0
+1275,9730.0,9740.0,10.0,O 21,Tackle,Missed Tackle,0
+1276,9732.0,9742.0,10.0,H 10,Carry,Linebreak,0
+1277,9733.0,9743.0,10.0,O 9,Tackle,Missed Tackle,0
+1278,9736.0,9746.0,10.0,H 10,Pass,Pass Accurate,0
+1279,9741.0,9751.0,10.0,H 15,Ball Carry,Ball Carry Dominant,0
+1280,9741.0,9751.0,10.0,O 8,Tackle,Tackle Negative,0
+1281,9741.0,9751.0,10.0,H 6,OOA,1st,0
+1281,9741.0,9751.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,1
+1282,9741.0,9751.0,10.0,H 5,OOA,2nd,0
+1282,9741.0,9751.0,10.0,H 5,Ruck Arrival,Ruck Arrival Effective,1
+1283,9742.0,9752.0,10.0,H 2,OOA,3rd,0
+1283,9742.0,9752.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+1284,9744.0,9754.0,10.0,H 9,Pass,Pass Accurate,0
+1285,9746.0,9756.0,10.0,H 10,Pass,Pass Accurate,0
+1286,9748.0,9758.0,10.0,H 12,Offload,Successful Offload,0
+1287,9749.0,9759.0,10.0,H 14,Tags,Error,0
+1287,9749.0,9759.0,10.0,H 14,Outcomes,Ball Lost,1
+1288,9802.0,9812.0,10.0,O 6,Set Piece,Scrum Involvement,0
+1289,9802.0,9812.0,10.0,O 3,Set Piece,Scrum Involvement,0
+1290,9802.0,9812.0,10.0,H 8,Set Piece,Scrum Involvement,0
+1291,9802.0,9812.0,10.0,O 7,Set Piece,Scrum Involvement,0
+1292,9802.0,9812.0,10.0,O 5,Set Piece,Scrum Involvement,0
+1293,9802.0,9812.0,10.0,H 4,Set Piece,Scrum Involvement,0
+1294,9802.0,9812.0,10.0,H 2,Set Piece,Scrum Involvement,0
+1295,9802.0,9812.0,10.0,H 3,Set Piece,Scrum Involvement,0
+1296,9802.0,9812.0,10.0,H 1,Set Piece,Scrum Involvement,0
+1297,9802.0,9812.0,10.0,O 2,Set Piece,Scrum Involvement,0
+1298,9802.0,9812.0,10.0,H 7,Set Piece,Scrum Involvement,0
+1299,9802.0,9812.0,10.0,O 8,Set Piece,Scrum Involvement,0
+1300,9802.0,9812.0,10.0,H 6,Set Piece,Scrum Involvement,0
+1301,9802.0,9812.0,10.0,H 5,Set Piece,Scrum Involvement,0
+1302,9802.0,9812.0,10.0,O 4,Set Piece,Scrum Involvement,0
+1303,9802.0,9812.0,10.0,O 17,Set Piece,Scrum Involvement,0
+1304,9838.0,9848.0,10.0,O 6,Set Piece,Scrum Involvement,0
+1305,9838.0,9848.0,10.0,O 3,Set Piece,Scrum Involvement,0
+1306,9838.0,9848.0,10.0,H 8,Set Piece,Scrum Involvement,0
+1307,9838.0,9848.0,10.0,O 7,Set Piece,Scrum Involvement,0
+1308,9838.0,9848.0,10.0,O 5,Set Piece,Scrum Involvement,0
+1309,9838.0,9848.0,10.0,H 4,Set Piece,Scrum Involvement,0
+1310,9838.0,9848.0,10.0,H 2,Set Piece,Scrum Involvement,0
+1311,9838.0,9848.0,10.0,H 3,Set Piece,Scrum Involvement,0
+1312,9838.0,9848.0,10.0,H 1,Set Piece,Scrum Involvement,0
+1313,9838.0,9848.0,10.0,O 2,Set Piece,Scrum Involvement,0
+1314,9838.0,9848.0,10.0,H 7,Set Piece,Scrum Involvement,0
+1315,9838.0,9848.0,10.0,O 8,Set Piece,Scrum Involvement,0
+1316,9838.0,9848.0,10.0,H 6,Set Piece,Scrum Involvement,0
+1317,9838.0,9848.0,10.0,H 5,Set Piece,Scrum Involvement,0
+1318,9838.0,9848.0,10.0,O 4,Set Piece,Scrum Involvement,0
+1319,9838.0,9848.0,10.0,O 17,Set Piece,Scrum Involvement,0
+1320,9843.0,9853.0,10.0,O 9,Pass,Pass Accurate,0
+1321,9845.0,9855.0,10.0,O 15,Kick,Good Kick,0
+1322,9847.0,9857.0,10.0,H 15,Outcome,Ball Caught,0
+1323,9851.0,9861.0,10.0,H 15,Pass,Pass Accurate,0
+1324,9856.0,9866.0,10.0,O 22,Tackle,Tackle Negative,0
+1325,9856.0,9866.0,10.0,O 10,Tackle,Tackle Negative,0
+1326,9856.0,9866.0,10.0,H 11,Ball Carry,Ball Carry Dominant,0
+1327,9858.0,9868.0,10.0,H 15,OOA,1st,0
+1327,9858.0,9868.0,10.0,H 15,Ruck Arrival,Ruck Arrival Dominant,1
+1328,9858.0,9868.0,10.0,H 14,OOA,2nd,0
+1328,9858.0,9868.0,10.0,H 14,Ruck Arrival,Ruck Arrival Effective,1
+1329,9861.0,9871.0,10.0,H 9,Pass,Pass Accurate,0
+1330,9862.0,9872.0,10.0,H 10,Offload,Successful Offload,0
+1331,9866.0,9876.0,10.0,H 12,Ball Carry,Ball Carry Negative,0
+1331,9866.0,9876.0,10.0,H 12,Outcomes,Ball Lost,1
+1332,9866.0,9876.0,10.0,O 12,Tackle,Tackle Dominant,0
+1333,9866.0,9876.0,10.0,O 22,Tackle,Tackle Dominant,0
+1334,9899.0,9909.0,10.0,O 2,Set Piece,Lineout Involvement,0
+1334,9899.0,9909.0,10.0,O 2,Set Piece,Unsuccessful Throw,1
+1334,9899.0,9909.0,10.0,O 2,Tags,Error,2
+1335,9899.0,9909.0,10.0,O 6,Set Piece,Lineout Involvement,0
+1336,9900.0,9910.0,10.0,O 3,Set Piece,Lineout Involvement,0
+1337,9900.0,9910.0,10.0,O 4,Set Piece,Lineout Involvement,0
+1338,9900.0,9910.0,10.0,H 3,Set Piece,Lineout Involvement,0
+1339,9900.0,9910.0,10.0,H 6,Set Piece,Lineout Involvement,0
+1340,9905.0,9915.0,10.0,O 5,Ball Carry,Ball Carry Negative,0
+1341,9916.0,9926.0,10.0,O 10,Kick,Bad Kick,0
+1341,9916.0,9926.0,10.0,O 10,Tags,Error,1
+1342,9921.0,9931.0,10.0,O 9,Tackle,Tackle Neutral,0
+1343,9921.0,9931.0,10.0,H 9,Ball Carry,Ball Carry Neutral,0
+1344,9922.0,9932.0,10.0,H 12,OOA,1st,0
+1344,9922.0,9932.0,10.0,H 12,Ruck Arrival,Ruck Arrival Effective,1
+1345,9922.0,9932.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,0
+1345,9922.0,9932.0,10.0,H 6,OOA,2nd,1
+1346,9923.0,9933.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,0
+1346,9923.0,9933.0,10.0,H 2,OOA,3rd,1
+1347,9925.0,9935.0,10.0,H 8,Pass,Pass Accurate,0
+1348,9929.0,9939.0,10.0,H 4,Ball Carry,Ball Carry Neutral,0
+1349,9929.0,9939.0,10.0,O 17,Tackle,Tackle Neutral,0
+1350,9929.0,9939.0,10.0,O 6,Tackle,Tackle Neutral,0
+1351,9929.0,9939.0,10.0,H 8,OOA,2nd,0
+1351,9929.0,9939.0,10.0,H 8,Ruck Arrival,Ruck Arrival Effective,1
+1352,9929.0,9939.0,10.0,H 1,OOA,1st,0
+1352,9929.0,9939.0,10.0,H 1,Ruck Arrival,Ruck Arrival Effective,1
+1353,9931.0,9941.0,10.0,H 2,OOA,3rd,0
+1353,9931.0,9941.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+1354,9933.0,9943.0,10.0,H 9,Pass,Pass Accurate,0
+1355,9938.0,9948.0,10.0,O 4,Tackle,Tackle Neutral,0
+1356,9938.0,9948.0,10.0,H 10,Ball Carry,Ball Carry Neutral,0
+1357,9939.0,9949.0,10.0,H 13,OOA,1st,0
+1357,9939.0,9949.0,10.0,H 13,Ruck Arrival,Ruck Arrival Effective,1
+1358,9940.0,9950.0,10.0,H 14,OOA,2nd,0
+1358,9940.0,9950.0,10.0,H 14,Ruck Arrival,Ruck Arrival Effective,1
+1359,9941.0,9951.0,10.0,H 7,OOA,3rd,0
+1359,9941.0,9951.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+1360,9944.0,9954.0,10.0,H 9,Pass,Pass Accurate,0
+1361,9947.0,9957.0,10.0,O 5,Tackle,Tackle Neutral,0
+1362,9948.0,9958.0,10.0,H 6,OOA,1st,0
+1362,9948.0,9958.0,10.0,H 6,Ruck Arrival,Ruck Arrival Effective,1
+1363,9948.0,9958.0,10.0,H 2,OOA,2nd,0
+1363,9948.0,9958.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+1364,9950.0,9960.0,10.0,H 9,Pass,Pass Accurate,0
+1365,9951.0,9961.0,10.0,H 10,Kick,Good Kick,0
+1366,9958.0,9968.0,10.0,H 14,Outcomes,Penalty Lost,0
+1367,9966.0,9976.0,10.0,H 6,Tackle,Tackle Neutral,0
+1368,9967.0,9977.0,10.0,O 9,Ball Carry,Ball Carry Neutral,0
+1369,9968.0,9978.0,10.0,O 21,OOA,1st,0
+1369,9968.0,9978.0,10.0,O 21,Ruck Arrival,Ruck Arrival Ineffective,1
+1370,9968.0,9978.0,10.0,O 12,OOA,2nd,0
+1370,9968.0,9978.0,10.0,O 12,Ruck Arrival,Ruck Arrival Ineffective,1
+1371,9969.0,9979.0,10.0,H 6,Outcomes,Penalty Lost,0
+1372,9992.0,10002.0,10.0,O 10,Kick,Good Kick,0
+1373,10015.0,10025.0,10.0,O 6,Set Piece,Lineout Involvement,0
+1374,10015.0,10025.0,10.0,H 8,Set Piece,Lineout Involvement,0
+1375,10015.0,10025.0,10.0,O 7,Set Piece,Lineout Involvement,0
+1376,10015.0,10025.0,10.0,H 4,Set Piece,Lineout Involvement,0
+1377,10015.0,10025.0,10.0,H 3,Set Piece,Lineout Involvement,0
+1378,10015.0,10025.0,10.0,H 1,Set Piece,Lineout Involvement,0
+1379,10015.0,10025.0,10.0,H 7,Set Piece,Lineout Involvement,0
+1380,10015.0,10025.0,10.0,O 8,Set Piece,Lineout Involvement,0
+1381,10015.0,10025.0,10.0,H 6,Set Piece,Lineout Involvement,0
+1382,10015.0,10025.0,10.0,H 5,Set Piece,Lineout Involvement,0
+1383,10015.0,10025.0,10.0,O 17,Set Piece,Lineout Involvement,0
+1384,10016.0,10026.0,10.0,O 3,Set Piece,Lineout Involvement,0
+1385,10016.0,10026.0,10.0,O 5,Set Piece,Lineout Involvement,0
+1386,10016.0,10026.0,10.0,O 2,Set Piece,Lineout Involvement,0
+1386,10016.0,10026.0,10.0,O 2,Set Piece,Successful Throw,1
+1387,10016.0,10026.0,10.0,O 4,Set Piece,Lineout Involvement,0
+1388,10030.0,10040.0,10.0,H 3,Outcomes,Penalty Lost,0
+1389,10037.0,10047.0,10.0,H 3,Discipline,Yellow Card,0
+1390,10053.0,10063.0,10.0,O 10,Kick,Good Kick,0
+1391,10079.0,10089.0,10.0,O 6,Set Piece,Lineout Involvement,0
+1392,10079.0,10089.0,10.0,O 3,Set Piece,Lineout Involvement,0
+1393,10079.0,10089.0,10.0,H 8,Set Piece,Lineout Involvement,0
+1394,10079.0,10089.0,10.0,O 7,Set Piece,Lineout Involvement,0
+1395,10079.0,10089.0,10.0,O 5,Set Piece,Lineout Involvement,0
+1396,10079.0,10089.0,10.0,H 4,Set Piece,Lineout Involvement,0
+1397,10079.0,10089.0,10.0,H 1,Set Piece,Lineout Involvement,0
+1398,10079.0,10089.0,10.0,O 2,Set Piece,Lineout Involvement,0
+1398,10079.0,10089.0,10.0,O 2,Set Piece,Successful Throw,1
+1399,10079.0,10089.0,10.0,H 7,Set Piece,Lineout Involvement,0
+1400,10079.0,10089.0,10.0,O 8,Set Piece,Lineout Involvement,0
+1401,10079.0,10089.0,10.0,H 6,Set Piece,Lineout Involvement,0
+1402,10079.0,10089.0,10.0,H 5,Set Piece,Lineout Involvement,0
+1403,10079.0,10089.0,10.0,O 4,Set Piece,Lineout Involvement,0
+1404,10079.0,10089.0,10.0,O 17,Set Piece,Lineout Involvement,0
+1405,10086.0,10096.0,10.0,H 10,Tackle,Missed Tackle,0
+1406,10088.0,10098.0,10.0,O 12,Tackle,Tackle Neutral,0
+1407,10088.0,10098.0,10.0,H 7,Ball Carry,Ball Carry Neutral,0
+1408,10089.0,10099.0,10.0,O 9,OOA,1st,0
+1408,10089.0,10099.0,10.0,O 9,Ruck Arrival,Ruck Arrival Ineffective,1
+1409,10090.0,10100.0,10.0,O 2,OOA,2nd,0
+1409,10090.0,10100.0,10.0,O 2,Ruck Arrival,Ruck Arrival Ineffective,1
+1410,10091.0,10101.0,10.0,O 5,OOA,3rd,0
+1410,10091.0,10101.0,10.0,O 5,Ruck Arrival,Ruck Arrival Ineffective,1
+1411,10092.0,10102.0,10.0,O 7,Outcomes,Penalty Lost,0
+1411,10092.0,10102.0,10.0,O 7,Outcomes,Ball Lost,1
+1412,10121.0,10131.0,10.0,H 15,Kick,Good Kick,0
+1413,10144.0,10154.0,10.0,O 6,Set Piece,Lineout Involvement,0
+1414,10144.0,10154.0,10.0,O 1,Set Piece,Lineout Involvement,0
+1415,10144.0,10154.0,10.0,H 8,Set Piece,Lineout Involvement,0
+1416,10144.0,10154.0,10.0,O 7,Set Piece,Lineout Involvement,0
+1417,10144.0,10154.0,10.0,H 4,Set Piece,Lineout Involvement,0
+1418,10144.0,10154.0,10.0,H 2,Set Piece,Lineout Involvement,0
+1418,10144.0,10154.0,10.0,H 2,Set Piece,Successful Throw,1
+1419,10144.0,10154.0,10.0,H 1,Set Piece,Lineout Involvement,0
+1420,10144.0,10154.0,10.0,O 8,Set Piece,Lineout Involvement,0
+1421,10144.0,10154.0,10.0,H 6,Set Piece,Lineout Involvement,0
+1422,10144.0,10154.0,10.0,H 5,Set Piece,Lineout Involvement,0
+1423,10144.0,10154.0,10.0,O 4,Set Piece,Lineout Involvement,0
+1424,10144.0,10154.0,10.0,O 17,Set Piece,Lineout Involvement,0
+1425,10145.0,10155.0,10.0,O 4,Tags,Error,0
+1426,10147.0,10157.0,10.0,H 5,Ball Carry,Ball Carry Neutral,0
+1427,10148.0,10158.0,10.0,H 4,OOA,1st,0
+1427,10148.0,10158.0,10.0,H 4,Ruck Arrival,Ruck Arrival Effective,1
+1428,10149.0,10159.0,10.0,H 1,OOA,2nd,0
+1428,10149.0,10159.0,10.0,H 1,Ruck Arrival,Ruck Arrival Effective,1
+1429,10149.0,10159.0,10.0,H 2,OOA,3rd,0
+1429,10149.0,10159.0,10.0,H 2,Ruck Arrival,Ruck Arrival Ineffective,1
+1430,10151.0,10161.0,10.0,H 9,Pass,Pass Accurate,0
+1431,10153.0,10163.0,10.0,H 10,Pass,Pass Accurate,0
+1432,10154.0,10164.0,10.0,H 12,Pass,Pass Accurate,0
+1433,10161.0,10171.0,10.0,O 21,Tackle,Missed Tackle,0
+1434,10163.0,10173.0,10.0,O 10,Tackle,Missed Tackle,0
+1435,10163.0,10173.0,10.0,O 14,Tackle,Tackle Negative,0
+1436,10163.0,10173.0,10.0,H 15,Ball Carry,Ball Carry Dominant,0
+1437,10164.0,10174.0,10.0,H 12,OOA,1st,0
+1437,10164.0,10174.0,10.0,H 12,Ruck Arrival,Ruck Arrival Dominant,1
+1438,10165.0,10175.0,10.0,H 7,OOA,2nd,0
+1438,10165.0,10175.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+1439,10166.0,10176.0,10.0,H 11,OOA,3rd,0
+1439,10166.0,10176.0,10.0,H 11,Ruck Arrival,Ruck Arrival Ineffective,1
+1440,10168.0,10178.0,10.0,H 9,Pass,Pass Accurate,0
+1441,10170.0,10180.0,10.0,H 10,Pass,Pass Accurate,0
+1442,10172.0,10182.0,10.0,H 4,Tags,Error,0
+1442,10172.0,10182.0,10.0,H 4,Outcomes,Ball Lost,1
+1443,10174.0,10184.0,10.0,O 7,Ball Steals,Steal from Tackle,0
+1444,10177.0,10187.0,10.0,O 7,Offload,Successful Offload,0
+1445,10180.0,10190.0,10.0,H 13,Tackle,Missed Tackle,0
+1446,10181.0,10191.0,10.0,O 2,Ball Carry,Ball Carry Dominant,0
+1447,10181.0,10191.0,10.0,H 14,Tackle,Tackle Negative,0
+1448,10182.0,10192.0,10.0,O 11,OOA,1st,0
+1448,10182.0,10192.0,10.0,O 11,Ruck Arrival,Ruck Arrival Ineffective,1
+1449,10233.0,10243.0,10.0,H 17,Set Piece,Scrum Involvement,0
+1450,10233.0,10243.0,10.0,O 6,Set Piece,Scrum Involvement,0
+1451,10233.0,10243.0,10.0,O 3,Set Piece,Scrum Involvement,0
+1452,10233.0,10243.0,10.0,H 8,Set Piece,Scrum Involvement,0
+1453,10233.0,10243.0,10.0,O 5,Set Piece,Scrum Involvement,0
+1454,10233.0,10243.0,10.0,H 4,Set Piece,Scrum Involvement,0
+1455,10233.0,10243.0,10.0,H 2,Set Piece,Scrum Involvement,0
+1456,10233.0,10243.0,10.0,H 1,Set Piece,Scrum Involvement,0
+1457,10233.0,10243.0,10.0,O 2,Set Piece,Scrum Involvement,0
+1458,10233.0,10243.0,10.0,H 7,Set Piece,Scrum Involvement,0
+1459,10233.0,10243.0,10.0,O 8,Set Piece,Scrum Involvement,0
+1460,10233.0,10243.0,10.0,O 4,Set Piece,Scrum Involvement,0
+1461,10233.0,10243.0,10.0,O 17,Set Piece,Scrum Involvement,0
+1462,10235.0,10245.0,10.0,O 9,Pass,Pass Accurate,0
+1463,10238.0,10248.0,10.0,O 10,Tags,Error,0
+1463,10238.0,10248.0,10.0,O 10,Outcomes,Ball Lost,1
+1464,10286.0,10296.0,10.0,O 5,Set Piece,Scrum Involvement,0
+1465,10286.0,10296.0,10.0,O 6,Set Piece,Scrum Involvement,0
+1466,10286.0,10296.0,10.0,O 3,Set Piece,Scrum Involvement,0
+1467,10286.0,10296.0,10.0,H 8,Set Piece,Scrum Involvement,0
+1468,10286.0,10296.0,10.0,H 4,Set Piece,Scrum Involvement,0
+1469,10286.0,10296.0,10.0,H 2,Set Piece,Scrum Involvement,0
+1470,10286.0,10296.0,10.0,H 1,Set Piece,Scrum Involvement,0
+1471,10286.0,10296.0,10.0,O 2,Set Piece,Scrum Involvement,0
+1472,10286.0,10296.0,10.0,H 7,Set Piece,Scrum Involvement,0
+1473,10286.0,10296.0,10.0,O 8,Set Piece,Scrum Involvement,0
+1474,10286.0,10296.0,10.0,O 4,Set Piece,Scrum Involvement,0
+1475,10286.0,10296.0,10.0,H 17,Set Piece,Scrum Involvement,0
+1476,10288.0,10298.0,10.0,H 9,Pass,Pass Accurate,0
+1477,10291.0,10301.0,10.0,O 7,Tackle,Tackle Neutral,0
+1478,10291.0,10301.0,10.0,H 23,Ball Carry,Ball Carry Neutral,0
+1479,10292.0,10302.0,10.0,H 12,OOA,1st,0
+1479,10292.0,10302.0,10.0,H 12,Ruck Arrival,Ruck Arrival Effective,1
+1480,10293.0,10303.0,10.0,H 7,OOA,2nd,0
+1480,10293.0,10303.0,10.0,H 7,Ruck Arrival,Ruck Arrival Effective,1
+1481,10294.0,10304.0,10.0,H 8,OOA,3rd,0
+1481,10294.0,10304.0,10.0,H 8,Ruck Arrival,Ruck Arrival Ineffective,1
+1482,10296.0,10306.0,10.0,H 9,Pass,Pass Accurate,0
+1483,10299.0,10309.0,10.0,O 12,Tackle,Missed Tackle,0
+1484,10300.0,10310.0,10.0,H 5,Ball Carry,Ball Carry Neutral,0
+1485,10300.0,10310.0,10.0,O 2,Tackle,Tackle Neutral,0
+1486,10300.0,10310.0,10.0,H 4,OOA,1st,0
+1486,10300.0,10310.0,10.0,H 4,Ruck Arrival,Ruck Arrival Effective,1
+1487,10301.0,10311.0,10.0,O 8,Counter Ruck,Counter Ruck Ineffective,0
+1488,10301.0,10311.0,10.0,H 2,OOA,2nd,0
+1488,10301.0,10311.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+1489,10303.0,10313.0,10.0,H 9,Pass,Pass Accurate,0
+1490,10307.0,10317.0,10.0,H 1,Ball Carry,Ball Carry Neutral,0
+1491,10307.0,10317.0,10.0,O 3,Tackle,Tackle Neutral,0
+1492,10307.0,10317.0,10.0,O 7,Tackle,Tackle Neutral,0
+1493,10308.0,10318.0,10.0,H 2,OOA,1st,0
+1493,10308.0,10318.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+1494,10308.0,10318.0,10.0,H 17,OOA,2nd,0
+1494,10308.0,10318.0,10.0,H 17,Ruck Arrival,Ruck Arrival Effective,1
+1495,10312.0,10322.0,10.0,H 9,Kick,Good Kick,0
+1496,10314.0,10324.0,10.0,H 15,Kick,Good Kick,0
+1497,10322.0,10332.0,10.0,O 6,Tackle,Tackle Negative,0
+1498,10322.0,10332.0,10.0,H 14,Ball Carry,Ball Carry Dominant,0
+1499,10323.0,10333.0,10.0,H 23,OOA,1st,0
+1499,10323.0,10333.0,10.0,H 23,Ruck Arrival,Ruck Arrival Effective,1
+1500,10324.0,10334.0,10.0,H 8,OOA,2nd,0
+1500,10324.0,10334.0,10.0,H 8,Ruck Arrival,Ruck Arrival Ineffective,1
+1501,10324.0,10334.0,10.0,H 13,OOA,3rd,0
+1501,10324.0,10334.0,10.0,H 13,Ruck Arrival,Ruck Arrival Effective,1
+1502,10325.0,10335.0,10.0,H 7,OOA,4th +,0
+1502,10325.0,10335.0,10.0,H 7,Ruck Arrival,Ruck Arrival Ineffective,1
+1503,10327.0,10337.0,10.0,H 9,Pass,Pass Accurate,0
+1504,10335.0,10345.0,10.0,O 2,Offload,Successful Offload,0
+1505,10338.0,10348.0,10.0,H 4,Ball Carry,Ball Carry Neutral,0
+1505,10338.0,10348.0,10.0,H 4,Outcomes,Ball Lost,1
+1506,10338.0,10348.0,10.0,O 2,Tackle,Tackle Neutral,0
+1507,10339.0,10349.0,10.0,H 5,OOA,1st,0
+1507,10339.0,10349.0,10.0,H 5,Ruck Arrival,Ruck Arrival Ineffective,1
+1508,10340.0,10350.0,10.0,H 2,OOA,2nd,0
+1508,10340.0,10350.0,10.0,H 2,Ruck Arrival,Ruck Arrival Ineffective,1
+1509,10340.0,10350.0,10.0,O 21,Ball Steals,Steal from Ruck,0
+1510,10343.0,10353.0,10.0,H 9,Outcomes,Penalty Lost,0
+1511,10350.0,10360.0,10.0,H 12,Tackle,Missed Tackle,0
+1512,10354.0,10364.0,10.0,H 12,Ball Steals,Steal from Tackle,0
+1513,10355.0,10365.0,10.0,O 9,Outcomes,Ball Lost,0
+1514,10359.0,10369.0,10.0,H 17,OOA,1st,0
+1514,10359.0,10369.0,10.0,H 17,Ruck Arrival,Ruck Arrival Effective,1
+1515,10359.0,10369.0,10.0,H 12,Ball Carry,Ball Carry Neutral,0
+1516,10359.0,10369.0,10.0,O 8,Tackle,Tackle Neutral,0
+1517,10359.0,10369.0,10.0,H 1,OOA,3rd,0
+1517,10359.0,10369.0,10.0,H 1,Ruck Arrival,Ruck Arrival Ineffective,1
+1518,10359.0,10369.0,10.0,H 2,OOA,2nd,0
+1518,10359.0,10369.0,10.0,H 2,Ruck Arrival,Ruck Arrival Effective,1
+1519,10360.0,10370.0,10.0,O 12,Counter Ruck,Counter Ruck Ineffective,0
+1520,10361.0,10371.0,10.0,H 9,Kick,Good Kick,0

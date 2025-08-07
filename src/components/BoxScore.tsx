@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { TeamStats, TryScore, KickAtGoal } from "@/lib/boxScoreData";
+import { TeamStats, TryScore, KickAtGoal, falconVsStJohnsPlayerData } from "@/lib/boxScoreData";
+import PlayerBoxScore from "./PlayerBoxScore";
 
 // Types for our box score data
 type BoxScoreProps = {
@@ -1099,6 +1100,7 @@ const BoxScore: React.FC<BoxScoreProps> = ({
   const cleanTeamA = cleanTeamName(matchInfo.teamA);
   const cleanTeamB = cleanTeamName(matchInfo.teamB);
   const isMobile = useIsMobile();
+  const [viewMode, setViewMode] = useState<'team' | 'player'>('team');
 
   // Calculate total points accounting for penalties properly
   const calculateTeamPoints = (triesData: TryScore[] | undefined) => {
@@ -1243,13 +1245,42 @@ const BoxScore: React.FC<BoxScoreProps> = ({
         {/* Main Content */}
         <main className="px-2 md:px-8">
           <div className="max-w-5xl mx-auto space-y-6 md:space-y-8">
-            {/* Possession Card */}
-            <PossessionCard 
-              teamA={cleanTeamA}
-              teamB={cleanTeamB}
-              possessionA={possessionA}
-              possessionB={possessionB}
-            />
+            {/* View Toggle */}
+            <div className="flex justify-center">
+              <div className="flex bg-scrummy-navyBlue/10 rounded-lg p-1">
+                <button
+                  onClick={() => setViewMode('team')}
+                  className={`px-4 md:px-6 py-2 rounded-md text-sm md:text-base font-medium transition-all ${
+                    viewMode === 'team'
+                      ? 'bg-scrummy-navyBlue text-white shadow-md'
+                      : 'text-scrummy-navyBlue hover:bg-scrummy-navyBlue/10'
+                  }`}
+                >
+                  Team
+                </button>
+                <button
+                  onClick={() => setViewMode('player')}
+                  className={`px-4 md:px-6 py-2 rounded-md text-sm md:text-base font-medium transition-all ${
+                    viewMode === 'player'
+                      ? 'bg-scrummy-navyBlue text-white shadow-md'
+                      : 'text-scrummy-navyBlue hover:bg-scrummy-navyBlue/10'
+                  }`}
+                >
+                  Player
+                </button>
+              </div>
+            </div>
+
+            {/* Team View */}
+            {viewMode === 'team' && (
+              <>
+                {/* Possession Card */}
+                <PossessionCard 
+                  teamA={cleanTeamA}
+                  teamB={cleanTeamB}
+                  possessionA={possessionA}
+                  possessionB={possessionB}
+                />
             
             {/* Scoring Card */}
             <ScoringCard
@@ -1383,6 +1414,16 @@ const BoxScore: React.FC<BoxScoreProps> = ({
                 </div>
               </div>
             </div>
+              </>
+            )}
+
+            {/* Player View */}
+            {viewMode === 'player' && (
+              <PlayerBoxScore
+                matchInfo={matchInfo}
+                playerData={falconVsStJohnsPlayerData}
+              />
+            )}
 
             <div className="text-center text-xs md:text-sm text-scrummy-navyBlue/70 mt-6 md:mt-8">
               <p>St John's College • MUKURU Derby Day 2025</p>

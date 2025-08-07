@@ -2797,3 +2797,182 @@ const stJohnsVsStGeorgesCBZWeek9: BoxScoreData = {
 // Add the CBZ Week 9 boxscore to the map
 const stJohnsVsStGeorgesWeek9MatchId = generateMatchId("Week 9", "14:00", "ST JOHNS", "ST GEORGES");
 boxScores.set(stJohnsVsStGeorgesWeek9MatchId, stJohnsVsStGeorgesCBZWeek9);
+
+// Add score for Week 10 CBZ Schools Rugby match - 02 Aug 2025
+finalScores.set(
+  generateMatchId("Week 10", "14:00", "FALCON", "ST JOHNS"),
+  { teamAScore: 29, teamBScore: 10 }
+);
+
+// Define tries with timestamps and conversion status for Falcon vs St Johns Week 10
+const falconVsStJohnsWeek10FalconTries: TryScore[] = [
+  { time: "100:09", hasConversion: false },  // H 13 first try (6009s / 60 = 100:09)
+  { time: "106:13", hasConversion: true },   // H 15 try (6373s / 60 = 106:13)
+  { time: "140:44", hasConversion: true },   // H 7 try (8444s / 60 = 140:44)
+  { time: "145:00", hasConversion: true },   // H 10 try (8700s / 60 = 145:00)
+  { time: "157:59", hasConversion: false }   // H 13 second try (9479s / 60 = 157:59)
+];
+
+const falconVsStJohnsWeek10StJohnsTries: TryScore[] = [
+  { time: "123:42", hasConversion: false },  // O 2 try (7422s / 60 = 123:42)
+  { time: "137:54", hasConversion: false }   // O 14 try (8274s / 60 = 137:54)
+];
+
+// Define kicking data based on try conversions
+const falconVsStJohnsWeek10FalconKicks: KickAtGoal[] = [
+  { x: 0.4, y: 0.5, successful: false },  // Missed conversion for first try
+  { x: 0.6, y: 0.3, successful: true },   // Successful conversion 
+  { x: 0.3, y: 0.6, successful: true },   // Successful conversion
+  { x: 0.7, y: 0.4, successful: true },   // Successful conversion
+  { x: 0.5, y: 0.7, successful: false }   // Missed conversion for last try
+];
+
+const falconVsStJohnsWeek10StJohnsKicks: KickAtGoal[] = [
+  { x: 0.2, y: 0.4, successful: false },  // Missed conversion
+  { x: 0.8, y: 0.6, successful: false }   // Missed conversion
+];
+
+// Create a box score for the Falcon vs St Johns CBZ Week 10 game
+const falconVsStJohnsWeek10: BoxScoreData = {
+  matchInfo: {
+    teamA: "FALCON",
+    teamB: "ST JOHNS",
+    venue: "CBZ Sports Club, Harare",
+    date: "Week 10",
+    kickoff: "14:00",
+    weather: "Sunny, 24°C",
+  },
+  teamAPlayers: [
+    { name: "-", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "14", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "13", tries: 2, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "12", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "10", tries: 1, kicks: "3/5", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "7", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "5", tries: 0, kicks: "-", lineouts: "11/17", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "4", tries: 0, kicks: "-", lineouts: "7/10", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "2", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamBPlayers: [
+    { name: "-", position: "15", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "14", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "13", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "12", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "11", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "10", tries: 0, kicks: "0/2", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "9", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "8", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "7", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "6", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "5", tries: 0, kicks: "-", lineouts: "6/8", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "4", tries: 0, kicks: "-", lineouts: "2/4", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "3", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "2", tries: 1, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 },
+    { name: "-", position: "1", tries: 0, kicks: "-", lineouts: "-", penaltiesWon: 0, penaltiesConceded: 0 }
+  ],
+  teamASummary: {
+    totalTries: 5,
+    totalConversions: "3/5 C",
+    lineoutAccuracy: "18/27 (67%)",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+    possession: 54,
+    scrums: { total: 28, won: 24 },
+    lineouts: { total: 27, won: 18 },
+    turnovers: 5,
+    knockOns: 0,
+    mauls: { total: 0, won: 0 },
+    kicks: {
+      fromHand: { total: 28, reclaimed: 24 },
+      inField: { total: 0, reclaimed: 0 },
+      toTouch: { total: 0 },
+      dropOuts: { total: 0, reclaimed: 0 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 5, successful: 3 }
+    },
+    attackingPenalties: 0,
+    defensivePenalties: 0,
+    scrumPenalties: 0
+  },
+  teamBSummary: {
+    totalTries: 2,
+    totalConversions: "0/2 C",
+    lineoutAccuracy: "8/12 (67%)",
+    penaltiesWon: 0,
+    penaltiesConceded: 0,
+    possession: 46,
+    scrums: { total: 25, won: 16 },
+    lineouts: { total: 12, won: 8 },
+    turnovers: 0,
+    knockOns: 0,
+    mauls: { total: 0, won: 0 },
+    kicks: {
+      fromHand: { total: 25, reclaimed: 16 },
+      inField: { total: 0, reclaimed: 0 },
+      toTouch: { total: 0 },
+      dropOuts: { total: 0, reclaimed: 0 },
+      goalLine: { total: 0 },
+      directToTouch: { total: 0 },
+      success: { total: 2, successful: 0 }
+    },
+    attackingPenalties: 0,
+    defensivePenalties: 0,
+    scrumPenalties: 0
+  },
+  tryDataA: falconVsStJohnsWeek10FalconTries,
+  tryDataB: falconVsStJohnsWeek10StJohnsTries,
+  kickDataA: falconVsStJohnsWeek10FalconKicks,
+  kickDataB: falconVsStJohnsWeek10StJohnsKicks
+};
+
+// Add the CBZ Week 10 Falcon vs St Johns box score to the map
+boxScores.set(
+  generateMatchId("Week 10", "14:00", "FALCON", "ST JOHNS"),
+  falconVsStJohnsWeek10
+);
+
+// Player data processing for Falcon vs St Johns Week 10
+export const falconVsStJohnsPlayerData = [
+  // Falcon College players (H team)
+  { playerCode: "H 2", playerNumber: 2, team: "FALCON", totalActions: 118, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 7, tacklesMissed: 0, tackleSuccessPct: 100.0, ballCarriesTotal: 2, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 34, ruckArrivalsEffective: 23, ruckEfficiencyPct: 67.6, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "H 8", playerNumber: 8, team: "FALCON", totalActions: 103, passesTotal: 7, passesAccurate: 7, passAccuracyPct: 100.0, tacklesTotal: 2, tacklesMissed: 0, tackleSuccessPct: 100.0, ballCarriesTotal: 3, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 27, ruckArrivalsEffective: 12, ruckEfficiencyPct: 44.4, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "H 7", playerNumber: 7, team: "FALCON", totalActions: 89, passesTotal: 1, passesAccurate: 1, passAccuracyPct: 100.0, tacklesTotal: 8, tacklesMissed: 0, tackleSuccessPct: 100.0, ballCarriesTotal: 1, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 25, ruckArrivalsEffective: 18, ruckEfficiencyPct: 72.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "H 5", playerNumber: 5, team: "FALCON", totalActions: 89, passesTotal: 2, passesAccurate: 2, passAccuracyPct: 100.0, tacklesTotal: 4, tacklesMissed: 1, tackleSuccessPct: 75.0, ballCarriesTotal: 8, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 17, ruckArrivalsEffective: 11, ruckEfficiencyPct: 64.7, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "H 9", playerNumber: 9, team: "FALCON", totalActions: 84, passesTotal: 69, passesAccurate: 69, passAccuracyPct: 100.0, tacklesTotal: 0, tacklesMissed: 0, tackleSuccessPct: 0.0, ballCarriesTotal: 3, ballCarriesDominant: 1, carryDominancePct: 33.3, ruckArrivalsTotal: 1, ruckArrivalsEffective: 0, ruckEfficiencyPct: 0.0, kicksTotal: 8, kicksGood: 8, kickSuccessPct: 100.0, errors: 0 },
+  { playerCode: "H 6", playerNumber: 6, team: "FALCON", totalActions: 84, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 2, tacklesMissed: 0, tackleSuccessPct: 100.0, ballCarriesTotal: 0, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 24, ruckArrivalsEffective: 17, ruckEfficiencyPct: 70.8, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "H 4", playerNumber: 4, team: "FALCON", totalActions: 84, passesTotal: 3, passesAccurate: 3, passAccuracyPct: 100.0, tacklesTotal: 6, tacklesMissed: 2, tackleSuccessPct: 66.7, ballCarriesTotal: 11, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 10, ruckArrivalsEffective: 7, ruckEfficiencyPct: 70.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "H 1", playerNumber: 1, team: "FALCON", totalActions: 73, passesTotal: 1, passesAccurate: 1, passAccuracyPct: 100.0, tacklesTotal: 4, tacklesMissed: 4, tackleSuccessPct: 0.0, ballCarriesTotal: 8, ballCarriesDominant: 4, carryDominancePct: 50.0, ruckArrivalsTotal: 10, ruckArrivalsEffective: 8, ruckEfficiencyPct: 80.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "H 3", playerNumber: 3, team: "FALCON", totalActions: 67, passesTotal: 4, passesAccurate: 4, passAccuracyPct: 100.0, tacklesTotal: 3, tacklesMissed: 0, tackleSuccessPct: 100.0, ballCarriesTotal: 4, ballCarriesDominant: 1, carryDominancePct: 25.0, ruckArrivalsTotal: 10, ruckArrivalsEffective: 5, ruckEfficiencyPct: 50.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "H 10", playerNumber: 10, team: "FALCON", totalActions: 64, passesTotal: 24, passesAccurate: 23, passAccuracyPct: 95.8, tacklesTotal: 9, tacklesMissed: 6, tackleSuccessPct: 33.3, ballCarriesTotal: 6, ballCarriesDominant: 1, carryDominancePct: 16.7, ruckArrivalsTotal: 6, ruckArrivalsEffective: 4, ruckEfficiencyPct: 66.7, kicksTotal: 5, kicksGood: 4, kickSuccessPct: 80.0, errors: 0 },
+  { playerCode: "H 12", playerNumber: 12, team: "FALCON", totalActions: 53, passesTotal: 6, passesAccurate: 6, passAccuracyPct: 100.0, tacklesTotal: 6, tacklesMissed: 3, tackleSuccessPct: 50.0, ballCarriesTotal: 8, ballCarriesDominant: 1, carryDominancePct: 12.5, ruckArrivalsTotal: 10, ruckArrivalsEffective: 8, ruckEfficiencyPct: 80.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "H 13", playerNumber: 13, team: "FALCON", totalActions: 40, passesTotal: 1, passesAccurate: 1, passAccuracyPct: 100.0, tacklesTotal: 6, tacklesMissed: 2, tackleSuccessPct: 66.7, ballCarriesTotal: 6, ballCarriesDominant: 2, carryDominancePct: 33.3, ruckArrivalsTotal: 8, ruckArrivalsEffective: 6, ruckEfficiencyPct: 75.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "H 15", playerNumber: 15, team: "FALCON", totalActions: 36, passesTotal: 2, passesAccurate: 2, passAccuracyPct: 100.0, tacklesTotal: 0, tacklesMissed: 0, tackleSuccessPct: 0.0, ballCarriesTotal: 8, ballCarriesDominant: 3, carryDominancePct: 37.5, ruckArrivalsTotal: 2, ruckArrivalsEffective: 1, ruckEfficiencyPct: 50.0, kicksTotal: 15, kicksGood: 12, kickSuccessPct: 80.0, errors: 0 },
+  { playerCode: "H 14", playerNumber: 14, team: "FALCON", totalActions: 28, passesTotal: 1, passesAccurate: 1, passAccuracyPct: 100.0, tacklesTotal: 2, tacklesMissed: 1, tackleSuccessPct: 50.0, ballCarriesTotal: 5, ballCarriesDominant: 3, carryDominancePct: 60.0, ruckArrivalsTotal: 6, ruckArrivalsEffective: 3, ruckEfficiencyPct: 50.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "H 11", playerNumber: 11, team: "FALCON", totalActions: 28, passesTotal: 1, passesAccurate: 1, passAccuracyPct: 100.0, tacklesTotal: 0, tacklesMissed: 0, tackleSuccessPct: 0.0, ballCarriesTotal: 4, ballCarriesDominant: 1, carryDominancePct: 25.0, ruckArrivalsTotal: 10, ruckArrivalsEffective: 6, ruckEfficiencyPct: 60.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+
+  // St John's players (O team)
+  { playerCode: "O 7", playerNumber: 7, team: "ST JOHNS", totalActions: 87, passesTotal: 4, passesAccurate: 3, passAccuracyPct: 75.0, tacklesTotal: 16, tacklesMissed: 3, tackleSuccessPct: 81.3, ballCarriesTotal: 2, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 8, ruckArrivalsEffective: 4, ruckEfficiencyPct: 50.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 6", playerNumber: 6, team: "ST JOHNS", totalActions: 77, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 18, tacklesMissed: 2, tackleSuccessPct: 88.9, ballCarriesTotal: 1, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 9, ruckArrivalsEffective: 5, ruckEfficiencyPct: 55.6, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 5", playerNumber: 5, team: "ST JOHNS", totalActions: 73, passesTotal: 2, passesAccurate: 1, passAccuracyPct: 50.0, tacklesTotal: 12, tacklesMissed: 3, tackleSuccessPct: 75.0, ballCarriesTotal: 1, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 8, ruckArrivalsEffective: 6, ruckEfficiencyPct: 75.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 2", playerNumber: 2, team: "ST JOHNS", totalActions: 68, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 12, tacklesMissed: 0, tackleSuccessPct: 100.0, ballCarriesTotal: 4, ballCarriesDominant: 1, carryDominancePct: 25.0, ruckArrivalsTotal: 2, ruckArrivalsEffective: 1, ruckEfficiencyPct: 50.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 8", playerNumber: 8, team: "ST JOHNS", totalActions: 66, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 11, tacklesMissed: 2, tackleSuccessPct: 81.8, ballCarriesTotal: 3, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 6, ruckArrivalsEffective: 2, ruckEfficiencyPct: 33.3, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 3", playerNumber: 3, team: "ST JOHNS", totalActions: 62, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 6, tacklesMissed: 0, tackleSuccessPct: 100.0, ballCarriesTotal: 0, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 8, ruckArrivalsEffective: 3, ruckEfficiencyPct: 37.5, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 12", playerNumber: 12, team: "ST JOHNS", totalActions: 54, passesTotal: 2, passesAccurate: 2, passAccuracyPct: 100.0, tacklesTotal: 16, tacklesMissed: 6, tackleSuccessPct: 62.5, ballCarriesTotal: 4, ballCarriesDominant: 1, carryDominancePct: 25.0, ruckArrivalsTotal: 8, ruckArrivalsEffective: 4, ruckEfficiencyPct: 50.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 4", playerNumber: 4, team: "ST JOHNS", totalActions: 54, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 9, tacklesMissed: 1, tackleSuccessPct: 88.9, ballCarriesTotal: 0, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 4, ruckArrivalsEffective: 2, ruckEfficiencyPct: 50.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 10", playerNumber: 10, team: "ST JOHNS", totalActions: 52, passesTotal: 4, passesAccurate: 4, passAccuracyPct: 100.0, tacklesTotal: 10, tacklesMissed: 5, tackleSuccessPct: 50.0, ballCarriesTotal: 5, ballCarriesDominant: 1, carryDominancePct: 20.0, ruckArrivalsTotal: 1, ruckArrivalsEffective: 1, ruckEfficiencyPct: 100.0, kicksTotal: 20, kicksGood: 12, kickSuccessPct: 60.0, errors: 0 },
+  { playerCode: "O 9", playerNumber: 9, team: "ST JOHNS", totalActions: 49, passesTotal: 33, passesAccurate: 33, passAccuracyPct: 100.0, tacklesTotal: 5, tacklesMissed: 2, tackleSuccessPct: 60.0, ballCarriesTotal: 3, ballCarriesDominant: 1, carryDominancePct: 33.3, ruckArrivalsTotal: 2, ruckArrivalsEffective: 0, ruckEfficiencyPct: 0.0, kicksTotal: 1, kicksGood: 1, kickSuccessPct: 100.0, errors: 0 },
+  { playerCode: "O 1", playerNumber: 1, team: "ST JOHNS", totalActions: 45, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 11, tacklesMissed: 1, tackleSuccessPct: 90.9, ballCarriesTotal: 1, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 4, ruckArrivalsEffective: 1, ruckEfficiencyPct: 25.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 14", playerNumber: 14, team: "ST JOHNS", totalActions: 28, passesTotal: 2, passesAccurate: 2, passAccuracyPct: 100.0, tacklesTotal: 12, tacklesMissed: 6, tackleSuccessPct: 50.0, ballCarriesTotal: 2, ballCarriesDominant: 1, carryDominancePct: 50.0, ruckArrivalsTotal: 2, ruckArrivalsEffective: 1, ruckEfficiencyPct: 50.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 17", playerNumber: 17, team: "ST JOHNS", totalActions: 19, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 4, tacklesMissed: 1, tackleSuccessPct: 75.0, ballCarriesTotal: 0, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 1, ruckArrivalsEffective: 0, ruckEfficiencyPct: 0.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 11", playerNumber: 11, team: "ST JOHNS", totalActions: 17, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 8, tacklesMissed: 5, tackleSuccessPct: 37.5, ballCarriesTotal: 1, ballCarriesDominant: 1, carryDominancePct: 100.0, ruckArrivalsTotal: 4, ruckArrivalsEffective: 2, ruckEfficiencyPct: 50.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 13", playerNumber: 13, team: "ST JOHNS", totalActions: 16, passesTotal: 2, passesAccurate: 2, passAccuracyPct: 100.0, tacklesTotal: 9, tacklesMissed: 1, tackleSuccessPct: 88.9, ballCarriesTotal: 0, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 2, ruckArrivalsEffective: 2, ruckEfficiencyPct: 100.0, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 },
+  { playerCode: "O 15", playerNumber: 15, team: "ST JOHNS", totalActions: 16, passesTotal: 2, passesAccurate: 1, passAccuracyPct: 50.0, tacklesTotal: 4, tacklesMissed: 3, tackleSuccessPct: 25.0, ballCarriesTotal: 1, ballCarriesDominant: 1, carryDominancePct: 100.0, ruckArrivalsTotal: 1, ruckArrivalsEffective: 0, ruckEfficiencyPct: 0.0, kicksTotal: 4, kicksGood: 3, kickSuccessPct: 75.0, errors: 0 },
+  { playerCode: "O 21", playerNumber: 21, team: "ST JOHNS", totalActions: 15, passesTotal: 0, passesAccurate: 0, passAccuracyPct: 0.0, tacklesTotal: 7, tacklesMissed: 4, tackleSuccessPct: 42.9, ballCarriesTotal: 1, ballCarriesDominant: 0, carryDominancePct: 0.0, ruckArrivalsTotal: 3, ruckArrivalsEffective: 1, ruckEfficiencyPct: 33.3, kicksTotal: 0, kicksGood: 0, kickSuccessPct: 0.0, errors: 0 }
+];

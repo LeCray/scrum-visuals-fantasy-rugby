@@ -1,0 +1,474 @@
+import React, { useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
+
+// Types for player data
+type PlayerData = {
+  playerCode: string;
+  playerNumber: number;
+  team: string;
+  totalActions: number;
+  passesTotal: number;
+  passesAccurate: number;
+  passAccuracyPct: number;
+  tacklesTotal: number;
+  tacklesMissed: number;
+  tackleSuccessPct: number;
+  ballCarriesTotal: number;
+  ballCarriesDominant: number;
+  carryDominancePct: number;
+  ruckArrivalsTotal: number;
+  ruckArrivalsEffective: number;
+  ruckEfficiencyPct: number;
+  kicksTotal: number;
+  kicksGood: number;
+  kickSuccessPct: number;
+  errors: number;
+};
+
+type PlayerBoxScoreProps = {
+  matchInfo: {
+    teamA: string;
+    teamB: string;
+  };
+  playerData: PlayerData[];
+};
+
+// Position mapping based on jersey numbers
+const getPositionName = (playerNumber: number): string => {
+  const positions: Record<number, string> = {
+    1: "Prop", 2: "Hooker", 3: "Prop",
+    4: "Lock", 5: "Lock", 6: "Flanker", 
+    7: "Flanker", 8: "Number 8", 9: "Scrum-half",
+    10: "Fly-half", 11: "Wing", 12: "Centre",
+    13: "Centre", 14: "Wing", 15: "Fullback",
+    16: "Sub", 17: "Sub", 18: "Sub", 19: "Sub",
+    20: "Sub", 21: "Sub", 22: "Sub", 23: "Sub"
+  };
+  return positions[playerNumber] || "Unknown";
+};
+
+// Helper function to clean team names
+const cleanTeamName = (teamName: string) => {
+  return teamName.replace(/\s+[12]XV$/, '');
+};
+
+const PlayerBoxScore: React.FC<PlayerBoxScoreProps> = ({
+  matchInfo,
+  playerData
+}) => {
+  const isMobile = useIsMobile();
+  const [showAllTeamA, setShowAllTeamA] = useState(false);
+  const [showAllTeamB, setShowAllTeamB] = useState(false);
+
+  const cleanTeamA = cleanTeamName(matchInfo.teamA);
+  const cleanTeamB = cleanTeamName(matchInfo.teamB);
+
+  // Separate players by team
+  const teamAPlayers = playerData.filter(p => p.team === cleanTeamA);
+  const teamBPlayers = playerData.filter(p => p.team !== cleanTeamA);
+
+  // Sort players by total actions (most active first)
+  const sortedTeamA = teamAPlayers.sort((a, b) => b.totalActions - a.totalActions);
+  const sortedTeamB = teamBPlayers.sort((a, b) => b.totalActions - a.totalActions);
+
+  // Get top 5 or all players based on state
+  const displayTeamA = showAllTeamA ? sortedTeamA : sortedTeamA.slice(0, 5);
+  const displayTeamB = showAllTeamB ? sortedTeamB : sortedTeamB.slice(0, 5);
+
+
+
+  return (
+    <div className="space-y-6 md:space-y-8">
+      {/* Team A Section */}
+      <div className="space-y-4">
+        <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navyBlue font-orbitron text-center">
+          {cleanTeamA} Players
+        </h2>
+        
+        {/* Player Stats Table */}
+        <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
+          <div className="overflow-x-auto -mx-3 md:mx-0">
+            <div className="inline-block min-w-full align-middle">
+              <table className="min-w-full border-collapse">
+                <thead>
+                  <tr className="bg-scrummy-navyBlue text-white">
+                    <th className="p-2 md:p-3 text-left rounded-l-lg text-xs md:text-base">Player</th>
+                    <th className="p-2 md:p-3 text-center text-xs md:text-base">Position</th>
+                    <th className="p-2 md:p-3 text-center text-xs md:text-base">Passes</th>
+                    <th className="p-2 md:p-3 text-center text-xs md:text-base">Pass %</th>
+                    <th className="p-2 md:p-3 text-center text-xs md:text-base">Tackles</th>
+                    <th className="p-2 md:p-3 text-center text-xs md:text-base">Tackle %</th>
+                    <th className="p-2 md:p-3 text-center text-xs md:text-base">Carries</th>
+                    <th className="p-2 md:p-3 text-center text-xs md:text-base">Kicks</th>
+                    <th className="p-2 md:p-3 text-center text-xs md:text-base">Kick %</th>
+                    <th className="p-2 md:p-3 text-center rounded-r-lg text-xs md:text-base">Errors</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {displayTeamA.map((player, index) => {
+                    return (
+                      <tr key={index} className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
+                        <td className="p-2 md:p-3 font-medium text-xs md:text-base">{player.playerCode}</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{getPositionName(player.playerNumber)}</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">
+                          {player.passesTotal > 0 ? `${player.passesAccurate}/${player.passesTotal}` : '-'}
+                        </td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">
+                          {player.passesTotal > 0 ? `${player.passAccuracyPct.toFixed(0)}%` : '-'}
+                        </td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">
+                          {player.tacklesTotal > 0 ? `${player.tacklesTotal - player.tacklesMissed}/${player.tacklesTotal}` : '-'}
+                        </td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">
+                          {player.tacklesTotal > 0 ? `${player.tackleSuccessPct.toFixed(0)}%` : '-'}
+                        </td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">
+                          {player.ballCarriesTotal > 0 ? `${player.ballCarriesTotal} (${player.carryDominancePct.toFixed(0)}% dom)` : '-'}
+                        </td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">
+                          {player.kicksTotal > 0 ? `${player.kicksGood}/${player.kicksTotal}` : '-'}
+                        </td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">
+                          {player.kicksTotal > 0 ? `${player.kickSuccessPct.toFixed(0)}%` : '-'}
+                        </td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{player.errors}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* See More Button */}
+        {sortedTeamA.length > 5 && (
+          <div className="text-center">
+            <button
+              onClick={() => setShowAllTeamA(!showAllTeamA)}
+              className="px-6 py-2 bg-scrummy-navyBlue text-white rounded-lg hover:bg-scrummy-navyBlue/80 transition-colors"
+            >
+              {showAllTeamA ? 'Show Less' : `See All ${sortedTeamA.length} Players`}
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Team B Section */}
+      <div className="space-y-4">
+        <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navyBlue font-orbitron text-center">
+          {cleanTeamB} Players
+        </h2>
+        
+        {/* Player Stats Table */}
+        <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
+          <div className="overflow-x-auto -mx-3 md:mx-0">
+            <div className="inline-block min-w-full align-middle">
+              <table className="min-w-full border-collapse">
+                <thead>
+                  <tr className="bg-scrummy-navyBlue text-white">
+                    <th className="p-2 md:p-3 text-left rounded-l-lg text-xs md:text-base">Player</th>
+                    <th className="p-2 md:p-3 text-center text-xs md:text-base">Position</th>
+                    <th className="p-2 md:p-3 text-center text-xs md:text-base">Passes</th>
+                    <th className="p-2 md:p-3 text-center text-xs md:text-base">Pass %</th>
+                    <th className="p-2 md:p-3 text-center text-xs md:text-base">Tackles</th>
+                    <th className="p-2 md:p-3 text-center text-xs md:text-base">Tackle %</th>
+                    <th className="p-2 md:p-3 text-center text-xs md:text-base">Carries</th>
+                    <th className="p-2 md:p-3 text-center text-xs md:text-base">Kicks</th>
+                    <th className="p-2 md:p-3 text-center text-xs md:text-base">Kick %</th>
+                    <th className="p-2 md:p-3 text-center rounded-r-lg text-xs md:text-base">Errors</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {displayTeamB.map((player, index) => {
+                    return (
+                      <tr key={index} className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
+                        <td className="p-2 md:p-3 font-medium text-xs md:text-base">{player.playerCode}</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{getPositionName(player.playerNumber)}</td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">
+                          {player.passesTotal > 0 ? `${player.passesAccurate}/${player.passesTotal}` : '-'}
+                        </td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">
+                          {player.passesTotal > 0 ? `${player.passAccuracyPct.toFixed(0)}%` : '-'}
+                        </td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">
+                          {player.tacklesTotal > 0 ? `${player.tacklesTotal - player.tacklesMissed}/${player.tacklesTotal}` : '-'}
+                        </td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">
+                          {player.tacklesTotal > 0 ? `${player.tackleSuccessPct.toFixed(0)}%` : '-'}
+                        </td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">
+                          {player.ballCarriesTotal > 0 ? `${player.ballCarriesTotal} (${player.carryDominancePct.toFixed(0)}% dom)` : '-'}
+                        </td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">
+                          {player.kicksTotal > 0 ? `${player.kicksGood}/${player.kicksTotal}` : '-'}
+                        </td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">
+                          {player.kicksTotal > 0 ? `${player.kickSuccessPct.toFixed(0)}%` : '-'}
+                        </td>
+                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{player.errors}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* See More Button */}
+        {sortedTeamB.length > 5 && (
+          <div className="text-center">
+            <button
+              onClick={() => setShowAllTeamB(!showAllTeamB)}
+              className="px-6 py-2 bg-scrummy-navyBlue text-white rounded-lg hover:bg-scrummy-navyBlue/80 transition-colors"
+            >
+              {showAllTeamB ? 'Show Less' : `See All ${sortedTeamB.length} Players`}
+            </button>
+          </div>
+        )}
+      </div>
+
+             {/* Player Analysis */}
+       <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-md">
+         <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-4 font-orbitron border-b border-scrummy-lightblue pb-2">
+           🔍 Player Analysis & Match Insights
+         </h2>
+         
+         <div className="space-y-5 text-sm md:text-base">
+           {/* Match Stars with detailed analysis */}
+           <div>
+             <h3 className="text-lg font-semibold text-scrummy-navyBlue mb-3">🏆 Match Stars</h3>
+             <div className="space-y-3">
+               {/* Team A MVP Analysis */}
+               <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-3 rounded-lg border-l-4 border-yellow-400">
+                 <div className="mb-2">
+                   <span className="font-bold text-lg text-scrummy-navyBlue">{sortedTeamA[0]?.playerCode}</span>
+                   <span className="ml-2 bg-yellow-200 px-2 py-1 rounded text-xs font-medium">
+                     {getPositionName(sortedTeamA[0]?.playerNumber)}
+                   </span>
+                   <span className="ml-2 text-xs text-gray-600">{cleanTeamA}</span>
+                 </div>
+                 <p className="text-scrummy-navyBlue/90 leading-relaxed">
+                   <strong>{sortedTeamA[0]?.playerCode}</strong> was {cleanTeamA}'s most active player with <strong className="text-blue-700">{sortedTeamA[0]?.totalActions} total actions</strong>.
+                   {sortedTeamA[0]?.passesTotal > 0 ? (
+                     <> Their distribution was clinical, completing <strong className="text-green-700">{sortedTeamA[0]?.passesAccurate}/{sortedTeamA[0]?.passesTotal} passes at {sortedTeamA[0]?.passAccuracyPct.toFixed(0)}% accuracy</strong>, 
+                     which allowed {cleanTeamA} to maintain possession and control field position.</>
+                   ) : (
+                     <> As a {getPositionName(sortedTeamA[0]?.playerNumber)}, they focused on their core role rather than distribution.</>
+                   )}
+                   {sortedTeamA[0]?.ballCarriesTotal > 0 && sortedTeamA[0]?.carryDominancePct > 30 && (
+                     <> Their <strong className="text-purple-700">{sortedTeamA[0]?.ballCarriesTotal} carries with {sortedTeamA[0]?.carryDominancePct.toFixed(0)}% dominance</strong> 
+                     broke through defensive lines, creating attacking opportunities.</>
+                   )}
+                   {sortedTeamA[0]?.ballCarriesTotal > 0 && sortedTeamA[0]?.carryDominancePct <= 30 && (
+                     <> They made <strong className="text-orange-600">{sortedTeamA[0]?.ballCarriesTotal} carries</strong> though struggled to break the defensive line 
+                     with only {sortedTeamA[0]?.carryDominancePct.toFixed(0)}% dominance.</>
+                   )}
+                   {sortedTeamA[0]?.tacklesTotal > 0 && (
+                     <> Defensively, they completed <strong className="text-red-700">{sortedTeamA[0]?.tacklesTotal - sortedTeamA[0]?.tacklesMissed}/{sortedTeamA[0]?.tacklesTotal} tackles at {sortedTeamA[0]?.tackleSuccessPct.toFixed(0)}% success</strong>.</>
+                   )}
+                   {sortedTeamA[0]?.errors === 0 ? (
+                     <> Most impressively, they made <strong className="text-green-700">zero errors</strong>, showcasing perfect decision-making under pressure.</>
+                   ) : sortedTeamA[0]?.errors === 1 ? (
+                     <> They made just <strong className="text-yellow-600">1 error</strong>, showing good composure throughout the match.</>
+                   ) : (
+                     <> However, <strong className="text-red-600">{sortedTeamA[0]?.errors} errors</strong> disrupted some attacking phases.</>
+                   )}
+                 </p>
+               </div>
+
+               {/* Team B MVP Analysis */}
+               <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-3 rounded-lg border-l-4 border-blue-400">
+                 <div className="mb-2">
+                   <span className="font-bold text-lg text-scrummy-navyBlue">{sortedTeamB[0]?.playerCode}</span>
+                   <span className="ml-2 bg-blue-200 px-2 py-1 rounded text-xs font-medium">
+                     {getPositionName(sortedTeamB[0]?.playerNumber)}
+                   </span>
+                   <span className="ml-2 text-xs text-gray-600">{cleanTeamB}</span>
+                 </div>
+                 <p className="text-scrummy-navyBlue/90 leading-relaxed">
+                   <strong>{sortedTeamB[0]?.playerCode}</strong> was {cleanTeamB}'s most influential player with <strong className="text-blue-700">{sortedTeamB[0]?.totalActions} total actions</strong>.
+                   {sortedTeamB[0]?.tacklesTotal > 0 && (
+                     <> Defensively, they made <strong className="text-blue-700">{sortedTeamB[0]?.tacklesTotal - sortedTeamB[0]?.tacklesMissed}/{sortedTeamB[0]?.tacklesTotal} tackles at {sortedTeamB[0]?.tackleSuccessPct.toFixed(0)}% success</strong>, 
+                     providing crucial defensive stability when {cleanTeamB} was under pressure.</>
+                   )}
+                   {sortedTeamB[0]?.passesTotal > 0 && (
+                     <> Their distribution was solid with <strong className="text-green-700">{sortedTeamB[0]?.passesAccurate}/{sortedTeamB[0]?.passesTotal} passes at {sortedTeamB[0]?.passAccuracyPct.toFixed(0)}% accuracy</strong>, 
+                     creating attacking platforms for the backline.</>
+                   )}
+                   {sortedTeamB[0]?.ballCarriesTotal > 0 && sortedTeamB[0]?.carryDominancePct > 30 && (
+                     <> They carried strongly with <strong className="text-purple-700">{sortedTeamB[0]?.ballCarriesTotal} carries at {sortedTeamB[0]?.carryDominancePct.toFixed(0)}% dominance</strong>, 
+                     breaking through defensive lines.</>
+                   )}
+                   {sortedTeamB[0]?.ballCarriesTotal > 0 && sortedTeamB[0]?.carryDominancePct <= 30 && (
+                     <> Their <strong className="text-orange-600">{sortedTeamB[0]?.ballCarriesTotal} carries</strong> struggled against strong defense, 
+                     achieving only {sortedTeamB[0]?.carryDominancePct.toFixed(0)}% dominance.</>
+                   )}
+                   {sortedTeamB[0]?.kicksTotal > 0 && (
+                     <> Additionally, {sortedTeamB[0]?.kicksGood}/{sortedTeamB[0]?.kicksTotal} successful kicks ({sortedTeamB[0]?.kickSuccessPct.toFixed(0)}%) 
+                     helped relieve territorial pressure at critical moments.</>
+                   )}
+                   {sortedTeamB[0]?.errors === 0 ? (
+                     <> They maintained perfect composure with <strong className="text-green-700">zero errors</strong>.</>
+                   ) : sortedTeamB[0]?.errors === 1 ? (
+                     <> They showed good composure with just <strong className="text-yellow-600">1 error</strong>.</>
+                   ) : (
+                     <> However, <strong className="text-red-600">{sortedTeamB[0]?.errors} errors</strong> hampered some attacking phases.</>
+                   )}
+                 </p>
+               </div>
+             </div>
+           </div>
+
+           {/* Tactical Battles */}
+           <div>
+             <h3 className="text-lg font-semibold text-scrummy-navyBlue mb-3">⚔️ Tactical Battles</h3>
+             <div className="space-y-3">
+               {/* Scrum-half Battle */}
+               {(() => {
+                 const scrumHalves = [...sortedTeamA, ...sortedTeamB].filter(p => p.playerNumber === 9);
+                 if (scrumHalves.length === 2) {
+                   const [sh1, sh2] = scrumHalves;
+                   const winner = sh1.passAccuracyPct > sh2.passAccuracyPct ? sh1 : sh2;
+                   const loser = winner === sh1 ? sh2 : sh1;
+                   return (
+                     <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-3 rounded-lg border-l-4 border-green-400">
+                       <h4 className="font-semibold text-green-800 mb-2">🏉 Scrum-half Showdown</h4>
+                       <p className="text-scrummy-navyBlue/90 leading-relaxed">
+                         <strong className="text-green-700">{winner.playerCode}</strong> won the crucial half-back battle with 
+                         <strong> {winner.passesAccurate}/{winner.passesTotal} passes at {winner.passAccuracyPct.toFixed(0)}% accuracy</strong>, 
+                         compared to <strong>{loser.playerCode}'s</strong> {loser.passesAccurate}/{loser.passesTotal} at {loser.passAccuracyPct.toFixed(0)}%. 
+                         This {(winner.passAccuracyPct - loser.passAccuracyPct).toFixed(0)}% accuracy advantage allowed {winner.playerCode} to 
+                         dictate the game's tempo and provide cleaner ball to the backline, creating more attacking opportunities and maintaining possession under pressure.
+                       </p>
+                     </div>
+                   );
+                 }
+                 return null;
+               })()}
+
+               {/* Fly-half Battle */}
+               {(() => {
+                 const flyHalves = [...sortedTeamA, ...sortedTeamB].filter(p => p.playerNumber === 10);
+                 if (flyHalves.length === 2) {
+                   const [fh1, fh2] = flyHalves;
+                   const winner = fh1.kickSuccessPct > fh2.kickSuccessPct ? fh1 : fh2;
+                   const loser = winner === fh1 ? fh2 : fh1;
+                   return (
+                     <div className="bg-gradient-to-r from-purple-50 to-violet-50 p-3 rounded-lg border-l-4 border-purple-400">
+                       <h4 className="font-semibold text-purple-800 mb-2">🎯 Fly-half Tactical Duel</h4>
+                       <p className="text-scrummy-navyBlue/90 leading-relaxed">
+                         <strong className="text-purple-700">{winner.playerCode}</strong> controlled territory with superior kicking, 
+                         landing <strong>{winner.kicksGood}/{winner.kicksTotal} kicks at {winner.kickSuccessPct.toFixed(0)}% success</strong> 
+                         versus <strong>{loser.playerCode}'s</strong> {loser.kicksGood}/{loser.kicksTotal} at {loser.kickSuccessPct.toFixed(0)}%. 
+                         This {(winner.kickSuccessPct - loser.kickSuccessPct).toFixed(0)}% kicking advantage was crucial for field position, 
+                         allowing {winner.playerCode}'s team to pin the opposition in their own half and create attacking opportunities from territorial pressure.
+                       </p>
+                     </div>
+                   );
+                 }
+                 return null;
+               })()}
+             </div>
+           </div>
+
+           {/* Performance Breakdown */}
+           <div>
+             <h3 className="text-lg font-semibold text-scrummy-navyBlue mb-3">📊 Performance Breakdown</h3>
+             <div className="space-y-3">
+               {/* Best Passer */}
+               {(() => {
+                 const bestPasser = [...sortedTeamA, ...sortedTeamB]
+                   .filter(p => p.passesTotal >= 5)
+                   .sort((a, b) => b.passAccuracyPct - a.passAccuracyPct)[0];
+                 return bestPasser && (
+                   <div className="bg-gradient-to-r from-cyan-50 to-blue-50 p-3 rounded-lg border-l-4 border-cyan-400">
+                     <h4 className="font-semibold text-cyan-800 mb-2">🎯 Distribution Master</h4>
+                     <p className="text-scrummy-navyBlue/90 leading-relaxed">
+                       <strong className="text-cyan-700">{bestPasser.playerCode} ({getPositionName(bestPasser.playerNumber)})</strong> 
+                       achieved exceptional <strong>{bestPasser.passAccuracyPct.toFixed(0)}% pass accuracy</strong> with {bestPasser.passesAccurate}/{bestPasser.passesTotal} completions. 
+                       This clinical distribution was the foundation of their team's attacking structure, as every accurate pass maintained momentum and 
+                       created space for teammates. The {getPositionName(bestPasser.playerNumber)} position demands this precision, 
+                       and {bestPasser.playerCode} delivered when it mattered most, rarely forcing plays and consistently finding the right option.
+                     </p>
+                   </div>
+                 );
+               })()}
+
+               {/* Best Defender */}
+               {(() => {
+                 const bestTackler = [...sortedTeamA, ...sortedTeamB]
+                   .filter(p => p.tacklesTotal >= 3)
+                   .sort((a, b) => b.tackleSuccessPct - a.tackleSuccessPct)[0];
+                 return bestTackler && (
+                   <div className="bg-gradient-to-r from-red-50 to-pink-50 p-3 rounded-lg border-l-4 border-red-400">
+                     <h4 className="font-semibold text-red-800 mb-2">🛡️ Defensive Anchor</h4>
+                     <p className="text-scrummy-navyBlue/90 leading-relaxed">
+                       <strong className="text-red-700">{bestTackler.playerCode} ({getPositionName(bestTackler.playerNumber)})</strong> 
+                       was a defensive wall with <strong>{bestTackler.tackleSuccessPct.toFixed(0)}% tackle success</strong> 
+                       ({bestTackler.tacklesTotal - bestTackler.tacklesMissed}/{bestTackler.tacklesTotal} completions). 
+                       This dominant tackling performance disrupted the opposition's attacking rhythm and forced them into errors. 
+                       As a {getPositionName(bestTackler.playerNumber)}, their role in the defensive line was crucial, 
+                       and their {bestTackler.tackleSuccessPct.toFixed(0)}% success rate shows they rarely missed their target, 
+                       providing the platform for turnovers and counter-attacks.
+                     </p>
+                   </div>
+                 );
+               })()}
+             </div>
+           </div>
+
+           {/* Areas for Development */}
+           <div>
+             <h3 className="text-lg font-semibold text-scrummy-navyBlue mb-3">⚠️ Development Opportunities</h3>
+             <div className="space-y-3">
+               {(() => {
+                 const strugglers = [...sortedTeamA, ...sortedTeamB]
+                   .filter(p => p.tackleSuccessPct < 70 || p.errors >= 2)
+                   .slice(0, 2);
+                 
+                 return strugglers.length > 0 ? strugglers.map((player, index) => (
+                   <div key={index} className="bg-gradient-to-r from-orange-50 to-red-50 p-3 rounded-lg border-l-4 border-orange-400">
+                     <div className="mb-2">
+                       <span className="font-bold text-orange-800">{player.playerCode}</span>
+                       <span className="ml-2 bg-orange-200 px-2 py-1 rounded text-xs font-medium">
+                         {getPositionName(player.playerNumber)}
+                       </span>
+                     </div>
+                     <p className="text-scrummy-navyBlue/90 leading-relaxed">
+                       {player.tackleSuccessPct < 70 && player.tacklesTotal > 0 && (
+                         <>
+                           <strong>{player.playerCode}</strong> struggled defensively with only <strong className="text-red-600">{player.tackleSuccessPct.toFixed(0)}% tackle success</strong> 
+                           ({player.tacklesTotal - player.tacklesMissed}/{player.tacklesTotal}). As a {getPositionName(player.playerNumber)}, 
+                           this position requires solid defensive reads and technique. The missed tackles likely came from poor body position or 
+                           rushing the contact, allowing attackers to offload or break through the line.
+                         </>
+                       )}
+                       {player.errors >= 2 && (
+                         <>
+                           {player.tackleSuccessPct < 70 ? ' Additionally, their ' : ''}
+                           <strong className="text-red-600">{player.errors} handling errors</strong> disrupted team momentum at crucial moments. 
+                           These errors suggest decision-making under pressure needs improvement, possibly rushing plays instead of securing possession first.
+                         </>
+                       )}
+                     </p>
+                   </div>
+                 )) : (
+                   <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-3 rounded-lg border-l-4 border-green-400">
+                     <p className="text-scrummy-navyBlue/90">
+                       Outstanding performance across both teams - all players maintained high standards with minimal errors and strong execution rates.
+                     </p>
+                   </div>
+                 );
+               })()}
+             </div>
+           </div>
+         </div>
+       </div>
+      </div>
+    </div>
+  );
+};
+
+export default PlayerBoxScore;
