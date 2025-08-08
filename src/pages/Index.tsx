@@ -255,6 +255,25 @@ const Index: React.FC = () => {
               </div>
 
         <div className="max-w-[95vw] mx-auto px-4 sm:px-6 relative z-10">
+          {/* Action Buttons Section */}
+          <div className="text-left mb-20">
+            <div className="flex flex-col sm:flex-row gap-3 justify-start">
+              <Link to="/fixtures">
+                <Button 
+                  className="bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-6 py-3 text-sm rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                >
+                  View Fixtures
+                </Button>
+              </Link>
+              <Link to="/download">
+                <Button 
+                  className="bg-scrummy-navy hover:bg-scrummy-blue text-white font-bold px-6 py-3 text-sm rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                >
+                  Download App
+                </Button>
+              </Link>
+            </div>
+          </div>
           <div className="grid md:grid-cols-3 gap-8 justify-center">
             {/* Phone 1 - Build Your Team */}
             <motion.div 
@@ -595,10 +614,11 @@ const Index: React.FC = () => {
                       ))}
                     </div>
 
-                    {/* Bottom Row - 1 Player */}
-                    <div className="flex justify-center">
+                    {/* Bottom Row - 2 Players */}
+                    <div className="flex justify-center gap-2 sm:gap-3">
                       {[
-                        { name: "Alba Capell", position: "Flanker", team: "Spain Women", pr: 85, image: "/assets/Women's card pics style/Spain_ Alba Capell.png", flagEmoji: "🇪🇸" }
+                        { name: "Alba Capell", position: "Flanker", team: "Spain Women", pr: 85, image: "/assets/Women's card pics style/Spain_ Alba Capell.png", flagEmoji: "🇪🇸" },
+                        { name: "Rinka Matsunda", position: "Fly-half", team: "Japan Sakura", pr: 84, image: "/assets/Women's card pics style/Japan_ Rinka matsunda.png", flagEmoji: "🇯🇵" }
                       ].map((player, index) => (
                         <div key={index} className="relative">
                           <div className="group relative shadow-xl rounded-lg flex flex-col transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden transform-style-3d bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-700 text-white h-[130px] sm:h-[160px] w-[100px] sm:w-[100px] cursor-pointer">
