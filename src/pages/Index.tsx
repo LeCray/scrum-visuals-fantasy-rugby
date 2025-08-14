@@ -669,31 +669,37 @@ const Index: React.FC = () => {
           </div>
           
           {/* Main Download CTA */}
-          <div className="mt-8 bg-scrummy-navy/5 rounded-xl p-6 border border-scrummy-goldYellow/20 relative z-[100]">
+          <div className="mt-8 bg-gradient-to-br from-scrummy-navy/5 to-scrummy-goldYellow/5 rounded-xl p-8 border border-scrummy-goldYellow/30 relative z-[100] shadow-lg">
             <div className="text-center">
-              <div className="flex justify-center mb-4">
-                <div className="w-14 h-14 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
-                  <span className="text-2xl">⚡</span>
-                </div>
-              </div>
-              <h4 className="font-orbitron text-lg font-bold text-scrummy-navy mb-2">
+              <h4 className="font-orbitron text-xl md:text-2xl font-bold text-scrummy-navy mb-3">
                 Get the Full Experience
               </h4>
-              <p className="text-sm text-gray-600 mb-4 max-w-sm mx-auto">
+              <p className="text-base text-gray-700 mb-6 max-w-md mx-auto font-medium">
                 Download the app for live stats, fantasy leagues, and exclusive features
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center relative z-[100]">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-[100]">
+                {/* Apple App Store - Official Badge */}
                 <button 
-                  className="inline-flex items-center justify-center bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-6 py-3 rounded-md cursor-pointer relative z-[101] transition-colors"
+                  className="cursor-pointer relative z-[101] transition-all hover:opacity-90"
                   onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
                 >
-                  iOS App Store
+                  <img 
+                    src="/assets/Store badges/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" 
+                    alt="Download on the App Store"
+                    className="h-12 w-auto"
+                  />
                 </button>
+                
+                {/* Google Play Store - Official Badge */}
                 <button 
-                  className="inline-flex items-center justify-center bg-scrummy-navy hover:bg-scrummy-blue text-white font-bold px-6 py-3 rounded-md cursor-pointer relative z-[101] transition-colors"
+                  className="cursor-pointer relative z-[101] transition-all hover:opacity-90"
                   onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
                 >
-                  Google Play
+                  <img 
+                    src="/assets/Store badges/GetItOnGooglePlay_Badge_Web_color_English.png" 
+                    alt="Get it on Google Play"
+                    className="h-12 w-auto"
+                  />
                 </button>
               </div>
             </div>
@@ -1124,23 +1130,30 @@ const Index: React.FC = () => {
           <p className="text-xl text-white/90 mb-8">
             Make predictions on every match and climb the leaderboards
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/download">
-              <Button 
-                size="lg"
-                className="bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-8 py-4"
-              >
-                🎯 Start Making Predictions
-              </Button>
-            </Link>
-                          <Link to="/download">
-                <Button 
-                  size="lg"
-                  className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-8 py-4"
-                >
-                  Get the App
-                </Button>
-              </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            {/* Apple App Store - Official Badge */}
+            <button 
+              className="cursor-pointer transition-all hover:opacity-90"
+              onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
+            >
+              <img 
+                src="/assets/Store badges/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" 
+                alt="Download on the App Store"
+                className="h-12 w-auto"
+              />
+            </button>
+            
+            {/* Google Play Store - Official Badge */}
+            <button 
+              className="cursor-pointer transition-all hover:opacity-90"
+              onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
+            >
+              <img 
+                src="/assets/Store badges/GetItOnGooglePlay_Badge_Web_color_English.png" 
+                alt="Get it on Google Play"
+                className="h-12 w-auto"
+              />
+            </button>
           </div>
         </div>
       </section>

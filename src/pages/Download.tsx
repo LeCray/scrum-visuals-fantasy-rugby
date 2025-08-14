@@ -230,12 +230,58 @@ const DownloadPage: React.FC = () => {
             <p className="text-gray-600">Available on iOS, Android, and as a web app</p>
           </motion.div>
 
-          {/* Web App - Featured */}
+          {/* Store Apps - Priority Section */}
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="mb-12 md:mb-16"
+          >
+            <div className="bg-gradient-to-br from-scrummy-navy/5 to-scrummy-goldYellow/5 rounded-xl p-8 border border-scrummy-goldYellow/30 shadow-lg">
+              <div className="text-center">
+                <h3 className="font-orbitron text-xl md:text-2xl font-bold text-scrummy-navy mb-3">
+                  Download the Official App
+                </h3>
+                <p className="text-base text-gray-700 mb-6 max-w-md mx-auto font-medium">
+                  Get the full SCRUMMY experience with live stats, fantasy leagues, and exclusive features
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  {/* Apple App Store - Official Badge */}
+                  <button 
+                    className="cursor-pointer transition-all hover:opacity-90"
+                    onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
+                  >
+                    <img 
+                      src="/assets/Store badges/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" 
+                      alt="Download on the App Store"
+                      className="h-12 w-auto"
+                    />
+                  </button>
+                  
+                  {/* Google Play Store - Official Badge */}
+                  <button 
+                    className="cursor-pointer transition-all hover:opacity-90"
+                    onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
+                  >
+                    <img 
+                      src="/assets/Store badges/GetItOnGooglePlay_Badge_Web_color_English.png" 
+                      alt="Get it on Google Play"
+                      className="h-12 w-auto"
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+
+
+          {/* Web App - Alternative Option */}
           <motion.div
             initial={{ y: -30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="mb-8 md:mb-12"
+            transition={{ delay: 0.9, duration: 0.6 }}
+            className="mb-12 md:mb-16"
           >
             <Card className="text-center p-6 md:p-8 bg-gradient-to-br from-scrummy-goldYellow/10 to-scrummy-gold/10 border-2 border-scrummy-goldYellow hover:shadow-xl transition-all duration-300">
               <CardContent className="space-y-4 md:space-y-6">
@@ -265,78 +311,6 @@ const DownloadPage: React.FC = () => {
               </CardContent>
             </Card>
           </motion.div>
-
-          <div className="grid gap-6 md:grid-cols-2 md:gap-8 mb-12 md:mb-16">
-            {/* iPhone Download - Available Now */}
-            <motion.div
-              initial={{ x: -30, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              whileHover={{ y: -5 }}
-            >
-              <Card className="text-center p-6 md:p-8 hover:shadow-xl transition-all duration-300 border-2 border-scrummy-goldYellow/30">
-                <CardContent className="space-y-4 md:space-y-6">
-                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-scrummy-goldYellow to-scrummy-gold rounded-2xl flex items-center justify-center mx-auto">
-                    <Smartphone className="w-8 h-8 md:w-10 md:h-10 text-scrummy-navy" />
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-bold text-scrummy-navy mb-2">iPhone</h3>
-                    <p className="text-gray-600 mb-4 md:mb-6">Available now on the App Store</p>
-                    <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                      <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                      Available Now
-                    </div>
-                  </div>
-
-                  <Button 
-                    size="lg" 
-                    className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-6 md:px-8 py-3 rounded-xl w-full"
-                    onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
-                  >
-                    Download for iOS
-                  </Button>
-                  
-                  <p className="text-xs text-gray-500">Requires iOS 18.0 or later</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Android Download - Available Now */}
-            <motion.div
-              initial={{ x: 30, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
-              whileHover={{ y: -5 }}
-            >
-              <Card className="text-center p-6 md:p-8 hover:shadow-xl transition-all duration-300 border-2 border-scrummy-navy/30">
-                <CardContent className="space-y-4 md:space-y-6">
-                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-scrummy-navy to-scrummy-blue rounded-2xl flex items-center justify-center mx-auto">
-                    <Smartphone className="w-8 h-8 md:w-10 md:h-10 text-white" />
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-bold text-scrummy-navy mb-2">Android</h3>
-                    <p className="text-gray-600 mb-4 md:mb-6">Available now on Google Play</p>
-                    <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                      <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                      Available Now
-                    </div>
-                  </div>
-
-                  <Button 
-                    size="lg" 
-                    className="bg-scrummy-navy text-white hover:bg-scrummy-blue font-bold px-6 md:px-8 py-3 rounded-xl w-full"
-                    onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
-                  >
-                    Download for Android
-                  </Button>
-                  
-                  <p className="text-xs text-gray-500">Requires Android 8.0 or later</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
 
           {/* App Features */}
           <motion.div
@@ -404,19 +378,30 @@ const DownloadPage: React.FC = () => {
             <p className="text-white/90 mb-6 text-sm md:text-base">
               Download SCRUMMY now on iOS and Android, or use our web app!
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
-              <Button 
-                className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold flex-1"
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              {/* Apple App Store - Official Badge */}
+              <button 
+                className="cursor-pointer transition-all hover:opacity-90"
                 onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
               >
-                Download for iOS
-              </Button>
-              <Button 
-                className="bg-white text-scrummy-navy hover:bg-gray-100 font-bold flex-1"
+                <img 
+                  src="/assets/Store badges/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" 
+                  alt="Download on the App Store"
+                  className="h-12 w-auto"
+                />
+              </button>
+              
+              {/* Google Play Store - Official Badge */}
+              <button 
+                className="cursor-pointer transition-all hover:opacity-90"
                 onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
               >
-                Download for Android
-              </Button>
+                <img 
+                  src="/assets/Store badges/GetItOnGooglePlay_Badge_Web_color_English.png" 
+                  alt="Get it on Google Play"
+                  className="h-12 w-auto"
+                />
+              </button>
             </div>
           </motion.div>
         </div>
