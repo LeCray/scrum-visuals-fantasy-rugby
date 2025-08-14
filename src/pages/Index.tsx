@@ -827,18 +827,22 @@ const Index: React.FC = () => {
 
               {/* Women's Rugby News Section */}
               <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-scrummy-navy mb-4">Women's Rugby Headlines</h3>
+                <h3 className="text-2xl font-bold text-scrummy-navy mb-4">Rugby World Cup Headlines</h3>
                 
                 {/* News Preview 1 */}
                 <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-white/30 hover:scale-105 transition-transform duration-300 cursor-pointer shadow-lg"
-                     onClick={() => window.open('https://www.rugbypass.com/news/wallaroos-stars-timely-return-to-face-wales-before-rugby-world-cup', '_blank')}>
+                     onClick={() => window.open('https://www.rugbypass.com/news/world-cup-memories-stacey-waaka-as-i-limped-off-the-field-i-felt-deeply-gutted', '_blank')}>
                   <div className="flex gap-4">
-                    <div className="w-20 h-16 bg-gradient-to-br from-green-500 to-yellow-400 rounded-lg flex items-center justify-center text-white font-bold text-xs">
-                      AUS
+                    <div className="w-20 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                      <img 
+                        src="https://eu-cdn.rugbypass.com/webp-images/wp/wp-content/uploads/2025/08/STACEY-WAAKA-effect-1024x576.jpg.webp?maxw=950&comp=80"
+                        alt="Stacey Waaka"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-bold text-scrummy-navy text-sm mb-1">Maya Stewart Returns From Injury</h4>
-                      <p className="text-xs text-gray-600 mb-2">Australia's all-time leading try-scorer makes crucial comeback ahead of Rugby World Cup</p>
+                      <h4 className="font-bold text-scrummy-navy text-sm mb-1">World Cup Memories: Stacey Waaka</h4>
+                      <p className="text-xs text-gray-600 mb-2">'As I limped off the field, I felt deeply gutted' - Black Ferns star reflects on World Cup</p>
                       <span className="text-xs text-blue-600 font-medium">Read more on RugbyPass →</span>
                     </div>
                   </div>
@@ -846,14 +850,18 @@ const Index: React.FC = () => {
 
                 {/* News Preview 2 */}
                 <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-white/30 hover:scale-105 transition-transform duration-300 cursor-pointer shadow-lg"
-                     onClick={() => window.open('https://www.rugbypass.com/news/levi-and-nathan-among-sevens-stars-sharpening-for-svns-series-at-nextgen-7s', '_blank')}>
+                     onClick={() => window.open('https://www.rugbypass.com/news/world-cup-memories-fiona-coghlan-the-black-ferns-were-gracious-in-defeat', '_blank')}>
                   <div className="flex gap-4">
-                    <div className="w-20 h-16 bg-gradient-to-br from-purple-500 to-pink-400 rounded-lg flex items-center justify-center text-white font-bold text-xs">
-                      7s
+                    <div className="w-20 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                      <img 
+                        src="https://eu-cdn.rugbypass.com/webp-images/wp/wp-content/uploads/2025/08/Fiona-Coghlan-1024x576.jpg.webp?maxw=950&comp=80"
+                        alt="Fiona Coghlan"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-bold text-scrummy-navy text-sm mb-1">Rising Stars Prepare for SVNS Series</h4>
-                      <p className="text-xs text-gray-600 mb-2">Next generation of sevens talent showcased at development tournament</p>
+                      <h4 className="font-bold text-scrummy-navy text-sm mb-1">World Cup Memories: Fiona Coghlan</h4>
+                      <p className="text-xs text-gray-600 mb-2">'The Black Ferns were gracious in defeat' - Ireland legend shares World Cup memories</p>
                       <span className="text-xs text-blue-600 font-medium">Read more on RugbyPass →</span>
                     </div>
                   </div>
@@ -861,14 +869,18 @@ const Index: React.FC = () => {
 
                 {/* News Preview 3 */}
                 <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-white/30 hover:scale-105 transition-transform duration-300 cursor-pointer shadow-lg"
-                     onClick={() => window.open('https://www.rugbypass.com/news/the-bremners-sisters-competing-for-the-same-black-ferns-shirt', '_blank')}>
+                     onClick={() => window.open('https://www.rugbypass.com/news/erica-jarrell-searcy-ready-for-first-proper-rugby-world-cup-challenge', '_blank')}>
                   <div className="flex gap-4">
-                    <div className="w-20 h-16 bg-gradient-to-br from-black to-gray-600 rounded-lg flex items-center justify-center text-white font-bold text-xs">
-                      NZ
+                    <div className="w-20 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                      <img 
+                        src="https://eu-cdn.rugbypass.com/webp-images/wp/wp-content/uploads/2025/08/Untitled-design-37-1-1024x576.png.webp?maxw=950&comp=80"
+                        alt="Erica Jarrell-Searcy"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-bold text-scrummy-navy text-sm mb-1">The Bremners: Sisters Battle for Same Jersey</h4>
-                      <p className="text-xs text-gray-600 mb-2">Family rivalry adds intrigue to New Zealand's World Cup selection</p>
+                      <h4 className="font-bold text-scrummy-navy text-sm mb-1">Jarrell-Searcy on World Cup</h4>
+                      <p className="text-xs text-gray-600 mb-2">'I love going two feet into things and soaking it all up' - USA star ready for challenge</p>
                       <span className="text-xs text-blue-600 font-medium">Read more on RugbyPass →</span>
                     </div>
                   </div>
