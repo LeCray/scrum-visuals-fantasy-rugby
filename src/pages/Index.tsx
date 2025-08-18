@@ -217,22 +217,74 @@ const Index: React.FC = () => {
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-black/20" />
         
-        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-3"
-          >
-            <h1 className="text-4xl md:text-6xl font-bold font-orbitron text-white leading-tight drop-shadow-lg">
-              FANTASY RUGBY
-              <span className="block text-white">IS ABOUT TO GET</span>
-              <span className="block text-[#FFC603] drop-shadow-xl">SCRUMMY</span>
-            </h1>
-            <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto drop-shadow-md">
-              Be the First to Join the Scrum!
-            </p>
-          </motion.div>
+        <div className="w-full px-4 lg:px-8 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-none">
+            {/* Left Side - Main Content */}
+            <motion.div
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-6 text-left pl-0 lg:pl-[20%]"
+            >
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-orbitron text-white leading-tight drop-shadow-lg text-left">
+                FANTASY RUGBY
+                <span className="block text-white text-left">IS ABOUT TO GET</span>
+                <span className="block text-[#FFC603] drop-shadow-xl text-left">SCRUMMY</span>
+              </h1>
+              <p className="text-lg md:text-xl text-white/90 drop-shadow-md text-left">
+                Be the First to Join the Scrum!
+              </p>
+            </motion.div>
+
+            {/* Right Side - WWC Banner & CTA */}
+            <motion.div
+              initial={{ x: 50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="space-y-6 text-center lg:text-left lg:ml-[20%]"
+            >
+              {/* Women's World Cup Banner Container */}
+              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 shadow-xl max-w-xl mx-auto lg:mx-0 lg:ml-auto lg:mr-[20%]">
+                <div className="space-y-4">
+                  <img 
+                    src="/assets/Women's banner/WWC Banner - drafts-3 (1).jpg" 
+                    alt="Women's World Cup 2025 Fantasy"
+                    className="w-full h-auto rounded-xl shadow-2xl border-2 border-white/30 hover:scale-105 transition-transform duration-300"
+                  />
+                  <p className="text-white text-lg font-semibold drop-shadow-lg text-center lg:text-left">
+                    Get ready for the biggest tournament in women's rugby
+                  </p>
+                  
+                  {/* App Store Badges */}
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center">
+                    {/* Apple App Store Badge */}
+                    <button 
+                      className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-2 cursor-pointer transition-all hover:bg-white/20 hover:border-white/40 hover:scale-105 drop-shadow-lg active:scale-95"
+                      onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
+                    >
+                      <img 
+                        src="/assets/Store badges/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" 
+                        alt="Download on the App Store"
+                        className="h-10 w-auto"
+                      />
+                    </button>
+                    
+                    {/* Google Play Store Badge */}
+                    <button 
+                      className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-2 cursor-pointer transition-all hover:bg-white/20 hover:border-white/40 hover:scale-105 drop-shadow-lg active:scale-95"
+                      onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
+                    >
+                      <img 
+                        src="/assets/Store badges/GetItOnGooglePlay_Badge_Web_color_English.png" 
+                        alt="Get it on Google Play"
+                        className="h-10 w-auto"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -255,25 +307,6 @@ const Index: React.FC = () => {
               </div>
 
         <div className="max-w-[95vw] mx-auto px-4 sm:px-6 relative z-10">
-          {/* Action Buttons Section */}
-          <div className="text-left mb-20">
-            <div className="flex flex-col sm:flex-row gap-3 justify-start">
-              <Link to="/fixtures">
-                <Button 
-                  className="bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-6 py-3 text-sm rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                >
-                  View Fixtures
-                </Button>
-              </Link>
-              <Link to="/download">
-                <Button 
-                  className="bg-scrummy-navy hover:bg-scrummy-blue text-white font-bold px-6 py-3 text-sm rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                >
-                  Download App
-                </Button>
-              </Link>
-            </div>
-          </div>
           <div className="grid md:grid-cols-3 gap-8 justify-center">
             {/* Phone 1 - Build Your Team */}
             <motion.div 
@@ -680,7 +713,7 @@ const Index: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-[100]">
                 {/* Apple App Store - Official Badge */}
                 <button 
-                  className="cursor-pointer relative z-[101] transition-all hover:opacity-90"
+                  className="bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200/50 rounded-xl p-3 shadow-lg cursor-pointer relative z-[101] transition-all hover:from-gray-100 hover:to-gray-200 hover:border-gray-300/70 hover:scale-105 hover:shadow-xl active:scale-95"
                   onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
                 >
                   <img 
@@ -692,7 +725,7 @@ const Index: React.FC = () => {
                 
                 {/* Google Play Store - Official Badge */}
                 <button 
-                  className="cursor-pointer relative z-[101] transition-all hover:opacity-90"
+                  className="bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200/50 rounded-xl p-3 shadow-lg cursor-pointer relative z-[101] transition-all hover:from-gray-100 hover:to-gray-200 hover:border-gray-300/70 hover:scale-105 hover:shadow-xl active:scale-95"
                   onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
                 >
                   <img 
