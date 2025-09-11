@@ -16,6 +16,8 @@ import Download from "./pages/Download";
 import Support from "./pages/Support";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ZimbabweSBRGraphic from "./pages/ZimbabweSBRGraphic";
+import Scrum6Leaderboard from "./pages/Scrum6Leaderboard";
+import Scrum6Rules from "./pages/Scrum6Rules";
 
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -40,6 +42,8 @@ const App = () => (
           <Route path="/support" element={<Support />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/zimbabwe-sbr-graphic" element={<ZimbabweSBRGraphic />} />
+          <Route path="/scrum6-leaderboard" element={<Scrum6Leaderboard />} />
+          <Route path="/scrum6-rules" element={<Scrum6Rules />} />
 
           <Route path="/box-score/:matchId" element={<BoxScorePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
