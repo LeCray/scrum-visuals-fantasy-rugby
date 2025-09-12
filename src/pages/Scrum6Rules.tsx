@@ -38,13 +38,40 @@ const Scrum6Rules: React.FC = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-scrummy-navy mb-4">Official Rules</h1>
           <h2 className="text-2xl md:text-3xl font-semibold text-scrummy-blue mb-6">SCRUM6 Challenge</h2>
           
-          {/* Back to Leaderboard */}
-          <Link 
-            to="/scrum6-leaderboard"
-            className="inline-flex items-center bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-6 py-3 rounded-lg transition-colors shadow-lg"
-          >
-            ← Back to Leaderboard
-          </Link>
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link 
+              to="/scrum6-leaderboard"
+              className="inline-flex items-center bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-6 py-3 rounded-lg transition-colors shadow-lg"
+            >
+              ← Back to Leaderboard
+            </Link>
+            
+            {/* Download Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button 
+                className="bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200/50 rounded-xl p-3 shadow-lg cursor-pointer transition-all hover:from-gray-100 hover:to-gray-200 hover:border-gray-300/70 hover:scale-105 hover:shadow-xl active:scale-95"
+                onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
+              >
+                <img 
+                  src="/assets/Store badges/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" 
+                  alt="Download on the App Store"
+                  className="h-10 w-auto"
+                />
+              </button>
+              
+              <button 
+                className="bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200/50 rounded-xl p-3 shadow-lg cursor-pointer transition-all hover:from-gray-100 hover:to-gray-200 hover:border-gray-300/70 hover:scale-105 hover:shadow-xl active:scale-95"
+                onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
+              >
+                <img 
+                  src="/assets/Store badges/GetItOnGooglePlay_Badge_Web_color_English.png" 
+                  alt="Get it on Google Play"
+                  className="h-10 w-auto"
+                />
+              </button>
+            </div>
+          </div>
         </motion.div>
 
         {/* Rules Content */}
@@ -110,10 +137,6 @@ const Scrum6Rules: React.FC = () => {
             <p className="text-gray-700 leading-relaxed">Information collected from entrants will be used solely for administration of the contest and otherwise in accordance with By entering this contest, you grant SCRUMMY the right to use your name, username/handle, likeness, image, and any submitted content for promotional purposes, including but not limited to announcements on social media, without additional compensation or notice, except where prohibited by law. Corporate privacy act can be found: <Link to="/privacy" className="text-blue-600 hover:underline font-semibold">https://scrummy-app.com/#/privacy</Link></p>
           </div>
 
-          <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
-            <h3 className="text-2xl font-bold text-blue-800 mb-4">10. Disclaimer ⚖️</h3>
-            <p className="text-blue-700 font-semibold text-lg">This is a free-to-play fantasy challenge. It does not involve betting, gambling, or wagering of any kind. No purchase necessary. Void where prohibited.</p>
-          </div>
 
           <div className="bg-gray-50 p-6 rounded-lg border-t-4 border-scrummy-navy">
             <h4 className="font-bold text-gray-800 mb-3 text-xl">Website/App Disclaimer:</h4>
