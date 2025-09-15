@@ -10,16 +10,16 @@ interface LeaderboardEntry {
 }
 
 const mockLeaderboardData: LeaderboardEntry[] = [
-  { rank: 1, name: "RugbyMaster99", points: 5930 },
-  { rank: 2, name: "TryScorer", points: 5805 },
-  { rank: 3, name: "ScrumLegend", points: 4932 },
-  { rank: 4, name: "LineoutKing", points: 4304 },
-  { rank: 5, name: "TackleQueen", points: 3432 },
-  { rank: 6, name: "KickMaster", points: 3203 },
-  { rank: 7, name: "RuckRover", points: 2309 },
-  { rank: 8, name: "MaulMachine", points: 2156 },
-  { rank: 9, name: "PassPro", points: 1987 },
-  { rank: 10, name: "BootyBeast", points: 1834 }
+  { rank: 1, name: "rsc2702", points: 104 },
+  { rank: 2, name: "Odysseus", points: 104 },
+  { rank: 3, name: "The_Great_Kolisi", points: 73 },
+  { rank: 4, name: "TM", points: 73 },
+  { rank: 5, name: "SheTacklesHard", points: 64 },
+  { rank: 6, name: "Tadiwrrr", points: 41 },
+  { rank: 7, name: "Mgainsboro", points: 39 },
+  { rank: 8, name: "Kundai_Sancta", points: 31 },
+  { rank: 9, name: "guest_panther_twist_blast", points: 30 },
+  { rank: 10, name: "Badgers", points: 29 }
 ];
 
 // Medal component
@@ -54,20 +54,20 @@ const Medal: React.FC<{ type: 'gold' | 'silver' | 'bronze' }> = ({ type }) => {
   return (
     <div className="relative">
       {/* Ribbon */}
-      <div className={`absolute top-10 left-1/2 transform -translate-x-1/2 w-6 h-10 bg-gradient-to-b ${colors[type].ribbon} rounded-b-sm z-0`}>
-        <div className="absolute bottom-0 left-0 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-current"></div>
-        <div className="absolute bottom-0 right-0 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-current"></div>
+      <div className={`absolute top-6 sm:top-8 md:top-10 left-1/2 transform -translate-x-1/2 w-4 sm:w-5 md:w-6 h-6 sm:h-8 md:h-10 bg-gradient-to-b ${colors[type].ribbon} rounded-b-sm z-0`}>
+        <div className="absolute bottom-0 left-0 w-0 h-0 border-l-2 border-r-2 border-t-2 sm:border-l-3 sm:border-r-3 sm:border-t-3 md:border-l-4 md:border-r-4 md:border-t-4 border-transparent border-t-current"></div>
+        <div className="absolute bottom-0 right-0 w-0 h-0 border-l-2 border-r-2 border-t-2 sm:border-l-3 sm:border-r-3 sm:border-t-3 md:border-l-4 md:border-r-4 md:border-t-4 border-transparent border-t-current"></div>
       </div>
       
       {/* Medal outer ring */}
-      <div className={`relative w-16 h-16 rounded-full bg-gradient-to-br ${colors[type].outer} flex items-center justify-center shadow-2xl border-2 border-white/50 z-10`}>
+      <div className={`relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br ${colors[type].outer} flex items-center justify-center shadow-2xl border-2 border-white/50 z-10`}>
         {/* Medal inner circle */}
-        <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${colors[type].inner} flex items-center justify-center border border-white/30 relative overflow-hidden`}>
+        <div className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br ${colors[type].inner} flex items-center justify-center border border-white/30 relative overflow-hidden`}>
           {/* Shine effect */}
-          <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-gradient-to-br ${colors[type].accent} opacity-40 blur-sm`}></div>
+          <div className={`absolute top-0.5 left-0.5 w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 rounded-full bg-gradient-to-br ${colors[type].accent} opacity-40 blur-sm`}></div>
           
           {/* Number */}
-          <span className="text-white text-lg font-bold drop-shadow-lg relative z-10">{numbers[type]}</span>
+          <span className="text-white text-sm sm:text-base md:text-lg font-bold drop-shadow-lg relative z-10">{numbers[type]}</span>
           
           {/* Inner shine */}
           <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-white/20 via-transparent to-transparent"></div>
@@ -131,34 +131,34 @@ const PodiumTier: React.FC<{
       </motion.div>
 
       {/* Player name */}
-      <div className="text-center mb-4">
-        <div className="flex items-center justify-center gap-2 mb-1">
-          <h3 className="text-white font-bold text-lg">{player.name}</h3>
+      <div className="text-center mb-2 sm:mb-4">
+        <div className="flex items-center justify-center gap-1 sm:gap-2 mb-1">
+          <h3 className="text-white font-bold text-sm sm:text-base md:text-lg truncate max-w-[80px] sm:max-w-none">{player.name}</h3>
           <motion.button
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => onShare(player)}
-            className="p-1 hover:bg-white/10 rounded transition-colors"
+            className="p-1 hover:bg-white/10 rounded transition-colors flex-shrink-0"
           >
             <img 
               src="/assets/Icons/pngtree-file-upload-icon-png-image_4718142.jpg" 
               alt="Share" 
-              className="w-5 h-5 opacity-80 hover:opacity-100 transition-opacity"
+              className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 opacity-80 hover:opacity-100 transition-opacity"
             />
           </motion.button>
         </div>
-        <p className="text-white/90 font-semibold text-sm">{player.points.toLocaleString()} points</p>
+        <p className="text-white/90 font-semibold text-xs sm:text-sm">{player.points.toLocaleString()} points</p>
       </div>
 
       {/* Podium tier with integrated base */}
       <div className="flex flex-col items-center">
         {/* Main podium tier */}
-        <div className={`${bgColors[type]} ${height} w-32 flex items-end justify-center pb-4 border-t-4 border-white shadow-lg`}>
-          <span className="text-white font-bold text-6xl opacity-20">{player.rank}</span>
+        <div className={`${bgColors[type]} ${height} w-20 sm:w-24 md:w-32 flex items-end justify-center pb-2 sm:pb-4 border-t-2 sm:border-t-4 border-white shadow-lg`}>
+          <span className="text-white font-bold text-3xl sm:text-4xl md:text-6xl opacity-20">{player.rank}</span>
         </div>
         
         {/* Connected base */}
-        <div className={`${bgColors[type]} h-3 w-32 border-l border-r border-white/20 shadow-md`}>
+        <div className={`${bgColors[type]} h-2 sm:h-3 w-20 sm:w-24 md:w-32 border-l border-r border-white/20 shadow-md`}>
         </div>
       </div>
     </motion.div>
@@ -401,10 +401,10 @@ const Scrum6Leaderboard: React.FC = () => {
         </motion.div>
 
         {/* Podium Section */}
-        <div className="max-w-4xl mx-auto mb-16">
+        <div className="max-w-4xl mx-auto mb-16 px-4">
           <div className="relative">
             {/* Players and medals above podium */}
-            <div className="flex items-end justify-center gap-8 mb-0">
+            <div className="flex items-end justify-center gap-2 sm:gap-4 md:gap-8 mb-0">
               {/* 2nd Place - Silver */}
               <PodiumTier 
                 player={topThree[1]} 
@@ -435,7 +435,7 @@ const Scrum6Leaderboard: React.FC = () => {
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: 1, opacity: 1 }}
               transition={{ duration: 1, delay: 1.4, type: "spring", stiffness: 100 }}
-              className="bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 h-4 w-full max-w-lg mx-auto rounded-b-lg shadow-2xl border-t-2 border-white/30"
+              className="bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 h-3 sm:h-4 w-full max-w-xs sm:max-w-md md:max-w-lg mx-auto rounded-b-lg shadow-2xl border-t-2 border-white/30"
             >
             </motion.div>
           </div>
@@ -446,7 +446,7 @@ const Scrum6Leaderboard: React.FC = () => {
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.4 }}
-          className="max-w-2xl mx-auto"
+          className="max-w-2xl mx-auto px-4"
         >
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
             <h2 className="text-2xl font-bold text-white mb-6 text-center">Top 10 Players</h2>
