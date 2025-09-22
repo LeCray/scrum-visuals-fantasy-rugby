@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from 'react-router-dom';
+import Scrum6ChallengeBanner from '../components/Scrum6ChallengeBanner';
 
 // Mock leaderboard data
 interface LeaderboardEntry {
@@ -398,6 +399,16 @@ const Scrum6Leaderboard: React.FC = () => {
               📋 Official Rules
             </motion.button>
           </Link>
+        </motion.div>
+
+        {/* Scrum6 Challenge Banner */}
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="max-w-4xl mx-auto mb-12 px-4"
+        >
+          <Scrum6ChallengeBanner />
         </motion.div>
 
         {/* Podium Section */}
