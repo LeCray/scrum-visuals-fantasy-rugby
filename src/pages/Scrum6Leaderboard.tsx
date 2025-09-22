@@ -10,16 +10,16 @@ interface LeaderboardEntry {
 }
 
 const mockLeaderboardData: LeaderboardEntry[] = [
-  { rank: 1, name: "rsc2702", points: 104 },
-  { rank: 2, name: "Odysseus", points: 104 },
-  { rank: 3, name: "The_Great_Kolisi", points: 73 },
-  { rank: 4, name: "TM", points: 73 },
-  { rank: 5, name: "SheTacklesHard", points: 64 },
-  { rank: 6, name: "Tadiwrrr", points: 41 },
-  { rank: 7, name: "Mgainsboro", points: 39 },
-  { rank: 8, name: "Kundai_Sancta", points: 31 },
-  { rank: 9, name: "guest_panther_twist_blast", points: 30 },
-  { rank: 10, name: "Badgers", points: 29 }
+  { rank: 1, name: "Badgers", points: 89 },
+  { rank: 2, name: "Odysseus", points: 86 },
+  { rank: 3, name: "rsc2702", points: 85 },
+  { rank: 4, name: "danaspiegel", points: 82 },
+  { rank: 5, name: "Tafara", points: 68 },
+  { rank: 6, name: "TM", points: 57 },
+  { rank: 7, name: "Mgainsboro", points: 51 },
+  { rank: 8, name: "guest_owl", points: 49 },
+  { rank: 9, name: "Pops", points: 43 },
+  { rank: 10, name: "HarryG", points: 39 }
 ];
 
 // Medal component
@@ -246,7 +246,7 @@ const Scrum6Leaderboard: React.FC = () => {
     // Week info
     ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
     ctx.font = '24px Arial';
-    ctx.fillText('Week 1 • 2025', 540, 650);
+    ctx.fillText('Week 2 • 2025', 540, 650);
 
     // Call to action
     ctx.fillStyle = '#FFFFFF';
