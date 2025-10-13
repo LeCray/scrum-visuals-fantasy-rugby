@@ -116,7 +116,6 @@ const Index: React.FC = () => {
   const [selectedPlayer, setSelectedPlayer] = useState<typeof zimbabwePlayers[0] | null>(null);
   const [activePhoneIndex, setActivePhoneIndex] = useState(1); // Start with middle phone (index 1)
   const [screenWidth, setScreenWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
-  const [activeBannerIndex, setActiveBannerIndex] = useState(0); // Banner carousel state
 
   const spinForPlayer = () => {
     const randomPlayer = zimbabwePlayers[Math.floor(Math.random() * zimbabwePlayers.length)];
@@ -149,15 +148,6 @@ const Index: React.FC = () => {
     }, 3000); // Change every 3 seconds
 
         return () => clearInterval(interval);
-  }, []);
-
-  // Cycle through banners
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveBannerIndex((prev) => (prev + 1) % 2); // Cycle between 2 banners
-    }, 5000); // Change every 5 seconds
-
-    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -244,137 +234,6 @@ const Index: React.FC = () => {
               <p className="text-lg md:text-xl text-white/90 drop-shadow-md text-left">
                 Be the First to Join the Scrum!
               </p>
-            </motion.div>
-
-            {/* Right Side - Banner Carousel */}
-            <motion.div
-              initial={{ x: 50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-6 text-center lg:text-left lg:ml-[20%]"
-            >
-              {/* Banner Carousel Container */}
-              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 shadow-xl max-w-xl mx-auto lg:mx-0 lg:ml-auto lg:mr-[20%] relative overflow-hidden">
-                <AnimatePresence mode="wait">
-                  {activeBannerIndex === 0 ? (
-                    /* Women's World Cup Banner */
-                    <motion.div
-                      key="wwc-banner"
-                      initial={{ x: 300, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      exit={{ x: -300, opacity: 0 }}
-                      transition={{ duration: 0.5 }}
-                      className="space-y-4"
-                    >
-                      <img 
-                        src="/assets/Women's banner/WWC Banner - drafts-3 (1).jpg" 
-                        alt="Women's World Cup 2025 Fantasy"
-                        className="w-full h-auto rounded-xl shadow-2xl border-2 border-white/30 hover:scale-105 transition-transform duration-300"
-                      />
-                      <p className="text-white text-lg font-semibold drop-shadow-lg text-center lg:text-left">
-                        Get ready for the biggest tournament in women's rugby
-                      </p>
-                      
-                      {/* App Store Badges */}
-                      <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center">
-                        <button 
-                          className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-2 cursor-pointer transition-all hover:bg-white/20 hover:border-white/40 hover:scale-105 drop-shadow-lg active:scale-95"
-                          onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
-                        >
-                          <img 
-                            src="/assets/Store badges/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" 
-                            alt="Download on the App Store"
-                            className="h-10 w-auto"
-                          />
-                        </button>
-                        <button 
-                          className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-2 cursor-pointer transition-all hover:bg-white/20 hover:border-white/40 hover:scale-105 drop-shadow-lg active:scale-95"
-                          onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
-                        >
-                          <img 
-                            src="/assets/Store badges/GetItOnGooglePlay_Badge_Web_color_English.png" 
-                            alt="Get it on Google Play"
-                            className="h-10 w-auto"
-                          />
-                        </button>
-                      </div>
-                    </motion.div>
-                  ) : (
-                    /* SCRUM6 Challenge Banner */
-                    <motion.div
-                      key="scrum6-banner"
-                      initial={{ x: 300, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      exit={{ x: -300, opacity: 0 }}
-                      transition={{ duration: 0.5 }}
-                      className="space-y-4"
-                    >
-                      {/* SCRUM6 Challenge Visual - Exact same size as WWC banner */}
-                      <div className="w-full h-auto bg-gradient-to-r from-scrummy-navy via-scrummy-blue to-scrummy-navy rounded-xl shadow-2xl border-2 border-white/30 hover:scale-105 transition-transform duration-300">
-                        {/* Match the WWC banner height exactly */}
-                        <div className="h-[240px] flex flex-col justify-center items-center p-6 text-center space-y-3">
-                          <div className="flex items-center justify-center gap-2">
-                            <div className="w-12 h-12 bg-scrummy-goldYellow rounded-full flex items-center justify-center">
-                              <span className="text-2xl font-bold text-scrummy-navy">6</span>
-                            </div>
-                            <h3 className="text-3xl font-bold text-white">SCRUM6</h3>
-                          </div>
-                          <h4 className="text-xl font-semibold text-scrummy-goldYellow">Weekly Challenge</h4>
-                          <div className="flex justify-center gap-6 text-white/90">
-                            <div className="text-center">
-                              <div className="text-2xl font-bold text-scrummy-goldYellow">3</div>
-                              <div className="text-xs">Winners</div>
-                            </div>
-                            <div className="text-center">
-                              <div className="text-2xl font-bold text-scrummy-goldYellow">FREE</div>
-                              <div className="text-xs">To Play</div>
-                            </div>
-                          </div>
-                          <p className="text-white text-sm">
-                            Compete weekly for amazing prizes!
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <p className="text-white text-lg font-semibold drop-shadow-lg text-center lg:text-left">
-                        Join the weekly SCRUM6 Challenge and compete for prizes!
-                      </p>
-                      
-                      {/* Action Buttons */}
-                      <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center">
-                        <Link 
-                          to="/scrum6-leaderboard"
-                          className="bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-6 py-3 rounded-xl transition-all hover:scale-105 drop-shadow-lg active:scale-95 text-center"
-                        >
-                          🏆 View Leaderboard
-                        </Link>
-                        <Link 
-                          to="/scrum6-rules"
-                          className="bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold px-6 py-3 rounded-xl transition-all hover:bg-white/20 hover:border-white/40 hover:scale-105 drop-shadow-lg active:scale-95 text-center"
-                        >
-                          📋 Official Rules
-                        </Link>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Carousel Indicators */}
-                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-2">
-                  <button
-                    onClick={() => setActiveBannerIndex(0)}
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      activeBannerIndex === 0 ? 'bg-scrummy-goldYellow' : 'bg-white/40'
-                    }`}
-                  />
-                  <button
-                    onClick={() => setActiveBannerIndex(1)}
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      activeBannerIndex === 1 ? 'bg-scrummy-goldYellow' : 'bg-white/40'
-                    }`}
-                  />
-                </div>
-              </div>
             </motion.div>
           </div>
         </div>
