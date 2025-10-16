@@ -170,7 +170,7 @@ const URCLineups: React.FC = () => {
     setError(null);
 
     try {
-      // Call Netlify Function to scrape lineup from match page HTML
+      // Call Netlify Function to scrape lineup from match page HTML (no auth needed!)
       const response = await fetch(`/.netlify/functions/urc-lineup-proxy?matchId=${matchIdValue}`);
 
       if (!response.ok) {

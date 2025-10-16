@@ -10,29 +10,38 @@ To disable: Change line 67 in `src/pages/URCLineups.tsx` to `false`
 ### Deploy Now
 ```bash
 git add .
-git commit -m "Add URC Match Lineups feature"
+git commit -m "Add URC Match Lineups with HTML scraping"
 git push
 ```
-**Result:** Users will see Match Lineups tab. They need to visit stats.unitedrugby.com first to get a session cookie.
+**Result:** Users will see Match Lineups tab. No authentication required!
 
 ---
 
 ## 🎯 How It Works
 
-### User Flow (When Enabled)
-1. User visits https://stats.unitedrugby.com (gets session cookie)
-2. User goes to your app's URC Lineups page
-3. Clicks "Match Lineups" tab
-4. Enters match ID (e.g., `287880`)
-5. Lineup loads using their browser's session cookie
+### User Flow
+1. User goes to your app's URC Lineups page
+2. Clicks "Match Lineups" tab
+3. Enters match ID (e.g., `287880`)
+4. Lineup loads automatically (no auth needed!)
 
 ### Technical Flow
 ```
-Browser (has cookie) → Netlify Function → URC Stats API
-                       (forwards cookie)
+1. User enters match ID
+2. Netlify Function fetches match page HTML from stats.unitedrugby.com
+3. Function parses HTML to extract player names (starting XV + bench)
+4. Returns structured lineup data
+5. Frontend matches names against GraphQL squad data
+6. Displays lineup with player photos, stats, positions
 ```
 
 **File:** `netlify/functions/urc-lineup-proxy.ts`
+
+### Why This Approach?
+- ✅ **No authentication** - scrapes public HTML
+- ✅ **Lightweight** - simple HTTP fetch + parsing
+- ✅ **Combines data** - Scraped names + GraphQL squad details (photos, stats)
+- ✅ **Fast** - no browser automation needed
 
 ---
 
