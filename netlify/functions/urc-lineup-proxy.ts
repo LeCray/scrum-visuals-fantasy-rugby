@@ -1,4 +1,5 @@
 import type { Handler } from '@netlify/functions';
+import fetch from 'node-fetch';
 
 /**
  * Netlify Function: Browser Cookie Pass-Through Proxy
