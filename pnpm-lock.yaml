@@ -180,11 +180,14 @@ importers:
       '@eslint/js':
         specifier: ^9.9.0
         version: 9.24.0
+      '@netlify/functions':
+        specifier: ^5.0.0
+        version: 5.0.0
       '@tailwindcss/typography':
         specifier: ^0.5.15
         version: 0.5.16(tailwindcss@3.4.17)
       '@types/node':
-        specifier: ^22.5.5
+        specifier: ^22.14.0
         version: 22.14.0
       '@types/react':
         specifier: ^18.3.3
@@ -213,6 +216,9 @@ importers:
       lovable-tagger:
         specifier: ^1.1.7
         version: 1.1.8(vite@5.4.18(@types/node@22.14.0))
+      node-fetch:
+        specifier: '2'
+        version: 2.7.0
       postcss:
         specifier: ^8.4.47
         version: 8.5.3
@@ -647,6 +653,14 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@netlify/functions@5.0.0':
+    resolution: {integrity: sha512-gyKzl+P5SPp6P4iqykwPagSy7ODgRoQqi9TkjFJjM74FVJgxdiBQoLAmz+Pjl7kE5avJWtIvlQ+akAFaChekQQ==}
+    engines: {node: '>=18.0.0'}
+
+  '@netlify/types@2.1.0':
+    resolution: {integrity: sha512-ktUb5d58pt1lQGXO5E9S0F1ljM0g+CoQuGTVII0IxBc0apmPq5RI0o3OWLY7U3ZERRiYTg5UfjiMihBEzuZsuw==}
+    engines: {node: ^18.14.0 || >=20}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2229,6 +2243,15 @@ packages:
       react: ^16.8 || ^17 || ^18
       react-dom: ^16.8 || ^17 || ^18
 
+  node-fetch@2.7.0:
+    resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
+    engines: {node: 4.x || >=6.0.0}
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
+
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
 
@@ -3038,6 +3061,12 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@netlify/functions@5.0.0':
+    dependencies:
+      '@netlify/types': 2.1.0
+
+  '@netlify/types@2.1.0': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -4684,6 +4713,10 @@ snapshots:
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+
+  node-fetch@2.7.0:
+    dependencies:
+      whatwg-url: 5.0.0
 
   node-releases@2.0.19: {}
 
