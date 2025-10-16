@@ -170,10 +170,8 @@ const URCLineups: React.FC = () => {
     setError(null);
 
     try {
-      // Use our Netlify Function proxy with credentials to forward browser cookies
-      const response = await fetch(`/.netlify/functions/urc-lineup-proxy?matchId=${matchIdValue}`, {
-        credentials: 'include', // Send browser cookies to the Netlify Function
-      });
+      // Call Netlify Function to scrape lineup from match page HTML
+      const response = await fetch(`/.netlify/functions/urc-lineup-proxy?matchId=${matchIdValue}`);
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -389,17 +387,8 @@ const URCLineups: React.FC = () => {
                 <p>
                   💡 <strong className="text-[#E6E9F5]/70">Option 2:</strong> Paste the full match URL - we'll extract the ID automatically
                 </p>
-                <p className="text-yellow-400/80 bg-yellow-400/10 border border-yellow-400/20 rounded px-3 py-2">
-                  🔑 <strong>Important:</strong> First visit{' '}
-                  <a 
-                    href="https://stats.unitedrugby.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-[#2D6CFF] hover:underline"
-                  >
-                    stats.unitedrugby.com
-                  </a>
-                  {' '}in your browser to get a session cookie. Then this proxy will use your session to fetch lineup data.
+                <p className="text-green-400/70 text-xs">
+                  ✅ No authentication required - lineups load automatically
                 </p>
               </div>
             </motion.div>
