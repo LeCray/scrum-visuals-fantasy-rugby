@@ -1,0 +1,41 @@
+{
+  "matchId": "287880",
+  "home": {
+    "team": "Connacht",
+    "teamId": "5483",
+    "starting": [
+      { "name": "Finlay Bealham", "number": 1, "position": "Prop" },
+      { "name": "Dylan Tierney-Martin", "number": 2, "position": "Hooker" },
+      { "name": "Jack Aungier", "number": 3, "position": "Prop" },
+      { "name": "Darragh Murray", "number": 4, "position": "Lock" },
+      { "name": "Joe Joyce", "number": 5, "position": "Lock" },
+      { "name": "Cian Prendergast", "number": 6, "position": "Flanker" },
+      { "name": "Conor Oliver", "number": 7, "position": "Flanker" },
+      { "name": "Paul Boyle", "number": 8, "position": "Number 8" },
+      { "name": "Ben Murphy", "number": 9, "position": "Scrum-Half" },
+      { "name": "Josh Ioane", "number": 10, "position": "Fly-Half" },
+      { "name": "Shayne Bolton", "number": 11, "position": "Wing" },
+      { "name": "Cathal Forde", "number": 12, "position": "Centre" },
+      { "name": "Piers O'Conor", "number": 13, "position": "Centre" },
+      { "name": "Mack Hansen", "number": 14, "position": "Wing" },
+      { "name": "Santiago Cordero", "number": 15, "position": "Fullback" }
+    ],
+    "bench": [
+      { "name": "Tadgh McElroy", "number": 16, "position": "Hooker" },
+      { "name": "Denis Buckley", "number": 17, "position": "Prop" },
+      { "name": "Sam Illo", "number": 18, "position": "Prop" },
+      { "name": "Oisín Dowling", "number": 19, "position": "Lock" },
+      { "name": "Seán Jansen", "number": 20, "position": "Flanker" },
+      { "name": "Caolin Blade", "number": 21, "position": "Scrum-Half" },
+      { "name": "David Hawkshaw", "number": 22, "position": "Fly-Half" },
+      { "name": "Hugh Gavin", "number": 23, "position": "Centre" }
+    ]
+  },
+  "away": {
+    "team": "Bulls",
+    "teamId": "5586",
+    "starting": [],
+    "bench": []
+  }
+}
+

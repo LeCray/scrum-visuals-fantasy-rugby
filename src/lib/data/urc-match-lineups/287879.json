@@ -1,0 +1,250 @@
+{
+  "matchId": "287879",
+  "home": {
+    "team": "Edinburgh",
+    "teamId": "1641",
+    "starting": [
+      {
+        "name": "Pierre Schoeman",
+        "number": 1,
+        "position": "Prop"
+      },
+      {
+        "name": "Ewan Ashman",
+        "number": 2,
+        "position": "Hooker"
+      },
+      {
+        "name": "D'arcy Rae",
+        "number": 3,
+        "position": "Prop"
+      },
+      {
+        "name": "Sam Skinner",
+        "number": 4,
+        "position": "Lock"
+      },
+      {
+        "name": "Grant Gilchrist",
+        "number": 5,
+        "position": "Lock"
+      },
+      {
+        "name": "Liam McConnell",
+        "number": 6,
+        "position": "Flanker"
+      },
+      {
+        "name": "Dylan Richardson",
+        "number": 7,
+        "position": "Flanker"
+      },
+      {
+        "name": "Magnus Bradbury",
+        "number": 8,
+        "position": "Number 8"
+      },
+      {
+        "name": "Charlie Shiel",
+        "number": 9,
+        "position": "Scrum-Half"
+      },
+      {
+        "name": "Cammy Scott",
+        "number": 10,
+        "position": "Fly-Half"
+      },
+      {
+        "name": "Duhan van der Merwe",
+        "number": 11,
+        "position": "Wing"
+      },
+      {
+        "name": "James Lang",
+        "number": 12,
+        "position": "Centre"
+      },
+      {
+        "name": "Piers O'Conor",
+        "number": 13,
+        "position": "Centre"
+      },
+      {
+        "name": "Darcy Graham",
+        "number": 14,
+        "position": "Wing"
+      },
+      {
+        "name": "Wes Goosen",
+        "number": 15,
+        "position": "Fullback"
+      }
+    ],
+    "bench": [
+      {
+        "name": "Paddy Harrison",
+        "number": 16,
+        "position": "sub 1"
+      },
+      {
+        "name": "James Whitcombe",
+        "number": 17,
+        "position": "sub 2"
+      },
+      {
+        "name": "Paul Hill",
+        "number": 18,
+        "position": "sub 3"
+      },
+      {
+        "name": "Glen Young",
+        "number": 19,
+        "position": "sub 4"
+      },
+      {
+        "name": "Freddy Douglas",
+        "number": 20,
+        "position": "sub 5"
+      },
+      {
+        "name": "Ben Vellacott",
+        "number": 21,
+        "position": "sub 6"
+      },
+      {
+        "name": "Ross Thompson",
+        "number": 22,
+        "position": "sub 7"
+      },
+      {
+        "name": "Ross McCann",
+        "number": 23,
+        "position": "sub 8"
+      }
+    ]
+  },
+  "away": {
+    "team": "Benetton",
+    "teamId": "2019",
+    "starting": [
+      {
+        "name": "Mirco Spagnolo",
+        "number": 1,
+        "position": "Prop"
+      },
+      {
+        "name": "Siua Maile",
+        "number": 2,
+        "position": "Hooker"
+      },
+      {
+        "name": "Giosue Zilocchi",
+        "number": 3,
+        "position": "Prop"
+      },
+      {
+        "name": "Giulio Marini",
+        "number": 4,
+        "position": "Lock"
+      },
+      {
+        "name": "Eli Snyman",
+        "number": 5,
+        "position": "Lock"
+      },
+      {
+        "name": "Alessandro Izekor",
+        "number": 6,
+        "position": "Flanker"
+      },
+      {
+        "name": "John Bryant",
+        "number": 7,
+        "position": "Flanker"
+      },
+      {
+        "name": "So'otala Fa'aso'o",
+        "number": 8,
+        "position": "Number 8"
+      },
+      {
+        "name": "Louis Werchon",
+        "number": 9,
+        "position": "Scrum-Half"
+      },
+      {
+        "name": "Jacob Umaga",
+        "number": 10,
+        "position": "Fly-Half"
+      },
+      {
+        "name": "Ignacio Mendy",
+        "number": 11,
+        "position": "Wing"
+      },
+      {
+        "name": "Malakai Fekitoa",
+        "number": 12,
+        "position": "Centre"
+      },
+      {
+        "name": "Filippo Drago",
+        "number": 13,
+        "position": "Centre"
+      },
+      {
+        "name": "Rhyno Smith",
+        "number": 14,
+        "position": "Wing"
+      },
+      {
+        "name": "Matt Gallagher",
+        "number": 15,
+        "position": "Fullback"
+      }
+    ],
+    "bench": [
+      {
+        "name": "Bautista Bernasconi",
+        "number": 16,
+        "position": "sub 1"
+      },
+      {
+        "name": "Thomas Gallo",
+        "number": 17,
+        "position": "sub 2"
+      },
+      {
+        "name": "Tiziano Pasquali",
+        "number": 18,
+        "position": "sub 3"
+      },
+      {
+        "name": "Riccardo Favretto",
+        "number": 19,
+        "position": "sub 4"
+      },
+      {
+        "name": "Federico Ruzza",
+        "number": 20,
+        "position": "sub 5"
+      },
+      {
+        "name": "Manuel Zuliani",
+        "number": 21,
+        "position": "sub 6"
+      },
+      {
+        "name": "Alessandro Garbisi",
+        "number": 22,
+        "position": "sub 7"
+      },
+      {
+        "name": "Leonardo Marin",
+        "number": 23,
+        "position": "sub 8"
+      }
+    ]
+  }
+}
+
