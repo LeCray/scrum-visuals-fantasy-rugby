@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ChevronLeft, Users, Loader2, AlertCircle, Search } from 'lucide-react';
-import { Input } from '../components/ui/input';
-import { Button } from '../components/ui/button';
+import { ChevronLeft, Users, Loader2, AlertCircle, Calendar, Upload } from 'lucide-react';
+import { getFixtures, getLineup } from '../lib/urcSupabaseService';
 
-// GraphQL Query - Updated for 2025 URC API (no arguments on squad field)
+// GraphQL Query for squad data
 const LINEUP_QUERY = `
   query {
     playerThemeSettings {
@@ -47,26 +46,7 @@ interface Squad {
   squad: Player[];
 }
 
-interface LineupData {
-  playerThemeSettings: {
-    squads: Squad[];
-  };
-}
-
-// Team info type
-type TeamInfo = {
-  id: string;
-  name: string;
-  playerCount: number;
-  region?: string;
-};
-
-// 🚦 FEATURE FLAG: Match Lineups
-// Set to 'true' when ready to enable the Match Lineups feature (uses Netlify Function proxy)
-// Set to 'false' to hide the feature and only show Squad Rosters
-const ENABLE_MATCH_LINEUPS = true;
-
-// Team ID to Name mapping (identified by player rosters)
+// Team ID to Name mapping
 const TEAM_NAMES: Record<string, { name: string; region: string }> = {
   '4377': { name: 'Munster', region: 'Ireland' },
   '5092': { name: 'Lions', region: 'South Africa' },
@@ -88,160 +68,149 @@ const TEAM_NAMES: Record<string, { name: string; region: string }> = {
 };
 
 const URCLineups: React.FC = () => {
-  const [selectedTeam, setSelectedTeam] = useState<string>('');
-  const [players, setPlayers] = useState<Player[]>([]);
-  const [availableTeams, setAvailableTeams] = useState<TeamInfo[]>([]);
+  const [mode, setMode] = useState<'squads' | 'lineups'>('lineups');
   const [allSquads, setAllSquads] = useState<Squad[]>([]);
+  const [availableTeams, setAvailableTeams] = useState<any[]>([]);
+  const [selectedTeam, setSelectedTeam] = useState<string>('');
+  const [squadPlayers, setSquadPlayers] = useState<Player[]>([]);
+  const [fixtures, setFixtures] = useState<any[]>([]);
+  const [selectedFixture, setSelectedFixture] = useState<any>(null);
+  const [lineupPlayers, setLineupPlayers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [matchId, setMatchId] = useState<string>('');
-  const [matchLineupData, setMatchLineupData] = useState<any>(null);
-  const [showMatchInput, setShowMatchInput] = useState(false);
 
+  // Fetch squad data from GraphQL
   const fetchAllSquads = async () => {
-    setLoading(true);
-    setError(null);
-
     try {
       const response = await fetch('https://unitedrugby.com/graphql', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          query: LINEUP_QUERY,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: LINEUP_QUERY }),
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      const result = await response.json();
+      const squads = result.data.playerThemeSettings.squads;
+      setAllSquads(squads);
 
-      const data: { data: LineupData } = await response.json();
+      // Build available teams list
+      const teams = squads
+        .filter((squad: Squad) => squad.squad && squad.squad.length > 0)
+        .map((squad: Squad) => {
+          const teamInfo = TEAM_NAMES[squad.currentClub];
+          return {
+            id: squad.currentClub,
+            name: teamInfo ? teamInfo.name : `Team ${squad.currentClub}`,
+            playerCount: squad.squad.length,
+            region: teamInfo?.region
+          };
+        })
+        .sort((a: any, b: any) => b.playerCount - a.playerCount);
+
+      setAvailableTeams(teams);
       
-      if (data.data?.playerThemeSettings?.squads?.length > 0) {
-        const squads = data.data.playerThemeSettings.squads;
-        setAllSquads(squads);
-        
-        // Build team list from available squads
-        const teams = squads
-          .filter(squad => squad.squad && squad.squad.length > 0)
-          .map(squad => {
-            const teamInfo = TEAM_NAMES[squad.currentClub];
-            return {
-              id: squad.currentClub,
-              name: teamInfo ? teamInfo.name : `Team ${squad.currentClub}`,
-              playerCount: squad.squad.length,
-              region: teamInfo?.region
-            };
-          })
-          .sort((a, b) => {
-            // Sort by name alphabetically
-            return a.name.localeCompare(b.name);
-          });
-        
-        setAvailableTeams(teams);
-        
-        // Select first team by default
-        if (teams.length > 0 && !selectedTeam) {
-          setSelectedTeam(teams[0].id);
-          setPlayers(squads.find(s => s.currentClub === teams[0].id)?.squad || []);
-        }
+      // Select first team by default
+      if (teams.length > 0) {
+        setSelectedTeam(teams[0].id);
+        setSquadPlayers(squads.find((s: Squad) => s.currentClub === teams[0].id)?.squad || []);
       }
     } catch (err) {
       console.error('Error fetching squads:', err);
-      setError('Unable to load squads. Please try again.');
-    } finally {
-      setLoading(false);
+      setError('Unable to load squad data');
     }
   };
 
   const handleTeamChange = (teamId: string) => {
     setSelectedTeam(teamId);
     const teamSquad = allSquads.find(squad => squad.currentClub === teamId);
-    setPlayers(teamSquad?.squad || []);
-    setMatchLineupData(null); // Clear match-specific data when switching teams
+    setSquadPlayers(teamSquad?.squad || []);
   };
 
-  const fetchMatchLineup = async (matchIdValue: string) => {
-    if (!matchIdValue) return;
-
-    setLoading(true);
-    setError(null);
-
+  // Load fixtures from Supabase
+  const loadFixtures = async () => {
     try {
-      // Call Netlify Function to scrape lineup from match page HTML (no auth needed!)
-      const response = await fetch(`/.netlify/functions/urc-lineup-proxy?matchId=${matchIdValue}`);
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log('Match lineup data:', data);
-      
-      setMatchLineupData(data);
-      
-      // Extract players from match lineup
-      // The actual structure will depend on what the API returns
-      // Common patterns:
-      if (data.home?.starting || data.home?.lineup) {
-        const homeStarters = data.home.starting || data.home.lineup || [];
-        const homeReplacements = data.home.replacements || data.home.bench || [];
-        setPlayers([...homeStarters, ...homeReplacements]);
-      } else if (data.homeTeam?.players) {
-        setPlayers(data.homeTeam.players);
-      } else if (data.lineup) {
-        setPlayers(data.lineup);
-      } else {
-        // Show raw data in console for debugging
-        console.log('Unknown lineup structure. Full data:', data);
-        setError('Lineup data received but format is unexpected. Check browser console for details.');
-      }
-      
+      const data = await getFixtures();
+      setFixtures(data);
     } catch (err) {
-      console.error('Error fetching match lineup:', err);
-      setError(`Unable to load match lineup. ${err instanceof Error ? err.message : 'Unknown error'}`);
+      console.error('Error loading fixtures:', err);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleMatchIdSubmit = () => {
-    if (matchId.trim()) {
-      // Extract match ID from URL if user pastes full URL
-      const extractedId = extractMatchIdFromUrl(matchId.trim());
-      fetchMatchLineup(extractedId);
+  // Load lineup for selected fixture
+  const loadLineup = async (matchId: string, homeTeamId: string, awayTeamId: string) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const lineupData = await getLineup(matchId);
+
+      if (!lineupData) {
+        throw new Error(`Lineup not available for this match yet`);
+      }
+      const homeSquad = allSquads.find(squad => squad.currentClub === homeTeamId);
+      const awaySquad = allSquads.find(squad => squad.currentClub === awayTeamId);
+
+      // Enrich HOME team lineup with squad data (photos, stats)
+      const enrichedHomeStarters = lineupData.home.starting.map((player: any) => {
+        const squadPlayer = homeSquad?.squad.find(p => 
+          `${p.playerFirstName} ${p.playerLastName}`.toLowerCase() === player.name.toLowerCase() ||
+          p.knownName?.toLowerCase() === player.name.toLowerCase()
+        );
+        return squadPlayer ? { ...squadPlayer, lineupNumber: player.number, lineupPosition: player.position } : player;
+      });
+
+      const enrichedHomeBench = (lineupData.home.bench || []).map((player: any) => {
+        const squadPlayer = homeSquad?.squad.find(p => 
+          `${p.playerFirstName} ${p.playerLastName}`.toLowerCase() === player.name.toLowerCase() ||
+          p.knownName?.toLowerCase() === player.name.toLowerCase()
+        );
+        return squadPlayer ? { ...squadPlayer, lineupNumber: player.number, lineupPosition: player.position } : player;
+      });
+
+      // Enrich AWAY team lineup with squad data (photos, stats)
+      const enrichedAwayStarters = lineupData.away.starting.map((player: any) => {
+        const squadPlayer = awaySquad?.squad.find(p => 
+          `${p.playerFirstName} ${p.playerLastName}`.toLowerCase() === player.name.toLowerCase() ||
+          p.knownName?.toLowerCase() === player.name.toLowerCase()
+        );
+        return squadPlayer ? { ...squadPlayer, lineupNumber: player.number, lineupPosition: player.position } : player;
+      });
+
+      const enrichedAwayBench = (lineupData.away.bench || []).map((player: any) => {
+        const squadPlayer = awaySquad?.squad.find(p => 
+          `${p.playerFirstName} ${p.playerLastName}`.toLowerCase() === player.name.toLowerCase() ||
+          p.knownName?.toLowerCase() === player.name.toLowerCase()
+        );
+        return squadPlayer ? { ...squadPlayer, lineupNumber: player.number, lineupPosition: player.position } : player;
+      });
+
+      // Combine both teams
+      setLineupPlayers([
+        { team: 'home', starting: enrichedHomeStarters, bench: enrichedHomeBench },
+        { team: 'away', starting: enrichedAwayStarters, bench: enrichedAwayBench }
+      ]);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load lineup');
+      setLineupPlayers([]);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const extractMatchIdFromUrl = (input: string): string => {
-    // Check if input is a URL
-    if (input.includes('stats.unitedrugby.com')) {
-      // Extract match ID from URL like:
-      // https://stats.unitedrugby.com/match-centre/.../287880#tabs-lineup
-      const match = input.match(/\/(\d+)(?:#|$)/);
-      return match ? match[1] : input;
-    }
-    return input;
+  const handleFixtureClick = (fixture: any) => {
+    setSelectedFixture(fixture);
+    loadLineup(fixture.matchId, fixture.home.teamId, fixture.away.teamId);
   };
 
   useEffect(() => {
     fetchAllSquads();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Only fetch once on mount
+    loadFixtures();
+  }, []);
 
-  const selectedTeamData = availableTeams.find(t => t.id === selectedTeam);
-
-  // Group players by position
-  const forwards = players.filter(p => 
-    ['Prop', 'Hooker', 'Lock', 'Flanker', 'Number 8'].some(pos => p.playerPosition?.includes(pos))
-  );
-  const backs = players.filter(p => 
-    ['Scrum-Half', 'Fly-Half', 'Centre', 'Wing', 'Fullback'].some(pos => p.playerPosition?.includes(pos))
-  );
-  const other = players.filter(p => !forwards.includes(p) && !backs.includes(p));
+  // Extract home and away lineups
+  const homeLineup = lineupPlayers.length > 0 && lineupPlayers[0]?.team === 'home' ? lineupPlayers[0] : null;
+  const awayLineup = lineupPlayers.length > 0 && lineupPlayers[1]?.team === 'away' ? lineupPlayers[1] : null;
 
   return (
     <div className="min-h-screen bg-[#0B0D18] text-[#E6E9F5]">
@@ -261,12 +230,20 @@ const URCLineups: React.FC = () => {
               <Users className="w-5 h-5 text-[#2D6CFF]" />
               <span className="font-bold text-lg">URC Lineups</span>
             </div>
+
+            <Link 
+              to="/urc-admin" 
+              className="flex items-center gap-2 text-[#E6E9F5] hover:text-[#2D6CFF] transition-colors bg-[#0B0D18] px-4 py-2 rounded-lg border border-[#2D6CFF]/30"
+            >
+              <Upload className="w-4 h-4" />
+              <span className="font-semibold">Admin</span>
+            </Link>
           </div>
         </div>
       </header>
 
       {/* Page Title */}
-      <section className="py-12 md:py-16 bg-gradient-to-b from-[#121527] to-[#0B0D18]">
+      <section className="py-8 bg-gradient-to-b from-[#121527] to-[#0B0D18]">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -274,61 +251,51 @@ const URCLineups: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-black text-[#E6E9F5] mb-4">
-              United Rugby Championship Lineups
+            <h1 className="text-3xl md:text-4xl font-black text-[#E6E9F5] mb-2">
+              URC Lineups
             </h1>
-            <p className="text-[#E6E9F5]/70 text-lg">
-              Live squad data from the official URC API
+            <p className="text-[#E6E9F5]/70">
+              {mode === 'squads' ? 'Browse team squads' : 'Select a fixture to view match-day lineup'}
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* Mode Selector */}
-      {ENABLE_MATCH_LINEUPS && (
-        <section className="py-6 bg-[#0B0D18] border-b border-[#2D6CFF]/20">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="flex justify-center gap-4">
-              <button
-                onClick={() => {
-                  setShowMatchInput(false);
-                  setMatchLineupData(null);
-                }}
-                className={`px-6 py-2 rounded-lg font-semibold transition-all ${
-                  !showMatchInput
-                    ? 'bg-[#2D6CFF] text-white'
-                    : 'bg-[#121527] text-[#E6E9F5]/70 hover:text-[#E6E9F5]'
-                }`}
-              >
-                <Users className="w-4 h-4 inline mr-2" />
-                Squad Rosters
-              </button>
-              <button
-                onClick={() => setShowMatchInput(true)}
-                className={`px-6 py-2 rounded-lg font-semibold transition-all ${
-                  showMatchInput
-                    ? 'bg-[#2D6CFF] text-white'
-                    : 'bg-[#121527] text-[#E6E9F5]/70 hover:text-[#E6E9F5]'
-                }`}
-              >
-                <Search className="w-4 h-4 inline mr-2" />
-                Match Lineups
-              </button>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Team Selector or Match ID Input */}
-      <section className="py-8 bg-[#0B0D18]">
+      <section className="py-6 bg-[#0B0D18] border-b border-[#2D6CFF]/20">
         <div className="max-w-7xl mx-auto px-4">
-          {(!ENABLE_MATCH_LINEUPS || !showMatchInput) ? (
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="max-w-md mx-auto"
+          <div className="flex justify-center gap-4">
+            <button
+              onClick={() => setMode('squads')}
+              className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+                mode === 'squads'
+                  ? 'bg-[#2D6CFF] text-white'
+                  : 'bg-[#121527] text-[#E6E9F5]/70 hover:text-[#E6E9F5]'
+              }`}
             >
+              <Users className="w-4 h-4 inline mr-2" />
+              Squad Rosters
+            </button>
+            <button
+              onClick={() => setMode('lineups')}
+              className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+                mode === 'lineups'
+                  ? 'bg-[#2D6CFF] text-white'
+                  : 'bg-[#121527] text-[#E6E9F5]/70 hover:text-[#E6E9F5]'
+              }`}
+            >
+              <Calendar className="w-4 h-4 inline mr-2" />
+              Match Lineups
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Squad Rosters Mode */}
+      {mode === 'squads' && (
+        <section className="py-8">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="max-w-md mx-auto mb-8">
               <label htmlFor="team-select" className="block text-sm font-semibold text-[#E6E9F5]/70 mb-2">
                 Select Team
               </label>
@@ -337,265 +304,368 @@ const URCLineups: React.FC = () => {
                 value={selectedTeam}
                 onChange={(e) => handleTeamChange(e.target.value)}
                 className="w-full px-4 py-3 bg-[#121527] border-2 border-[#2D6CFF]/30 rounded-lg text-[#E6E9F5] font-semibold focus:border-[#2D6CFF] focus:outline-none focus:ring-2 focus:ring-[#2D6CFF]/50 transition-all"
-                disabled={loading || availableTeams.length === 0}
               >
-                {availableTeams.length === 0 ? (
-                  <option>Loading teams...</option>
-                ) : (
-                  availableTeams.map(team => (
-                    <option key={team.id} value={team.id}>
-                      {team.name} {team.region ? `(${team.region})` : ''} - {team.playerCount} players
-                    </option>
-                  ))
-                )}
+                {availableTeams.map(team => (
+                  <option key={team.id} value={team.id}>
+                    {team.name} {team.region ? `(${team.region})` : ''} - {team.playerCount} players
+                  </option>
+                ))}
               </select>
-            </motion.div>
-          ) : ENABLE_MATCH_LINEUPS ? (
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="max-w-2xl mx-auto"
-            >
-              <label htmlFor="match-id" className="block text-sm font-semibold text-[#E6E9F5]/70 mb-2">
-                Enter Match ID
-              </label>
-              <div className="flex gap-3">
-                <Input
-                  id="match-id"
-                  type="text"
-                  value={matchId}
-                  onChange={(e) => setMatchId(e.target.value)}
-                  placeholder="287880 or paste full URL"
-                  className="flex-1 bg-[#121527] border-2 border-[#2D6CFF]/30 text-[#E6E9F5] placeholder:text-[#E6E9F5]/40"
-                  onKeyDown={(e) => e.key === 'Enter' && handleMatchIdSubmit()}
-                />
-                <Button
-                  onClick={handleMatchIdSubmit}
-                  className="bg-[#2D6CFF] hover:bg-[#2D6CFF]/80 text-white font-semibold px-6"
-                >
-                  <Search className="w-4 h-4 mr-2" />
-                  Load Lineup
-                </Button>
-              </div>
-              <div className="text-[#E6E9F5]/50 text-xs mt-3 space-y-2">
-                <p>
-                  💡 <strong className="text-[#E6E9F5]/70">Option 1:</strong> Copy match ID from URL. Example:{' '}
-                  <code className="bg-[#121527] px-1 rounded text-[#2D6CFF]">287880</code> from{' '}
-                  <code className="bg-[#121527] px-1 rounded">...bulls.../287880#tabs-lineup</code>
-                </p>
-                <p>
-                  💡 <strong className="text-[#E6E9F5]/70">Option 2:</strong> Paste the full match URL - we'll extract the ID automatically
-                </p>
-                <p className="text-green-400/70 text-xs">
-                  ✅ No authentication required - lineups load automatically
-                </p>
-              </div>
-            </motion.div>
-          ) : null}
-        </div>
-      </section>
+            </div>
 
-      {/* Content */}
-      <section className="py-8 pb-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <AnimatePresence mode="wait">
             {loading ? (
-              <motion.div
-                key="loading"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="flex flex-col items-center justify-center py-20"
-              >
-                <Loader2 className="w-12 h-12 text-[#2D6CFF] animate-spin mb-4" />
-                <p className="text-[#E6E9F5]/70 text-lg">Fetching latest lineups…</p>
-              </motion.div>
-            ) : error ? (
-              <motion.div
-                key="error"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                className="flex flex-col items-center justify-center py-20"
-              >
-                <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-6 max-w-md text-center">
-                  <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
-                  <p className="text-red-400 font-semibold mb-2">Unable to load squads</p>
-                  <p className="text-[#E6E9F5]/60 text-sm">{error}</p>
-                  <button
-                    onClick={() => fetchAllSquads()}
-                    className="mt-4 px-4 py-2 bg-[#2D6CFF] text-white rounded-lg hover:bg-[#2D6CFF]/80 transition-colors font-semibold"
-                  >
-                    Retry
-                  </button>
-                </div>
-              </motion.div>
-            ) : players.length === 0 ? (
-              <motion.div
-                key="empty"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="text-center py-20"
-              >
-                <Users className="w-16 h-16 text-[#E6E9F5]/30 mx-auto mb-4" />
-                <p className="text-[#E6E9F5]/70">No lineup data available for this team.</p>
-              </motion.div>
+              <div className="flex justify-center py-12">
+                <Loader2 className="w-8 h-8 animate-spin text-[#2D6CFF]" />
+              </div>
             ) : (
-              <motion.div
-                key="content"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                {/* Team Header */}
-                <div className="text-center mb-8">
-                  <h2 className="text-3xl font-black text-[#2D6CFF] mb-2">
-                    {selectedTeamData?.name || 'Team Squad'}
-                  </h2>
-                  {selectedTeamData?.region && (
-                    <p className="text-[#E6E9F5]/60">{selectedTeamData.region}</p>
-                  )}
-                  <p className="text-[#E6E9F5]/50 text-sm mt-2">
-                    {players.length} player{players.length !== 1 ? 's' : ''} in squad
-                  </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {squadPlayers.map((player, idx) => (
+                  <motion.div
+                    key={player.playerId}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.02 }}
+                    className="bg-[#121527] rounded-lg p-4 flex items-center gap-4 border border-[#2D6CFF]/20"
+                  >
+                    {player.headshots ? (
+                      <img 
+                        src={player.headshots} 
+                        alt={player.knownName || `${player.playerFirstName} ${player.playerLastName}`}
+                        className="w-16 h-16 rounded-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-16 h-16 rounded-full bg-[#2D6CFF]/20 flex items-center justify-center">
+                        <Users className="w-8 h-8 text-[#2D6CFF]" />
+                      </div>
+                    )}
+                    <div className="flex-1">
+                      <div className="font-bold">
+                        {player.knownName || `${player.playerFirstName} ${player.playerLastName}`}
+                      </div>
+                      <div className="text-sm text-[#E6E9F5]/60">
+                        {player.playerPosition} • #{player.heroNumber}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* Match Lineups Mode - Fixtures Grid */}
+      {mode === 'lineups' && (
+        <section className="py-8">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex items-center gap-2 mb-6">
+              <Calendar className="w-5 h-5 text-[#2D6CFF]" />
+              <h2 className="text-xl font-bold">Upcoming Fixtures</h2>
+            </div>
+
+            {loading && !selectedFixture ? (
+              <div className="flex justify-center py-12">
+                <Loader2 className="w-8 h-8 animate-spin text-[#2D6CFF]" />
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {fixtures.map((fixture) => (
+                  <motion.div
+                    key={fixture.matchId}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => handleFixtureClick(fixture)}
+                    className={`
+                      cursor-pointer rounded-xl p-6 border-2 transition-all
+                      ${selectedFixture?.matchId === fixture.matchId
+                        ? 'bg-[#2D6CFF]/20 border-[#2D6CFF]'
+                        : 'bg-[#121527] border-[#2D6CFF]/30 hover:border-[#2D6CFF]/60'
+                      }
+                      ${!fixture.hasLineup ? 'opacity-50' : ''}
+                    `}
+                  >
+                    <div className="text-xs text-[#E6E9F5]/50 mb-3">
+                      {fixture.round} • {fixture.date} • {fixture.time}
+                    </div>
+                    
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex-1 text-right">
+                        <div className="font-bold text-lg">{fixture.home.team}</div>
+                        <div className="text-sm text-[#E6E9F5]/60">{fixture.home.abbreviation}</div>
+                      </div>
+                      
+                      <div className="text-2xl font-bold text-[#2D6CFF]">vs</div>
+                      
+                      <div className="flex-1 text-left">
+                        <div className="font-bold text-lg">{fixture.away.team}</div>
+                        <div className="text-sm text-[#E6E9F5]/60">{fixture.away.abbreviation}</div>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-3 text-xs text-center">
+                      {fixture.hasLineup ? (
+                        <span className="text-green-400">✓ Lineup Available</span>
+                      ) : (
+                        <span className="text-[#E6E9F5]/40">Lineup not yet available</span>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* Lineup Display - Match Lineups Mode Only */}
+      {mode === 'lineups' && selectedFixture && (
+        <section className="py-8 bg-[#121527]/50">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold text-center mb-2">
+                {selectedFixture.home.team} vs {selectedFixture.away.team}
+              </h2>
+              <p className="text-sm text-[#E6E9F5]/60 text-center">
+                {selectedFixture.date} • {selectedFixture.time} • {selectedFixture.venue}
+              </p>
+            </div>
+
+            {loading ? (
+              <div className="flex justify-center py-12">
+                <Loader2 className="w-8 h-8 animate-spin text-[#2D6CFF]" />
+              </div>
+            ) : error ? (
+              <div className="flex items-center justify-center gap-2 py-12 text-red-400">
+                <AlertCircle className="w-5 h-5" />
+                <span>{error}</span>
+              </div>
+            ) : homeLineup && awayLineup ? (
+              <div className="space-y-8">
+                {/* Starting XV */}
+                <div>
+                  <h3 className="text-xl font-bold mb-6 text-center text-[#2D6CFF] uppercase tracking-wider">Starting XV</h3>
+                  
+                  {/* FORWARDS */}
+                  <div className="mb-8">
+                    <h4 className="text-sm font-bold text-center mb-6 text-[#E6E9F5] uppercase tracking-widest">Forwards</h4>
+                    <div className="space-y-3">
+                      {homeLineup.starting.slice(0, 8).map((homePlayer: any, idx: number) => {
+                        const awayPlayer = awayLineup.starting[idx];
+                        return (
+                          <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: idx * 0.05 }}
+                            className="flex items-center gap-4"
+                          >
+                            {/* Home Player */}
+                            <div className="flex-1 flex items-center gap-3 bg-green-900/30 rounded-lg p-3 border border-green-700/50">
+                              {homePlayer.headshots ? (
+                                <img 
+                                  src={homePlayer.headshots} 
+                                  alt={homePlayer.knownName || `${homePlayer.playerFirstName} ${homePlayer.playerLastName}`}
+                                  className="w-12 h-12 rounded-lg object-cover"
+                                />
+                              ) : (
+                                <div className="w-12 h-12 rounded-lg bg-green-700/30 flex items-center justify-center">
+                                  <Users className="w-6 h-6 text-green-400" />
+                                </div>
+                              )}
+                              <div className="flex-1 min-w-0">
+                                <div className="font-bold text-sm text-white truncate">
+                                  {homePlayer.knownName || `${homePlayer.playerFirstName} ${homePlayer.playerLastName}` || homePlayer.name}
+                                </div>
+                                <div className="text-xs text-green-300/70">{homePlayer.lineupPosition || homePlayer.playerPosition}</div>
+                              </div>
+                            </div>
+
+                            {/* Position Number */}
+                            <div className="flex-shrink-0 w-16 text-center">
+                              <div className="text-2xl font-bold text-white">
+                                {homePlayer.lineupNumber}
+                              </div>
+                            </div>
+
+                            {/* Away Player */}
+                            <div className="flex-1 flex items-center gap-3 bg-blue-900/30 rounded-lg p-3 border border-blue-700/50 flex-row-reverse">
+                              {awayPlayer.headshots ? (
+                                <img 
+                                  src={awayPlayer.headshots} 
+                                  alt={awayPlayer.knownName || `${awayPlayer.playerFirstName} ${awayPlayer.playerLastName}`}
+                                  className="w-12 h-12 rounded-lg object-cover"
+                                />
+                              ) : (
+                                <div className="w-12 h-12 rounded-lg bg-blue-700/30 flex items-center justify-center">
+                                  <Users className="w-6 h-6 text-blue-400" />
+                                </div>
+                              )}
+                              <div className="flex-1 min-w-0 text-right">
+                                <div className="font-bold text-sm text-white truncate">
+                                  {awayPlayer.knownName || `${awayPlayer.playerFirstName} ${awayPlayer.playerLastName}` || awayPlayer.name}
+                                </div>
+                                <div className="text-xs text-blue-300/70">{awayPlayer.lineupPosition || awayPlayer.playerPosition}</div>
+                              </div>
+                            </div>
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* BACKS */}
+                  <div>
+                    <h4 className="text-sm font-bold text-center mb-6 text-[#E6E9F5] uppercase tracking-widest">Backs</h4>
+                    <div className="space-y-3">
+                      {homeLineup.starting.slice(8, 15).map((homePlayer: any, idx: number) => {
+                        const awayPlayer = awayLineup.starting[idx + 8];
+                        return (
+                          <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: (8 + idx) * 0.05 }}
+                            className="flex items-center gap-4"
+                          >
+                            {/* Home Player */}
+                            <div className="flex-1 flex items-center gap-3 bg-green-900/30 rounded-lg p-3 border border-green-700/50">
+                              {homePlayer.headshots ? (
+                                <img 
+                                  src={homePlayer.headshots} 
+                                  alt={homePlayer.knownName || `${homePlayer.playerFirstName} ${homePlayer.playerLastName}`}
+                                  className="w-12 h-12 rounded-lg object-cover"
+                                />
+                              ) : (
+                                <div className="w-12 h-12 rounded-lg bg-green-700/30 flex items-center justify-center">
+                                  <Users className="w-6 h-6 text-green-400" />
+                                </div>
+                              )}
+                              <div className="flex-1 min-w-0">
+                                <div className="font-bold text-sm text-white truncate">
+                                  {homePlayer.knownName || `${homePlayer.playerFirstName} ${homePlayer.playerLastName}` || homePlayer.name}
+                                </div>
+                                <div className="text-xs text-green-300/70">{homePlayer.lineupPosition || homePlayer.playerPosition}</div>
+                              </div>
+                            </div>
+
+                            {/* Position Number */}
+                            <div className="flex-shrink-0 w-16 text-center">
+                              <div className="text-2xl font-bold text-white">
+                                {homePlayer.lineupNumber}
+                              </div>
+                            </div>
+
+                            {/* Away Player */}
+                            <div className="flex-1 flex items-center gap-3 bg-blue-900/30 rounded-lg p-3 border border-blue-700/50 flex-row-reverse">
+                              {awayPlayer.headshots ? (
+                                <img 
+                                  src={awayPlayer.headshots} 
+                                  alt={awayPlayer.knownName || `${awayPlayer.playerFirstName} ${awayPlayer.playerLastName}`}
+                                  className="w-12 h-12 rounded-lg object-cover"
+                                />
+                              ) : (
+                                <div className="w-12 h-12 rounded-lg bg-blue-700/30 flex items-center justify-center">
+                                  <Users className="w-6 h-6 text-blue-400" />
+                                </div>
+                              )}
+                              <div className="flex-1 min-w-0 text-right">
+                                <div className="font-bold text-sm text-white truncate">
+                                  {awayPlayer.knownName || `${awayPlayer.playerFirstName} ${awayPlayer.playerLastName}` || awayPlayer.name}
+                                </div>
+                                <div className="text-xs text-blue-300/70">{awayPlayer.lineupPosition || awayPlayer.playerPosition}</div>
+                              </div>
+                            </div>
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
 
-                {/* Forwards */}
-                {forwards.length > 0 && (
-                  <div className="mb-8">
-                    <h3 className="text-xl font-bold text-[#2D6CFF] mb-4 flex items-center gap-2">
-                      <span className="w-1 h-6 bg-[#2D6CFF] rounded"></span>
-                      Forwards
-                    </h3>
-                    <div className="grid gap-3">
-                      {forwards.map((player, index) => (
-                        <PlayerCard key={player.playerId} player={player} index={index} />
-                      ))}
-                    </div>
-                  </div>
-                )}
+                {/* Bench */}
+                <div>
+                  <h3 className="text-xl font-bold mb-6 text-center text-[#2D6CFF] uppercase tracking-wider">Replacements</h3>
+                  <div className="space-y-3">
+                    {homeLineup.bench.map((homePlayer: any, idx: number) => {
+                      const awayPlayer = awayLineup.bench[idx];
+                      return (
+                        <motion.div
+                          key={idx}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: (15 + idx) * 0.05 }}
+                          className="flex items-center gap-4"
+                        >
+                          {/* Home Player */}
+                          <div className="flex-1 flex items-center gap-3 bg-green-900/20 rounded-lg p-2 border border-green-700/30">
+                            {homePlayer.headshots ? (
+                              <img 
+                                src={homePlayer.headshots} 
+                                alt={homePlayer.knownName || `${homePlayer.playerFirstName} ${homePlayer.playerLastName}`}
+                                className="w-10 h-10 rounded-lg object-cover"
+                              />
+                            ) : (
+                              <div className="w-10 h-10 rounded-lg bg-green-700/20 flex items-center justify-center">
+                                <Users className="w-5 h-5 text-green-400" />
+                              </div>
+                            )}
+                            <div className="flex-1 min-w-0">
+                              <div className="font-semibold text-xs text-white truncate">
+                                {homePlayer.knownName || `${homePlayer.playerFirstName} ${homePlayer.playerLastName}` || homePlayer.name}
+                              </div>
+                            </div>
+                          </div>
 
-                {/* Backs */}
-                {backs.length > 0 && (
-                  <div className="mb-8">
-                    <h3 className="text-xl font-bold text-[#2D6CFF] mb-4 flex items-center gap-2">
-                      <span className="w-1 h-6 bg-[#2D6CFF] rounded"></span>
-                      Backs
-                    </h3>
-                    <div className="grid gap-3">
-                      {backs.map((player, index) => (
-                        <PlayerCard key={player.playerId} player={player} index={index} />
-                      ))}
-                    </div>
-                  </div>
-                )}
+                          {/* Number */}
+                          <div className="flex-shrink-0 w-12 text-center">
+                            <div className="text-lg font-bold text-white">
+                              {homePlayer.lineupNumber}
+                            </div>
+                          </div>
 
-                {/* Other */}
-                {other.length > 0 && (
-                  <div className="mb-8">
-                    <h3 className="text-xl font-bold text-[#2D6CFF] mb-4 flex items-center gap-2">
-                      <span className="w-1 h-6 bg-[#2D6CFF] rounded"></span>
-                      Squad
-                    </h3>
-                    <div className="grid gap-3">
-                      {other.map((player, index) => (
-                        <PlayerCard key={player.playerId} player={player} index={index} />
-                      ))}
-                    </div>
+                          {/* Away Player */}
+                          <div className="flex-1 flex items-center gap-3 bg-blue-900/20 rounded-lg p-2 border border-blue-700/30 flex-row-reverse">
+                            {awayPlayer.headshots ? (
+                              <img 
+                                src={awayPlayer.headshots} 
+                                alt={awayPlayer.knownName || `${awayPlayer.playerFirstName} ${awayPlayer.playerLastName}`}
+                                className="w-10 h-10 rounded-lg object-cover"
+                              />
+                            ) : (
+                              <div className="w-10 h-10 rounded-lg bg-blue-700/20 flex items-center justify-center">
+                                <Users className="w-5 h-5 text-blue-400" />
+                              </div>
+                            )}
+                            <div className="flex-1 min-w-0 text-right">
+                              <div className="font-semibold text-xs text-white truncate">
+                                {awayPlayer.knownName || `${awayPlayer.playerFirstName} ${awayPlayer.playerLastName}` || awayPlayer.name}
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      );
+                    })}
                   </div>
-                )}
-              </motion.div>
+                </div>
+              </div>
+            ) : (
+              <div className="text-center py-12 text-[#E6E9F5]/60">
+                Select a fixture above to view lineups
+              </div>
             )}
-          </AnimatePresence>
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
-      {/* Disclaimer */}
-      <footer className="border-t border-[#2D6CFF]/20 py-6 bg-[#121527]">
-        <div className="max-w-7xl mx-auto px-4">
-          <p className="text-center text-[#E6E9F5]/50 text-sm">
-            Data provided directly from the official United Rugby Championship API (unitedrugby.com/graphql). 
-            Displayed for informational use only.
-          </p>
+      {/* Empty State - Match Lineups Mode Only */}
+      {mode === 'lineups' && !selectedFixture && !loading && (
+        <div className="py-20 text-center text-[#E6E9F5]/50">
+          <Users className="w-16 h-16 mx-auto mb-4 opacity-20" />
+          <p>Select a fixture above to view the match-day lineup</p>
         </div>
-      </footer>
+      )}
     </div>
   );
 };
 
-// Player Card Component
-const PlayerCard: React.FC<{ player: Player; index: number }> = ({ player, index }) => {
-  const displayName = player.knownName || `${player.playerFirstName} ${player.playerLastName}`;
-  
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.03, duration: 0.4 }}
-      className="bg-[#121527] border border-[#2D6CFF]/30 rounded-lg p-4 hover:border-[#2D6CFF] transition-all hover:shadow-lg hover:shadow-[#2D6CFF]/20"
-    >
-      <div className="flex items-center gap-4">
-        {/* Player Image */}
-        <div className="flex-shrink-0">
-          {player.headshots ? (
-            <img
-              src={player.headshots}
-              alt={displayName}
-              className="w-16 h-16 rounded-full object-cover border-2 border-[#2D6CFF]/50"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = 'none';
-              }}
-            />
-          ) : (
-            <div className="w-16 h-16 rounded-full bg-[#2D6CFF]/20 flex items-center justify-center border-2 border-[#2D6CFF]/50">
-              <Users className="w-8 h-8 text-[#2D6CFF]" />
-            </div>
-          )}
-        </div>
-
-        {/* Player Info - Left Side */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-3 mb-1">
-            {player.heroNumber && (
-              <span className="text-2xl font-black text-[#2D6CFF]">
-                #{player.heroNumber}
-              </span>
-            )}
-            <h4 className="text-lg font-bold text-[#E6E9F5] truncate">
-              {displayName}
-            </h4>
-          </div>
-          <p className="text-[#E6E9F5]/70 font-semibold">
-            {player.playerPosition || 'Position N/A'}
-          </p>
-        </div>
-
-        {/* Player Stats - Right Side */}
-        <div className="text-right flex-shrink-0">
-          <div className="flex flex-col gap-1">
-            {player.playerAge && (
-              <p className="text-sm text-[#E6E9F5]/60">
-                Age: <span className="font-semibold text-[#E6E9F5]">{player.playerAge}</span>
-              </p>
-            )}
-            {player.playerHeight && (
-              <p className="text-sm text-[#E6E9F5]/60">
-                {player.playerHeight}cm
-              </p>
-            )}
-            {player.playerWeight && (
-              <p className="text-sm text-[#E6E9F5]/60">
-                {player.playerWeight}kg
-              </p>
-            )}
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
 export default URCLineups;
-
