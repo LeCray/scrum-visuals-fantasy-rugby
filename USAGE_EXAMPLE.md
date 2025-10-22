@@ -127,3 +127,4 @@ But you can also use the `supabase` client directly in any component!
 
 Just import it and use it! 🚀
 
+
