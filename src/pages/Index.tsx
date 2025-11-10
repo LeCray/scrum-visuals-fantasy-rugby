@@ -1,1213 +1,1018 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Instagram, Facebook, Youtube, Menu, X, Globe, Shuffle, Calendar, Trophy, Smartphone } from "lucide-react";
-import { FaTiktok } from 'react-icons/fa';
-import ThreeScene from "../components/ThreeScene";
+import { 
+  Trophy, 
+  ChevronRight, 
+  Smartphone, 
+  Users, 
+  CalendarDays,
+  Filter,
+  SlidersHorizontal,
+  Menu,
+  X
+} from "lucide-react";
 
+/* ---------------- THEME TOKENS ---------------- */
+const tokens = {
+  bg: "#0B0D18",
+  surface: "#121527",
+  surface2: "#0E1222",
+  text: "#E6E9F5",
+  textMuted: "#A9B1C6",
+  primary: "#2D6CFF",
+  primary2: "#7A5CFF",
+  gold: "#F9C94E",
+};
 
-// Women's Rugby Players Data
-const zimbabwePlayers = [
-  {
-    name: "Ellie Kildunne",
-    position: "Fullback",
-    age: 25,
-    club: "England Women's Rugby",
-    knownFor: "Pace and attacking flair",
-    bio: "A dynamic fullback who combines electric pace with exceptional game awareness. Ellie's attacking threat from the back is unmatched in women's rugby.",
-    pr: 94,
-    image: "/assets/Women's card pics style/England_ Ellie kildunne.png",
-    flagEmoji: "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
-  },
-  {
-    name: "Ruby Tui",
-    position: "Wing",
-    age: 32,
-    club: "New Zealand Black Ferns",
-    knownFor: "Finishing ability and leadership",
-    bio: "A world-class winger who brings invaluable experience and leadership. Ruby's finishing ability and work rate make her a legend of the game.",
-    pr: 96,
-    image: "/assets/Women's card pics style/New Zealand_ Ruby Tui.png",
-    flagEmoji: "🇳🇿"
-  },
-  {
-    name: "Alev Kelter",
-    position: "Center",
-    age: 29,
-    club: "USA Women's Rugby",
-    knownFor: "Power running and versatility",
-    bio: "A powerful center who excels in both attack and defense. Alev's versatility and athleticism make her a constant threat.",
-    pr: 89,
-    image: "/assets/Women's card pics style/USA_ Alev Kelter.png",
-    flagEmoji: "🇺🇸"
-  },
-  {
-    name: "Siokapesi Palu",
-    position: "Prop",
-    age: 26,
-    club: "Australia Wallaroos",
-    knownFor: "Scrum dominance and mobility",
-    bio: "A dominant prop who anchors the scrum with authority. Siokapesi's strength and mobility around the field are exceptional.",
-    pr: 87,
-    image: "/assets/Women's card pics style/Australia_ Siokapesi Palu.png",
-    flagEmoji: "🇦🇺"
-  },
-  {
-    name: "Alba Capell",
-    position: "Flanker",
-    age: 28,
-    club: "Spain Women's Rugby",
-    knownFor: "Breakdown expertise and work rate",
-    bio: "A tireless flanker who excels at the breakdown. Alba's work rate and dedication set the standard for Spanish rugby.",
-    pr: 85,
-    image: "/assets/Women's card pics style/Spain_ Alba Capell.png",
-    flagEmoji: "🇪🇸"
-  },
-  {
-    name: "Micke Gunter",
-    position: "Lock",
-    age: 27,
-    club: "South Africa Springbok Women",
-    knownFor: "Lineout mastery and physicality",
-    bio: "A dominant lock who combines lineout expertise with powerful ball-carrying. Micke's physicality makes her a force in the pack.",
-    pr: 88,
-    image: "/assets/Women's card pics style/South Africa_ Micke Gunter.png",
-    flagEmoji: "🇿🇦"
-  },
-  {
-    name: "Valeria Fedrighi",
-    position: "Scrum-half",
-    age: 25,
-    club: "Italy Women's Rugby",
-    knownFor: "Quick service and tactical awareness",
-    bio: "A dynamic scrum-half who controls the tempo of the game. Valeria's quick service and tactical awareness are key to Italy's success.",
-    pr: 83,
-    image: "/assets/Women's card pics style/Italy_ Valeria Fedrighi.png",
-    flagEmoji: "🇮🇹"
-  },
-  {
-    name: "Easter Savelio",
-    position: "Number 8",
-    age: 24,
-    club: "Samoa Women's Rugby",
-    knownFor: "Power and ball-handling skills",
-    bio: "A powerful number 8 who combines strength with exceptional ball-handling skills. Easter's athleticism creates opportunities for her team.",
-    pr: 86,
-    image: "/assets/Women's card pics style/Samoa_ Easter Savelio.png",
-    flagEmoji: "🇼🇸"
-  },
-  {
-    name: "Rinka Matsunda",
-    position: "Fly-half",
-    age: 23,
-    club: "Japan Sakura Fifteen",
-    knownFor: "Precision kicking and game management",
-    bio: "A skillful fly-half with exceptional game management abilities. Rinka's precision kicking and tactical awareness drive Japan's attacking play.",
-    pr: 84,
-    image: "/assets/Women's card pics style/Japan_ Rinka matsunda.png",
-    flagEmoji: "🇯🇵"
-  }
-];
+const appGradient = "bg-[radial-gradient(1200px_600px_at_80%_-20%,rgba(45,108,255,.25),rgba(122,92,255,.12)_40%,transparent_70%),linear-gradient(180deg,#0B0D18_0%,#0B0D18_30%,#0E1222_100%)]";
+const cardGrad = "bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))]";
+const glow = "shadow-[0_0_40px_rgba(45,108,255,.35)]";
 
-const Index: React.FC = () => {
+/* ---------------- PRIMITIVES ---------------- */
+const Container: React.FC<React.PropsWithChildren> = ({ children }) => (
+  <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
+);
+
+const CustomButton = ({
+  children,
+  variant = "primary",
+  icon: Icon,
+  onClick,
+}: {
+  children: React.ReactNode;
+  variant?: "primary" | "ghost" | "outline" | "gold";
+  icon?: any;
+  onClick?: () => void;
+}) => {
+  const base = "inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold transition duration-200";
+  const variants: Record<string, string> = {
+    primary: "text-white bg-gradient-to-r from-[#2D6CFF] via-[#7A5CFF] to-[#2D6CFF] hover:brightness-110",
+    gold: "text-black bg-[linear-gradient(180deg,#F9C94E,#E3B43F)] hover:brightness-105",
+    ghost: "text-white/80 hover:text-white hover:bg-white/5",
+    outline: "text-white border border-white/15 hover:border-white/40",
+  };
+  return (
+    <button onClick={onClick} className={`${base} ${variants[variant]}`}>
+      {Icon && <Icon className="h-4 w-4" />}
+      {children}
+    </button>
+  );
+};
+
+const Card: React.FC<React.PropsWithChildren<{ className?: string }>> = ({
+  children,
+  className = "",
+}) => (
+  <div className={`rounded-3xl ${cardGrad} border border-white/10 ${glow} ${className}`}>
+    {children}
+  </div>
+);
+
+/* ---------------- NAV ---------------- */
+const Nav = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [selectedPlayer, setSelectedPlayer] = useState<typeof zimbabwePlayers[0] | null>(null);
-  const [activePhoneIndex, setActivePhoneIndex] = useState(1); // Start with middle phone (index 1)
-  const [screenWidth, setScreenWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
-
-  const spinForPlayer = () => {
-    const randomPlayer = zimbabwePlayers[Math.floor(Math.random() * zimbabwePlayers.length)];
-    setSelectedPlayer(randomPlayer);
-  };
-
-  // Track screen width for responsive card spacing
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // Calculate responsive card spacing based on screen width
-  const getCardSpacing = () => {
-    if (screenWidth >= 1536) return 120; // 2xl screens
-    if (screenWidth >= 1280) return 100; // xl screens  
-    if (screenWidth >= 1024) return 80;  // lg screens
-    if (screenWidth >= 768) return 70;   // md screens
-    return 60; // sm and smaller screens
-  };
-
-  // Cycle through phones for animation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActivePhoneIndex((prev) => (prev + 1) % 3); // Cycle 0, 1, 2, 0, 1, 2...
-    }, 3000); // Change every 3 seconds
-
-        return () => clearInterval(interval);
-  }, []);
+  const navLink = "px-3 py-2 rounded-xl text-sm text-white/70 hover:text-white hover:bg-white/5 transition";
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 overflow-x-hidden">
-      {/* Navigation Header */}
-      <header className="bg-scrummy-navy/95 backdrop-blur-md border-b border-scrummy-goldYellow/20 sticky top-0 z-50">
-        <div className="w-full pr-4 py-3 flex items-center justify-between">
-          <Link to="/" className="flex items-center hover:scale-105 transition-transform duration-200 pl-2">
-            <img src="/assets/Scrummy-logo/SCRUMMY Logo Exception_On Dark BG (3).svg" alt="SCRUMMY Logo" className="h-14 w-auto opacity-95 hover:opacity-100" />
+    <header className="sticky top-0 z-50 border-b border-white/10 backdrop-blur supports-[backdrop-filter]:bg-black/40 w-full">
+      <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-8">
+        <div className="flex h-20 md:h-24 items-center justify-between text-white">
+          <Link to="/" className="flex items-center">
+            <div className="h-16 md:h-20 w-auto">
+              <img 
+                src="/assets/Scrummy-logo/SCRUMMY Logo Exception_On Dark BG (3).svg" 
+                alt="SCRUMMY" 
+                className="w-full h-full object-contain" 
+              />
+            </div>
           </Link>
           
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            <Link to="/" className="text-white hover:text-scrummy-goldYellow font-medium transition-colors">Home</Link>
-            <Link to="/fixtures" className="text-white hover:text-scrummy-goldYellow font-medium transition-colors">Fixtures</Link>
-            <Link to="/about" className="text-white hover:text-scrummy-goldYellow font-medium transition-colors">About</Link>
-            <Link to="/download" className="bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-4 py-2 rounded-md transition-colors">Download App</Link>
-
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-1">
+            <Link to="/" className={navLink}>Home</Link>
+            <Link to="/fixtures" className={navLink}>Fixtures</Link>
+            <Link to="/about" className={navLink}>About</Link>
           </nav>
+
+          {/* Desktop Actions */}
+          <div className="hidden md:flex items-center gap-2">
+            <CustomButton 
+              variant="gold" 
+              icon={Smartphone}
+              onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
+            >
+              Download App
+            </CustomButton>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden text-white hover:text-scrummy-goldYellow transition-colors p-2"
+            className="md:hidden text-white p-2"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
-        {/* Mobile Navigation Menu */}
-        <AnimatePresence>
+        {/* Mobile Menu */}
           {mobileMenuOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="lg:hidden bg-scrummy-navy/98 backdrop-blur-md border-t border-scrummy-goldYellow/20"
-            >
-              <nav className="px-4 py-4 space-y-4">
-                <Link to="/" className="block text-white hover:text-scrummy-goldYellow font-medium transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-                <Link to="/fixtures" className="block text-white hover:text-scrummy-goldYellow font-medium transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>Fixtures</Link>
-                <Link to="/about" className="block text-white hover:text-scrummy-goldYellow font-medium transition-colors py-2" onClick={() => setMobileMenuOpen(false)}>About</Link>
-                <Link to="/download" className="block bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-4 py-3 rounded-md transition-colors text-center" onClick={() => setMobileMenuOpen(false)}>Download App</Link>
-
+            className="md:hidden border-t border-white/10 py-4"
+          >
+            <nav className="flex flex-col gap-2">
+              <Link to="/" className={navLink} onClick={() => setMobileMenuOpen(false)}>
+                Home
+              </Link>
+              <Link to="/fixtures" className={navLink} onClick={() => setMobileMenuOpen(false)}>
+                Fixtures
+              </Link>
+              <Link to="/about" className={navLink} onClick={() => setMobileMenuOpen(false)}>
+                About
+              </Link>
+              <div className="pt-2">
+                <CustomButton 
+                  variant="gold" 
+                  icon={Smartphone}
+                  onClick={() => {
+                    window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank');
+                    setMobileMenuOpen(false);
+                  }}
+                >
+                  Download App
+                </CustomButton>
+              </div>
               </nav>
             </motion.div>
           )}
-        </AnimatePresence>
+      </div>
       </header>
+  );
+};
 
-      {/* 1. Hero Section - Scrummy Brand Introduction */}
-      <section className="py-12 relative overflow-hidden">
-        {/* Brand Book Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FFC603] via-[#1196F5] to-[#001E5C]" />
-        
-        {/* Rugby Ball Pattern Overlay */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-8 left-12 w-16 h-10 border-2 border-white rounded-full transform rotate-12"></div>
-          <div className="absolute top-20 right-16 w-12 h-7 border-2 border-white rounded-full transform -rotate-45"></div>
-          <div className="absolute bottom-16 left-20 w-20 h-12 border-2 border-white rounded-full transform rotate-45"></div>
-          <div className="absolute bottom-8 right-12 w-14 h-8 border-2 border-white rounded-full transform -rotate-12"></div>
-          <div className="absolute top-1/2 left-8 w-10 h-6 border-2 border-white rounded-full transform rotate-90"></div>
-          <div className="absolute top-1/3 right-8 w-18 h-11 border-2 border-white rounded-full transform -rotate-30"></div>
-        </div>
+/* ---------------- MOCK DATA ---------------- */
+const mockPlayers = [
+  { name: "Jade Shekells", role: "Centre", pr: 89, value: 60, color: "from-emerald-500/20 to-emerald-600/10" },
+  { name: "Bernard van der Linde", role: "Scrum Half", pr: 88, value: 57, color: "from-amber-500/20 to-amber-600/10" },
+  { name: "Hinata Komaki", role: "Prop", pr: 87, value: 59, color: "from-red-500/20 to-red-600/10" },
+  { name: "Joe McCarthy", role: "Lock", pr: 87.3, value: 63, color: "from-blue-500/20 to-blue-600/10" },
+];
 
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-black/20" />
-        
-        <div className="w-full px-4 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-none">
-            {/* Left Side - Main Content */}
-            <motion.div
-              initial={{ x: -50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
+const featuredPlayer = {
+  name: "Sydney Niupulusu",
+  role: "Lock",
+  country: "Samoa",
+  flag: "🇼🇸",
+  value: 54,
+  pr: 87,
+  bio: "Dominant lock with incredible tackling consistency and leadership on the field.",
+  image: "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?w=1200&auto=format&fit=crop",
+};
+
+/* ---------------- HOMEPAGE ---------------- */
+const Index: React.FC = () => {
+  return (
+    <div className="min-h-screen" style={{ background: tokens.bg, color: tokens.text }}>
+      <Nav />
+
+      <main className={appGradient}>
+        {/* HERO */}
+        <section className="relative text-white pt-20 pb-20 md:pt-28 md:pb-28">
+          <Container>
+            <div className="grid items-center gap-12 md:grid-cols-2">
+              <div>
+                <motion.h1
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="space-y-6 text-left pl-0 lg:pl-[20%]"
-            >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-orbitron text-white leading-tight drop-shadow-lg text-left">
-                FANTASY RUGBY
-                <span className="block text-white text-left">IS ABOUT TO GET</span>
-                <span className="block text-[#FFC603] drop-shadow-xl text-left">SCRUMMY</span>
-              </h1>
-              <p className="text-lg md:text-xl text-white/90 drop-shadow-md text-left">
-                Be the First to Join the Scrum!
-              </p>
-            </motion.div>
+                  className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight"
+                >
+                  Fantasy Rugby,{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2D6CFF] via-[#7A5CFF] to-[#F9C94E]">
+                    reimagined
+                  </span>
+                </motion.h1>
+                <p className="mt-4 md:mt-6 text-white/70 max-w-xl">
+                  Build your squad, make smart predictions, and compete every week. A seamless
+                  experience across web and app.
+                </p>
+                <div className="mt-6 flex flex-wrap items-center gap-3">
+                  <CustomButton variant="gold" icon={Trophy}>
+                    Play Now
+                  </CustomButton>
+                  <CustomButton variant="outline" icon={ChevronRight}>
+                    How it works
+                  </CustomButton>
           </div>
         </div>
-      </section>
 
-      {/* 2. Feature Showcase */}
-      <section className="py-12 relative overflow-hidden">
-        {/* Extended Brand Gradient Background - Flows into Meet Players */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FFC603]/20 via-[#1196F5]/15 to-[#001E5C]/20" />
-        
-        {/* Rugby Ball Pattern Overlay - Extended to cover Meet Players */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-12 left-20 w-14 h-8 border-2 border-white rounded-full transform rotate-45"></div>
-          <div className="absolute top-32 right-24 w-10 h-6 border-2 border-white rounded-full transform -rotate-30"></div>
-          <div className="absolute bottom-20 left-16 w-16 h-10 border-2 border-white rounded-full transform rotate-12"></div>
-          <div className="absolute bottom-32 right-20 w-12 h-7 border-2 border-white rounded-full transform -rotate-45"></div>
-          <div className="absolute top-1/2 left-1/4 w-8 h-5 border-2 border-white rounded-full transform rotate-60"></div>
-          <div className="absolute top-1/3 right-1/4 w-14 h-8 border-2 border-white rounded-full transform -rotate-15"></div>
-          {/* Additional patterns for Meet Players area */}
-          <div className="absolute bottom-0 left-1/3 w-12 h-7 border-2 border-white rounded-full transform rotate-30" style={{ top: '120%' }}></div>
-          <div className="absolute bottom-0 right-1/4 w-10 h-6 border-2 border-white rounded-full transform -rotate-60" style={{ top: '140%' }}></div>
-              </div>
-
-        <div className="max-w-[95vw] mx-auto px-4 sm:px-6 relative z-10">
-          <div className="grid md:grid-cols-3 gap-8 justify-center">
-            {/* Phone 1 - Build Your Team */}
+              {/* Fanned player cards */}
+              <div className="relative flex justify-center items-center h-[280px] md:h-[320px] lg:h-[400px]">
+            {/* Left Card */}
             <motion.div 
-              className="text-center"
-              animate={{
-                scale: activePhoneIndex === 0 ? 1.1 : 0.9,
-                y: activePhoneIndex === 0 ? -16 : 8,
-                opacity: activePhoneIndex === 0 ? 1 : 0.8,
-                zIndex: activePhoneIndex === 0 ? 20 : 1
+              className="absolute left-[-20px] md:left-[-50px] top-[60px] md:top-[80px] scale-[0.6] md:scale-[0.8]"
+              style={{
+                rotate: 0,
+                zIndex: 10,
+                filter: 'brightness(0.85) drop-shadow(0 0 30px rgba(255, 165, 0, 0.6)) drop-shadow(0 0 60px rgba(255, 140, 0, 0.4))'
               }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-            >
-                             <motion.div 
-                 className="relative mx-auto mb-4 w-32 h-56 bg-black rounded-[1.5rem] p-1"
+              initial={{ opacity: 0 }}
                  animate={{
-                   boxShadow: activePhoneIndex === 0 
-                     ? "0 25px 50px -12px rgba(0,0,0,0.6)" 
-                     : "0 10px 25px -3px rgba(0,0,0,0.3)",
-                   y: activePhoneIndex === 0 ? [0, -8, 0] : 0
+                opacity: 1,
+                y: [0, -8, 0]
                  }}
                 transition={{ 
-                  duration: 0.6,
-                  y: activePhoneIndex === 0 ? { 
-                    duration: 1.5, 
+                opacity: { duration: 0.6, delay: 0.2 },
+                y: {
+                  duration: 3.2,
                     repeat: Infinity, 
-                    ease: "easeInOut" 
-                  } : { duration: 0.6 }
-                }}
-              >
-                <div className="w-full h-full bg-white rounded-[1rem] overflow-hidden relative">
-                  <div className="absolute top-0 left-0 right-0 h-6 bg-black/5 flex items-center justify-center">
-                    <div className="w-20 h-3 bg-black rounded-full"></div>
+                  ease: "easeInOut",
+                  delay: 0.8
+                }
+              }}
+            >
+                  <div className="relative isolate z-0">
+                    <img
+                      src="https://scrummy-app.ai/player_card_backgrounds/half-back-bg.png"
+                      alt="card background"
+                      className="object-contain min-w-[170px] max-w-[170px] lg:min-w-[200px] lg:max-w-[200px]"
+                    />
+                    <div className="z-30 overflow-clip absolute pt-2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                      <div className="w-8 flex flex-row items-center justify-center h-10 absolute top-3 right-0 lg:w-10">
+                        <div className="overflow-clip w-6 h-6 lg:w-8 lg:h-8">
+                          <img
+                            src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/7df7b034-0d82-54a1-8606-86e46eebfa35.png"
+                            alt="team logo"
+                            className="w-full h-full object-contain"
+                  />
+                </div>
                   </div>
-                  <img 
-                    src="/assets/App headshots/WhatsApp Image 2025-07-28 at 14.53.53.jpeg" 
-                    alt="Team Building Interface"
-                    className="w-full h-full object-cover object-center mt-6"
-                  />
-                </div>
-            </motion.div>
-              <h3 className="font-bold text-xl text-[#001E5C] mb-3 drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]">Build Your Team</h3>
-              <p className="text-[#001E5C]/90 text-sm max-w-xs mx-auto drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]">Select 5-6 players to create your fantasy rugby squad and compete with friends</p>
-            </motion.div>
-            
-            {/* Phone 2 - Make Predictions */}
-            <motion.div 
-              className="text-center"
-              animate={{
-                scale: activePhoneIndex === 1 ? 1.1 : 0.9,
-                y: activePhoneIndex === 1 ? -16 : 8,
-                opacity: activePhoneIndex === 1 ? 1 : 0.8,
-                zIndex: activePhoneIndex === 1 ? 20 : 1
-              }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-            >
-                             <motion.div 
-                 className="relative mx-auto mb-4 w-32 h-56 bg-black rounded-[1.5rem] p-1"
-                 animate={{
-                   boxShadow: activePhoneIndex === 1 
-                     ? "0 25px 50px -12px rgba(0,0,0,0.6)" 
-                     : "0 10px 25px -3px rgba(0,0,0,0.3)",
-                   y: activePhoneIndex === 1 ? [0, -8, 0] : 0
-                 }}
-                transition={{ 
-                  duration: 0.6,
-                  y: activePhoneIndex === 1 ? { 
-                    duration: 1.5, 
-                    repeat: Infinity, 
-                    ease: "easeInOut" 
-                  } : { duration: 0.6 }
-                }}
-              >
-                <div className="w-full h-full bg-white rounded-[1rem] overflow-hidden relative">
-                  <div className="absolute top-0 left-0 right-0 h-6 bg-black/5 flex items-center justify-center">
-                    <div className="w-20 h-3 bg-black rounded-full"></div>
-                  </div>
-                  <img 
-                    src="/assets/App headshots/WhatsApp Image 2025-07-28 at 14.53.52.jpeg" 
-                    alt="Match Predictions Interface"
-                    className="w-full h-full object-cover object-center mt-6"
-                  />
-          </div>
-              </motion.div>
-              <h3 className="font-bold text-xl text-[#001E5C] mb-3 drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]">Make Predictions</h3>
-              <p className="text-[#001E5C]/90 text-sm max-w-xs mx-auto drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]">Predict match outcomes from professional rugby to school finals - every match, every level</p>
-            </motion.div>
-            
-            {/* Phone 3 - Compete & Win */}
-            <motion.div 
-              className="text-center"
-              animate={{
-                scale: activePhoneIndex === 2 ? 1.1 : 0.9,
-                y: activePhoneIndex === 2 ? -16 : 8,
-                opacity: activePhoneIndex === 2 ? 1 : 0.8,
-                zIndex: activePhoneIndex === 2 ? 20 : 1
-              }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-            >
-                             <motion.div 
-                 className="relative mx-auto mb-4 w-32 h-56 bg-black rounded-[1.5rem] p-1"
-                 animate={{
-                   boxShadow: activePhoneIndex === 2 
-                     ? "0 25px 50px -12px rgba(0,0,0,0.6)" 
-                     : "0 10px 25px -3px rgba(0,0,0,0.3)",
-                   y: activePhoneIndex === 2 ? [0, -8, 0] : 0
-                 }}
-                transition={{ 
-                  duration: 0.6,
-                  y: activePhoneIndex === 2 ? { 
-                    duration: 1.5, 
-                    repeat: Infinity, 
-                    ease: "easeInOut" 
-                  } : { duration: 0.6 }
-                }}
-              >
-                <div className="w-full h-full bg-white rounded-[1rem] overflow-hidden relative">
-                  <div className="absolute top-0 left-0 right-0 h-6 bg-black/5 flex items-center justify-center">
-                    <div className="w-20 h-3 bg-black rounded-full"></div>
-                </div>
-                  <img 
-                    src="/assets/App headshots/WhatsApp Image 2025-07-28 at 15.24.09.jpeg" 
-                    alt="Competition Leaderboard Interface"
-                    className="w-full h-full object-cover object-center mt-6"
-                  />
+                      <div className="min-h-[100px] max-h-[100px] max-w-[100px] aspect-[3/4] overflow-hidden min-w-[140px] flex flex-col items-center justify-center lg:min-h-[140px] lg:max-h-[140px] lg:max-w-[140px] relative">
+                        <img
+                          src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/5171fb81-f984-5856-9cfc-23b62f52a94c.png"
+                          alt="Gareth Davies"
+                          className="min-h-[80px] max-h-[80px] min-w-[80px] max-w-[80px] object-cover object-top translate-y-[5%] lg:min-h-[120px] lg:max-h-[120px] lg:min-w-[120px] lg:max-w-[120px]"
+                          style={{
+                            maskImage: 'linear-gradient(to bottom, black 80%, transparent)',
+                            WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent)',
+                            maskRepeat: 'no-repeat',
+                            WebkitMaskRepeat: 'no-repeat',
+                            maskSize: '100% 100%',
+                            WebkitMaskSize: '100% 100%'
+                          }}
+                        />
+                        <div className="flex flex-col absolute bottom-0 items-center p-1 justify-center">
+                          <p className="text-[15px] lg:text-xs truncate max-w-[100px] lg:max-w-[130px]">Gareth Davies</p>
               </div>
-              </motion.div>
-              <h3 className="font-bold text-xl text-[#001E5C] mb-3 drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]">Compete & Win</h3>
-              <p className="text-[#001E5C]/90 text-sm max-w-xs mx-auto drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]">Join leagues, climb leaderboards, and win prizes in weekly fantasy competitions</p>
-            </motion.div>
                 </div>
+                      <div className="w-full flex flex-row items-center justify-center">
+                        <div className="w-full flex flex-row items-center justify-center" style={{ width: '100%', border: '1px solid rgb(179, 116, 0)', borderRadius: '2px' }}>
+                          <div className="flex flex-col items-center w-full" style={{ borderRight: '1px solid rgb(179, 116, 0)' }}>
+                            <p className="text-xs font-bold">42</p>
+                            <p className="text-xs">Value</p>
               </div>
-              
-        {/* 3. CONNECT - Combined Experience Section */}
-        <div className="max-w-[95vw] xl:max-w-[90vw] 2xl:max-w-[85vw] mx-auto px-4 sm:px-6 mt-16 overflow-hidden">
-            {/* Meet Players & Build Your Dream Team */}
-            <div className="text-center mb-12">
-              <h2 className="font-orbitron text-3xl md:text-4xl font-bold text-[#001E5C] mb-4 drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]">
-                Meet Players & Build Your Dream Team
-              </h2>
+                          <div className="flex flex-col items-center w-full">
+                            <p className="text-xs font-bold">84.3</p>
+                            <p className="text-xs">PR</p>
             </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 xl:gap-20 items-start">
-            {/* Left Side - Meet a Player */}
-            <div className="space-y-8">
-              <div className="text-center">
-                <h3 className="font-orbitron text-2xl font-bold text-[#001E5C] mb-4 drop-shadow-[0_2px_4px_rgba(255,255,255,0.8)]">
-                  Meet a Player
-                </h3>
-                <p className="text-[#001E5C]/90 mb-4 drop-shadow-[0_1px_2px_rgba(255,255,255,0.6)]">Discover the stars driving the game forward</p>
-                <div className="bg-scrummy-navy/5 rounded-lg p-4">
-                  <p className="text-sm text-gray-700 leading-relaxed">
-                    Explore detailed player profiles, stats, and performance ratings. Click any card to dive deep into their career highlights, playing style, and current form.
-                  </p>
                 </div>
               </div>
-              
-              <div className="relative flex justify-center items-end h-[280px] sm:h-[320px] lg:h-[360px] xl:h-[400px] 2xl:h-[440px] px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
-            {zimbabwePlayers.slice(0, 3).map((player, index) => (
-          <motion.div
-                key={index}
-            initial={{ y: 50, opacity: 0, rotate: index === 0 ? -8 : index === 2 ? 8 : 0, x: index === 0 ? -getCardSpacing() : index === 2 ? getCardSpacing() : 0 }}
-            animate={{ 
-              y: [0, -35, 5, 0], 
-              scale: [1, 1.12, 0.98, 1],
-              rotate: [
-                index === 0 ? -8 : index === 2 ? 8 : 0,
-                index === 0 ? -6 : index === 2 ? 6 : 2,
-                index === 0 ? -10 : index === 2 ? 10 : -1,
-                index === 0 ? -8 : index === 2 ? 8 : 0
-              ],
-              opacity: 1, 
-              x: index === 0 ? -getCardSpacing() : index === 2 ? getCardSpacing() : 0 
-            }}
-                transition={{ 
-              duration: 0.8, 
-              delay: index * 0.15, 
-              type: "spring", 
-              stiffness: 100,
-              y: {
-                duration: 2.2 + index * 0.3,
-                repeat: Infinity,
-                ease: [0.68, -0.55, 0.265, 1.55],
-                delay: index * 0.6
-              },
-              scale: {
-                duration: 2.2 + index * 0.3,
-                repeat: Infinity,
-                ease: [0.68, -0.55, 0.265, 1.55],
-                delay: index * 0.6
-              },
-              rotate: {
-                duration: 2.2 + index * 0.3,
-                repeat: Infinity,
-                ease: [0.68, -0.55, 0.265, 1.55],
-                delay: index * 0.6
-              }
-            }}
+                      <div className="flex text-[10px] -mt-1 lg:text-xs flex-row items-center justify-center gap-2">
+                        <p className="font-bold">Scrum Half</p>
+                        <img className="w-8 h-8" src="/assets/Scrummy-logo/SCRUMMY Logo Exception_On Dark BG (3).svg" alt="scrummy logo" />
+                      </div>
+                    </div>
+          </div>
+            </motion.div>
+            
+            {/* Center Card (Featured) */}
+            <motion.div 
+              className="absolute left-[80px] md:left-[120px] lg:left-[140px] top-0 scale-[1.0] md:scale-[1.4]"
                 style={{
-                  transformOrigin: 'center bottom',
-                  zIndex: index === 1 ? 20 : index === 0 ? 10 : 15
-                }}
-                className={`absolute shadow-2xl rounded-lg flex flex-col transition-all duration-500 hover:scale-110 hover:rotate-0 hover:z-30 hover:-translate-y-8 overflow-hidden text-white h-[240px] sm:h-[280px] lg:h-[320px] xl:h-[360px] 2xl:h-[400px] w-[160px] sm:w-[180px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] cursor-pointer ${
-                  index === 1 
-                    ? 'bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-700'
-                    : index === 2 
-                    ? 'bg-gradient-to-br from-gray-300 via-gray-400 to-gray-600'
-                    : 'bg-gradient-to-br from-purple-600 via-blue-800 to-purple-900'
-                }`}
-                onClick={() => setSelectedPlayer(player)}
-          >
-                <div className="absolute top-2 right-2 z-[5]">
-                  <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
-                    <span className="text-lg">
-                      {player.flagEmoji}
-                    </span>
-                  </div>
-                </div>
-                <div className="relative flex-[3] overflow-hidden bg-gradient-to-b from-transparent to-black/20">
-                  <img 
-                    src={player.image} 
-                    alt={player.name} 
-                    className="transition-opacity duration-300 ease-in-out opacity-100 w-full object-scale-down object-top"
-                    onError={(e) => {
-                      e.currentTarget.src = `/placeholder.svg`;
-                    }}
-                  />
-                </div>
-                <div className={`p-3 flex-[1] ${
-                  index === 1 
-                    ? 'bg-yellow-500/10' 
-                    : index === 2 
-                    ? 'bg-gray-500/10' 
-                    : 'bg-blue-900/10'
-                }`}>
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-xs font-bold truncate flex-1">{player.name}</h3>
-                  </div>
-                  <div className="flex justify-between items-center text-sm mb-2">
-                    <div className="text-xs truncate">{player.position}</div>
-                    <div className="text-xs font-medium flex flex-row items-center justify-end text-nowrap">PR {player.pr}</div>
-                  </div>
-                </div>
-          </motion.div>
-            ))}
-        </div>
-
-              <div className="text-center mt-8 space-y-4 relative z-[100]">
-            <button 
-              className="inline-flex items-center justify-center bg-scrummy-goldYellow hover:bg-scrummy-gold text-scrummy-navy font-bold px-8 py-3 mb-4 rounded-md cursor-pointer relative z-[101] transition-colors"
-              onClick={() => window.location.href = '/#/download'}
+                rotate: 0,
+                zIndex: 20,
+                filter: 'drop-shadow(0 15px 40px rgba(0,0,0,0.6)) drop-shadow(0 0 40px rgba(45, 108, 255, 0.7)) drop-shadow(0 0 80px rgba(45, 108, 255, 0.5))'
+              }}
+              initial={{ opacity: 0 }}
+                 animate={{
+                opacity: 1,
+                y: [0, -10, 0]
+                 }}
+                transition={{ 
+                opacity: { duration: 0.6, delay: 0.3 },
+                y: {
+                  duration: 3.5,
+                    repeat: Infinity, 
+                  ease: "easeInOut",
+                  delay: 0.9
+                }
+              }}
             >
-              <Shuffle className="w-5 h-5 mr-2" />
-              🔁 Meet Another Player
-            </button>
-                
-
+                  <div className="relative isolate z-0">
+                    <img
+                      src="https://scrummy-app.ai/player_card_backgrounds/second-row-bg.png"
+                      alt="card background"
+                      className="object-contain min-w-[180px] max-w-[180px] lg:min-w-[220px] lg:max-w-[220px]"
+                    />
+                    <div className="z-30 overflow-clip absolute pt-2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                      <div className="w-8 flex flex-row items-center justify-center h-10 absolute top-3 right-0 lg:w-10">
+                        <div className="overflow-clip w-6 h-6 lg:w-8 lg:h-8">
+                          <img
+                            src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/6b065f58-eaad-592e-82d5-f27f589e6ab2.png"
+                            alt="team logo"
+                            className="w-full h-full object-contain"
+                          />
+                </div>
+                </div>
+                      <div className="min-h-[100px] max-h-[100px] max-w-[100px] aspect-[3/4] overflow-hidden min-w-[140px] flex flex-col items-center justify-center lg:min-h-[140px] lg:max-h-[140px] lg:max-w-[140px] relative">
+                        <img
+                          src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/b6def658-0e92-5b71-b0a5-01b29c7cf5b1.png"
+                          alt="Joe McCarthy"
+                          className="min-h-[80px] max-h-[80px] min-w-[80px] max-w-[80px] object-cover object-top translate-y-[5%] lg:min-h-[120px] lg:max-h-[120px] lg:min-w-[120px] lg:max-w-[120px]"
+                          style={{
+                            maskImage: 'linear-gradient(to bottom, black 80%, transparent)',
+                            WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent)',
+                            maskRepeat: 'no-repeat',
+                            WebkitMaskRepeat: 'no-repeat',
+                            maskSize: '100% 100%',
+                            WebkitMaskSize: '100% 100%'
+                          }}
+                        />
+                        <div className="flex flex-col absolute bottom-0 items-center p-1 justify-center">
+                          <p className="text-[15px] lg:text-xs truncate max-w-[100px] lg:max-w-[130px]">Joe McCarthy</p>
               </div>
+                </div>
+                      <div className="w-full flex flex-row items-center justify-center">
+                        <div className="w-full flex flex-row items-center justify-center" style={{ width: '100%', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '2px' }}>
+                          <div className="flex flex-col items-center w-full" style={{ borderRight: '1px solid rgba(255,255,255,0.2)' }}>
+                            <p className="text-xs font-bold">54</p>
+                            <p className="text-xs">Value</p>
+              </div>
+                          <div className="flex flex-col items-center w-full">
+                            <p className="text-xs font-bold">87</p>
+                            <p className="text-xs">PR</p>
             </div>
-
-            {/* Right Side - Build Your Dream Team */}
-            <div className="space-y-8">
-              <div className="text-center">
-                <h3 className="font-orbitron text-2xl font-bold text-scrummy-navy mb-4">
-                  Build Your Dream Team
-                </h3>
-                <p className="text-gray-600 mb-4">Create your ultimate team and compete</p>
-                <div className="bg-scrummy-navy/5 rounded-lg p-4">
-                  <p className="text-sm text-gray-700 leading-relaxed">
-                    Assemble your perfect 5-player fantasy team from the world's best rugby talent. Manage your budget, optimize formations, and compete in leagues with friends.
-                  </p>
                 </div>
               </div>
+                      <div className="flex text-[10px] -mt-1 lg:text-xs flex-row items-center justify-center gap-2">
+                        <p className="font-bold">Lock</p>
+                        <img className="w-8 h-8" src="/assets/Scrummy-logo/SCRUMMY Logo Exception_On Dark BG (3).svg" alt="scrummy logo" />
+            </div>
+                </div>
+              </div>
+                </motion.div>
 
-              <div className="bg-gradient-to-br from-[#FFC603] via-[#1196F5] to-[#001E5C] text-white rounded-2xl p-3 sm:p-4 xl:p-6 space-y-3 sm:space-y-4 min-h-[380px] sm:min-h-[400px]">
-                {/* Team Builder Header */}
-                <div className="flex justify-between items-center">
-                  <h4 className="text-lg sm:text-xl font-bold">Edit Your Team</h4>
-                  <div className="flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500 sm:w-[14px] sm:h-[14px]">
-                      <circle cx="8" cy="8" r="6"></circle>
-                      <path d="M18.09 10.37A6 6 0 1 1 10.34 18"></path>
-                      <path d="M7 6h1v4"></path>
-                      <path d="m16.71 13.88.7.71-2.82 2.82"></path>
-                    </svg>
-                    <span className="text-xs font-medium whitespace-nowrap">5 / 240</span>
+                {/* Right Card */}
+          <motion.div
+                  className="absolute right-[5px] md:right-[10px] top-[80px] md:top-[100px] scale-[0.55] md:scale-[0.75]"
+                  style={{
+                    rotate: 0,
+                    zIndex: 15,
+                    filter: 'brightness(0.8) drop-shadow(0 0 30px rgba(138, 0, 0, 0.6)) drop-shadow(0 0 60px rgba(180, 0, 0, 0.4))'
+                  }}
+                  initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: 1, 
+                    y: [0, -7, 0]
+            }}
+                transition={{ 
+                    opacity: { duration: 0.6, delay: 0.4 },
+              y: {
+                      duration: 2.9,
+                repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 1.0
+                    }
+                  }}
+                >
+                  <div className="relative isolate z-0">
+                    <img
+                      src="https://scrummy-app.ai/player_card_backgrounds/front-row-bg.png"
+                      alt="card background"
+                      className="object-contain min-w-[170px] max-w-[170px] lg:min-w-[200px] lg:max-w-[200px]"
+                    />
+                    <div className="z-30 overflow-clip absolute pt-2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                      <div className="w-8 flex flex-row items-center justify-center h-10 absolute top-3 right-0 lg:w-10">
+                        <div className="overflow-clip w-6 h-6 lg:w-8 lg:h-8">
+                          <img
+                            src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/521cb3f7-4972-5e4e-85e6-a50b18899f84.png"
+                            alt="team logo"
+                            className="w-full h-full object-contain"
+                          />
                   </div>
                 </div>
+                      <div className="min-h-[100px] max-h-[100px] max-w-[100px] aspect-[3/4] overflow-hidden min-w-[140px] flex flex-col items-center justify-center lg:min-h-[140px] lg:max-h-[140px] lg:max-w-[140px] relative">
+                        <img
+                          src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/2b5881d3-8421-5bb9-9517-bd37cd9568c5.png"
+                          alt="Scott Wilson"
+                          className="min-h-[80px] max-h-[80px] min-w-[80px] max-w-[80px] object-cover object-top translate-y-[5%] lg:min-h-[120px] lg:max-h-[120px] lg:min-w-[120px] lg:max-w-[120px]"
+                          style={{
+                            maskImage: 'linear-gradient(to bottom, black 80%, transparent)',
+                            WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent)',
+                            maskRepeat: 'no-repeat',
+                            WebkitMaskRepeat: 'no-repeat',
+                            maskSize: '100% 100%',
+                            WebkitMaskSize: '100% 100%'
+                          }}
+                        />
+                        <div className="flex flex-col absolute bottom-0 items-center p-1 justify-center">
+                          <p className="text-[15px] lg:text-xs truncate max-w-[100px] lg:max-w-[130px]">Scott Wilson</p>
+                </div>
+                  </div>
+                      <div className="w-full flex flex-row items-center justify-center">
+                        <div className="w-full flex flex-row items-center justify-center" style={{ width: '100%', border: '1px solid rgb(138, 0, 0)', borderRadius: '2px' }}>
+                          <div className="flex flex-col items-center w-full" style={{ borderRight: '1px solid rgb(138, 0, 0)' }}>
+                            <p className="text-xs font-bold">48</p>
+                            <p className="text-xs">Value</p>
+                  </div>
+                          <div className="flex flex-col items-center w-full">
+                            <p className="text-xs font-bold">83.3</p>
+                            <p className="text-xs">PR</p>
+                </div>
+        </div>
+              </div>
+                      <div className="flex text-[10px] -mt-1 lg:text-xs flex-row items-center justify-center gap-2">
+                        <p className="font-bold">Prop</p>
+                        <img className="w-8 h-8" src="/assets/Scrummy-logo/SCRUMMY Logo Exception_On Dark BG (3).svg" alt="scrummy logo" />
+            </div>
+                </div>
+              </div>
+                </motion.div>
+                  </div>
+                </div>
+          </Container>
+        </section>
 
-                {/* Rugby Pitch with Players */}
-                <div className="relative bg-green-700 rounded-2xl p-3 sm:p-4 h-[340px] sm:h-[360px] w-full overflow-hidden">
-                  {/* Simple Center Line */}
-                  <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute left-4 right-4 top-1/2 h-0.5 bg-white/20 transform -translate-y-0.5"></div>
+        {/* FEATURE CARDS */}
+        <section className="py-14 md:py-20">
+          <Container>
+            <div className="mb-8 flex items-end justify-between text-white">
+              <h2 className="text-2xl md:text-4xl font-bold">What makes SCRUMMY different</h2>
                   </div>
-                  
-                  {/* Subtle Grass Texture */}
-                  <div className="absolute inset-0 opacity-5">
-                    <div className="w-full h-full bg-gradient-to-br from-green-600/10 to-green-800/10"></div>
-                  </div>
-                  
-                                    {/* Player Cards on Pitch */}
-                  <div className="relative z-10 flex flex-col justify-center items-center gap-3 sm:gap-4 p-2 sm:p-3 h-full">
-                    {/* Top Row - 4 Players (2x2 on mobile, 4x1 on larger screens) */}
-                    <div className="grid grid-cols-2 sm:flex sm:justify-center sm:items-center gap-2 sm:gap-3">
-                      {[
-                        { name: "Ellie Kildunne", position: "Fullback", team: "England Women", pr: 94, image: "/assets/Women's card pics style/England_ Ellie kildunne.png", flagEmoji: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" },
-                        { name: "Ruby Tui", position: "Wing", team: "New Zealand Black Ferns", pr: 96, image: "/assets/Women's card pics style/New Zealand_ Ruby Tui.png", flagEmoji: "🇳🇿" },
-                        { name: "Alev Kelter", position: "Center", team: "USA Women", pr: 89, image: "/assets/Women's card pics style/USA_ Alev Kelter.png", flagEmoji: "🇺🇸" },
-                        { name: "Siokapesi Palu", position: "Prop", team: "Australia Wallaroos", pr: 87, image: "/assets/Women's card pics style/Australia_ Siokapesi Palu.png", flagEmoji: "🇦🇺" }
-                      ].map((player, index) => (
-                        <div key={index} className="relative">
-                          <div className="group relative shadow-xl rounded-lg flex flex-col transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden transform-style-3d bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-700 text-white h-[130px] sm:h-[160px] w-[100px] sm:w-[100px] cursor-pointer">
-                            <div className="absolute top-2 right-2 z-10">
-                              <div className="w-6 h-6 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
-                                <span className="text-sm">
-                                  {player.flagEmoji}
-                                </span>
+            <div className="grid gap-6 md:grid-cols-3">
+              {[
+                {
+                  icon: Trophy,
+                  title: "Weekly Challenges",
+                  desc: "Compete in SCRUM6 and URC challenges for prizes.",
+                  cta: "View Leaderboard",
+                },
+                {
+                  icon: CalendarDays,
+                  title: "Every Match, Every Level",
+                  desc: "From Springboks to school finals – fixtures, predictions & live chat.",
+                  cta: "Explore Fixtures",
+                },
+                {
+                  icon: Users,
+                  title: "Build Your Squad",
+                  desc: "Draft 5–6 players, manage budget, optimize formations.",
+                  cta: "Create Team",
+                },
+              ].map((item, i) => (
+                <Card key={i} className="p-6 hover:translate-y-[-2px] transition">
+                  <div className="flex items-center gap-3 text-white">
+                    <div className="grid place-items-center h-10 w-10 rounded-2xl bg-white/5">
+                      <item.icon className="h-5 w-5" />
                               </div>
+                    <h3 className="font-semibold">{item.title}</h3>
                             </div>
-                            <div className="relative flex-[3] overflow-hidden bg-gradient-to-b from-transparent to-black/20">
-                              <img 
-                                src={player.image} 
-                                alt={player.name}
-                                className="w-full object-scale-down object-top"
-                              />
+                  <p className="mt-3 text-sm text-white/70">{item.desc}</p>
+                  <div className="mt-5">
+                    <CustomButton variant="outline">{item.cta}</CustomButton>
                             </div>
-                            <div className="p-1.5 sm:p-2 flex-[1] bg-yellow-500/10">
-                              <div className="flex items-center gap-1 mb-1">
-                                <h3 className="text-[10px] sm:text-xs font-bold truncate flex-1">{player.name}</h3>
-                              </div>
-                              <div className="flex justify-between items-center text-sm">
-                                <div className="text-[9px] sm:text-xs truncate">{player.position}</div>
-                                <div className="text-[9px] sm:text-xs font-medium">PR {player.pr}</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                </Card>
                       ))}
                     </div>
+          </Container>
+        </section>
 
-                    {/* Bottom Row - 2 Players */}
-                    <div className="flex justify-center gap-2 sm:gap-3">
-                      {[
-                        { name: "Alba Capell", position: "Flanker", team: "Spain Women", pr: 85, image: "/assets/Women's card pics style/Spain_ Alba Capell.png", flagEmoji: "🇪🇸" },
-                        { name: "Rinka Matsunda", position: "Fly-half", team: "Japan Sakura", pr: 84, image: "/assets/Women's card pics style/Japan_ Rinka matsunda.png", flagEmoji: "🇯🇵" }
-                      ].map((player, index) => (
-                        <div key={index} className="relative">
-                          <div className="group relative shadow-xl rounded-lg flex flex-col transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden transform-style-3d bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-700 text-white h-[130px] sm:h-[160px] w-[100px] sm:w-[100px] cursor-pointer">
-                            <div className="absolute top-2 right-2 z-10">
-                              <div className="w-6 h-6 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
-                                <span className="text-sm">{player.flagEmoji}</span>
-                              </div>
-                            </div>
-                            <div className="relative flex-[3] overflow-hidden bg-gradient-to-b from-transparent to-black/20">
-                              <img 
-                                src={player.image} 
-                                alt={player.name}
-                                className="w-full object-scale-down object-top"
-                              />
-                            </div>
-                            <div className="p-1.5 sm:p-2 flex-[1] bg-yellow-500/10">
-                              <div className="flex items-center gap-1 mb-1">
-                                <h3 className="text-[10px] sm:text-xs font-bold truncate flex-1">{player.name}</h3>
-                              </div>
-                              <div className="flex justify-between items-center text-sm">
-                                <div className="text-[9px] sm:text-xs truncate">{player.position}</div>
-                                <div className="text-[9px] sm:text-xs font-medium">PR {player.pr}</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="text-center space-y-3 sm:space-y-4 relative z-[100]">
-                  <p className="text-xs text-white/80 px-2">
-                    Need more players? Add forwards, backs, or a super sub to complete your squad.
-                  </p>
-                  <button 
-                    className="inline-flex items-center justify-center bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-4 sm:px-6 py-2 w-full mb-4 text-sm rounded-md cursor-pointer relative z-[101] transition-colors"
-                    onClick={() => window.location.href = '/#/download'}
-                  >
-                    ⚡ Complete Your Team
-                  </button>
-                  
-
-                </div>
-              </div>
-            </div>
+        {/* SQUAD BUILDING SECTION */}
+        <section className="py-20 md:py-28">
+          <Container>
+            <motion.div 
+              className="grid md:grid-cols-2 gap-12 items-center"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              {/* Content Left */}
+              <div className="text-white">
+                <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                  Build Your Squad
+                </h2>
+                <p className="text-lg md:text-xl text-white/70 leading-relaxed">
+                  Build a team of 6 players. Manage your budget, choose your formation, and dominate the competition.
+                </p>
           </div>
           
-          {/* Main Download CTA */}
-          <div className="mt-8 bg-gradient-to-br from-scrummy-navy/5 to-scrummy-goldYellow/5 rounded-xl p-8 border border-scrummy-goldYellow/30 relative z-[100] shadow-lg">
-            <div className="text-center">
-              <h4 className="font-orbitron text-xl md:text-2xl font-bold text-scrummy-navy mb-3">
-                Get the Full Experience
-              </h4>
-              <p className="text-base text-gray-700 mb-6 max-w-md mx-auto font-medium">
-                Download the app for live stats, fantasy leagues, and exclusive features
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-[100]">
-                {/* Apple App Store - Official Badge */}
-                <button 
-                  className="bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200/50 rounded-xl p-3 shadow-lg cursor-pointer relative z-[101] transition-all hover:from-gray-100 hover:to-gray-200 hover:border-gray-300/70 hover:scale-105 hover:shadow-xl active:scale-95"
-                  onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
+              {/* Formation Cards Right - DRAMATIC 3D View */}
+              <div 
+                className="relative h-[680px] md:h-[780px] flex items-center justify-center"
+                style={{ perspective: '1000px' }}
+              >
+                {/* 3D Dark Holographic Field */}
+                <div 
+                  className="relative w-full max-w-[750px] h-[700px]"
+                  style={{ 
+                    transformStyle: 'preserve-3d',
+                    transform: 'rotateX(35deg)',
+                    borderRadius: '16px',
+                    boxShadow: '0 50px 120px rgba(45, 108, 255, 0.25), 0 30px 80px rgba(0,0,0,0.7)',
+                  }}
                 >
-                  <img 
-                    src="/assets/Store badges/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" 
-                    alt="Download on the App Store"
-                    className="h-12 w-auto"
-                  />
-                </button>
-                
-                {/* Google Play Store - Official Badge */}
-                <button 
-                  className="bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200/50 rounded-xl p-3 shadow-lg cursor-pointer relative z-[101] transition-all hover:from-gray-100 hover:to-gray-200 hover:border-gray-300/70 hover:scale-105 hover:shadow-xl active:scale-95"
-                  onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
-                >
-                  <img 
-                    src="/assets/Store badges/GetItOnGooglePlay_Badge_Web_color_English.png" 
-                    alt="Get it on Google Play"
-                    className="h-12 w-auto"
-                  />
-                </button>
-              </div>
-            </div>
-          </div>
+                  {/* Dark Transparent Platform */}
+                  <div className="absolute inset-0" style={{
+                    background: 'linear-gradient(135deg, rgba(20, 20, 40, 0.35) 0%, rgba(30, 40, 70, 0.45) 50%, rgba(20, 20, 40, 0.35) 100%)',
+                    borderRadius: '16px',
+                    border: '1px solid rgba(100, 150, 255, 0.3)',
+                    boxShadow: 'inset 0 2px 15px rgba(0,0,0,0.4), inset 0 -2px 15px rgba(45, 108, 255, 0.15)',
+                  }}>
+                    {/* Tech Grid Pattern */}
+                    <div className="absolute inset-0 opacity-30" style={{
+                      backgroundImage: `
+                        repeating-linear-gradient(0deg, transparent 0px, transparent 48px, rgba(100, 150, 255, 0.2) 48px, rgba(100, 150, 255, 0.2) 49px),
+                        repeating-linear-gradient(90deg, transparent 0px, transparent 48px, rgba(100, 150, 255, 0.2) 48px, rgba(100, 150, 255, 0.2) 49px)
+                      `,
+                      borderRadius: '16px',
+                    }} />
+                    
+                    {/* Subtle Depth Lighting */}
+                    <div className="absolute inset-0 opacity-20" style={{
+                      background: `
+                        radial-gradient(circle at 30% 30%, rgba(80, 120, 255, 0.3) 0%, transparent 40%),
+                        radial-gradient(circle at 70% 70%, rgba(45, 108, 255, 0.25) 0%, transparent 35%)
+                      `,
+                      borderRadius: '16px',
+                    }} />
 
-          {/* Follow the Conversation - Social & Community */}
-          <div className="mt-16 pt-16 border-t border-gray-200/50">
-            <div className="text-center mb-12">
-              <h2 className="font-orbitron text-3xl md:text-4xl font-bold text-scrummy-navy mb-4">
-                Follow the <span className="text-pink-500">conversation</span>
-              </h2>
-              <p className="text-lg text-gray-600">
-                Live from our Instagram, TikTok, Facebook, X & YouTube
-              </p>
-            </div>
-
-            {/* Social Media Feeds - Mixed Approach */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-              
-              {/* Instagram - Styled Card */}
-              <Card className="bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:scale-105 transition-transform duration-300 cursor-pointer" onClick={() => window.open('https://www.instagram.com/scrummyapp_/', '_blank')}>
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                      <Instagram className="w-5 h-5 text-purple-600" />
-                    </div>
-                    <span className="text-xs bg-white/20 px-2 py-1 rounded-full">2h</span>
-                  </div>
-                  <h3 className="font-bold mb-2">Latest Rugby Highlights</h3>
-                  <p className="text-sm opacity-90 mb-3">@scrummyapp_</p>
-                  <p className="text-xs opacity-80">2.4k ❤️ 156 💬</p>
-                  <div className="mt-2 text-xs opacity-70">Tap to view on Instagram</div>
-                </CardContent>
-              </Card>
-
-              {/* TikTok - Styled Card */}
-              <Card className="bg-gradient-to-r from-teal-600 to-green-500 text-white hover:scale-105 transition-transform duration-300 cursor-pointer" onClick={() => window.open('https://www.tiktok.com/@scrummy_hub', '_blank')}>
-                  <CardContent className="p-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
-                      <span className="text-white font-bold text-xs">TT</span>
-                      </div>
-                    <span className="text-xs bg-white/20 px-2 py-1 rounded-full">4h</span>
-                    </div>
-                  <h3 className="font-bold mb-2">Kolbe's Magic Steps</h3>
-                  <p className="text-sm opacity-90 mb-3">@scrummy_hub</p>
-                  <p className="text-xs opacity-80">8.2k ❤️ 342 💬</p>
-                  <div className="mt-2 text-xs opacity-70">Tap to view on TikTok</div>
-                  </CardContent>
-                </Card>
-
-              {/* Facebook - Styled Card */}
-              <Card className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:scale-105 transition-transform duration-300 cursor-pointer" onClick={() => window.open('https://www.facebook.com/profile.php?id=61574057183440', '_blank')}>
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                      <Facebook className="w-5 h-5 text-blue-600" />
-                    </div>
-                    <span className="text-xs bg-white/20 px-2 py-1 rounded-full">6h</span>
-                  </div>
-                  <h3 className="font-bold mb-2">Player Stats Update</h3>
-                  <p className="text-sm opacity-90 mb-3">Scrummy Rugby</p>
-                  <p className="text-xs opacity-80">1.8k ❤️ 89 💬</p>
-                  <div className="mt-2 text-xs opacity-70">Tap to view on Facebook</div>
-                </CardContent>
-              </Card>
-
-              {/* Twitter/X - Styled Card */}
-              <Card className="bg-gradient-to-r from-gray-800 to-black text-white hover:scale-105 transition-transform duration-300 cursor-pointer" onClick={() => window.open('https://x.com/scrummyapp_', '_blank')}>
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                      <span className="text-black font-bold text-xs">𝕏</span>
-                    </div>
-                    <span className="text-xs bg-white/20 px-2 py-1 rounded-full">1d</span>
-                  </div>
-                  <h3 className="font-bold mb-2">School Rugby Rising Stars</h3>
-                  <p className="text-sm opacity-90 mb-3">@scrummyapp_</p>
-                  <p className="text-xs opacity-80">5.7k ❤️ 234 💬</p>
-                  <div className="mt-2 text-xs opacity-70">Tap to view on X</div>
-                </CardContent>
-              </Card>
-
-
-
-            </div>
-                
-                        {/* YouTube & News Section */}
-            <div className="grid lg:grid-cols-2 gap-8 mb-12">
-              {/* YouTube Channel Section */}
-              <div className="bg-gradient-to-r from-slate-900 to-black text-white rounded-2xl p-6">
-                {/* Embedded YouTube Video */}
-                <div className="relative aspect-video rounded-lg overflow-hidden shadow-2xl">
-                  <iframe 
-                    src="https://www.youtube.com/embed/o9lknRnPxMM"
-                    width="100%" 
-                    height="100%" 
-                    style={{ border: 'none' }}
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full"
-                  ></iframe>
-                </div>
-                <div className="mt-4">
-                  <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">NEW</span>
-                  <h3 className="text-xl font-bold mt-2 mb-1">Scrummy Sports on YouTube</h3>
-                  <p className="text-white/60 text-sm">Watch our latest rugby analysis</p>
-                  <div className="flex gap-2 mt-3">
-                    <Button 
-                      className="bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-2"
-                      onClick={() => window.open('https://www.youtube.com/@ScrummySports', '_blank')}
-                    >
-                      🎥 Visit Channel
-                    </Button>
-                    <Button 
-                      className="bg-white text-black hover:bg-gray-200 border-2 border-white text-sm px-4 py-2"
-                      onClick={() => window.open('https://www.youtube.com/@ScrummySports?sub_confirmation=1', '_blank')}
-                    >
-                      + Subscribe
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Women's Rugby News Section */}
-              <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-scrummy-navy mb-4">Rugby World Cup Headlines</h3>
-                
-                {/* News Preview 1 */}
-                <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-white/30 hover:scale-105 transition-transform duration-300 cursor-pointer shadow-lg"
-                     onClick={() => window.open('https://www.rugbypass.com/news/world-cup-memories-stacey-waaka-as-i-limped-off-the-field-i-felt-deeply-gutted', '_blank')}>
-                  <div className="flex gap-4">
-                    <div className="w-20 h-16 rounded-lg overflow-hidden flex-shrink-0">
-                      <img 
-                        src="https://eu-cdn.rugbypass.com/webp-images/wp/wp-content/uploads/2025/08/STACEY-WAAKA-effect-1024x576.jpg.webp?maxw=950&comp=80"
-                        alt="Stacey Waaka"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-bold text-scrummy-navy text-sm mb-1">World Cup Memories: Stacey Waaka</h4>
-                      <p className="text-xs text-gray-600 mb-2">'As I limped off the field, I felt deeply gutted' - Black Ferns star reflects on World Cup</p>
-                      <span className="text-xs text-blue-600 font-medium">Read more on RugbyPass →</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* News Preview 2 */}
-                <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-white/30 hover:scale-105 transition-transform duration-300 cursor-pointer shadow-lg"
-                     onClick={() => window.open('https://www.rugbypass.com/news/world-cup-memories-fiona-coghlan-the-black-ferns-were-gracious-in-defeat', '_blank')}>
-                  <div className="flex gap-4">
-                    <div className="w-20 h-16 rounded-lg overflow-hidden flex-shrink-0">
-                      <img 
-                        src="https://eu-cdn.rugbypass.com/webp-images/wp/wp-content/uploads/2025/08/Fiona-Coghlan-1024x576.jpg.webp?maxw=950&comp=80"
-                        alt="Fiona Coghlan"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-bold text-scrummy-navy text-sm mb-1">World Cup Memories: Fiona Coghlan</h4>
-                      <p className="text-xs text-gray-600 mb-2">'The Black Ferns were gracious in defeat' - Ireland legend shares World Cup memories</p>
-                      <span className="text-xs text-blue-600 font-medium">Read more on RugbyPass →</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* News Preview 3 */}
-                <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-white/30 hover:scale-105 transition-transform duration-300 cursor-pointer shadow-lg"
-                     onClick={() => window.open('https://www.rugbypass.com/news/erica-jarrell-searcy-ready-for-first-proper-rugby-world-cup-challenge', '_blank')}>
-                  <div className="flex gap-4">
-                    <div className="w-20 h-16 rounded-lg overflow-hidden flex-shrink-0">
-                      <img 
-                        src="https://eu-cdn.rugbypass.com/webp-images/wp/wp-content/uploads/2025/08/Untitled-design-37-1-1024x576.png.webp?maxw=950&comp=80"
-                        alt="Erica Jarrell-Searcy"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-bold text-scrummy-navy text-sm mb-1">Jarrell-Searcy on World Cup</h4>
-                      <p className="text-xs text-gray-600 mb-2">'I love going two feet into things and soaking it all up' - USA star ready for challenge</p>
-                      <span className="text-xs text-blue-600 font-medium">Read more on RugbyPass →</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Social Follow Buttons */}
-            <div className="flex flex-wrap justify-center gap-3 relative z-[102]">
-              <Button 
-                className="bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:from-pink-600 hover:to-purple-600"
-                onClick={() => window.open('https://www.instagram.com/scrummyapp_/', '_blank')}
-              >
-                📸 Instagram
-              </Button>
-              <Button 
-                className="bg-gradient-to-r from-teal-500 to-green-500 text-white hover:from-teal-600 hover:to-green-600"
-                onClick={() => window.open('https://www.tiktok.com/@scrummy_hub', '_blank')}
-              >
-                🎵 TikTok
-              </Button>
-              <Button 
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700"
-                onClick={() => window.open('https://www.facebook.com/profile.php?id=61574057183440', '_blank')}
-              >
-                📘 Facebook
-              </Button>
-              <Button 
-                className="bg-gradient-to-r from-gray-800 to-black text-white hover:from-gray-900 hover:to-gray-900"
-                onClick={() => window.open('https://x.com/scrummyapp_', '_blank')}
-              >
-                𝕏 Twitter
-              </Button>
-              <Button 
-                className="bg-gradient-to-r from-red-600 to-red-800 text-white hover:from-red-700 hover:to-red-900"
-                onClick={() => window.open('https://www.youtube.com/@ScrummySports?sub_confirmation=1', '_blank')}
-              >
-                🎥 YouTube
-              </Button>
-            </div>
-          </div>
-
-          {/* Every Match, Every Level - Fixtures & Predictions */}
-          <div className="mt-16 pt-16 border-t border-gray-200/50">
-            <div className="text-center mb-12">
-              <h2 className="font-orbitron text-3xl md:text-4xl font-bold text-scrummy-navy mb-4">
-                Every match, <span className="text-green-600">every level</span>
-              </h2>
-              <p className="text-lg text-gray-600">
-                From Springboks to school finals - fixtures, predictions & live chat
-              </p>
-            </div>
-
-            {/* Toggle Buttons */}
-            <div className="flex justify-center mb-8">
-              <div className="bg-white/20 backdrop-blur-sm rounded-lg p-1 shadow-lg border border-white/30">
-                <button className="px-6 py-2 rounded-md text-gray-600 hover:text-scrummy-navy transition-colors">
-                  Professional Rugby
-                </button>
-                <button className="px-6 py-2 rounded-md bg-scrummy-navy text-white font-bold">
-                  School Rugby
-                </button>
-              </div>
-            </div>
-
-            {/* Match Cards */}
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              {/* Live Match Card */}
-              <Card className="bg-white/20 backdrop-blur-sm border-2 border-white/30 hover:border-white/50 transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <span className="text-xs text-blue-600 font-medium">Interschools</span>
-                      <p className="text-sm text-gray-600">Newlands</p>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-xs text-red-500 font-medium">• LIVE 67</span>
-                      <p className="text-sm text-gray-600">Sat, 19 Jul</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="text-center">
-                      <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mb-2">
-                        <span className="text-white font-bold">WP</span>
-                      </div>
-                      <p className="font-bold text-green-600 text-2xl">31</p>
-                      <p className="text-sm text-gray-600">Wynberg</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-gray-400">vs</p>
-                      <div className="text-sm text-green-600 mt-2">• Penalty try awarded</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mb-2">
-                        <span className="text-white font-bold">PA</span>
-                      </div>
-                      <p className="font-bold text-2xl">28</p>
-                      <p className="text-sm text-gray-600">Paarl Gym</p>
+                  {/* Glowing Field Lines */}
+                  <div className="absolute inset-0">
+                    {/* Try Line - Top */}
+                    <div className="absolute top-[8%] left-0 right-0 h-[2px]" style={{
+                      background: 'linear-gradient(90deg, transparent 0%, rgba(100, 150, 255, 0.5) 50%, transparent 100%)',
+                      boxShadow: '0 0 6px rgba(100, 150, 255, 0.4)'
+                    }} />
+                    
+                    {/* Halfway Line (Center) */}
+                    <div className="absolute top-1/2 left-0 right-0 h-[2px]" style={{
+                      background: 'linear-gradient(90deg, transparent 0%, rgba(100, 150, 255, 0.7) 50%, transparent 100%)',
+                      boxShadow: '0 0 10px rgba(100, 150, 255, 0.5)'
+                    }} />
+                    <div className="absolute top-1/2 left-1/2 w-[80px] h-[80px] rounded-full transform -translate-x-1/2 -translate-y-1/2" style={{
+                      border: '2px solid rgba(100, 150, 255, 0.4)',
+                      boxShadow: '0 0 12px rgba(100, 150, 255, 0.3), inset 0 0 12px rgba(100, 150, 255, 0.15)'
+                    }} />
+                    
+                    {/* Try Line - Bottom */}
+                    <div className="absolute top-[92%] left-0 right-0 h-[2px]" style={{
+                      background: 'linear-gradient(90deg, transparent 0%, rgba(100, 150, 255, 0.5) 50%, transparent 100%)',
+                      boxShadow: '0 0 6px rgba(100, 150, 255, 0.4)'
+                    }} />
+                    
+                    {/* Corner Markers */}
+                    <div className="absolute top-[5%] left-[5%] w-2 h-2 rounded-full" style={{
+                      background: 'rgba(100, 150, 255, 0.5)',
+                      boxShadow: '0 0 8px rgba(100, 150, 255, 0.6)'
+                    }} />
+                    <div className="absolute top-[5%] right-[5%] w-2 h-2 rounded-full" style={{
+                      background: 'rgba(100, 150, 255, 0.5)',
+                      boxShadow: '0 0 8px rgba(100, 150, 255, 0.6)'
+                    }} />
+                    <div className="absolute bottom-[5%] left-[5%] w-2 h-2 rounded-full" style={{
+                      background: 'rgba(100, 150, 255, 0.5)',
+                      boxShadow: '0 0 8px rgba(100, 150, 255, 0.6)'
+                    }} />
+                    <div className="absolute bottom-[5%] right-[5%] w-2 h-2 rounded-full" style={{
+                      background: 'rgba(100, 150, 255, 0.5)',
+                      boxShadow: '0 0 8px rgba(100, 150, 255, 0.6)'
+                    }} />
                     </div>
                   </div>
 
-                                     <Link to="/download">
-                     <Button className="w-full bg-gray-100 text-gray-600 hover:bg-gray-200">
-                       💬 Join Live Chat (247 fans)
-                     </Button>
-                   </Link>
-                </CardContent>
-              </Card>
-
-              {/* Upcoming Match Card */}
-              <Card className="bg-white/20 backdrop-blur-sm border-2 border-white/30 hover:border-white/50 transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <span className="text-xs text-blue-600 font-medium">Interschools</span>
-                      <p className="text-sm text-gray-600">Newlands</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-2xl font-bold text-scrummy-navy">03:00</p>
-                      <p className="text-sm text-gray-600">Sat, 19 Jul</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="text-center">
-                      <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mb-2">
-                        <span className="text-white font-bold">BI</span>
-                      </div>
-                      <p className="font-bold">Bishops</p>
-                      <p className="text-sm text-gray-600">Home</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-gray-400">vs</p>
-                    </div>
-                    <div className="text-center">
-                      <div className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mb-2">
-                        <span className="text-white font-bold">RO</span>
-                      </div>
-                      <p className="font-bold">Rondebosch</p>
-                      <p className="text-sm text-gray-600">Away</p>
-                    </div>
-                  </div>
-
-                                     <div className="flex gap-2">
-                     <Link to="/download" className="flex-1">
-                       <Button className="w-full bg-scrummy-navy hover:bg-scrummy-blue text-white">
-                         🎯 Predict
-                       </Button>
-                     </Link>
-                     <Link to="/download" className="flex-1">
-                       <Button variant="outline" className="w-full border-scrummy-navy text-scrummy-navy hover:bg-scrummy-navy hover:text-white">
-                         💬 Chat
-                       </Button>
-                     </Link>
-                   </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Feature Icons */}
-            <div className="grid md:grid-cols-3 gap-8 mb-8">
-              {[
-                { icon: "📅", title: "All Fixtures", desc: "Complete schedules for professional & school rugby" },
-                { icon: "🎯", title: "Smart Predictions", desc: "Make predictions on every match outcome" },
-                { icon: "💬", title: "Live Chat", desc: "Real-time discussions during every game" }
-              ].map((feature, index) => (
-                <div key={index} className="text-center">
-                  <div className="w-16 h-16 bg-scrummy-goldYellow/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">{feature.icon}</span>
-                  </div>
-                  <h3 className="font-orbitron text-xl font-bold text-scrummy-navy mb-2">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Bottom CTA */}
-            <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-2xl p-8 text-center">
-              <div className="bg-black/20 rounded-lg p-4 mb-4 max-w-md mx-auto">
-                <p className="font-bold">"Finally! Every match from Springboks to school finals in one place"</p>
-                <p className="text-sm opacity-80">- Rugby fan from Cape Town</p>
-              </div>
-              <p className="text-lg">Experience rugby without limits - join the conversation!</p>
-          </div>
-          </div>
-        </div>
-
-        {/* Player Modal */}
-        <AnimatePresence>
-          {selectedPlayer && (
-          <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-              onClick={() => setSelectedPlayer(null)}
-            >
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
-                className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="text-center">
-                  <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-4 border-scrummy-goldYellow">
-                    <img 
-                      src={selectedPlayer.image} 
-                      alt={selectedPlayer.name}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        // Fallback to initials if image doesn't exist
-                        const parent = e.currentTarget.parentElement;
-                        if (parent) {
-                          parent.innerHTML = `<div class="w-full h-full bg-scrummy-goldYellow flex items-center justify-center">
-                            <span class="text-2xl font-bold text-scrummy-navy">${selectedPlayer.name.split(' ').map(n => n[0]).join('')}</span>
-                          </div>`;
+                  {/* Player Cards Container - Counter-rotated to stay upright */}
+                  <div className="absolute inset-0" style={{ transform: 'rotateX(-35deg)', transformStyle: 'preserve-3d' }}>
+                    
+                    {/* Back Row - 3 Cards */}
+                    {/* Back Left */}
+                    <motion.div 
+                      className="absolute" 
+                      style={{ top: '6%', left: '6%', transformStyle: 'preserve-3d' }}
+                      initial={{ opacity: 0, y: -150, scale: 0.85 }}
+                      animate={{ 
+                        opacity: 1, 
+                        y: [0, -8, 0],
+                        scale: 0.85
+                      }}
+                      transition={{
+                        opacity: { duration: 0.8, delay: 0.3, ease: "easeOut" },
+                        scale: { duration: 0.8, delay: 0.3, ease: "easeOut" },
+                        y: {
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 1.1
                         }
                       }}
-                    />
+                      viewport={{ once: true, margin: "-100px" }}
+                    >
+                      <div className="relative isolate z-0" style={{ 
+                        transform: 'translateZ(60px)',
+                        filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.6))',
+                      }}>
+                        <img src="https://scrummy-app.ai/player_card_backgrounds/front-row-bg.png" alt="card bg" className="object-contain min-w-[140px] max-w-[140px]" />
+                        <div className="z-30 overflow-clip absolute pt-1 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                          <div className="w-6 flex flex-row items-center justify-center h-8 absolute top-2 right-0">
+                            <div className="overflow-clip w-5 h-5"><img src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/521cb3f7-4972-5e4e-85e6-a50b18899f84.png" alt="team" className="w-full h-full object-contain" /></div>
                   </div>
-                  <h3 className="font-orbitron text-2xl font-bold text-scrummy-navy mb-2">
-                    {selectedPlayer.name}
-                  </h3>
-                  <div className="flex justify-center items-center gap-4 mb-1">
-                    <p className="text-scrummy-blue font-semibold">{selectedPlayer.position}</p>
-                    <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold">
-                      PR {selectedPlayer.pr}
+                          <div className="min-h-[70px] max-h-[70px] max-w-[70px] aspect-[3/4] overflow-hidden min-w-[100px] flex flex-col items-center justify-center relative">
+                            <img src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/2b5881d3-8421-5bb9-9517-bd37cd9568c5.png" className="min-h-[60px] max-h-[60px] min-w-[60px] max-w-[60px] object-cover object-top translate-y-[5%] [mask-image:linear-gradient(to_bottom,black_80%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_80%,transparent)]" />
+                            <div className="flex flex-col absolute bottom-0 items-center p-1 justify-center"><p className="text-[10px] truncate max-w-[70px]">Player 1</p></div>
+                </div>
+                          <div className="w-full flex flex-row items-center justify-center"><div className="w-full flex flex-row items-center justify-center" style={{ border: '1px solid rgb(138, 0, 0)', borderRadius: '2px' }}><div className="flex flex-col items-center w-full" style={{ borderRight: '1px solid rgb(138, 0, 0)' }}><p className="text-[8px] font-bold">45</p><p className="text-[7px]">Value</p></div><div className="flex flex-col items-center w-full"><p className="text-[8px] font-bold">82</p><p className="text-[7px]">PR</p></div></div></div>
+                          <div className="flex text-[8px] -mt-1 flex-row items-center justify-center gap-1"><p className="font-bold">Prop</p></div>
+              </div>
+                </div>
+                    </motion.div>
+
+                    {/* Back Center */}
+                    <motion.div 
+                      className="absolute" 
+                      style={{ top: '6%', left: '50%', transformStyle: 'preserve-3d' }}
+                      initial={{ opacity: 0, y: -150, x: '-50%', scale: 0.85 }}
+                      animate={{ 
+                        opacity: 1, 
+                        y: [0, -10, 0],
+                        x: '-50%',
+                        scale: 0.85
+                      }}
+                      transition={{
+                        opacity: { duration: 0.8, delay: 0.4, ease: "easeOut" },
+                        scale: { duration: 0.8, delay: 0.4, ease: "easeOut" },
+                        x: { duration: 0.8, delay: 0.4, ease: "easeOut" },
+                        y: {
+                          duration: 3.2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 1.2
+                        }
+                      }}
+                      viewport={{ once: true, margin: "-100px" }}
+                    >
+                      <div className="relative isolate z-0" style={{ 
+                        transform: 'translateZ(60px)',
+                        filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.6))',
+                      }}>
+                        <img src="https://scrummy-app.ai/player_card_backgrounds/second-row-bg.png" alt="card bg" className="object-contain min-w-[140px] max-w-[140px]" />
+                        <div className="z-30 overflow-clip absolute pt-1 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                          <div className="w-6 flex flex-row items-center justify-center h-8 absolute top-2 right-0">
+                            <div className="overflow-clip w-5 h-5"><img src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/6b065f58-eaad-592e-82d5-f27f589e6ab2.png" alt="team" className="w-full h-full object-contain" /></div>
                     </div>
+                          <div className="min-h-[70px] max-h-[70px] max-w-[70px] aspect-[3/4] overflow-hidden min-w-[100px] flex flex-col items-center justify-center relative">
+                            <img src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/b6def658-0e92-5b71-b0a5-01b29c7cf5b1.png" className="min-h-[60px] max-h-[60px] min-w-[60px] max-w-[60px] object-cover object-top translate-y-[5%] [mask-image:linear-gradient(to_bottom,black_80%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_80%,transparent)]" />
+                            <div className="flex flex-col absolute bottom-0 items-center p-1 justify-center"><p className="text-[10px] truncate max-w-[70px]">Player 2</p></div>
+                    </div>
+                          <div className="w-full flex flex-row items-center justify-center"><div className="w-full flex flex-row items-center justify-center" style={{ border: '1px solid rgb(0, 77, 153)', borderRadius: '2px' }}><div className="flex flex-col items-center w-full" style={{ borderRight: '1px solid rgb(0, 77, 153)' }}><p className="text-[8px] font-bold">50</p><p className="text-[7px]">Value</p></div><div className="flex flex-col items-center w-full"><p className="text-[8px] font-bold">85</p><p className="text-[7px]">PR</p></div></div></div>
+                          <div className="flex text-[8px] -mt-1 flex-row items-center justify-center gap-1"><p className="font-bold">Lock</p></div>
                   </div>
-                  <p className="text-gray-600 text-sm mb-4">{selectedPlayer.club}</p>
-                  <div className="bg-scrummy-navy/5 rounded-lg p-4 mb-4">
-                    <p className="font-semibold text-scrummy-navy mb-2">Known for:</p>
-                    <p className="text-scrummy-goldYellow font-medium">{selectedPlayer.knownFor}</p>
+                </div>
+              </motion.div>
+
+                    {/* Back Right */}
+                    <motion.div 
+                      className="absolute" 
+                      style={{ top: '6%', right: '6%', transformStyle: 'preserve-3d' }}
+                      initial={{ opacity: 0, y: -150, scale: 0.85 }}
+                      animate={{ 
+                        opacity: 1, 
+                        y: [0, -7, 0],
+                        scale: 0.85
+                      }}
+                      transition={{
+                        opacity: { duration: 0.8, delay: 0.5, ease: "easeOut" },
+                        scale: { duration: 0.8, delay: 0.5, ease: "easeOut" },
+                        y: {
+                          duration: 2.8,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 1.3
+                        }
+                      }}
+                      viewport={{ once: true, margin: "-100px" }}
+                    >
+                      <div className="relative isolate z-0" style={{ 
+                        transform: 'translateZ(60px)',
+                        filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.6))',
+                      }}>
+                        <img src="https://scrummy-app.ai/player_card_backgrounds/back-row-bg.png" alt="card bg" className="object-contain min-w-[140px] max-w-[140px]" />
+                        <div className="z-30 overflow-clip absolute pt-1 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                          <div className="w-6 flex flex-row items-center justify-center h-8 absolute top-2 right-0">
+                            <div className="overflow-clip w-5 h-5"><img src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/7df7b034-0d82-54a1-8606-86e46eebfa35.png" alt="team" className="w-full h-full object-contain" /></div>
+                    </div>
+                          <div className="min-h-[70px] max-h-[70px] max-w-[70px] aspect-[3/4] overflow-hidden min-w-[100px] flex flex-col items-center justify-center relative">
+                            <img src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/5171fb81-f984-5856-9cfc-23b62f52a94c.png" className="min-h-[60px] max-h-[60px] min-w-[60px] max-w-[60px] object-cover object-top translate-y-[5%] [mask-image:linear-gradient(to_bottom,black_80%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_80%,transparent)]" />
+                            <div className="flex flex-col absolute bottom-0 items-center p-1 justify-center"><p className="text-[10px] truncate max-w-[70px]">Player 3</p></div>
+                    </div>
+                          <div className="w-full flex flex-row items-center justify-center"><div className="w-full flex flex-row items-center justify-center" style={{ border: '1px solid rgb(179, 116, 0)', borderRadius: '2px' }}><div className="flex flex-col items-center w-full" style={{ borderRight: '1px solid rgb(179, 116, 0)' }}><p className="text-[8px] font-bold">47</p><p className="text-[7px]">Value</p></div><div className="flex flex-col items-center w-full"><p className="text-[8px] font-bold">88</p><p className="text-[7px]">PR</p></div></div></div>
+                          <div className="flex text-[8px] -mt-1 flex-row items-center justify-center gap-1"><p className="font-bold">Flanker</p></div>
                   </div>
-                  <p className="text-gray-700 text-sm leading-relaxed mb-6">
-                    {selectedPlayer.bio}
-                  </p>
-                  <Button 
-                    onClick={() => setSelectedPlayer(null)}
-                    className="bg-scrummy-navy hover:bg-scrummy-blue text-white w-full"
-                  >
-                    Close
-                  </Button>
+                </div>
+                    </motion.div>
+
+                    {/* Middle Row - 2 Cards */}
+                    {/* Middle Left */}
+                    <motion.div 
+                      className="absolute" 
+                      style={{ top: '35%', left: '18%', transformStyle: 'preserve-3d' }}
+                      initial={{ opacity: 0, y: -150, scale: 0.85 }}
+                      animate={{ 
+                        opacity: 1, 
+                        y: [0, -9, 0],
+                        scale: 0.85
+                      }}
+                      transition={{
+                        opacity: { duration: 0.8, delay: 0.6, ease: "easeOut" },
+                        scale: { duration: 0.8, delay: 0.6, ease: "easeOut" },
+                        y: {
+                          duration: 3.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 1.4
+                        }
+                      }}
+                      viewport={{ once: true, margin: "-100px" }}
+                    >
+                      <div className="relative isolate z-0" style={{ 
+                        transform: 'translateZ(150px)',
+                        filter: 'drop-shadow(0 20px 35px rgba(0,0,0,0.65))',
+                      }}>
+                        <img src="https://scrummy-app.ai/player_card_backgrounds/half-back-bg.png" alt="card bg" className="object-contain min-w-[140px] max-w-[140px]" />
+                        <div className="z-30 overflow-clip absolute pt-1 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                          <div className="w-6 flex flex-row items-center justify-center h-8 absolute top-2 right-0">
+                            <div className="overflow-clip w-5 h-5"><img src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/7df7b034-0d82-54a1-8606-86e46eebfa35.png" alt="team" className="w-full h-full object-contain" /></div>
+                    </div>
+                          <div className="min-h-[70px] max-h-[70px] max-w-[70px] aspect-[3/4] overflow-hidden min-w-[100px] flex flex-col items-center justify-center relative">
+                            <img src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/5171fb81-f984-5856-9cfc-23b62f52a94c.png" className="min-h-[60px] max-h-[60px] min-w-[60px] max-w-[60px] object-cover object-top translate-y-[5%] [mask-image:linear-gradient(to_bottom,black_80%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_80%,transparent)]" />
+                            <div className="flex flex-col absolute bottom-0 items-center p-1 justify-center"><p className="text-[10px] truncate max-w-[70px]">Player 4</p></div>
+                    </div>
+                          <div className="w-full flex flex-row items-center justify-center"><div className="w-full flex flex-row items-center justify-center" style={{ border: '1px solid rgb(179, 116, 0)', borderRadius: '2px' }}><div className="flex flex-col items-center w-full" style={{ borderRight: '1px solid rgb(179, 116, 0)' }}><p className="text-[8px] font-bold">42</p><p className="text-[7px]">Value</p></div><div className="flex flex-col items-center w-full"><p className="text-[8px] font-bold">84</p><p className="text-[7px]">PR</p></div></div></div>
+                          <div className="flex text-[8px] -mt-1 flex-row items-center justify-center gap-1"><p className="font-bold">Scrum Half</p></div>
+                  </div>
+                </div>
+            </motion.div>
+
+                    {/* Middle Right */}
+                    <motion.div 
+                      className="absolute" 
+                      style={{ top: '35%', right: '18%', transformStyle: 'preserve-3d' }}
+                      initial={{ opacity: 0, y: -150, scale: 0.85 }}
+                      animate={{ 
+                        opacity: 1, 
+                        y: [0, -8, 0],
+                        scale: 0.85
+                      }}
+                      transition={{
+                        opacity: { duration: 0.8, delay: 0.7, ease: "easeOut" },
+                        scale: { duration: 0.8, delay: 0.7, ease: "easeOut" },
+                        y: {
+                          duration: 3.3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 1.5
+                        }
+                      }}
+                      viewport={{ once: true, margin: "-100px" }}
+                    >
+                      <div className="relative isolate z-0" style={{ 
+                        transform: 'translateZ(150px)',
+                        filter: 'drop-shadow(0 20px 35px rgba(0,0,0,0.65))',
+                      }}>
+                        <img src="https://scrummy-app.ai/player_card_backgrounds/half-back-bg.png" alt="card bg" className="object-contain min-w-[140px] max-w-[140px]" />
+                        <div className="z-30 overflow-clip absolute pt-1 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                          <div className="w-6 flex flex-row items-center justify-center h-8 absolute top-2 right-0">
+                            <div className="overflow-clip w-5 h-5"><img src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/6b065f58-eaad-592e-82d5-f27f589e6ab2.png" alt="team" className="w-full h-full object-contain" /></div>
+            </div>
+                          <div className="min-h-[70px] max-h-[70px] max-w-[70px] aspect-[3/4] overflow-hidden min-w-[100px] flex flex-col items-center justify-center relative">
+                            <img src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/b6def658-0e92-5b71-b0a5-01b29c7cf5b1.png" className="min-h-[60px] max-h-[60px] min-w-[60px] max-w-[60px] object-cover object-top translate-y-[5%] [mask-image:linear-gradient(to_bottom,black_80%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_80%,transparent)]" />
+                            <div className="flex flex-col absolute bottom-0 items-center p-1 justify-center"><p className="text-[10px] truncate max-w-[70px]">Player 5</p></div>
+          </div>
+                          <div className="w-full flex flex-row items-center justify-center"><div className="w-full flex flex-row items-center justify-center" style={{ border: '1px solid rgb(0, 77, 153)', borderRadius: '2px' }}><div className="flex flex-col items-center w-full" style={{ borderRight: '1px solid rgb(0, 77, 153)' }}><p className="text-[8px] font-bold">46</p><p className="text-[7px]">Value</p></div><div className="flex flex-col items-center w-full"><p className="text-[8px] font-bold">86</p><p className="text-[7px]">PR</p></div></div></div>
+                          <div className="flex text-[8px] -mt-1 flex-row items-center justify-center gap-1"><p className="font-bold">Fly Half</p></div>
+            </div>
+              </div>
+            </motion.div>
+
+                    {/* Front Row - 1 Card */}
+                    <motion.div 
+                      className="absolute" 
+                      style={{ top: '57%', left: '50%', transformStyle: 'preserve-3d' }}
+                      initial={{ opacity: 0, y: -150, x: '-50%', scale: 0.85 }}
+                      animate={{ 
+                        opacity: 1, 
+                        y: [0, -12, 0],
+                        x: '-50%',
+                        scale: 0.85
+                      }}
+                      transition={{
+                        opacity: { duration: 0.8, delay: 0.8, ease: "easeOut" },
+                        scale: { duration: 0.8, delay: 0.8, ease: "easeOut" },
+                        x: { duration: 0.8, delay: 0.8, ease: "easeOut" },
+                        y: {
+                          duration: 3.8,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 1.6
+                        }
+                      }}
+                      viewport={{ once: true, margin: "-100px" }}
+                    >
+                      <div className="relative isolate z-0" style={{ 
+                        transform: 'translateZ(250px)',
+                        filter: 'drop-shadow(0 25px 45px rgba(0,0,0,0.75))',
+                      }}>
+                        <img src="https://scrummy-app.ai/player_card_backgrounds/back-row-bg.png" alt="card bg" className="object-contain min-w-[140px] max-w-[140px]" />
+                        <div className="z-30 overflow-clip absolute pt-1 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                          <div className="w-6 flex flex-row items-center justify-center h-8 absolute top-2 right-0">
+                            <div className="overflow-clip w-5 h-5"><img src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/521cb3f7-4972-5e4e-85e6-a50b18899f84.png" alt="team" className="w-full h-full object-contain" /></div>
+                    </div>
+                          <div className="min-h-[70px] max-h-[70px] max-w-[70px] aspect-[3/4] overflow-hidden min-w-[100px] flex flex-col items-center justify-center relative">
+                            <img src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/2b5881d3-8421-5bb9-9517-bd37cd9568c5.png" className="min-h-[60px] max-h-[60px] min-w-[60px] max-w-[60px] object-cover object-top translate-y-[5%] [mask-image:linear-gradient(to_bottom,black_80%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_80%,transparent)]" />
+                            <div className="flex flex-col absolute bottom-0 items-center p-1 justify-center"><p className="text-[10px] truncate max-w-[70px]">Player 6</p></div>
+                    </div>
+                          <div className="w-full flex flex-row items-center justify-center"><div className="w-full flex flex-row items-center justify-center" style={{ border: '1px solid rgb(138, 0, 0)', borderRadius: '2px' }}><div className="flex flex-col items-center w-full" style={{ borderRight: '1px solid rgb(138, 0, 0)' }}><p className="text-[8px] font-bold">55</p><p className="text-[7px]">Value</p></div><div className="flex flex-col items-center w-full"><p className="text-[8px] font-bold">90</p><p className="text-[7px]">PR</p></div></div></div>
+                          <div className="flex text-[8px] -mt-1 flex-row items-center justify-center gap-1"><p className="font-bold">Fullback</p></div>
+                  </div>
+                      </div>
+                    </motion.div>
+                    </div>
+                    </div>
+                      </div>
+            </motion.div>
+          </Container>
+        </section>
+
+        {/* PREDICTIONS SECTION */}
+        <section className="py-20 md:py-28">
+          <Container>
+            <motion.div 
+              className="grid md:grid-cols-2 gap-12 items-center"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              {/* Fixture Card Left */}
+              <motion.div 
+                className="flex justify-center md:justify-end order-2 md:order-1"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                viewport={{ once: true, margin: "-100px" }}
+              >
+                <div className="w-full max-w-md p-6 rounded-2xl bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-white/10 backdrop-blur-sm">
+                  {/* League Tag */}
+                  <div className="text-xs text-white/50 mb-6 text-center">United Rugby Championship, Week 6</div>
+                  
+                  <div className="flex flex-row items-center justify-between mb-6">
+                    {/* Home Team */}
+                    <div className="flex-1 flex flex-col gap-3 items-center justify-center">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-white/5 border border-white/10 p-3 flex items-center justify-center">
+                        <img 
+                          src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/521cb3f7-4972-5e4e-85e6-a50b18899f84.png" 
+                          alt="Ulster Rugby" 
+                          className="w-full h-full object-contain"
+                        />
+                    </div>
+                      <p className="text-xs md:text-sm text-white font-medium text-center">Ulster Rugby</p>
+                  </div>
+                  
+                    {/* Match Info */}
+                    <div className="flex-1 flex flex-col items-center text-center justify-center px-4">
+                      <p className="text-xs text-white/50 mb-1">Fri, 28 Nov</p>
+                      <p className="text-lg font-bold text-white">2:45 PM</p>
+                      <div className="text-xs text-white/40 mt-1">VS</div>
+                  </div>
+
+                    {/* Away Team */}
+                    <div className="flex-1 flex flex-col gap-3 items-center justify-center">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-white/5 border border-white/10 p-3 flex items-center justify-center">
+                        <img 
+                          src="https://athstat-landing-assets-migrated.s3.amazonaws.com/logos/1fa00c37-f405-54f6-8bb5-78d3eac2f9c5.png" 
+                          alt="Benetton Rugby" 
+                          className="w-full h-full object-contain"
+                        />
+                   </div>
+                      <p className="text-xs md:text-sm text-white font-medium text-center">Benetton Rugby</p>
+            </div>
+            </div>
+
+                  {/* Prediction Section */}
+                  <div className="pt-6 border-t border-white/10">
+                    <p className="text-xs text-white/60 text-center mb-4">Who you got winning?</p>
+                    <div className="flex gap-3">
+                      <button className="flex-1 px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white text-sm font-medium transition-all hover:scale-[1.02]">
+                        Ulster
+                      </button>
+                      <button className="flex-1 px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white text-sm font-medium transition-all hover:scale-[1.02]">
+                        Benetton
+                      </button>
+              </div>
+          </div>
+          </div>
+              </motion.div>
+
+              {/* Content Right */}
+              <div className="text-white order-1 md:order-2">
+                <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                  Make Your Predictions
+                </h2>
+                <p className="text-lg md:text-xl text-white/70 leading-relaxed">
+                  Predict who will win the next match. Compete against friends and climb the leaderboard.
+                </p>
                       </div>
               </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+          </Container>
       </section>
 
-      {/* 4. Final CTA Block */}
-      <section className="py-8 bg-gradient-to-r from-scrummy-navy to-scrummy-blue text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="font-orbitron text-3xl md:text-4xl font-bold mb-6">
-            Think you know rugby?
+      {/* CLOSING SECTION */}
+      <section className="py-20 md:py-28">
+        <Container>
+          <motion.div
+            className="max-w-3xl mx-auto text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
+              Where Rugby Meets Strategy
           </h2>
-          <p className="text-xl text-white/90 mb-8">
-            Make predictions on every match and climb the leaderboards
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            {/* Apple App Store - Official Badge */}
-            <button 
-              className="cursor-pointer transition-all hover:opacity-90"
-              onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
-            >
-              <img 
-                src="/assets/Store badges/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" 
-                alt="Download on the App Store"
-                className="h-12 w-auto"
-              />
-            </button>
-            
-            {/* Google Play Store - Official Badge */}
-            <button 
-              className="cursor-pointer transition-all hover:opacity-90"
-              onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
-            >
-              <img 
-                src="/assets/Store badges/GetItOnGooglePlay_Badge_Web_color_English.png" 
-                alt="Get it on Google Play"
-                className="h-12 w-auto"
-              />
-            </button>
-          </div>
-        </div>
+            <p className="text-lg md:text-xl text-white/80 leading-relaxed mb-6">
+              Rugby has always been about more than just the game—it's about strategy, passion, and the thrill of competition. 
+              SCRUMMY brings that same intensity to fantasy rugby, giving you the tools to build your ultimate squad, make bold predictions, 
+              and compete with fans across the globe.
+            </p>
+            <p className="text-lg md:text-xl text-white/80 leading-relaxed">
+              Whether you're a seasoned fantasy player or new to the scrum, SCRUMMY is where your rugby knowledge meets real competition. 
+              Join thousands of fans who are already building their dream teams and making their mark on the leaderboard.
+            </p>
+          </motion.div>
+        </Container>
       </section>
+      </main>
 
-      {/* Footer */}
-      <footer className="bg-gradient-to-r from-scrummy-navy to-scrummy-blue text-white py-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                      <div className="grid md:grid-cols-4 gap-4">
+      {/* FOOTER */}
+      <footer className="border-t border-white/10 py-10 text-white/70">
+        <Container>
+          <div className="grid gap-8 md:grid-cols-4">
             <div>
-              <img src="/assets/Scrummy-logo/SCRUMMY Logo Exception_On Dark BG (3).svg" alt="SCRUMMY Logo" className="h-12 mb-4" />
-              <p className="text-white/80 text-sm">The Home of School Boy Rugby</p>
-            </div>
-            <div>
-              <h4 className="font-orbitron font-bold text-scrummy-goldYellow mb-4">Quick Links</h4>
-              <div className="space-y-2">
-                <Link to="/fixtures" className="block text-white/80 hover:text-scrummy-goldYellow transition-colors">Fixtures</Link>
-                <Link to="/about" className="block text-white/80 hover:text-scrummy-goldYellow transition-colors">About</Link>
-              </div>
-            </div>
-            <div>
-              <h4 className="font-orbitron font-bold text-scrummy-goldYellow mb-4">Support</h4>
-              <div className="space-y-2">
-                <Link to="/support" className="block text-white/80 hover:text-scrummy-goldYellow transition-colors">Help Center</Link>
-                <Link to="/privacy" className="block text-white/80 hover:text-scrummy-goldYellow transition-colors">Privacy Policy</Link>
-                <Link to="/download" className="block text-white/80 hover:text-scrummy-goldYellow transition-colors">Download App</Link>
-              </div>
-            </div>
-            <div>
-              <h4 className="font-orbitron font-bold text-scrummy-goldYellow mb-4">Connect</h4>
-              <div className="flex gap-4">
-                <a href="https://www.instagram.com/scrummyapp_/" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors">
-                  <Instagram size={24} />
-              </a>
-                <a href="https://www.facebook.com/profile.php?id=61574057183440" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors">
-                  <Facebook size={24} />
-              </a>
-                <a href="https://www.tiktok.com/@scrummy_hub" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors">
-                  <FaTiktok size={24} />
-              </a>
-                <a href="https://x.com/scrummyapp_" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors">
-                  <span className="text-xl">𝕏</span>
-              </a>
-                <a href="https://www.youtube.com/@ScrummySports" target="_blank" rel="noopener noreferrer" className="hover:text-scrummy-goldYellow transition-colors">
-                  <Youtube size={24} />
-              </a>
-              </div>
-            </div>
-            </div>
-          <div className="border-t border-white/20 mt-8 pt-8 text-center">
-            <p className="text-white/60 text-sm">© 2025 SCRUMMY. All rights reserved.</p>
+              <Link to="/" className="flex items-center">
+                <div className="h-14 w-auto max-w-[280px]">
+                  <img 
+                    src="/assets/Scrummy-logo/SCRUMMY Logo Exception_On Dark BG (3).svg" 
+                    alt="SCRUMMY" 
+                    className="w-full h-full object-contain" 
+                  />
           </div>
+              </Link>
+              <p className="mt-3 text-sm">This isn't just rugby. This is Scrummy.</p>
         </div>
+            <div>
+              <div className="font-semibold text-white">Product</div>
+              <ul className="mt-3 space-y-2 text-sm">
+                <li><Link to="/fixtures" className="hover:text-white transition">Fixtures</Link></li>
+                <li><Link to="/about" className="hover:text-white transition">About</Link></li>
+              </ul>
+            </div>
+            <div>
+              <div className="font-semibold text-white">Company</div>
+              <ul className="mt-3 space-y-2 text-sm">
+                <li><Link to="/about" className="hover:text-white transition">About</Link></li>
+                <li><Link to="/support" className="hover:text-white transition">Contact</Link></li>
+              </ul>
+            </div>
+            <div>
+              <div className="font-semibold text-white">Follow</div>
+              <div className="mt-3 text-sm">
+                <a href="https://www.instagram.com/scrummyapp_/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Instagram</a> •{" "}
+                <a href="https://www.tiktok.com/@scrummy_hub" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">TikTok</a> •{" "}
+                <a href="https://www.youtube.com/@ScrummySports" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">YouTube</a>
+              </div>
+            </div>
+              </div>
+          <div className="mt-8 text-xs text-white/50">
+            © {new Date().getFullYear()} Scrummy. All rights reserved.
+            </div>
+        </Container>
       </footer>
       </div>
   );
 };
 
 export default Index;
-
-
 
