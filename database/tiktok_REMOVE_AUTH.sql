@@ -37,3 +37,6 @@ CREATE POLICY "Public access" ON tiktok_active_hours FOR ALL USING (true) WITH C
 
 
 
+
+
+

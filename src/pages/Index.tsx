@@ -551,46 +551,133 @@ const Index: React.FC = () => {
                       borderRadius: '16px',
                     }} />
 
-                  {/* Glowing Field Lines */}
+                  {/* Rugby Pitch Lines */}
                   <div className="absolute inset-0">
                     {/* Try Line - Top */}
-                    <div className="absolute top-[8%] left-0 right-0 h-[2px]" style={{
-                      background: 'linear-gradient(90deg, transparent 0%, rgba(100, 150, 255, 0.5) 50%, transparent 100%)',
+                    <div className="absolute top-[8%] left-[8%] right-[8%] h-[2px]" style={{
+                      background: 'rgba(100, 150, 255, 0.6)',
+                      boxShadow: '0 0 8px rgba(100, 150, 255, 0.5)'
+                    }} />
+                    
+                    {/* 22m Line - Top */}
+                    <div className="absolute top-[22%] left-[8%] right-[8%] h-[1.5px]" style={{
+                      background: 'rgba(100, 150, 255, 0.5)',
                       boxShadow: '0 0 6px rgba(100, 150, 255, 0.4)'
                     }} />
+                    <div className="absolute top-[22%] left-[8%] text-[10px] text-blue-300/40 font-bold" style={{ transform: 'translateY(-18px)' }}>22</div>
+                    
+                    {/* 10m Line - Top */}
+                    <div className="absolute top-[36%] left-[8%] right-[8%] h-[1px]" style={{
+                      background: 'rgba(100, 150, 255, 0.35)',
+                      boxShadow: '0 0 4px rgba(100, 150, 255, 0.3)'
+                    }} />
+                    <div className="absolute top-[36%] left-[8%] text-[9px] text-blue-300/30 font-bold" style={{ transform: 'translateY(-16px)' }}>10</div>
                     
                     {/* Halfway Line (Center) */}
-                    <div className="absolute top-1/2 left-0 right-0 h-[2px]" style={{
-                      background: 'linear-gradient(90deg, transparent 0%, rgba(100, 150, 255, 0.7) 50%, transparent 100%)',
-                      boxShadow: '0 0 10px rgba(100, 150, 255, 0.5)'
+                    <div className="absolute top-1/2 left-[8%] right-[8%] h-[2px]" style={{
+                      background: 'rgba(100, 150, 255, 0.7)',
+                      boxShadow: '0 0 10px rgba(100, 150, 255, 0.6)',
+                      transform: 'translateY(-1px)'
                     }} />
-                    <div className="absolute top-1/2 left-1/2 w-[80px] h-[80px] rounded-full transform -translate-x-1/2 -translate-y-1/2" style={{
-                      border: '2px solid rgba(100, 150, 255, 0.4)',
-                      boxShadow: '0 0 12px rgba(100, 150, 255, 0.3), inset 0 0 12px rgba(100, 150, 255, 0.15)'
+                    <div className="absolute top-1/2 left-1/2 w-[60px] h-[60px] rounded-full transform -translate-x-1/2 -translate-y-1/2" style={{
+                      border: '1.5px solid rgba(100, 150, 255, 0.5)',
+                      boxShadow: '0 0 10px rgba(100, 150, 255, 0.4)'
                     }} />
                     
+                    {/* 10m Line - Bottom */}
+                    <div className="absolute top-[64%] left-[8%] right-[8%] h-[1px]" style={{
+                      background: 'rgba(100, 150, 255, 0.35)',
+                      boxShadow: '0 0 4px rgba(100, 150, 255, 0.3)'
+                    }} />
+                    <div className="absolute top-[64%] right-[8%] text-[9px] text-blue-300/30 font-bold" style={{ transform: 'translateY(-16px)' }}>10</div>
+                    
+                    {/* 22m Line - Bottom */}
+                    <div className="absolute top-[78%] left-[8%] right-[8%] h-[1.5px]" style={{
+                      background: 'rgba(100, 150, 255, 0.5)',
+                      boxShadow: '0 0 6px rgba(100, 150, 255, 0.4)'
+                    }} />
+                    <div className="absolute top-[78%] right-[8%] text-[10px] text-blue-300/40 font-bold" style={{ transform: 'translateY(-18px)' }}>22</div>
+                    
                     {/* Try Line - Bottom */}
-                    <div className="absolute top-[92%] left-0 right-0 h-[2px]" style={{
-                      background: 'linear-gradient(90deg, transparent 0%, rgba(100, 150, 255, 0.5) 50%, transparent 100%)',
+                    <div className="absolute top-[92%] left-[8%] right-[8%] h-[2px]" style={{
+                      background: 'rgba(100, 150, 255, 0.6)',
+                      boxShadow: '0 0 8px rgba(100, 150, 255, 0.5)'
+                    }} />
+                    
+                    {/* Touchlines (Side Lines) */}
+                    <div className="absolute top-[8%] bottom-[8%] left-[8%] w-[2px]" style={{
+                      background: 'rgba(100, 150, 255, 0.5)',
+                      boxShadow: '0 0 6px rgba(100, 150, 255, 0.4)'
+                    }} />
+                    <div className="absolute top-[8%] bottom-[8%] right-[8%] w-[2px]" style={{
+                      background: 'rgba(100, 150, 255, 0.5)',
                       boxShadow: '0 0 6px rgba(100, 150, 255, 0.4)'
                     }} />
                     
-                    {/* Corner Markers */}
-                    <div className="absolute top-[5%] left-[5%] w-2 h-2 rounded-full" style={{
-                      background: 'rgba(100, 150, 255, 0.5)',
-                      boxShadow: '0 0 8px rgba(100, 150, 255, 0.6)'
+                    {/* Try Bars (Goal Posts) - Top */}
+                    <div className="absolute top-[3%] left-1/2 transform -translate-x-1/2">
+                      {/* Vertical Post */}
+                      <div className="relative w-[2px] h-[35px] mx-auto" style={{
+                        background: 'linear-gradient(to bottom, rgba(100, 150, 255, 0.7), rgba(100, 150, 255, 0.3))',
+                        boxShadow: '0 0 8px rgba(100, 150, 255, 0.6)'
+                      }} />
+                      {/* Horizontal Bar (H-shape top) */}
+                      <div className="absolute top-[10px] left-1/2 transform -translate-x-1/2 w-[40px] h-[2px]" style={{
+                        background: 'rgba(100, 150, 255, 0.6)',
+                        boxShadow: '0 0 6px rgba(100, 150, 255, 0.5)'
+                      }} />
+                      {/* Left Upright */}
+                      <div className="absolute top-0 left-[calc(50%-20px)] w-[2px] h-[15px]" style={{
+                        background: 'linear-gradient(to top, rgba(100, 150, 255, 0.6), rgba(100, 150, 255, 0.2))',
+                        boxShadow: '0 0 6px rgba(100, 150, 255, 0.4)'
+                      }} />
+                      {/* Right Upright */}
+                      <div className="absolute top-0 right-[calc(50%-20px)] w-[2px] h-[15px]" style={{
+                        background: 'linear-gradient(to top, rgba(100, 150, 255, 0.6), rgba(100, 150, 255, 0.2))',
+                        boxShadow: '0 0 6px rgba(100, 150, 255, 0.4)'
+                      }} />
+                    </div>
+                    
+                    {/* Try Bars (Goal Posts) - Bottom */}
+                    <div className="absolute bottom-[3%] left-1/2 transform -translate-x-1/2">
+                      {/* Vertical Post */}
+                      <div className="relative w-[2px] h-[35px] mx-auto" style={{
+                        background: 'linear-gradient(to top, rgba(100, 150, 255, 0.7), rgba(100, 150, 255, 0.3))',
+                        boxShadow: '0 0 8px rgba(100, 150, 255, 0.6)'
+                      }} />
+                      {/* Horizontal Bar (H-shape bottom) */}
+                      <div className="absolute bottom-[10px] left-1/2 transform -translate-x-1/2 w-[40px] h-[2px]" style={{
+                        background: 'rgba(100, 150, 255, 0.6)',
+                        boxShadow: '0 0 6px rgba(100, 150, 255, 0.5)'
+                      }} />
+                      {/* Left Upright */}
+                      <div className="absolute bottom-0 left-[calc(50%-20px)] w-[2px] h-[15px]" style={{
+                        background: 'linear-gradient(to bottom, rgba(100, 150, 255, 0.6), rgba(100, 150, 255, 0.2))',
+                        boxShadow: '0 0 6px rgba(100, 150, 255, 0.4)'
+                      }} />
+                      {/* Right Upright */}
+                      <div className="absolute bottom-0 right-[calc(50%-20px)] w-[2px] h-[15px]" style={{
+                        background: 'linear-gradient(to bottom, rgba(100, 150, 255, 0.6), rgba(100, 150, 255, 0.2))',
+                        boxShadow: '0 0 6px rgba(100, 150, 255, 0.4)'
+                      }} />
+                    </div>
+                    
+                    {/* Corner Flag Markers */}
+                    <div className="absolute top-[8%] left-[8%] w-2 h-2 rounded-full" style={{
+                      background: 'rgba(100, 150, 255, 0.6)',
+                      boxShadow: '0 0 8px rgba(100, 150, 255, 0.7)'
                     }} />
-                    <div className="absolute top-[5%] right-[5%] w-2 h-2 rounded-full" style={{
-                      background: 'rgba(100, 150, 255, 0.5)',
-                      boxShadow: '0 0 8px rgba(100, 150, 255, 0.6)'
+                    <div className="absolute top-[8%] right-[8%] w-2 h-2 rounded-full" style={{
+                      background: 'rgba(100, 150, 255, 0.6)',
+                      boxShadow: '0 0 8px rgba(100, 150, 255, 0.7)'
                     }} />
-                    <div className="absolute bottom-[5%] left-[5%] w-2 h-2 rounded-full" style={{
-                      background: 'rgba(100, 150, 255, 0.5)',
-                      boxShadow: '0 0 8px rgba(100, 150, 255, 0.6)'
+                    <div className="absolute bottom-[8%] left-[8%] w-2 h-2 rounded-full" style={{
+                      background: 'rgba(100, 150, 255, 0.6)',
+                      boxShadow: '0 0 8px rgba(100, 150, 255, 0.7)'
                     }} />
-                    <div className="absolute bottom-[5%] right-[5%] w-2 h-2 rounded-full" style={{
-                      background: 'rgba(100, 150, 255, 0.5)',
-                      boxShadow: '0 0 8px rgba(100, 150, 255, 0.6)'
+                    <div className="absolute bottom-[8%] right-[8%] w-2 h-2 rounded-full" style={{
+                      background: 'rgba(100, 150, 255, 0.6)',
+                      boxShadow: '0 0 8px rgba(100, 150, 255, 0.7)'
                     }} />
                     </div>
                   </div>

@@ -13,6 +13,8 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/lib/supabase";
 import { generateAnalyticsPDF } from "@/lib/pdfExport";
+import { generateSimpleWeeklyComparison } from "@/lib/simpleWeeklyComparison";
+import { downloadRawDataReport, copyRawDataToClipboard } from "@/lib/exportRawData";
 import {
   LineChart,
   Line,
@@ -193,6 +195,8 @@ const UnifiedAnalyticsDashboard: React.FC = () => {
   const [tiktokActiveHours, setTiktokActiveHours] = useState<TikTokActiveHours[]>([]);
   
   const [loading, setLoading] = useState(true);
+  const [generatingReport, setGeneratingReport] = useState(false);
+  const [exportingRawData, setExportingRawData] = useState(false);
 
   useEffect(() => {
     fetchAllData();
@@ -598,6 +602,49 @@ const UnifiedAnalyticsDashboard: React.FC = () => {
     avgEngagement: platformData.filter(p => p.hasData).reduce((sum, p) => sum + p.engagement, 0) / platformData.filter(p => p.hasData).length || 0
   };
 
+  const handleGenerateWeeklyReport = async () => {
+    console.log('📊 User clicked Weekly Report button');
+    setGeneratingReport(true);
+    try {
+      await generateSimpleWeeklyComparison();
+      console.log('✅ Report generated successfully!');
+    } catch (error: any) {
+      console.error('❌ Error generating weekly report:', error);
+      alert(`Failed to generate report: ${error.message || 'Unknown error'}\n\nCheck console for details.`);
+    } finally {
+      setGeneratingReport(false);
+    }
+  };
+
+  const handleExportRawData = async () => {
+    console.log('📋 User clicked Export Raw Data button');
+    setExportingRawData(true);
+    try {
+      await downloadRawDataReport();
+      console.log('✅ Raw data exported successfully!');
+      alert('✅ Raw data downloaded!\n\nOpen the .txt file and copy it to ChatGPT with the prompt:\n"Create a professional analytics report from this data"');
+    } catch (error: any) {
+      console.error('❌ Error exporting raw data:', error);
+      alert(`Failed to export data: ${error.message || 'Unknown error'}\n\nCheck console for details.`);
+    } finally {
+      setExportingRawData(false);
+    }
+  };
+
+  const handleCopyRawData = async () => {
+    console.log('📋 User clicked Copy Raw Data button');
+    setExportingRawData(true);
+    try {
+      await copyRawDataToClipboard();
+      console.log('✅ Raw data copied to clipboard!');
+    } catch (error: any) {
+      console.error('❌ Error copying raw data:', error);
+      alert(`Failed to copy data: ${error.message || 'Unknown error'}\n\nCheck console for details.`);
+    } finally {
+      setExportingRawData(false);
+    }
+  };
+
   const handleExportPDF = async () => {
     try {
       console.log('Starting PDF export...');
@@ -733,11 +780,31 @@ const UnifiedAnalyticsDashboard: React.FC = () => {
 
             <Button 
               size="sm" 
+              onClick={handleGenerateWeeklyReport}
+              disabled={generatingReport}
+              className="h-9 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold text-xs px-3"
+            >
+              <Calendar className="w-3 h-3 mr-1.5" />
+              {generatingReport ? 'Generating...' : '📊 Weekly Report'}
+            </Button>
+
+            <Button 
+              size="sm" 
+              onClick={handleCopyRawData}
+              disabled={exportingRawData}
+              className="h-9 bg-green-600 hover:bg-green-700 text-white font-semibold text-xs px-3"
+            >
+              <Download className="w-3 h-3 mr-1.5" />
+              {exportingRawData ? 'Exporting...' : '📋 Raw Data for AI'}
+            </Button>
+
+            <Button 
+              size="sm" 
               onClick={handleExportPDF}
               className="h-9 bg-green-600 hover:bg-green-700 text-white text-xs px-3"
             >
               <Download className="w-3 h-3 mr-1.5" />
-              Export PDF
+              Quick Export
             </Button>
 
             <Link to="/hub/upload">

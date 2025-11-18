@@ -24,6 +24,8 @@ import URCAdmin from "./pages/URCAdmin";
 const UnifiedAnalyticsDashboard = lazy(() => import("./pages/UnifiedAnalyticsDashboard"));
 const AnalyticsUpload = lazy(() => import("./pages/AnalyticsUpload"));
 const ContentTracker = lazy(() => import("./pages/ContentTracker"));
+const AnalyticsWeekly = lazy(() => import("./pages/AnalyticsWeekly"));
+const AnalyticsHistory = lazy(() => import("./pages/AnalyticsHistory"));
 
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -60,6 +62,8 @@ const App = () => (
           <Route path="/hub/dashboard" element={<Suspense fallback={<div>Loading...</div>}><UnifiedAnalyticsDashboard /></Suspense>} />
           <Route path="/hub/upload" element={<Suspense fallback={<div>Loading...</div>}><AnalyticsUpload /></Suspense>} />
           <Route path="/hub/content" element={<Suspense fallback={<div>Loading...</div>}><ContentTracker /></Suspense>} />
+          <Route path="/hub/weekly" element={<Suspense fallback={<div>Loading...</div>}><AnalyticsWeekly /></Suspense>} />
+          <Route path="/hub/history" element={<Suspense fallback={<div>Loading...</div>}><AnalyticsHistory /></Suspense>} />
           
           {/* Legacy redirects */}
           <Route path="/hub/live" element={<Suspense fallback={<div>Loading...</div>}><UnifiedAnalyticsDashboard /></Suspense>} />
