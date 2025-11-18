@@ -130,23 +130,6 @@ const DownloadPage: React.FC = () => {
                   50K+ Users
                 </span>
               </div>
-
-              {/* CTA Buttons */}
-              <div className="flex justify-center md:justify-start">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button 
-                    size="lg" 
-                    className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold transition-all duration-300 hover:shadow-lg"
-                    onClick={() => window.open('https://scrummy-app.ai', '_blank')}
-                  >
-                    <Globe className="w-5 h-5 mr-2" />
-                    Launch Web App
-                  </Button>
-                </motion.div>
-              </div>
             </motion.div>
 
             {/* Right Content - Phone Mockup */}
@@ -272,44 +255,6 @@ const DownloadPage: React.FC = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
-
-
-
-          {/* Web App - Alternative Option */}
-          <motion.div
-            initial={{ y: -30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.9, duration: 0.6 }}
-            className="mb-12 md:mb-16"
-          >
-            <Card className="text-center p-6 md:p-8 bg-gradient-to-br from-scrummy-goldYellow/10 to-scrummy-gold/10 border-2 border-scrummy-goldYellow hover:shadow-xl transition-all duration-300">
-              <CardContent className="space-y-4 md:space-y-6">
-                <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-r from-scrummy-goldYellow to-scrummy-gold rounded-2xl flex items-center justify-center mx-auto">
-                  <Globe className="w-10 h-10 md:w-12 md:h-12 text-scrummy-navy" />
-                </div>
-                
-                <div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-scrummy-navy mb-2">Web App</h3>
-                  <p className="text-gray-600 mb-4 md:mb-6">Access SCRUMMY directly in your browser - no download required!</p>
-                  <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                    <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                    Available Now
-                  </div>
-                </div>
-
-                <Button 
-                  size="lg" 
-                  className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold px-8 py-4 rounded-xl w-full max-w-sm mx-auto text-lg"
-                  onClick={() => window.open('https://scrummy-app.ai', '_blank')}
-                >
-                  <Globe className="w-5 h-5 mr-2" />
-                  Launch Web App
-                </Button>
-                
-                <p className="text-xs text-gray-500">Works on all devices with a modern browser</p>
-              </CardContent>
-            </Card>
           </motion.div>
 
           {/* App Features */}
