@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Filter, Search, X } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { generateMatchId, getBoxScore, getFinalScore } from "@/lib/boxScoreData";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 // Define types for our fixtures data
 type Fixture = {
@@ -627,6 +633,19 @@ function parseConversions(conversionStr: string) {
   return { conversions, penalties };
 }
 
+// Theme tokens matching homepage
+const tokens = {
+  bg: "#0B0D18",
+  surface: "#121527",
+  text: "#E6E9F5",
+  textMuted: "#A9B1C6",
+  primary: "#2D6CFF",
+  gold: "#F9C94E",
+};
+
+const appGradient = "bg-[radial-gradient(1200px_600px_at_80%_-20%,rgba(45,108,255,.25),rgba(122,92,255,.12)_40%,transparent_70%),linear-gradient(180deg,#0B0D18_0%,#0B0D18_30%,#0E1222_100%)]";
+const cardGrad = "bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))]";
+
 const Fixtures: React.FC = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
@@ -635,6 +654,7 @@ const Fixtures: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = useState("All");
   const [teamSearchInput, setTeamSearchInput] = useState("");
   const [cbzTeamSearchInput, setCbzTeamSearchInput] = useState("");
+  const [openAccordion, setOpenAccordion] = useState("week-0"); // First week open by default
 
   const handleFixtureClick = (date: string, time: string, teamA: string, teamB: string) => {
     if (isHighlightedFixture(date, time, teamA, teamB)) {
@@ -733,181 +753,209 @@ const Fixtures: React.FC = () => {
   const saMonths = ["All", ...Array.from(new Set(saSchoolsRugby.map(day => day.month)))];
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <div className="min-h-screen" style={{ background: tokens.bg, color: tokens.text }}>
       {/* Modern Header */}
-      <header className="bg-white/90 backdrop-blur-md border-b border-gray-200/50 sticky top-0 z-20">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 text-scrummy-navy hover:text-scrummy-blue transition-colors">
-            <ChevronLeft className="w-5 h-5" />
-            <span className="font-medium">Back to Home</span>
-          </Link>
-          <div className="flex items-center gap-4">
-            <img src="/assets/logo.png" alt="SCRUMMY" className="h-10" />
-            <span className="font-orbitron font-bold text-scrummy-navy">SCRUMMY</span>
+      <header className="sticky top-0 z-50 border-b border-white/10 backdrop-blur supports-[backdrop-filter]:bg-black/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex h-20 md:h-24 items-center justify-between">
+            <Link to="/" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors">
+              <ChevronLeft className="w-5 h-5" />
+              <span className="font-medium">Back to Home</span>
+            </Link>
+            <div className="flex items-center gap-4">
+              <img src="/assets/Scrummy-logo/SCRUMMY Logo Exception_On Dark BG (3).svg" alt="SCRUMMY" className="h-16 md:h-20" />
+            </div>
+            <div className="w-24" /> {/* Spacer for balance */}
           </div>
-          <div className="w-24" /> {/* Spacer for balance */}
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="py-16 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-scrummy-navy/5 to-scrummy-blue/5" />
-        <div className="max-w-6xl mx-auto px-4 text-center relative z-10">
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
-            <h1 className="text-4xl md:text-6xl font-bold font-orbitron text-scrummy-navy leading-tight">
-              Schools Rugby
-              <span className="block text-scrummy-goldYellow">Fixtures & Results</span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-              Complete coverage of school boy rugby across Zimbabwe and South Africa
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <main className={appGradient}>
+        {/* Hero Section */}
+        <section className="py-12 md:py-16 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-4"
+            >
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+                Schools Rugby{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2D6CFF] via-[#7A5CFF] to-[#F9C94E]">
+                  Fixtures & Results
+                </span>
+              </h1>
+              <p className="text-base md:text-lg text-white/70 max-w-3xl mx-auto">
+                Complete coverage of school boy rugby across Zimbabwe and South Africa
+              </p>
+            </motion.div>
+          </div>
+        </section>
 
-      {/* MAIN content */}
-      <main className="pb-16">
-        <div className="max-w-6xl mx-auto px-4 space-y-8">
-          {/* Legend for highlighted games */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg">
-            <div className="flex flex-col lg:flex-row items-center gap-4 text-scrummy-navy">
-              <div className="flex items-center gap-3">
-                <img src="/assets/logo.png" alt="SCRUMMY" className="w-12 h-12" />
-                <div>
-                  <p className="text-base md:text-lg font-semibold">
-                    Games marked with a <span className="text-scrummy-goldYellow">yellow border</span> and SCRUMMY logo have detailed player and game stats.
-                  </p>
-                  <p className="text-sm text-gray-600">All times are in CAT (Central Africa Time)</p>
+        {/* MAIN content */}
+        <div className="pb-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            {/* Legend for highlighted games */}
+            <div className={`${cardGrad} rounded-2xl p-6 border border-white/10 shadow-[0_0_40px_rgba(45,108,255,.35)]`}>
+              <div className="flex flex-col lg:flex-row items-center gap-4">
+                <div className="flex items-center gap-3">
+                  <img src="/assets/logo.png" alt="SCRUMMY" className="w-12 h-12" />
+                  <div>
+                    <p className="text-sm md:text-base font-semibold text-white">
+                      Games marked with a <span className="text-[#F9C94E]">yellow border</span> and SCRUMMY logo have detailed player and game stats.
+                    </p>
+                    <p className="text-xs md:text-sm text-white/60">All times are in CAT (Central Africa Time)</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Tabs */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 shadow-lg max-w-4xl mx-auto">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.key}
-                  onClick={() => setActiveTab(tab.key)}
-                  className={`px-4 py-3 rounded-lg font-semibold transition-all duration-300 ${
-                    activeTab === tab.key
-                      ? "bg-scrummy-goldYellow text-scrummy-navy shadow-md"
-                      : "text-scrummy-navy hover:bg-scrummy-goldYellow/20"
-                  }`}
-                >
-                  {tab.name}
-                </button>
-              ))}
-            </div>
-          </div>
-
-            {/* Month and Team filters for SBR 2025 */}
-            {activeTab === "sbr2025" && (
-              <div className="flex justify-end mt-4 gap-2">
-                <div className="w-60">
-                  <select
-                    value={selectedMonth}
-                    onChange={(e) => setSelectedMonth(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg bg-white border border-scrummy-navyBlue/20 text-scrummy-navyBlue font-semibold focus:outline-none focus:ring-2 focus:ring-scrummy-goldYellow"
-                    aria-label="Select month"
+            {/* Tabs */}
+            <div className={`${cardGrad} rounded-2xl p-3 border border-white/10 shadow-[0_0_40px_rgba(45,108,255,.35)]`}>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.key}
+                    onClick={() => {
+                      setActiveTab(tab.key);
+                      setOpenAccordion("week-0"); // Reset to first week when changing tabs
+                    }}
+                    className={`px-4 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                      activeTab === tab.key
+                        ? "bg-gradient-to-r from-[#2D6CFF] via-[#7A5CFF] to-[#2D6CFF] text-white shadow-lg"
+                        : "text-white/70 hover:text-white hover:bg-white/5"
+                    }`}
                   >
-                    {months.map((month) => (
-                      <option key={month} value={month}>
-                        {month === "All" ? "All Months" : month}
-                      </option>
-                    ))}
-                  </select>
+                    {tab.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Prominent Filters Section for SBR 2025 */}
+            {activeTab === "sbr2025" && (
+              <div className={`${cardGrad} rounded-2xl p-6 border border-white/10 shadow-[0_0_40px_rgba(45,108,255,.35)]`}>
+                <div className="flex items-center gap-3 mb-4">
+                  <Filter className="w-5 h-5 text-[#F9C94E]" />
+                  <h3 className="text-lg font-semibold text-white">Filter Fixtures</h3>
                 </div>
-                <div className="w-60">
-                  <div className="relative w-full">
-                    <input 
-                      type="text"
-                      value={cbzTeamSearchInput}
-                      onChange={(e) => handleCbzTeamSearch(e.target.value)}
-                      placeholder="Search for a school..."
-                      className="w-full px-3 py-2 rounded-lg bg-white border border-scrummy-navyBlue/20 text-scrummy-navyBlue font-semibold focus:outline-none focus:ring-2 focus:ring-scrummy-goldYellow pr-8"
-                      aria-label="Search for a school"
-                    />
-                    {cbzTeamSearchInput && (
-                      <button 
-                        onClick={clearCbzTeamSearch}
-                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-scrummy-navyBlue/50 hover:text-scrummy-navyBlue"
-                        aria-label="Clear search"
-                      >
-                        ✕
-                      </button>
-                    )}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm text-white/60 mb-2">Select Month</label>
+                    <select
+                      value={selectedMonth}
+                      onChange={(e) => setSelectedMonth(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-[#2D6CFF] focus:border-[#2D6CFF] transition-all"
+                      aria-label="Select month"
+                    >
+                      {months.map((month) => (
+                        <option key={month} value={month} className="bg-[#121527] text-white">
+                          {month === "All" ? "All Months" : month}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm text-white/60 mb-2">Search School</label>
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/40" />
+                      <input 
+                        type="text"
+                        value={cbzTeamSearchInput}
+                        onChange={(e) => handleCbzTeamSearch(e.target.value)}
+                        placeholder="Search for a school..."
+                        className="w-full pl-10 pr-10 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#2D6CFF] focus:border-[#2D6CFF] transition-all"
+                        aria-label="Search for a school"
+                      />
+                      {cbzTeamSearchInput && (
+                        <button 
+                          onClick={clearCbzTeamSearch}
+                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                          aria-label="Clear search"
+                        >
+                          <X className="w-5 h-5" />
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
             )}
             
-            {/* Month and Team filters for SA Schools */}
+            {/* Prominent Filters Section for SA Schools */}
             {activeTab === "sa_schools" && (
-              <div className="flex justify-end mt-4 gap-2">
-                <div className="w-60">
-                  <select
-                    value={selectedMonth}
-                    onChange={(e) => setSelectedMonth(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg bg-white border border-scrummy-navyBlue/20 text-scrummy-navyBlue font-semibold focus:outline-none focus:ring-2 focus:ring-scrummy-goldYellow"
-                    aria-label="Select month"
-                  >
-                    {saMonths.map((month) => (
-                      <option key={month} value={month}>
-                        {month === "All" ? "All Months" : month}
-                      </option>
-                    ))}
-                  </select>
+              <div className={`${cardGrad} rounded-2xl p-6 border border-white/10 shadow-[0_0_40px_rgba(45,108,255,.35)]`}>
+                <div className="flex items-center gap-3 mb-4">
+                  <Filter className="w-5 h-5 text-[#F9C94E]" />
+                  <h3 className="text-lg font-semibold text-white">Filter Fixtures</h3>
                 </div>
-                <div className="w-60">
-                  <div className="relative w-full">
-                    <input 
-                      type="text"
-                      value={teamSearchInput}
-                      onChange={(e) => handleTeamSearch(e.target.value)}
-                      placeholder="Search for a school..."
-                      className="w-full px-3 py-2 rounded-lg bg-white border border-scrummy-navyBlue/20 text-scrummy-navyBlue font-semibold focus:outline-none focus:ring-2 focus:ring-scrummy-goldYellow pr-8"
-                      aria-label="Search for a school"
-                    />
-                    {teamSearchInput && (
-                      <button 
-                        onClick={clearTeamSearch}
-                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-scrummy-navyBlue/50 hover:text-scrummy-navyBlue"
-                        aria-label="Clear search"
-                      >
-                        ✕
-                      </button>
-                    )}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm text-white/60 mb-2">Select Month</label>
+                    <select
+                      value={selectedMonth}
+                      onChange={(e) => setSelectedMonth(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-[#2D6CFF] focus:border-[#2D6CFF] transition-all"
+                      aria-label="Select month"
+                    >
+                      {saMonths.map((month) => (
+                        <option key={month} value={month} className="bg-[#121527] text-white">
+                          {month === "All" ? "All Months" : month}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm text-white/60 mb-2">Search School</label>
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/40" />
+                      <input 
+                        type="text"
+                        value={teamSearchInput}
+                        onChange={(e) => handleTeamSearch(e.target.value)}
+                        placeholder="Search for a school..."
+                        className="w-full pl-10 pr-10 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#2D6CFF] focus:border-[#2D6CFF] transition-all"
+                        aria-label="Search for a school"
+                      />
+                      {teamSearchInput && (
+                        <button 
+                          onClick={clearTeamSearch}
+                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                          aria-label="Clear search"
+                        >
+                          <X className="w-5 h-5" />
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
             )}
 
-          <div className="mt-8 space-y-8">
+          <div className="mt-8">
             {!hasFixtures() ? (
-              <div className="text-center bg-white/80 backdrop-blur-sm rounded-xl p-8 shadow-lg">
-                <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navy mb-4">
+              <div className={`text-center ${cardGrad} rounded-2xl p-8 border border-white/10`}>
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
                   Stay Tuned
                 </h2>
-                <p className="text-base text-gray-600">
+                <p className="text-base text-white/60">
                   Check back soon for updates!
                 </p>
               </div>
               ) : (
-                filteredFixtures(activeTab).map((day, idx) => (
-                  <div key={idx} className={`bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-200/50 ${day.day === "FEATURED MATCHES" ? "col-span-full" : ""}`}>
+                <Accordion type="single" collapsible value={openAccordion} onValueChange={setOpenAccordion} className="space-y-4">
+                  {filteredFixtures(activeTab).map((day, idx) => (
+                    <AccordionItem key={idx} value={`week-${idx}`} className={`${cardGrad} rounded-2xl border border-white/10 shadow-[0_0_40px_rgba(45,108,255,.35)] overflow-hidden ${day.day === "FEATURED MATCHES" ? "col-span-full" : ""}`}>
                     {day.day === "FEATURED MATCHES" ? (
                       <>
-                        <h2 className="text-3xl md:text-4xl font-bold mb-6 font-orbitron border-b border-scrummy-goldYellow/30 pb-4 flex flex-col md:flex-row md:items-end">
-                          <span className="text-scrummy-navy">{day.date}</span>
-                          <span className="text-scrummy-goldYellow text-2xl md:ml-3">{day.day}</span>
-                        </h2>
+                        <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                          <h2 className="text-2xl md:text-3xl font-bold font-orbitron flex flex-col md:flex-row md:items-end text-left">
+                            <span className="text-white">{day.date}</span>
+                            <span className="text-[#F9C94E] text-xl md:ml-3">{day.day}</span>
+                          </h2>
+                        </AccordionTrigger>
+                        <AccordionContent className="px-6 pb-6">
                         <motion.div
                           className="grid grid-cols-1 gap-4"
                           variants={containerVariants}
@@ -917,7 +965,7 @@ const Fixtures: React.FC = () => {
                           {day.fixtures.map((f, i) => (
                             <motion.div key={i} variants={itemVariants} className="w-full">
                               <Card
-                                className="transition-all duration-300 hover:shadow-lg h-[280px] w-full relative border-2 border-scrummy-goldYellow hover:shadow-[0_0_20px_rgba(255,199,0,0.4)] cursor-pointer bg-gradient-to-br from-white/90 to-white/70"
+                                className="transition-all duration-300 hover:shadow-lg h-[280px] w-full relative border-2 border-[#F9C94E] hover:shadow-[0_0_20px_rgba(249,201,78,0.6)] cursor-pointer bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))]"
                                 onClick={() => handleFixtureClick(day.date, f.time, f.teamA, f.teamB)}
                               >
                                 <img 
@@ -926,7 +974,7 @@ const Fixtures: React.FC = () => {
                                   className="absolute top-4 right-4 w-12 h-12 opacity-80" 
                                 />
                                 <CardContent className="p-6 flex flex-col h-full">
-                                  <div className="text-xl font-bold text-scrummy-navy bg-scrummy-goldYellow inline-flex rounded-lg px-4 py-2 self-start mb-4">
+                                  <div className="text-xl font-bold text-[#0B0D18] bg-[#F9C94E] inline-flex rounded-lg px-4 py-2 self-start mb-4">
                                     {f.time}
                                   </div>
                                   <div className="flex items-center justify-center flex-grow gap-8 md:gap-16">
@@ -939,7 +987,7 @@ const Fixtures: React.FC = () => {
                                           className="w-32 h-32 mx-auto mb-2 object-contain" 
                                         />
                                       )}
-                                      <p className="text-xl font-bold text-scrummy-navy">{f.teamA}</p>
+                                      <p className="text-xl font-bold text-white">{f.teamA}</p>
                                     </div>
                                     {/* VS */}
                                     <div className="flex-none">
@@ -947,12 +995,12 @@ const Fixtures: React.FC = () => {
                                         const finalScore = getFinalScore(day.date, f.time, f.teamA, f.teamB);
                                         if (finalScore) {
                                           return (
-                                            <p className="text-5xl font-bold text-scrummy-goldYellow font-orbitron">
+                                            <p className="text-5xl font-bold text-[#F9C94E] font-orbitron">
                                               {String(finalScore.teamAScore).padStart(2, '0')} - {String(finalScore.teamBScore).padStart(2, '0')}
                                             </p>
                                           );
                                         }
-                                        return <p className="text-3xl font-bold text-scrummy-goldYellow">VS</p>;
+                                        return <p className="text-3xl font-bold text-[#F9C94E]">VS</p>;
                                       })()}
                                     </div>
                                     {/* Team B */}
@@ -964,7 +1012,7 @@ const Fixtures: React.FC = () => {
                                           className="w-32 h-32 mx-auto mb-2 object-contain" 
                                         />
                                       )}
-                                      <p className="text-xl font-bold text-scrummy-navy">{f.teamB}</p>
+                                      <p className="text-xl font-bold text-white">{f.teamB}</p>
                                     </div>
                                   </div>
                                   {/* Add streaming link for first match */}
@@ -1006,13 +1054,17 @@ const Fixtures: React.FC = () => {
                             </motion.div>
                           ))}
                         </motion.div>
+                        </AccordionContent>
                       </>
                     ) : (
                       <>
-                        <h2 className="text-xl md:text-2xl font-semibold mb-4 font-orbitron border-b border-gray-200 pb-2 flex flex-col md:flex-row md:items-end">
-                          <span className="text-scrummy-navy">{day.date}</span>
-                          <span className="text-scrummy-goldYellow text-lg md:ml-3">{day.day}</span>
-                        </h2>
+                        <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                          <h2 className="text-lg md:text-xl font-semibold font-orbitron flex flex-col md:flex-row md:items-end text-left">
+                            <span className="text-white">{day.date}</span>
+                            <span className="text-[#F9C94E] text-base md:ml-3">{day.day}</span>
+                          </h2>
+                        </AccordionTrigger>
+                        <AccordionContent className="px-6 pb-6">
                         <motion.div
                           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
                           variants={containerVariants}
@@ -1033,7 +1085,7 @@ const Fixtures: React.FC = () => {
                               const teamAStr = String(finalScore.teamAScore).padStart(2, '0');
                               const teamBStr = String(finalScore.teamBScore).padStart(2, '0');
                               scoreDisplay = (
-                                <div className="text-2xl font-orbitron text-scrummy-goldYellow text-center">
+                                <div className="text-2xl font-orbitron text-[#F9C94E] text-center">
                                   {teamAStr} - {teamBStr}
                                 </div>
                               );
@@ -1044,10 +1096,10 @@ const Fixtures: React.FC = () => {
                                 <Card
                                   className={`transition-all duration-300 hover:shadow-lg h-[240px] w-full relative ${
                                     isHighlighted && !isCancelled
-                                      ? "border-2 border-scrummy-goldYellow hover:shadow-[0_0_20px_rgba(255,199,0,0.4)] cursor-pointer"
+                                      ? "border-2 border-[#F9C94E] hover:shadow-[0_0_20px_rgba(249,201,78,0.6)] cursor-pointer bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))]"
                                       : isCancelled
-                                      ? "bg-white/60 opacity-75"
-                                      : "bg-white/80 hover:bg-white/90 cursor-pointer"
+                                      ? "bg-white/5 opacity-50"
+                                      : "bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] cursor-pointer border border-white/10"
                                   }`}
                                   onClick={() => !isCancelled && handleFixtureClick(day.date, f.time, f.teamA, f.teamB)}
                                 >
@@ -1061,10 +1113,10 @@ const Fixtures: React.FC = () => {
                                   <CardContent className="p-2 pt-1 flex flex-col h-full">
                                     <div className={`text-lg font-bold ${
                                       isCancelled 
-                                        ? 'text-red-500 bg-red-50'
+                                        ? 'text-white bg-red-500/80'
                                         : isHighlighted 
-                                          ? 'text-scrummy-navy bg-scrummy-goldYellow' 
-                                          : 'text-scrummy-goldYellow bg-scrummy-navy'
+                                          ? 'text-[#0B0D18] bg-[#F9C94E]' 
+                                          : 'text-[#F9C94E] bg-[#2D6CFF]'
                                     } inline-flex rounded px-2 py-1 self-start mb-0.5 mt-2 ml-2 z-10`}>
                                       {f.time}
                                     </div>
@@ -1079,16 +1131,16 @@ const Fixtures: React.FC = () => {
                                             className="w-24 h-24 mx-auto mb-0.5 object-contain" 
                                           />
                                         )}
-                                        <p className="text-base font-medium text-scrummy-navy">{f.teamA}</p>
+                                        <p className="text-base font-medium text-white">{f.teamA}</p>
                                       </div>
                                       {/* Score or VS */}
                                       <div className="flex-none flex flex-col items-center justify-center">
                                         {isCancelled ? (
-                                          <p className="text-red-500/70 font-semibold text-base">cancelled</p>
+                                          <p className="text-red-400 font-semibold text-base">cancelled</p>
                                         ) : showFinal ? (
                                           scoreDisplay
                                         ) : (
-                                          <p className="text-gray-400 font-semibold text-base">vs</p>
+                                          <p className="text-white/40 font-semibold text-base">vs</p>
                                         )}
                                       </div>
                                       {/* Team B */}
@@ -1100,13 +1152,13 @@ const Fixtures: React.FC = () => {
                                             className="w-24 h-24 mx-auto mb-0.5 object-contain" 
                                           />
                                         )}
-                                        <p className="text-base font-medium text-scrummy-navy">{f.teamB}</p>
+                                        <p className="text-base font-medium text-white">{f.teamB}</p>
                                       </div>
                                     </div>
 
                                     {/* Location display below team info */}
                                     {f.location && (
-                                      <div className="text-xs text-center font-medium text-gray-500 mt-2">
+                                      <div className="text-xs text-center font-medium text-white/60 mt-2">
                                         {f.location}
                                       </div>
                                     )}
@@ -1116,14 +1168,17 @@ const Fixtures: React.FC = () => {
                             );
                           })}
                         </motion.div>
+                        </AccordionContent>
                       </>
                     )}
-                  </div>
-                ))
+                    </AccordionItem>
+                  ))}
+                </Accordion>
               )}
             </div>
-          <div className="mt-12 text-center text-sm text-gray-500">
-            {/* Footer space */}
+            <div className="mt-12 text-center text-sm text-white/40">
+              {/* Footer space */}
+            </div>
           </div>
         </div>
       </main>
