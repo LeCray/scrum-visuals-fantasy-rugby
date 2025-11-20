@@ -8,11 +8,12 @@ import {
   Award, 
   Target,
   Download,
-  Share2
+  Share2,
+  History
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { getLatestSocialStats, SocialStats } from "@/lib/supabase";
+import { getLatestSocialStats, getWeeklyAggregatedStats, SocialStats, WeeklyAggregatedStats } from "@/lib/supabase";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { 
@@ -27,24 +28,36 @@ import {
   ResponsiveContainer,
   PieChart,
   Pie,
-  Cell
+  Cell,
+  Legend,
+  Area,
+  AreaChart,
+  ComposedChart
 } from "recharts";
 
 const AnalyticsWeekly: React.FC = () => {
   const [socialStats, setSocialStats] = useState<SocialStats[]>([]);
+  const [weeklyAggregatedData, setWeeklyAggregatedData] = useState<WeeklyAggregatedStats[]>([]);
   const [loading, setLoading] = useState(true);
   const [exporting, setExporting] = useState(false);
+  const [viewMode, setViewMode] = useState<'current' | 'historical'>('current');
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [viewMode]);
 
   const fetchData = async () => {
     setLoading(true);
     try {
-      const data = await getLatestSocialStats();
-      setSocialStats(data);
+      if (viewMode === 'current') {
+        const data = await getLatestSocialStats();
+        setSocialStats(data);
+      } else {
+        // Fetch properly aggregated weekly data from database
+        const data = await getWeeklyAggregatedStats(8); // Last 8 weeks
+        setWeeklyAggregatedData(data);
+      }
     } catch (error) {
       console.error('Error fetching weekly stats:', error);
     } finally {
@@ -130,6 +143,17 @@ const AnalyticsWeekly: React.FC = () => {
     return num.toString();
   };
 
+  // Transform weeklyAggregatedData for charts
+  const weeklyChartData = weeklyAggregatedData.map((week, index) => ({
+    weekLabel: `Week ${index + 1}`,
+    weekStart: new Date(week.weekStart).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+    weekEnd: new Date(week.weekEnd).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+    totalFollowers: week.aggregated.totalFollowers,
+    totalPosts: week.aggregated.totalPosts,
+    avgEngagement: week.aggregated.avgEngagement,
+    totalInteractions: week.aggregated.totalInteractions
+  }));
+
   // Calculate weekly metrics
   const totalFollowers = socialStats.reduce((sum, stat) => sum + stat.followers, 0);
   const totalEngagement = socialStats.length > 0 
@@ -162,27 +186,52 @@ const AnalyticsWeekly: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       {/* Header */}
       <header className="bg-white/90 backdrop-blur-md border-b border-gray-200/50 sticky top-0 z-20">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between flex-wrap gap-4">
           <Link to="/" className="flex items-center gap-2 text-scrummy-navy hover:text-scrummy-blue transition-colors">
             <ChevronLeft className="w-5 h-5" />
             <span className="font-medium">Back to Home</span>
           </Link>
           <div className="flex items-center gap-4">
             <img src="/assets/logo.png" alt="SCRUMMY" className="h-10" />
-            <span className="font-orbitron font-bold text-scrummy-navy">Analytics Hub</span>
+            <span className="font-orbitron font-bold text-scrummy-navy hidden md:inline">Analytics Hub</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
+            {/* View Mode Toggle - Prominent */}
+            <div className="flex items-center gap-1 bg-white border-2 border-scrummy-navy rounded-lg p-1 shadow-md">
+              <Button
+                variant={viewMode === 'current' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setViewMode('current')}
+                className={viewMode === 'current' 
+                  ? 'bg-scrummy-navy text-white hover:bg-scrummy-navy' 
+                  : 'text-scrummy-navy hover:bg-gray-100'}
+              >
+                <Calendar className="w-4 h-4 mr-1" />
+                Current Week
+              </Button>
+              <Button
+                variant={viewMode === 'historical' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setViewMode('historical')}
+                className={viewMode === 'historical' 
+                  ? 'bg-scrummy-goldYellow text-scrummy-navy font-bold hover:bg-scrummy-goldYellow' 
+                  : 'text-scrummy-navy hover:bg-gray-100'}
+              >
+                <History className="w-4 h-4 mr-1" />
+                📊 8-Week Report
+              </Button>
+            </div>
             <Button 
               variant="outline" 
               size="sm" 
               className="text-scrummy-navy border-scrummy-navy hover:bg-scrummy-navy hover:text-white"
               onClick={handleExportPDF}
-              disabled={exporting || loading || socialStats.length === 0}
+              disabled={exporting || loading || (viewMode === 'current' && socialStats.length === 0) || (viewMode === 'historical' && weeklyAggregatedData.length === 0)}
             >
               <Download className={`w-4 h-4 mr-2 ${exporting ? 'animate-bounce' : ''}`} />
               {exporting ? 'Exporting...' : 'Export'}
             </Button>
-            <Button variant="outline" size="sm" className="text-scrummy-navy border-scrummy-navy hover:bg-scrummy-navy hover:text-white">
+            <Button variant="outline" size="sm" className="text-scrummy-navy border-scrummy-navy hover:bg-scrummy-navy hover:text-white hidden sm:flex">
               <Share2 className="w-4 h-4 mr-2" />
               Share
             </Button>
@@ -196,15 +245,21 @@ const AnalyticsWeekly: React.FC = () => {
           {/* Page Header */}
           <div className="text-center mb-8">
             <h1 className="text-4xl md:text-6xl font-bold font-orbitron text-scrummy-navy leading-tight mb-4">
-              Weekly <span className="text-scrummy-goldYellow">Performance</span> Report
+              {viewMode === 'current' ? 'Weekly' : '8-Week'} <span className="text-scrummy-goldYellow">Performance</span> Report
             </h1>
             <p className="text-lg text-gray-600 mb-4">
-              Comprehensive analysis of social media performance
+              {viewMode === 'current' 
+                ? 'Comprehensive analysis of social media performance' 
+                : 'Week-by-week analytics for the past 2 months'}
             </p>
             <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>Week of {new Date().toLocaleDateString()}</span>
+                <span>
+                  {viewMode === 'current' 
+                    ? `Week of ${new Date().toLocaleDateString()}` 
+                    : `Last 8 weeks ending ${new Date().toLocaleDateString()}`}
+                </span>
               </div>
               <span>•</span>
               <span>Generated automatically</span>
@@ -240,9 +295,9 @@ const AnalyticsWeekly: React.FC = () => {
           {loading ? (
             <div className="text-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-scrummy-navy mx-auto"></div>
-              <p className="mt-4 text-gray-600">Loading weekly report...</p>
+              <p className="mt-4 text-gray-600">Loading {viewMode === 'current' ? 'weekly' : 'historical'} report...</p>
             </div>
-          ) : socialStats.length === 0 ? (
+          ) : viewMode === 'current' && socialStats.length === 0 ? (
             <Card className="bg-white/80 backdrop-blur-sm border-2 border-white/30 shadow-lg">
               <CardContent className="p-12 text-center">
                 <div className="text-6xl mb-4">📋</div>
@@ -257,7 +312,243 @@ const AnalyticsWeekly: React.FC = () => {
                 </p>
               </CardContent>
             </Card>
+          ) : viewMode === 'historical' && weeklyAggregatedData.length === 0 ? (
+            <Card className="bg-white/80 backdrop-blur-sm border-2 border-white/30 shadow-lg">
+              <CardContent className="p-12 text-center">
+                <div className="text-6xl mb-4">📊</div>
+                <h2 className="text-2xl font-bold text-scrummy-navy mb-4 font-orbitron">
+                  No Historical Data
+                </h2>
+                <p className="text-gray-600 mb-6">
+                  Not enough historical data to generate an 8-week report.
+                </p>
+                <p className="text-sm text-gray-500">
+                  Add more data over time to see weekly trends.
+                </p>
+              </CardContent>
+            </Card>
+          ) : viewMode === 'historical' ? (
+            // HISTORICAL 8-WEEK VIEW
+            <div className="space-y-8">
+              {/* Historical Summary */}
+              <Card className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-xl">
+                <CardContent className="p-8">
+                  <h2 className="text-3xl font-bold font-orbitron mb-6 text-center">
+                    8-Week Summary
+                  </h2>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div className="text-center">
+                      <div className="text-4xl font-bold mb-2">{weeklyChartData.length}</div>
+                      <div className="text-purple-100">Weeks Tracked</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-4xl font-bold mb-2">
+                        {formatNumber(weeklyChartData.length > 0 ? weeklyChartData[weeklyChartData.length - 1].totalFollowers : 0)}
+                      </div>
+                      <div className="text-purple-100">Current Followers</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-4xl font-bold mb-2">
+                        {weeklyChartData.reduce((sum, w) => sum + w.totalPosts, 0)}
+                      </div>
+                      <div className="text-purple-100">Total Posts</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-4xl font-bold mb-2">
+                        {(weeklyChartData.reduce((sum, w) => sum + w.avgEngagement, 0) / weeklyChartData.length).toFixed(1)}%
+                      </div>
+                      <div className="text-purple-100">Avg. Engagement</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Week-by-Week Trends */}
+              <Card className="bg-white/80 backdrop-blur-sm border-2 border-white/30 shadow-lg">
+                <CardContent className="p-6">
+                  <h2 className="text-2xl font-bold text-scrummy-navy mb-6 font-orbitron text-center">
+                    Follower Growth Over 8 Weeks
+                  </h2>
+                  <div className="h-96">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <AreaChart data={weeklyChartData}>
+                        <defs>
+                          <linearGradient id="colorFollowers" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.8}/>
+                            <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0}/>
+                          </linearGradient>
+                        </defs>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                        <XAxis 
+                          dataKey="weekLabel" 
+                          stroke="#6B7280"
+                          tick={{ fontSize: 12 }}
+                        />
+                        <YAxis stroke="#6B7280" />
+                        <Tooltip 
+                          contentStyle={{ 
+                            backgroundColor: 'white', 
+                            border: '1px solid #E5E7EB',
+                            borderRadius: '8px'
+                          }}
+                          labelFormatter={(label) => {
+                            const week = weeklyChartData.find(w => w.weekLabel === label);
+                            return week ? `${week.weekStart} - ${week.weekEnd}` : label;
+                          }}
+                        />
+                        <Area 
+                          type="monotone" 
+                          dataKey="totalFollowers" 
+                          stroke="#8b5cf6" 
+                          fillOpacity={1} 
+                          fill="url(#colorFollowers)" 
+                          name="Total Followers"
+                        />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Engagement Trends */}
+              <Card className="bg-white/80 backdrop-blur-sm border-2 border-white/30 shadow-lg">
+                <CardContent className="p-6">
+                  <h2 className="text-2xl font-bold text-scrummy-navy mb-6 font-orbitron text-center">
+                    Engagement Rate Trends
+                  </h2>
+                  <div className="h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <ComposedChart data={weeklyChartData}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                        <XAxis 
+                          dataKey="weekLabel" 
+                          stroke="#6B7280"
+                          tick={{ fontSize: 12 }}
+                        />
+                        <YAxis stroke="#6B7280" />
+                        <Tooltip 
+                          contentStyle={{ 
+                            backgroundColor: 'white', 
+                            border: '1px solid #E5E7EB',
+                            borderRadius: '8px'
+                          }}
+                          labelFormatter={(label) => {
+                            const week = weeklyChartData.find(w => w.weekLabel === label);
+                            return week ? `${week.weekStart} - ${week.weekEnd}` : label;
+                          }}
+                        />
+                        <Legend />
+                        <Bar dataKey="totalPosts" fill="#FFC700" name="Posts" radius={[4, 4, 0, 0]} />
+                        <Line 
+                          type="monotone" 
+                          dataKey="avgEngagement" 
+                          stroke="#ec4899" 
+                          strokeWidth={3}
+                          name="Avg Engagement %"
+                          dot={{ fill: '#ec4899', r: 5 }}
+                        />
+                      </ComposedChart>
+                    </ResponsiveContainer>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Week-by-Week Table */}
+              <Card className="bg-white/80 backdrop-blur-sm border-2 border-white/30 shadow-lg">
+                <CardContent className="p-6">
+                  <h2 className="text-2xl font-bold text-scrummy-navy mb-6 font-orbitron text-center">
+                    Week-by-Week Breakdown
+                  </h2>
+                  <div className="overflow-x-auto">
+                    <table className="w-full border-collapse">
+                      <thead>
+                        <tr className="bg-scrummy-navy text-white">
+                          <th className="p-3 text-left rounded-l-lg">Week</th>
+                          <th className="p-3 text-left">Date Range</th>
+                          <th className="p-3 text-center">Followers</th>
+                          <th className="p-3 text-center">Posts</th>
+                          <th className="p-3 text-center">Engagement</th>
+                          <th className="p-3 text-center">Interactions</th>
+                          <th className="p-3 text-center rounded-r-lg">Growth</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {weeklyChartData.map((week, index) => {
+                          const prevWeek = index > 0 ? weeklyChartData[index - 1] : null;
+                          const growth = prevWeek 
+                            ? ((week.totalFollowers - prevWeek.totalFollowers) / prevWeek.totalFollowers * 100).toFixed(1)
+                            : '0.0';
+                          const isPositive = parseFloat(growth) >= 0;
+                          
+                          return (
+                            <tr key={week.weekLabel} className="border-b border-gray-200 hover:bg-gray-50">
+                              <td className="p-3 font-semibold">{week.weekLabel}</td>
+                              <td className="p-3 text-sm text-gray-600">{week.weekStart} - {week.weekEnd}</td>
+                              <td className="p-3 text-center font-semibold">{formatNumber(week.totalFollowers)}</td>
+                              <td className="p-3 text-center">{week.totalPosts}</td>
+                              <td className="p-3 text-center font-semibold">{week.avgEngagement.toFixed(1)}%</td>
+                              <td className="p-3 text-center">{formatNumber(week.totalInteractions)}</td>
+                              <td className="p-3 text-center">
+                                <div className={`inline-flex items-center gap-1 ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
+                                  {isPositive ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
+                                  {Math.abs(parseFloat(growth))}%
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Key Insights */}
+              <Card className="bg-white/80 backdrop-blur-sm border-2 border-white/30 shadow-lg">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4 mb-6">
+                    <Target className="w-8 h-8 text-scrummy-goldYellow" />
+                    <h2 className="text-2xl font-bold text-scrummy-navy font-orbitron">
+                      8-Week Key Insights
+                    </h2>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="p-4 bg-green-50 rounded-lg">
+                      <p className="text-sm text-gray-700">
+                        <strong>Best Week:</strong> {weeklyChartData.reduce((best, week) => 
+                          week.avgEngagement > best.avgEngagement ? week : best, weeklyChartData[0])?.weekLabel} with {
+                          weeklyChartData.reduce((best, week) => 
+                            week.avgEngagement > best.avgEngagement ? week : best, weeklyChartData[0])?.avgEngagement.toFixed(1)
+                        }% engagement
+                      </p>
+                    </div>
+                    <div className="p-4 bg-blue-50 rounded-lg">
+                      <p className="text-sm text-gray-700">
+                        <strong>Most Productive:</strong> {weeklyChartData.reduce((best, week) => 
+                          week.totalPosts > best.totalPosts ? week : best, weeklyChartData[0])?.weekLabel} with {
+                          weeklyChartData.reduce((best, week) => 
+                            week.totalPosts > best.totalPosts ? week : best, weeklyChartData[0])?.totalPosts
+                        } posts
+                      </p>
+                    </div>
+                    <div className="p-4 bg-purple-50 rounded-lg">
+                      <p className="text-sm text-gray-700">
+                        <strong>Total Growth:</strong> {weeklyChartData.length > 1 ? 
+                          ((weeklyChartData[weeklyChartData.length - 1].totalFollowers - weeklyChartData[0].totalFollowers) / 
+                          weeklyChartData[0].totalFollowers * 100).toFixed(1) : '0'}% over 8 weeks
+                      </p>
+                    </div>
+                    <div className="p-4 bg-yellow-50 rounded-lg">
+                      <p className="text-sm text-gray-700">
+                        <strong>Average:</strong> {(weeklyChartData.reduce((sum, w) => sum + w.totalPosts, 0) / weeklyChartData.length).toFixed(1)} posts per week
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           ) : (
+            // CURRENT WEEK VIEW (existing code)
             <div className="space-y-8">
               {/* Executive Summary */}
               <Card className="bg-gradient-to-r from-scrummy-navy to-scrummy-blue text-white shadow-xl">

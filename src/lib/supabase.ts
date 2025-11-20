@@ -251,3 +251,186 @@ export const createSocialStatsData = (data: {
     date: data.date || new Date().toISOString().split('T')[0]
   }
 }
+
+// New interface for weekly aggregated data
+export interface WeeklyAggregatedStats {
+  weekNumber: number
+  weekStart: string
+  weekEnd: string
+  year: number
+  platforms: {
+    [platform: string]: {
+      followers: number // Latest in week
+      totalPosts: number // Sum for week
+      totalLikes: number // Sum for week
+      totalComments: number // Sum for week
+      totalShares: number // Sum for week
+      totalViews: number // Sum for week
+      avgEngagement: number // Average for week
+      topPostUrl?: string
+    }
+  }
+  aggregated: {
+    totalFollowers: number // Sum across all platforms
+    totalPosts: number // Sum across all platforms
+    totalLikes: number
+    totalComments: number
+    totalInteractions: number // likes + comments + shares
+    avgEngagement: number // Average across all platforms
+  }
+}
+
+// GET /api/weekly-aggregated-stats - Returns data grouped and aggregated by week
+export const getWeeklyAggregatedStats = async (weeks: number = 8): Promise<WeeklyAggregatedStats[]> => {
+  if (!supabase) {
+    console.log('⚠️ Supabase not connected - returning empty array')
+    return []
+  }
+
+  try {
+    // Calculate date range (approximately weeks * 7 days + buffer)
+    const daysToFetch = weeks * 7 + 7 // Extra week for buffer
+    const startDate = new Date()
+    startDate.setDate(startDate.getDate() - daysToFetch)
+    const startDateStr = startDate.toISOString().split('T')[0]
+    
+    console.log(`📅 Fetching data from ${startDateStr} for weekly aggregation`)
+    
+    // Fetch all data for the period
+    const { data, error } = await supabase
+      .from('social_stats')
+      .select('*')
+      .gte('date', startDateStr)
+      .order('date', { ascending: true })
+    
+    if (error) {
+      console.error('❌ Error fetching data for weekly aggregation:', error)
+      return []
+    }
+    
+    if (!data || data.length === 0) {
+      console.log('📭 No data available for weekly aggregation')
+      return []
+    }
+    
+    console.log(`✅ Fetched ${data.length} records for weekly aggregation`)
+    
+    // Group data by ISO week
+    const weeklyGroups = new Map<string, SocialStats[]>()
+    
+    data.forEach((stat) => {
+      const date = new Date(stat.date)
+      const year = date.getFullYear()
+      
+      // Get ISO week number (Sunday start)
+      const firstDayOfYear = new Date(year, 0, 1)
+      const dayOfYear = Math.floor((date.getTime() - firstDayOfYear.getTime()) / (24 * 60 * 60 * 1000))
+      const weekNumber = Math.ceil((dayOfYear + firstDayOfYear.getDay() + 1) / 7)
+      
+      // Create week key
+      const weekKey = `${year}-W${weekNumber.toString().padStart(2, '0')}`
+      
+      if (!weeklyGroups.has(weekKey)) {
+        weeklyGroups.set(weekKey, [])
+      }
+      weeklyGroups.get(weekKey)!.push(stat)
+    })
+    
+    // Convert to aggregated weekly data
+    const weeklyStats: WeeklyAggregatedStats[] = []
+    const sortedWeeks = Array.from(weeklyGroups.keys()).sort().slice(-weeks) // Get last N weeks
+    
+    sortedWeeks.forEach((weekKey) => {
+      const weekData = weeklyGroups.get(weekKey)!
+      const [yearStr, weekStr] = weekKey.split('-W')
+      const year = parseInt(yearStr)
+      const weekNumber = parseInt(weekStr)
+      
+      // Calculate week start and end dates
+      const firstDayOfYear = new Date(year, 0, 1)
+      const daysToAdd = (weekNumber - 1) * 7 - firstDayOfYear.getDay()
+      const weekStart = new Date(year, 0, 1 + daysToAdd)
+      const weekEnd = new Date(weekStart)
+      weekEnd.setDate(weekStart.getDate() + 6)
+      
+      // Group by platform
+      const platformGroups = new Map<string, SocialStats[]>()
+      weekData.forEach((stat) => {
+        if (!platformGroups.has(stat.platform)) {
+          platformGroups.set(stat.platform, [])
+        }
+        platformGroups.get(stat.platform)!.push(stat)
+      })
+      
+      // Aggregate per platform
+      const platforms: WeeklyAggregatedStats['platforms'] = {}
+      let totalFollowers = 0
+      let totalPosts = 0
+      let totalLikes = 0
+      let totalComments = 0
+      let totalShares = 0
+      let totalViews = 0
+      let totalEngagementSum = 0
+      let platformCount = 0
+      
+      platformGroups.forEach((stats, platform) => {
+        // Sort by date to get latest
+        stats.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        
+        // Get latest follower count for this platform in this week
+        const latestFollowers = stats[0].followers
+        
+        // Sum all posts, likes, comments, etc. for this week
+        const weekTotalPosts = stats.reduce((sum, s) => sum + s.posts, 0)
+        const weekTotalLikes = stats.reduce((sum, s) => sum + s.likes, 0)
+        const weekTotalComments = stats.reduce((sum, s) => sum + s.comments, 0)
+        const weekTotalShares = stats.reduce((sum, s) => sum + s.shares, 0)
+        const weekTotalViews = stats.reduce((sum, s) => sum + s.views, 0)
+        const weekAvgEngagement = stats.reduce((sum, s) => sum + s.engagement_rate, 0) / stats.length
+        
+        platforms[platform] = {
+          followers: latestFollowers,
+          totalPosts: weekTotalPosts,
+          totalLikes: weekTotalLikes,
+          totalComments: weekTotalComments,
+          totalShares: weekTotalShares,
+          totalViews: weekTotalViews,
+          avgEngagement: weekAvgEngagement,
+          topPostUrl: stats[0].top_post_url
+        }
+        
+        totalFollowers += latestFollowers
+        totalPosts += weekTotalPosts
+        totalLikes += weekTotalLikes
+        totalComments += weekTotalComments
+        totalShares += weekTotalShares
+        totalViews += weekTotalViews
+        totalEngagementSum += weekAvgEngagement
+        platformCount++
+      })
+      
+      weeklyStats.push({
+        weekNumber,
+        weekStart: weekStart.toISOString().split('T')[0],
+        weekEnd: weekEnd.toISOString().split('T')[0],
+        year,
+        platforms,
+        aggregated: {
+          totalFollowers,
+          totalPosts,
+          totalLikes,
+          totalComments,
+          totalInteractions: totalLikes + totalComments + totalShares,
+          avgEngagement: platformCount > 0 ? totalEngagementSum / platformCount : 0
+        }
+      })
+    })
+    
+    console.log(`✅ Processed ${weeklyStats.length} weeks of aggregated data`)
+    return weeklyStats
+    
+  } catch (err) {
+    console.error('❌ Exception during weekly aggregation:', err)
+    return []
+  }
+}
