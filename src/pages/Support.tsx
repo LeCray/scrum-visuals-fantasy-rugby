@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ChevronLeft, Mail, MessageCircle, Phone, HelpCircle, User, Bug, Star, Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronLeft, Mail, HelpCircle, Star, Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 
@@ -152,12 +152,13 @@ const Support: React.FC = () => {
             </p>
           </motion.div>
 
-          <div className="grid gap-6 md:grid-cols-3 mb-12">
+          <div className="flex justify-center mb-12">
             {/* Email Support */}
             <motion.div
-              initial={{ x: -30, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.6 }}
+              className="w-full max-w-md"
             >
               <Card className="text-center p-6 hover:shadow-lg transition-all duration-300 border-2 hover:border-scrummy-goldYellow">
                 <CardContent className="space-y-4">
@@ -176,62 +177,6 @@ const Support: React.FC = () => {
                   >
                     <Mail className="w-4 h-4 mr-2" />
                     info@scrummy-app.ai
-                  </Button>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* In-App Support */}
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-            >
-              <Card className="text-center p-6 hover:shadow-lg transition-all duration-300 border-2 hover:border-scrummy-goldYellow">
-                <CardContent className="space-y-4">
-                  <div className="w-16 h-16 bg-scrummy-goldYellow rounded-full flex items-center justify-center mx-auto">
-                    <MessageCircle className="w-8 h-8 text-scrummy-navy" />
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl font-bold text-scrummy-navy mb-2">In-App Help</h3>
-                    <p className="text-gray-600 mb-4">Access help directly in the app</p>
-                  </div>
-
-                  <Button 
-                    className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold w-full"
-                    onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy', '_blank')}
-                  >
-                    <MessageCircle className="w-4 h-4 mr-2" />
-                    Open SCRUMMY App
-                  </Button>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Bug Reports */}
-            <motion.div
-              initial={{ x: 30, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-            >
-              <Card className="text-center p-6 hover:shadow-lg transition-all duration-300 border-2 hover:border-scrummy-goldYellow">
-                <CardContent className="space-y-4">
-                  <div className="w-16 h-16 bg-scrummy-goldYellow rounded-full flex items-center justify-center mx-auto">
-                    <Bug className="w-8 h-8 text-scrummy-navy" />
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl font-bold text-scrummy-navy mb-2">Report Issues</h3>
-                    <p className="text-gray-600 mb-4">Use our online form to report bugs</p>
-                  </div>
-
-                  <Button 
-                    className="bg-red-600 text-white hover:bg-red-700 w-full"
-                    onClick={() => window.open('https://form.jotform.com/251844112364149', '_blank')}
-                  >
-                    <Bug className="w-4 h-4 mr-2" />
-                    Report Bug
                   </Button>
                 </CardContent>
               </Card>
