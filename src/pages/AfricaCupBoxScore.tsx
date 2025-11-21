@@ -5,6 +5,23 @@ import { ChevronLeft, Calendar, MapPin, Clock, Users, Activity, AlertCircle, Dow
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
+import Nav from '../components/Nav';
+import Footer from '../components/Footer';
+
+// Theme tokens from homepage
+const tokens = {
+  bg: "#0B0D18",
+  surface: "#121527",
+  surface2: "#0E1222",
+  text: "#E6E9F5",
+  textMuted: "#A9B1C6",
+  primary: "#2D6CFF",
+  primary2: "#7A5CFF",
+  gold: "#F9C94E",
+};
+
+const appGradient = "bg-[radial-gradient(1200px_600px_at_80%_-20%,rgba(45,108,255,.25),rgba(122,92,255,.12)_40%,transparent_70%),linear-gradient(180deg,#0B0D18_0%,#0B0D18_30%,#0E1222_100%)]";
+const cardGrad = "bg-[linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01))]";
 
 // Timezone conversion utility (same as other Africa Cup pages)
 const convertToLocalTime = (timeStr: string, date: string = '2025-07-08') => {
@@ -106,47 +123,33 @@ const AfricaCupBoxScore: React.FC = () => {
   const timeInfo = convertToLocalTime(match.time, convertDateFormat(match.date));
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-[#D0E3FF]">
-      {/* Header Navigation */}
-      <header className="bg-scrummy-navy shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link to="/africa-cup/fixtures" className="flex items-center gap-2 text-white hover:text-scrummy-goldYellow transition-colors">
-            <ChevronLeft className="w-5 h-5" />
-            <span className="font-medium">Back to Fixtures</span>
-          </Link>
-          <div className="flex items-center gap-6">
-            <Link to="/africa-cup" className="text-white hover:text-scrummy-goldYellow transition-colors">
-              Tournament Hub
-            </Link>
-            <Link to="/africa-cup/teams" className="text-white hover:text-scrummy-goldYellow transition-colors">
-              Teams & Rosters
-            </Link>
-            <Link to="/africa-cup/fixtures" className="text-white hover:text-scrummy-goldYellow transition-colors">
-              Fixtures
-            </Link>
-          </div>
-        </div>
-      </header>
+    <div className={`${appGradient} min-h-screen`} style={{ color: tokens.text }}>
+      <Nav />
 
       {/* Match Header */}
-      <section className="bg-scrummy-navy text-white py-8">
+      <section className="relative py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4">
+          <Link to="/africa-cup/fixtures" className="inline-flex items-center gap-2 text-white/70 hover:text-[#F9C94E] transition-colors mb-8">
+            <ChevronLeft className="w-5 h-5" />
+            <span className="font-medium">Back to Africa Cup Fixtures</span>
+          </Link>
+
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
             {/* Match Info */}
-            <div className="text-center mb-6">
-              <Badge variant="secondary" className="mb-4">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white/70 text-sm mb-6">
                 Rugby Africa Cup 2025 - Match {matchId}
-              </Badge>
-              <div className="flex items-center justify-center gap-4 text-sm text-white/80 mb-6">
-                <div className="flex items-center gap-1">
+              </div>
+              <div className="flex items-center justify-center gap-6 text-sm text-white/60 mb-8 flex-wrap">
+                <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   <span>{match.date}</span>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
                   <span>
                     {timeInfo.isEAT ? (
@@ -156,7 +159,7 @@ const AfricaCupBoxScore: React.FC = () => {
                     )}
                   </span>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
                   <span>Mandela National Stadium, Kampala</span>
                 </div>
@@ -164,32 +167,34 @@ const AfricaCupBoxScore: React.FC = () => {
             </div>
 
             {/* Score Display */}
-            <div className="flex items-center justify-center gap-8 mb-6">
-              <div className="text-center">
-                <div className="text-6xl mb-2">{match.team1.flag}</div>
-                <div className="text-xl font-bold">{match.team1.name}</div>
-              </div>
-              
-              <div className="text-center">
-                <div className="text-6xl font-black mb-2">
-                  {match.finalScore ? `${match.finalScore.team1} - ${match.finalScore.team2}` : '0 - 0'}
+            <div className={`${cardGrad} rounded-3xl border border-white/10 p-8 md:p-12 max-w-4xl mx-auto mb-8`}>
+              <div className="flex items-center justify-center gap-8 md:gap-16">
+                <div className="text-center flex-1">
+                  <div className="text-6xl md:text-7xl mb-3">{match.team1.flag}</div>
+                  <div className="text-xl md:text-2xl font-bold text-white">{match.team1.name}</div>
                 </div>
-                <div className="text-sm text-white/80">
-                  {match.finalScore ? 'Full Time' : 'Upcoming'}
+                
+                <div className="text-center px-4">
+                  <div className="text-5xl md:text-6xl font-black text-[#F9C94E] mb-2">
+                    {match.finalScore ? `${match.finalScore.team1} - ${match.finalScore.team2}` : '0 - 0'}
+                  </div>
+                  <div className="text-sm text-white/50">
+                    {match.finalScore ? 'Full Time' : 'Upcoming'}
+                  </div>
                 </div>
-              </div>
-              
-              <div className="text-center">
-                <div className="text-6xl mb-2">{match.team2.flag}</div>
-                <div className="text-xl font-bold">{match.team2.name}</div>
+                
+                <div className="text-center flex-1">
+                  <div className="text-6xl md:text-7xl mb-3">{match.team2.flag}</div>
+                  <div className="text-xl md:text-2xl font-bold text-white">{match.team2.name}</div>
+                </div>
               </div>
             </div>
 
             {/* Status Notice */}
-            <div className={`flex items-center justify-center gap-2 px-4 py-2 rounded-full text-sm ${
+            <div className={`flex items-center justify-center gap-2 px-4 py-3 rounded-full text-sm max-w-2xl mx-auto ${
               match.finalScore 
-                ? 'bg-green-500/20 text-green-200' 
-                : 'bg-orange-500/20 text-orange-200'
+                ? 'bg-green-500/10 text-green-400 border border-green-500/30' 
+                : 'bg-orange-500/10 text-orange-400 border border-orange-500/30'
             }`}>
               <AlertCircle className="w-4 h-4" />
               <span>
@@ -2265,6 +2270,8 @@ const AfricaCupBoxScore: React.FC = () => {
           </motion.div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

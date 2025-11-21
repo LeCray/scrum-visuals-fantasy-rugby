@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
-import { ChevronLeft, Filter, Search, X } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { generateMatchId, getBoxScore, getFinalScore } from "@/lib/boxScoreData";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { ChevronLeft, ChevronRight, ChevronDown, RotateCcw, Calendar, ChevronRight as ChevronRightIcon } from "lucide-react";
+import { generateMatchId, getFinalScore } from "@/lib/boxScoreData";
+import { loadAllFixtures } from "@/lib/fixturesDataService";
+import Footer from "@/components/Footer";
+import Nav from "@/components/Nav";
 
-// Define types for our fixtures data
+/* ---------------- THEME TOKENS (FROM HOMEPAGE) ---------------- */
+const tokens = {
+  bg: "#0B0D18",
+  surface: "#121527",
+  surface2: "#0E1222",
+  text: "#E6E9F5",
+  textMuted: "#A9B1C6",
+  primary: "#2D6CFF",
+  primary2: "#7A5CFF",
+  gold: "#F9C94E",
+};
+
+const appGradient = "bg-[radial-gradient(1200px_600px_at_80%_-20%,rgba(45,108,255,.25),rgba(122,92,255,.12)_40%,transparent_70%),linear-gradient(180deg,#0B0D18_0%,#0B0D18_30%,#0E1222_100%)]";
+
+// Types
 type Fixture = {
   time: string;
   teamA: string;
@@ -28,633 +37,131 @@ type FixtureDay = {
   month?: string;
 };
 
-const tabs = [
-  { name: "CBZ Schools Rugby", key: "sbr2025" },
-  { name: "SA Schools Rugby", key: "sa_schools" },
-  { name: "Zim Sables Games", key: "zim" },
-  { name: "Derby Day", key: "derby" }
-];
-
-// Map to track cancelled games
-const cancelledGames = [
-  { date: "April 29th", time: "9:00", teamA: "CHURCHILL 2XV", teamB: "LOMAGUNDI 2XV" }
-];
-
-const isCancelledGame = (date: string, time: string, teamA: string, teamB: string) => {
-  return cancelledGames.some(game => 
-    game.date === date && 
-    game.time === time && 
-    game.teamA === teamA && 
-    game.teamB === teamB
-  );
+type Competition = {
+  id: string;
+  name: string;
+  display_name: string;
+  has_matchweeks: boolean;
+  season: string;
 };
 
-// Fixture data
-const derbyDay: FixtureDay[] = [  {
-    date: "April 28th",
-    day: "Monday",
-    fixtures: [
-      { time: "9:00",  teamA: "EAGLESVALE 2XV",  teamB: "WATERSHED 2XV" },
-      { time: "10:20", teamA: "GOLDRIDGE 1XV",   teamB: "GATEWAY 1XV" },
-      { time: "11:40", teamA: "WATERSHED 1XV",  teamB: "MIDLANDS CC 1XV" },
-      { time: "13:00", teamA: "MILTON 1XV",     teamB: "WISE OWL 1XV" },
-      { time: "14:20", teamA: "HILLCREST 1XV",  teamB: "EAGLESVALE 1XV" },
-      { time: "15:40", teamA: "RYDINGS 1XV",    teamB: "HERITAGE 1XV" }
-    ]
-  },
-  {
-    date: "April 29th",
-    day: "Tuesday",
-    fixtures: [
-      { time: "9:00",  teamA: "CHURCHILL 2XV", teamB: "LOMAGUNDI 2XV" },
-      { time: "10:20", teamA: "FALCON 2XV",    teamB: "ST ALBANS 2XV" },
-      { time: "11:40", teamA: "PETERHOUSE 2XV",teamB: "ST GEORGE'S 2XV" },
-      { time: "13:00", teamA: "ST JOHN'S 2XV", teamB: "PRINCE EDWARD'S 2XV" },
-      { time: "14:20", teamA: "LOMAGUNDI 1XV", teamB: "ST ALBANS 1XV" },
-      { time: "15:40", teamA: "ST GEORGE'S 1XV",teamB: "ST ANDREW'S 1XV" }
-    ]
-  },
-  {
-    date: "April 30th",
-    day: "Wednesday",
-    fixtures: [
-      { time: "9:00",  teamA: "WISE OWL 2XV", teamB: "LOMAGUNDI 2XV" },
-      { time: "10:20", teamA: "WATERSHED 2XV", teamB: "CBC 2XV" },
-      { time: "11:40", teamA: "RYDINGS 1XV",   teamB: "MIDLANDS CC 1XV" },
-      { time: "13:00", teamA: "GOLDRIDGE 1XV", teamB: "HILLCREST 1XV" },
-      { time: "14:20", teamA: "EAGLESVALE 1XV",teamB: "HERITAGE 1XV" },
-      { time: "15:40", teamA: "WATERSHED 1XV", teamB: "GATEWAY 1XV" }
-    ]
-  },
-  {
-    date: "May 1st",
-    day: "Thursday",
-    fixtures: [
-      { time: "8:00",  teamA: "ST GEORGE'S 2XV",  teamB: "ST ALBANS 2XV" },
-      { time: "9:20",  teamA: "ST GEORGE'S 1XV",  teamB: "PRINCE EDWARD 1XV" },
-      { time: "10:40", teamA: "CBC 1XV",          teamB: "FALCON 1XV" },
-      { time: "12:00", teamA: "LOMAGUNDI 1XV",   teamB: "CHURCHILL 1XV" },
-      { time: "13:20", teamA: "PETERHOUSE 1XV", teamB: "ST ANDREW'S 1XV" },
-      { time: "14:40", teamA: "ST JOHN'S 1XV",   teamB: "ST ALBANS 1XV" },
-      { time: "16:00", teamA: "ZAM STEELERS",    teamB: "SHARKS ACADEMY" }
-    ]
-  },
-  {
-    date: "May 2nd",
-    day: "Friday",
-    fixtures: [
-      { time: "9:00",  teamA: "MILTON 2XV",      teamB: "WISE OWL 2XV" },
-      { time: "10:20", teamA: "EAGLESVALE 2XV", teamB: "CBC 2XV" },
-      { time: "11:40", teamA: "MILTON 1XV",     teamB: "LOMAGUNDI 2XV" },
-      { time: "13:00", teamA: "PRINCE EDWARD 2XV", teamB: "LORD BRIGHTON 2XV" },
-      { time: "14:20", teamA: "RYDINGS 1XV",    teamB: "WISE OWL 1XV" },
-      { time: "15:40", teamA: "PETERHOUSE 2XV",teamB: "FALCON 2XV" }
-    ]
-  },
-  {
-    date: "May 3rd",
-    day: "Saturday",
-    fixtures: [
-      { time: "9:00",  teamA: "ST JOHN'S 2XV",  teamB: "ST ALBANS 2XV" },
-      { time: "10:20", teamA: "CBC 1XV",       teamB: "PETERHOUSE 1XV" },
-      { time: "11:40", teamA: "PRINCE EDWARD 1XV", teamB: "CHURCHILL 1XV" },
-      { time: "13:00", teamA: "LOMAGUNDI 1XV",teamB: "ST GEORGE'S 1XV" },
-      { time: "14:20", teamA: "FALCON 1XV",    teamB: "ST ALBANS 1XV" },
-      { time: "15:40", teamA: "ST JOHN'S 1XV", teamB: "ST ANDREW'S 1XV" }
-    ]
-  }
-];
-
-const zimSablesGames: FixtureDay[] = [ {
-    date: "May 4th",
-    day: "Sunday",
-    fixtures: [
-      { time: "11:30", teamA: "ZIMBABWE U20", teamB: "SHARKS ACADEMY" },
-      { time: "14:30", teamA: "ZIMBABWE SABLES", teamB: "ZAMBIA" }
-    ]
-  }
-];
-
-// South Africa Schools Rugby fixtures
-const saSchoolsRugby: FixtureDay[] = [
-  {
-    date: "May 16th",
-    day: "Friday",
-    month: "May",
-    fixtures: [
-      { time: "TBD", teamA: "TIER 2 URBAN", teamB: "TIER 2 CD" },
-      { time: "TBD", teamA: "ST CHARLES COLLEGE", teamB: "CLIFTON SCHOOL" },
-      { time: "TBD", teamA: "MICHAELHOUSE", teamB: "NORTHWOOD SCHOOL" },
-      { time: "TBD", teamA: "KEARSNEY COLLEGE", teamB: "DURBAN HIGH SCHOOL" },
-      { time: "TBD", teamA: "MARITZBURG COLLEGE", teamB: "WESTVILLE BOYS' HIGH SCHOOL" },
-      { time: "TBD", teamA: "HILTON COLLEGE", teamB: "GLENWOOD HIGH SCHOOL" }
-    ]
-  },
-  {
-    date: "May 24th",
-    day: "Saturday",
-    month: "May",
-    fixtures: [
-      { time: "TBD", teamA: "QUEEN'S COLLEGE", teamB: "GREY HIGH SCHOOL", location: "Away" }
-    ]
-  },
-  {
-    date: "May 31st",
-    day: "Saturday",
-    month: "May",
-    fixtures: [
-      { time: "TBD", teamA: "GREY HIGH SCHOOL", teamB: "ST ANDREW'S", location: "LOWER FIELD" },
-      { time: "TBD", teamA: "MARITZBURG COLLEGE", teamB: "KEARSNEY COLLEGE"},
-      { time: "TBD", teamA: "WESTVILLE BOYS' HIGH SCHOOL", teamB: "GLENWOOD HIGH SCHOOL"},
-      { time: "TBD", teamA: "PRETORIA BOYS HIGH SCHOOL", teamB: "MICHEALHOUSE" },
-      { time: "TBD", teamA: "DURBAN HIGH SCHOOL", teamB: "HILTON COLLEGE"},
-      { time: "TBD", teamA: "GREYTOWN HIGH SCHOOL", teamB: "LADYSMITH HIGH SCHOOL"}
-    ]
-  },
-  {
-    date: "June 7th",
-    day: "Saturday",
-    month: "June",
-    fixtures: [
-      { time: "TBD", teamA: "GREY HIGH SCHOOL", teamB: "DANIEL PIENAAR", location: "Home" }
-    ]
-  },
-  {
-    date: "July 26th",
-    day: "Saturday",
-    month: "July",
-    fixtures: [
-      { time: "TBD", teamA: "GREY HIGH SCHOOL", teamB: "FRAMESBY", location: "Home" }
-    ]
-  },
-  {
-    date: "August 2nd",
-    day: "Saturday",
-    month: "August",
-    fixtures: [
-      { time: "TBD", teamA: "GREY HIGH SCHOOL", teamB: "GREY COLLEGE", location: "Home" }
-    ]
-  },
-  {
-    date: "August 9th",
-    day: "Saturday",
-    month: "August",
-    fixtures: [
-      { time: "TBD", teamA: "MUIR", teamB: "GREY HIGH SCHOOL", location: "Away" }
-    ]
-  },
-  {
-    date: "August 16th",
-    day: "Saturday",
-    month: "August",
-    fixtures: [
-      { time: "TBD", teamA: "SELBORNE", teamB: "GREY HIGH SCHOOL", location: "Away" }
-    ]
-  }
-];
-
-const week1Games: FixtureDay[] = [];
-
-// SBR Season 2025 fixtures organized by week with month information
-const sbr2025Games: FixtureDay[] = [
-  {
-    date: "Week 1",
-    day: "17 May",
-    month: "May",
-    fixtures: [
-      { time: "14:00", teamA: "ST JOHNS", teamB: "PRINCE EDWARD", location: "St John's College, Harare" },
-      { time: "14:00", teamA: "KYLE", teamB: "ST GEORGES", location: "Kyle College, Masvingo" },
-      { time: "14:00", teamA: "GATEWAY", teamB: "HILLCREST", location: "Gateway High School, Harare" },
-      { time: "14:00", teamA: "HELLENIC", teamB: "WATERSHED", location: "Hellenic Academy, Harare" },
-      { time: "14:00", teamA: "PETERHOUSE", teamB: "CBC", location: "Peterhouse Boys, Marondera" },
-      { time: "14:00", teamA: "ALLAN WILSON", teamB: "MILTON", location: "Allan Wilson, Harare" },
-      { time: "14:00", teamA: "MIDLANDS CC", teamB: "HERITAGE", location: "MCC, Gweru" },
-      { time: "14:00", teamA: "GOLDRIDGE", teamB: "EAGLESVALE", location: "Goldridge, Kwekwe" },
-      { time: "14:30", teamA: "WISE OWL", teamB: "CHURCHILL", location: "Wise Owl, Marondera" },
-      { time: "15:15", teamA: "LOMAGUNDI", teamB: "FALCON", location: "Lomagundi College, Chinhoyi" },
-      { time: "TBA", teamA: "NATTIE COLLEGE", teamB: "RYDINGS", location: "Nattie College, Harare" }
-    ]
-  },
-  {
-    date: "Week 2",
-    day: "24 May",
-    month: "May",
-    fixtures: [
-      { time: "11:30", teamA: "GATEWAY", teamB: "HERITAGE" },
-      { time: "12:30", teamA: "WATERSHED", teamB: "HILLCREST", location: "Watershed College, Marondera" },
-      { time: "15:00", teamA: "HELLENIC", teamB: "EAGLESVALE", location: "Eaglesvale, Harare" },
-      { time: "15:30", teamA: "PRINCE EDWARD", teamB: "CHURCHILL", location: 
-        "Prince Edward, Harare" },
-      { time: "15:30", teamA: "ST GEORGES", teamB: "ST JOHNS", location: "St George's College, Harare" },
-      { time: "15:30", teamA: "FALCON", teamB: "CBC" },
-      { time: "TBD", teamA: "PETERHOUSE", teamB: "LOMAGUNDI" }
-    ]
-  },
-  {
-    date: "Week 3",
-    day: "07 June",
-    month: "June",
-    fixtures: [
-      { time: "09:00", teamA: "ST GEORGES 4TH", teamB: "ALLAN WILSON 1ST" },
-      { time: "10:30", teamA: "PETRA", teamB: "GATEWAY" },
-      { time: "12:05", teamA: "MIDLANDS CC", teamB: "GOLDRIDGE" },
-      { time: "12:30", teamA: "HERITAGE", teamB: "RYDINGS" },
-      { time: "12:30", teamA: "ELIS ROBINS", teamB: "MUTARE" },
-      { time: "12:50", teamA: "PRINCE EDWARD", teamB: "HILLCREST" },
-      { time: "13:20", teamA: "MILTON", teamB: "CHURCHILL" },
-      { time: "14:00", teamA: "ST GEORGES", teamB: "LOMAGUNDI" },
-      { time: "14:45", teamA: "HELLENIC", teamB: "ST JOHNS" },
-      { time: "15:00", teamA: "WISE OWL", teamB: "PLUMTREE" },
-      { time: "15:30", teamA: "KYLE", teamB: "WATERSHED" },
-      { time: "15:30", teamA: "FALCON", teamB: "PETERHOUSE" },
-      { time: "15:30", teamA: "CBC", teamB: "EAGLESVALE" }
-    ]
-  },
-  {
-    date: "Week 4",
-    day: "14 June",
-    month: "June",
-    fixtures: [
-      { time: "11:30", teamA: "MIDLANDS CC", teamB: "GATEWAY" },
-      { time: "12:00", teamA: "BMC", teamB: "ELLIS ROBINS" },
-      { time: "12:00", teamA: "MILTON", teamB: "WISE OWL" },
-      { time: "12:30", teamA: "MUTARE", teamB: "VICTORIA HIGH" },
-      { time: "13:00", teamA: "HILLCREST", teamB: "WATERSHED" },
-      { time: "13:30", teamA: "HELLENIC", teamB: "HERITAGE" },
-      { time: "14:45", teamA: "PETERHOUSE", teamB: "ST JOHNS" },
-      { time: "15:00", teamA: "CHURCHILL", teamB: "ALLAN WILSON" },
-      { time: "15:00", teamA: "EAGLESVALE", teamB: "PETRA" },
-      { time: "14:00", teamA: "FALCON", teamB: "ST GEORGE'S" },
-      { time: "15:30", teamA: "KYLE", teamB: "LOMAGUNDI" },
-      { time: "15:30", teamA: "ST JOHNS", teamB: "WISE OWL", location: "CBZ Sports Club, Harare" }
-    ]
-  },
-  {
-    date: "Week 5",
-    day: "28 June",
-    month: "June",
-    fixtures: [
-      { time: "10:15", teamA: "GATEWAY", teamB: "ST JOHNS HIGH" },
-      { time: "11:00", teamA: "MILTON", teamB: "GIFFORD" },
-      { time: "12:00", teamA: "PETRA", teamB: "MIDLANDS CC" },
-      { time: "12:30", teamA: "HERITAGE", teamB: "WATERSHED" },
-      { time: "13:45", teamA: "LOMAGUNDI", teamB: "CHURCHILL" },
-      { time: "13:45", teamA: "HELLENIC", teamB: "PETERHOUSE" },
-      { time: "15:00", teamA: "ST JOHNS", teamB: "FALCON" },
-      { time: "15:00", teamA: "MUTARE", teamB: "HILLCREST" },
-      { time: "15:30", teamA: "PRINCE EDWARD", teamB: "EAGLESVALE" },
-      { time: "15:30", teamA: "ST GEORGES", teamB: "CBC" }
-    ]
-  },
-  {
-    date: "Week 6",
-    day: "05 July",
-    month: "July",
-    fixtures: [
-      { time: "9:00", teamA: "MIDLANDS CC", teamB: "CBC" },
-      { time: "10:00", teamA: "BMC", teamB: "TYNWALD" },
-      { time: "11:00", teamA: "HILLCREST", teamB: "KYLE" },
-      { time: "12:00", teamA: "RYDINGS", teamB: "MILTON" },
-      { time: "13:00", teamA: "MARIST", teamB: "ST JOSEPH" },
-      { time: "14:00", teamA: "ST AUGUSTINES", teamB: "MUTAMBARA" },
-      { time: "15:00", teamA: "MUTARE", teamB: "ST JOSEPH" },
-      { time: "9:30", teamA: "ST AUGUSTINES", teamB: "FIRST CLASS" },
-      { time: "10:30", teamA: "FIRST CLASS", teamB: "MUTAMBARA" },
-      { time: "11:30", teamA: "MUTARE", teamB: "FIRST CLASS" },
-      { time: "12:30", teamA: "MARIST", teamB: "ST AUGUSTINES" },
-      { time: "13:30", teamA: "MUTARE", teamB: "MARIST", location: "Manicaland U20 Nash Rugby Final" },
-      { time: "14:30", teamA: "MUTARE", teamB: "MARIST" },
-      { time: "15:30", teamA: "PLUMTREE", teamB: "PETRA" },
-      { time: "16:00", teamA: "PETERHOUSE", teamB: "WISE OWL" },
-      { time: "TBD", teamA: "ALLAN WILSON", teamB: "CHURCHILL" },
-      { time: "TBD", teamA: "WATERSHED", teamB: "EAGLESVALE" },
-      { time: "TBD", teamA: "HERITAGE", teamB: "WISE OWL" }
-    ]
-  },
-  {
-    date: "Week 7",
-    day: "12 July",
-    month: "July",
-    fixtures: [
-      { time: "14:00", teamA: "KYLE", teamB: "CHURCHILL" },
-      { time: "14:00", teamA: "WISE OWL", teamB: "PRINCE EDWARD" },
-      { time: "14:00", teamA: "HELLENIC", teamB: "FALCON" },
-      { time: "14:00", teamA: "ST JOHNS", teamB: "LOMAGUNDI" },
-      { time: "14:00", teamA: "GOROMONZI", teamB: "SAMUEL CENTENARY" },
-      { time: "14:00", teamA: "TYNWALD", teamB: "NATTIE COLLEGE" }
-    ]
-  },
-  {
-    date: "Week 8",
-    day: "19 July",
-    month: "July",
-    fixtures: [
-      { time: "14:00", teamA: "MIDLANDS CC", teamB: "NATTIE COLLEGE" },
-      { time: "14:00", teamA: "CHURCHILL", teamB: "WISE OWL" },
-      { time: "14:00", teamA: "LORD BRIGHTON", teamB: "ALLAN WILSON" },
-      { time: "14:00", teamA: "LOMAGUNDI", teamB: "HELLENIC" },
-      { time: "14:00", teamA: "BMC", teamB: "RYDINGS" },
-      { time: "14:00", teamA: "ST JOHNS", teamB: "PH" },
-      { time: "14:00", teamA: "ST GEORGES", teamB: "PRINCE EDWARD" },
-      { time: "14:00", teamA: "CBC", teamB: "WATERSHED" },
-      { time: "14:00", teamA: "HILLCREST", teamB: "HERITAGE" },
-      { time: "14:00", teamA: "GATEWAY", teamB: "EAGLESVALE" }
-    ]
-  },
-  {
-    date: "Week 9",
-    day: "26 July",
-    month: "July",
-    fixtures: [
-      { time: "14:00", teamA: "LOMAGUNDI", teamB: "CBC" },
-      { time: "14:00", teamA: "HILLCREST", teamB: "EAGLESVALE" },
-      { time: "14:00", teamA: "ST JOHNS", teamB: "ST GEORGES" },
-      { time: "14:00", teamA: "PETERHOUSE", teamB: "FALCON" },
-      { time: "14:00", teamA: "CHURCHILL", teamB: "PRINCE EDWARD" },
-      { time: "14:00", teamA: "WATERSHED", teamB: "MIDLANDS CC" },
-      { time: "14:00", teamA: "GOLDRIDGE", teamB: "HERITAGE" },
-      { time: "14:00", teamA: "MILTON", teamB: "PLUMTREE" },
-      { time: "14:00", teamA: "WISE OWL", teamB: "KUTAMA" },
-      { time: "14:00", teamA: "BMC", teamB: "LORD BRIGHTON" }
-    ]
-  },
-  {
-    date: "Week 10",
-    day: "02 Aug",
-    month: "August",
-    fixtures: [
-      { time: "14:00", teamA: "LOMAGUNDI", teamB: "PRINCE EDWARD" },
-      { time: "14:00", teamA: "MARONDERA", teamB: "MUTARE" },
-      { time: "14:00", teamA: "WISE OWL", teamB: "HILLCREST" },
-      { time: "15:00", teamA: "PETERHOUSE", teamB: "ST GEORGES" },
-      { time: "14:00", teamA: "HERITAGE", teamB: "KYLE" },
-      { time: "14:00", teamA: "ST IGNATIUS", teamB: "TYNWALD" },
-      { time: "14:00", teamA: "WATERSHED", teamB: "GATEWAY" },
-      { time: "14:00", teamA: "CBC", teamB: "HELLENIC" },
-      { time: "14:00", teamA: "EAGLESVALE", teamB: "MIDLANDS CC" },
-      { time: "14:00", teamA: "FALCON", teamB: "ST JOHNS" }
-    ]
-  }
-];
-
-// Map team names to logo paths
-const teamLogoMap: Record<string, string> = {
-  "ZIMBABWE U20": "/assets/ZimbabweU20.png",
-  "SHARKS ACADEMY": "/assets/SharksAcademy.png",
-  "ZIMBABWE SABLES": "/assets/ZimSables.png",
-  "ZAMBIA": "/assets/Zambia.png",
-  "EAGLESVALE 2XV": "/assets/Eaglesvale.png",
-  "WATERSHED 2XV": "/assets/Watershed.png",
-  "GOLDRIDGE 1XV": "/assets/Goldridge.png",
-  "GATEWAY 1XV": "/assets/Gateway.png",
-  "WATERSHED 1XV": "/assets/Watershed.png",
-  "WATERSHED": "/assets/Watershed.png",
-  "MIDLANDS CC 1XV": "/assets/MidlandsCC.png",
-  "MILTON 1XV": "/assets/Milton.png",
-  "WISE OWL 1XV": "/assets/WiseOwl.png",
-  "HILLCREST 1XV": "/assets/Hillcrest.png",
-  "EAGLESVALE 1XV": "/assets/Eaglesvale.png",
-  "RYDINGS 1XV": "/assets/Rydings.png",
-  "RYDINGS": "/assets/Rydings.png",
-  "HERITAGE 1XV": "/assets/Heritage.png",
-  "CHURCHILL 2XV": "/assets/Churchill.png",
-  "LOMAGUNDI 2XV": "/assets/Lomagundi.png",
-  "FALCON 2XV": "/assets/Falcon.png",
-  "ST ALBANS 2XV": "/assets/StAlbans.png",
-  "PETERHOUSE 2XV": "/assets/Peterhouse.png",
-  "ST GEORGE'S 2XV": "/assets/StGeorges.png",
-  "ST GEORGE'S": "/assets/StGeorges.png",
-  "ST JOHN'S 2XV": "/assets/StJohns.png",
-  "PRINCE EDWARD'S 2XV": "/assets/PrinceEdward.png",
-  "LOMAGUNDI 1XV": "/assets/Lomagundi.png",
-  "LOMAGUNDI": "/assets/Lomagundi.png",
-  "ST ALBANS 1XV": "/assets/StAlbans.png",
-  "ST GEORGE'S 1XV": "/assets/StGeorges.png",
-  "ST ANDREW'S 1XV": "/assets/StAndrews.png",
-  "CBC 2XV": "/assets/CBC.png",
-  "CBC": "/assets/CBC.png",
-  "PRINCE EDWARD 1XV": "/assets/PrinceEdward.png",
-  "CBC 1XV": "/assets/CBC.png",
-  "FALCON 1XV": "/assets/Falcon.png",
-  "FALCON": "/assets/Falcon.png",
-  "CHURCHILL 1XV": "/assets/Churchill.png",
-  "ST JOHN'S 1XV": "/assets/StJohns.png",
-  "ST JOHN'S": "/assets/StJohns.png",
-  "ZAM STEELERS": "/assets/ZamSteelers.png",
-  "PETERHOUSE 1XV": "/assets/Peterhouse.png",
-  "PETERHOUSE": "/assets/Peterhouse.png",
-  "MILTON 2XV": "/assets/Milton.png",
-  "WISE OWL 2XV": "/assets/WiseOwl.png",
-  "PRINCE EDWARD 2XV": "/assets/PrinceEdward.png",
-  "LORD BRIGHTON 2XV": "/assets/LordBrighton.png",
-  "LORD BRIGHTON": "/assets/LordBrighton.png",
-  
-  // SBR Season 2025 teams
-  "WISE OWL": "/assets/WiseOwl.png",
-  "CHURCHILL": "/assets/Churchill.png",
-  "ST JOHNS": "/assets/StJohns.png",
-  "PRINCE EDWARD": "/assets/PrinceEdward.png",
-  "KYLE": "/assets/Kyle.png",
-  "ST GEORGES": "/assets/StGeorges.png",
-  "ST GEORGES 4TH": "/assets/StGeorges.png",
-  "GATEWAY": "/assets/Gateway.png",
-  "HILLCREST": "/assets/Hillcrest.png",
-  "HELLENIC": "/assets/Hellenic.png",
-  "HERITAGE": "/assets/Heritage.png",
-  "ALLAN WILSON": "/assets/Allan Wilson.png",
-  "ALLAN WILSON 1ST": "/assets/Allan Wilson.png",
-  "CRENBORNE": "/assets/logo.png",
-  "MILTON": "/assets/Milton.png",
-  "PH": "/assets/Peterhouse.png",
-  "PH 7s": "/assets/Peterhouse.png",
-  "ST IGNATIUS": "/assets/St Ignatius.png",
-  "NATTIE COLLEGE": "/assets/Nattie.png",
-  "GOROMONZI": "/assets/Goromonzi.png",
-  "SAMUEL CENTENARY": "/assets/logo.png",
-  "ST JOHNS HIGH": "/assets/STJOHNSHIGH.png",
-  "KUTAMA": "/assets/Kutama.png",
-  "MUTARE": "/assets/Mutare Boys High.png",
-  "PETRA": "/assets/logo.png",
-  "MIDLANDS CC": "/assets/MidlandsCC.png",
-  "PLUMTREE": "/assets/logo.png",
-  "MARONDERA HIGH": "/assets/Marondera high.png",
-  "GIFFORD": "/assets/logo.png",
-  "ELLIS ROBINS": "/assets/logo.png",
-  "BMC": "/assets/logo.png",
-  "TYNWALD": "/assets/logo.png",
-  "VICTORIA HIGH": "/assets/logo.png",
-  "MARIST": "/assets/logo.png",
-  "ST JOSEPH": "/assets/logo.png",
-  "ST AUGUSTINES": "/assets/logo.png",
-  "MUTAMBARA": "/assets/logo.png",
-  "FIRST CLASS": "/assets/logo.png",
-
-
-  
-  
-  // South African Schools
-  "TIER 2 URBAN": "/assets/logo.png", // Placeholder
-  "TIER 2 CD": "/assets/logo.png", // Placeholder
-  "ST CHARLES COLLEGE": "/assets/SA logos/SA schools (Logo)/St Charles.png",
-  "CLIFTON SCHOOL": "/assets/SA logos/SA schools (Logo)/Clifton.png",
-  "MICHAELHOUSE": "/assets/SA logos/SA schools (Logo)/Michaelhouse.png",
-  "MICHEALHOUSE": "/assets/SA logos/SA schools (Logo)/Michaelhouse.png", // Alternative spelling
-  "NORTHWOOD SCHOOL": "/assets/SA logos/SA schools (Logo)/Northwood.png",
-  "KEARSNEY COLLEGE": "/assets/SA logos/SA schools (Logo)/Kearsney College.png",
-  "DURBAN HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Durban High school.png",
-  "MARITZBURG COLLEGE": "/assets/SA logos/SA schools (Logo)/Maritzburg.png",
-  "WESTVILLE BOYS' HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Westville Boy's High School.png",
-  "HILTON COLLEGE": "/assets/SA logos/SA schools (Logo)/Hilton College.png",
-  "GLENWOOD HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Glenwood High School.png",
-  "AMANZIMTOTI HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Amanzimtoti High School.png",
-  "KING EDWARD HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/King Edward.png",
-  "CURRO HILLCREST": "/assets/SA logos/SA schools (Logo)/Curro Hillcrest.png",
-  "ASHTON COLLEGE BALLITO": "/assets/SA logos/SA schools (Logo)/Ashton college.png",
-  "KINGSWAY HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Kingsway High school.png",
-  "HILLCREST HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Hillcrest high school.png",
-  "PORT SHEPSTONE HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Port Shepstone high school.png",
-  "IXOPO HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Ixopo.png",
-  "DUNDEE HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Dundee high school.png",
-  "GREYTOWN HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Greytown.png",
-  "SAREL CILLIERS HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Sarel Cilliers high school.png",
-  "NEWCASTLE HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Newcastle.png",
-  "VRYHEID HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Vryheid high school.png",
-  "VRYHEID LANDBOU SCHOOL": "/assets/SA logos/SA schools (Logo)/VRYHEID LANDBOU SCHOOL.png",
-  "HOËRSKOOL RICHARDSBAAI": "/assets/SA logos/SA schools (Logo)/Hoërskool Richardsbaai.png",
-  "WERDA SCHOOL": "/assets/SA logos/SA schools (Logo)/Werda.png",
-  "PORT NATAL SCHOOL": "/assets/SA logos/SA schools (Logo)/Port Natal.png",
-  "HOËRSKOOL PIONIER": "/assets/SA logos/SA schools (Logo)/Hoërskool Pionier.png",
-  "EMPANGENI HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/Empangeni.png",
-  "GRANTLEIGH": "/assets/SA logos/SA schools (Logo)/Grantleigh.png",
-  "FELIXTON COLLEGE": "/assets/SA logos/SA schools (Logo)/Felixton College.png",
-  "PONGOLA AKADEMIE": "/assets/SA logos/SA schools (Logo)/PONGOLA AKADEMIE.png",
-  "LADYSMITH HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/LADYSMITH HIGH SCHOOL.png",
-  "PRETORIA BOYS HIGH SCHOOL": "/assets/SA logos/SA schools (Logo)/PRETORIA BOYS HIGH SCHOOL College.png",
-  
-  // Grey High School fixtures teams
-  "GREY HIGH SCHOOL": "/assets/SA logos/Grey High School.png", 
-  "MEYER SAUERMAN": "/assets/logo.png", // Placeholder
-  "QUEEN'S COLLEGE": "/assets/SA logos/QueensCollege.png",
-  "ST ANDREW'S": "/assets/StAndrews.png",
-  "DANIEL PIENAAR": "/assets/SA logos/Daniel Pienaar school.png",
-  "FRAMESBY": "/assets/SA logos/framesby school.png",
-  "GREY COLLEGE": "/assets/SA logos/Grey College.png",
-  "MUIR": "/assets/SA logos/Muir College.png",
-  "SELBORNE": "/assets/SA logos/Selborne College.png",
-
-  "GOLDRIDGE": "/assets/Goldridge.png",
-  "EAGLESVALE": "/assets/Eaglesvale.png"
-
-};
-
-// Animation variants for staggered animations
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      delayChildren: 0.1,
-      staggerChildren: 0.05
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: { type: "spring", stiffness: 100 }
-  }
-};
-
-// Add function to check if a fixture is highlighted
 const isHighlightedFixture = (date: string, time: string, teamA: string, teamB: string) => {
   const highlightedGames = [
-    { date: "TODAY", time: "11:30", teamA: "ZIMBABWE U20", teamB: "SHARKS ACADEMY" },
-    { date: "TODAY", time: "14:30", teamA: "ZIMBABWE SABLES", teamB: "ZAMBIA" },
-    { date: "April 28th", time: "13:00", teamA: "MILTON 1XV", teamB: "WISE OWL 1XV" },
-    { date: "April 28th", time: "15:40", teamA: "RYDINGS 1XV", teamB: "HERITAGE 1XV" },
-    { date: "April 29th", time: "14:20", teamA: "LOMAGUNDI 1XV", teamB: "ST ALBANS 1XV" },
-    { date: "April 29th", time: "15:40", teamA: "ST GEORGE'S 1XV", teamB: "ST ANDREW'S 1XV" },
-    { date: "April 30th", time: "13:00", teamA: "GOLDRIDGE 1XV", teamB: "HILLCREST 1XV" },
-    { date: "April 30th", time: "15:40", teamA: "WATERSHED 1XV", teamB: "GATEWAY 1XV" },
-    { date: "May 1st", time: "13:20", teamA: "PETERHOUSE 1XV", teamB: "ST ANDREW'S 1XV" },
-    { date: "May 1st", time: "16:00", teamA: "ZAM STEELERS", teamB: "SHARKS ACADEMY" },
-    { date: "May 3rd", time: "10:20", teamA: "CBC 1XV", teamB: "PETERHOUSE 1XV" },
-    { date: "May 3rd", time: "11:40", teamA: "PRINCE EDWARD 1XV", teamB: "CHURCHILL 1XV" },
-    { date: "May 3rd", time: "14:20", teamA: "FALCON 1XV", teamB: "ST ALBANS 1XV" },
-    { date: "May 3rd", time: "15:40", teamA: "ST JOHN'S 1XV", teamB: "ST ANDREW'S 1XV" },
     { date: "Week 1", time: "14:00", teamA: "HELLENIC", teamB: "WATERSHED" },
     { date: "Week 1", time: "15:15", teamA: "LOMAGUNDI", teamB: "FALCON" },
     { date: "Week 4", time: "14:00", teamA: "FALCON", teamB: "ST GEORGE'S" },
-    { date: "Week 4", time: "15:30", teamA: "ST JOHNS", teamB: "WISE OWL" },
-    { date: "Week 5", time: "13:45", teamA: "HELLENIC", teamB: "PETERHOUSE" },
     { date: "Week 5", time: "15:00", teamA: "ST JOHNS", teamB: "FALCON" },
-    { date: "Week 5", time: "15:30", teamA: "ST GEORGES", teamB: "CBC" },
-    { date: "Week 9", time: "14:00", teamA: "ST JOHNS", teamB: "ST GEORGES" }
   ];
-
   return highlightedGames.some(game => 
-    game.date === date && 
-    game.time === time && 
-    game.teamA === teamA && 
-    game.teamB === teamB
+    game.date === date && game.time === time && game.teamA === teamA && game.teamB === teamB
   );
 };
 
-// Helper to parse conversions and penalty kicks from summary string
-function parseConversions(conversionStr: string) {
-  // e.g. "1/1 PK" or "1/1" or "1/1 C, 2/2 PK" or "-"
-  if (!conversionStr || conversionStr === "-") return { conversions: 0, penalties: 0 };
-  let conversions = 0;
-  let penalties = 0;
-  // Split by comma if both are present
-  const parts = conversionStr.split(',').map(s => s.trim());
-  for (const part of parts) {
-    if (part.includes('PK')) {
-      const match = part.match(/(\d+)\/(\d+) PK/);
-      if (match) {
-        penalties += parseInt(match[1], 10);
-      }
-    } else if (part.includes('C')) {
-      const match = part.match(/(\d+)\/(\d+) C/);
-      if (match) {
-        conversions += parseInt(match[1], 10);
-      }
-    } else {
-      // fallback: if just "1/1" assume conversions
-      const match = part.match(/(\d+)\/(\d+)/);
-      if (match) {
-        conversions += parseInt(match[1], 10);
-      }
-    }
-  }
-  return { conversions, penalties };
-}
-
-// Theme tokens matching homepage
-const tokens = {
-  bg: "#0B0D18",
-  surface: "#121527",
-  text: "#E6E9F5",
-  textMuted: "#A9B1C6",
-  primary: "#2D6CFF",
-  gold: "#F9C94E",
-};
-
-const appGradient = "bg-[radial-gradient(1200px_600px_at_80%_-20%,rgba(45,108,255,.25),rgba(122,92,255,.12)_40%,transparent_70%),linear-gradient(180deg,#0B0D18_0%,#0B0D18_30%,#0E1222_100%)]";
-const cardGrad = "bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))]";
+/* ---------------- PRIMITIVES (FROM HOMEPAGE) ---------------- */
+const Container: React.FC<React.PropsWithChildren> = ({ children }) => (
+  <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
+);
 
 const Fixtures: React.FC = () => {
-  const isMobile = useIsMobile();
   const navigate = useNavigate();
+  
+  // Data state
+  const [loading, setLoading] = useState(true);
+  const [competitions, setCompetitions] = useState<Competition[]>([]);
+  const [teamLogos, setTeamLogos] = useState<Record<string, string>>({});
+  const [fixturesData, setFixturesData] = useState<Record<string, FixtureDay[]>>({});
 
-  const [activeTab, setActiveTab] = useState("sbr2025");
-  const [selectedMonth, setSelectedMonth] = useState("All");
-  const [teamSearchInput, setTeamSearchInput] = useState("");
-  const [cbzTeamSearchInput, setCbzTeamSearchInput] = useState("");
-  const [openAccordion, setOpenAccordion] = useState("week-0"); // First week open by default
+  // Filter state
+  const [selectedCompetition, setSelectedCompetition] = useState("sbr2025");
+  const [selectedSeason, setSelectedSeason] = useState("2025");
+  const [teamSearch, setTeamSearch] = useState("");
+  const [currentWeekIndex, setCurrentWeekIndex] = useState(0);
+  
+  // Dropdown state
+  const [showCompetitionDropdown, setShowCompetitionDropdown] = useState(false);
+  const [showWeekDropdown, setShowWeekDropdown] = useState(false);
+
+  // Load data
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const data = await loadAllFixtures();
+        setCompetitions(data.competitions);
+        setTeamLogos(data.teamLogos);
+        setFixturesData({
+          derby_day: data.derbyDay,
+          zim: data.zimSables,
+          sa_schools: data.saSchools,
+          sbr2025: data.sbr2025
+        });
+      } catch (error) {
+        console.error('Error loading fixtures:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, []);
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.relative')) {
+        setShowCompetitionDropdown(false);
+        setShowWeekDropdown(false);
+      }
+    };
+
+    if (showCompetitionDropdown || showWeekDropdown) {
+      document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
+    }
+  }, [showCompetitionDropdown, showWeekDropdown]);
+
+  const getCurrentFixtures = (): FixtureDay[] => {
+    const fixtures = fixturesData[selectedCompetition] || [];
+    if (teamSearch.trim()) {
+      const searchTerm = teamSearch.toUpperCase();
+      return fixtures.map(day => ({
+        ...day,
+        fixtures: day.fixtures.filter(f => 
+          f.teamA.includes(searchTerm) || f.teamB.includes(searchTerm)
+        )
+      })).filter(day => day.fixtures.length > 0);
+    }
+    return fixtures;
+  };
+
+  const allFixtures = getCurrentFixtures();
+  const currentCompetition = competitions.find(c => c.id === selectedCompetition);
+
+  const handlePrevWeek = () => {
+    if (currentWeekIndex > 0) setCurrentWeekIndex(currentWeekIndex - 1);
+  };
+
+  const handleNextWeek = () => {
+    if (currentWeekIndex < allFixtures.length - 1) setCurrentWeekIndex(currentWeekIndex + 1);
+  };
+
+  const handleReset = () => {
+    setTeamSearch("");
+    setCurrentWeekIndex(0);
+    setSelectedCompetition("sbr2025");
+    setShowCompetitionDropdown(false);
+    setShowWeekDropdown(false);
+  };
+
+  const handleCompetitionChange = (competitionId: string) => {
+    setSelectedCompetition(competitionId);
+    setCurrentWeekIndex(0);
+    setShowCompetitionDropdown(false);
+  };
+
+  const handleWeekChange = (weekIndex: number) => {
+    setCurrentWeekIndex(weekIndex);
+    setShowWeekDropdown(false);
+  };
 
   const handleFixtureClick = (date: string, time: string, teamA: string, teamB: string) => {
     if (isHighlightedFixture(date, time, teamA, teamB)) {
@@ -663,525 +170,301 @@ const Fixtures: React.FC = () => {
     }
   };
 
-  // Handle search input changes
-  const handleTeamSearch = (input: string) => {
-    setTeamSearchInput(input);
-  };
+  if (loading) {
+    return (
+      <div className={`min-h-screen ${appGradient}`} style={{ color: tokens.text }}>
+        <Nav />
+        <Container>
+          <div className="flex items-center justify-center py-32">
+            <div className="text-2xl font-bold">Loading...</div>
+          </div>
+        </Container>
+      </div>
+    );
+  }
 
-  // Handle clear search
-  const clearTeamSearch = () => {
-    setTeamSearchInput("");
-  };
-
-  // Handle CBZ team search input changes
-  const handleCbzTeamSearch = (input: string) => {
-    setCbzTeamSearchInput(input);
-  };
-
-  // Handle clear CBZ team search
-  const clearCbzTeamSearch = () => {
-    setCbzTeamSearchInput("");
-  };
-
-  const filteredFixtures = (activeTab: string): FixtureDay[] => {
-    if (activeTab === "derby") return derbyDay;
-    if (activeTab === "zim") return zimSablesGames;
-    if (activeTab === "sa_schools") {
-      let fixtures = saSchoolsRugby;
-      
-      // Filter by month if a specific month is selected
-      if (selectedMonth !== "All") {
-        fixtures = fixtures.filter(day => day.month === selectedMonth);
-      }
-      
-      // Filter by team search input
-      if (teamSearchInput.trim() !== "") {
-        const searchTerm = teamSearchInput.toUpperCase();
-        fixtures = fixtures.map(day => {
-          const filteredMatches = day.fixtures.filter(fixture => 
-            fixture.teamA.includes(searchTerm) || fixture.teamB.includes(searchTerm)
-          );
-          
-          return filteredMatches.length > 0 
-            ? { ...day, fixtures: filteredMatches } 
-            : null;
-        }).filter(Boolean) as FixtureDay[];
-      }
-      
-      return fixtures;
-    }
-    if (activeTab === "sbr2025") {
-      let fixtures = sbr2025Games;
-      
-      // Filter by month
-      if (selectedMonth !== "All") {
-        fixtures = fixtures.filter(day => day.month === selectedMonth);
-      }
-      
-      // Filter by CBZ team search
-      if (cbzTeamSearchInput.trim() !== "") {
-        const searchTerm = cbzTeamSearchInput.toUpperCase();
-        fixtures = fixtures.map(day => {
-          const filteredMatches = day.fixtures.filter(fixture => 
-            fixture.teamA.includes(searchTerm) || fixture.teamB.includes(searchTerm)
-          );
-          
-          return filteredMatches.length > 0 
-            ? { ...day, fixtures: filteredMatches } 
-            : null;
-        }).filter(Boolean) as FixtureDay[];
-      }
-      
-      return fixtures;
-    }
-    return [];
-  };
-
-  // Check if fixtures are available for the active tab
-  const hasFixtures = (): boolean => {
-    if (activeTab === "derby") return derbyDay.length > 0;
-    if (activeTab === "zim") return zimSablesGames.length > 0;
-    if (activeTab === "sa_schools") return saSchoolsRugby.length > 0;
-    if (activeTab === "sbr2025") return sbr2025Games.length > 0;
-    return false;
-  };
-
-  // Get unique months from SBR 2025 fixtures for the dropdown
-  const months = ["All", ...Array.from(new Set(sbr2025Games.map(day => day.month)))];
-  
-  // Get unique months from SA Schools fixtures for the dropdown
-  const saMonths = ["All", ...Array.from(new Set(saSchoolsRugby.map(day => day.month)))];
-  
   return (
-    <div className="min-h-screen" style={{ background: tokens.bg, color: tokens.text }}>
-      {/* Modern Header */}
-      <header className="sticky top-0 z-50 border-b border-white/10 backdrop-blur supports-[backdrop-filter]:bg-black/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-20 md:h-24 items-center justify-between">
-            <Link to="/" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors">
-              <ChevronLeft className="w-5 h-5" />
-              <span className="font-medium">Back to Home</span>
-            </Link>
-            <div className="flex items-center gap-4">
-              <img src="/assets/Scrummy-logo/SCRUMMY Logo Exception_On Dark BG (3).svg" alt="SCRUMMY" className="h-16 md:h-20" />
-            </div>
-            <div className="w-24" /> {/* Spacer for balance */}
-          </div>
-        </div>
-      </header>
+    <div className={`min-h-screen ${appGradient}`} style={{ color: tokens.text }}>
+      <Nav />
 
-      <main className={appGradient}>
-        {/* Hero Section */}
-        <section className="py-12 md:py-16 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              className="space-y-4"
-            >
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
-                Schools Rugby{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2D6CFF] via-[#7A5CFF] to-[#F9C94E]">
-                  Fixtures & Results
-                </span>
-              </h1>
-              <p className="text-base md:text-lg text-white/70 max-w-3xl mx-auto">
-                Complete coverage of school boy rugby across Zimbabwe and South Africa
-              </p>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* MAIN content */}
-        <div className="pb-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-            {/* Legend for highlighted games */}
-            <div className={`${cardGrad} rounded-2xl p-6 border border-white/10 shadow-[0_0_40px_rgba(45,108,255,.35)]`}>
-              <div className="flex flex-col lg:flex-row items-center gap-4">
-                <div className="flex items-center gap-3">
-                  <img src="/assets/logo.png" alt="SCRUMMY" className="w-12 h-12" />
-                  <div>
-                    <p className="text-sm md:text-base font-semibold text-white">
-                      Games marked with a <span className="text-[#F9C94E]">yellow border</span> and SCRUMMY logo have detailed player and game stats.
-                    </p>
-                    <p className="text-xs md:text-sm text-white/60">All times are in CAT (Central Africa Time)</p>
-                  </div>
-                </div>
+      {/* HERO SECTION */}
+      <section className="relative text-white pt-20 pb-20 md:pt-28 md:pb-28">
+        <Container>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center"
+          >
+            <div className="inline-flex items-center gap-3 mb-6">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#2D6CFF] to-[#7A5CFF] flex items-center justify-center">
+                <Calendar className="w-8 h-8 text-white" />
               </div>
             </div>
+            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
+              Schools Rugby{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F9C94E] to-[#E3B43F]">
+                Fixtures & Results
+              </span>
+            </h1>
+            <p className="mt-4 md:mt-6 text-white/70 max-w-2xl mx-auto">
+              Complete coverage of school boy rugby across Zimbabwe and South Africa – fixtures, predictions & live results.
+            </p>
+          </motion.div>
+        </Container>
+      </section>
 
-            {/* Tabs */}
-            <div className={`${cardGrad} rounded-2xl p-3 border border-white/10 shadow-[0_0_40px_rgba(45,108,255,.35)]`}>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
-                {tabs.map((tab) => (
-                  <button
-                    key={tab.key}
-                    onClick={() => {
-                      setActiveTab(tab.key);
-                      setOpenAccordion("week-0"); // Reset to first week when changing tabs
-                    }}
-                    className={`px-4 py-3 rounded-xl font-semibold transition-all duration-300 ${
-                      activeTab === tab.key
-                        ? "bg-gradient-to-r from-[#2D6CFF] via-[#7A5CFF] to-[#2D6CFF] text-white shadow-lg"
-                        : "text-white/70 hover:text-white hover:bg-white/5"
-                    }`}
-                  >
-                    {tab.name}
-                  </button>
-                ))}
-              </div>
-            </div>
+      {/* FIXTURES SECTION */}
+      <section className="py-14 md:py-20">
+        <Container>
+          {/* Filters - Minimal */}
+          <div className="mb-8 flex flex-wrap items-center gap-3">
+            {/* Competition Dropdown */}
+            <div className="relative">
+              <button 
+                onClick={() => {
+                  setShowCompetitionDropdown(!showCompetitionDropdown);
+                  setShowWeekDropdown(false);
+                }}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 font-medium transition-all hover:bg-white/10 text-sm"
+              >
+                <span>{currentCompetition?.display_name || 'Competition'}</span>
+                <ChevronDown className="w-4 h-4" />
+              </button>
 
-            {/* Prominent Filters Section for SBR 2025 */}
-            {activeTab === "sbr2025" && (
-              <div className={`${cardGrad} rounded-2xl p-6 border border-white/10 shadow-[0_0_40px_rgba(45,108,255,.35)]`}>
-                <div className="flex items-center gap-3 mb-4">
-                  <Filter className="w-5 h-5 text-[#F9C94E]" />
-                  <h3 className="text-lg font-semibold text-white">Filter Fixtures</h3>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm text-white/60 mb-2">Select Month</label>
-                    <select
-                      value={selectedMonth}
-                      onChange={(e) => setSelectedMonth(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-[#2D6CFF] focus:border-[#2D6CFF] transition-all"
-                      aria-label="Select month"
+              {showCompetitionDropdown && (
+                <div className="absolute top-full left-0 mt-2 w-64 rounded-xl bg-[#121527] border border-white/10 shadow-xl z-50 overflow-hidden">
+                  {competitions.map((comp) => (
+                    <button
+                      key={comp.id}
+                      onClick={() => handleCompetitionChange(comp.id)}
+                      className={`w-full text-left px-4 py-3 text-sm transition-colors ${
+                        selectedCompetition === comp.id 
+                          ? 'bg-white/10 text-white font-semibold' 
+                          : 'text-white/70 hover:bg-white/5 hover:text-white'
+                      }`}
                     >
-                      {months.map((month) => (
-                        <option key={month} value={month} className="bg-[#121527] text-white">
-                          {month === "All" ? "All Months" : month}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm text-white/60 mb-2">Search School</label>
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/40" />
-                      <input 
-                        type="text"
-                        value={cbzTeamSearchInput}
-                        onChange={(e) => handleCbzTeamSearch(e.target.value)}
-                        placeholder="Search for a school..."
-                        className="w-full pl-10 pr-10 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#2D6CFF] focus:border-[#2D6CFF] transition-all"
-                        aria-label="Search for a school"
-                      />
-                      {cbzTeamSearchInput && (
-                        <button 
-                          onClick={clearCbzTeamSearch}
-                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/40 hover:text-white transition-colors"
-                          aria-label="Clear search"
-                        >
-                          <X className="w-5 h-5" />
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-            
-            {/* Prominent Filters Section for SA Schools */}
-            {activeTab === "sa_schools" && (
-              <div className={`${cardGrad} rounded-2xl p-6 border border-white/10 shadow-[0_0_40px_rgba(45,108,255,.35)]`}>
-                <div className="flex items-center gap-3 mb-4">
-                  <Filter className="w-5 h-5 text-[#F9C94E]" />
-                  <h3 className="text-lg font-semibold text-white">Filter Fixtures</h3>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm text-white/60 mb-2">Select Month</label>
-                    <select
-                      value={selectedMonth}
-                      onChange={(e) => setSelectedMonth(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-semibold focus:outline-none focus:ring-2 focus:ring-[#2D6CFF] focus:border-[#2D6CFF] transition-all"
-                      aria-label="Select month"
-                    >
-                      {saMonths.map((month) => (
-                        <option key={month} value={month} className="bg-[#121527] text-white">
-                          {month === "All" ? "All Months" : month}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm text-white/60 mb-2">Search School</label>
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/40" />
-                      <input 
-                        type="text"
-                        value={teamSearchInput}
-                        onChange={(e) => handleTeamSearch(e.target.value)}
-                        placeholder="Search for a school..."
-                        className="w-full pl-10 pr-10 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#2D6CFF] focus:border-[#2D6CFF] transition-all"
-                        aria-label="Search for a school"
-                      />
-                      {teamSearchInput && (
-                        <button 
-                          onClick={clearTeamSearch}
-                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/40 hover:text-white transition-colors"
-                          aria-label="Clear search"
-                        >
-                          <X className="w-5 h-5" />
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-          <div className="mt-8">
-            {!hasFixtures() ? (
-              <div className={`text-center ${cardGrad} rounded-2xl p-8 border border-white/10`}>
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                  Stay Tuned
-                </h2>
-                <p className="text-base text-white/60">
-                  Check back soon for updates!
-                </p>
-              </div>
-              ) : (
-                <Accordion type="single" collapsible value={openAccordion} onValueChange={setOpenAccordion} className="space-y-4">
-                  {filteredFixtures(activeTab).map((day, idx) => (
-                    <AccordionItem key={idx} value={`week-${idx}`} className={`${cardGrad} rounded-2xl border border-white/10 shadow-[0_0_40px_rgba(45,108,255,.35)] overflow-hidden ${day.day === "FEATURED MATCHES" ? "col-span-full" : ""}`}>
-                    {day.day === "FEATURED MATCHES" ? (
-                      <>
-                        <AccordionTrigger className="px-6 py-4 hover:no-underline">
-                          <h2 className="text-2xl md:text-3xl font-bold font-orbitron flex flex-col md:flex-row md:items-end text-left">
-                            <span className="text-white">{day.date}</span>
-                            <span className="text-[#F9C94E] text-xl md:ml-3">{day.day}</span>
-                          </h2>
-                        </AccordionTrigger>
-                        <AccordionContent className="px-6 pb-6">
-                        <motion.div
-                          className="grid grid-cols-1 gap-4"
-                          variants={containerVariants}
-                          initial="hidden"
-                          animate="visible"
-                        >
-                          {day.fixtures.map((f, i) => (
-                            <motion.div key={i} variants={itemVariants} className="w-full">
-                              <Card
-                                className="transition-all duration-300 hover:shadow-lg h-[280px] w-full relative border-2 border-[#F9C94E] hover:shadow-[0_0_20px_rgba(249,201,78,0.6)] cursor-pointer bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))]"
-                                onClick={() => handleFixtureClick(day.date, f.time, f.teamA, f.teamB)}
-                              >
-                                <img 
-                                  src="/assets/logo.png" 
-                                  alt="SCRUMMY" 
-                                  className="absolute top-4 right-4 w-12 h-12 opacity-80" 
-                                />
-                                <CardContent className="p-6 flex flex-col h-full">
-                                  <div className="text-xl font-bold text-[#0B0D18] bg-[#F9C94E] inline-flex rounded-lg px-4 py-2 self-start mb-4">
-                                    {f.time}
-                                  </div>
-                                  <div className="flex items-center justify-center flex-grow gap-8 md:gap-16">
-                                    {/* Team A */}
-                                    <div className="flex-1 text-center">
-                                      {teamLogoMap[f.teamA] && (
-                                        <img 
-                                          src={teamLogoMap[f.teamA]} 
-                                          alt={`${f.teamA} logo`} 
-                                          className="w-32 h-32 mx-auto mb-2 object-contain" 
-                                        />
-                                      )}
-                                      <p className="text-xl font-bold text-white">{f.teamA}</p>
-                                    </div>
-                                    {/* VS */}
-                                    <div className="flex-none">
-                                      {(() => {
-                                        const finalScore = getFinalScore(day.date, f.time, f.teamA, f.teamB);
-                                        if (finalScore) {
-                                          return (
-                                            <p className="text-5xl font-bold text-[#F9C94E] font-orbitron">
-                                              {String(finalScore.teamAScore).padStart(2, '0')} - {String(finalScore.teamBScore).padStart(2, '0')}
-                                            </p>
-                                          );
-                                        }
-                                        return <p className="text-3xl font-bold text-[#F9C94E]">VS</p>;
-                                      })()}
-                                    </div>
-                                    {/* Team B */}
-                                    <div className="flex-1 text-center">
-                                      {teamLogoMap[f.teamB] && (
-                                        <img 
-                                          src={teamLogoMap[f.teamB]} 
-                                          alt={`${f.teamB} logo`} 
-                                          className="w-32 h-32 mx-auto mb-2 object-contain" 
-                                        />
-                                      )}
-                                      <p className="text-xl font-bold text-white">{f.teamB}</p>
-                                    </div>
-                                  </div>
-                                  {/* Add streaming link for first match */}
-                                  {day.day === "FEATURED MATCHES" && f.time === "11:30" && (
-                                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
-                                      <a 
-                                        href="https://www.facebook.com/stories/103595778471519/UzpfSVNDOjkzMTQzOTcyNTY2OTIxNg==/?view_single=1&source=shared_permalink&mibextid=wwXIfr"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 bg-[#1877F2] text-white px-4 py-2 rounded-lg hover:bg-[#0c5bce] transition-colors"
-                                        onClick={(e) => e.stopPropagation()}
-                                      >
-                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                        </svg>
-                                        Watch Live on Facebook
-                                      </a>
-                                    </div>
-                                  )}
-                                  {/* Add streaming link for Sables match */}
-                                  {day.day === "FEATURED MATCHES" && f.time === "14:30" && (
-                                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
-                                      <a 
-                                        href="https://www.facebook.com/share/v/19Ntb1K6s9/?mibextid=wwXIfr"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 bg-[#1877F2] text-white px-4 py-2 rounded-lg hover:bg-[#0c5bce] transition-colors"
-                                        onClick={(e) => e.stopPropagation()}
-                                      >
-                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                        </svg>
-                                        Watch Live on Facebook
-                                      </a>
-                                    </div>
-                                  )}
-                                </CardContent>
-                              </Card>
-                            </motion.div>
-                          ))}
-                        </motion.div>
-                        </AccordionContent>
-                      </>
-                    ) : (
-                      <>
-                        <AccordionTrigger className="px-6 py-4 hover:no-underline">
-                          <h2 className="text-lg md:text-xl font-semibold font-orbitron flex flex-col md:flex-row md:items-end text-left">
-                            <span className="text-white">{day.date}</span>
-                            <span className="text-[#F9C94E] text-base md:ml-3">{day.day}</span>
-                          </h2>
-                        </AccordionTrigger>
-                        <AccordionContent className="px-6 pb-6">
-                        <motion.div
-                          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-                          variants={containerVariants}
-                          initial="hidden"
-                          animate="visible"
-                        >
-                          {day.fixtures.map((f, i) => {
-                            const isHighlighted = isHighlightedFixture(day.date, f.time, f.teamA, f.teamB);
-                            const isCancelled = isCancelledGame(day.date, f.time, f.teamA, f.teamB);
-
-                            // Get the final score for this fixture
-                            let scoreDisplay = null;
-                            let showFinal = false;
-                            const finalScore = getFinalScore(day.date, f.time, f.teamA, f.teamB);
-                            if (finalScore && !isCancelled) {
-                              showFinal = true;
-                              // Pad scores to two digits for uniformity
-                              const teamAStr = String(finalScore.teamAScore).padStart(2, '0');
-                              const teamBStr = String(finalScore.teamBScore).padStart(2, '0');
-                              scoreDisplay = (
-                                <div className="text-2xl font-orbitron text-[#F9C94E] text-center">
-                                  {teamAStr} - {teamBStr}
-                                </div>
-                              );
-                            }
-
-                            return (
-                              <motion.div key={i} variants={itemVariants}>
-                                <Card
-                                  className={`transition-all duration-300 hover:shadow-lg h-[240px] w-full relative ${
-                                    isHighlighted && !isCancelled
-                                      ? "border-2 border-[#F9C94E] hover:shadow-[0_0_20px_rgba(249,201,78,0.6)] cursor-pointer bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))]"
-                                      : isCancelled
-                                      ? "bg-white/5 opacity-50"
-                                      : "bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] cursor-pointer border border-white/10"
-                                  }`}
-                                  onClick={() => !isCancelled && handleFixtureClick(day.date, f.time, f.teamA, f.teamB)}
-                                >
-                                  {isHighlighted && !isCancelled && (
-                                    <img 
-                                      src="/assets/logo.png" 
-                                      alt="SCRUMMY" 
-                                      className="absolute top-2 right-2 w-12 h-12 opacity-80" 
-                                    />
-                                  )}
-                                  <CardContent className="p-2 pt-1 flex flex-col h-full">
-                                    <div className={`text-lg font-bold ${
-                                      isCancelled 
-                                        ? 'text-white bg-red-500/80'
-                                        : isHighlighted 
-                                          ? 'text-[#0B0D18] bg-[#F9C94E]' 
-                                          : 'text-[#F9C94E] bg-[#2D6CFF]'
-                                    } inline-flex rounded px-2 py-1 self-start mb-0.5 mt-2 ml-2 z-10`}>
-                                      {f.time}
-                                    </div>
-
-                                    <div className="flex items-center justify-center w-full gap-4 mt-2">
-                                      {/* Team A */}
-                                      <div className="flex-1 text-center">
-                                        {teamLogoMap[f.teamA] && (
-                                          <img 
-                                            src={teamLogoMap[f.teamA]} 
-                                            alt={`${f.teamA} logo`} 
-                                            className="w-24 h-24 mx-auto mb-0.5 object-contain" 
-                                          />
-                                        )}
-                                        <p className="text-base font-medium text-white">{f.teamA}</p>
-                                      </div>
-                                      {/* Score or VS */}
-                                      <div className="flex-none flex flex-col items-center justify-center">
-                                        {isCancelled ? (
-                                          <p className="text-red-400 font-semibold text-base">cancelled</p>
-                                        ) : showFinal ? (
-                                          scoreDisplay
-                                        ) : (
-                                          <p className="text-white/40 font-semibold text-base">vs</p>
-                                        )}
-                                      </div>
-                                      {/* Team B */}
-                                      <div className="flex-1 text-center">
-                                        {teamLogoMap[f.teamB] && (
-                                          <img 
-                                            src={teamLogoMap[f.teamB]} 
-                                            alt={`${f.teamB} logo`} 
-                                            className="w-24 h-24 mx-auto mb-0.5 object-contain" 
-                                          />
-                                        )}
-                                        <p className="text-base font-medium text-white">{f.teamB}</p>
-                                      </div>
-                                    </div>
-
-                                    {/* Location display below team info */}
-                                    {f.location && (
-                                      <div className="text-xs text-center font-medium text-white/60 mt-2">
-                                        {f.location}
-                                      </div>
-                                    )}
-                                  </CardContent>
-                                </Card>
-                              </motion.div>
-                            );
-                          })}
-                        </motion.div>
-                        </AccordionContent>
-                      </>
-                    )}
-                    </AccordionItem>
+                      {comp.display_name}
+                    </button>
                   ))}
-                </Accordion>
+                </div>
               )}
             </div>
-            <div className="mt-12 text-center text-sm text-white/40">
-              {/* Footer space */}
-            </div>
+
+            {/* Week Dropdown */}
+            {allFixtures.length > 0 && (
+              <div className="relative">
+                <button 
+                  onClick={() => {
+                    setShowWeekDropdown(!showWeekDropdown);
+                    setShowCompetitionDropdown(false);
+                  }}
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 font-medium transition-all hover:bg-white/10 text-sm"
+                >
+                  <span>{allFixtures[currentWeekIndex]?.date || 'Week'}</span>
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+
+                {showWeekDropdown && (
+                  <div className="absolute top-full left-0 mt-2 w-64 rounded-xl bg-[#121527] border border-white/10 shadow-xl z-50 max-h-80 overflow-y-auto">
+                    {allFixtures.map((week, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => handleWeekChange(idx)}
+                        className={`w-full text-left px-4 py-3 text-sm transition-colors ${
+                          currentWeekIndex === idx 
+                            ? 'bg-white/10 text-white font-semibold' 
+                            : 'text-white/70 hover:bg-white/5 hover:text-white'
+                        }`}
+                      >
+                        {week.date}
+                        <span className="text-xs text-white/50 ml-2">({week.fixtures.length} fixtures)</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            <button
+              onClick={handleReset}
+              disabled={selectedCompetition === "sbr2025" && currentWeekIndex === 0}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 font-medium transition-all hover:bg-white/10 disabled:opacity-40 disabled:cursor-not-allowed text-sm"
+            >
+              <RotateCcw className="w-4 h-4" />
+              <span>Reset</span>
+            </button>
           </div>
-        </div>
-      </main>
+
+          {/* Week Navigation */}
+          {allFixtures[currentWeekIndex] && (
+            <div className="mb-10 flex items-center justify-between text-white">
+              <button
+                onClick={handlePrevWeek}
+                disabled={currentWeekIndex === 0}
+                className="p-3 rounded-2xl bg-white/5 border border-white/10 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              <div className="text-center">
+                <h2 className="text-xl md:text-2xl font-bold">{allFixtures[currentWeekIndex].date}</h2>
+                <p className="text-white/70 mt-1 text-sm">{allFixtures[currentWeekIndex].day}</p>
+              </div>
+
+              <button
+                onClick={handleNextWeek}
+                disabled={currentWeekIndex === allFixtures.length - 1}
+                className="p-3 rounded-2xl bg-white/5 border border-white/10 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          )}
+
+          {/* Fixtures - Clean List */}
+          {!allFixtures[currentWeekIndex] || allFixtures[currentWeekIndex].fixtures.length === 0 ? (
+            <div className="text-center py-16">
+              <h3 className="text-xl font-bold mb-2">No Fixtures Found</h3>
+              <p className="text-sm text-white/70">Try adjusting your filters</p>
+            </div>
+          ) : (
+            <div className="rounded-2xl bg-white/[0.02] border border-white/10 overflow-hidden">
+              {allFixtures[currentWeekIndex].fixtures.map((fixture, idx) => {
+                const isHighlighted = isHighlightedFixture(
+                  allFixtures[currentWeekIndex].date,
+                  fixture.time,
+                  fixture.teamA,
+                  fixture.teamB
+                );
+                const isCancelled = fixture.status === 'cancelled';
+                const finalScore = getFinalScore(
+                  allFixtures[currentWeekIndex].date,
+                  fixture.time,
+                  fixture.teamA,
+                  fixture.teamB
+                );
+                const isClickable = isHighlighted && !isCancelled;
+
+                return (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.02 }}
+                    onClick={() => isClickable && handleFixtureClick(
+                      allFixtures[currentWeekIndex].date,
+                      fixture.time,
+                      fixture.teamA,
+                      fixture.teamB
+                    )}
+                    className={`group relative py-4 px-4 transition-all ${
+                      isClickable ? 'cursor-pointer hover:bg-white/5' : ''
+                    }`}
+                    style={{
+                      borderLeftWidth: isHighlighted ? '3px' : '0px',
+                      borderLeftColor: isHighlighted ? tokens.gold : 'transparent',
+                      paddingLeft: isHighlighted ? '16px' : '16px'
+                    }}
+                  >
+                    <div className="flex items-center justify-center gap-4">
+                      {/* Team A - Right Aligned */}
+                      <div className="flex-1 text-right">
+                        <span className="font-semibold text-sm">
+                          {fixture.teamA}
+                        </span>
+                      </div>
+
+                      {/* Team A Logo */}
+                      <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center">
+                        {teamLogos[fixture.teamA] && (
+                          <img 
+                            src={teamLogos[fixture.teamA]} 
+                            alt={fixture.teamA}
+                            className="max-w-full max-h-full object-contain"
+                            style={{ filter: 'drop-shadow(0 0 3px rgba(255,255,255,0.4))' }}
+                          />
+                        )}
+                      </div>
+
+                      {/* Score/Time - Center */}
+                      <div className="flex-shrink-0 text-center min-w-[80px]">
+                        {isCancelled ? (
+                          <span className="text-red-400 text-xs font-bold">CANCELLED</span>
+                        ) : finalScore ? (
+                          <div className="font-bold text-base">
+                            {finalScore.teamAScore} - {finalScore.teamBScore}
+                          </div>
+                        ) : (
+                          <div className="text-sm font-medium text-white/70">{fixture.time}</div>
+                        )}
+                      </div>
+
+                      {/* Team B Logo */}
+                      <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center">
+                        {teamLogos[fixture.teamB] && (
+                          <img 
+                            src={teamLogos[fixture.teamB]} 
+                            alt={fixture.teamB}
+                            className="max-w-full max-h-full object-contain"
+                            style={{ filter: 'drop-shadow(0 0 3px rgba(255,255,255,0.4))' }}
+                          />
+                        )}
+                      </div>
+
+                      {/* Team B - Left Aligned */}
+                      <div className="flex-1 text-left">
+                        <span className="font-semibold text-sm">
+                          {fixture.teamB}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Stats Badge */}
+                    {isHighlighted && !isCancelled && (
+                      <div className="absolute top-2 right-2">
+                        <div 
+                          className="px-2 py-0.5 rounded text-xs font-bold"
+                          style={{ background: tokens.gold, color: '#000' }}
+                        >
+                          STATS
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Arrow for clickable */}
+                    {isClickable && (
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                        <ChevronRightIcon className="w-5 h-5 text-white/30 group-hover:text-white/60 transition-colors" />
+                      </div>
+                    )}
+
+                    {/* Bottom border - inset from edges */}
+                    {idx < allFixtures[currentWeekIndex].fixtures.length - 1 && (
+                      <div className="absolute bottom-0 left-1/4 right-1/4 border-b border-white/10"></div>
+                    )}
+                  </motion.div>
+                );
+              })}
+
+              {/* Footer Note */}
+              {allFixtures[currentWeekIndex]?.fixtures.some(f => 
+                isHighlightedFixture(allFixtures[currentWeekIndex].date, f.time, f.teamA, f.teamB)
+              ) && (
+                <div className="mt-8 pt-6 border-t border-white/10">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full" style={{ background: tokens.gold }}></div>
+                    <p className="text-sm text-white/70">
+                      Games with a <span style={{ color: tokens.gold }} className="font-semibold">yellow border</span> have detailed stats
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </Container>
+      </section>
+
+      <Footer />
     </div>
   );
 };

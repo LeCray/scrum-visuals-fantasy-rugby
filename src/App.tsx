@@ -17,8 +17,6 @@ import Download from "./pages/Download";
 import Support from "./pages/Support";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ZimbabweSBRGraphic from "./pages/ZimbabweSBRGraphic";
-import URCLineups from "./pages/URCLineups";
-import URCAdmin from "./pages/URCAdmin";
 
 // Analytics Hub imports - lazy loaded so they don't affect the main app
 const UnifiedAnalyticsDashboard = lazy(() => import("./pages/UnifiedAnalyticsDashboard"));
@@ -50,11 +48,6 @@ const App = () => (
           <Route path="/support" element={<Support />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/zimbabwe-sbr-graphic" element={<ZimbabweSBRGraphic />} />
-          
-          {/* URC Routes */}
-          <Route path="/urc-lineups" element={<URCLineups />} />
-          <Route path="/urc-admin" element={<URCAdmin />} />
-
           <Route path="/box-score/:matchId" element={<BoxScorePage />} />
           
           {/* Analytics Hub Routes - Unified dashboard system */}

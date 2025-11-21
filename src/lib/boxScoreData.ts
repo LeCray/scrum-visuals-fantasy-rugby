@@ -139,6 +139,29 @@ const generateMatchId = (date: string, time: string, teamA: string, teamB: strin
   return `${date}-${time}-${teamA}-${teamB}`.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
 };
 
+// Week to actual date mapping for SBR 2025
+export const weekToDateMap: Record<string, string> = {
+  "Week 1": "17 May 2025",
+  "Week 2": "24 May 2025",
+  "Week 3": "07 June 2025",
+  "Week 4": "14 June 2025",
+  "Week 5": "28 June 2025",
+  "Week 6": "05 July 2025",
+  "Week 7": "12 July 2025",
+  "Week 8": "19 July 2025",
+  "Week 9": "26 July 2025",
+  "Week 10": "02 August 2025",
+};
+
+// Function to get formatted date from week string
+export const getFormattedDate = (dateStr: string): string => {
+  // If it's a week string, convert to actual date
+  if (dateStr.startsWith("Week ")) {
+    return weekToDateMap[dateStr] || dateStr;
+  }
+  return dateStr;
+};
+
 // Map to store box scores by match ID
 export const boxScores = new Map<string, BoxScoreData>();
 

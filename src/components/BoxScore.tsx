@@ -1,9 +1,26 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Calendar, MapPin, Clock, Cloud } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { TeamStats, TryScore, KickAtGoal, falconVsStJohnsPlayerData, peterhouseVsStGeorgesPlayerData, generateMatchId } from "@/lib/boxScoreData";
+import { TeamStats, TryScore, KickAtGoal, falconVsStJohnsPlayerData, peterhouseVsStGeorgesPlayerData, generateMatchId, getFormattedDate } from "@/lib/boxScoreData";
 import PlayerBoxScore from "./PlayerBoxScore";
+import Nav from "./Nav";
+import Footer from "./Footer";
+
+// Theme tokens from homepage
+const tokens = {
+  bg: "#0B0D18",
+  surface: "#121527",
+  surface2: "#0E1222",
+  text: "#E6E9F5",
+  textMuted: "#A9B1C6",
+  primary: "#2D6CFF",
+  primary2: "#7A5CFF",
+  gold: "#F9C94E",
+};
+
+const appGradient = "bg-[radial-gradient(1200px_600px_at_80%_-20%,rgba(45,108,255,.25),rgba(122,92,255,.12)_40%,transparent_70%),linear-gradient(180deg,#0B0D18_0%,#0B0D18_30%,#0E1222_100%)]";
+const cardGrad = "bg-[linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01))]";
 
 // Types for our box score data
 type BoxScoreProps = {
@@ -116,31 +133,31 @@ const PossessionCard: React.FC<{
   possessionB: number;
 }> = ({ teamA, teamB, possessionA, possessionB }) => {
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
-      <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-3 md:mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
+    <div className={`${cardGrad} rounded-3xl border border-white/10 p-6 md:p-8`}>
+      <h2 className="text-xl md:text-2xl font-bold text-white mb-6 text-center">
         Possession
       </h2>
 
       <div className="relative pt-10 pb-2">
         {/* Team names at top */}
         <div className="absolute top-0 left-0 flex justify-between w-full px-2">
-          <span className="font-bold text-sm md:text-base text-blue-700">{teamA}</span>
-          <span className="font-bold text-sm md:text-base text-cyan-600">{teamB}</span>
+          <span className="font-bold text-sm md:text-base text-[#2D6CFF]">{teamA}</span>
+          <span className="font-bold text-sm md:text-base text-[#7A5CFF]">{teamB}</span>
         </div>
 
         {/* Progress bar */}
-        <div className="w-full h-10 md:h-14 bg-gray-100 rounded-lg overflow-hidden flex shadow-inner">
+        <div className="w-full h-10 md:h-14 bg-white/5 rounded-lg overflow-hidden flex">
           <div 
-            className="h-full bg-gradient-to-r from-blue-600 to-blue-500 flex items-center justify-center text-white font-bold relative"
+            className="h-full bg-gradient-to-r from-[#2D6CFF] to-[#2D6CFF]/80 flex items-center justify-center text-white font-bold relative"
             style={{ width: `${possessionA}%` }}
           >
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-lg md:text-xl drop-shadow-md">{possessionA}%</span>
             </div>
-            <div className="absolute right-0 h-full w-0.5 bg-white"></div>
+            <div className="absolute right-0 h-full w-0.5 bg-white/30"></div>
           </div>
           <div 
-            className="h-full bg-gradient-to-r from-cyan-500 to-cyan-400 flex items-center justify-center text-white font-bold relative"
+            className="h-full bg-gradient-to-r from-[#7A5CFF]/80 to-[#7A5CFF] flex items-center justify-center text-white font-bold relative"
             style={{ width: `${possessionB}%` }}
           >
             <div className="absolute inset-0 flex items-center justify-center">
@@ -150,7 +167,7 @@ const PossessionCard: React.FC<{
         </div>
 
         {/* Additional context */}
-        <div className="mt-3 text-center text-xs md:text-sm text-gray-500">
+        <div className="mt-3 text-center text-xs md:text-sm text-white/50">
           Based on time with ball in play
         </div>
       </div>
@@ -168,7 +185,7 @@ const DotVisualizer: React.FC<{
   // If we have too many dots, we'll show a number instead
   if (count > max) {
     return (
-      <div className={`inline-flex items-center justify-center ${colorClass} text-white rounded-full font-bold px-2.5 py-1`}>
+      <div className={`inline-flex items-center justify-center ${colorClass} text-white rounded-full font-bold px-2.5 py-1 shadow-lg`}>
         {count}
       </div>
     );
@@ -183,10 +200,11 @@ const DotVisualizer: React.FC<{
       {dots.map((_, i) => (
         <div 
           key={i} 
-          className={`${sizeClass} rounded-full ${colorClass} shadow-sm transition-all duration-300 ease-in-out`}
+          className={`${sizeClass} rounded-full ${colorClass} transition-all duration-300 ease-in-out`}
           style={{ 
             animationDelay: `${i * 0.05}s`,
-            animation: 'pulse 2s infinite' 
+            animation: 'pulse 2s infinite',
+            filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.3))'
           }}
         ></div>
       ))}
@@ -240,20 +258,20 @@ const PenaltiesCard: React.FC<{
     isLast?: boolean;
   }) => (
     <div className={`${!isLast ? 'mb-5' : ''}`}>
-      <div className="text-center font-semibold mb-2 text-gray-700">{title}</div>
+      <div className="text-center font-semibold mb-2 text-white/70">{title}</div>
       <div className="grid grid-cols-2 gap-1">
-        <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-2 shadow-sm">
-          <DotVisualizer count={teamACount} colorClass="bg-blue-600" />
-          <div className="text-center text-blue-700 font-bold mt-3 flex items-center justify-center gap-1.5">
+        <div className="bg-white/5 rounded-lg p-2 border border-[#2D6CFF]/30">
+          <DotVisualizer count={teamACount} colorClass="bg-[#2D6CFF]" />
+          <div className="text-center text-[#2D6CFF] font-bold mt-3 flex items-center justify-center gap-1.5">
             <span className="text-lg">{teamACount}</span>
-            <span className="text-xs text-blue-600">Penalties</span>
+            <span className="text-xs text-white/50">Penalties</span>
           </div>
         </div>
-        <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-2 shadow-sm">
-          <DotVisualizer count={teamBCount} colorClass="bg-cyan-500" />
-          <div className="text-center text-cyan-700 font-bold mt-3 flex items-center justify-center gap-1.5">
+        <div className="bg-white/5 rounded-lg p-2 border border-[#7A5CFF]/30">
+          <DotVisualizer count={teamBCount} colorClass="bg-[#7A5CFF]" />
+          <div className="text-center text-[#7A5CFF] font-bold mt-3 flex items-center justify-center gap-1.5">
             <span className="text-lg">{teamBCount}</span>
-            <span className="text-xs text-cyan-600">Penalties</span>
+            <span className="text-xs text-white/50">Penalties</span>
           </div>
         </div>
       </div>
@@ -261,15 +279,15 @@ const PenaltiesCard: React.FC<{
   );
   
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
-      <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-4 md:mb-5 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
+    <div className={`${cardGrad} rounded-3xl border border-white/10 p-6 md:p-8`}>
+      <h2 className="text-xl md:text-2xl font-bold text-white mb-6 text-center">
         Penalties Conceded
       </h2>
       
       <div className="relative">
         <div className="absolute -top-2 left-0 flex justify-between w-full px-2">
-          <span className="font-bold text-sm text-blue-700">{teamA}</span>
-          <span className="font-bold text-sm text-cyan-600">{teamB}</span>
+          <span className="font-bold text-sm text-[#2D6CFF]">{teamA}</span>
+          <span className="font-bold text-sm text-[#7A5CFF]">{teamB}</span>
         </div>
         
         <div className="pt-4">
@@ -305,95 +323,95 @@ const PenaltiesCard: React.FC<{
           {(Object.values(penaltyCausesA).some(v => v && v > 0) || 
            Object.values(penaltyCausesB).some(v => v && v > 0)) && (
             <div className="mt-6">
-              <h3 className="text-center font-bold text-gray-700 mb-4">Penalty Causes</h3>
+              <h3 className="text-center font-bold text-white/70 mb-4">Penalty Causes</h3>
               
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   {penaltyCausesA.offside && (
-                    <div className="flex justify-between bg-blue-50 p-2 rounded">
-                      <span>Offside</span>
-                      <span className="font-bold">{penaltyCausesA.offside}</span>
+                    <div className="flex justify-between bg-white/5 p-2 rounded border border-white/10">
+                      <span className="text-white/70">Offside</span>
+                      <span className="font-bold text-[#2D6CFF]">{penaltyCausesA.offside}</span>
         </div>
                   )}
                   {penaltyCausesA.ruckOffence && (
-                    <div className="flex justify-between bg-blue-50 p-2 rounded">
-                      <span>Ruck Offence</span>
-                      <span className="font-bold">{penaltyCausesA.ruckOffence}</span>
+                    <div className="flex justify-between bg-white/5 p-2 rounded border border-white/10">
+                      <span className="text-white/70">Ruck Offence</span>
+                      <span className="font-bold text-[#2D6CFF]">{penaltyCausesA.ruckOffence}</span>
                     </div>
                   )}
                   {penaltyCausesA.notReleasePlayer && (
-                    <div className="flex justify-between bg-blue-50 p-2 rounded">
-                      <span>Not Release Player</span>
-                      <span className="font-bold">{penaltyCausesA.notReleasePlayer}</span>
+                    <div className="flex justify-between bg-white/5 p-2 rounded border border-white/10">
+                      <span className="text-white/70">Not Release Player</span>
+                      <span className="font-bold text-[#2D6CFF]">{penaltyCausesA.notReleasePlayer}</span>
                     </div>
                   )}
                   {penaltyCausesA.violentFoulPlay && (
-                    <div className="flex justify-between bg-blue-50 p-2 rounded">
-                      <span>Violent Play</span>
-                      <span className="font-bold">{penaltyCausesA.violentFoulPlay}</span>
+                    <div className="flex justify-between bg-white/5 p-2 rounded border border-white/10">
+                      <span className="text-white/70">Violent Play</span>
+                      <span className="font-bold text-[#2D6CFF]">{penaltyCausesA.violentFoulPlay}</span>
                     </div>
                   )}
                   {penaltyCausesA.notReleasingBall && (
-                    <div className="flex justify-between bg-blue-50 p-2 rounded">
-                      <span>Not Release Ball</span>
-                      <span className="font-bold">{penaltyCausesA.notReleasingBall}</span>
+                    <div className="flex justify-between bg-white/5 p-2 rounded border border-white/10">
+                      <span className="text-white/70">Not Release Ball</span>
+                      <span className="font-bold text-[#2D6CFF]">{penaltyCausesA.notReleasingBall}</span>
                     </div>
                   )}
                   {penaltyCausesA.dangerousTackle && (
-                    <div className="flex justify-between bg-blue-50 p-2 rounded">
-                      <span>Dangerous Tackle</span>
-                      <span className="font-bold">{penaltyCausesA.dangerousTackle}</span>
+                    <div className="flex justify-between bg-white/5 p-2 rounded border border-white/10">
+                      <span className="text-white/70">Dangerous Tackle</span>
+                      <span className="font-bold text-[#2D6CFF]">{penaltyCausesA.dangerousTackle}</span>
                     </div>
                   )}
                   {penaltyCausesA.scrum && (
-                    <div className="flex justify-between bg-blue-50 p-2 rounded">
-                      <span>Scrum</span>
-                      <span className="font-bold">{penaltyCausesA.scrum}</span>
+                    <div className="flex justify-between bg-white/5 p-2 rounded border border-white/10">
+                      <span className="text-white/70">Scrum</span>
+                      <span className="font-bold text-[#2D6CFF]">{penaltyCausesA.scrum}</span>
                     </div>
                   )}
                 </div>
                 
                 <div className="space-y-2">
                   {penaltyCausesB.offside && (
-                    <div className="flex justify-between bg-cyan-50 p-2 rounded">
-                      <span>Offside</span>
-                      <span className="font-bold">{penaltyCausesB.offside}</span>
+                    <div className="flex justify-between bg-white/5 p-2 rounded border border-white/10">
+                      <span className="text-white/70">Offside</span>
+                      <span className="font-bold text-[#7A5CFF]">{penaltyCausesB.offside}</span>
                     </div>
                   )}
                   {penaltyCausesB.ruckOffence && (
-                    <div className="flex justify-between bg-cyan-50 p-2 rounded">
-                      <span>Ruck Offence</span>
-                      <span className="font-bold">{penaltyCausesB.ruckOffence}</span>
+                    <div className="flex justify-between bg-white/5 p-2 rounded border border-white/10">
+                      <span className="text-white/70">Ruck Offence</span>
+                      <span className="font-bold text-[#7A5CFF]">{penaltyCausesB.ruckOffence}</span>
                     </div>
                   )}
                   {penaltyCausesB.notReleasePlayer && (
-                    <div className="flex justify-between bg-cyan-50 p-2 rounded">
-                      <span>Not Release Player</span>
-                      <span className="font-bold">{penaltyCausesB.notReleasePlayer}</span>
+                    <div className="flex justify-between bg-white/5 p-2 rounded border border-white/10">
+                      <span className="text-white/70">Not Release Player</span>
+                      <span className="font-bold text-[#7A5CFF]">{penaltyCausesB.notReleasePlayer}</span>
                     </div>
                   )}
                   {penaltyCausesB.violentFoulPlay && (
-                    <div className="flex justify-between bg-cyan-50 p-2 rounded">
-                      <span>Violent Play</span>
-                      <span className="font-bold">{penaltyCausesB.violentFoulPlay}</span>
+                    <div className="flex justify-between bg-white/5 p-2 rounded border border-white/10">
+                      <span className="text-white/70">Violent Play</span>
+                      <span className="font-bold text-[#7A5CFF]">{penaltyCausesB.violentFoulPlay}</span>
                     </div>
                   )}
                   {penaltyCausesB.notReleasingBall && (
-                    <div className="flex justify-between bg-cyan-50 p-2 rounded">
-                      <span>Not Release Ball</span>
-                      <span className="font-bold">{penaltyCausesB.notReleasingBall}</span>
+                    <div className="flex justify-between bg-white/5 p-2 rounded border border-white/10">
+                      <span className="text-white/70">Not Release Ball</span>
+                      <span className="font-bold text-[#7A5CFF]">{penaltyCausesB.notReleasingBall}</span>
                     </div>
                   )}
                   {penaltyCausesB.dangerousTackle && (
-                    <div className="flex justify-between bg-cyan-50 p-2 rounded">
-                      <span>Dangerous Tackle</span>
-                      <span className="font-bold">{penaltyCausesB.dangerousTackle}</span>
+                    <div className="flex justify-between bg-white/5 p-2 rounded border border-white/10">
+                      <span className="text-white/70">Dangerous Tackle</span>
+                      <span className="font-bold text-[#7A5CFF]">{penaltyCausesB.dangerousTackle}</span>
                     </div>
                   )}
                   {penaltyCausesB.scrum && (
-                    <div className="flex justify-between bg-cyan-50 p-2 rounded">
-                      <span>Scrum</span>
-                      <span className="font-bold">{penaltyCausesB.scrum}</span>
+                    <div className="flex justify-between bg-white/5 p-2 rounded border border-white/10">
+                      <span className="text-white/70">Scrum</span>
+                      <span className="font-bold text-[#7A5CFF]">{penaltyCausesB.scrum}</span>
                     </div>
                   )}
                 </div>
@@ -459,7 +477,7 @@ const ScrumLineoutCard: React.FC<{
             cx={size / 2}
             cy={size / 2}
             r={radius}
-            className="fill-transparent stroke-gray-200"
+            className="fill-transparent stroke-white/10"
             strokeWidth={strokeWidth}
           />
           
@@ -478,8 +496,8 @@ const ScrumLineoutCard: React.FC<{
         
         {/* Text inside circle */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <span className="text-lg font-bold">{percent}%</span>
-          <span className="text-xs">{won}/{total}</span>
+          <span className="text-lg font-bold text-white">{percent}%</span>
+          <span className="text-xs text-white/50">{won}/{total}</span>
         </div>
       </div>
     );
@@ -515,7 +533,7 @@ const ScrumLineoutCard: React.FC<{
   }) => (
     <div className={`${!isLast ? 'mb-6' : ''}`}>
       <div className="flex items-center justify-center mb-3">
-        <h3 className="text-center font-bold text-gray-700 text-lg">
+        <h3 className="text-center font-bold text-white/70 text-lg">
           {title}
         </h3>
         {iconSrc && (
@@ -526,48 +544,48 @@ const ScrumLineoutCard: React.FC<{
       <div className="grid grid-cols-2 gap-3">
         {isCircular ? (
           <>
-            <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-3 shadow-sm flex flex-col items-center">
+            <div className="bg-white/5 rounded-lg p-3 border border-[#2D6CFF]/30 flex flex-col items-center">
               <CircularProgress 
                 percent={teamAData.percent || 0} 
-                colorClass="stroke-blue-600" 
+                colorClass="stroke-[#2D6CFF]" 
                 won={teamAData.won || 0} 
                 total={teamAData.total || 0} 
               />
               <div className="mt-2 text-center">
-                <div className="text-blue-700 font-bold">{teamA}</div>
-                <div className="text-xs text-blue-600">{teamAData.label || ''}</div>
+                <div className="text-[#2D6CFF] font-bold">{teamA}</div>
+                <div className="text-xs text-white/50">{teamAData.label || ''}</div>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-3 shadow-sm flex flex-col items-center">
+            <div className="bg-white/5 rounded-lg p-3 border border-[#7A5CFF]/30 flex flex-col items-center">
               <CircularProgress 
                 percent={teamBData.percent || 0} 
-                colorClass="stroke-cyan-500" 
+                colorClass="stroke-[#7A5CFF]" 
                 won={teamBData.won || 0} 
                 total={teamBData.total || 0} 
               />
               <div className="mt-2 text-center">
-                <div className="text-cyan-700 font-bold">{teamB}</div>
-                <div className="text-xs text-cyan-600">{teamBData.label || ''}</div>
+                <div className="text-[#7A5CFF] font-bold">{teamB}</div>
+                <div className="text-xs text-white/50">{teamBData.label || ''}</div>
               </div>
             </div>
           </>
         ) : (
           <>
-            <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-3 shadow-sm">
+            <div className="bg-white/5 rounded-lg p-3 border border-[#2D6CFF]/30">
               <div className="flex flex-col items-center">
-                <DotVisualizer count={teamAData.count || 0} colorClass="bg-blue-600" />
+                <DotVisualizer count={teamAData.count || 0} colorClass="bg-[#2D6CFF]" />
                 <div className="mt-3 text-center">
-                  <div className="text-lg font-bold text-blue-700">{teamAData.count}</div>
-                  <div className="text-xs text-blue-600">{teamAData.label || title}</div>
+                  <div className="text-lg font-bold text-[#2D6CFF]">{teamAData.count}</div>
+                  <div className="text-xs text-white/50">{teamAData.label || title}</div>
                 </div>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-3 shadow-sm">
+            <div className="bg-white/5 rounded-lg p-3 border border-[#7A5CFF]/30">
               <div className="flex flex-col items-center">
-                <DotVisualizer count={teamBData.count || 0} colorClass="bg-cyan-500" />
+                <DotVisualizer count={teamBData.count || 0} colorClass="bg-[#7A5CFF]" />
                 <div className="mt-3 text-center">
-                  <div className="text-lg font-bold text-cyan-700">{teamBData.count}</div>
-                  <div className="text-xs text-cyan-600">{teamBData.label || title}</div>
+                  <div className="text-lg font-bold text-[#7A5CFF]">{teamBData.count}</div>
+                  <div className="text-xs text-white/50">{teamBData.label || title}</div>
                 </div>
               </div>
             </div>
@@ -578,8 +596,8 @@ const ScrumLineoutCard: React.FC<{
   );
   
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
-      <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-4 md:mb-6 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
+    <div className={`${cardGrad} rounded-3xl border border-white/10 p-6 md:p-8`}>
+      <h2 className="text-xl md:text-2xl font-bold text-white mb-6 text-center">
         Set Piece Performance
       </h2>
       
@@ -682,30 +700,30 @@ const ScoringCard: React.FC<{
   const teamBPoints = calculatePoints(triesB);
   
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
-      <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-4 md:mb-6 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
+    <div className={`${cardGrad} rounded-3xl border border-white/10 p-6 md:p-8`}>
+      <h2 className="text-xl md:text-2xl font-bold text-white mb-6 text-center">
         Scoring Summary
       </h2>
       
       {/* Points total */}
       <div className="grid grid-cols-2 gap-3 mb-6">
         <div className="text-center">
-          <h3 className="font-bold text-blue-700 text-base md:text-lg mb-1">{teamA}</h3>
-          <div className="bg-white rounded-lg p-4 shadow-sm">
-            <div className="text-4xl font-bold text-blue-700">
+          <h3 className="font-bold text-[#2D6CFF] text-base md:text-lg mb-1">{teamA}</h3>
+          <div className="bg-white/5 rounded-lg p-4 border border-[#2D6CFF]/30">
+            <div className="text-4xl font-bold text-[#2D6CFF]">
               {teamAPoints}
             </div>
-            <div className="text-sm text-blue-600">Points</div>
+            <div className="text-sm text-white/50">Points</div>
           </div>
         </div>
         
         <div className="text-center">
-          <h3 className="font-bold text-cyan-600 text-base md:text-lg mb-1">{teamB}</h3>
-          <div className="bg-white rounded-lg p-4 shadow-sm">
-            <div className="text-4xl font-bold text-cyan-600">
+          <h3 className="font-bold text-[#7A5CFF] text-base md:text-lg mb-1">{teamB}</h3>
+          <div className="bg-white/5 rounded-lg p-4 border border-[#7A5CFF]/30">
+            <div className="text-4xl font-bold text-[#7A5CFF]">
               {teamBPoints}
             </div>
-            <div className="text-sm text-cyan-600">Points</div>
+            <div className="text-sm text-white/50">Points</div>
           </div>
         </div>
       </div>
@@ -713,49 +731,49 @@ const ScoringCard: React.FC<{
       {/* Score details */}
       <div className="grid grid-cols-2 gap-4 mb-8">
         <div>
-          <h3 className="font-bold text-blue-700 text-base mb-2">Tries Scored</h3>
+          <h3 className="font-bold text-[#2D6CFF] text-base mb-2">Tries Scored</h3>
           <div className="space-y-2">
             {triesA.map((tryScore, i) => (
-              <div key={i} className="flex items-center p-2 rounded bg-blue-50">
-                <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold mr-3">
+              <div key={i} className="flex items-center p-2 rounded bg-white/5 border border-white/10">
+                <div className="w-7 h-7 rounded-full bg-[#2D6CFF] text-white flex items-center justify-center text-xs font-bold mr-3">
                   {tryScore.isPenalty ? "P" : "T"}
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 text-white/70">
                   {tryScore.isPenalty 
                     ? "Penalty" 
                     : tryScore.hasConversion 
                       ? "Try + Conv" 
                       : "Try"}
                 </div>
-                <div className="font-mono text-sm">{tryScore.time}</div>
+                <div className="font-mono text-sm text-white/50">{tryScore.time}</div>
               </div>
             ))}
             {triesA.length === 0 && (
-              <div className="p-2 text-gray-500 italic text-center">No tries scored</div>
+              <div className="p-2 text-white/30 italic text-center">No tries scored</div>
             )}
           </div>
         </div>
         
         <div>
-          <h3 className="font-bold text-cyan-600 text-base mb-2">Tries Scored</h3>
+          <h3 className="font-bold text-[#7A5CFF] text-base mb-2">Tries Scored</h3>
           <div className="space-y-2">
             {triesB.map((tryScore, i) => (
-              <div key={i} className="flex items-center p-2 rounded bg-cyan-50">
-                <div className="w-7 h-7 rounded-full bg-cyan-500 text-white flex items-center justify-center text-xs font-bold mr-3">
+              <div key={i} className="flex items-center p-2 rounded bg-white/5 border border-white/10">
+                <div className="w-7 h-7 rounded-full bg-[#7A5CFF] text-white flex items-center justify-center text-xs font-bold mr-3">
                   {tryScore.isPenalty ? "P" : "T"}
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 text-white/70">
                   {tryScore.isPenalty 
                     ? "Penalty" 
                     : tryScore.hasConversion 
                       ? "Try + Conv" 
                       : "Try"}
                 </div>
-                <div className="font-mono text-sm">{tryScore.time}</div>
+                <div className="font-mono text-sm text-white/50">{tryScore.time}</div>
               </div>
             ))}
             {triesB.length === 0 && (
-              <div className="p-2 text-gray-500 italic text-center">No tries scored</div>
+              <div className="p-2 text-white/30 italic text-center">No tries scored</div>
             )}
           </div>
         </div>
@@ -763,10 +781,10 @@ const ScoringCard: React.FC<{
       
       {/* Kicks visualization */}
       <div>
-        <h3 className="text-center font-semibold text-lg text-gray-700 mb-3">Kicks At Goal</h3>
+        <h3 className="text-center font-semibold text-lg text-white/70 mb-3">Kicks At Goal</h3>
         <div className="grid grid-cols-2 gap-4">
-          <div className="bg-white rounded-lg p-3 shadow-sm">
-            <div className="text-center text-sm text-blue-700 font-semibold mb-2">{teamA}</div>
+          <div className="bg-white/5 rounded-lg p-3 border border-white/10">
+            <div className="text-center text-sm text-[#2D6CFF] font-semibold mb-2">{teamA}</div>
             {/* Simple kick visualization */}
             <div className="relative w-full bg-green-600 rounded-lg" style={{ height: "120px" }}>
               {/* Goal posts */}
@@ -799,8 +817,8 @@ const ScoringCard: React.FC<{
             </div>
           </div>
           
-          <div className="bg-white rounded-lg p-3 shadow-sm">
-            <div className="text-center text-sm text-cyan-700 font-semibold mb-2">{teamB}</div>
+          <div className="bg-white/5 rounded-lg p-3 border border-white/10">
+            <div className="text-center text-sm text-[#7A5CFF] font-semibold mb-2">{teamB}</div>
             {/* Simple kick visualization */}
             <div className="relative w-full bg-green-600 rounded-lg" style={{ height: "120px" }}>
               {/* Goal posts */}
@@ -846,15 +864,15 @@ const CardsCard: React.FC<{
   cardsB?: { yellow: number; red: number };
 }> = ({ teamA, teamB, cardsA = { yellow: 0, red: 0 }, cardsB = { yellow: 0, red: 0 } }) => {
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
-      <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-3 md:mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
+    <div className={`${cardGrad} rounded-3xl border border-white/10 p-6 md:p-8`}>
+      <h2 className="text-xl md:text-2xl font-bold text-white mb-6 text-center">
         Cards Conceded
       </h2>
 
       <div className="grid grid-cols-2 gap-4">
         {/* Team A Cards */}
         <div className="text-center">
-          <h3 className="font-bold text-blue-700 text-base md:text-lg mb-2">{teamA}</h3>
+          <h3 className="font-bold text-[#2D6CFF] text-base md:text-lg mb-2">{teamA}</h3>
           <div className="flex justify-center gap-4 mb-3">
             {/* Yellow Cards */}
             {cardsA.yellow > 0 && Array.from({ length: cardsA.yellow }).map((_, i) => (
@@ -865,14 +883,14 @@ const CardsCard: React.FC<{
               <div key={`red-${i}`} className="w-10 h-14 md:w-12 md:h-16 bg-red-600 rounded-md shadow-md"></div>
             ))}
             {cardsA.yellow === 0 && cardsA.red === 0 && (
-              <div className="text-gray-500 italic">No cards</div>
+              <div className="text-white/30 italic">No cards</div>
             )}
           </div>
         </div>
 
         {/* Team B Cards */}
         <div className="text-center">
-          <h3 className="font-bold text-cyan-600 text-base md:text-lg mb-2">{teamB}</h3>
+          <h3 className="font-bold text-[#7A5CFF] text-base md:text-lg mb-2">{teamB}</h3>
           <div className="flex justify-center gap-4 mb-3">
             {/* Yellow Cards */}
             {cardsB.yellow > 0 && Array.from({ length: cardsB.yellow }).map((_, i) => (
@@ -883,7 +901,7 @@ const CardsCard: React.FC<{
               <div key={`red-${i}`} className="w-10 h-14 md:w-12 md:h-16 bg-red-600 rounded-md shadow-md"></div>
             ))}
             {cardsB.yellow === 0 && cardsB.red === 0 && (
-              <div className="text-gray-500 italic">No cards</div>
+              <div className="text-white/30 italic">No cards</div>
             )}
           </div>
         </div>
@@ -922,30 +940,30 @@ const KicksCard: React.FC<{
   };
   
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
-      <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-4 md:mb-6 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
+    <div className={`${cardGrad} rounded-3xl border border-white/10 p-6 md:p-8`}>
+      <h2 className="text-xl md:text-2xl font-bold text-white mb-6 text-center">
         Kicking Performance
       </h2>
       
       <div className="space-y-6">
         {/* Kicks from Hand */}
         <div>
-          <h3 className="font-semibold text-center text-gray-700 mb-3">Kicks from Hand</h3>
+          <h3 className="font-semibold text-center text-white/70 mb-3">Kicks from Hand</h3>
           <div className="grid grid-cols-2 gap-3">
-            <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-3 shadow-sm">
+            <div className="bg-white/5 rounded-lg p-3 border border-[#2D6CFF]/30">
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-700">{kicksA.fromHand?.total || 0}</div>
-                <div className="text-sm text-blue-600">Total Kicks</div>
-                <div className="text-xs text-gray-500 mt-1">
+                <div className="text-3xl font-bold text-[#2D6CFF]">{kicksA.fromHand?.total || 0}</div>
+                <div className="text-sm text-white/50">Total Kicks</div>
+                <div className="text-xs text-white/30 mt-1">
                   {kicksA.fromHand?.reclaimed || 0} Reclaimed ({formatPercentage(kicksA.fromHand?.reclaimed || 0, kicksA.fromHand?.total || 1)})
                 </div>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-3 shadow-sm">
+            <div className="bg-white/5 rounded-lg p-3 border border-[#7A5CFF]/30">
               <div className="text-center">
-                <div className="text-3xl font-bold text-cyan-700">{kicksB.fromHand?.total || 0}</div>
-                <div className="text-sm text-cyan-600">Total Kicks</div>
-                <div className="text-xs text-gray-500 mt-1">
+                <div className="text-3xl font-bold text-[#7A5CFF]">{kicksB.fromHand?.total || 0}</div>
+                <div className="text-sm text-white/50">Total Kicks</div>
+                <div className="text-xs text-white/30 mt-1">
                   {kicksB.fromHand?.reclaimed || 0} Reclaimed ({formatPercentage(kicksB.fromHand?.reclaimed || 0, kicksB.fromHand?.total || 1)})
                 </div>
               </div>
@@ -955,22 +973,22 @@ const KicksCard: React.FC<{
         
         {/* Kicks in Field */}
         <div>
-          <h3 className="font-semibold text-center text-gray-700 mb-3">Kicks in Field</h3>
+          <h3 className="font-semibold text-center text-white/70 mb-3">Kicks in Field</h3>
           <div className="grid grid-cols-2 gap-3">
-            <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-3 shadow-sm">
+            <div className="bg-white/5 rounded-lg p-3 border border-[#2D6CFF]/30">
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-700">{kicksA.inField?.total || 0}</div>
-                <div className="text-sm text-blue-600">Total Kicks</div>
-                <div className="text-xs text-gray-500 mt-1">
+                <div className="text-3xl font-bold text-[#2D6CFF]">{kicksA.inField?.total || 0}</div>
+                <div className="text-sm text-white/50">Total Kicks</div>
+                <div className="text-xs text-white/30 mt-1">
                   {kicksA.inField?.reclaimed || 0} Reclaimed ({formatPercentage(kicksA.inField?.reclaimed || 0, kicksA.inField?.total || 1)})
                 </div>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-3 shadow-sm">
+            <div className="bg-white/5 rounded-lg p-3 border border-[#7A5CFF]/30">
               <div className="text-center">
-                <div className="text-3xl font-bold text-cyan-700">{kicksB.inField?.total || 0}</div>
-                <div className="text-sm text-cyan-600">Total Kicks</div>
-                <div className="text-xs text-gray-500 mt-1">
+                <div className="text-3xl font-bold text-[#7A5CFF]">{kicksB.inField?.total || 0}</div>
+                <div className="text-sm text-white/50">Total Kicks</div>
+                <div className="text-xs text-white/30 mt-1">
                   {kicksB.inField?.reclaimed || 0} Reclaimed ({formatPercentage(kicksB.inField?.reclaimed || 0, kicksB.inField?.total || 1)})
                 </div>
               </div>
@@ -980,15 +998,15 @@ const KicksCard: React.FC<{
         
         {/* Kicks to Touch */}
         <div>
-          <h3 className="font-semibold text-center text-gray-700 mb-3">Kicks to Touch</h3>
+          <h3 className="font-semibold text-center text-white/70 mb-3">Kicks to Touch</h3>
           <div className="grid grid-cols-2 gap-3">
-            <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-3 shadow-sm text-center">
-              <div className="text-3xl font-bold text-blue-700">{kicksA.toTouch?.total || 0}</div>
-              <div className="text-sm text-blue-600">Kicks</div>
+            <div className="bg-white/5 rounded-lg p-3 border border-[#2D6CFF]/30 text-center">
+              <div className="text-3xl font-bold text-[#2D6CFF]">{kicksA.toTouch?.total || 0}</div>
+              <div className="text-sm text-white/50">Kicks</div>
             </div>
-            <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-3 shadow-sm text-center">
-              <div className="text-3xl font-bold text-cyan-700">{kicksB.toTouch?.total || 0}</div>
-              <div className="text-sm text-cyan-600">Kicks</div>
+            <div className="bg-white/5 rounded-lg p-3 border border-[#7A5CFF]/30 text-center">
+              <div className="text-3xl font-bold text-[#7A5CFF]">{kicksB.toTouch?.total || 0}</div>
+              <div className="text-sm text-white/50">Kicks</div>
             </div>
           </div>
         </div>
@@ -1025,44 +1043,44 @@ const MaulsCard: React.FC<{
 }> = ({ teamA, teamB, maulsA = { total: 0, won: 0 }, maulsB = { total: 0, won: 0 } }) => {
   
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
-      <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-3 md:mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
+    <div className={`${cardGrad} rounded-3xl border border-white/10 p-6 md:p-8`}>
+      <h2 className="text-xl md:text-2xl font-bold text-white mb-6 text-center">
         Mauls
       </h2>
 
       <div className="grid grid-cols-2 gap-4">
         {/* Team A Mauls */}
         <div className="text-center">
-          <h3 className="font-bold text-blue-700 text-base md:text-lg mb-2">{teamA}</h3>
-          <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-3 shadow-sm">
+          <h3 className="font-bold text-[#2D6CFF] text-base md:text-lg mb-2">{teamA}</h3>
+          <div className="bg-white/5 rounded-lg p-3 border border-[#2D6CFF]/30">
             {maulsA.total > 0 ? (
               <>
-                <div className="text-2xl md:text-3xl font-bold text-blue-700">{maulsA.total}</div>
-                <div className="text-sm text-blue-600">Mauls</div>
-                <div className="text-xs text-gray-500 mt-1">
+                <div className="text-2xl md:text-3xl font-bold text-[#2D6CFF]">{maulsA.total}</div>
+                <div className="text-sm text-white/50">Mauls</div>
+                <div className="text-xs text-white/30 mt-1">
                   {maulsA.won} Won ({Math.round((maulsA.won / maulsA.total) * 100)}% Retained)
                 </div>
               </>
             ) : (
-              <div className="text-gray-500 italic py-2">No Mauls</div>
+              <div className="text-white/30 italic py-2">No Mauls</div>
             )}
           </div>
         </div>
 
         {/* Team B Mauls */}
         <div className="text-center">
-          <h3 className="font-bold text-cyan-600 text-base md:text-lg mb-2">{teamB}</h3>
-          <div className="bg-gradient-to-br from-white to-cyan-50 rounded-lg p-3 shadow-sm">
+          <h3 className="font-bold text-[#7A5CFF] text-base md:text-lg mb-2">{teamB}</h3>
+          <div className="bg-white/5 rounded-lg p-3 border border-[#7A5CFF]/30">
             {maulsB.total > 0 ? (
               <>
-                <div className="text-2xl md:text-3xl font-bold text-cyan-700">{maulsB.total}</div>
-                <div className="text-sm text-cyan-600">Mauls</div>
-                <div className="text-xs text-gray-500 mt-1">
+                <div className="text-2xl md:text-3xl font-bold text-[#7A5CFF]">{maulsB.total}</div>
+                <div className="text-sm text-white/50">Mauls</div>
+                <div className="text-xs text-white/30 mt-1">
                   {maulsB.won} Won ({Math.round((maulsB.won / maulsB.total) * 100)}% Retained)
                 </div>
               </>
             ) : (
-              <div className="text-gray-500 italic py-2">No Mauls</div>
+              <div className="text-white/30 italic py-2">No Mauls</div>
             )}
           </div>
         </div>
@@ -1180,105 +1198,108 @@ const BoxScore: React.FC<BoxScoreProps> = ({
   const tryStatsB = getTryStats(tryDataB);
 
   return (
-    <div className="relative text-scrummy-navyBlue min-h-screen pb-12">
-      {/* Background Logo */}
-      <div
-        className="fixed inset-0 pointer-events-none opacity-5"
-        style={{
-          backgroundImage: "url('/assets/logo.png')",
-          backgroundSize: isMobile ? "120% auto" : "80% auto",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
+    <div className={`${appGradient} min-h-screen`} style={{ color: tokens.text }}>
+      <Nav />
 
-      <div className="relative z-10">
-        {/* Header Section */}
-        <header className="relative py-6 md:py-12 px-4 md:px-8">
-          <div className="max-w-5xl mx-auto">
+      <div className="relative">
+        {/* Hero Section */}
+        <section className="relative py-12 md:py-16">
+          <div className="max-w-5xl mx-auto px-4 md:px-8">
             <Link
               to="/fixtures"
-              className="inline-flex items-center text-scrummy-navyBlue hover:text-scrummy-goldYellow transition-colors text-sm md:text-base"
+              className="inline-flex items-center text-white/70 hover:text-[#F9C94E] transition-colors text-sm md:text-base mb-8"
             >
               <ChevronLeft size={isMobile ? 16 : 20} />
               <span>Back to Fixtures</span>
             </Link>
 
-            <div className="text-center mt-4 md:mt-8">
-              {/* Centered Large Logo */}
-              <Link to="/" className="inline-block">
-                <img
-                  src="/assets/logo.png"
-                  alt="SCRUMMY"
-                  className="w-full max-w-[280px] md:max-w-[480px] h-auto mx-auto"
-                />
-              </Link>
-
-              <h1 className="text-3xl md:text-6xl font-bold font-orbitron mb-4 md:mb-6">
-                <span className="text-scrummy-navyBlue">Rugby Match</span>{" "}
-                <span className="text-scrummy-goldYellow block md:inline">Box Score</span>
+            <div className="text-center">
+              <h1 className="text-3xl md:text-5xl font-bold mb-8">
+                <span className="text-white">Match</span>{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F9C94E] to-[#E3B43F]">
+                  Box Score
+                </span>
               </h1>
 
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-md max-w-4xl mx-auto">
+              <div className={`${cardGrad} rounded-3xl border border-white/10 p-6 md:p-8 max-w-4xl mx-auto`}>
                 {/* Team Logos and Score */}
-                <div className="flex items-center justify-center gap-3 md:gap-6 mb-4 md:mb-6">
-                  <div className="text-center">
+                <div className="flex items-center justify-center gap-6 md:gap-12 mb-6">
+                  <div className="text-center flex-1">
                     <img
                       src={teamLogoMap[matchInfo.teamA]}
                       alt={`${cleanTeamA} logo`}
-                      className="w-16 h-16 md:w-24 md:h-24 mx-auto mb-1 md:mb-2 object-contain"
+                      className="w-20 h-20 md:w-28 md:h-28 mx-auto mb-3 object-contain"
+                      style={{ filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.3))' }}
                     />
-                    <h2 className="text-base md:text-xl font-semibold">{cleanTeamA}</h2>
+                    <h2 className="text-base md:text-xl font-semibold text-white">{cleanTeamA}</h2>
                   </div>
 
-                  <div className="text-center px-4 md:px-8">
-                    <div className="text-2xl md:text-4xl font-bold font-orbitron text-scrummy-goldYellow mb-1 md:mb-2">
+                  <div className="text-center px-4">
+                    <div className="text-3xl md:text-5xl font-bold text-[#F9C94E] mb-2">
                       {teamAPoints} - {teamBPoints}
                     </div>
-                    <div className="text-xs md:text-sm text-scrummy-navyBlue/60">Final Score</div>
+                    <div className="text-xs md:text-sm text-white/50">Final Score</div>
                   </div>
 
-                  <div className="text-center">
+                  <div className="text-center flex-1">
                     <img
                       src={teamLogoMap[matchInfo.teamB]}
                       alt={`${cleanTeamB} logo`}
-                      className="w-16 h-16 md:w-24 md:h-24 mx-auto mb-1 md:mb-2 object-contain"
+                      className="w-20 h-20 md:w-28 md:h-28 mx-auto mb-3 object-contain"
+                      style={{ filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.3))' }}
                     />
-                    <h2 className="text-base md:text-xl font-semibold">{cleanTeamB}</h2>
+                    <h2 className="text-base md:text-xl font-semibold text-white">{cleanTeamB}</h2>
                   </div>
                 </div>
 
                 {/* Match Details */}
-                <div className="text-scrummy-navyBlue/80 border-t border-scrummy-lightblue pt-3 md:pt-4 text-xs md:text-base text-center md:text-left">
-                  {matchInfo.venue} • {matchInfo.date} • {matchInfo.kickoff} • {matchInfo.weather}
+                <div className="border-t border-white/10 pt-6 mt-6">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                    <div className="flex items-center justify-center gap-2 text-white/60 text-xs md:text-sm">
+                      <Calendar className="w-4 h-4 text-[#F9C94E]" />
+                      <span>{getFormattedDate(matchInfo.date)}</span>
+                    </div>
+                    <div className="flex items-center justify-center gap-2 text-white/60 text-xs md:text-sm">
+                      <Clock className="w-4 h-4 text-[#F9C94E]" />
+                      <span>{matchInfo.kickoff}</span>
+                    </div>
+                    <div className="flex items-center justify-center gap-2 text-white/60 text-xs md:text-sm">
+                      <MapPin className="w-4 h-4 text-[#F9C94E]" />
+                      <span>{matchInfo.venue}</span>
+                    </div>
+                    <div className="flex items-center justify-center gap-2 text-white/60 text-xs md:text-sm">
+                      <Cloud className="w-4 h-4 text-[#F9C94E]" />
+                      <span>{matchInfo.weather}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </header>
+        </section>
 
         {/* Main Content */}
-        <main className="px-2 md:px-8">
-          <div className="max-w-5xl mx-auto space-y-6 md:space-y-8">
+        <main className="px-4 md:px-8 pb-12">
+          <div className="max-w-5xl mx-auto space-y-8">
             {/* View Toggle */}
             <div className="flex justify-center">
-              <div className="flex bg-scrummy-navyBlue/10 rounded-lg p-1">
+              <div className="flex bg-white/5 rounded-xl p-1 border border-white/10">
                 <button
                   onClick={() => setViewMode('team')}
-                  className={`px-4 md:px-6 py-2 rounded-md text-sm md:text-base font-medium transition-all ${
+                  className={`px-6 md:px-8 py-3 rounded-lg text-sm md:text-base font-medium transition-all ${
                     viewMode === 'team'
-                      ? 'bg-scrummy-navyBlue text-white shadow-md'
-                      : 'text-scrummy-navyBlue hover:bg-scrummy-navyBlue/10'
+                      ? 'bg-[#2D6CFF] text-white shadow-lg'
+                      : 'text-white/70 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   Team
                 </button>
                 <button
                   onClick={() => setViewMode('player')}
-                  className={`px-4 md:px-6 py-2 rounded-md text-sm md:text-base font-medium transition-all ${
+                  className={`px-6 md:px-8 py-3 rounded-lg text-sm md:text-base font-medium transition-all ${
                     viewMode === 'player'
-                      ? 'bg-scrummy-navyBlue text-white shadow-md'
-                      : 'text-scrummy-navyBlue hover:bg-scrummy-navyBlue/10'
+                      ? 'bg-[#2D6CFF] text-white shadow-lg'
+                      : 'text-white/70 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   Player
@@ -1362,70 +1383,68 @@ const BoxScore: React.FC<BoxScoreProps> = ({
             />
 
             {/* Match Summary */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
-              <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-3 md:mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
+            <div className={`${cardGrad} rounded-3xl border border-white/10 p-6 md:p-8`}>
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-6 text-center">
                 Match Summary
               </h2>
-              <div className="overflow-x-auto -mx-3 md:mx-0">
-                <div className="inline-block min-w-full align-middle">
-                  <table className="min-w-full border-collapse">
-                    <thead>
-                      <tr className="bg-scrummy-navyBlue text-white">
-                        <th className="p-2 md:p-3 text-left rounded-l-lg text-xs md:text-base">Metric</th>
-                        <th className="p-2 md:p-3 text-center text-xs md:text-base">{cleanTeamA}</th>
-                        <th className="p-2 md:p-3 text-center rounded-r-lg text-xs md:text-base">{cleanTeamB}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
-                        <td className="p-2 md:p-3 font-medium text-xs md:text-base">Total Tries</td>
-                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{tryStatsA.tries}</td>
-                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{tryStatsB.tries}</td>
-                      </tr>
-                      <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
-                        <td className="p-2 md:p-3 font-medium text-xs md:text-base">Total Conversions</td>
-                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{tryStatsA.conversions}</td>
-                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{tryStatsB.conversions}</td>
-                      </tr>
-                      <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
-                        <td className="p-2 md:p-3 font-medium text-xs md:text-base">Penalty Kicks</td>
-                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{tryStatsA.penalties}</td>
-                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{tryStatsB.penalties}</td>
-                      </tr>
-                      <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
-                        <td className="p-2 md:p-3 font-medium text-xs md:text-base">Lineout Accuracy</td>
-                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamASummary.lineoutAccuracy}</td>
-                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamBSummary.lineoutAccuracy}</td>
-                      </tr>
-                      <tr className="border-b border-scrummy-lightblue/20 hover:bg-white/50 transition-colors">
-                        <td className="p-2 md:p-3 font-medium text-xs md:text-base">Penalties Won</td>
-                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamASummary.penaltiesWon}</td>
-                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamBSummary.penaltiesWon}</td>
-                      </tr>
-                      <tr className="hover:bg-white/50 transition-colors">
-                        <td className="p-2 md:p-3 font-medium text-xs md:text-base">Penalties Conceded</td>
-                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamASummary.penaltiesConceded}</td>
-                        <td className="p-2 md:p-3 text-center text-xs md:text-base">{teamBSummary.penaltiesConceded}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-collapse">
+                  <thead>
+                    <tr className="bg-white/5 border border-white/10">
+                      <th className="p-3 md:p-4 text-left rounded-tl-lg text-xs md:text-base text-white">Metric</th>
+                      <th className="p-3 md:p-4 text-center text-xs md:text-base text-[#2D6CFF]">{cleanTeamA}</th>
+                      <th className="p-3 md:p-4 text-center rounded-tr-lg text-xs md:text-base text-[#7A5CFF]">{cleanTeamB}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                      <td className="p-3 md:p-4 font-medium text-xs md:text-base text-white/70">Total Tries</td>
+                      <td className="p-3 md:p-4 text-center text-xs md:text-base text-white">{tryStatsA.tries}</td>
+                      <td className="p-3 md:p-4 text-center text-xs md:text-base text-white">{tryStatsB.tries}</td>
+                    </tr>
+                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                      <td className="p-3 md:p-4 font-medium text-xs md:text-base text-white/70">Total Conversions</td>
+                      <td className="p-3 md:p-4 text-center text-xs md:text-base text-white">{tryStatsA.conversions}</td>
+                      <td className="p-3 md:p-4 text-center text-xs md:text-base text-white">{tryStatsB.conversions}</td>
+                    </tr>
+                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                      <td className="p-3 md:p-4 font-medium text-xs md:text-base text-white/70">Penalty Kicks</td>
+                      <td className="p-3 md:p-4 text-center text-xs md:text-base text-white">{tryStatsA.penalties}</td>
+                      <td className="p-3 md:p-4 text-center text-xs md:text-base text-white">{tryStatsB.penalties}</td>
+                    </tr>
+                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                      <td className="p-3 md:p-4 font-medium text-xs md:text-base text-white/70">Lineout Accuracy</td>
+                      <td className="p-3 md:p-4 text-center text-xs md:text-base text-white">{teamASummary.lineoutAccuracy}</td>
+                      <td className="p-3 md:p-4 text-center text-xs md:text-base text-white">{teamBSummary.lineoutAccuracy}</td>
+                    </tr>
+                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                      <td className="p-3 md:p-4 font-medium text-xs md:text-base text-white/70">Penalties Won</td>
+                      <td className="p-3 md:p-4 text-center text-xs md:text-base text-white">{teamASummary.penaltiesWon}</td>
+                      <td className="p-3 md:p-4 text-center text-xs md:text-base text-white">{teamBSummary.penaltiesWon}</td>
+                    </tr>
+                    <tr className="hover:bg-white/5 transition-colors">
+                      <td className="p-3 md:p-4 font-medium text-xs md:text-base text-white/70">Penalties Conceded</td>
+                      <td className="p-3 md:p-4 text-center text-xs md:text-base text-white">{teamASummary.penaltiesConceded}</td>
+                      <td className="p-3 md:p-4 text-center text-xs md:text-base text-white">{teamBSummary.penaltiesConceded}</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
             {/* Key Section */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-md">
-              <h2 className="text-xl md:text-2xl font-bold text-scrummy-navyBlue mb-3 md:mb-4 font-orbitron border-b border-scrummy-lightblue pb-2 text-center">
+            <div className={`${cardGrad} rounded-3xl border border-white/10 p-6 md:p-8`}>
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-6 text-center">
                 Key
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 text-scrummy-navyBlue/80 text-xs md:text-base">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-white/70 text-xs md:text-sm">
                 <div className="space-y-2">
-                  <p><span className="font-semibold">C/P:</span> Conversions / Penalty Kicks made</p>
-                  <p><span className="font-semibold">Lineout Throws:</span> Successful / Total (with %)</p>
+                  <p><span className="font-semibold text-white">C/P:</span> Conversions / Penalty Kicks made</p>
+                  <p><span className="font-semibold text-white">Lineout Throws:</span> Successful / Total (with %)</p>
                 </div>
                 <div className="space-y-2">
-                  <p><span className="font-semibold">Penalties Won:</span> Positive action earns team a penalty</p>
-                  <p><span className="font-semibold">Penalties Conceded:</span> Infractions by the player</p>
+                  <p><span className="font-semibold text-white">Penalties Won:</span> Positive action earns team a penalty</p>
+                  <p><span className="font-semibold text-white">Penalties Conceded:</span> Infractions by the player</p>
                 </div>
               </div>
             </div>
@@ -1442,16 +1461,14 @@ const BoxScore: React.FC<BoxScoreProps> = ({
             
             {/* Show message if no player data available */}
             {viewMode === 'player' && currentPlayerData.length === 0 && (
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md text-center">
-                <p className="text-scrummy-navyBlue">Player statistics not available for this match.</p>
+              <div className={`${cardGrad} rounded-3xl border border-white/10 p-8 text-center`}>
+                <p className="text-white/70">Player statistics not available for this match.</p>
               </div>
             )}
-
-            <div className="text-center text-xs md:text-sm text-scrummy-navyBlue/70 mt-6 md:mt-8">
-              <p>St John's College • MUKURU Derby Day 2025</p>
-            </div>
           </div>
         </main>
+
+        <Footer />
       </div>
     </div>
   );

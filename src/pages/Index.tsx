@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
+import Footer from "@/components/Footer";
+import Nav from "@/components/Nav";
 import { 
   Trophy, 
   ChevronRight, 
@@ -70,90 +72,6 @@ const Card: React.FC<React.PropsWithChildren<{ className?: string }>> = ({
   </div>
 );
 
-/* ---------------- NAV ---------------- */
-const Nav = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const navLink = "px-3 py-2 rounded-xl text-sm text-white/70 hover:text-white hover:bg-white/5 transition";
-
-  return (
-    <header className="sticky top-0 z-50 border-b border-white/10 backdrop-blur supports-[backdrop-filter]:bg-black/40 w-full">
-      <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-8">
-        <div className="flex h-20 md:h-24 items-center justify-between text-white">
-          <Link to="/" className="flex items-center">
-            <div className="h-16 md:h-20 w-auto">
-              <img 
-                src="/assets/Scrummy-logo/SCRUMMY Logo Exception_On Dark BG (3).svg" 
-                alt="SCRUMMY" 
-                className="w-full h-full object-contain" 
-              />
-            </div>
-          </Link>
-          
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1">
-            <Link to="/" className={navLink}>Home</Link>
-            <Link to="/fixtures" className={navLink}>Fixtures</Link>
-            <Link to="/about" className={navLink}>About</Link>
-          </nav>
-
-          {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-2">
-            <CustomButton 
-              variant="gold" 
-              icon={Smartphone}
-              onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
-            >
-              Download App
-            </CustomButton>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-white p-2"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-white/10 py-4"
-          >
-            <nav className="flex flex-col gap-2">
-              <Link to="/" className={navLink} onClick={() => setMobileMenuOpen(false)}>
-                Home
-              </Link>
-              <Link to="/fixtures" className={navLink} onClick={() => setMobileMenuOpen(false)}>
-                Fixtures
-              </Link>
-              <Link to="/about" className={navLink} onClick={() => setMobileMenuOpen(false)}>
-                About
-              </Link>
-              <div className="pt-2">
-                <CustomButton 
-                  variant="gold" 
-                  icon={Smartphone}
-                  onClick={() => {
-                    window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank');
-                    setMobileMenuOpen(false);
-                  }}
-                >
-                  Download App
-                </CustomButton>
-              </div>
-              </nav>
-            </motion.div>
-          )}
-      </div>
-      </header>
-  );
-};
-
 /* ---------------- MOCK DATA ---------------- */
 const mockPlayers = [
   { name: "Jade Shekells", role: "Centre", pr: 89, value: 60, color: "from-emerald-500/20 to-emerald-600/10" },
@@ -175,6 +93,8 @@ const featuredPlayer = {
 
 /* ---------------- HOMEPAGE ---------------- */
 const Index: React.FC = () => {
+  const navigate = useNavigate();
+  
   return (
     <div className="min-h-screen" style={{ background: tokens.bg, color: tokens.text }}>
       <Nav />
@@ -201,7 +121,7 @@ const Index: React.FC = () => {
                   experience across web and app.
                 </p>
                 <div className="mt-6 flex flex-wrap items-center gap-3">
-                  <CustomButton variant="gold" icon={Trophy}>
+                  <CustomButton variant="gold" icon={Trophy} onClick={() => navigate('/download')}>
                     Play Now
                   </CustomButton>
                   <CustomButton variant="outline" icon={ChevronRight}>
@@ -1053,50 +973,7 @@ const Index: React.FC = () => {
       </section>
       </main>
 
-      {/* FOOTER */}
-      <footer className="border-t border-white/10 py-10 text-white/70">
-        <Container>
-          <div className="grid gap-8 md:grid-cols-4">
-            <div>
-              <Link to="/" className="flex items-center">
-                <div className="h-14 w-auto max-w-[280px]">
-                  <img 
-                    src="/assets/Scrummy-logo/SCRUMMY Logo Exception_On Dark BG (3).svg" 
-                    alt="SCRUMMY" 
-                    className="w-full h-full object-contain" 
-                  />
-          </div>
-              </Link>
-              <p className="mt-3 text-sm">This isn't just rugby. This is Scrummy.</p>
-        </div>
-            <div>
-              <div className="font-semibold text-white">Product</div>
-              <ul className="mt-3 space-y-2 text-sm">
-                <li><Link to="/fixtures" className="hover:text-white transition">Fixtures</Link></li>
-                <li><Link to="/about" className="hover:text-white transition">About</Link></li>
-              </ul>
-            </div>
-            <div>
-              <div className="font-semibold text-white">Company</div>
-              <ul className="mt-3 space-y-2 text-sm">
-                <li><Link to="/about" className="hover:text-white transition">About</Link></li>
-                <li><Link to="/support" className="hover:text-white transition">Contact</Link></li>
-              </ul>
-            </div>
-            <div>
-              <div className="font-semibold text-white">Follow</div>
-              <div className="mt-3 text-sm">
-                <a href="https://www.instagram.com/scrummyapp_/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Instagram</a> •{" "}
-                <a href="https://www.tiktok.com/@scrummy_hub" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">TikTok</a> •{" "}
-                <a href="https://www.youtube.com/@ScrummySports" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">YouTube</a>
-              </div>
-            </div>
-              </div>
-          <div className="mt-8 text-xs text-white/50">
-            © {new Date().getFullYear()} Scrummy. All rights reserved.
-            </div>
-        </Container>
-      </footer>
+      <Footer />
       </div>
   );
 };

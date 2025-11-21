@@ -1,12 +1,32 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ChevronLeft, Mail, HelpCircle, Star, Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
-import { Button } from '../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Mail, HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import Footer from "@/components/Footer";
+import Nav from "@/components/Nav";
+
+/* ---------------- THEME TOKENS (FROM HOMEPAGE) ---------------- */
+const tokens = {
+  bg: "#0B0D18",
+  surface: "#121527",
+  surface2: "#0E1222",
+  text: "#E6E9F5",
+  textMuted: "#A9B1C6",
+  primary: "#2D6CFF",
+  primary2: "#7A5CFF",
+  gold: "#F9C94E",
+};
+
+const appGradient = "bg-[radial-gradient(1200px_600px_at_80%_-20%,rgba(45,108,255,.25),rgba(122,92,255,.12)_40%,transparent_70%),linear-gradient(180deg,#0B0D18_0%,#0B0D18_30%,#0E1222_100%)]";
+
+const cardGrad = "bg-[linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01))]";
+const glow = "shadow-[0_0_20px_rgba(45,108,255,.1)]";
+
+/* ---------------- PRIMITIVES (FROM HOMEPAGE) ---------------- */
+const Container: React.FC<React.PropsWithChildren> = ({ children }) => (
+  <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
+);
 
 const Support: React.FC = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
 
   const faqs = [
@@ -49,282 +69,206 @@ const Support: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-[#D0E3FF]">
-      {/* Header Navigation */}
-      <header className="bg-scrummy-navy shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-2 text-white hover:text-scrummy-goldYellow transition-colors">
-              <ChevronLeft className="w-5 h-5" />
-              <span className="font-medium">Back to SCRUMMY</span>
-            </Link>
-            
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-6">
-              <Link to="/" className="text-white hover:text-scrummy-goldYellow transition-colors">
-                Home
-              </Link>
-              <Link to="/download" className="text-white hover:text-scrummy-goldYellow transition-colors">
-                Download
-              </Link>
-            </div>
+    <div className={`min-h-screen ${appGradient}`} style={{ color: tokens.text }}>
+      <Nav />
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-white hover:text-scrummy-goldYellow transition-colors"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-
-          {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden mt-4 pb-4 border-t border-scrummy-goldYellow/20"
-            >
-              <div className="space-y-2 pt-4">
-                <Link to="/" className="block text-white hover:text-scrummy-goldYellow transition-colors py-2">
-                  Home
-                </Link>
-                <Link to="/download" className="block text-white hover:text-scrummy-goldYellow transition-colors py-2">
-                  Download
-                </Link>
-              </div>
-            </motion.div>
-          )}
-        </div>
-      </header>
-
-      {/* Hero Section */}
-      <section className="relative py-12 md:py-16 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-scrummy-navy via-scrummy-blue to-blue-900">
-          <div className="absolute top-0 right-0 w-32 md:w-64 h-full bg-gradient-to-br from-scrummy-goldYellow/20 to-yellow-500/20 transform skew-x-12 translate-x-16 md:translate-x-32"></div>
-          <div className="absolute bottom-0 left-0 w-28 md:w-56 h-full bg-gradient-to-tr from-green-500/15 to-teal-500/15 transform -skew-x-12 -translate-x-14 md:-translate-x-28"></div>
-        </div>
-
-        <div className="absolute inset-0 bg-black/10" />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4">
+      {/* HERO SECTION */}
+      <section className="relative text-white pt-20 pb-20 md:pt-28 md:pb-28">
+        <Container>
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             className="text-center"
           >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-white mb-6"
-            >
-              <HelpCircle className="w-4 h-4" />
-              <span className="text-sm font-medium">Help & Support</span>
-            </motion.div>
-
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4">
-              SCRUMMY Support
+            <div className="inline-flex items-center gap-3 mb-6">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#2D6CFF] to-[#7A5CFF] flex items-center justify-center">
+                <HelpCircle className="w-8 h-8 text-white" />
+              </div>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
+              Support &{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F9C94E] to-[#E3B43F]">
+                Help Center
+              </span>
             </h1>
-            
-            <p className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-8">
-              Get help with the ultimate rugby fantasy app
+            <p className="mt-4 md:mt-6 text-white/70 max-w-2xl mx-auto text-lg md:text-xl">
+              Get help with SCRUMMY. We're here to support you every step of the way.
             </p>
           </motion.div>
-        </div>
+        </Container>
       </section>
 
-      {/* Contact Options */}
-      <section className="py-12 md:py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
+      {/* CONTACT SECTION */}
+      <section className="py-14 md:py-20">
+        <Container>
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-100px" }}
             className="text-center mb-12"
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navy mb-4">Get Help</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              We're here to help! Choose the best way to get support for your SCRUMMY experience.
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">
+              Get in Touch
+            </h2>
+            <p className="text-white/70 max-w-2xl mx-auto">
+              Have a question? We're here to help
             </p>
           </motion.div>
 
-          <div className="flex justify-center mb-12">
-            {/* Email Support */}
+          <div className="max-w-2xl mx-auto">
             <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="w-full max-w-md"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className={`p-8 rounded-3xl border border-white/10 ${cardGrad} ${glow} text-center`}
             >
-              <Card className="text-center p-6 hover:shadow-lg transition-all duration-300 border-2 hover:border-scrummy-goldYellow">
-                <CardContent className="space-y-4">
-                  <div className="w-16 h-16 bg-scrummy-goldYellow rounded-full flex items-center justify-center mx-auto">
-                    <Mail className="w-8 h-8 text-scrummy-navy" />
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl font-bold text-scrummy-navy mb-2">Email Support</h3>
-                    <p className="text-gray-600 mb-4">Get detailed help via email</p>
-                  </div>
-
-                  <Button 
-                    className="bg-scrummy-navy text-white hover:bg-scrummy-blue w-full"
-                    onClick={() => window.open('mailto:info@scrummy-app.ai?subject=SCRUMMY App Support', '_blank')}
-                  >
-                    <Mail className="w-4 h-4 mr-2" />
-                    info@scrummy-app.ai
-                  </Button>
-                </CardContent>
-              </Card>
+              <div className="w-16 h-16 rounded-2xl bg-[#F9C94E]/10 flex items-center justify-center mx-auto mb-4 text-[#F9C94E]">
+                <Mail className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Email Support</h3>
+              <p className="text-white/70 mb-6">Get detailed help via email</p>
+              <a
+                href="mailto:info@scrummy-app.ai?subject=SCRUMMY App Support"
+                className="inline-flex items-center gap-2 rounded-2xl px-6 py-3 text-sm font-semibold text-black bg-[linear-gradient(180deg,#F9C94E,#E3B43F)] hover:brightness-105 transition duration-200"
+              >
+                <Mail className="h-4 w-4" />
+                info@scrummy-app.ai
+              </a>
             </motion.div>
           </div>
-        </div>
+        </Container>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-12 md:py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4">
+      {/* FAQ SECTION */}
+      <section className="py-14 md:py-20">
+        <Container>
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.7, duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-100px" }}
             className="text-center mb-12"
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navy mb-4">Frequently Asked Questions</h2>
-            <p className="text-gray-600">
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">
+              Frequently Asked <span className="text-[#F9C94E]">Questions</span>
+            </h2>
+            <p className="text-white/70 max-w-2xl mx-auto">
               Find answers to common questions about SCRUMMY
             </p>
           </motion.div>
 
-          <div className="space-y-4">
+          <div className="max-w-3xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
               <motion.div
                 key={index}
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.05 }}
+                viewport={{ once: true, margin: "-100px" }}
+                className={`rounded-2xl border border-white/10 ${cardGrad} overflow-hidden`}
               >
-                <Card className="overflow-hidden">
-                  <CardHeader 
-                    className="cursor-pointer hover:bg-gray-50 transition-colors"
-                    onClick={() => toggleFAQ(index)}
-                  >
-                    <div className="flex items-center justify-between">
-                      <CardTitle className="text-lg text-scrummy-navy">{faq.question}</CardTitle>
-                      {expandedFAQ === index ? (
-                        <ChevronUp className="w-5 h-5 text-scrummy-goldYellow" />
-                      ) : (
-                        <ChevronDown className="w-5 h-5 text-scrummy-goldYellow" />
-                      )}
-                    </div>
-                  </CardHeader>
-                  {expandedFAQ === index && (
-                    <CardContent className="pt-0">
-                      <p className="text-gray-600">{faq.answer}</p>
-                    </CardContent>
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition"
+                >
+                  <span className="font-semibold text-white text-base">{faq.question}</span>
+                  {expandedFAQ === index ? (
+                    <ChevronUp className="w-5 h-5 text-[#F9C94E] flex-shrink-0 ml-4" />
+                  ) : (
+                    <ChevronDown className="w-5 h-5 text-[#F9C94E] flex-shrink-0 ml-4" />
                   )}
-                </Card>
+                </button>
+                {expandedFAQ === index && (
+                  <div className="px-6 pb-5 pt-2">
+                    <p className="text-white/70 text-sm leading-relaxed">{faq.answer}</p>
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
-      {/* App Information */}
-      <section className="py-12 md:py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
+      {/* KEY FEATURES SECTION */}
+      <section className="py-14 md:py-20">
+        <Container>
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1.0, duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className={`p-8 md:p-12 rounded-3xl border border-white/10 ${cardGrad}`}
           >
-            <Card className="bg-scrummy-navy/5 border-scrummy-goldYellow/30">
-              <CardContent className="p-6 md:p-8">
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-scrummy-navy mb-4">About SCRUMMY</h3>
-                  <p className="text-gray-600 max-w-2xl mx-auto">
-                    SCRUMMY is the ultimate rugby fantasy app that lets you vote for your favorite players and teams, 
-                    follow live scores, and connect with rugby fans across Africa and beyond.
-                  </p>
-                </div>
+            <div className="text-center mb-8">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">About SCRUMMY</h3>
+              <p className="text-white/70 max-w-2xl mx-auto">
+                The ultimate rugby fantasy app that lets you vote for your favorite players and teams, 
+                follow live scores, and connect with rugby fans worldwide.
+              </p>
+            </div>
 
-                <div className="grid gap-6 md:grid-cols-2">
-                  <div>
-                    <h4 className="font-bold text-scrummy-navy mb-3">Key Features</h4>
-                    <ul className="space-y-2 text-gray-600">
-                      <li>• Vote for your favorite teams and players</li>
-                      <li>• Follow live match scores and updates</li>
-                      <li>• Access detailed player and team statistics</li>
-                      <li>• Join the rugby community and discussions</li>
-                      <li>• Get notifications about your favorite teams</li>
-                    </ul>
-                  </div>
-                  
-                  <div>
-                    <h4 className="font-bold text-scrummy-navy mb-3">App Information</h4>
-                    <ul className="space-y-2 text-gray-600">
-                      <li>• Developer: Athstat.io</li>
-                      <li>• Available on iOS and Android</li>
-                      <li>• Free to download and use</li>
-                      <li>• Regular updates with new features</li>
-                      <li>• Supports multiple languages</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="mt-8 text-center">
-                  <div className="flex items-center justify-center gap-2 text-scrummy-goldYellow mb-4">
-                    <Star className="w-5 h-5 fill-current" />
-                    <Star className="w-5 h-5 fill-current" />
-                    <Star className="w-5 h-5 fill-current" />
-                    <Star className="w-5 h-5 fill-current" />
-                    <Star className="w-5 h-5 fill-current" />
-                  </div>
-                  <p className="text-gray-600">
-                    Join thousands of rugby fans already using SCRUMMY
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Download CTA */}
-      <section className="py-12 md:py-16 bg-gradient-to-r from-scrummy-navy to-scrummy-blue text-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
-          >
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">Don't Have SCRUMMY Yet?</h3>
-            <p className="text-white/90 mb-8 max-w-2xl mx-auto">
-              Download the app to start voting, following live scores, and connecting with rugby fans worldwide.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <Button 
-                className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold flex-1"
-                onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
-              >
-                Download for iOS
-              </Button>
-              <Button 
-                className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold flex-1"
-                onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
-              >
-                Download for Android
-              </Button>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h4 className="font-bold text-white mb-4 text-lg">Key Features</h4>
+                <ul className="space-y-3 text-white/70 text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Vote for your favorite teams and players</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Follow live match scores and updates</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Access detailed player and team statistics</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Join the rugby community and discussions</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Get notifications about your favorite teams</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="font-bold text-white mb-4 text-lg">App Information</h4>
+                <ul className="space-y-3 text-white/70 text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Developer: Athstat.io</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Available on iOS and Android</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Free to download and use</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Regular updates with new features</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Supports multiple languages</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </motion.div>
-        </div>
+        </Container>
       </section>
+
+      <Footer />
     </div>
   );
 };
 
-export default Support; 
+export default Support;

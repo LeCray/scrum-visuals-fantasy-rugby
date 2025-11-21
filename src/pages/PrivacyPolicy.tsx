@@ -1,286 +1,219 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronLeft, Shield, Menu, X } from 'lucide-react';
-import { Button } from '../components/ui/button';
-import { Card, CardContent } from '../components/ui/card';
+import { Shield } from 'lucide-react';
+import Footer from "@/components/Footer";
+import Nav from "@/components/Nav";
+
+/* ---------------- THEME TOKENS (FROM HOMEPAGE) ---------------- */
+const tokens = {
+  bg: "#0B0D18",
+  surface: "#121527",
+  surface2: "#0E1222",
+  text: "#E6E9F5",
+  textMuted: "#A9B1C6",
+  primary: "#2D6CFF",
+  primary2: "#7A5CFF",
+  gold: "#F9C94E",
+};
+
+const appGradient = "bg-[radial-gradient(1200px_600px_at_80%_-20%,rgba(45,108,255,.25),rgba(122,92,255,.12)_40%,transparent_70%),linear-gradient(180deg,#0B0D18_0%,#0B0D18_30%,#0E1222_100%)]";
+
+const cardGrad = "bg-[linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01))]";
+
+/* ---------------- PRIMITIVES (FROM HOMEPAGE) ---------------- */
+const Container: React.FC<React.PropsWithChildren> = ({ children }) => (
+  <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
+);
 
 const PrivacyPolicy: React.FC = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-[#D0E3FF]">
-      {/* Header Navigation */}
-      <header className="bg-scrummy-navy shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-2 text-white hover:text-scrummy-goldYellow transition-colors">
-              <ChevronLeft className="w-5 h-5" />
-              <span className="font-medium">Back to SCRUMMY</span>
-            </Link>
-            
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-6">
-              <Link to="/" className="text-white hover:text-scrummy-goldYellow transition-colors">
-                Home
-              </Link>
-              <Link to="/support" className="text-white hover:text-scrummy-goldYellow transition-colors">
-                Support
-              </Link>
-              <Link to="/download" className="text-white hover:text-scrummy-goldYellow transition-colors">
-                Download
-              </Link>
-            </div>
+    <div className={`min-h-screen ${appGradient}`} style={{ color: tokens.text }}>
+      <Nav />
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-white hover:text-scrummy-goldYellow transition-colors"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-
-          {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden mt-4 pb-4 border-t border-scrummy-goldYellow/20"
-            >
-              <div className="space-y-2 pt-4">
-                <Link to="/" className="block text-white hover:text-scrummy-goldYellow transition-colors py-2">
-                  Home
-                </Link>
-                <Link to="/support" className="block text-white hover:text-scrummy-goldYellow transition-colors py-2">
-                  Support
-                </Link>
-                <Link to="/download" className="block text-white hover:text-scrummy-goldYellow transition-colors py-2">
-                  Download
-                </Link>
-              </div>
-            </motion.div>
-          )}
-        </div>
-      </header>
-
-      {/* Hero Section */}
-      <section className="relative py-12 md:py-16 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-scrummy-navy via-scrummy-blue to-blue-900">
-          <div className="absolute top-0 right-0 w-32 md:w-64 h-full bg-gradient-to-br from-scrummy-goldYellow/20 to-yellow-500/20 transform skew-x-12 translate-x-16 md:translate-x-32"></div>
-          <div className="absolute bottom-0 left-0 w-28 md:w-56 h-full bg-gradient-to-tr from-green-500/15 to-teal-500/15 transform -skew-x-12 -translate-x-14 md:-translate-x-28"></div>
-        </div>
-
-        <div className="absolute inset-0 bg-black/10" />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4">
+      {/* HERO SECTION */}
+      <section className="relative text-white pt-20 pb-20 md:pt-28 md:pb-28">
+        <Container>
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             className="text-center"
           >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-white mb-6"
-            >
-              <Shield className="w-4 h-4" />
-              <span className="text-sm font-medium">Privacy & Security</span>
-            </motion.div>
-
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4">
-              SCRUMMY Privacy Policy
+            <div className="inline-flex items-center gap-3 mb-6">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#2D6CFF] to-[#7A5CFF] flex items-center justify-center">
+                <Shield className="w-8 h-8 text-white" />
+              </div>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
+              Privacy{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F9C94E] to-[#E3B43F]">
+                Policy
+              </span>
             </h1>
-            
-            <p className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-8">
+            <p className="mt-4 md:mt-6 text-white/70 max-w-2xl mx-auto text-lg md:text-xl">
               How we protect and handle your personal information
             </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Privacy Policy Content - Introduction */}
-      <section className="py-12 md:py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-          >
-            <Card className="mb-8">
-              <CardContent className="p-6 md:p-8">
-                <p className="text-gray-700 leading-relaxed">
-                  This Privacy Policy describes how SCRUMMY collects, holds, processes, uses, and discloses your Personal Data (defined below) when you use our mobile application or access our services. SCRUMMY is a wholly owned entity of Athstat.io, who own the legal rights to all aspects of the SCRUMMY Product and are the legal entity owning the product. For the purposes of this agreement, SCRUMMY is the referenced party for whom the Privacy Policy described herein applies, operating as a legally owned entity of Athstat.io. For purposes of applicable data protection legislation, Athstat.io, and therefore SCRUMMY, are located at 40736 Chevington Ln Leesburg, VA 20175 United States. By providing your Personal Data to SCRUMMY, you agree that you are authorized to provide that information and are accepting this Privacy Policy and any supplementary privacy statement that may be relevant to you. If you do not agree to our practices, please do not register, subscribe, create an account, or otherwise interact with our mobile application and services.
-                </p>
-              </CardContent>
-            </Card>
-
-            <div className="space-y-8">
-              {/* What is Personal Data */}
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navy mb-6">What is "Personal Data"?</h2>
-                <Card>
-                  <CardContent className="p-6">
-                    <p className="text-gray-700 leading-relaxed">
-                      The term "Personal Data" refers to information that does or is capable of identifying you as an individual. Personal Data may include the following: name, username, date of birth, and contact data (i.e. email address, phone number and team affiliations). No sensitive information will be collected regarding the user. We may also collect information that is related to you but that does not personally identify you ("Non-Personal Data"). Non-Personal Data includes information that could personally identify you in its original form, but that we have modified (for instance, by aggregating, anonymizing or de-identifying such information) to remove or obscure any Personal Data.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Information Collected */}
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navy mb-6">Information Collected</h2>
-                <Card>
-                  <CardContent className="p-6 space-y-4">
-                    <p className="text-gray-700 leading-relaxed">
-                      The type of information we collect or process from or about you will depend on how you interact with SCRUMMY. When you submit Personal Data or we collect it directly from you through our mobile application or through use of our services, SCRUMMY is the data controller of your Personal Data.
-                    </p>
-                    <p className="text-gray-700 leading-relaxed">
-                      SCRUMMY may collect Technical Information about you when you use our mobile application. "Technical Information" is information that does not, by itself, identify a specific individual but which could be used to indirectly identify you. Our servers automatically record Technical Information, which may include your device identifier, device type, operating system version, app version, and the date and time of your app usage.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* How We Use Your Information */}
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navy mb-6">How We Use Your Information</h2>
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="space-y-4">
-                      <p className="text-gray-700 leading-relaxed">We use your personal information to:</p>
-                      <ul className="space-y-2 text-gray-700">
-                        <li className="flex items-start gap-3">
-                          <span className="w-2 h-2 bg-scrummy-goldYellow rounded-full mt-2 flex-shrink-0"></span>
-                          <span>Provide and maintain the SCRUMMY app and its features</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="w-2 h-2 bg-scrummy-goldYellow rounded-full mt-2 flex-shrink-0"></span>
-                          <span>Process your votes and fantasy team selections</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="w-2 h-2 bg-scrummy-goldYellow rounded-full mt-2 flex-shrink-0"></span>
-                          <span>Send you live match updates and notifications</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="w-2 h-2 bg-scrummy-goldYellow rounded-full mt-2 flex-shrink-0"></span>
-                          <span>Personalize your rugby experience and content</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="w-2 h-2 bg-scrummy-goldYellow rounded-full mt-2 flex-shrink-0"></span>
-                          <span>Improve our services and develop new features</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="w-2 h-2 bg-scrummy-goldYellow rounded-full mt-2 flex-shrink-0"></span>
-                          <span>Respond to your inquiries and provide customer support</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Your Rights */}
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navy mb-6">Your Rights</h2>
-                <Card>
-                  <CardContent className="p-6">
-                    <p className="text-gray-700 leading-relaxed mb-4">
-                      Depending on your location, you may have the following rights regarding your personal information:
-                    </p>
-                    <ul className="space-y-2 text-gray-700">
-                      <li className="flex items-start gap-3">
-                        <span className="w-2 h-2 bg-scrummy-goldYellow rounded-full mt-2 flex-shrink-0"></span>
-                        <span>Access and receive a copy of your personal data</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="w-2 h-2 bg-scrummy-goldYellow rounded-full mt-2 flex-shrink-0"></span>
-                        <span>Correct inaccurate or incomplete personal data</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="w-2 h-2 bg-scrummy-goldYellow rounded-full mt-2 flex-shrink-0"></span>
-                        <span>Delete your personal data under certain circumstances</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="w-2 h-2 bg-scrummy-goldYellow rounded-full mt-2 flex-shrink-0"></span>
-                        <span>Object to or restrict the processing of your personal data</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="w-2 h-2 bg-scrummy-goldYellow rounded-full mt-2 flex-shrink-0"></span>
-                        <span>Receive your personal data in a portable format</span>
-                      </li>
-                    </ul>
-                    <p className="text-gray-700 leading-relaxed mt-4">
-                      To exercise these rights, please contact us at <a href="mailto:info@scrummy-app.ai" className="text-scrummy-navy hover:text-scrummy-blue underline">info@scrummy-app.ai</a>.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Contact Information */}
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-scrummy-navy mb-6">Contact Us</h2>
-                <Card>
-                  <CardContent className="p-6">
-                    <p className="text-gray-700 leading-relaxed mb-4">
-                      If you have any questions about this Privacy Policy or our data practices, please contact us:
-                    </p>
-                    <div className="space-y-2 text-gray-700">
-                      <p><strong>Email:</strong> <a href="mailto:info@scrummy-app.ai" className="text-scrummy-navy hover:text-scrummy-blue underline">info@scrummy-app.ai</a></p>
-                      <p><strong>Address:</strong> Athstat LLC, 40736 Chevington Ln, Leesburg, VA 20175, United States</p>
-                      <p><strong>Phone:</strong> +1 321-961-6401</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Last Updated */}
-              <div className="text-center py-8">
-                <p className="text-gray-600">
-                  <strong>Last Updated:</strong> December 2024
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Download CTA */}
-      <section className="py-12 md:py-16 bg-gradient-to-r from-scrummy-navy to-scrummy-blue text-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
-          >
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">Ready to Join SCRUMMY?</h3>
-            <p className="text-white/90 mb-8 max-w-2xl mx-auto">
-              Download the app and start your rugby fantasy journey with confidence in our privacy protection.
+            <p className="mt-3 text-white/50 text-sm">
+              Last updated: January 2025
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <Button 
-                className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold flex-1"
-                onClick={() => window.open('https://apps.apple.com/us/app/scrummy-fantasy-rugby/id6744964910', '_blank')}
-              >
-                Download for iOS
-              </Button>
-              <Button 
-                className="bg-scrummy-goldYellow text-scrummy-navy hover:bg-scrummy-gold font-bold flex-1"
-                onClick={() => window.open('https://play.google.com/store/apps/details?id=com.scrummy&pcampaignid=web_share', '_blank')}
-              >
-                Download for Android
-              </Button>
-            </div>
           </motion.div>
-        </div>
+        </Container>
       </section>
+
+      {/* INTRO SECTION */}
+      <section className="py-14 md:py-20">
+        <Container>
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className={`p-6 md:p-8 rounded-3xl border border-white/10 ${cardGrad} mb-8`}
+            >
+              <p className="text-white/80 leading-relaxed text-sm">
+                This Privacy Policy describes how SCRUMMY collects, holds, processes, uses, and discloses your Personal Data when you use our mobile application or access our services. SCRUMMY is a wholly owned entity of Athstat.io. By providing your Personal Data to SCRUMMY, you agree that you are authorized to provide that information and are accepting this Privacy Policy. If you do not agree to our practices, please do not register, subscribe, create an account, or otherwise interact with our mobile application and services.
+              </p>
+            </motion.div>
+
+            {/* What is Personal Data */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="mb-8"
+            >
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">What is "Personal Data"?</h2>
+              <div className={`p-6 md:p-8 rounded-3xl border border-white/10 ${cardGrad}`}>
+                <p className="text-white/80 leading-relaxed text-sm">
+                  The term "Personal Data" refers to information that does or is capable of identifying you as an individual. Personal Data may include the following: name, username, date of birth, and contact data (i.e. email address, phone number and team affiliations). No sensitive information will be collected regarding the user. We may also collect information that is related to you but that does not personally identify you ("Non-Personal Data"). Non-Personal Data includes information that could personally identify you in its original form, but that we have modified (for instance, by aggregating, anonymizing or de-identifying such information) to remove or obscure any Personal Data.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Information Collected */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="mb-8"
+            >
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Information Collected</h2>
+              <div className={`p-6 md:p-8 rounded-3xl border border-white/10 ${cardGrad} space-y-4`}>
+                <p className="text-white/80 leading-relaxed text-sm">
+                  The type of information we collect or process from or about you will depend on how you interact with SCRUMMY. When you submit Personal Data or we collect it directly from you through our mobile application or through use of our services, SCRUMMY is the data controller of your Personal Data.
+                </p>
+                <p className="text-white/80 leading-relaxed text-sm">
+                  SCRUMMY may collect Technical Information about you when you use our mobile application. "Technical Information" is information that does not, by itself, identify a specific individual but which could be used to indirectly identify you. Our servers automatically record Technical Information, which may include your device identifier, device type, operating system version, app version, and the date and time of your app usage.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* How We Use Your Information */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="mb-8"
+            >
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">How We Use Your Information</h2>
+              <div className={`p-6 md:p-8 rounded-3xl border border-white/10 ${cardGrad}`}>
+                <p className="text-white/80 leading-relaxed text-sm mb-4">We use your personal information to:</p>
+                <ul className="space-y-3 text-white/70 text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Provide and maintain the SCRUMMY app and its features</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Process your votes and fantasy team selections</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Send you live match updates and notifications</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Personalize your rugby experience and content</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Improve our services and develop new features</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Respond to your inquiries and provide customer support</span>
+                  </li>
+                </ul>
+              </div>
+            </motion.div>
+
+            {/* Your Rights */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="mb-8"
+            >
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Your Rights</h2>
+              <div className={`p-6 md:p-8 rounded-3xl border border-white/10 ${cardGrad}`}>
+                <p className="text-white/80 leading-relaxed text-sm mb-4">
+                  Depending on your location, you may have the following rights regarding your personal information:
+                </p>
+                <ul className="space-y-3 text-white/70 text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Access and receive a copy of your personal data</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Rectify inaccurate or incomplete personal data</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Request deletion of your personal data</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Object to processing of your personal data</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#F9C94E] mt-1">•</span>
+                    <span>Withdraw consent where processing is based on consent</span>
+                  </li>
+                </ul>
+              </div>
+            </motion.div>
+
+            {/* Contact Us */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Contact Us</h2>
+              <div className={`p-6 md:p-8 rounded-3xl border border-white/10 ${cardGrad}`}>
+                <p className="text-white/80 leading-relaxed text-sm mb-4">
+                  If you have any questions about this Privacy Policy or our data practices, please contact us:
+                </p>
+                <div className="text-white/70 text-sm space-y-2">
+                  <p><span className="text-[#F9C94E]">Email:</span> info@scrummy-app.ai</p>
+                  <p><span className="text-[#F9C94E]">Company:</span> Athstat.io</p>
+                  <p><span className="text-[#F9C94E]">Address:</span> 40736 Chevington Ln, Leesburg, VA 20175, United States</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </Container>
+      </section>
+
+      <Footer />
     </div>
   );
 };
 
-export default PrivacyPolicy; 
+export default PrivacyPolicy;
